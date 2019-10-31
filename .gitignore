@@ -1,0 +1,20 @@
+# Operating Files #
+###################
+.DS_Store
+/.idea
+
+# Files to Process #
+####################
+*.rtf
+
+# Processed Files #
+###################
+*.xml
+
+# Debug Directory #
+###################
+/debugdir
+
+# Log Files #
+#############
+*.log
