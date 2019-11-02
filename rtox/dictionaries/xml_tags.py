@@ -30,56 +30,45 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-This module is the control center for parsing the RTF document.
+Tag dictionaries for plain XML, TEI, and TPRES tags.
 """
-
-import os
-import rtox.file_prep
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
-__name__ = "ParseControl"
+__name__ = "xml_tags"
+
+xml_tags_dict = {
+        "paragraph":        "<para>",
+        "title":            "<title>",
+        "heading":          "<heading>",
+        "footnote":         "<fn>",
+        "italic":           "<italic>",
+        "bold":             "<bold>",
+        "list":             "<list>",
+}
+
+tei_tags_dict = {
+        "paragraph":        "<p>",
+        "title":            ,
+        "heading":          ,
+        "footnote":         ,
+        'italic':           '<hi rend="italic">',
+        'bold':             '<hi rend="bold">',
+        "list":             ,
+        "rendition":        ,
+}
 
 
-class ParseControl:
+tpres_tags_dict = {
+         "paragraph":       "<pBody>",
+         "title":           ,
+         "heading":         ,
+         "footnote":        ,
+         "italics":         ,
+         "bold":            ,
+         "list":            ,
 
-    def __init__(
-                 self,
-                 input_file_name,
-                 debug_file_dir,
-                 base_script_dir
-                ):
-        self.__input_file = input_file_name
-        self.__debug_file_dir = debug_file_dir
-        self.__base_script_dir = base_script_dir
-
-    def input_file_prep(self, debug_file_dir):
-        """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Check input file is
-        1) ASCII encoded, 2) starts with {\rtf, and 3) uses ANSI code page
-        1252 character set.
-        """
-
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.__base_script_dir, self.__input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
-        working_rtf_file = os.path.join(self.__debug_file_dir,
-                                        "working_input_file.data")
-        with open(working_rtf_file, "w+") as write_file_object:
-            write_file_object.write(read_file)
-
-        # Check ASCII, {\rtf, and ANSI.
-        rtox.file_prep.FilePrep.check_file_rtf(
-            working_rtf_file=working_rtf_file,
-            debug_file_dir=debug_file_dir)
-
-        # Split header from body.
-        # rtox.file_prep.FilePrep.head_from_body(
-        #
-        #
-        # )
+}

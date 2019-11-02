@@ -29,62 +29,60 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#  !/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
-A dictionary of tags used depending on the user's tag-style selection.
+Parse the font table and create a dictionary of values.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "xml_tags"
+__date__ = "2019-10-31"
+__name__ = "font_table"
 
-class Tags:
+import linecache
+import os
+import re
+
+class FonttblParse:
+    """
+    Process Header font table settings.
+    """
+
+    def __init__(
+                 self,
+                ):
+        self.__init__()
 
     @staticmethod
-    def xml_tags():
-        xml_tags_dict = {
-                 "paragraph":       <para>,
-                 "title":           <title>,
-                 "heading":         <heading>,
-                 "footnote":        <fn>,
-                 "italics":         <italics>,
-                 "bold":            <bold>,
-                 "list":            <list>,
-        }
+    def file_write(debug_file_dir, rtf_file_codes):
+        with open(os.path.join(debug_file_dir, "rtf_file_codes.data"),
+                  "w+") as rtf_dict:
+            rtf_dict.write(str(rtf_file_codes))
+            rtf_dict.close()
+        return rtf_file_codes
 
+    # Check for font table. If yes, increment line count and move to function
+    # to set fonts. If no, move to function to check for file table.
     @staticmethod
-    def tei_tags():
-        tei_tags_dict = {
-                 "paragraph":       <p>,
-                 "title":
-                 "heading":
-                 "footnote":
-                 "italics":
-                 "bold":
-                 "list":
-        }
+    def font_table_scope(working_rtf_file, hdr_line_count):
+        line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
+        if line_to_read == re.compile(r'{\\fonttbl'):
+            font_table = 1
+            hdr_line_count += 1
+            return font_table, hdr_line_count
+        else:
+            font_table = 0
+            return font_table, hdr_line_count
+
+    def set_fonts(self, working_rtf_file, hdr_line_count):
+        line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
+        line_to_read = line_to_read.replace("{", "").replace("}", "")
+        
 
 
-    def tpres_tags():
-        tpres_tags_dict = {
-                 "paragraph":       <pBody>,
-                 "title":
-                 "heading":
-                 "footnote":
-                 "italics":
-                 "bold":
-                 "list":
 
+
+        {\f0\froman\fcharset0 Time New Roman;}
+        {\f1\fnil\fcharset0 Courier New;}
         }

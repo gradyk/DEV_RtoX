@@ -34,7 +34,7 @@
 import os
 import sys
 import rtox.read_configuration
-import rtox.ParseControl
+import rtox.HeaderParse
 from log_config import logger
 
 
@@ -44,7 +44,6 @@ __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
-
 
 base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
@@ -115,7 +114,8 @@ def config_messages():
     # file_to_convert and file_to_produce are from the command line.
     if config_settings_dict.get("input") is not None:
         input_file = config_settings_dict.get("input")
-        logger.info(msg=f"The file you want to convert is {input_file}.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"The file you want to convert is {input_file}.")
     else:
         logger.critical(msg="You did not provide a file to convert. The "
                             "program must have a file to convert and will "
@@ -124,12 +124,13 @@ def config_messages():
 
     if config_settings_dict.get("output") is not None:
         output_file = config_settings_dict.get("output")
-        logger.info(msg=f"The file you want to produce is {output_file}.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"The file you want to produce is {output_file}.")
     else:
-        logger.info(msg="You did not specify a file to produce. "
-                        "The converted file will have the same base name as "
-                        "your original file, but will have the extension "
-                        '".xml" instead of ".rtf".')
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="The converted file will have the same base "
+                            "name as your original file, but with a .xml "
+                            "extension.")
         output_file = os.path.splitext(input_file)[0]+'.xml'
 
     # These settings come from the Config.ini file.
@@ -145,42 +146,46 @@ def config_messages():
     # debugdir, current_directory, and base_script_dir.
 
     if tag_style:
-        logger.info(msg=f'You chose "{tag_style}" for your XML tags.')
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f'You chose "{tag_style}" for your XML tags.')
     else:
-        logger.info(msg="You did not choose a tag style. The program "
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="You did not choose a tag style. The program "
                         "defaults to XML tags.")
     if convert_symbol:
-        logger.info(msg=f"You chose to have all symbols converted "
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"You chose to have all symbols converted "
                         f"to UTF-8 characters.")
     else:
-        logger.info(msg="You chose to not have symbols converted or did not "
-                        "make a choice. Symbols will not be converted to "
-                        'UTF-8 characters and may appear as a "?" or other '
-                        "character in the text.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="Symbols will not be converted to UTF-8 characters "
+                            'and may appear as a "?" or other character in '
+                            "the text.")
     if convert_caps:
-        logger.info(msg="")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="")
     else:
-        logger.info(msg="")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="")
     if report_level:
-        logger.info(msg=f"You selected a problem report level of "
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"You selected a problem report level of "
                         f"{report_level}.")
     else:
-        logger.info(msg="You did not select a problem report level. The "
-                        "default level is 3.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="The default problem report level is 3.")
     if xml_indenting:
-        logger.info(msg=f"You chose to have XML indenting turned on. A "
-                        f"carriage return will be placed after each closing "
-                        f"XML tag (regardless of whether you selected plain "
-                        f"XML, TEI, or TPRES tags.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"You chose to have XML indenting turned on.")
     else:
-        logger.info(msg="You did not chose whether to have XML indenting "
-                        "turned on. The default option is no XML indenting.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="The default option is no XML indenting.")
     if create_lists:
-        logger.info(msg="You chose to have create lists turned on.")
+        if logger.isEnabledFor(level=10):
+            logger.info(msg="You chose to have create lists turned on.")
     else:
-        logger.info(msg="You did not make a choice regarding creating "
-                        "lists or chose to have creating lists turned off. "
-                        'The default option is "off".')
+        if logger.isEnabledFor(level=10):
+            logger.info(msg='The default option for creating lists is "off".')
 
     return input_file, output_file
 
@@ -213,18 +218,18 @@ def print_output_error_message():
                     "change the extension to .xml")
 
 
-def parse_routine():
+def header_routine():
     """
     Check to make sure RTF input file actually is an rtf file.
     """
 
-    rtox.ParseControl.ParseControl(
+    rtox.HeaderParse.HeaderParse(
         input_file_name=input_file_name,
         debug_file_dir=debug_dir,
         base_script_dir=base_script_dir)
 
-    rtox.ParseControl.ParseControl.input_file_prep(
-        self=rtox.ParseControl.ParseControl(
+    rtox.HeaderParse.HeaderParse.input_file_prep(
+        self=rtox.HeaderParse.HeaderParse(
             input_file_name=input_file_name,
             debug_file_dir=debug_dir,
             base_script_dir=base_script_dir),
@@ -233,4 +238,4 @@ def parse_routine():
 
 if __name__ == "__main__":
     config_messages()
-    parse_routine()
+    header_routine()

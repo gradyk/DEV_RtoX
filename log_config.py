@@ -47,18 +47,18 @@ import os
 import sys
 from logging.handlers import RotatingFileHandler
 
-logging.root.setLevel(level=10)
+logging.basicConfig(level=30)
 logger = logging.getLogger(__name__)
 
 # Create Handlers
 conhandler = logging.StreamHandler()
-conhandler.setLevel(level=10)
+conhandler.setLevel(logging.INFO)
 
 filehandler_debug = logging.handlers.RotatingFileHandler(
     filename=os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
                           "rtox.log"),  mode="w",  maxBytes=8000,
     backupCount=20)
-filehandler_debug.setLevel(level=10)
+filehandler_debug.setLevel(logging.DEBUG)
 
 # Create Formatters
 conformat = logging.Formatter(fmt='%(asctime)s | %(name)s | %(levelname)s '

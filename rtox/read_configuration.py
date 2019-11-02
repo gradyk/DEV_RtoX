@@ -99,7 +99,7 @@ class Configuration:
                 config_file_dict_args.update({key: val})
         config_settings_dict = config_file_dict_args
 
-        f = open(os.path.join(debug_dir, "config_dict.txt"), "w+")
+        f = open(os.path.join(debug_dir, "config_dict.py"), "w+")
         f.write(str(config_settings_dict))
         f.close()
         return config_settings_dict
