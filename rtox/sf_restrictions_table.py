@@ -29,35 +29,17 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-code_page = {
-    "437":      "United States IBM",
-    "708":      "Arabic (ASMO 708)",
-    "709":      "Arabic (ASMO 449+, BCON V4",
-    "710":      "Arabic (transparent Arabic",
-    "711":      "Arabic (Nafitha Enchanced",
-    "720":      "Arabic (transparent ASMO)",
-    "819":      "Windows 3.1 (United States and Western Europe",
-    "850":      "IBM multilingual",
-    "852":      "Eastern European",
-    "860":      "Portuguese",
-    "862":      "Hebrew",
-    "863":      "French Canadian",
-    "864":      "Arabic",
-    "865":      "Norwegian",
-    "866":      "Soviet Union",
-    "874":      "Thai",
-    "932":      "Japanese",
-    "936":      "Simplified Chinese",
-    "949":      "Korean",
-    "950":      "Traditional Chinese",
-    "1250":     "Windows 3.1 (Eastern European)",
-    "1251":     "Windows 3.1 (Cyrillic)",
-    "1252":     "Western European",
-    "1253":     "Greek",
-    "1254":     "Turkish",
-    "1255":     "Hebrew",
-    "1256":     "Arabic",
-    "1257":     "Baltic",
-    "1258":     "Vietnamese",
-    "1361":     "Johab"
-}
+
+"""
+
+"""
+
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2019-11-04"
+__name__ = "sf_restrictions"
+
+
+class SFRestrictions:

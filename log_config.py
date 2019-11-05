@@ -47,8 +47,10 @@ import os
 import sys
 from logging.handlers import RotatingFileHandler
 
-logging.basicConfig(level=30)
+logging.basicConfig(level=10)
+logging.propagate=False
 logger = logging.getLogger(__name__)
+
 
 # Create Handlers
 conhandler = logging.StreamHandler()

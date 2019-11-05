@@ -48,27 +48,28 @@ xml_tags_dict = {
         "italic":           "<italic>",
         "bold":             "<bold>",
         "list":             "<list>",
+        "rendition":        "<rendition>"
 }
 
 tei_tags_dict = {
         "paragraph":        "<p>",
-        "title":            ,
-        "heading":          ,
-        "footnote":         ,
+        "title":            "<title>",
+        "heading":          "<head>",
+        "footnote":         "<note>",
         'italic':           '<hi rend="italic">',
         'bold':             '<hi rend="bold">',
-        "list":             ,
-        "rendition":        ,
+        "list":             "<list>",
+        "rendition":        "<rendition>",
 }
 
 
 tpres_tags_dict = {
          "paragraph":       "<pBody>",
-         "title":           ,
-         "heading":         ,
-         "footnote":        ,
-         "italics":         ,
-         "bold":            ,
-         "list":            ,
-
+         "title":           "<generalTitle",
+         "heading":         "<headDiv>",
+         "footnote":        "<footNote>",
+         "italic":          '<hiText rend="italic">',
+         "bold":            '<hiText rend="bold">',
+         "list":            "<listGenl>",
+         "rendition":       "<rendFormat>"
 }

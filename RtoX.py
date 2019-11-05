@@ -228,12 +228,44 @@ def header_routine():
         debug_file_dir=debug_dir,
         base_script_dir=base_script_dir)
 
-    rtox.HeaderParse.HeaderParse.input_file_prep(
+    header_vars = rtox.HeaderParse.HeaderParse.input_file_prep(
         self=rtox.HeaderParse.HeaderParse(
             input_file_name=input_file_name,
             debug_file_dir=debug_dir,
             base_script_dir=base_script_dir),
         debug_file_dir=debug_dir)
+
+    hdr_line_count = header_vars[1]
+
+    font_table_vars = rtox.HeaderParse.HeaderParse.font_table(
+        hdr_line_count=hdr_line_count,
+        working_rtf_file=input_file_name
+    )
+    hdr_line_count = font_table_vars[0]
+    working_rtf_file = font_table_vars[1]
+    font_table = font_table_vars[2]
+
+    while font_table == 1:
+        build_font_vars = rtox.HeaderParse.HeaderParse.build_font_dict(
+            working_rtf_file=working_rtf_file,
+            hdr_line_count=hdr_line_count,
+            font_table=font_table,
+            debug_dir=debug_dir,
+            self=rtox.HeaderParse.HeaderParse(
+                input_file_name=input_file_name,
+                debug_file_dir=debug_dir,
+                base_script_dir=base_script_dir))
+        hdr_line_count = build_font_vars[1]
+        font_table = build_font_vars[2]
+
+        font_table_end_check = rtox.HeaderParse.HeaderParse.font_table_end(
+            working_rtf_file=working_rtf_file,
+            hdr_line_count=hdr_line_count,
+            font_table=font_table)
+        hdr_line_count = font_table_end_check[0]
+        font_table = font_table_end_check[1]
+
+    # Do color table check.
 
 
 if __name__ == "__main__":
