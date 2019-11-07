@@ -42,10 +42,12 @@ __name__ = "HeaderParse"
 
 import linecache
 import os
+import sys
 import rtox.header_start
 import rtox.font_table
+import rtox.color_table
+import rtox.style_sheet_table
 import rtox.dictionaries.xml_tags
-import sys
 from log_config import logger
 
 
@@ -84,12 +86,17 @@ class HeaderParse:
         # Open the file in which the XML tags and text will be
         # added as the conversion progresses. Add first line to file. Assign
         # tagging dictionary to td based on user configuration.
+        # TODO The xml tags should vary depending on user tag preference.
         with open(os.path.join(self.__debug_file_dir,
                                "working_xml_file.data"), "w+") as \
                 working_xml_file:
+            xml_header = open(os.path.join(self.__base_script_dir,
+                                           "tpresheader.xml"), "r")
+            xml_header_tags = xml_header.read()
             working_xml_file.write('<?xml version="1.0" encoding="UTF-8"?>\n'
                                    '<ts:TPRES>\n'
-                                   '\t<ts:tpresHeader>\n')
+                                   '\t<ts:tpresHeader>\n'
+                                   f'{xml_header_tags}\n')
 
         # Check ASCII, {\rtf, and ANSI.
         code_vars = rtox.header_start.check_file_rtf(
@@ -110,7 +117,6 @@ class HeaderParse:
         font_vars = rtox.font_table.FonttblParse.font_table_exist(
             working_rtf_file=working_rtf_file,
             hdr_line_count=hdr_line_count)
-
         font_table = font_vars[0]
         hdr_line_count = font_vars[1]
 
@@ -127,13 +133,11 @@ class HeaderParse:
         :return: hdr_line_count and font_table
         """
         line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
-        if line_to_read[0] is "{":
-            hdr_line_count += 1
+        if line_to_read[0] is "}":
+            font_table = 0
             return hdr_line_count, font_table
 
-        elif line_to_read[0] is "}":
-            hdr_line_count += 1
-            font_table = 0
+        elif line_to_read[0] is "{":
             return hdr_line_count, font_table
 
         else:
@@ -150,25 +154,16 @@ class HeaderParse:
         :param working_rtf_file: copy of input file
         :param hdr_line_count: line to read
         :param font_table: 1 = font table exists, 0 = no font table
+        :param debug_dir: directory for working files
         :return:
         """
         if logger.isEnabledFor(level=10):
-            logger.info(msg="header line count  = " + str(hdr_line_count) + "\n"
-                        "font table = " + str(font_table) + "\n")
+            logger.info(msg=f"header line count = {hdr_line_count}\n"
+                            f"font table = {font_table}\n")
 
         config_dict = os.path.join(debug_dir, "config_dict.py")
         with open(config_dict) as file:
             font_codes_list = file.readlines()
-        # if debugdir.config_dict.config_dict.get("tag-style") == "1":
-        #     from rtox.dictionaries.xml_tags import xml_tags_dict as td
-        #
-        # elif debugdir.config_dict.config_dict.get("tag-style") == "2":
-        #     from rtox.dictionaries.xml_tags import tei_tags_dict as td
-        #
-        # elif debugdir.config_dict.config_dict.get("tag-style") == "3":
-        #     from rtox.dictionaries.xml_tags import tpres_tags_dict as td
-        # else:
-        #     from rtox.dictionaries.xml_tags import xml_tags_dict as td
 
         font_codes = rtox.font_table.FonttblParse.set_fonts(
             working_rtf_file=working_rtf_file,
@@ -187,29 +182,154 @@ class HeaderParse:
         cpg = font_codes[10]
         font_table = font_codes[11]
 
-        font_codes_list.append(f"fontnum: {fontnum}, fontfamily: "
-                               f"{fontfamily}, fcharset: {fcharset}, fprq: "
-                               f"{fprq}, panose: {panose}, name: "
-                               f"{name}, altname: {altname}, fontemb: "
-                               f"{fontemb}, fontfile: {fontfile}, "
-                               f"cpg: {cpg}")
+        font_codes_list.append("{"
+                               f"'fontnum': '{fontnum}', 'fontfamily': "
+                               f"'{fontfamily}', 'fcharset': '{fcharset}',"
+                               f" 'fprq': '{fprq}', 'panose': '{panose}', "
+                               f"'name': '{name}', 'altname': '{altname}', "
+                               f"'fontemb': '{fontemb}', 'fontfile': "
+                               f"'{fontfile}', 'cpg': '{cpg}'"
+                               "}")
 
         with open(os.path.join(self.__debug_file_dir,
                                "config_dict.py"), "w+") as config_dict:
-            config_dict.write(str(font_codes_list))
+            font_codes_list = str(font_codes_list).replace("[", "").replace(
+                "]", "").replace("\\", "").replace("\"", "")
+            config_dict.write(font_codes_list)
 
         if logger.isEnabledFor(level=10):
-            msg = (f'header line = {hdr_line_count}'
-                   f'fontnum = {fontnum}'
-                   f"fontfamily = {fontfamily}"
-                   f"fcharset = {fcharset}",
-                   f"fprq = {fprq}",
-                   f"panose = {panose}",
-                   f"name = {name}",
-                   f"altname = {altname}",
-                   f"fontemb = {fontemb}",
-                   f"fontfile = {fontfile}",
+            msg = (f"header line = {hdr_line_count}, "
+                   f"fontnum = {fontnum}, "
+                   f"fontfamily = {fontfamily}, "
+                   f"fcharset = {fcharset}, "
+                   f"fprq = {fprq}, "
+                   f"panose = {panose}, "
+                   f"name = {name}, "
+                   f"altname = {altname}, "
+                   f"fontemb = {fontemb}, "
+                   f"fontfile = {fontfile}, "
                    f"cpg = {cpg}")
             logger.info(msg)
 
+        hdr_line_count += 1
+
         return self, hdr_line_count, font_table
+
+    @staticmethod
+    def color_table(working_rtf_file, hdr_line_count):
+        """
+        Check for color table.
+        :return:
+        """
+        color_vars = rtox.color_table.ColortblParse.color_table_exist(
+            working_rtf_file=working_rtf_file,
+            hdr_line_count=hdr_line_count)
+        hdr_line_count = color_vars
+
+        return hdr_line_count
+
+    @staticmethod
+    def style_sheet(working_rtf_file, hdr_line_count):
+        """
+        Check for stylesheet(s).
+        :param working_rtf_file:
+        :param hdr_line_count:
+        :return:
+        """
+        rtf_line_to_read = ""
+        match_symbol = ""
+        style_sheet_vars = rtox.style_sheet_table.StyleSheetParse.\
+            style_sheet_exist(
+                working_rtf_file=working_rtf_file,
+                hdr_line_count=hdr_line_count,
+                self=rtox.style_sheet_table.StyleSheetParse(
+                    rtf_line_to_read=rtf_line_to_read,
+                    match_symbol=match_symbol))
+        style_sheet = style_sheet_vars[0]
+        hdr_line_count = style_sheet_vars[1]
+
+        return style_sheet, hdr_line_count
+
+    def build_style_sheet_dict(self, working_rtf_file, hdr_line_count,
+                               style_sheet, debug_dir, rtf_line_to_read,
+                               match_symbol):
+        """
+        Proceed to capture codes for each stylesheet in a file.
+        :param working_rtf_file:
+        :param hdr_line_count:
+        :param style_sheet:
+        :param debug_dir:
+        :param rtf_line_to_read:
+        :param match_symbol
+        :return:
+        """
+
+        if logger.isEnabledFor(level=10):
+            logger.info(msg=f"header line count = {hdr_line_count}\n"
+                            f"stylesheet = {style_sheet}\n")
+
+        config_dict = os.path.join(debug_dir, "config_dict.py")
+        with open(config_dict) as file:
+            style_codes_list = file.readlines()
+
+        style_codes = \
+            rtox.style_sheet_table.StyleSheetParse.set_styles(
+                working_rtf_file=working_rtf_file,
+                hdr_line_count=hdr_line_count,
+                style_sheet=style_sheet,
+                self=rtox.style_sheet_table.StyleSheetParse(
+                    rtf_line_to_read=rtf_line_to_read,
+                    match_symbol=match_symbol,))
+        hdr_line_count = style_codes[0]
+        para_style = style_codes[1]
+        char_style = style_codes[2]
+        sec_style = style_codes[3]
+        table_style = style_codes[4]
+        table_row_style = style_codes[5]
+        additive = style_codes[6]
+        para_next_style = style_codes[7]
+        style_name = style_codes[8]
+        italic = style_codes[9]
+        bold = style_codes[10]
+        underline = style_codes[11]
+        small_caps = style_codes[12]
+        strikethrough = style_codes[13]
+
+        style_codes_list.append("{"
+                                f"'para_style': '{para_style}, 'char_style': "
+                                f"'{char_style}', 'sec_style': '{sec_style}', "
+                                f"'table_style': '{table_style}', "
+                                f"'table_row_style': '{table_row_style}, "
+                                f"'additive': '{additive}, 'para_next_style': "
+                                f"'{para_next_style}, 'style_name': '"
+                                f"'{style_name}', 'italic': '{italic}', "
+                                f"'bold': '{bold}', 'underline': '"
+                                f"{underline}', 'small_caps': '{small_caps}', "
+                                f"'strikethrough': '{strikethrough}'"
+                                "}")
+
+        with open(os.path.join(self.__debug_file_dir,
+                               "config_dict.py"), "w+") as config_dict:
+            font_codes_list = str(style_codes_list).replace("[", "").replace(
+                "]", "").replace("\\", "").replace("\"", "")
+            config_dict.write(font_codes_list)
+
+        if logger.isEnabledFor(level=10):
+            msg = (f"para_style: {para_style}, "
+                   f"char_style: {char_style}, "
+                   f"sec_style: {sec_style}, "
+                   f"table_style: {table_style}, "
+                   f"table_row_style: {table_row_style}, "
+                   f"additive: {additive}, "
+                   f"para_next_style: {para_next_style}, "
+                   f"style_name: '{style_name}, "
+                   f"italic: {italic}, "
+                   f"bold: {bold}, "
+                   f"underline: {underline}, "
+                   f"small_caps: {small_caps}, "
+                   f"strikethrough: {strikethrough}")
+            logger.info(msg)
+
+        hdr_line_count += 1
+
+        return self, hdr_line_count, style_sheet

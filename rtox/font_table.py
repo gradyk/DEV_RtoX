@@ -73,6 +73,12 @@ class FonttblParse:
     # to set fonts. If no, move to function to check for file table.
     @staticmethod
     def font_table_exist(working_rtf_file, hdr_line_count):
+        """
+        Check to see if input file contains font tables.
+        :param working_rtf_file:
+        :param hdr_line_count:
+        :return:
+        """
         line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
 
         match = re.search(r'{\\fonttbl', line_to_read)
@@ -87,7 +93,7 @@ class FonttblParse:
     @staticmethod
     def set_fonts(working_rtf_file, hdr_line_count, font_table):
         """
-        For each font number (e.g., f0), capture the settings.
+        For each font number (e.g., f0), capture the relevant settings.
         :param working_rtf_file: copy of the input file
         :param hdr_line_count: current line in the working_rtf_file
         :param font_table: 0 = no font table, 1 = font table exists

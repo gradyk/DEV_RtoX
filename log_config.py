@@ -47,7 +47,7 @@ import os
 import sys
 from logging.handlers import RotatingFileHandler
 
-logging.basicConfig(level=10)
+logging.basicConfig(level=30)
 logging.propagate=False
 logger = logging.getLogger(__name__)
 

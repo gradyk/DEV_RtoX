@@ -98,7 +98,6 @@ class Configuration:
             for key, val in config.items(section):
                 config_file_dict_args.update({key: val})
         config_settings_dict = config_file_dict_args
-
         f = open(os.path.join(debug_dir, "config_dict.py"), "w+")
         f.write(str(config_settings_dict))
         f.close()

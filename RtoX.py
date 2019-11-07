@@ -45,6 +45,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
+
 base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
 """ Set the path for the main script and confirm it exists. """
@@ -210,7 +211,6 @@ def print_input_error_message():
 def print_output_error_message():
     """
     Prints a message if no file_to_produce is specified.
-    :return:
     """
 
     logger.info(msg="You did not provide a file name for the converted file. "
@@ -246,6 +246,7 @@ def header_routine():
     font_table = font_table_vars[2]
 
     while font_table == 1:
+
         build_font_vars = rtox.HeaderParse.HeaderParse.build_font_dict(
             working_rtf_file=working_rtf_file,
             hdr_line_count=hdr_line_count,
@@ -265,7 +266,20 @@ def header_routine():
         hdr_line_count = font_table_end_check[0]
         font_table = font_table_end_check[1]
 
-    # Do color table check.
+    hdr_line_count += 1
+    color_vars = rtox.HeaderParse.HeaderParse.color_table(
+        working_rtf_file=working_rtf_file,
+        hdr_line_count=hdr_line_count)
+    hdr_line_count = color_vars
+
+    style_sheet = 1
+    while style_sheet == 1:
+
+        style_sheet_vars = rtox.HeaderParse.HeaderParse.style_sheet(
+            working_rtf_file=working_rtf_file,
+            hdr_line_count=hdr_line_count)
+        style_sheet = style_sheet_vars[0]
+        hdr_line_count = style_sheet_vars[1]
 
 
 if __name__ == "__main__":

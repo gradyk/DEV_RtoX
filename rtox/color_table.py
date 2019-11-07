@@ -40,6 +40,44 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
 __name__ = "color_table"
 
+import linecache
+import re
 
-class ColorParse:
-    
+
+class ColortblParse:
+    """
+    Process Header color table.
+    """
+
+    def __init__(
+                 self,
+                ):
+        self.__init__()
+
+    @staticmethod
+    def color_table_exist(working_rtf_file, hdr_line_count):
+        """
+        Check for color table. If yes, increment line count and search for end
+        of color table. If no, return and begin search for not table in header.
+        :param working_rtf_file:
+        :param hdr_line_count:
+        :return: hdr_line_count:
+        """
+        line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
+
+        match = re.search(r'{\\colortbl', line_to_read)
+        if match:
+            color_table = 1
+            hdr_line_count += 1
+
+            while color_table == 1:
+                line_to_read = linecache.getline(working_rtf_file,
+                                                 hdr_line_count)
+                sub_match = re.search(r'}', line_to_read)
+                if sub_match:
+                    hdr_line_count += 1
+                    return hdr_line_count
+                else:
+                    hdr_line_count += 1
+        else:
+            return hdr_line_count

@@ -62,7 +62,6 @@ tei_tags_dict = {
         "rendition":        "<rendition>",
 }
 
-
 tpres_tags_dict = {
          "paragraph":       "<pBody>",
          "title":           "<generalTitle",

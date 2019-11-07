@@ -130,6 +130,7 @@ def check_file_rtf(working_rtf_file, debug_file_dir):
                             "now quit.\n")
         sys.exit(1)
 
+    # TODO Redo these re.compile into re.search structure.
     # Check for keyword ansicpg1252.
     pattern_cpg = re.compile(r'ansicpg1252')
     if pattern_cpg.match(first_line_list[fll_index]):
