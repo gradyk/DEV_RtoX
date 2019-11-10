@@ -50,18 +50,10 @@ class Configuration:
 
     def __init__(self,
                  debug_dir=None,
-                 show_config_file=None,
-                 base_script_dir=None,
                  config_file=None,
-                 file_to_convert=None,
-                 file_to_produce=None,
                  ):
         self.__config_file = config_file
         self.__debug_dir = debug_dir
-        self.__show_config_file = show_config_file
-        self.__base_directory = base_script_dir
-        self.__file_to_convert = file_to_convert
-        self.__file_to_produce = file_to_produce
 
     @staticmethod
     def get_system_arguments():
@@ -84,8 +76,7 @@ class Configuration:
 
         return config_args
 
-    @staticmethod
-    def get_configuration(config_file, debug_dir, config_file_dict_args):
+    def get_configuration(self, config_file_dict_args):
         """
         Pull user configuration settings from config.ini and put
         key:value pairs in config_setting_dict dictionary.
@@ -93,12 +84,12 @@ class Configuration:
         """
 
         config = configparser.ConfigParser()
-        config.read(config_file)
+        config.read(self.__config_file)
         for section in config.sections():
             for key, val in config.items(section):
                 config_file_dict_args.update({key: val})
         config_settings_dict = config_file_dict_args
-        f = open(os.path.join(debug_dir, "config_dict.py"), "w+")
+        f = open(os.path.join(self.__debug_dir, "config_dict.py"), "w+")
         f.write(str(config_settings_dict))
         f.close()
         return config_settings_dict

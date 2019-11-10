@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -29,8 +29,9 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+
 """
-Tag dictionaries for plain XML tags.
+Tag dictionary for TEI tags.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -40,13 +41,14 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
 __name__ = "xml_tags"
 
-xml_tags_dict = {
-        "paragraph":        "<para>",
+tei_tags_dict = {
+        "paragraph":        "<p>",
         "title":            "<title>",
-        "heading":          "<heading>",
-        "footnote":         "<fn>",
-        "italic":           "<italic>",
-        "bold":             "<bold>",
+        "heading":          "<head>",
+        "footnote":         "<note>",
+        'italic':           '<hi rend="italic">',
+        'bold':             '<hi rend="bold">',
+        'underscore':       '<hi rend="underscore">',
         "list":             "<list>",
-        "rendition":        "<rendition>"
+        "rendition":        "<rendition>",
 }

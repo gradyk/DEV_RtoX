@@ -45,7 +45,7 @@ import sys
 from log_config import logger
 
 
-def file_table_check():
+def file_table_exist():
     """
     Check for the existence of a file table.
     :return:

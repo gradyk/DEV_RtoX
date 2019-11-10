@@ -43,6 +43,7 @@ __name__ = "style_sheet"
 import linecache
 import re
 import sys
+import rtox.check_line
 from log_config import logger
 
 
@@ -77,7 +78,11 @@ class StyleSheetParse:
 
         else:
             style_sheet = 0
-            return style_sheet, hdr_line_count
+            hdr_line_count += 1
+            rtox.check_line.CheckLine.line_evaluate(
+                hdr_line_count=hdr_line_count,
+                working_rtf_file=working_rtf_file
+            )
 
     def set_styles(self, style_sheet, working_rtf_file, hdr_line_count):
         """

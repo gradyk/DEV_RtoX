@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Tag dictionaries for plain XML tags.
+Tag dictionary for TPRES tags.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,15 +38,32 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
-__name__ = "xml_tags"
+__name__ = "tpres_tags"
 
-xml_tags_dict = {
-        "paragraph":        "<para>",
-        "title":            "<title>",
-        "heading":          "<heading>",
-        "footnote":         "<fn>",
-        "italic":           "<italic>",
-        "bold":             "<bold>",
-        "list":             "<list>",
-        "rendition":        "<rendition>"
+tpres_tags_dict = {
+        "para-beg":         "<pBody>",
+        "para-attr":        "<pBody ",
+        "para-end":         "</pBody>",
+        "title-beg":        "<generalTitle>",
+        "title-attr":       "<generalTitle ",
+        "title-end":        "</generalTitle>",
+        "heading-beg":      "<headDiv>",
+        "heading-attr":     "<headDiv ",
+        "heading-end":      "</headDiv>",
+        "footnote-beg":     "<footNote>",
+        "footnote-attr":    "<footNote ",
+        "footnote-end":     "</footNote>",
+        "italic-beg":       '<hiText rend="italic">',
+        "italic-end":       "</hiText>",
+        "bold-beg":         '<hiText rend="bold">',
+        "bold-end":         '</hiText>',
+        "underscore-beg":   '<hiText rend="underscore">',
+        "underscore-end":   "</hiText>",
+        "list-beg":         "<listGenl>",
+        "list-attr":        "<listGenl ",
+        "list-end":         "</listGenl>",
+        "rend-beg":         "<rendFormat>",
+        "rend-attr":        "rendFormat ",
+        "rend-end":         "</rendFormat>"
 }
+

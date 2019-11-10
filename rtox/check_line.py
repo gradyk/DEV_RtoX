@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -30,23 +30,60 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Tag dictionaries for plain XML tags.
+
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "xml_tags"
+__date__ = "2019-11-08"
+__name__ = "check_line"
 
-xml_tags_dict = {
-        "paragraph":        "<para>",
-        "title":            "<title>",
-        "heading":          "<heading>",
-        "footnote":         "<fn>",
-        "italic":           "<italic>",
-        "bold":             "<bold>",
-        "list":             "<list>",
-        "rendition":        "<rendition>"
-}
+import linecache
+import re
+
+
+class CheckLine:
+    def __init__(
+                 self,
+                 hdr_line_count,
+                 working_rtf_file
+                ):
+        self.__line_to_read = hdr_line_count
+        self.__working_file = working_rtf_file
+
+    def line_evaluate(self):
+        """
+        Evaluate line start and decide next steps.
+        :return:
+        """
+
+        stack_track = 0
+        char_index = 0
+        counter = 0
+        open_bracket_count = 0
+        text_to_process = ""
+        cw_chars = ["{", "\\", "*"]
+        line_to_read = linecache.getline(self.__line_to_read,
+                                         self.__working_file)
+        while counter == 0:
+            for char in cw_chars:
+                match = re.search(char, line_to_read[char_index])
+                if match:
+                    char_index += 1
+                    stack_track = 1
+                else:
+                    pass
+            counter = 1
+
+        close_bracket = re.search(r'}', self.__line_to_read)
+        if close_bracket == "}":
+            text_to_process = self.__line_to_read[
+                              self.__line_to_read.find("{")
+                              + 1:self.__line_to_read.find("}")]
+           self.__line_to_read = self.__line_to_read + \
+                                 open_bracket_count + 1
+            state = 0
+        else:
+            open_bracket_count += 1
