@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Check for a color table and capture color definitions.
+Process color table (version 0.1.0a0 simply notes the existence of the table.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -51,33 +51,36 @@ class ColortblParse:
 
     def __init__(
                  self,
-                ):
-        self.__init__()
+                 input_file_name,
+                 line_to_read,
+                 xml_tag
+                 ):
+        self.__input_file_name = input_file_name
+        self.__line_to_read = line_to_read
+        self.__xml_tag = xml_tag
 
     @staticmethod
-    def color_table_exist(working_rtf_file, hdr_line_count):
+    def color_table(self):
         """
-        Check for color table. If yes, increment line count and search for end
-        of color table. If no, return and begin search for not table in header.
-        :param working_rtf_file:
-        :param hdr_line_count:
-        :return: hdr_line_count:
+        Note end of color table so next module knows where to start.
+        :return: self.__line_to_read:
         """
-        line_to_read = linecache.getline(working_rtf_file, hdr_line_count)
+        line_to_parse = linecache.getline(self.__input_file_name,
+                                          self.__line_to_read)
 
-        match = re.search(r'{\\colortbl', line_to_read)
+        match = re.search(r'{\\colortbl', line_to_parse)
         if match:
             color_table = 1
-            hdr_line_count += 1
+            self.__line_to_read += 1
 
             while color_table == 1:
-                line_to_read = linecache.getline(working_rtf_file,
-                                                 hdr_line_count)
-                sub_match = re.search(r'}', line_to_read)
+                line_to_parse = linecache.getline(self.__input_file_name,
+                                                  self.__line_to_read)
+                sub_match = re.search(r'}', line_to_parse)
                 if sub_match:
-                    hdr_line_count += 1
-                    return hdr_line_count
+                    self.__line_to_read += 1
+                    return self.__line_to_read
                 else:
-                    hdr_line_count += 1
+                    self.__line_to_read += 1
         else:
-            return hdr_line_count
+            return self.__line_to_read

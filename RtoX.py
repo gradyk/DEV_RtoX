@@ -31,10 +31,6 @@
 
 """ This is the main script for the RtoX program. """
 
-import rtox.read_configuration
-import rtox.HeaderParse
-
-
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
@@ -42,9 +38,16 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
+import os
+import rtox.color_table
 import rtox.first_line
+import rtox.font_table
+import rtox.HeaderParse
 import rtox.header_structure
+import rtox.input_file_prep
 import rtox.prelim
+import rtox.read_configuration
+import rtox.style_sheet_table
 
 
 class MainRtoX:
@@ -53,7 +56,7 @@ class MainRtoX:
                  db_dir,
                  if_name,
                  of_name
-                ):
+                 ):
         self.__base_script_dir = bs_dir
         self.__debug_dir = db_dir
         self.__input_file_name = if_name
@@ -71,106 +74,91 @@ class MainRtoX:
         return self.__base_script_dir, self.__debug_dir, \
             self.__input_file_name, self.__output_file_name
 
-    @staticmethod
-    def header_structure():
-        rtox.header_structure.HeaderStructure.table_check(
-            self=input_file_name)
+    def prep_rtf_file(self):
+        rtox.input_file_prep.InputPrep.input_file_prep(
+            rtox.input_file_prep.InputPrep(
+                input_file_name=self.__input_file_name,
+                debug_file_dir=self.__debug_dir,
+                base_script_dir=self.__base_script_dir))
 
-    @staticmethod
-    def rtf_first_line():
+    def header_structure(self):
+        rtox.header_structure.HeaderStructure.table_check(
+            rtox.header_structure.HeaderStructure(
+                input_file_name=self.__input_file_name,
+                debug_dir=self.__debug_dir))
+
+    def rtf_first_line(self):
         rtox.first_line.FirstLine.line_parse(
             rtox.first_line.FirstLine(
-                debug_dir=debug_dir,
-                input_file_name=input_file_name))
+                debug_dir=self.__debug_dir,
+                input_file_name=self.__input_file_name))
 
-    def font_table(self):
+    @staticmethod
+    def font_table():
 
-        font_table_vars = rtox.HeaderParse.HeaderParse.font_table(
-            hdr_line_count=hdr_line_count,
-            working_rtf_file=input_file_name
-        )
-        hdr_line_count = font_table_vars[0]
-        working_rtf_file = font_table_vars[1]
-        font_table = font_table_vars[2]
+        with open(os.path.join(debug_dir, "config_dict.py")) as cd:
+            settings_dict = dict(cd)
+            xml_tag = settings_dict["tag-style"]
+            if xml_tag == 1:
+                tag_dict = os.path.join(debug_dir, "xml_tags.py")
+            elif xml_tag == 2:
+                tag_dict = os.path.join(debug_dir, "tei_tags.py")
+            elif xml_tag == 3:
+                tag_dict = os.path.join(debug_dir, "tpres_tags.py")
 
         while font_table == 1:
 
-            build_font_vars = rtox.HeaderParse.HeaderParse.build_font_dict(
-                working_rtf_file=working_rtf_file,
-                hdr_line_count=hdr_line_count,
-                font_table=font_table,
-                debug_dir=debug_dir,
-                self=rtox.HeaderParse.HeaderParse(
-                    input_file_name=input_file_name,
-                    debug_file_dir=debug_dir,
-                    base_script_dir=base_script_dir))
-            hdr_line_count = build_font_vars[1]
-            font_table = build_font_vars[2]
+            with open(os.path.join(debug_dir, "header_tables_dict.py")) as htd:
 
-            font_table_end_check = rtox.HeaderParse.HeaderParse.font_table_end(
-                working_rtf_file=working_rtf_file,
-                hdr_line_count=hdr_line_count,
-                font_table=font_table)
-            hdr_line_count = font_table_end_check[0]
-            font_table = font_table_end_check[1]
+                table_dict = dict(htd)
+                if table_dict["fonttbl"]:
+                    line_to_read = table_dict['fonttbl'] + 1
+                    build_font_vars = rtox.font_table.FonttblParse.set_fonts(
+                        self=rtox.font_table.FonttblParse(
+                            input_file_name=input_file_name,
+                            line_to_read=line_to_read,
+                            tag_dict=tag_dict,
+                            debug_dir=debug_dir))
+                    font_code_list = build_font_vars[0]
 
-    def header_routine(self, base_script_dir, debug_dir, input_file_name):
+                    rtox.font_table.FonttblParse.update_rtf_file_codes(
+                        font_code_list=font_code_list,
+                        self=rtox.font_table.FonttblParse(
+                            input_file_name=input_file_name,
+                            line_to_read=line_to_read,
+                            tag_dict=tag_dict,
+                            debug_dir=debug_dir))
+                else:
+                    font_table_end_check = rtox.font_table.FonttblParse.\
+                        font_table_end(
+                            self=rtox.font_table.FonttblParse(
+                                input_file_name=input_file_name,
+                                line_to_read=line_to_read,
+                                tag_dict=tag_dict,
+                                debug_dir=debug_dir))
+                    line_to_read = font_table_end_check[0]
+
+        return xml_tag, line_to_read
+
+    @staticmethod
+    def color_table(xml_tag, line_to_read):
         """
         Check to make sure RTF input file actually is an rtf file.
         """
 
-        rtox.HeaderParse.HeaderParse(
-            input_file_name=input_file_name,
-            debug_file_dir=debug_dir,
-            base_script_dir=base_script_dir)
-
-        header_vars = rtox.HeaderParse.HeaderParse.input_file_prep(
-            self=rtox.HeaderParse.HeaderParse(
+        line_to_read += 1
+        color_vars = rtox.color_table.ColortblParse.color_table(
+            rtox.color_table.ColortblParse(
                 input_file_name=input_file_name,
-                debug_file_dir=debug_dir,
-                base_script_dir=base_script_dir),
-            debug_file_dir=debug_dir)
+                line_to_read=line_to_read,
+                xml_tag=xml_tag))
+        line_to_read = color_vars[0]
 
-        hdr_line_count = header_vars[1]
+        return line_to_read
 
-        font_table_vars = rtox.HeaderParse.HeaderParse.font_table(
-            hdr_line_count=hdr_line_count,
-            working_rtf_file=input_file_name
-        )
-        hdr_line_count = font_table_vars[0]
-        working_rtf_file = font_table_vars[1]
-        font_table = font_table_vars[2]
-
-        while font_table == 1:
-
-            build_font_vars = rtox.HeaderParse.HeaderParse.build_font_dict(
-                working_rtf_file=working_rtf_file,
-                hdr_line_count=hdr_line_count,
-                font_table=font_table,
-                debug_dir=debug_dir,
-                self=rtox.HeaderParse.HeaderParse(
-                    input_file_name=input_file_name,
-                    debug_file_dir=debug_dir,
-                    base_script_dir=base_script_dir))
-            hdr_line_count = build_font_vars[1]
-            font_table = build_font_vars[2]
-
-            font_table_end_check = rtox.HeaderParse.HeaderParse.font_table_end(
-                working_rtf_file=working_rtf_file,
-                hdr_line_count=hdr_line_count,
-                font_table=font_table)
-            hdr_line_count = font_table_end_check[0]
-            font_table = font_table_end_check[1]
-
-        hdr_line_count += 1
-        color_vars = rtox.HeaderParse.HeaderParse.color_table(
-            working_rtf_file=working_rtf_file,
-            hdr_line_count=hdr_line_count)
-        hdr_line_count = color_vars
-
-        style_sheet_vars = rtox.HeaderParse.HeaderParse.style_sheet(
-            working_rtf_file=working_rtf_file,
-            hdr_line_count=hdr_line_count)
+    def style_sheet_table(self):
+        style_sheet_vars = rtox.style_sheet_table.StyleSheetParse.set_styles(
+           )
         style_sheet = style_sheet_vars[0]
         hdr_line_count = style_sheet_vars[1]
 
@@ -189,8 +177,6 @@ class MainRtoX:
                     base_script_dir=base_script_dir))
 
 
-
-
 if __name__ == "__main__":
     vars_init = MainRtoX.prelim_routine(
         self=MainRtoX(
@@ -203,14 +189,34 @@ if __name__ == "__main__":
     input_file_name = vars_init[2]
     output_file_name = vars_init[3]
 
-    MainRtoX.header_structure()
+    MainRtoX.prep_rtf_file(
+        rtox.input_file_prep.InputPrep.input_file_prep(
+            rtox.input_file_prep.InputPrep(
+                input_file_name=input_file_name,
+                debug_file_dir=debug_dir,
+                base_script_dir=base_script_dir)))
 
-    MainRtoX.rtf_first_line()
+    MainRtoX.header_structure(
+        rtox.header_structure.HeaderStructure.table_check(
+            rtox.header_structure.HeaderStructure(
+                input_file_name=input_file_name,
+                debug_dir=debug_dir)))
 
-    MainRtoX.font_table()
+    MainRtoX.rtf_first_line(
+        rtox.first_line.FirstLine.line_parse(
+            rtox.first_line.FirstLine(
+                debug_dir=debug_dir,
+                input_file_name=input_file_name)))
 
-    header_routine(
-        base_script_dir=base_script_dir,
-        debug_dir=debug_dir,
-        input_file_name=input_file_name,
-        self=())
+    font_table_vars = MainRtoX.font_table()
+    xml_tag = font_table_vars[0]
+    line_to_read = font_table_vars[1]
+
+    MainRtoX.color_table(
+        line_to_read=line_to_read,
+        xml_tag=xml_tag)
+
+    MainRtoX.style_sheet_table()
+
+
+
