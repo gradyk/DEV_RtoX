@@ -40,6 +40,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-10"
 __name__ = "first_line"
 
+import linecache
 import os
 import re
 import sys
@@ -53,11 +54,13 @@ class FirstLine:
 
     def __init__(
                  self,
-                 input_file_name,
-                 debug_dir
-                ):
-        self.__input_file_name = input_file_name
+                 working_file,
+                 debug_dir,
+                 base_script_dir
+                 ):
+        self.__working_file = working_file
         self.__debug_dir = debug_dir
+        self.__base_script_dir = base_script_dir
 
     def line_parse(self):
         """
@@ -66,13 +69,11 @@ class FirstLine:
         Check for language keywords; check for style codes.
         """
 
-        read_obj = open(self.__input_file_name, "r")
-        token = read_obj.read()
-        line_to_read = read_obj.readline()
-        rtf_file_codes = []
+        line_to_read = linecache.getline(self.__working_file, 1)
+        rtf_file_codes = {}
 
         try:
-            token.encode(encoding="us-ascii")
+            line_to_read.encode(encoding="us-ascii")
         except UnicodeEncodeError:
             logger.critical(msg="RTF file is not ASCII encoded. This "
                                 "version of the program needs an ASCII "
@@ -92,7 +93,7 @@ class FirstLine:
         pattern_rtf = re.search(r'rtf[0-9]+', line_to_read)
         if pattern_rtf:
             rtf_code = pattern_rtf[0].replace('rtf', "")
-            rtf_file_codes.append({"rtf": rtf_code})
+            rtf_file_codes.update({"rtf": rtf_code})
             pass
         else:
             logger.critical(msg="Document does not start with 'rtfN'. "
@@ -104,7 +105,7 @@ class FirstLine:
         pattern_ansi = re.search(r'ansi', line_to_read)
         if pattern_ansi:
             rtf_code = pattern_ansi[0].replace('ansi', "")
-            rtf_file_codes.append({"ansi": rtf_code})
+            rtf_file_codes.update({"ansi": rtf_code})
             pass
         else:
             logger.critical(msg="Document does not use the ANSI "
@@ -120,7 +121,7 @@ class FirstLine:
         pattern_cpg = re.search(r'ansicpg1252', line_to_read)
         if pattern_cpg:
             rtf_code = pattern_cpg[0].replace("ansicpg", "")
-            rtf_file_codes.append({"code_pg": rtf_code})
+            rtf_file_codes.update({"code_pg": rtf_code})
             pass
         else:
             logger.critical(msg="Document did not use ANSI code page 1252 "
@@ -142,7 +143,7 @@ class FirstLine:
         pattern_uc = re.search(r'uc[0-9]+', line_to_read)
         if pattern_uc[0]:
             rtf_code = pattern_uc[0].replace("uc", "")
-            rtf_file_codes.append({"uc": rtf_code})
+            rtf_file_codes.update({"uc": rtf_code})
             pass
         else:
             logger.critical(msg="This version of RtoX does not support "
@@ -153,14 +154,14 @@ class FirstLine:
         pattern_lang = re.search(r'deflang[0-9]+', line_to_read)
         if pattern_lang:
             rtf_code = pattern_lang[0].replace("deflang", "")
-            rtf_file_codes.append({"deflang": rtf_code})
+            rtf_file_codes.update({"deflang": rtf_code})
         else:
             pass
 
         pattern_alt_lang = re.search(r'adeflang[0-9]+', line_to_read)
         if pattern_alt_lang:
             rtf_code = pattern_alt_lang[0].replace("adeflang", "")
-            rtf_file_codes.append({"adeflang": rtf_code})
+            rtf_file_codes.update({"adeflang": rtf_code})
         else:
             pass
 
@@ -168,14 +169,14 @@ class FirstLine:
         if pattern_fe_lang:
             rtf_code = pattern_fe_lang[0].replace(
                 "deflangfe", "")
-            rtf_file_codes.append({"deflangfe": rtf_code})
+            rtf_file_codes.update({"deflangfe": rtf_code})
         else:
             pass
 
         pattern_lang_code = re.search(r'deff[0-9]+', line_to_read)
         if pattern_lang_code:
             rtf_code = pattern_lang_code[0].replace("deff", "")
-            rtf_file_codes.append({"deff": rtf_code})
+            rtf_file_codes.update({"deff": rtf_code})
         else:
             pass
 
@@ -183,28 +184,28 @@ class FirstLine:
         pattern_ea_default = re.search(r'stshfdbch[0-9]+', line_to_read)
         if pattern_ea_default:
             rtf_code = pattern_ea_default[0].replace("stshfdbch", "")
-            rtf_file_codes.append({"stshfdbch": rtf_code})
+            rtf_file_codes.update({"stshfdbch": rtf_code})
         else:
             pass
 
         pattern_ascii_default = re.search(r'stshfloch[0-9]+', line_to_read)
         if pattern_ascii_default:
             rtf_code = pattern_ascii_default[0].replace("stshfloch", "")
-            rtf_file_codes.append({"stshfloch": rtf_code})
+            rtf_file_codes.update({"stshfloch": rtf_code})
         else:
             pass
 
         pattern_highansi_default = re.search(r'stshfhich[0-9]+', line_to_read)
         if pattern_highansi_default:
             rtf_code = pattern_highansi_default[0].replace("stshfhich", "")
-            rtf_file_codes.append({"stshfhich": rtf_code})
+            rtf_file_codes.update({"stshfhich": rtf_code})
         else:
             pass
 
         pattern_bidi_default = re.search(r'stshfbi', line_to_read)
         if pattern_bidi_default:
             rtf_code = pattern_bidi_default[0].replace("stshfbi", "")
-            rtf_file_codes.append({"stshfbi": rtf_code})
+            rtf_file_codes.update({"stshfbi": rtf_code})
         else:
             pass
 
@@ -212,22 +213,26 @@ class FirstLine:
         pattern_other_lang = re.search(match, line_to_read)
         if pattern_other_lang:
             rtf_code = pattern_other_lang[0].replace(str(match), "")
-            rtf_file_codes.append({'other_lang': rtf_code})
+            rtf_file_codes.update({'other_lang': rtf_code})
         else:
             pass
 
         FirstLine.file_write(
-            rtf_file_codes=rtf_file_codes,
-            self=(FirstLine(
-                input_file_name=self.__input_file_name,
-                debug_dir=self.__debug_dir)))
+            FirstLine(
+                base_script_dir=self.__base_script_dir,
+                debug_dir=self.__debug_dir,
+                working_file=self.__working_file),
+            rtf_file_codes=rtf_file_codes)
 
     def file_write(self, rtf_file_codes):
         """
         Write the rtf_file_codes list to a data file.
         :param rtf_file_codes:
         """
-        with open(os.path.join(self.__debug_dir, "rtf_file_codes.data"),
-                  "w+") as rtf_dict:
-            rtf_dict.write(str(rtf_file_codes))
-            rtf_dict.close()
+
+        with open(os.path.join(self.__debug_dir, "rtf_file_codes.py"),
+                  "w+") as rtc:
+            rtc.write("rtf_codes_dictionary = {}")
+
+        from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
+        rtf_dict.update(rtf_file_codes)

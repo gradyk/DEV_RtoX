@@ -49,8 +49,8 @@ import os
 class Configuration:
 
     def __init__(self,
-                 debug_dir=None,
-                 config_file=None,
+                 debug_dir,
+                 config_file,
                  ):
         self.__config_file = config_file
         self.__debug_dir = debug_dir
@@ -90,6 +90,6 @@ class Configuration:
                 config_file_dict_args.update({key: val})
         config_settings_dict = config_file_dict_args
         f = open(os.path.join(self.__debug_dir, "config_dict.py"), "w+")
-        f.write(str(config_settings_dict))
+        f.write("config_dictionary = " + str(config_settings_dict))
         f.close()
         return config_settings_dict

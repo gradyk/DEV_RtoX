@@ -54,12 +54,12 @@ class FonttblParse:
 
     def __init__(
                  self,
-                 input_file_name,
+                 working_file,
                  line_to_read,
                  tag_dict,
                  debug_dir
                 ):
-        self.__input_file_name = input_file_name
+        self.__working_file = working_file
         self.__line_to_read = line_to_read
         self.__tag_dict = tag_dict
         self.__debug_dir = debug_dir
@@ -76,7 +76,7 @@ class FonttblParse:
                     "fscript", "fdecor", "ftech", "fbidi"]
         c_sets = ["ansi", "mac", "pc", "pca"]
 
-        line_to_parse = linecache.getline(self.__input_file_name,
+        line_to_parse = linecache.getline(self.__working_file,
                                           self.__line_to_read)
 
         match = re.search(r'f[0-9]+', line_to_parse)
@@ -135,44 +135,44 @@ class FonttblParse:
             f'\n'
         )
 
-        with open(os.path.join(self.__debug_dir,
-                               "working_xml_file.data")) as xfile:
-            line_num = 1
-            xfile_text = linecache.getline(xfile, line_num)
-        match = xfile_text.search("</ts:tpresHeader>", xfile_text)
+        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
+        line_num = 1
+
+        line_to_parse = linecache.getline(xfile, line_num)
+        match = re.search("</ts:tpresHeader>", line_to_parse)
         while match:
             line_num -= line_num
             linecache.updatecache(xml_tag_set)
         else:
             line_num += 1
 
-        font_code_list = [{"fontnum": fontnum, "name": name, "fcharset":
-                           fcharset, "fprq": fprq, "panose": panose,
-                           "fontfamily": fontfamily, "altname": altname,
-                           "fontemb": fontemb, "cpg": cpg}]
+        font_code_list = {"fontnum": fontnum, "name": name, "fcharset":
+                          fcharset, "fprq": fprq, "panose": panose,
+                          "fontfamily": fontfamily, "altname": altname,
+                          "fontemb": fontemb, "cpg": cpg}
 
-        return font_code_list
+        return font_code_list, self.__line_to_read
 
-    def update_rtf_file_codes(self,  font_code_list):
+    @staticmethod
+    def update_rtf_file_codes(font_code_list):
         """
-        Write the RTF file codes to a list file.
+        Write the RTF file codes to a file.
         :param font_code_list:
         """
-        with open(os.path.join(self.__debug_dir, "rtf_file_codes.data"),
-                  "w+") as rtf_dict:
-            rtf_dict.write(str(font_code_list))
-            rtf_dict.close()
+
+        from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
+        rtf_dict.update(font_code_list)
 
     def font_table_end(self):
         self.__line_to_read += 1
-        line_to_parse = linecache.getline(self.__input_file_name,
+        line_to_parse = linecache.getline(self.__working_file,
                                           self.__line_to_read)
 
         match_beg = re.search(r"{\\f[0-9]+", line_to_parse)
         if match_beg:
             FonttblParse.set_fonts(
                 self=FonttblParse(
-                    input_file_name=self.__input_file_name,
+                    working_file=self.__working_file,
                     line_to_read=self.__line_to_read,
                     tag_dict=self.__tag_dict,
                     debug_dir=self.__debug_dir))

@@ -47,11 +47,11 @@ class InputPrep:
 
     def __init__(self,
                  input_file_name,
-                 debug_file_dir,
+                 debug_dir,
                  base_script_dir
-                ):
+                 ):
         self.__input_file = input_file_name
-        self.__debug_file_dir = debug_file_dir
+        self.__debug_dir = debug_dir
         self.__base_script_dir = base_script_dir
 
     def input_file_prep(self):
@@ -61,23 +61,21 @@ class InputPrep:
         xml file where tags will be placed and insert a header section.
         """
 
-        # Copy input file to working_input_file.data in debugdir and give
-        # it the name working_rtf_file.
+        # Copy input file to working_input_file.data in debugdir.
         with open(os.path.join(self.__base_script_dir, self.__input_file)) as \
                 input_file_copy:
             read_file = input_file_copy.read()
 
-        working_rtf_file = os.path.join(self.__debug_file_dir,
-                                        "working_input_file.data")
-
-        with open(working_rtf_file, "w+") as write_file_object:
-            write_file_object.write(read_file)
+        with open(os.path.join(self.__debug_dir, "working_input_file.txt"),
+                  "w+") as working_rtf_file:
+            working_rtf_file.write(read_file)
 
         # Open the file in which the XML tags and text will be
-        # added as the conversion progresses. Add first line to file.
+        # added as the conversion progresses. Add first line and header tags to
+        # the file.
         # TODO The xml tags should vary depending on user tag preference.
-        with open(os.path.join(self.__debug_file_dir,
-                               "working_xml_file.data"), "w+") as \
+        with open(os.path.join(self.__debug_dir,
+                               "working_xml_file.xml"), "w+") as \
                 working_xml_file:
             xml_header = open(os.path.join(self.__base_script_dir,
                                            "tpresheader.xml"), "r")
@@ -86,3 +84,8 @@ class InputPrep:
                                    '<ts:TPRES>\n'
                                    '\t<ts:tpresHeader>\n'
                                    f'{xml_header_tags}\n')
+
+        working_rtf_file = os.path.join(self.__debug_dir,
+                                        "working_input_file.txt")
+
+        return working_rtf_file

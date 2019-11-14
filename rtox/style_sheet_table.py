@@ -56,7 +56,7 @@ class StyleSheetParse:
                  self,
                  rtf_line_to_read,
                  match_symbol
-                ):
+                 ):
         self.__line_to_read = rtf_line_to_read
         self.__match = match_symbol
 

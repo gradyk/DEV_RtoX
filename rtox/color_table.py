@@ -51,21 +51,20 @@ class ColortblParse:
 
     def __init__(
                  self,
-                 input_file_name,
-                 line_to_read,
-                 xml_tag
+                 working_file,
+                 line_to_check,
+                 tag_dict
                  ):
-        self.__input_file_name = input_file_name
-        self.__line_to_read = line_to_read
-        self.__xml_tag = xml_tag
+        self.__working_file = working_file
+        self.__line_to_read = line_to_check
+        self.__tag_dict = tag_dict
 
-    @staticmethod
     def color_table(self):
         """
         Note end of color table so next module knows where to start.
         :return: self.__line_to_read:
         """
-        line_to_parse = linecache.getline(self.__input_file_name,
+        line_to_parse = linecache.getline(self.__working_file,
                                           self.__line_to_read)
 
         match = re.search(r'{\\colortbl', line_to_parse)
@@ -74,7 +73,7 @@ class ColortblParse:
             self.__line_to_read += 1
 
             while color_table == 1:
-                line_to_parse = linecache.getline(self.__input_file_name,
+                line_to_parse = linecache.getline(self.__working_file,
                                                   self.__line_to_read)
                 sub_match = re.search(r'}', line_to_parse)
                 if sub_match:

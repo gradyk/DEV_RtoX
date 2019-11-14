@@ -48,17 +48,21 @@ from log_config import logger
 
 class Prelim:
 
-    def __init__(self
+    def __init__(self,
+                 config_file,
+                 base_script_dir,
+                 debug_dir
                  ):
-        self.__init__()
+        self.__config_file = config_file
+        self.__base_script_dir = base_script_dir
+        self.__debug_dir = debug_dir
 
-    @staticmethod
-    def prelim_settings():
+    def prelim_settings(self):
 
-        base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        self.__base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
         """ Set the path for the main script and confirm it exists. """
-        main_script = os.path.join(base_script_dir, "RtoX.py")
+        main_script = os.path.join(self.__base_script_dir, "RtoX.py")
 
         if main_script and not os.path.isfile(main_script):
             logger.debug(msg="What script are you using? The program uses "
@@ -66,20 +70,20 @@ class Prelim:
             sys.exit(1)
 
         """ Set the directory for the config file and confirm it exists. """
-        config_file = os.path.join(base_script_dir, "Config.ini")
+        self.__config_file = os.path.join(self.__base_script_dir, "Config.ini")
 
-        if config_file and not os.path.isfile(config_file):
+        if self.__config_file and not os.path.isfile(self.__config_file):
             logger.critical(msg="The program cannot find the configuration "
                                 "file (Config.ini). Please make sure it is "
                                 'in the folder "DEVrtf2xml".')
             sys.exit(1)
 
         """ Set the debug_dir to store working files created by the program. """
-        debug_dir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                                 "debugdir")
+        self.__debug_dir = os.path.join(os.path.dirname(os.path.abspath(
+            sys.argv[0])), "debugdir")
 
         """ Determine if the base directory is in sys.path; if not, add it. """
-        if base_script_dir in sys.path:
+        if self.__base_script_dir in sys.path:
             current_in_path = 1
             temp = []
         else:
@@ -98,14 +102,14 @@ class Prelim:
             sys.path.append(path)
 
         if current_in_path:
-            sys.path.append(base_script_dir)
+            sys.path.append(self.__base_script_dir)
         else:
             pass
 
-        return base_script_dir, debug_dir,
+        return self.__base_script_dir, self.__debug_dir, self.__config_file
 
     @staticmethod
-    def config_messages():
+    def config_messages(config_file, debug_dir):
         """
         Report the settings before running the program.
         """
@@ -115,8 +119,10 @@ class Prelim:
 
         config_settings_dict = \
             rtox.read_configuration.Configuration.get_configuration(
-                config_file_dict_args=config_file_dict_args,
-                self=config_file_dict_args)
+                rtox.read_configuration.Configuration(
+                    config_file=config_file,
+                    debug_dir=debug_dir),
+                config_file_dict_args=config_file_dict_args)
 
         # file_to_convert and file_to_produce are from the command line.
         if config_settings_dict.get("input") is not None:
