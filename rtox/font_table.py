@@ -70,6 +70,8 @@ class FonttblParse:
         :return: hdr_line_count, fontnum, fontfamily, fcharset, fprq, panose, \
             name, altname, fontemb, fontfile, cpg, font_table
         """
+
+        font_code_list = {}
         fontnum, fontfamily, fcharset, fprq, panose, name, altname, fontemb, \
             fontfile, cpg = "", "", "", "", "", "", "", "", "", ""
         families = ["fnil", "froman", "fswiss", "fmodern",
@@ -82,74 +84,98 @@ class FonttblParse:
         match = re.search(r'f[0-9]+', line_to_parse)
         if match:
             fontnum = match[0]
+
             for family in families:
                 match = re.search(family, line_to_parse)
                 if match:
                     fontfamily = match[0]
 
-        match = re.search(r'\\fcharset([0-9])+', line_to_parse)
-        if match:
-            fcharset = match[0].replace("\\fcharset", "")
-
-        match = re.search(r'\\fprq([0-9])+', line_to_parse)
-        if match:
-            fprq = match[0].replace("\\fprq", "")
-
-        match = re.search(re.compile(r'\\\*\\[0-9]+'), line_to_parse)
-        if match:
-            panose = match[0].replace(match[0], "")
-
-        match = re.search(r'(\s\w+)+(;)*', line_to_parse)
-        if match:
-            name_pre = match.group(0).replace(";", "")
-            name = name_pre.lstrip()
-
-        match = re.search(re.compile(r'\\\*\\falt\s'), line_to_parse)
-        if match:
-            altname = match[0].replace(match[0], "")
-
-        match = re.search(r'{\\fontemb', line_to_parse)
-        if match:
-            fontemb = "Yes"
-        else:
-            fontemb = "No"
-
-        for c_set in c_sets:
-            match = re.search(c_set+"cpg", line_to_parse)
+            match = re.search(r'\\fcharset([0-9])+', line_to_parse)
             if match:
-                cpg = match.group(1).replace(match.group(1), "")
+                fcharset = match[0].replace("\\fcharset", "")
 
-        xml_tag_set = (
-            f'\t<ts:tagsDecl>'
-            f'\t\t<ts:rendFormat scheme="rtf" selector="{fontnum}">\n'
-            f'\t\t\tfont-style="{name}"\n'
-            f'\t\t\tcharset="{fcharset}"\n'
-            f'\t\t\tfprq="{fprq}"\n'
-            f'\t\t\tpanose="{panose}"\n'
-            f'\t\t\tfontfamily="{fontfamily}"\n'
-            f'\t\t\taltname="{altname}"/>\n'
-            f'\t\t\tfontemb="{fontemb}"\n'
-            f'\t\t\tcpg="{cpg}"\n'
-            f"\t\t</ts:rendFormat>\n"
-            f'\t</ts:tagsDecl>\n'
-            f'\n'
-        )
+            match = re.search(r'\\fprq([0-9])+', line_to_parse)
+            if match:
+                fprq = match[0].replace("\\fprq", "")
 
-        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
-        line_num = 1
+            match = re.search(re.compile(r'\\\*\\[0-9]+'), line_to_parse)
+            if match:
+                panose = match[0].replace(match[0], "")
 
-        line_to_parse = linecache.getline(xfile, line_num)
-        match = re.search("</ts:tpresHeader>", line_to_parse)
-        while match:
-            line_num -= line_num
-            linecache.updatecache(xml_tag_set)
+            match = re.search(r'(\s\w+)+(;)*', line_to_parse)
+            if match:
+                name_pre = match.group(0).replace(";", "")
+                name = name_pre.lstrip()
+
+            match = re.search(re.compile(r'\\\*\\falt\s'), line_to_parse)
+            if match:
+                altname = match[0].replace(match[0], "")
+
+            match = re.search(r'{\\fontemb', line_to_parse)
+            if match:
+                fontemb = "Yes"
+            else:
+                fontemb = "No"
+
+            for c_set in c_sets:
+                match = re.search(c_set+"cpg", line_to_parse)
+                if match:
+                    cpg = match.group(1).replace(match.group(1), "")
+            # TODO This needs to change based on tag-style selection.
+            # TODO Consider what needs to be in a tag inserted in the body of
+            #  the file when the font style changes.
+            xml_tag_set = (
+                f'\t<ts:tagsDecl>\n'
+                f'\t\t<ts:rendFormat scheme="rtf" selector="{fontnum}">\n'
+                f'\t\t\tfont-style="{name}"\n'
+                f'\t\t\tcharset="{fcharset}"\n'
+                f'\t\t\tfprq="{fprq}"\n'
+                f'\t\t\tpanose="{panose}"\n'
+                f'\t\t\tfontfamily="{fontfamily}"\n'
+                f'\t\t\taltname="{altname}"\n'
+                f'\t\t\tfontemb="{fontemb}"\n'
+                f'\t\t\tcpg="{cpg}"\n'
+                f"\t\t</ts:rendFormat>\n"
+                f'\t</ts:tagsDecl>\n'
+                f'\n'
+                f'</ts:tpresHeader>\n'
+            )
+
+            xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
+
+            line_len = FonttblParse.file_len(
+                xfile=xfile)
+
+            line_count = 0
+            while line_count < line_len:
+
+                line_to_parse = linecache.getline(xfile, line_count)
+                match = re.search("</ts:tpresHeader>", line_to_parse)
+                if match:
+                    line_count -= 1
+
+                    with open(xfile, "r") as xfile_temp:
+                        lines = xfile_temp.readlines()
+
+                    if len(lines) > int(line_count):
+                        lines[line_count] = xml_tag_set
+
+                    with open(xfile, "w") as xfile_update:
+                        xfile_update.writelines(lines)
+
+                    line_count = line_len + 1
+
+                else:
+                    line_count += 1
+            # TODO this needs to get written to a dictionary here - call
+            #  update_rtf_file_codes??
+            font_code_list = {"fontnum": fontnum, "name": name, "fcharset":
+                              fcharset, "fprq": fprq, "panose": panose,
+                              "fontfamily": fontfamily, "altname": altname,
+                              "fontemb": fontemb, "cpg": cpg}
+
         else:
-            line_num += 1
-
-        font_code_list = {"fontnum": fontnum, "name": name, "fcharset":
-                          fcharset, "fprq": fprq, "panose": panose,
-                          "fontfamily": fontfamily, "altname": altname,
-                          "fontemb": fontemb, "cpg": cpg}
+            pass
 
         return font_code_list, self.__line_to_read
 
@@ -188,3 +214,11 @@ class FonttblParse:
                                     "the end of the fonttbl. RtoX will "
                                     "now quite.")
                 sys.exit(1)
+
+    @staticmethod
+    def file_len(xfile):
+        with open(xfile) as \
+                file_size:
+            for i, l in enumerate(file_size):
+                pass
+        return i + 1

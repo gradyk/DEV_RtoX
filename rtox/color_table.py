@@ -72,6 +72,8 @@ class ColortblParse:
             color_table = 1
             self.__line_to_read += 1
 
+
+
             while color_table == 1:
                 line_to_parse = linecache.getline(self.__working_file,
                                                   self.__line_to_read)
