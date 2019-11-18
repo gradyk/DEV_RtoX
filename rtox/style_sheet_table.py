@@ -41,10 +41,8 @@ __date__ = "2019-11-04"
 __name__ = "style_sheet"
 
 import linecache
+import os
 import re
-import sys
-import rtox.check_line
-from log_config import logger
 
 
 class StyleSheetParse:
@@ -54,99 +52,97 @@ class StyleSheetParse:
 
     def __init__(
                  self,
-                 rtf_line_to_read,
-                 match_symbol
+                 working_file,
+                 line_to_check,
+                 debug_dir
                  ):
-        self.__line_to_read = rtf_line_to_read
-        self.__match = match_symbol
+        self.__working_file = working_file
+        self.__line_to_read = line_to_check
+        self.__debug_dir = debug_dir
 
-    def style_sheet_exist(self, working_rtf_file, hdr_line_count):
-        """
-        Check to see if input file contains stylesheets.
-        :param working_rtf_file:
-        :param hdr_line_count:
-        :return: hdr_line_count:
-        """
-
-        self.__line_to_read = linecache.getline(working_rtf_file,
-                                                hdr_line_count)
-        self.__match = re.search(r'\\stylesheet', self.__line_to_read)
-        if self.__match:
-            style_sheet = 1
-            hdr_line_count += 1
-            return style_sheet, hdr_line_count
-
-        else:
-            style_sheet = 0
-            hdr_line_count += 1
-            rtox.check_line.CheckLine.line_evaluate(
-                hdr_line_count=hdr_line_count,
-                working_rtf_file=working_rtf_file
-            )
-
-    def set_styles(self, style_sheet, working_rtf_file, hdr_line_count):
+    def find_styles(self, style_sheet):
         """
         For each stylesheet, capture the relevant settings.
         :return:
         """
 
-        para_style, char_style, sec_style, table_style, table_row_style,\
-            para_next_style, style_name = "", "", "", "", "", "", ""
-        additive = False
-        italic, bold, underline, small_caps, strikethrough = 0, 0, 0, 0, 0
+        state = 0
+        line_status = 1
+        line_count = self.__line_to_read
+        cb_line_count = line_count
+        line_to_parse_start = ""
 
-        text_to_process = ""
         while style_sheet == 1:
-            self.__line_to_read = linecache.getline(working_rtf_file,
-                                                    hdr_line_count)
-            hdr_line_count += 1
-            open_bracket = re.search(r'{', self.__line_to_read[0])
-            if open_bracket == "{":
-                open_bracket_count = 0
-                state = 1
-            else:
-                logger.debug(msg=f"There seems to be an error in the RTF "
-                                 f"formatting at working_rtf_file line "
-                                 f"{hdr_line_count} : "
-                                 f"{self.__line_to_read}. The program will "
-                                 f"now quit.")
-                sys.exit(1)
 
-            while state == 1:
-                new_line_to_read = hdr_line_count + open_bracket_count
-                self.__line_to_read = linecache.getline(
-                    working_rtf_file, new_line_to_read)
-                close_bracket = re.search(r'}', self.__line_to_read)
-                if close_bracket == "}":
-                    text_to_process = self.__line_to_read[
-                                      self.__line_to_read.find("{")
-                                      + 1:self.__line_to_read.find("}")]
-                    hdr_line_count = hdr_line_count + open_bracket_count + 1
-                    state = 0
+            while line_status == 1:
+                line_to_parse_start = linecache.getline(self.__working_file,
+                                                        line_count)
+                open_bracket = re.search(r'{', line_to_parse_start[0])
+                if open_bracket:
+                    cb_line_count = line_count
                 else:
-                    open_bracket_count += 1
+                    line_count += 1
+
+                close_bracket = re.search(r'}', line_to_parse_start)
+                if close_bracket:
+                    line_status = 0
+                    state = 1
+                else:
+                    line_status = 0
+                    state = 0
+                    cb_line_count += 1
+
+            running_line = ""
+            while state == 0:
+                line_to_parse_end = linecache.getline(self.__working_file,
+                                                      cb_line_count)
+                close_bracket = re.search(r'}', line_to_parse_end)
+                if close_bracket:
+                    state = 1
+                    running_line = line_to_parse_end.rstrip()
+                else:
+                    state = 0
+                    cb_line_count += 1
+                    running_line = running_line + line_to_parse_end.rstrip()
+                    continue
+
+            line_to_process = line_to_parse_start.rstrip() + running_line
+
+            text_to_process = line_to_process[
+                              line_to_process.find("{")
+                              + 1:line_to_process.find("}")]
+            print(text_to_process)
+
+            StyleSheetParse.set_styles(
+                self=StyleSheetParse(
+                    debug_dir=self.__debug_dir,
+                    working_file=self.__working_file,
+                    line_to_check=self.__line_to_read),
+                text_to_process=text_to_process)
+
+    def set_styles(self, text_to_process):
 
             styledef = re.search(r'\\s[0-9]*', text_to_process)
             if styledef:
-                para_style = styledef[0].replace("\\s", "")
+                para_style = styledef[0].replace("\\", "")
             else:
                 para_style = 0
 
             styledef = re.search(r'\\\*\\cs[0-9]+', text_to_process)
             if styledef:
-                char_style = styledef[0].replace("\\\\*\\cs", "")
+                char_style = styledef[0].replace("\\\\*\\", "")
             else:
                 char_style = 0
 
             styledef = re.search(r'\\ds[0-9]+', text_to_process)
             if styledef:
-                sec_style = styledef[0].replace("\\ds", "")
+                sec_style = styledef[0].replace("\\", "")
             else:
                 sec_style = 0
 
             styledef = re.search(r'\\ts[0-9]+', text_to_process)
             if styledef:
-                table_style = styledef[0].replace("\\ts", "")
+                table_style = styledef[0].replace("\\", "")
             else:
                 table_style = 0
 
@@ -177,19 +173,19 @@ class StyleSheetParse:
 
             styledef = re.search(r'\\i[0-9]*', text_to_process)
             if styledef:
-                italic = styledef[0].replace("\\i", "")
+                italic = styledef[0].replace("\\", "")
             else:
                 italic = 0
 
             styledef = re.search(r'\\b[0-9]*', text_to_process)
             if styledef:
-                bold = styledef[0].replace("\\b", "")
+                bold = styledef[0].replace("\\", "")
             else:
                 bold = 0
 
             styledef = re.search(r'\\ul[0-9]*', text_to_process)
             if styledef:
-                underline = styledef[0].replace("\\ul", "")
+                underline = styledef[0].replace("\\", "")
             else:
                 underline = 0
 
@@ -205,6 +201,40 @@ class StyleSheetParse:
             else:
                 strikethrough = 0
 
-        return hdr_line_count, para_style, char_style, sec_style, table_style, \
-               table_row_style, additive, para_next_style, style_name, \
-               italic, bold, underline, small_caps, strikethrough
+            style_file = os.path.join(self.__debug_dir, "styles.csv")
+            line = "code","bold_on","bold_off","italic_on","italic_off"
+
+            with open(style_file, 'w') as temp_file:
+                temp_file.write(line)
+
+            StyleSheetParse.styles_tags(
+                self=StyleSheetParse(
+                    working_file=self.__working_file,
+                    line_to_check=self.__line_to_read,
+                    debug_dir=self.__debug_dir),
+                # xml_tag_num=,
+                para_style=para_style,
+                # char_style=char_style,
+                # sec_style=sec_style,
+                # table_style=table_style,
+                # table_row_style=table_row_style,
+                # additive=additive,
+                # para_next_style=para_next_style,
+                # style_name=style_name,
+                italic=italic,
+                bold=bold,
+                # underline=underline,
+                # small_caps=small_caps,
+                # strikethrough=strikethrough
+            )
+
+    def styles_tags(self, para_style, italic, bold):
+
+        style_file = os.path.join(self.__debug_dir, "styles.csv")
+        with open(style_file, 'w') as temp_file:
+            if para_style is not None:
+                line = f'{para_style}',f'{bold}',f'{bold}',f'{italic}',\
+                       f'{italic}'
+                temp_file.write(line)
+            else:
+                pass

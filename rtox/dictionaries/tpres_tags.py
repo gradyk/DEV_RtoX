@@ -40,7 +40,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
 __name__ = "tpres_tags"
 
-tpres_tags_dict = {
+xml_tags = {
         "para-beg":         "<pBody>",
         "para-attr":        "<pBody ",
         "para-end":         "</pBody>",

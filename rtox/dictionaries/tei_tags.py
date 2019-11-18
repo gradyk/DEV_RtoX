@@ -41,7 +41,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
 __name__ = "xml_tags"
 
-tei_tags_dict = {
+xml_tags = {
         "paragraph":        "<p>",
         "title":            "<title>",
         "heading":          "<head>",

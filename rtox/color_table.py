@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Process color table (version 0.1.0a0 simply notes the existence of the table.
+Process color table (version 0.1.0a0 notes the existence of the table in the
+XML file and the codes dictionary).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -41,6 +42,7 @@ __date__ = "2019-11-04"
 __name__ = "color_table"
 
 import linecache
+import os
 import re
 
 
@@ -53,35 +55,117 @@ class ColortblParse:
                  self,
                  working_file,
                  line_to_check,
-                 tag_dict
+                 debug_dir
                  ):
         self.__working_file = working_file
         self.__line_to_read = line_to_check
-        self.__tag_dict = tag_dict
+        self.__debug_dir = debug_dir
 
-    def color_table(self):
+    def color_table(self, xml_tag_num):
         """
-        Note end of color table so next module knows where to start.
-        :return: self.__line_to_read:
+        Record a tag about the color table, but do not save all color table
+        settings (not relevant for most XML applications).
         """
-        line_to_parse = linecache.getline(self.__working_file,
-                                          self.__line_to_read)
 
-        match = re.search(r'{\\colortbl', line_to_parse)
-        if match:
-            color_table = 1
-            self.__line_to_read += 1
+        if xml_tag_num == "1":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<ts:rendFormat scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</ts:rendFormat>\n'
+                '\n'
+            )
+            # TODO What if XML file does not have this tag? Question
+            #  applies to all RTF tables.
+            xml_pattern = '</header>'
 
+        elif xml_tag_num == "2":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<tei:rendition scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</tei:rendition>\n'
+                '\n'
+            )
+            # TODO What if TEI file does not have this tag? Question
+            #  applies to all RTF tables.
+            xml_pattern = '</tei:tagsDecl>'
 
+        elif xml_tag_num == "3":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<rendition scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</rendition>\n'
+                '\n'
+            )
+            # TODO What if TPRES file does not have this tag? Question
+            #  applies to all RTF tables.
+            xml_pattern = '</ts:tagsDecl>'
 
-            while color_table == 1:
-                line_to_parse = linecache.getline(self.__working_file,
-                                                  self.__line_to_read)
-                sub_match = re.search(r'}', line_to_parse)
-                if sub_match:
-                    self.__line_to_read += 1
-                    return self.__line_to_read
-                else:
-                    self.__line_to_read += 1
         else:
-            return self.__line_to_read
+            xml_tag_set = (
+                '\n'
+                '\t<ts:rendFormat scheme="css" selector="colortbl">\n'
+                '\t\tp.normal = {\n'
+                '\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t}\n'
+                '\t</ts:rendFormat>\n'
+                '\n'
+            )
+            # TODO What if XML file does not have this tag? Question
+            #  applies to all RTF tables.
+            xml_pattern = '</header>'
+
+        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
+
+        line_len = ColortblParse.file_len(
+            xfile=xfile)
+
+        line_count = 0
+        while line_count < line_len:
+
+            line_to_parse = linecache.getline(xfile, line_count)
+            match = re.search(xml_pattern, line_to_parse)
+            if match:
+                line_count -= 1
+
+                with open(xfile, "r") as xfile_temp:
+                    lines = xfile_temp.readlines()
+
+                if len(lines) > int(line_count):
+                    lines[line_count] = xml_tag_set
+
+                with open(xfile, "w") as xfile_update:
+                    xfile_update.writelines(lines)
+
+                line_count = line_len + 1
+
+            else:
+                line_count += 1
+
+        # TODO this needs to get written to a dictionary here - call
+        #  update_rtf_file_codes??
+        color_code_list = {"colortbl": 'Skipped'}
+
+        return color_code_list
+
+    @staticmethod
+    def file_len(xfile):
+        """
+        Determines number of lines in XML file for help in placing tags.
+        :param xfile:
+        :return: line length
+        """
+
+        with open(xfile) as \
+                file_size:
+            for i, l in enumerate(file_size):
+                pass
+        return i + 1

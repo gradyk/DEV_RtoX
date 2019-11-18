@@ -236,5 +236,3 @@ class FirstLine:
 
         from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
         rtf_dict.update(rtf_file_codes)
-
-        print("rtf_codes_dictionary = " + str(rtf_dict))

@@ -64,7 +64,7 @@ class FonttblParse:
         self.__tag_dict = tag_dict
         self.__debug_dir = debug_dir
 
-    def set_fonts(self):
+    def set_fonts(self, xml_tag_num):
         """
         For each font number (e.g., f0), capture the relevant settings.
         :return: hdr_line_count, fontnum, fontfamily, fcharset, fprq, panose, \
@@ -121,25 +121,75 @@ class FonttblParse:
                 match = re.search(c_set+"cpg", line_to_parse)
                 if match:
                     cpg = match.group(1).replace(match.group(1), "")
-            # TODO This needs to change based on tag-style selection.
-            # TODO Consider what needs to be in a tag inserted in the body of
-            #  the file when the font style changes.
-            xml_tag_set = (
-                f'\t<ts:tagsDecl>\n'
-                f'\t\t<ts:rendFormat scheme="rtf" selector="{fontnum}">\n'
-                f'\t\t\tfont-style="{name}"\n'
-                f'\t\t\tcharset="{fcharset}"\n'
-                f'\t\t\tfprq="{fprq}"\n'
-                f'\t\t\tpanose="{panose}"\n'
-                f'\t\t\tfontfamily="{fontfamily}"\n'
-                f'\t\t\taltname="{altname}"\n'
-                f'\t\t\tfontemb="{fontemb}"\n'
-                f'\t\t\tcpg="{cpg}"\n'
-                f"\t\t</ts:rendFormat>\n"
-                f'\t</ts:tagsDecl>\n'
-                f'\n'
-                f'</ts:tpresHeader>\n'
-            )
+
+            if xml_tag_num == "1":
+                xml_tag_set = (
+                    f'\n'
+                    f'<rendition scheme="css" selector="{fontnum}">\n'
+                    '\tp.normal {\n'
+                    f'\tfont-style: normal;\n'
+                    f'\tfont-family: "{fontfamily}";\n'
+                    f'\tcolor: rgb(0,0,0);\n'
+                    f'\tfont-size: 12pt;\n'
+                    f'\tfont-weight: normal;\n'
+                    f'\tfont-variant: normal;\n'
+                    '\t}'
+                    f'</rendition>\n'
+                    f'\n'
+                )
+                xml_pattern = "</header>"
+
+            elif xml_tag_num == "2":
+                xml_tag_set = (
+                    f'\n'
+                    f'<rendition scheme="css" selector="{fontnum}">\n'
+                    '\tp.normal {\n'
+                    f'\tfont-style: normal;\n'
+                    f'\tfont-family: "{fontfamily}";\n'
+                    f'\tfont-color: ;\n'
+                    f'\tfont-size: 12pt;\n'
+                    f'\tfont-weight: normal;\n'
+                    f'\tfont-variant: normal;\n'
+                    '\t}\n'
+                    f'</rendition>\n'
+                    f'\n'
+                )
+                xml_pattern = "</tei:tagsDecl>"
+
+            elif xml_tag_num == "3":
+                xml_tag_set = (
+                    f'\n'
+                    f'\t\t\t<ts:rendFormat scheme="css" selector="{fontnum}">\n'
+                    '\t\t\t\tpBody.normal {\n'
+                    f'\t\t\t\t\tfont-style: normal;\n'
+                    f'\t\t\t\t\tfontfamily: "{fontfamily};"\n'
+                    f'\t\t\t\t\tcolor: rgb(0,0,0);\n'
+                    f'\t\t\t\t\tfont-size: 12pt;\n'
+                    f'\t\t\t\t\tfont-weight: normal;\n'
+                    f'\t\t\t\t\tfont-variant: normal;\n'
+                    '\t\t\t}\n'
+                    f"\t\t\t</ts:rendFormat>\n"
+                    f"\n"
+                    f'\t\t</ts:tagsDecl>\n'
+                )
+                xml_pattern = "</ts:tagsDecl>"
+
+            else:
+                xml_tag_set = (
+                    f'\n'
+                    f'<rendition scheme="css" selector="{fontnum}">\n'
+                    '\tp.normal {\n'
+                    f'\tfont-style: normal;\n'
+                    f'\tfont-family: "{fontfamily}";\n'
+                    f'\tcolor: rgb(0,0,0);\n'
+                    f'\tfont-size: 12pt;\n'
+                    f'\tfont-weight: normal;\n'
+                    f'\tfont-variant: normal;\n'
+                    '\t}'
+                    f'</rendition>\n'
+                    f'\n'
+                )
+                xml_pattern = "</header>"
 
             xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
 
@@ -150,7 +200,7 @@ class FonttblParse:
             while line_count < line_len:
 
                 line_to_parse = linecache.getline(xfile, line_count)
-                match = re.search("</ts:tpresHeader>", line_to_parse)
+                match = re.search(xml_pattern, line_to_parse)
                 if match:
                     line_count -= 1
 
@@ -167,6 +217,7 @@ class FonttblParse:
 
                 else:
                     line_count += 1
+
             # TODO this needs to get written to a dictionary here - call
             #  update_rtf_file_codes??
             font_code_list = {"fontnum": fontnum, "name": name, "fcharset":
@@ -189,7 +240,7 @@ class FonttblParse:
         from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
         rtf_dict.update(font_code_list)
 
-    def font_table_end(self):
+    def font_table_end(self, xml_tag_num):
         self.__line_to_read += 1
         line_to_parse = linecache.getline(self.__working_file,
                                           self.__line_to_read)
@@ -201,7 +252,8 @@ class FonttblParse:
                     working_file=self.__working_file,
                     line_to_read=self.__line_to_read,
                     tag_dict=self.__tag_dict,
-                    debug_dir=self.__debug_dir))
+                    debug_dir=self.__debug_dir),
+                xml_tag_num=xml_tag_num)
 
             return self.__line_to_read
         else:
@@ -217,6 +269,12 @@ class FonttblParse:
 
     @staticmethod
     def file_len(xfile):
+        """
+        Determines number of lines in XML file for help in placing tags.
+        :param xfile:
+        :return: line length
+        """
+
         with open(xfile) as \
                 file_size:
             for i, l in enumerate(file_size):

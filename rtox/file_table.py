@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Check for a file table, which indicates the pre-RTF file included subdocuments.
+Parse the file table (the pre-RTF file included subdocuments).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -41,20 +41,122 @@ __date__ = "2019-11-04"
 __name__ = "file_table"
 
 import linecache
-import sys
-from log_config import logger
+import os
+import re
 
 
-def file_table_exist():
+class FiletblParse:
     """
-    Check for the existence of a file table.
-    :return:
+    Process Header file table.
     """
 
-    if :
+    def __init__(
+                 self,
+                 working_file,
+                 line_to_check,
+                 debug_dir
+                 ):
+        self.__working_file = working_file
+        self.__line_to_read = line_to_check
+        self.__debug_dir = debug_dir
 
-    else:
-        logger.debug(msg="This version of RtoX does not convert RTF documents "
-                         "that came from Word documents composed of subdocuments. "
-                         "The program will now quit.\n")
-        sys.exit(1)
+    def file_table(self, xml_tag_num):
+        """
+        Record a tag about the color table, but do not save all color table
+        settings (not relevant for most XML applications).
+        """
+
+        if xml_tag_num == "1":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<ts:rendFormat scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</ts:rendFormat>\n'
+                '\n'
+            )
+            xml_pattern = '</header>'
+
+        elif xml_tag_num == "2":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<tei:rendition scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</tei:rendition>\n'
+                '\n'
+            )
+            xml_pattern = '</tei:tagsDecl>'
+
+        elif xml_tag_num == "3":
+            xml_tag_set = (
+                '\n'
+                '\t\t\t<rendition scheme="css" selector="colortbl">\n'
+                '\t\t\t\tp.normal = {\n'
+                '\t\t\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t\t\t}\n'
+                '\t\t\t</rendition>\n'
+                '\n'
+            )
+            xml_pattern = '</ts:tagsDecl>'
+
+        else:
+            xml_tag_set = (
+                '\n'
+                '\t<ts:rendFormat scheme="css" selector="colortbl">\n'
+                '\t\tp.normal = {\n'
+                '\t\t\tcolor: rgb(0,0,0);\n'
+                '\t\t}\n'
+                '\t</ts:rendFormat>\n'
+                '\n'
+            )
+            xml_pattern = '</header>'
+
+        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
+
+        line_len = FiletblParse.file_len(
+            xfile=xfile)
+
+        line_count = 0
+        while line_count < line_len:
+
+            line_to_parse = linecache.getline(xfile, line_count)
+            match = re.search(xml_pattern, line_to_parse)
+            if match:
+                line_count -= 1
+
+                with open(xfile, "r") as xfile_temp:
+                    lines = xfile_temp.readlines()
+
+                if len(lines) > int(line_count):
+                    lines[line_count] = xml_tag_set
+
+                with open(xfile, "w") as xfile_update:
+                    xfile_update.writelines(lines)
+
+                line_count = line_len + 1
+
+            else:
+                line_count += 1
+
+        # TODO this needs to get written to a dictionary here - call
+        #  update_rtf_file_codes??
+        file_code_list = {"filetbl": 'Skipped'}
+
+        return file_code_list
+
+    @staticmethod
+    def file_len(xfile):
+        """
+        Determines number of lines in XML file for help in placing tags.
+        :param xfile:
+        :return: line length
+        """
+
+        with open(xfile) as \
+                file_size:
+            for i, l in enumerate(file_size):
+                pass
+        return i + 1
