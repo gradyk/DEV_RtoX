@@ -38,6 +38,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
+import csv
 import os
 import pytest
 import rtox.color_table
@@ -123,6 +124,34 @@ class MainRtoX:
                 base_script_dir=base_script_dir_pass))
 
     @staticmethod
+    def csv_file_prep():
+        """
+        Prepare csv files for table codes.
+        :return:
+        """
+
+        font_file = os.path.join(debug_dir_pass, "fonts.csv")
+        line = ["fontnum", "name", "fcharset", "fprq", "panose",
+                "fontfamily", "altname", "fontemb", "cpg"]
+
+        with open(font_file, 'w') as temp_file:
+            temp_file_writer = \
+                csv.writer(temp_file, delimiter=",",
+                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            temp_file_writer.writerow(line)
+
+        style_file = os.path.join(debug_dir_pass, "styles.csv")
+        line = ["code", "additive", "para_next_style", "bold",
+                "italic", "underline", "small_caps",
+                "strikethrough", "style_name"]
+
+        with open(style_file, 'w') as temp_file:
+            temp_file_writer = \
+                csv.writer(temp_file, delimiter=",",
+                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            temp_file_writer.writerow(line)
+
+    @staticmethod
     def rtf_first_line():
         """
         Process the first line of the RTF file.
@@ -134,12 +163,11 @@ class MainRtoX:
                 base_script_dir=base_script_dir_pass))
 
     @staticmethod
-    def font_table():
+    def xml_tag_pref():
         """
-        If there is a font table, process the font settings for each font
-        number. Those settings become tag(s) in the XML document.
-        :return: line_to_check: tracks the line in the working file to process
-        :return: xml_tag_num: tracks the user's XML tag-style selection
+        Determine user's prefersence for XML tag style and use appropriate
+        dictionary.
+        :return: tag_dict: XML dictionary based on user preference
         """
 
         from debugdir.config_dict import config_dictionary as rtf_settings_dict
@@ -159,35 +187,34 @@ class MainRtoX:
         else:
             tag_dict = os.path.join(debug_dir_pass, "xml_tags.py")
 
-        from debugdir.header_tables_dict import header_tables_dictionary as htd
+        return tag_dict, xml_tag_num
 
+    @staticmethod
+    def font_table():
+        """
+        If there is a font table, process the font settings for each font
+        number. Those settings become tag(s) in the XML document.
+        :return: line_to_check: tracks the line in the working file to process
+        :return: xml_tag_num: tracks the user's XML tag-style selection
+        """
+
+        from debugdir.header_tables_dict import header_tables_dictionary as htd
         if "fonttbl" in htd.keys():
+            table_state = 0
+        else:
+            table_state = 1
+
+        while table_state == 0:
+
             line_to_check = htd['fonttbl'] + 1
-            set_font_vars = rtox.font_table.FonttblParse.set_fonts(
+
+            table_state = rtox.font_table.FonttblParse.find_fonts(
                 self=rtox.font_table.FonttblParse(
                     working_file=working_file_pass,
                     line_to_read=line_to_check,
-                    tag_dict=tag_dict,
-                    debug_dir=debug_dir_pass),
-                xml_tag_num=xml_tag_num)
-            font_code_list = set_font_vars[0]
-            line_to_check = set_font_vars[1]
-
-            rtox.font_table.FonttblParse.update_rtf_file_codes(
-                font_code_list=font_code_list)
-        else:
-            line_to_check = htd['fonttbl'] + 1
-            font_table_end_vars = rtox.font_table.FonttblParse.\
-                font_table_end(
-                    self=rtox.font_table.FonttblParse(
-                        working_file=working_file_pass,
-                        line_to_read=line_to_check,
-                        tag_dict=tag_dict,
-                        debug_dir=debug_dir_pass),
-                    xml_tag_num=xml_tag_num)
-            line_to_check = font_table_end_vars
-
-        return line_to_check, xml_tag_num
+                    debug_dir=debug_dir_pass,
+                    table_state=table_state,
+                    xml_tag_num=xml_tag_num_pass))
 
     @staticmethod
     def file_table(xml_tag_num):
@@ -196,8 +223,8 @@ class MainRtoX:
         """
 
         from debugdir.header_tables_dict import header_tables_dictionary as htd
-
         if "filetbl" in htd.keys():
+
             line_to_check = htd['filetbl'] + 1
 
             file_table_vars = rtox.file_table.FiletblParse.file_table(
@@ -220,8 +247,8 @@ class MainRtoX:
         """
 
         from debugdir.header_tables_dict import header_tables_dictionary as htd
-
         if "colortbl" in htd.keys():
+
             line_to_check = htd['colortbl'] + 1
 
             color_table_vars = rtox.color_table.ColortblParse.color_table(
@@ -241,20 +268,22 @@ class MainRtoX:
     def style_sheet_table():
 
         from debugdir.header_tables_dict import header_tables_dictionary as htd
-
         if "stylesheet" in htd.keys():
-            line_to_check = htd['stylesheet'] + 1
-            style_sheet = 1
+            style_state = 0
+        else:
+            style_state = 1
 
-            rtox.style_sheet_table.StyleSheetParse.find_styles(
+        while style_state == 0:
+
+            line_to_check = htd['stylesheet'] + 1
+
+            style_state = rtox.style_sheet_table.StyleSheetParse.find_styles(
                 self=rtox.style_sheet_table.StyleSheetParse(
                     debug_dir=debug_dir_pass,
                     line_to_check=line_to_check,
-                    working_file=working_file_pass),
-                style_sheet=style_sheet)
-
-        else:
-            pass
+                    working_file=working_file_pass,
+                    style_state=style_state,
+                    xml_tag_num=xml_tag_num_pass))
 
 
 if __name__ == "__main__":
@@ -279,9 +308,13 @@ if __name__ == "__main__":
 
     MainRtoX.rtf_first_line()
 
-    font_table_vars = MainRtoX.font_table()
-    line_to_check_pass = font_table_vars[0]
-    xml_tag_num_pass = font_table_vars[1]
+    tag_pref_vars = MainRtoX.xml_tag_pref()
+    tag_dict_pass = tag_pref_vars[0]
+    xml_tag_num_pass = tag_pref_vars[1]
+
+    MainRtoX.csv_file_prep()
+
+    MainRtoX.font_table()
 
     MainRtoX.file_table(
         xml_tag_num=xml_tag_num_pass)

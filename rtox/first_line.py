@@ -216,23 +216,3 @@ class FirstLine:
             rtf_file_codes.update({'other_lang': rtf_code})
         else:
             pass
-
-        FirstLine.file_write(
-            FirstLine(
-                base_script_dir=self.__base_script_dir,
-                debug_dir=self.__debug_dir,
-                working_file=self.__working_file),
-            rtf_file_codes=rtf_file_codes)
-
-    def file_write(self, rtf_file_codes):
-        """
-        Write the rtf_file_codes list to a data file.
-        :param rtf_file_codes:
-        """
-
-        with open(os.path.join(self.__debug_dir, "rtf_file_codes.py"),
-                  "w+") as rtc:
-            rtc.write("rtf_codes_dictionary = {}")
-
-        from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
-        rtf_dict.update(rtf_file_codes)

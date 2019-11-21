@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -40,6 +40,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-31"
 __name__ = "font_table"
 
+import csv
 import linecache
 import os
 import re
@@ -56,216 +57,294 @@ class FonttblParse:
                  self,
                  working_file,
                  line_to_read,
-                 tag_dict,
-                 debug_dir
-                ):
+                 debug_dir,
+                 table_state,
+                 xml_tag_num
+                 ):
         self.__working_file = working_file
         self.__line_to_read = line_to_read
-        self.__tag_dict = tag_dict
         self.__debug_dir = debug_dir
+        self.__table_state = table_state
+        self.__xml_tag_num = xml_tag_num
 
-    def set_fonts(self, xml_tag_num):
+    def find_fonts(self):
+        """
+        Capture the beginning and end of a font definition.
+        :return: text_to_process: the complete font definition
+        """
+
+        line_status = 1
+        line_count = self.__line_to_read
+        cb_line_count = line_count
+        line_to_parse_start = ""
+
+        # Check if this line is the end of the table.
+        while linecache.getline(self.__working_file,
+                                self.__line_to_read).rstrip() != '}':
+
+            # Find beginning and end of line to process and extract text to
+            # process.
+            while line_status == 1:
+                line_to_parse_start = linecache.getline(self.__working_file,
+                                                        line_count)
+                open_bracket = re.search(r'{', line_to_parse_start[0])
+                if open_bracket:
+                    cb_line_count = line_count
+                    pass
+                else:
+                    line_count += 1
+
+                close_bracket = re.search(r'}', line_to_parse_start)
+                if close_bracket:
+                    line_status = 0
+                    pass
+                else:
+                    line_status = 0
+                    cb_line_count += 1
+
+            running_line = ""
+            while line_status == 0:
+                line_to_parse_end = linecache.getline(self.__working_file,
+                                                      cb_line_count)
+                close_bracket = re.search(r'}', line_to_parse_end)
+                if close_bracket:
+                    line_status = 1
+                    running_line = line_to_parse_end.rstrip()
+                else:
+                    line_status = 0
+                    cb_line_count += 1
+                    running_line = running_line + line_to_parse_end.rstrip()
+                    continue
+
+            line_to_process = line_to_parse_start.rstrip() + running_line
+
+            text_to_process = line_to_process[
+                              line_to_process.find("{")
+                              + 1:line_to_process.find("}")]
+
+            self.__line_to_read = line_count
+
+            # Process the text.
+            FonttblParse.set_fonts(
+                self=FonttblParse(
+                    working_file=self.__working_file,
+                    line_to_read=self.__line_to_read,
+                    debug_dir=self.__debug_dir,
+                    table_state=self.__table_state,
+                    xml_tag_num=self.__xml_tag_num),
+                text_to_process=text_to_process)
+
+            line_count = cb_line_count + 1
+            self.__line_to_read = line_count
+
+        else:
+            self.__table_state = 1
+
+        return self.__table_state
+
+    def set_fonts(self, text_to_process):
         """
         For each font number (e.g., f0), capture the relevant settings.
         :return: hdr_line_count, fontnum, fontfamily, fcharset, fprq, panose, \
             name, altname, fontemb, fontfile, cpg, font_table
         """
 
-        font_code_list = {}
-        fontnum, fontfamily, fcharset, fprq, panose, name, altname, fontemb, \
-            fontfile, cpg = "", "", "", "", "", "", "", "", "", ""
+        fontnum, fontfamily, fcharset, fprq, panose, name, altname, \
+            fontemb, fontfile, cpg = "", "", "", "", "", "", "", "", "", ""
         families = ["fnil", "froman", "fswiss", "fmodern",
                     "fscript", "fdecor", "ftech", "fbidi"]
         c_sets = ["ansi", "mac", "pc", "pca"]
 
-        line_to_parse = linecache.getline(self.__working_file,
-                                          self.__line_to_read)
-
-        match = re.search(r'f[0-9]+', line_to_parse)
+        match = re.search(r'f[0-9]+', text_to_process)
         if match:
             fontnum = match[0]
+        else:
+            logger.debug(msg="There appears to be an error in the font "
+                             f'table at line {self.__line_to_read}. A '
+                             f'font number is missing. RtoX will now quit.\n')
+            sys.exit(1)
 
-            for family in families:
-                match = re.search(family, line_to_parse)
-                if match:
-                    fontfamily = match[0]
-
-            match = re.search(r'\\fcharset([0-9])+', line_to_parse)
+        for family in families:
+            match = re.search(family, text_to_process)
             if match:
-                fcharset = match[0].replace("\\fcharset", "")
+                fontfamily = match[0]
 
-            match = re.search(r'\\fprq([0-9])+', line_to_parse)
-            if match:
-                fprq = match[0].replace("\\fprq", "")
+        match = re.search(r'\\fcharset([0-9])+', text_to_process)
+        if match:
+            fcharset = match[0].replace("\\fcharset", "")
+        else:
+            fcharset = 0
 
-            match = re.search(re.compile(r'\\\*\\[0-9]+'), line_to_parse)
-            if match:
-                panose = match[0].replace(match[0], "")
+        match = re.search(r'\\fprq([0-9])+', text_to_process)
+        if match:
+            fprq = match[0].replace("\\fprq", "")
+        else:
+            fprq = 0
 
-            match = re.search(r'(\s\w+)+(;)*', line_to_parse)
-            if match:
-                name_pre = match.group(0).replace(";", "")
-                name = name_pre.lstrip()
+        match = re.search(re.compile(r'\\\*\\[0-9]+'), text_to_process)
+        if match:
+            panose = match[0].replace(match[0], "")
+        else:
+            panose = 0
 
-            match = re.search(re.compile(r'\\\*\\falt\s'), line_to_parse)
-            if match:
-                altname = match[0].replace(match[0], "")
+        match = re.search(r'(\s\w+)+(;)*', text_to_process)
+        if match:
+            name_pre = match.group(0).replace(";", "")
+            name = name_pre.lstrip()
+        else:
+            name = "None"
 
-            match = re.search(r'{\\fontemb', line_to_parse)
+        match = re.search(re.compile(r'\\\*\\falt\s'), text_to_process)
+        if match:
+            altname = match[0].replace(match[0], "")
+        else:
+            altname = "None"
+
+        match = re.search(r'{\\fontemb', text_to_process)
+        if match:
+            fontemb = "Yes"
+        else:
+            fontemb = "No"
+
+        for c_set in c_sets:
+            match = re.search(c_set+"cpg", text_to_process)
             if match:
-                fontemb = "Yes"
+                cpg = match.group(1).replace(match.group(1), "")
             else:
-                fontemb = "No"
+                cpg = 0
 
-            for c_set in c_sets:
-                match = re.search(c_set+"cpg", line_to_parse)
-                if match:
-                    cpg = match.group(1).replace(match.group(1), "")
+        # Select tags to add to XML file based on user's preference.
+        if self.__xml_tag_num == "1":
+            xml_tag_set = (
+                f'\n'
+                f'<rendition scheme="css" selector="{fontnum}">\n'
+                '\tp.normal {\n'
+                f'\tfont-style: normal;\n'
+                f'\tfont-family: "{fontfamily}";\n'
+                f'\tcolor: rgb(0,0,0);\n'
+                f'\tfont-size: 12pt;\n'
+                f'\tfont-weight: normal;\n'
+                f'\tfont-variant: normal;\n'
+                '\t}'
+                f'</rendition>\n'
+                f'\n'
+            )
+            xml_pattern = "</header>"
 
-            if xml_tag_num == "1":
-                xml_tag_set = (
-                    f'\n'
-                    f'<rendition scheme="css" selector="{fontnum}">\n'
-                    '\tp.normal {\n'
-                    f'\tfont-style: normal;\n'
-                    f'\tfont-family: "{fontfamily}";\n'
-                    f'\tcolor: rgb(0,0,0);\n'
-                    f'\tfont-size: 12pt;\n'
-                    f'\tfont-weight: normal;\n'
-                    f'\tfont-variant: normal;\n'
-                    '\t}'
-                    f'</rendition>\n'
-                    f'\n'
-                )
-                xml_pattern = "</header>"
+        elif self.__xml_tag_num == "2":
+            xml_tag_set = (
+                f'\n'
+                f'<rendition scheme="css" selector="{fontnum}">\n'
+                '\tp.normal {\n'
+                f'\tfont-style: normal;\n'
+                f'\tfont-family: "{fontfamily}";\n'
+                f'\tfont-color: ;\n'
+                f'\tfont-size: 12pt;\n'
+                f'\tfont-weight: normal;\n'
+                f'\tfont-variant: normal;\n'
+                '\t}\n'
+                f'</rendition>\n'
+                f'\n'
+            )
+            xml_pattern = "</tei:tagsDecl>"
 
-            elif xml_tag_num == "2":
-                xml_tag_set = (
-                    f'\n'
-                    f'<rendition scheme="css" selector="{fontnum}">\n'
-                    '\tp.normal {\n'
-                    f'\tfont-style: normal;\n'
-                    f'\tfont-family: "{fontfamily}";\n'
-                    f'\tfont-color: ;\n'
-                    f'\tfont-size: 12pt;\n'
-                    f'\tfont-weight: normal;\n'
-                    f'\tfont-variant: normal;\n'
-                    '\t}\n'
-                    f'</rendition>\n'
-                    f'\n'
-                )
-                xml_pattern = "</tei:tagsDecl>"
-
-            elif xml_tag_num == "3":
-                xml_tag_set = (
-                    f'\n'
-                    f'\t\t\t<ts:rendFormat scheme="css" selector="{fontnum}">\n'
-                    '\t\t\t\tpBody.normal {\n'
-                    f'\t\t\t\t\tfont-style: normal;\n'
-                    f'\t\t\t\t\tfontfamily: "{fontfamily};"\n'
-                    f'\t\t\t\t\tcolor: rgb(0,0,0);\n'
-                    f'\t\t\t\t\tfont-size: 12pt;\n'
-                    f'\t\t\t\t\tfont-weight: normal;\n'
-                    f'\t\t\t\t\tfont-variant: normal;\n'
-                    '\t\t\t}\n'
-                    f"\t\t\t</ts:rendFormat>\n"
-                    f"\n"
-                    f'\t\t</ts:tagsDecl>\n'
-                )
-                xml_pattern = "</ts:tagsDecl>"
-
-            else:
-                xml_tag_set = (
-                    f'\n'
-                    f'<rendition scheme="css" selector="{fontnum}">\n'
-                    '\tp.normal {\n'
-                    f'\tfont-style: normal;\n'
-                    f'\tfont-family: "{fontfamily}";\n'
-                    f'\tcolor: rgb(0,0,0);\n'
-                    f'\tfont-size: 12pt;\n'
-                    f'\tfont-weight: normal;\n'
-                    f'\tfont-variant: normal;\n'
-                    '\t}'
-                    f'</rendition>\n'
-                    f'\n'
-                )
-                xml_pattern = "</header>"
-
-            xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
-
-            line_len = FonttblParse.file_len(
-                xfile=xfile)
-
-            line_count = 0
-            while line_count < line_len:
-
-                line_to_parse = linecache.getline(xfile, line_count)
-                match = re.search(xml_pattern, line_to_parse)
-                if match:
-                    line_count -= 1
-
-                    with open(xfile, "r") as xfile_temp:
-                        lines = xfile_temp.readlines()
-
-                    if len(lines) > int(line_count):
-                        lines[line_count] = xml_tag_set
-
-                    with open(xfile, "w") as xfile_update:
-                        xfile_update.writelines(lines)
-
-                    line_count = line_len + 1
-
-                else:
-                    line_count += 1
-
-            # TODO this needs to get written to a dictionary here - call
-            #  update_rtf_file_codes??
-            font_code_list = {"fontnum": fontnum, "name": name, "fcharset":
-                              fcharset, "fprq": fprq, "panose": panose,
-                              "fontfamily": fontfamily, "altname": altname,
-                              "fontemb": fontemb, "cpg": cpg}
+        elif self.__xml_tag_num == "3":
+            xml_tag_set = (
+                f'\n'
+                f'\t\t\t<ts:rendFormat scheme="css" '
+                f'selector="{fontnum}">\n'
+                '\t\t\t\tpBody.normal {\n'
+                f'\t\t\t\t\tfont-style: normal;\n'
+                f'\t\t\t\t\tfontfamily: "{fontfamily};"\n'
+                f'\t\t\t\t\tcolor: rgb(0,0,0);\n'
+                f'\t\t\t\t\tfont-size: 12pt;\n'
+                f'\t\t\t\t\tfont-weight: normal;\n'
+                f'\t\t\t\t\tfont-variant: normal;\n'
+                '\t\t\t\t}\n'
+                f"\t\t\t</ts:rendFormat>\n"
+                f"\n"
+            )
+            xml_pattern = "</ts:tagsDecl>"
 
         else:
-            pass
+            xml_tag_set = (
+                f'\n'
+                f'<rendition scheme="css" selector="{fontnum}">\n'
+                '\tp.normal {\n'
+                f'\tfont-style: normal;\n'
+                f'\tfont-family: "{fontfamily}";\n'
+                f'\tcolor: rgb(0,0,0);\n'
+                f'\tfont-size: 12pt;\n'
+                f'\tfont-weight: normal;\n'
+                f'\tfont-variant: normal;\n'
+                '\t}'
+                f'</rendition>\n'
+                f'\n'
+            )
+            xml_pattern = "</header>"
 
-        return font_code_list, self.__line_to_read
+        # Write tags to XML file.
+        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
 
-    @staticmethod
-    def update_rtf_file_codes(font_code_list):
-        """
-        Write the RTF file codes to a file.
-        :param font_code_list:
-        """
+        line_len = FonttblParse.file_len(
+            xfile=xfile)
 
-        from debugdir.rtf_file_codes import rtf_codes_dictionary as rtf_dict
-        rtf_dict.update(font_code_list)
+        xml_line_track = 0
+        while xml_line_track < line_len:
 
-    def font_table_end(self, xml_tag_num):
-        self.__line_to_read += 1
-        line_to_parse = linecache.getline(self.__working_file,
-                                          self.__line_to_read)
+            line_to_parse = linecache.getline(xfile, xml_line_track)
+            match = re.search(xml_pattern, line_to_parse)
+            if match:
+                xml_line_track -= 2
 
-        match_beg = re.search(r"{\\f[0-9]+", line_to_parse)
-        if match_beg:
-            FonttblParse.set_fonts(
-                self=FonttblParse(
-                    working_file=self.__working_file,
-                    line_to_read=self.__line_to_read,
-                    tag_dict=self.__tag_dict,
-                    debug_dir=self.__debug_dir),
-                xml_tag_num=xml_tag_num)
+                with open(xfile, "r") as xfile_temp:
+                    lines = xfile_temp.readlines()
 
-            return self.__line_to_read
-        else:
-            match_end = re.search(r'}', line_to_parse)
-            if match_end:
-                return
+                if len(lines) > int(xml_line_track):
+                    lines[xml_line_track] = xml_tag_set
+
+                with open(xfile, "w") as xfile_update:
+                    xfile_update.writelines(lines)
+
+                xml_line_track = line_len + 1
+
             else:
-                logger.critical(msg="There appears to be an error in the "
-                                    "RTF file structure. RtoX can't find "
-                                    "the end of the fonttbl. RtoX will "
-                                    "now quite.")
-                sys.exit(1)
+                xml_line_track += 1
+
+        # Record font information in csv file.
+        FonttblParse.font_tags(
+            self=FonttblParse(
+                debug_dir=self.__debug_dir,
+                line_to_read=self.__line_to_read,
+                working_file=self.__working_file,
+                table_state=self.__table_state,
+                xml_tag_num=self.__xml_tag_num),
+            fontnum=fontnum,
+            name=name,
+            fcharset=fcharset,
+            fprq=fprq,
+            panose=panose,
+            fontfamily=fontfamily,
+            altname=altname,
+            fontemb=fontemb,
+            cpg=cpg)
+
+    def font_tags(self, fontnum, name, fcharset, fprq, panose,
+                  fontfamily, altname, fontemb, cpg):
+        """
+        Write the font information to a csv file.
+        """
+
+        font_file = os.path.join(self.__debug_dir, "fonts.csv")
+        with open(font_file, 'a') as temp_file:
+            temp_file_writer = \
+                csv.writer(temp_file, delimiter=",",
+                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
+
+            if fontnum is not None:
+                line = [fontnum, name, fcharset, fprq, panose, fontfamily,
+                        altname, fontemb, cpg]
+                temp_file_writer.writerow(line)
 
     @staticmethod
     def file_len(xfile):
