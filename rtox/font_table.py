@@ -44,6 +44,7 @@ import csv
 import linecache
 import os
 import re
+import rtox.xml_font_tags
 import sys
 from log_config import logger
 
@@ -213,104 +214,6 @@ class FonttblParse:
             else:
                 cpg = 0
 
-        # Select tags to add to XML file based on user's preference.
-        if self.__xml_tag_num == "1":
-            xml_tag_set = (
-                f'\n'
-                f'<rendition scheme="css" selector="{fontnum}">\n'
-                '\tp.normal {\n'
-                f'\tfont-style: normal;\n'
-                f'\tfont-family: "{fontfamily}";\n'
-                f'\tcolor: rgb(0,0,0);\n'
-                f'\tfont-size: 12pt;\n'
-                f'\tfont-weight: normal;\n'
-                f'\tfont-variant: normal;\n'
-                '\t}'
-                f'</rendition>\n'
-                f'\n'
-            )
-            xml_pattern = "</header>"
-
-        elif self.__xml_tag_num == "2":
-            xml_tag_set = (
-                f'\n'
-                f'<rendition scheme="css" selector="{fontnum}">\n'
-                '\tp.normal {\n'
-                f'\tfont-style: normal;\n'
-                f'\tfont-family: "{fontfamily}";\n'
-                f'\tfont-color: ;\n'
-                f'\tfont-size: 12pt;\n'
-                f'\tfont-weight: normal;\n'
-                f'\tfont-variant: normal;\n'
-                '\t}\n'
-                f'</rendition>\n'
-                f'\n'
-            )
-            xml_pattern = "</tei:tagsDecl>"
-
-        elif self.__xml_tag_num == "3":
-            xml_tag_set = (
-                f'\n'
-                f'\t\t\t<ts:rendFormat scheme="css" '
-                f'selector="{fontnum}">\n'
-                '\t\t\t\tpBody.normal {\n'
-                f'\t\t\t\t\tfont-style: normal;\n'
-                f'\t\t\t\t\tfontfamily: "{fontfamily};"\n'
-                f'\t\t\t\t\tcolor: rgb(0,0,0);\n'
-                f'\t\t\t\t\tfont-size: 12pt;\n'
-                f'\t\t\t\t\tfont-weight: normal;\n'
-                f'\t\t\t\t\tfont-variant: normal;\n'
-                '\t\t\t\t}\n'
-                f"\t\t\t</ts:rendFormat>\n"
-                f"\n"
-            )
-            xml_pattern = "</ts:tagsDecl>"
-
-        else:
-            xml_tag_set = (
-                f'\n'
-                f'<rendition scheme="css" selector="{fontnum}">\n'
-                '\tp.normal {\n'
-                f'\tfont-style: normal;\n'
-                f'\tfont-family: "{fontfamily}";\n'
-                f'\tcolor: rgb(0,0,0);\n'
-                f'\tfont-size: 12pt;\n'
-                f'\tfont-weight: normal;\n'
-                f'\tfont-variant: normal;\n'
-                '\t}'
-                f'</rendition>\n'
-                f'\n'
-            )
-            xml_pattern = "</header>"
-
-        # Write tags to XML file.
-        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
-
-        line_len = FonttblParse.file_len(
-            xfile=xfile)
-
-        xml_line_track = 0
-        while xml_line_track < line_len:
-
-            line_to_parse = linecache.getline(xfile, xml_line_track)
-            match = re.search(xml_pattern, line_to_parse)
-            if match:
-                xml_line_track -= 2
-
-                with open(xfile, "r") as xfile_temp:
-                    lines = xfile_temp.readlines()
-
-                if len(lines) > int(xml_line_track):
-                    lines[xml_line_track] = xml_tag_set
-
-                with open(xfile, "w") as xfile_update:
-                    xfile_update.writelines(lines)
-
-                xml_line_track = line_len + 1
-
-            else:
-                xml_line_track += 1
-
         # Record font information in csv file.
         FonttblParse.font_tags(
             self=FonttblParse(
@@ -346,16 +249,20 @@ class FonttblParse:
                         altname, fontemb, cpg]
                 temp_file_writer.writerow(line)
 
-    @staticmethod
-    def file_len(xfile):
-        """
-        Determines number of lines in XML file for help in placing tags.
-        :param xfile:
-        :return: line length
-        """
+        FonttblParse.tag_it(
+            self=FonttblParse(
+                debug_dir=self.__debug_dir,
+                line_to_read=self.__line_to_read,
+                working_file=self.__working_file,
+                table_state=self.__table_state,
+                xml_tag_num=self.__xml_tag_num),
+            fontnum=fontnum,
+            fontfamily=fontfamily)
 
-        with open(xfile) as \
-                file_size:
-            for i, l in enumerate(file_size):
-                pass
-        return i + 1
+    def tag_it(self, fontnum, fontfamily):
+        rtox.xml_font_tags.XMLTagSets.xml_font_tags(
+            self=rtox.xml_font_tags.XMLTagSets(
+                debug_dir=self.__debug_dir,
+                fontnum=fontnum,
+                fontfamily=fontfamily,
+                xml_tag_num=self.__xml_tag_num))

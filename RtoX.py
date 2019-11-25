@@ -204,9 +204,9 @@ class MainRtoX:
         else:
             table_state = 1
 
-        while table_state == 0:
+        line_to_check = htd['fonttbl'] + 1
 
-            line_to_check = htd['fonttbl'] + 1
+        while table_state == 0:
 
             table_state = rtox.font_table.FonttblParse.find_fonts(
                 self=rtox.font_table.FonttblParse(
@@ -273,9 +273,9 @@ class MainRtoX:
         else:
             style_state = 1
 
-        while style_state == 0:
+        line_to_check = htd['stylesheet'] + 1
 
-            line_to_check = htd['stylesheet'] + 1
+        while style_state == 0:
 
             style_state = rtox.style_sheet_table.StyleSheetParse.find_styles(
                 self=rtox.style_sheet_table.StyleSheetParse(

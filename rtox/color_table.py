@@ -41,9 +41,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
 __name__ = "color_table"
 
-import linecache
-import os
-import re
+import rtox.xml_color_tags
 
 
 class ColortblParse:
@@ -64,108 +62,16 @@ class ColortblParse:
     def color_table(self, xml_tag_num):
         """
         Record a tag about the color table, but do not save all color table
-        settings (not relevant for most XML applications).
+        settings (typically not relevant for XML applications).
         """
 
-        if xml_tag_num == "1":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<ts:rendFormat scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
-                '\t\t\t</ts:rendFormat>\n'
-                '\n'
-            )
-            # TODO What if XML file does not have this tag? Question
-            #  applies to all RTF tables.
-            xml_pattern = '</header>'
-
-        elif xml_tag_num == "2":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<tei:rendition scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
-                '\t\t\t</tei:rendition>\n'
-                '\n'
-            )
-            # TODO What if TEI file does not have this tag? Question
-            #  applies to all RTF tables.
-            xml_pattern = '</tei:tagsDecl>'
-
-        elif xml_tag_num == "3":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<rendition scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
-                '\t\t\t</rendition>\n'
-                '\n'
-            )
-            # TODO What if TPRES file does not have this tag? Question
-            #  applies to all RTF tables.
-            xml_pattern = '</ts:tagsDecl>'
-
-        else:
-            xml_tag_set = (
-                '\n'
-                '\t<ts:rendFormat scheme="css" selector="colortbl">\n'
-                '\t\tp.normal = {\n'
-                '\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t}\n'
-                '\t</ts:rendFormat>\n'
-                '\n'
-            )
-            # TODO What if XML file does not have this tag? Question
-            #  applies to all RTF tables.
-            xml_pattern = '</header>'
-
-        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
-
-        line_len = ColortblParse.file_len(
-            xfile=xfile)
-
-        line_count = 0
-        while line_count < line_len:
-
-            line_to_parse = linecache.getline(xfile, line_count)
-            match = re.search(xml_pattern, line_to_parse)
-            if match:
-                line_count -= 1
-
-                with open(xfile, "r") as xfile_temp:
-                    lines = xfile_temp.readlines()
-
-                if len(lines) > int(line_count):
-                    lines[line_count] = xml_tag_set
-
-                with open(xfile, "w") as xfile_update:
-                    xfile_update.writelines(lines)
-
-                line_count = line_len + 1
-
-            else:
-                line_count += 1
+        rtox.xml_color_tags.XMLTagSets.xml_color_tags(
+            self=rtox.xml_color_tags.XMLTagSets(
+                debug_dir=self.__debug_dir,
+                xml_tag_num=xml_tag_num))
 
         # TODO this needs to get written to a dictionary here - call
         #  update_rtf_file_codes??
         color_code_list = {"colortbl": 'Skipped'}
 
         return color_code_list
-
-    @staticmethod
-    def file_len(xfile):
-        """
-        Determines number of lines in XML file for help in placing tags.
-        :param xfile:
-        :return: line length
-        """
-
-        with open(xfile) as \
-                file_size:
-            for i, l in enumerate(file_size):
-                pass
-        return i + 1

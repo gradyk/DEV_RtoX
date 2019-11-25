@@ -80,10 +80,7 @@ class InputPrep:
             xml_header = open(os.path.join(self.__base_script_dir,
                                            "tpresheader.xml"), "r")
             xml_header_tags = xml_header.read()
-            working_xml_file.write('<?xml version="1.0" encoding="UTF-8"?>\n'
-                                   '<ts:TPRES>\n'
-                                   '\t<ts:tpresHeader>\n'
-                                   f'{xml_header_tags}\n')
+            working_xml_file.write(xml_header_tags)
 
         working_rtf_file = os.path.join(self.__debug_dir,
                                         "working_input_file.txt")
