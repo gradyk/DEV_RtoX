@@ -112,6 +112,7 @@ class XMLTagSets:
             ns = "{http://kennethgrady.com/ns/1.0.0}"
             new_tag = Et.SubElement(parent, ns + xml_pattern_two, scheme="css")
             new_tag.text = xml_tag_set
+            new_tag.tail = None
 
             parent.insert(parent.index(xml_pattern), new_tag)
 

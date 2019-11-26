@@ -209,19 +209,19 @@ class StyleSheetParse:
         else:
             underline = 0
 
-        styledef = re.search(r'\\scaps', text_to_process)
+        styledef = re.search(r'\\strike[0-9]*', text_to_process)
         if styledef:
-            small_caps = styledef[0].replace("\\scaps", "")
-        else:
-            small_caps = 0
-
-        styledef = re.search(r'\\strike', text_to_process)
-        if styledef:
-            strikethrough = styledef[0].replace("\\strike", "")
+            strikethrough = styledef[0].replace("\\", "")
         else:
             strikethrough = 0
 
-        # rtox.xml_tags.XMLTagSets.xml_style_tags()
+        styledef = re.search(r'\\scaps[0-9]*', text_to_process)
+        if styledef:
+            small_caps = styledef[0].replace("\\", "")
+        else:
+            small_caps = 0
+
+    # rtox.xml_tags.XMLTagSets.xml_style_tags()
         # Select tags to add to XML file based on user's preference.
 
         # Write tags to XML file.

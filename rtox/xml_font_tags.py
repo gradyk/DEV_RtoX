@@ -69,7 +69,7 @@ class XMLTagSets:
                 f'\n'
                 '\tp.normal {\n'
                 f'\tfont-style: normal;\n'
-                f'\tfont-family: "{self.__fontfamily}";\n'
+                f'\tfont-family: {self.__fontfamily};\n'
                 f'\tfont-size: 12pt;\n'
                 f'\tfont-weight: normal;\n'
                 f'\tfont-variant: normal;\n'
@@ -85,7 +85,7 @@ class XMLTagSets:
                 f'\n'
                 '\tp.normal {\n'
                 f'\tfont-style: normal;\n'
-                f'\tfont-family: "{self.__fontfamily}";\n'
+                f'\tfont-family: {self.__fontfamily};\n'
                 f'\tfont-size: 12pt;\n'
                 f'\tfont-weight: normal;\n'
                 f'\tfont-variant: normal;\n'
@@ -101,7 +101,7 @@ class XMLTagSets:
                 f'\n\t\t\t\t\t#{self.__fontnum}'
                 ' {\n'
                 f'\t\t\t\t\t\tfont-style: normal;\n'
-                f'\t\t\t\t\t\tfontfamily: "{self.__fontfamily};"\n'
+                f'\t\t\t\t\t\tfontfamily: {self.__fontfamily};\n'
                 f'\t\t\t\t\t\tfont-size: 12pt;\n'
                 f'\t\t\t\t\t\tfont-weight: normal;\n'
                 f'\t\t\t\t\t\tfont-variant: normal;\n'
@@ -140,6 +140,7 @@ class XMLTagSets:
             ns = "{http://kennethgrady.com/ns/1.0.0}"
             new_tag = Et.SubElement(parent, ns + xml_pattern_two, scheme="css")
             new_tag.text = xml_tag_set
+            new_tag.tail = "\n"
 
             parent.insert(parent.index(xml_pattern), new_tag)
 
