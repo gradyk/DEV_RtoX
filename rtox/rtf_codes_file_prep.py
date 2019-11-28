@@ -30,59 +30,57 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare the input file for processing.
+Prepare the rtf codes xml ile.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "input_file_prep"
+__date__ = "2019-11-27"
+__name__ = "rtf_codes_file_prep"
 
 import os
+from lxml import etree as et
 
 
-class InputPrep:
+class RTFCodesPrep:
 
     def __init__(self,
-                 input_file_name,
                  debug_dir,
-                 base_script_dir
+                 xml_tag_num
                  ):
-        self.__input_file = input_file_name
         self.__debug_dir = debug_dir
-        self.__base_script_dir = base_script_dir
+        self.__xml_tag_num = xml_tag_num
 
-    def input_file_prep(self):
+    def rtf_codes_to_xml_prep(self):
         """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Create a working
-        xml file where tags will be placed and insert a header section.
+        Open the file in which the XML tags and text will be
+        added as the conversion progresses. Add first line and header tags to
+        the file.
         """
 
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.__base_script_dir, self.__input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
+        if self.__xml_tag_num == "1":
+            ns = "http://www.w3.org/1999/xml"
+            prefix = None
 
-        with open(os.path.join(self.__debug_dir, "working_input_file.txt"),
-                  "w+") as working_rtf_file:
-            working_rtf_file.write(read_file)
+        elif self.__xml_tag_num == "2":
+            ns = "http://www.tei-c.org/ns/1.0"
+            prefix = "tei"
 
-        # Open the file in which the XML tags and text will be
-        # added as the conversion progresses. Add first line and header tags to
-        # the file.
-        # TODO The xml tags should vary depending on user tag preference.
+        elif self.__xml_tag_num == "3":
+            ns = "http://kennethgrady.com/ns/1.0.0"
+            prefix = "ts"
+
+        else:
+            ns = "http://www.w3.org/1999/xml"
+            prefix = None
+
         with open(os.path.join(self.__debug_dir,
-                               "working_xml_file.xml"), "w+") as \
-                working_xml_file:
-            xml_header = open(os.path.join(self.__base_script_dir,
-                                           "tpresheader.xml"), "r")
-            xml_header_tags = xml_header.read()
-            working_xml_file.write(xml_header_tags)
+                  "rtf_tags.xml"), "w+") as rcx:
 
-        working_rtf_file = os.path.join(self.__debug_dir,
-                                        "working_input_file.txt")
-
-        return working_rtf_file
+            namespace = "{%s}" % ns
+            nsmapped = {prefix: ns}
+            root = et.Element(namespace + "rtfCodes", nsmap=nsmapped)
+            root_string = et.tostring(root, method="html").decode("utf-8")
+            rcx.write(root_string)

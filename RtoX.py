@@ -49,6 +49,7 @@ import rtox.header_structure
 import rtox.input_file_prep
 import rtox.prelim
 import rtox.read_configuration
+import rtox.rtf_codes_file_prep
 import rtox.style_sheet_table
 
 
@@ -311,6 +312,11 @@ if __name__ == "__main__":
     tag_pref_vars = MainRtoX.xml_tag_pref()
     tag_dict_pass = tag_pref_vars[0]
     xml_tag_num_pass = tag_pref_vars[1]
+
+    rtox.rtf_codes_file_prep.RTFCodesPrep.rtf_codes_to_xml_prep(
+        self=rtox.rtf_codes_file_prep.RTFCodesPrep(
+            debug_dir=debug_dir_pass,
+            xml_tag_num=xml_tag_num_pass))
 
     MainRtoX.csv_file_prep()
 
