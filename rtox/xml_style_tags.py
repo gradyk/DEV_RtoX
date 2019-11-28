@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Insert font table tag sets into appropriate places in XML working file.
+Insert style table tag sets into appropriate places in XML working file.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-21"
-__name__ = "xml_font_tags"
+__name__ = "xml_color_tags"
 
 import os
 from lxml import etree as et
@@ -50,15 +50,29 @@ class XMLTagSets:
                  self,
                  debug_dir,
                  xml_tag_num,
-                 fontnum,
-                 fontfamily,
+                 code,
+                 additive,
+                 para_next,
+                 bold,
+                 italic,
+                 underline,
+                 small_caps,
+                 strikethrough,
+                 style_name
                  ):
         self.__debug_dir = debug_dir
         self.__xml_tag_num = xml_tag_num
-        self.__fontnum = fontnum
-        self.__fontfamily = fontfamily
+        self.__code = code
+        self.__additive = additive
+        self.__para_next = para_next
+        self.__bold = bold
+        self.__italic = italic
+        self.__underline = underline
+        self.__small_caps = small_caps
+        self.__strikethrough = strikethrough
+        self.__style_name = style_name
 
-    def xml_font_tags(self):
+    def xml_style_tags(self):
         """
         Determine which font tag set to use based on user's preferences.
         """
@@ -67,9 +81,16 @@ class XMLTagSets:
             tag_vars = XMLTagSets.plain_xml(
                 self=XMLTagSets(
                     debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
+                    xml_tag_num=self.__xml_tag_num,
+                    code=self.__code,
+                    additive=self.__additive,
+                    para_next=self.__para_next,
+                    bold=self.__bold,
+                    italic=self.__italic,
+                    underline=self.__underline,
+                    small_caps=self.__small_caps,
+                    strikethrough=self.__strikethrough,
+                    style_name=self.__style_name))
             xml_tag_set_pass = tag_vars[0]
             xml_pattern_pass = tag_vars[1]
             xml_pattern_two_pass = tag_vars[2]
@@ -80,9 +101,16 @@ class XMLTagSets:
             tag_vars = XMLTagSets.tei_xml(
                 self=XMLTagSets(
                     debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
+                    xml_tag_num=self.__xml_tag_num,
+                    code=self.__code,
+                    additive=self.__additive,
+                    para_next=self.__para_next,
+                    bold=self.__bold,
+                    italic=self.__italic,
+                    underline=self.__underline,
+                    small_caps=self.__small_caps,
+                    strikethrough=self.__strikethrough,
+                    style_name=self.__style_name))
             xml_tag_set_pass = tag_vars[0]
             xml_pattern_pass = tag_vars[1]
             xml_pattern_two_pass = tag_vars[2]
@@ -93,9 +121,16 @@ class XMLTagSets:
             tag_vars = XMLTagSets.tpres_xml(
                 self=XMLTagSets(
                     debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
+                    xml_tag_num=self.__xml_tag_num,
+                    code=self.__code,
+                    additive=self.__additive,
+                    para_next=self.__para_next,
+                    bold=self.__bold,
+                    italic=self.__italic,
+                    underline=self.__underline,
+                    small_caps=self.__small_caps,
+                    strikethrough=self.__strikethrough,
+                    style_name=self.__style_name))
             xml_tag_set_pass = tag_vars[0]
             xml_pattern_pass = tag_vars[1]
             xml_pattern_two_pass = tag_vars[2]
@@ -106,9 +141,16 @@ class XMLTagSets:
             tag_vars = XMLTagSets.plain_xml(
                 self=XMLTagSets(
                     debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
+                    xml_tag_num=self.__xml_tag_num,
+                    code=self.__code,
+                    additive=self.__additive,
+                    para_next=self.__para_next,
+                    bold=self.__bold,
+                    italic=self.__italic,
+                    underline=self.__underline,
+                    small_caps=self.__small_caps,
+                    strikethrough=self.__strikethrough,
+                    style_name=self.__style_name))
             xml_tag_set_pass = tag_vars[0]
             xml_pattern_pass = tag_vars[1]
             xml_pattern_two_pass = tag_vars[2]
@@ -118,9 +160,16 @@ class XMLTagSets:
         XMLTagSets.make_new_tags(
             self=XMLTagSets(
                 debug_dir=self.__debug_dir,
-                fontfamily=self.__fontfamily,
-                fontnum=self.__fontnum,
-                xml_tag_num=self.__xml_tag_num),
+                xml_tag_num=self.__xml_tag_num,
+                code=self.__code,
+                additive=self.__additive,
+                para_next=self.__para_next,
+                bold=self.__bold,
+                italic=self.__italic,
+                underline=self.__underline,
+                small_caps=self.__small_caps,
+                strikethrough=self.__strikethrough,
+                style_name=self.__style_name),
             xml_tag_set=xml_tag_set_pass,
             xml_pattern_two=xml_pattern_two_pass,
             ns=ns_pass,
@@ -135,14 +184,17 @@ class XMLTagSets:
         :return: ns: namespace
         """
         xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
-            '{\n'
-            f'\tfont-style: normal;\n'
-            f'\tfont-family: {self.__fontfamily};\n'
-            f'\tfont-size: 12pt;\n'
-            f'\tfont-weight: normal;\n'
-            f'\tfont-variant: normal;\n'
-            '\t}'
+            f'\n\t\t\t#{self.__code}'
+            ' {\n'
+            f'\t\t\t\tadditive: {self.__additive};\n'
+            f'\t\t\t\tpara_next: {self.__para_next};\n'
+            f'\t\t\t\tbold: {self.__bold};\n'
+            f'\t\t\t\titalic: {self.__italic};\n'
+            f'\t\t\t\tunderline: {self.__underline};\n'
+            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
+            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
+            f'\t\t\t\tstyle_name: {self.__style_name}\n'
+            '\t\t\t}'
             f'\n'
         )
         prefix = None
@@ -156,14 +208,17 @@ class XMLTagSets:
         Tag set for TEI. See plain_xml for returns.
         """
         xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
-            '{\n'
-            f'\tfont-style: normal;\n'
-            f'\tfont-family: {self.__fontfamily};\n'
-            f'\tfont-size: 12pt;\n'
-            f'\tfont-weight: normal;\n'
-            f'\tfont-variant: normal;\n'
-            '\t}\n'
+            f'\n\t\t\t#{self.__code}'
+            ' {\n'
+            f'\t\t\t\tadditive: {self.__additive};\n'
+            f'\t\t\t\tpara_next: {self.__para_next};\n'
+            f'\t\t\t\tbold: {self.__bold};\n'
+            f'\t\t\t\titalic: {self.__italic};\n'
+            f'\t\t\t\tunderline: {self.__underline};\n'
+            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
+            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
+            f'\t\t\t\tstyle_name: {self.__style_name}\n'
+            '\t\t\t}'
             f'\n'
         )
         prefix = "tei"
@@ -177,14 +232,18 @@ class XMLTagSets:
         Tag set for TPRES. See plain_xml for returns.
         """
         xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
+            f'\n\t\t\t#{self.__code}'
             ' {\n'
-            f'\t\tfont-style: normal;\n'
-            f'\t\tfontfamily: {self.__fontfamily};\n'
-            f'\t\tfont-size: 12pt;\n'
-            f'\t\tfont-weight: normal;\n'
-            f'\t\tfont-variant: normal;\n'
-            '\t}\n'
+            f'\t\t\t\tadditive: {self.__additive};\n'
+            f'\t\t\t\tpara_next: {self.__para_next};\n'
+            f'\t\t\t\tbold: {self.__bold};\n'
+            f'\t\t\t\titalic: {self.__italic};\n'
+            f'\t\t\t\tunderline: {self.__underline};\n'
+            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
+            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
+            f'\t\t\t\tstyle_name: {self.__style_name}\n'
+            '\t\t\t}'
+            f'\n'
         )
         prefix = "ts"
         ns = "http://kennethgrady.com/ns/1.0.0"

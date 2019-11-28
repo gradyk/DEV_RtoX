@@ -44,6 +44,7 @@ import csv
 import linecache
 import os
 import re
+import rtox.xml_style_tags
 
 
 class StyleSheetParse:
@@ -221,11 +222,6 @@ class StyleSheetParse:
         else:
             small_caps = 0
 
-    # rtox.xml_tags.XMLTagSets.xml_style_tags()
-        # Select tags to add to XML file based on user's preference.
-
-        # Write tags to XML file.
-
         # Record style information in csv file.
         StyleSheetParse.styles_tags(
             self=StyleSheetParse(
@@ -261,3 +257,36 @@ class StyleSheetParse:
                         italic, underline, small_caps, strikethrough,
                         style_name]
                 temp_file_writer.writerow(line)
+
+        StyleSheetParse.tag_it(
+            self=StyleSheetParse(
+                debug_dir=self.__debug_dir,
+                line_to_check=self.__line_to_read,
+                working_file=self.__working_file,
+                style_state=self.__style_state,
+                xml_tag_num=self.__xml_tag_num),
+            code=code,
+            additive=additive,
+            bold=bold,
+            italic=italic,
+            underline=underline,
+            para_next=para_next_style,
+            small_caps=small_caps,
+            strikethrough=strikethrough,
+            style_name=style_name)
+
+    def tag_it(self, code, additive, para_next, bold, italic, underline,
+               small_caps, strikethrough, style_name):
+        rtox.xml_style_tags.XMLTagSets.xml_style_tags(
+            self=rtox.xml_style_tags.XMLTagSets(
+                debug_dir=self.__debug_dir,
+                xml_tag_num=self.__xml_tag_num,
+                code=code,
+                additive=additive,
+                para_next=para_next,
+                bold=bold,
+                italic=italic,
+                underline=underline,
+                small_caps=small_caps,
+                strikethrough=strikethrough,
+                style_name=style_name))
