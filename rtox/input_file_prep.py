@@ -77,6 +77,7 @@ class InputPrep:
         with open(os.path.join(self.__debug_dir,
                                "working_xml_file.xml"), "w+") as \
                 working_xml_file:
+
             xml_header = open(os.path.join(self.__base_script_dir,
                                            "tpresheader.xml"), "r")
             xml_header_tags = xml_header.read()

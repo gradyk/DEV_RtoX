@@ -168,7 +168,22 @@ class FonttblParse:
         for family in families:
             match = re.search(family, text_to_process)
             if match:
-                fontfamily = match[0]
+                if match[0] == "fnil":
+                    fontfamily = "Default"
+                elif match[0] == "froman":
+                    fontfamily = "Times New Roman"
+                elif match[0] == "fswiss":
+                    fontfamily = "Arial"
+                elif match[0] == "fmodern":
+                    fontfamily = "Courier"
+                elif match[0] == "fscript":
+                    fontfamily = "Cursive"
+                elif match[0] == "fdecor":
+                    fontfamily = "Old English"
+                elif match[0] == "ftech":
+                    fontfamily = "Symbol"
+                elif match[0] == "fidi":
+                    fontfamily = "Miriam"
 
         match = re.search(r'\\fcharset([0-9])+', text_to_process)
         if match:
@@ -192,6 +207,7 @@ class FonttblParse:
         if match:
             name_pre = match.group(0).replace(";", "")
             name = name_pre.lstrip()
+            fontfamily = name
         else:
             name = "None"
 
@@ -241,8 +257,7 @@ class FonttblParse:
         font_file = os.path.join(self.__debug_dir, "fonts.csv")
         with open(font_file, 'a') as temp_file:
             temp_file_writer = \
-                csv.writer(temp_file, delimiter=",",
-                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                csv.writer(temp_file, csv.QUOTE_ALL, delimiter=",")
 
             if fontnum is not None:
                 line = [fontnum, name, fcharset, fprq, panose, fontfamily,

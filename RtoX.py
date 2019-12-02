@@ -38,10 +38,11 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
-import csv
 import os
 import pytest
 import rtox.color_table
+import rtox.csv_prep
+import rtox.doc_info_read
 import rtox.file_table
 import rtox.first_line
 import rtox.font_table
@@ -121,36 +122,7 @@ class MainRtoX:
         rtox.header_structure.HeaderStructure.table_check(
             rtox.header_structure.HeaderStructure(
                 working_file=working_file_pass,
-                debug_dir=debug_dir_pass,
-                base_script_dir=base_script_dir_pass))
-
-    @staticmethod
-    def csv_file_prep():
-        """
-        Prepare csv files for table codes.
-        :return:
-        """
-
-        font_file = os.path.join(debug_dir_pass, "fonts.csv")
-        line = ["fontnum", "name", "fcharset", "fprq", "panose",
-                "fontfamily", "altname", "fontemb", "cpg"]
-
-        with open(font_file, 'w') as temp_file:
-            temp_file_writer = \
-                csv.writer(temp_file, delimiter=",",
-                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            temp_file_writer.writerow(line)
-
-        style_file = os.path.join(debug_dir_pass, "styles.csv")
-        line = ["code", "additive", "para_next_style", "bold",
-                "italic", "underline", "small_caps",
-                "strikethrough", "style_name"]
-
-        with open(style_file, 'w') as temp_file:
-            temp_file_writer = \
-                csv.writer(temp_file, delimiter=",",
-                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            temp_file_writer.writerow(line)
+                debug_dir=debug_dir_pass))
 
     @staticmethod
     def rtf_first_line():
@@ -289,6 +261,8 @@ class MainRtoX:
 
 if __name__ == "__main__":
     pytest.main()
+
+    # Prepare rtf file and read codes to be used in processing document text.
     vars_init = MainRtoX.prelim_routine(
         self=MainRtoX(
             bs_dir="",
@@ -301,33 +275,48 @@ if __name__ == "__main__":
     input_file_name = vars_init[2]
     output_file_name = vars_init[3]
 
+    # Prepare rtf input file for processing.
     working_file_pass = MainRtoX.prep_rtf_file(
         base_script_dir=base_script_dir_pass,
         debug_dir=debug_dir_pass)
 
+    # ############### Begin Header Processing
+
+    # Determine header structure of rtf input document.
     MainRtoX.header_structure()
 
+    # Process first line of rtf input document.
     MainRtoX.rtf_first_line()
 
+    # Determine user's preference for xml tag style.
     tag_pref_vars = MainRtoX.xml_tag_pref()
     tag_dict_pass = tag_pref_vars[0]
     xml_tag_num_pass = tag_pref_vars[1]
 
+    # Set up a basic xml file to store font, color, etc. rtf codes in xml
+    # format.
     rtox.rtf_codes_file_prep.RTFCodesPrep.rtf_codes_to_xml_prep(
         self=rtox.rtf_codes_file_prep.RTFCodesPrep(
             debug_dir=debug_dir_pass,
             xml_tag_num=xml_tag_num_pass))
 
-    MainRtoX.csv_file_prep()
+    # Set up csv files for processed rtf codes.
+    rtox.csv_prep.CSVPrep.csv_file_prep(
+        self=rtox.csv_prep.CSVPrep(
+            debug_dir=debug_dir_pass))
 
+    # Process font table rtf codes.
     MainRtoX.font_table()
 
+    # Process file table rtf codes.
     MainRtoX.file_table(
         xml_tag_num=xml_tag_num_pass)
 
+    # Process color table rtf codes.
     MainRtoX.color_table(
         xml_tag_num=xml_tag_num_pass)
 
+    # Process style sheet table rtf codes.
     MainRtoX.style_sheet_table()
 
     # MainRtoX.list_table(
@@ -341,3 +330,41 @@ if __name__ == "__main__":
 
     # MainRtoX.generator(
     #   xml_tag_num=xml_tag_num_pass)
+
+    # ############### End Header Processing
+
+    # Process info section of document.
+    # Find beginning of info section.
+    info_start_vars = rtox.doc_info_read.DocInfoRead.info_start(
+        self=rtox.doc_info_read.DocInfoRead(
+            debug_dir=debug_dir_pass,
+            working_file=working_file_pass))
+    line_counter_pass = info_start_vars[0]
+    line_number_pass = info_start_vars[1]
+    start_line_pass = info_start_vars[2]
+    line_to_scan_pass = info_start_vars[3]
+
+    if line_counter_pass < line_number_pass:
+
+        running_line = ""
+        # Test for end of info section.
+        first_test_vars = rtox.doc_info_read.DocInfoRead.info_end_test(
+            self=rtox.doc_info_read.DocInfoRead(
+                debug_dir=debug_dir_pass,
+                working_file=working_file_pass),
+            line_counter=line_counter_pass,
+            running_line=running_line)
+        running_line_pass = first_test_vars
+
+    else:
+        running_line_pass = line_to_scan_pass
+        pass
+
+    text_to_process_pass = rtox.doc_info_read.DocInfoRead.process_text(
+        line_to_scan=line_to_scan_pass,
+        running_line=running_line_pass)
+
+    chars = "}{"
+    info_list = rtox.doc_info_read.DocInfoRead.split_between(
+        text_to_process=text_to_process_pass,
+        chars=chars)

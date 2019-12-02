@@ -54,23 +54,19 @@ class HeaderStructure:
 
     def __init__(self,
                  working_file,
-                 debug_dir,
-                 base_script_dir
+                 debug_dir
                  ):
         self.__working_file = working_file
         self.__debug_dir = debug_dir
-        self.__base_script_dir = base_script_dir
 
     def table_check(self):
         """
         Check input file for each possible table in header. If located,
         record the line on which the table starts.
-        :return:
         """
 
         line_len = HeaderStructure.file_len(
             self=HeaderStructure(
-                base_script_dir=self.__base_script_dir,
                 debug_dir=self.__debug_dir,
                 working_file=self.__working_file))
 
@@ -92,8 +88,8 @@ class HeaderStructure:
 
         header_table_dict = header_tables_dict_args
         with open(os.path.join(self.__debug_dir,
-                               "header_tables_dict.py"), "w+") as f:
-            f.write("header_tables_dictionary = " + str(header_table_dict))
+                               "header_tables_dict.py"), "w+") as file:
+            file.write("header_tables_dictionary = " + str(header_table_dict))
 
     def file_len(self):
         with open(self.__working_file) as \

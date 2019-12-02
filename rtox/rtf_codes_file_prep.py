@@ -60,18 +60,22 @@ class RTFCodesPrep:
         the file.
         """
 
+        # User chose plain xml.
         if self.__xml_tag_num == "1":
             ns = "http://www.w3.org/1999/xml"
             prefix = None
 
+        # User chose TEI xml.
         elif self.__xml_tag_num == "2":
             ns = "http://www.tei-c.org/ns/1.0"
             prefix = "tei"
 
+        # User chose TPRES xml.
         elif self.__xml_tag_num == "3":
             ns = "http://kennethgrady.com/ns/1.0.0"
             prefix = "ts"
 
+        # User did not make a selection; default is plain xml.
         else:
             ns = "http://www.w3.org/1999/xml"
             prefix = None

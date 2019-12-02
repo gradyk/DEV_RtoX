@@ -80,7 +80,7 @@ class StyleSheetParse:
 
         # Check to see if this line is the end of the table.
         while linecache.getline(self.__working_file,
-                                self.__line_to_read).rstrip() != '}':
+                                self.__line_to_read).rstrip() is not '}':
 
             # Find beginning and end of line to process and extract text to
             # process.
@@ -123,7 +123,7 @@ class StyleSheetParse:
 
             self.__line_to_read = line_count
 
-            # Process the text.
+            # Call function to process the text.
             StyleSheetParse.set_styles(
                 self=StyleSheetParse(
                     debug_dir=self.__debug_dir,
@@ -143,7 +143,8 @@ class StyleSheetParse:
 
     def set_styles(self, text_to_process):
         """
-        Parses a style sheet entry, which is the text_to_process.
+        Parses a style sheet entry for the csv file, which is drawn from the
+        text_to_process.
         """
 
         styledef = re.search(r'\\s[0-9]+', text_to_process)
@@ -222,7 +223,7 @@ class StyleSheetParse:
         else:
             small_caps = 0
 
-        # Record style information in csv file.
+        # Call function to record style information in csv file.
         StyleSheetParse.styles_tags(
             self=StyleSheetParse(
                 working_file=self.__working_file,
