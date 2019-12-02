@@ -368,3 +368,9 @@ if __name__ == "__main__":
     info_list = rtox.doc_info_read.DocInfoRead.split_between(
         text_to_process=text_to_process_pass,
         chars=chars)
+
+    rtox.doc_info_read.DocInfoRead.info_to_csv(
+        self=rtox.doc_info_read.DocInfoRead(
+            working_file=working_file_pass,
+            debug_dir=debug_dir_pass),
+        result_list=info_list)

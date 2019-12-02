@@ -83,11 +83,16 @@ class CSVPrep:
         info_file = os.path.join(self.__debug_dir, "info.csv")
         line = ["title", "subject", "author", "manager", "company",
                 "operator", "category", "keywords", "comment" 
-                "document_comments", "hyperlink_base_address", "count",
-                "year", "month", "day", "minutes", "seconds", "version",
-                "editing_time_minutes", "no_of_pages", "no_of_words",
+                "document_comments", "hyperlink_base_address",
+                "version", "editing_time_minutes", "no_of_pages", "no_of_words",
                 "no_of_characters_with_spaces",
-                "no_of_characters_without_spaces", "internal_version_number"]
+                "no_of_characters_without_spaces", "internal_version_number",
+                "creatim", "c_year", "c_month", "c_day", "c_hour", "c_minutes",
+                "c_seconds", "revtim", "r_year", "r_month", "r_day", "r_hour",
+                "r_minutes", "r_seconds", "printim", "p_year", "p_month",
+                "p_day", "p_hour", "p_minutes", "p_seconds", "buptim",
+                "b_year", "b_month", "b_day", "b_hour", "b_minutes",
+                "b_seconds", "keywords"]
 
         with open(info_file, 'w') as temp_file:
             temp_file_writer = \
