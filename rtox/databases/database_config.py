@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -29,57 +32,52 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#
+#
+#  Redistribution and use in source and binary forms, with or without
+#  modification, are permitted provided that the following conditions are met:
+#
+#
+#
+#
 """
-Prepare the input file for processing.
+Read the Database.ini file to determine parameters for building rtox_db.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "input_file_prep"
+__date__ = "2019-12-03"
+__name__ = "database_prep"
 
 import os
+from configparser import ConfigParser
 
 
-class InputPrep:
+class DatabasePrep:
 
-    def __init__(self, input_file_name, debug_dir, base_script_dir):
-        self.input_file = input_file_name
-        self.debug_dir = debug_dir
-        self.base_script_dir = base_script_dir
+    def __init__(self,
+                 base_script_dir
+                 ):
+        self.__base_script_dir = base_script_dir
 
-    def input_file_prep(self):
-        """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Create a working
-        xml file where tags will be placed and insert a header section.
-        """
+    def config(self, section="postgresql"):
+        # Create a parser.
+        parser = ConfigParser()
+        # Read config file.
+        db_file = os.path.join(self.__base_script_dir, "Database.ini")
+        parser.read(db_file)
 
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.base_script_dir, self.input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
+        # Get section, default to postgresql.
+        if parser.has_section(section):
+            host = parser[section]["host"]
+            database = parser[section]["database"]
+            user = parser[section]["user"]
+            password = parser[section]["password"]
 
-        with open(os.path.join(self.debug_dir, "working_input_file.txt"),
-                  "w+") as working_rtf_file:
-            working_rtf_file.write(read_file)
-
-        # Open the file in which the XML tags and text will be
-        # added as the conversion progresses. Add first line and header tags to
-        # the file.
-        # TODO The xml tags should vary depending on user tag preference.
-        with open(os.path.join(self.debug_dir,
-                               "working_xml_file.xml"), "w+") as \
-                working_xml_file:
-
-            xml_header = open(os.path.join(self.base_script_dir,
-                                           "tpresheader.xml"), "r")
-            xml_header_tags = xml_header.read()
-            working_xml_file.write(xml_header_tags)
-
-        working_rtf_file = os.path.join(self.debug_dir,
-                                        "working_input_file.txt")
-
-        return working_rtf_file
+        else:
+            raise Exception(
+                "Section {0} not found in the {1} file".format(section,
+                                                               db_file))
+        return host, database, user, password

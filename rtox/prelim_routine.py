@@ -31,6 +31,16 @@
 
 """
 First processing step for RTF file.
+1. Establish the directory for the main script (RtoX.py) and confirm the
+script is in that directory.
+2. Establish the directory for the Config.ini file and confirm the file is in
+that directory.
+3. Establish the debugdir directory, where working files are stored during
+processing.
+4. Make sure the base script directory is in the system path.
+TODO Is this a problem in a Windows installation?
+5. Copy all of path to temp.
+TODO Is this needed or a holdover from rtf2xml?
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +48,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-09"
-__name__ = "prelim"
+__name__ = "prelim_routine"
 
 import os
 import sys
@@ -48,49 +58,45 @@ from log_config import logger
 
 class Prelim:
 
-    def __init__(self,
-                 config_file,
-                 base_script_dir,
-                 debug_dir
-                 ):
-        self.__config_file = config_file
-        self.__base_script_dir = base_script_dir
-        self.__debug_dir = debug_dir
+    def __init__(self, config_file, base_script_dir, debug_dir):
+        self.config_file = config_file
+        self.base_script_dir = base_script_dir
+        self.debug_dir = debug_dir
 
     def prelim_settings(self):
 
-        self.__base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        self.base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
 
-        """ Set the path for the main script and confirm it exists. """
-        main_script = os.path.join(self.__base_script_dir, "RtoX.py")
+        # Set the path for the main script and confirm it exists.
+        main_script = os.path.join(self.base_script_dir, "RtoX.py")
 
         if main_script and not os.path.isfile(main_script):
-            logger.debug(msg="What script are you using? The program uses "
-                             "RtoX.py as the main script.")
+            logger.critical(msg="What script are you using? The program uses "
+                                "RtoX.py as the main script.")
             sys.exit(1)
 
-        """ Set the directory for the config file and confirm it exists. """
-        self.__config_file = os.path.join(self.__base_script_dir, "Config.ini")
+        # Set the directory for the config file and confirm it exists.
+        self.config_file = os.path.join(self.base_script_dir, "Config.ini")
 
-        if self.__config_file and not os.path.isfile(self.__config_file):
-            logger.critical(msg="The program cannot find the configuration "
+        if self.config_file and not os.path.isfile(self.config_file):
+            logger.critical(msg="RtoX cannot find the configuration "
                                 "file (Config.ini). Please make sure it is "
-                                'in the folder "DEVrtf2xml".')
+                                'in the folder "DEV_RtoX".')
             sys.exit(1)
 
-        """ Set the debug_dir to store working files created by the program. """
-        self.__debug_dir = os.path.join(os.path.dirname(os.path.abspath(
-            sys.argv[0])), "debugdir")
+        # Set the debug_dir directory to store working files created by the
+        # program.
+        self.debug_dir = os.path.join(self.base_script_dir, "debugdir")
 
-        """ Determine if the base directory is in sys.path; if not, add it. """
-        if self.__base_script_dir in sys.path:
+        # Determine if the base directory is in sys.path; if not, add it.
+        if self.base_script_dir in sys.path:
             current_in_path = 1
             temp = []
         else:
             logger.debug(msg="The base directory is not in sys.path.")
             sys.exit(1)
 
-        """ Copy all of sys.path to temp and list the base directory last. """
+        # Copy all of sys.path to temp and list the base directory last.
         for path in sys.path:
             if path != sys.path:
                 temp.append(path)
@@ -102,16 +108,17 @@ class Prelim:
             sys.path.append(path)
 
         if current_in_path:
-            sys.path.append(self.__base_script_dir)
+            sys.path.append(self.base_script_dir)
         else:
             pass
 
-        return self.__base_script_dir, self.__debug_dir, self.__config_file
+        return self.base_script_dir, self.debug_dir, self.config_file
 
-    @staticmethod
-    def config_messages(config_file, debug_dir):
+    def create_config_dict(self):
         """
-        Report the settings before running the program.
+        Depending on the user's preference (problem-report-level),
+        report the settings before running the remainder of the program.
+        TODO Change this to just logging the configuration in the rtox.log file.
         """
 
         config_file_dict_args = rtox.read_configuration.Configuration\
@@ -120,8 +127,7 @@ class Prelim:
         config_settings_dict = \
             rtox.read_configuration.Configuration.get_configuration(
                 rtox.read_configuration.Configuration(
-                    config_file=config_file,
-                    debug_dir=debug_dir),
+                    config_file=self.config_file, debug_dir=self.debug_dir),
                 config_file_dict_args=config_file_dict_args)
 
         # file_to_convert and file_to_produce are from the command line.
@@ -208,21 +214,20 @@ class Prelim:
     @staticmethod
     def print_input_error_message():
         """
-        Prints an error message if the configuration (as recorded in the
+        Log an error message if the configuration (as recorded in the
         config_file_dict) is not valid.
-        :return:
         """
 
-        logger.critical(msg="You did not provide information the program "
+        logger.critical(msg="You did not provide information the RtoX program "
                             "needs. The program will now quit.")
         sys.exit(1)
 
     @staticmethod
     def print_output_error_message():
         """
-        Prints a message if no file_to_produce is specified.
+        Log a message if no file_to_produce is specified.
         """
-
+        # TODO Check that program can handle no name provided properly.
         logger.info(msg="You did not provide a file name for the converted "
                         "file. The program will use the name of the file to "
                         "convert and change the extension to .xml")

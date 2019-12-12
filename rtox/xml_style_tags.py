@@ -38,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-21"
-__name__ = "xml_color_tags"
+__name__ = "xml_style_tags"
 
 import os
 from lxml import etree as et

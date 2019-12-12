@@ -30,61 +30,53 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Converts the configuration file (Config.ini) into a
-Python dictionary and adds command line options to the dictionary.
+Set up schemas in rtox_db.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-23"
-__name__ = "read_configuration"
+__date__ = "2019-12-08"
+__name__ = "schema_structure"
 
-import configparser
-import argparse
-import os
+import psycopg2
+import psycopg2.errorcodes
+import sys
+from psycopg2 import sql
 
 
-class Configuration:
+class SchemaStructure:
 
-    def __init__(self, debug_dir, config_file):
-        self.config_file = config_file
-        self.debug_dir = debug_dir
+    def __init__(self, con, cur):
+        self.con = con
+        self.cur = cur
+
+    def schema_setup(self):
+
+        sys.stdout.write("Starting schema creation... \n")
+
+        # List of schemas to set up, if they don't already exist.
+        schema_family = ["fontcodes", "stylecodes", "docinfocodes", "doccodes"]
+
+        for schema in schema_family:
+            try:
+                sys.stdout.write(f"Creating {schema} schema... \n")
+                self.cur.execute(sql.SQL(
+                    f"CREATE SCHEMA IF NOT EXISTS {schema}").
+                    format(sql.Identifier(f"{schema}")))
+
+            except psycopg2.DatabaseError as err:
+                SchemaStructure.error_code(err=err)
 
     @staticmethod
-    def get_system_arguments():
-        """
-        Read the arguments from the command line.
-        """
+    def error_code(err):
 
-        parser = argparse.ArgumentParser(description="Process command line "
-                                                     "arguments for RtoX.py.")
-
-        parser.add_argument("--input", required=True, help="RTF file to "
-                                                           "convert.")
-        parser.add_argument("--output", required=True, help="XML file to "
-                                                            "produce.")
-
-        config_args = vars(parser.parse_args())
-
-        return config_args
-
-    def get_configuration(self, config_file_dict_args):
-        """
-        1. Pull user configuration settings from Config.ini.
-        2. Put key:value pairs in from command line and Config.ini into
-        config_setting_dict dictionary.
-        """
-
-        config = configparser.ConfigParser()
-        config.read(self.config_file)
-        for section in config.sections():
-            for key, val in config.items(section):
-                config_file_dict_args.update({key: val})
-        config_settings_dict = config_file_dict_args
-
-        with open(os.path.join(self.debug_dir, "config_dict.py"), "w+") as f:
-            f.write("config_dictionary = " + str(config_settings_dict))
-
-        return config_settings_dict
+        if str(err.pgcode) == "3F000":
+            # Schema already exists.
+            sys.stdout.write(f"{err}.\n")
+        else:
+            # There is a different problem.
+            pg_err = str(err.pgcode)
+            print(f"Error number {pg_err}; {err}.\n")
+            sys.exit(1)

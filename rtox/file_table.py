@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Parse the file table (the pre-RTF file included subdocuments).
+Parse the file table (if the table exists in the document it means the pre-RTF 
+file included subdocuments).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -47,32 +48,24 @@ import re
 
 class FiletblParse:
     """
-    Process Header file table.
+    Process file table in document header.
     """
 
-    def __init__(
-                 self,
-                 working_file,
-                 line_to_check,
-                 debug_dir
-                 ):
-        self.__working_file = working_file
-        self.__line_to_read = line_to_check
-        self.__debug_dir = debug_dir
+    def __init__(self, line_to_read, debug_dir):
+        self.line_to_read = line_to_read
+        self.debug_dir = debug_dir
 
     def file_table(self, xml_tag_num):
         """
-        Record a tag about the color table, but do not save all color table
+        Record a tag about the file table, but do not save all table
         settings (not relevant for most XML applications).
         """
 
         if xml_tag_num == "1":
             xml_tag_set = (
                 '\n'
-                '\t\t\t<ts:rendFormat scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
+                '\t\t\t<ts:rendFormat scheme="css" selector="filetbl">\n'
+                '\t\t\t\tp.normal = {}\n'
                 '\t\t\t</ts:rendFormat>\n'
                 '\n'
             )
@@ -81,10 +74,8 @@ class FiletblParse:
         elif xml_tag_num == "2":
             xml_tag_set = (
                 '\n'
-                '\t\t\t<tei:rendition scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
+                '\t\t\t<tei:rendition scheme="css" selector="filetbl">\n'
+                '\t\t\t\tp.normal = {}\n'
                 '\t\t\t</tei:rendition>\n'
                 '\n'
             )
@@ -93,10 +84,8 @@ class FiletblParse:
         elif xml_tag_num == "3":
             xml_tag_set = (
                 '\n'
-                '\t\t\t<rendition scheme="css" selector="colortbl">\n'
-                '\t\t\t\tp.normal = {\n'
-                '\t\t\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t\t\t}\n'
+                '\t\t\t<rendition scheme="css" selector="filetbl">\n'
+                '\t\t\t\tp.normal = {}\n'
                 '\t\t\t</rendition>\n'
                 '\n'
             )
@@ -105,16 +94,14 @@ class FiletblParse:
         else:
             xml_tag_set = (
                 '\n'
-                '\t<ts:rendFormat scheme="css" selector="colortbl">\n'
-                '\t\tp.normal = {\n'
-                '\t\t\tcolor: rgb(0,0,0);\n'
-                '\t\t}\n'
+                '\t<ts:rendFormat scheme="css" selector="filetbl">\n'
+                '\t\tp.normal = {}\n'
                 '\t</ts:rendFormat>\n'
                 '\n'
             )
             xml_pattern = '</header>'
 
-        xfile = os.path.join(self.__debug_dir, "working_xml_file.xml")
+        xfile = os.path.join(self.debug_dir, "working_xml_file.xml")
 
         line_len = FiletblParse.file_len(
             xfile=xfile)
@@ -122,8 +109,8 @@ class FiletblParse:
         line_count = 0
         while line_count < line_len:
 
-            line_to_parse = linecache.getline(xfile, line_count)
-            match = re.search(xml_pattern, line_to_parse)
+            line_to_parse = linecache.getline(xfile, self.line_to_read)
+            match = re.search(______________, line_to_parse)
             if match:
                 line_count -= 1
 
@@ -151,10 +138,8 @@ class FiletblParse:
     def file_len(xfile):
         """
         Determines number of lines in XML file for help in placing tags.
-        :param xfile:
-        :return: line length
         """
-
+        i = -1
         with open(xfile) as \
                 file_size:
             for i, l in enumerate(file_size):

@@ -42,21 +42,18 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-29"
 __name__ = "doc_info_read"
 
-import csv
 import linecache
-import os
+import psycopg2
 import re
+import sys
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 class DocInfoRead:
 
-    def __init__(
-                 self,
-                 working_file,
-                 debug_dir
-                ):
-        self.__working_file = working_file
-        self.__debug_dir = debug_dir
+    def __init__(self, working_file, debug_dir):
+        self.working_file = working_file
+        self.debug_dir = debug_dir
 
     def info_start(self):
         """
@@ -64,16 +61,15 @@ class DocInfoRead:
         """
 
         line_number = DocInfoRead.file_len(
-            self=DocInfoRead(
-                debug_dir=self.__debug_dir,
-                working_file=self.__working_file))
+            self=DocInfoRead(debug_dir=self.debug_dir,
+                             working_file=self.working_file))
 
         line_counter = 0
         start_line = ""
         line_to_scan = ""
 
         while line_counter < line_number:
-            line_to_scan = linecache.getline(self.__working_file,
+            line_to_scan = linecache.getline(self.working_file,
                                              line_counter)
             info_regex = r'{\\info'
             match_info = re.search(info_regex, line_to_scan)
@@ -83,10 +79,10 @@ class DocInfoRead:
                 close_bracket = re.search(r'}}', line_to_scan)
                 if close_bracket:
                     line_counter = line_number + 1
-                    return line_counter, line_number, start_line, line_to_scan
+                    return line_counter, line_number, line_to_scan
                 else:
                     line_counter += 1
-                    return line_counter, line_number, start_line, line_to_scan
+                    return line_counter, line_number, line_to_scan
             else:
                 line_counter += 1
 
@@ -103,10 +99,10 @@ class DocInfoRead:
 
         while line_status == 0:
 
-            line_to_scan_test = linecache.getline(self.__working_file,
+            line_to_scan_test = linecache.getline(self.working_file,
                                                   cb_line_count).rstrip()
             running_line = running_line + line_to_scan_test.rstrip()
-            line_to_scan_test_plus = linecache.getline(self.__working_file,
+            line_to_scan_test_plus = linecache.getline(self.working_file,
                                                        cb_line_count + 1)
             line_end = len(line_to_scan_test) - 1
 
@@ -155,7 +151,8 @@ class DocInfoRead:
 
         return result_list
 
-    def info_to_csv(self, result_list):
+    @staticmethod
+    def docinfo_for_db(result_list):
         """
         Take the contents of the info section (result_list), separate into
         components, transfer the component information to a csv file.
@@ -170,19 +167,15 @@ class DocInfoRead:
                                                    "", "", "", "",
 
         # Special time categories.
-        creatim = ""
         c_year, c_month, c_day, c_hour, \
             c_minutes, c_seconds = 0, 0, 0, 0, 0, 0
 
-        revtim = ""
         r_year, r_month, r_day, r_hour, \
             r_minutes, r_seconds = 0, 0, 0, 0, 0, 0
 
-        printim = ""
         p_year, p_month, p_day, p_hour, \
             p_minutes, p_seconds = 0, 0, 0, 0, 0, 0
 
-        buptim = ""
         b_year, b_month, b_day, b_hour, \
             b_minutes, b_seconds = 0, 0, 0, 0, 0, 0
 
@@ -268,7 +261,6 @@ class DocInfoRead:
             else:
                 comment = "None"
 
-            # TODO May need further work, see Microsoft spec p. 30.
             if re.search("doccomm", item):
                 doccomm = item.replace("{\\doccomm", "").replace("}", "")
                 doccomm = doccomm.lstrip()
@@ -279,7 +271,6 @@ class DocInfoRead:
             else:
                 doccomm = "None"
 
-            # TODO May need further work, see Microsoft spec p. 30.
             if re.search("hlinkbase", item):
                 hlinkbase = item.replace("{\\hlinkbase", "").replace("}", "")
                 hlinkbase = hlinkbase.lstrip()
@@ -373,7 +364,6 @@ class DocInfoRead:
 
             # Then address the special time categories.
             if re.search("creatim", item):
-                creatim = "Yes"
                 cat_time = item.replace("{\\creatim", "").replace("}", "")
                 cat_time_list = cat_time.split("\\")
                 for time_item in cat_time_list:
@@ -386,12 +376,10 @@ class DocInfoRead:
                     c_minutes = time_data_vars[4]
                     c_seconds = time_data_vars[5]
             else:
-                creatim = "No"
                 c_year, c_month, c_day, c_hour, \
                     c_minutes, c_seconds = 0, 0, 0, 0, 0, 0
 
             if re.search("revtim", item):
-                revtim = "Yes"
                 cat_time = item.replace("{\\revtim", "").replace("}", "")
                 cat_time_list = cat_time.split("\\")
                 for time_item in cat_time_list:
@@ -404,12 +392,10 @@ class DocInfoRead:
                     r_minutes = time_data_vars[4]
                     r_seconds = time_data_vars[5]
             else:
-                revtim = "No"
                 r_year, r_month, r_day, r_hour, \
                     r_minutes, r_seconds = 0, 0, 0, 0, 0, 0
 
             if re.search("printim", item):
-                printim = "Yes"
                 cat_time = item.replace("{\\printim", "").replace("}", "")
                 cat_time_list = cat_time.split("\\")
                 for time_item in cat_time_list:
@@ -422,12 +408,10 @@ class DocInfoRead:
                     p_minutes = time_data_vars[4]
                     p_seconds = time_data_vars[5]
             else:
-                printim = "No"
                 p_year, p_month, p_day, p_hour, \
                     p_minutes, p_seconds = 0, 0, 0, 0, 0, 0
 
             if re.search("buptim", item):
-                buptim = "Yes"
                 cat_time = item.replace("{\\buptim", "").replace("}", "")
                 cat_time_list = cat_time.split("\\")
                 for time_item in cat_time_list:
@@ -440,29 +424,118 @@ class DocInfoRead:
                     b_minutes = time_data_vars[4]
                     b_seconds = time_data_vars[5]
             else:
-                buptim = "No"
                 b_year, b_month, b_day, b_hour, \
                     b_minutes, b_seconds = 0, 0, 0, 0, 0, 0
 
-            info_file = os.path.join(self.__debug_dir, "info.csv")
-            with open(info_file, 'a') as temp_file:
-                temp_file_writer = \
-                    csv.writer(temp_file, csv.QUOTE_ALL, delimiter=",")
+        return title, subject, author, manager, company, operator, category, \
+            comment, doccomm, hlinkbase, version, edmins, nofpages, \
+            nofwords, nofchars, nofcharsws, vern, keywords, c_year, \
+            c_month, c_day, c_hour, c_minutes, c_seconds, r_year, r_month, \
+            r_day, r_hour, r_minutes, r_seconds, p_year, p_month, p_day, \
+            p_hour, p_minutes, p_seconds, b_year, b_month, b_day, b_hour, \
+            b_minutes, b_seconds
 
-                line = [title, subject, author, manager, company, operator,
-                        category, comment, doccomm, hlinkbase, version, edmins,
-                        nofpages, nofwords, nofchars, nofcharsws, vern, creatim,
-                        c_year, c_month, c_day, c_hour, c_minutes, c_seconds,
-                        revtim, r_year, r_month, r_day, r_hour, r_minutes,
-                        r_seconds, printim, p_year, p_month, p_day, p_hour,
-                        p_minutes, p_seconds, buptim, b_year, b_month, b_day,
-                        b_hour, b_minutes, b_seconds, keywords]
+    @staticmethod
+    def docinfo_db(title, subject, author, manager,
+                   company, operator, category, comment, doccomm, hlinkbase,
+                   version, edmins, nofpages, nofwords, nofchars, nofcharsws,
+                   vern, keywords, c_year, c_month, c_day, c_hour, c_minutes,
+                   c_seconds, r_year, r_month, r_day, r_hour, r_minutes,
+                   r_seconds, p_year, p_month, p_day, p_hour, p_minutes,
+                   p_seconds, b_year, b_month, b_day, b_hour, b_minutes,
+                   b_seconds):
 
-                temp_file_writer.writerow(line)
+        from debugdir.config_dict import config_dictionary
+
+        host = config_dictionary.get("host")
+        database = config_dictionary.get("database")
+        user = config_dictionary.get("user")
+        password = config_dictionary.get("password")
+
+        con = psycopg2.connect(host=host, database=database, user=user,
+                               password=password)
+        con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = con.cursor()
+
+        try:
+            postgres_insert_query = """INSERT INTO 
+            rtox_db.docinfocodes.general(title, subject, author, manager, 
+            company, operator, category, comment, doccomm, hlinkbase, 
+            version, edmins, nofpages, nofwords, nofchars, nofcharsws,
+            vern, keywords) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,
+            %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
+            record_to_insert = (title, subject, author, manager,
+                                company, operator, category, comment,
+                                doccomm, hlinkbase, version, edmins,
+                                nofpages, nofwords, nofchars, nofcharsws,
+                                vern, keywords)
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
+
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering docinfo codes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
+
+        try:
+            postgres_insert_query = """INSERT INTO 
+            rtox_db.docinfocodes.create(year, month, day, hour, minutes, 
+            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
+            record_to_insert = (c_year, c_month, c_day, c_hour, c_minutes,
+                                c_seconds)
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering fontcodes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
+
+        try:
+            postgres_insert_query = """INSERT INTO 
+            rtox_db.docinfocodes.revise(year, month, day, hour, minutes, 
+            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
+            record_to_insert = (r_year, r_month, r_day, r_hour, r_minutes,
+                                r_seconds)
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering fontcodes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
+
+        try:
+            postgres_insert_query = """INSERT INTO 
+            rtox_db.docinfocodes.print(year, month, day, hour, minutes, 
+            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
+            record_to_insert = (p_year, p_month, p_day, p_hour, p_minutes,
+                                p_seconds)
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering fontcodes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
+
+        try:
+            postgres_insert_query = """INSERT INTO 
+            rtox_db.docinfocodes.backup(year, month, day, hour, minutes, 
+            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
+            record_to_insert = (b_year, b_month, b_day, b_hour, b_minutes,
+                                b_seconds)
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering fontcodes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
+
+        if con is not None:
+            cur.close()
+            con.close()
 
     def file_len(self):
-        with open(self.__working_file) as \
-                file_size:
+        i = -1
+        with open(self.working_file) as file_size:
             for i, l in enumerate(file_size):
                 pass
         return i + 1

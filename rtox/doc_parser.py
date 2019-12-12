@@ -29,46 +29,11 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+"""Text only appears in entries that start {\cs ... }
+
+The text appears at the end, preeceded by a space.
+
+\par means the beginning of a new paragraph, and so a <pBody> tag
+should be inserted.
+
 """
-Prepare csv files for use in processing.
-"""
-
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2019-11-29"
-__name__ = "csv_prep"
-
-import csv
-import os
-
-
-class CSVFiles:
-
-    def __init__(self,
-                 debug_dir
-                ):
-        self.__debug_dir = debug_dir
-
-    def style_csv(self):
-        # Prepare style sheet code csv file.
-        style_file = os.path.join(self.__debug_dir, "styles.csv")
-        line = ["code", "additive", "para_next_style", "bold",
-                "italic", "underline", "small_caps",
-                "strikethrough", "style_name"]
-
-        with open(style_file, 'w') as temp_file:
-            temp_file_writer = \
-                csv.writer(temp_file, delimiter=",",
-                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            temp_file_writer.writerow(line)
-
-
-class CSVPrep:
-
-    def __init__(self, debug_dir):
-        self.__debug_dir = debug_dir
-
-    def run_prep(self):
-        CSVFiles.style_csv(self=CSVFiles(debug_dir=self.__debug_dir))

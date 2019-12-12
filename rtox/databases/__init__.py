@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -29,44 +29,3 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""
-Read the Database.ini file to determine parameters for building rtox_db.
-"""
-
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2019-12-03"
-__name__ = "database_prep"
-
-import os
-from configparser import ConfigParser
-
-
-class DatabasePrep:
-
-    def __init__(self,
-                 base_script_dir
-                 ):
-        self.__base_script_dir = base_script_dir
-
-    def config(self, section="postgresql"):
-        # create a parser
-        parser = ConfigParser()
-        # read config file
-        db_file = os.path.join(self.__base_script_dir, "Database.ini")
-        parser.read(db_file)
-
-        # Get section, default to postgresql.
-        if parser.has_section(section):
-            host = parser[section]["host"]
-            database = parser[section]["database"]
-            user = parser[section]["user"]
-            password = parser[section]["password"]
-
-        else:
-            raise Exception(
-                "Section {0} not found in the {1} file".format(section,
-                                                               db_file))
-        return host, database, user, password

@@ -46,12 +46,9 @@ from lxml import etree as et
 
 class RTFCodesPrep:
 
-    def __init__(self,
-                 debug_dir,
-                 xml_tag_num
-                 ):
-        self.__debug_dir = debug_dir
-        self.__xml_tag_num = xml_tag_num
+    def __init__(self, debug_dir, xml_tag_num):
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
 
     def rtf_codes_to_xml_prep(self):
         """
@@ -60,28 +57,15 @@ class RTFCodesPrep:
         the file.
         """
 
-        # User chose plain xml.
-        if self.__xml_tag_num == "1":
-            ns = "http://www.w3.org/1999/xml"
-            prefix = None
+        xml_list = [[1, "http://www.w3.org/1999/xml", None],
+                    [2, "http://www.tei-c.org/ns/1.0", "tei"],
+                    [3, "http://kennethgrady.com/ns/1.0.0", "ts"],
+                    [None, "http://www.w3.org/1999/xml", None]]
 
-        # User chose TEI xml.
-        elif self.__xml_tag_num == "2":
-            ns = "http://www.tei-c.org/ns/1.0"
-            prefix = "tei"
+        ns = xml_list[int(self.xml_tag_num)-1][1]
+        prefix = xml_list[int(self.xml_tag_num)][2]
 
-        # User chose TPRES xml.
-        elif self.__xml_tag_num == "3":
-            ns = "http://kennethgrady.com/ns/1.0.0"
-            prefix = "ts"
-
-        # User did not make a selection; default is plain xml.
-        else:
-            ns = "http://www.w3.org/1999/xml"
-            prefix = None
-
-        with open(os.path.join(self.__debug_dir,
-                  "rtf_tags.xml"), "w+") as rcx:
+        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "w+") as rcx:
 
             namespace = "{%s}" % ns
             nsmapped = {prefix: ns}
