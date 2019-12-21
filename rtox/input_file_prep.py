@@ -45,7 +45,11 @@ import os
 
 class InputPrep:
 
-    def __init__(self, input_file_name, debug_dir, base_script_dir):
+    def __init__(self,
+                 input_file_name: str,
+                 debug_dir: str,
+                 base_script_dir: str
+                 ):
         self.input_file = input_file_name
         self.debug_dir = debug_dir
         self.base_script_dir = base_script_dir

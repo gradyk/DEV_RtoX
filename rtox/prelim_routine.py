@@ -58,7 +58,11 @@ from log_config import logger
 
 class Prelim:
 
-    def __init__(self, config_file, base_script_dir, debug_dir):
+    def __init__(self,
+                 config_file: str,
+                 base_script_dir: str,
+                 debug_dir: str
+                 ):
         self.config_file = config_file
         self.base_script_dir = base_script_dir
         self.debug_dir = debug_dir

@@ -40,7 +40,8 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-31"
 __name__ = "font_table"
 
-import linecache
+import rtox.lib.table_boundaries
+import rtox.lib.split_between_characters
 import psycopg2
 import re
 import rtox.xml_font_tags
@@ -60,198 +61,213 @@ class FonttblParse:
     the user.
     """
 
-    def __init__(self, working_file, line_to_read, debug_dir, table_state,
-                 xml_tag_num):
+    def __init__(self,
+                 working_file: str,
+                 line_to_read: str,
+                 debug_dir: str,
+                 xml_tag_num: str,
+                 table: str) -> None:
         self.working_file = working_file
         self.line_to_read = line_to_read
-        self.debut_dir = debug_dir
-        self.table_state = table_state
+        self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
+        self.table = table
 
-    def find_fonts(self):
+    def find_fonts(self) -> None:
         """
-        1. Find the beginning and end of a font code definition.
+        1. Find the beginning and end of the table.
         """
+        tse_vars = rtox.lib.table_boundaries.TableBounds.table_start_end(
+            self=rtox.lib.table_boundaries.TableBounds(
+                line_number=self.line_to_read,
+                table=self.table))
 
-        line_status = 1
-        line_count = self.line_to_read
-        cb_line_count = line_count
-        line_to_parse_start = ""
+        # 2. Split the font code list into separate strings, one per font code.
+        font_code_strings = rtox.lib.split_between_characters.SplitBetween.\
+            split_between(self=rtox.lib.split_between_characters.SplitBetween(
+                            text_to_process=tse_vars[2],
+                            split_characters="}{"))
 
-        # Check if this line is the end of the table.
-        while linecache.getline(self.working_file,
-                                self.line_to_read).rstrip() != '}':
+        # 3. Separate each font code string into its parts and return the
+        # values for each part so that they can be stored in the rtox_db
+        # database.
+        for font_code in font_code_strings:
 
-            # Find beginning and end of line to process and extract text to
-            # process.
-            while line_status == 1:
-                line_to_parse_start = linecache.getline(self.working_file,
-                                                        line_count)
-                open_bracket = re.search(r'{', line_to_parse_start[0])
-                if open_bracket:
-                    cb_line_count = line_count
-                    pass
-                else:
-                    line_count += 1
+            fontnum = SetFonts.fontnum(self=SetFonts(font_code=font_code))
+            fontfamily = SetFonts.fontfamily(self=SetFonts(font_code=font_code))
+            fcharset = SetFonts.fcharset(self=SetFonts(font_code=font_code))
+            fprq = SetFonts.fprq(self=SetFonts(font_code=font_code))
+            panose = SetFonts.panose(self=SetFonts(font_code=font_code))
+            fname = SetFonts.fname(self=SetFonts(font_code=font_code))
+            altname = SetFonts.altname(self=SetFonts(font_code=font_code))
+            fontemb = SetFonts.fontemb(self=SetFonts(font_code=font_code))
+            cpg = SetFonts.cpg(self=SetFonts(font_code=font_code))
 
-                close_bracket = re.search(r'}', line_to_parse_start)
-                if close_bracket:
-                    line_status = 0
-                    pass
-                else:
-                    line_status = 0
-                    cb_line_count += 1
+            set_font_vars = [fontnum, fontfamily, fcharset, fprq, panose,
+                             fname, altname, fontemb, cpg]
 
-            running_line = ""
-            while line_status == 0:
-                line_to_parse_end = linecache.getline(self.working_file,
-                                                      cb_line_count)
-                close_bracket = re.search(r'}', line_to_parse_end)
-                if close_bracket:
-                    line_status = 1
-                    running_line = line_to_parse_end.rstrip()
-                else:
-                    line_status = 0
-                    cb_line_count += 1
-                    running_line = running_line + line_to_parse_end.rstrip()
-                    continue
+            StoreFonts.font_db(self=StoreFonts(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num,
+                set_font_vars=set_font_vars))
+            StoreFonts.tag_it(self=StoreFonts(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num,
+                set_font_vars=set_font_vars),
+                fontnum=fontnum, fontfamily=fontfamily)
 
-            line_to_process = line_to_parse_start.rstrip() + running_line
 
-            text_to_process = line_to_process[
-                              line_to_process.find("{")
-                              + 1:line_to_process.find("}")]
+class SetFonts:
+    def __init__(self,
+                 font_code: str
+                 ) -> None:
+        self.font_code = font_code
 
-            self.line_to_read = line_count
-
-            # 2. Process the a font code.
-            set_fonts_vars = FonttblParse.set_fonts(
-                self=FonttblParse(
-                    working_file=self.working_file,
-                    line_to_read=self.line_to_read,
-                    debug_dir=self.debut_dir,
-                    table_state=self.table_state,
-                    xml_tag_num=self.xml_tag_num),
-                text_to_process=text_to_process)
-            fontnum = set_fonts_vars[0]
-            fontfamily = set_fonts_vars[1]
-            fcharset = set_fonts_vars[2]
-            fprq = set_fonts_vars[3]
-            panose = set_fonts_vars[4]
-            name = set_fonts_vars[5]
-            altname = set_fonts_vars[6]
-            fontemb = set_fonts_vars[7]
-            fontfile = set_fonts_vars[8]
-            cpg = set_fonts_vars[9]
-
-            FonttblParse.font_db(fontnum=fontnum, fontfamily=fontfamily,
-                                 fcharset=fcharset, fprq=fprq,
-                                 panose=panose, name=name, altname=altname,
-                                 fontemb=fontemb, fontfile=fontfile,
-                                 cpg=cpg)
-
-            line_count = cb_line_count + 1
-            self.line_to_read = line_count
-
-        else:
-            self.table_state = 1
-
-        return self.table_state
-
-    def set_fonts(self, text_to_process):
+    def fontnum(self) -> str:
         """
-        2. For each font code defined by a unique font number (e.g.,
-        fontnum = f0), capture the code settings.
+        4. Each font code is defined by a unique font number (e.g.,
+        fontnum = f0).
         """
 
-        fontnum, fontfamily, fcharset, fprq, panose, name, altname, \
-            fontemb, fontfile, cpg = "", "", "", "", "", "", "", "", "", ""
-        families = ["fnil", "froman", "fswiss", "fmodern",
-                    "fscript", "fdecor", "ftech", "fbidi"]
-        c_sets = ["ansi", "mac", "pc", "pca"]
-
-        match = re.search(r'f[0-9]+', text_to_process)
-        if match:
-            fontnum = match[0]
-        else:
-            logger.debug(msg="There appears to be an error in the font "
-                             f'table at line {self.line_to_read}. A '
-                             f'font number is missing. RtoX will now quit.\n')
+        try:
+            test = re.search(r'\\f[0-9]+', self.font_code)
+            fontnum = test[0].replace("\\", "")
+            return fontnum
+        except TypeError:
+            logger.debug(msg="There is an error in the font table "
+                             f'A font number is missing. RtoX will now quit.\n')
             sys.exit(1)
 
-        for family in families:
-            match = re.search(family, text_to_process)
-            if match:
-                if match[0] == "fnil":
-                    fontfamily = "Default"
-                elif match[0] == "froman":
-                    fontfamily = "Times New Roman"
-                elif match[0] == "fswiss":
-                    fontfamily = "Arial"
-                elif match[0] == "fmodern":
-                    fontfamily = "Courier"
-                elif match[0] == "fscript":
-                    fontfamily = "Cursive"
-                elif match[0] == "fdecor":
-                    fontfamily = "Old English"
-                elif match[0] == "ftech":
-                    fontfamily = "Symbol"
-                elif match[0] == "fidi":
-                    fontfamily = "Miriam"
-
-        match = re.search(r'\\fcharset([0-9])+', text_to_process)
-        if match:
-            fcharset = match[0].replace("\\fcharset", "")
-        else:
-            fcharset = 0
-
-        match = re.search(r'\\fprq([0-9])+', text_to_process)
-        if match:
-            fprq = match[0].replace("\\fprq", "")
-        else:
-            fprq = 0
-
-        match = re.search(re.compile(r'\\\*\\[0-9]+'), text_to_process)
-        if match:
-            panose = match[0].replace(match[0], "")
-        else:
-            panose = 0
-
-        match = re.search(r'(\s\w+)+(;)*', text_to_process)
-        if match:
-            name_pre = match.group(0).replace(";", "")
-            name = name_pre.lstrip()
-            fontfamily = name
-        else:
-            name = "None"
-
-        match = re.search(re.compile(r'\\\*\\falt\s'), text_to_process)
-        if match:
-            altname = match[0].replace(match[0], "")
-        else:
-            altname = "None"
-
-        match = re.search(r'{\\fontemb', text_to_process)
-        if match:
-            fontemb = True
-        else:
-            fontemb = False
-
-        for c_set in c_sets:
-            match = re.search(c_set+"cpg", text_to_process)
-            if match:
-                cpg = match.group(1).replace(match.group(1), "")
-            else:
-                cpg = 0
-
-        return fontnum, fontfamily, fcharset, fprq, panose, name, altname, \
-            fontemb, fontfile, cpg
-
-    @staticmethod
-    def font_db(fontnum, name, fcharset, fprq, panose, fontfamily,
-                altname, fontemb, fontfile, cpg):
+    def fontfamily(self) -> str:
         """
-        3. Store the settings for each font code in the rtox_db, fontcode
+        5. Each font code may define its font family.
+        """
+
+        # TODO Update font names to valid names for XML/HTML.
+        font_families = dict([
+                        ("fnil", "default"),
+                        ("froman", "Times New Roman"),
+                        ("fswiss", "Arial"),
+                        ("fmodern", "Courier"),
+                        ("fscript", "Cursive"),
+                        ("fdecor", "Old English"),
+                        ("ftech", "Symbol"),
+                        ("fbidi", "Miriam")
+        ])
+
+        for key in font_families:
+            if re.search(r"\\"+key, self.font_code) is not None:
+                fontfamily = font_families.get(key, "None")
+                return fontfamily
+            else:
+                pass
+
+    def fcharset(self) -> str:
+        """
+        6. Each font code may define the character set it uses.
+        """
+        try:
+            test = re.search(r'\\fcharset([0-9])+', self.font_code)
+            fcharset = test[0].replace("\\fcharset", "")
+            return fcharset
+        except TypeError:
+            fcharset = "0"
+            return fcharset
+
+    def fprq(self) -> str:
+        """
+        7. Each font code may define the font pitch (default, fixed or
+        variable).
+        """
+        try:
+            test = re.search(r'\\fprq([0-9])+', self.font_code)
+            fprq = test[0].replace("\\fprq", "")
+            return fprq
+        except TypeError:
+            fprq = "0"
+            return fprq
+
+    def panose(self) -> str:
+        """
+        8. If present, it contains a 10-byte Panose 1 number. Each byte
+        represents a single font property as defined by the Panose 1 standard
+        specification.
+        """
+        try:
+            test = re.search(re.compile(r'\\\*\\[0-9]+'), self.font_code)
+            panose = test[0].replace(test[0], "")
+            return panose
+        except TypeError:
+            panose = "0"
+            return panose
+
+    def fname(self) -> str:
+        """
+        9. Each code may have a non-tagged name.
+        """
+        try:
+            test = re.search(r'(\s\w+)+(;)*', self.font_code)
+            fname_pre = test.group(0).replace(";", "")
+            fname = fname_pre.lstrip()
+            return fname
+        except TypeError:
+            fname = "None"
+            return fname
+
+    def altname(self) -> str:
+        """
+        10. Each font code may use an alternative name.
+        """
+        try:
+            test = re.search(re.compile(r'\\\*\\falt\s'), self.font_code)
+            altname = test[0].replace(test[0], "")
+            return altname
+        except TypeError:
+            altname = "None"
+            return altname
+
+    def fontemb(self) -> bool:
+        """
+        11. Each code may contain an embedded font. At present, RtoX does not
+        support capturing information about the embedded font.
+        """
+        try:
+            if re.search(r'{\\fontemb', self.font_code) is not None:
+                fontemb = True
+                return fontemb
+            else:
+                fontemb = False
+                return fontemb
+        except TypeError:
+            fontemb = False
+            return fontemb
+
+    def cpg(self) -> str:
+        """
+        12. Each font code may use a specified code page (e.g. Windows 1252).
+        """
+        try:
+            test = re.search(r'{\\cpg([0-9])+', self.font_code)
+            cpg = test[0].replace("\\cpg", "")
+            return cpg
+        except TypeError:
+            cpg = "0"
+            return cpg
+
+
+class StoreFonts:
+    def __init__(self,
+                 debug_dir: str,
+                 xml_tag_num: str,
+                 set_font_vars: list
+                 ) -> None:
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
+        self.set_font_vars = set_font_vars
+
+    def font_db(self) -> None:
+        """
+        13. Store the settings for each font code in the rtox_db, fontcode
         schema.
         """
 
@@ -269,31 +285,40 @@ class FonttblParse:
 
         try:
             postgres_insert_query = """INSERT INTO rtox_db.fontcodes.fontinfo
-                (FONTNUM, NAME, FCHARSET, FPRQ, PANOSE, FONTFAMILY,
-                 ALTNAME, FONTEMB, FONTFILE, CPG) VALUES (%s, %s, %s, %s, %s, 
-                 %s, %s, %s, %s, %s)"""
-            record_to_insert = (fontnum, name, fcharset, fprq, panose,
-                                fontfamily, altname, fontemb, fontfile, cpg)
+                (FONTNUM, FONTFAMILY, FCHARSET, FPRQ, PANOSE, FNAME,
+                 ALTNAME, FONTEMB, CPG) VALUES (%s, %s, %s, %s, %s, 
+                 %s, %s, %s, %s)"""
+            record_to_insert = (self.set_font_vars[0], self.set_font_vars[1],
+                                self.set_font_vars[2], self.set_font_vars[3],
+                                self.set_font_vars[4], self.set_font_vars[5],
+                                self.set_font_vars[6], self.set_font_vars[7],
+                                self.set_font_vars[8])
             cur.execute(postgres_insert_query, record_to_insert)
             con.commit()
 
         except psycopg2.DatabaseError as err:
             pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering fontcodes in database.\n"
+            sys.stdout.write("Problem entering font codes in database.\n"
                              f"Error number {pg_err}; {err}\n")
 
         if con is not None:
             cur.close()
             con.close()
 
-    def tag_it(self, fontnum, fontfamily):
+    def tag_it(self, fontnum: str, fontfamily: str) -> None:
         """
-        4. Call the module that turns the font code into XML tags.
+        14. Turn the font code into XML tags.
         """
 
-        rtox.xml_font_tags.XMLTagSets.xml_font_tags(
+        xml_font_tags_vars = rtox.xml_font_tags.XMLTagSets.xml_font_tags(
             self=rtox.xml_font_tags.XMLTagSets(
-                debug_dir=self.debut_dir,
-                fontnum=fontnum,
-                fontfamily=fontfamily,
-                xml_tag_num=self.xml_tag_num))
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num),
+            fontnum=fontnum,
+            fontfamily=fontfamily)
+
+        rtox.xml_font_tags.XMLTagSets.make_new_tags(
+            self=rtox.xml_font_tags.XMLTagSets(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num),
+            xml_font_tags_vars=xml_font_tags_vars)

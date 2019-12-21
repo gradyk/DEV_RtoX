@@ -46,161 +46,53 @@ from lxml import etree as et
 
 class XMLTagSets:
 
-    def __init__(
-                 self,
-                 debug_dir,
-                 xml_tag_num,
-                 fontnum,
-                 fontfamily,
-                 ):
-        self.__debug_dir = debug_dir
-        self.__xml_tag_num = xml_tag_num
-        self.__fontnum = fontnum
-        self.__fontfamily = fontfamily
+    def __init__(self,
+                 debug_dir: str,
+                 xml_tag_num: str
+                 ) -> None:
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
 
-    def xml_font_tags(self):
+    def xml_font_tags(self, fontnum, fontfamily):
         """
         Determine which font tag set to use based on user's preferences.
         """
 
-        if self.__xml_tag_num == "1":
-            tag_vars = XMLTagSets.plain_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        tag_insert = (f'\n\t#{fontnum}''{\n\tfont-style: normal;'
+                      f'\n\tfont-family:'
+                      f' {fontfamily};\n\tfont-size: '
+                      f'12pt;\n\tfont-weight: normal;\n'
+                      '\tfont-variant: normal;\n\t}\n)')
 
-        elif self.__xml_tag_num == "2":
-            tag_vars = XMLTagSets.tei_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        xml_tags = [
+            ["1", tag_insert, "http://www.w3.org/1999/xml", None, "rendition"],
+            ["2", tag_insert, "http://www.tei-c.org/ns/1.0", "tei",
+             "rendition"],
+            ["3", tag_insert, "http://kennethgrady.com/ns/1.0.0", "ts",
+             "revisionDesc"],
+            ["4", tag_insert, "http://www.w3.org/1999/xml", None, "rendition"]
+            ]
 
-        elif self.__xml_tag_num == "3":
-            tag_vars = XMLTagSets.tpres_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        xml_tag_set = xml_tags[int(self.xml_tag_num)][1]
+        ns = xml_tags[int(self.xml_tag_num)][2]
+        prefix = xml_tags[int(self.xml_tag_num)][3]
+        xml_pattern_two = xml_tags[int(self.xml_tag_num)][4]
 
-        else:
-            tag_vars = XMLTagSets.plain_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    fontfamily=self.__fontfamily,
-                    fontnum=self.__fontnum,
-                    xml_tag_num=self.__xml_tag_num))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        return xml_tag_set, ns, prefix, xml_pattern_two
 
-        XMLTagSets.make_new_tags(
-            self=XMLTagSets(
-                debug_dir=self.__debug_dir,
-                fontfamily=self.__fontfamily,
-                fontnum=self.__fontnum,
-                xml_tag_num=self.__xml_tag_num),
-            xml_tag_set=xml_tag_set_pass,
-            xml_pattern_two=xml_pattern_two_pass,
-            ns=ns_pass,
-            prefix=prefix_pass)
-
-    def plain_xml(self):
+    def make_new_tags(self, xml_font_tags_vars):
         """
-        Tag set for plain xml.
-        :return: xml_tag_set: tags to wrap font codes
-        :return: xml_pattern:
-        :return: xml_pattern_two:
-        :return: ns: namespace
+        xml_tag_set = ...vars[0], ns = ...vars[1], prefix = ...vars[2],
+        xml_pattern_two = ...vars[3]
         """
-        xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
-            '{\n'
-            f'\tfont-style: normal;\n'
-            f'\tfont-family: {self.__fontfamily};\n'
-            f'\tfont-size: 12pt;\n'
-            f'\tfont-weight: normal;\n'
-            f'\tfont-variant: normal;\n'
-            '\t}'
-            f'\n'
-        )
-        prefix = None
-        ns = "http://www.w3.org/1999/xml"
-        xml_pattern = "p"
-        xml_pattern_two = "rendition"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
 
-    def tei_xml(self):
-        """
-        Tag set for TEI. See plain_xml for returns.
-        """
-        xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
-            '{\n'
-            f'\tfont-style: normal;\n'
-            f'\tfont-family: {self.__fontfamily};\n'
-            f'\tfont-size: 12pt;\n'
-            f'\tfont-weight: normal;\n'
-            f'\tfont-variant: normal;\n'
-            '\t}\n'
-            f'\n'
-        )
-        prefix = "tei"
-        ns = "http://www.tei-c.org/ns/1.0"
-        xml_pattern = "p"
-        xml_pattern_two = "rendition"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
-
-    def tpres_xml(self):
-        """
-        Tag set for TPRES. See plain_xml for returns.
-        """
-        xml_tag_set = (
-            f'\n\t#{self.__fontnum}'
-            ' {\n'
-            f'\t\tfont-style: normal;\n'
-            f'\t\tfontfamily: {self.__fontfamily};\n'
-            f'\t\tfont-size: 12pt;\n'
-            f'\t\tfont-weight: normal;\n'
-            f'\t\tfont-variant: normal;\n'
-            '\t}\n'
-        )
-        prefix = "ts"
-        ns = "http://kennethgrady.com/ns/1.0.0"
-        xml_pattern = "revisionDesc"
-        xml_pattern_two = "rendFormat"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
-
-    def make_new_tags(self, xml_tag_set, xml_pattern_two, ns, prefix):
-
-        rtf_tags_file = os.path.join(self.__debug_dir, "rtf_tags.xml")
+        rtf_tags_file = os.path.join(self.debug_dir, "rtf_tags.xml")
         tree = et.parse(rtf_tags_file)
         root = tree.getroot()
-        namespace = "{%s}" % ns
-        nsmapped = {prefix: ns}
-        et.SubElement(root, namespace + xml_pattern_two,
-                      nsmap=nsmapped, scheme="css").text = xml_tag_set
+        namespace = "{%s}" % xml_font_tags_vars[1]
+        nsmapped = {xml_font_tags_vars[2]: xml_font_tags_vars[1]}
+        et.SubElement(root, namespace + xml_font_tags_vars[3],
+                      nsmap=nsmapped, scheme="css").text = xml_font_tags_vars[0]
 
-        with open(os.path.join(self.__debug_dir, "rtf_tags.xml"), "wb") as file:
+        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "wb") as file:
             file.write(et.tostring(root, pretty_print=True))

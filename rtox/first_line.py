@@ -41,7 +41,6 @@ __date__ = "2019-11-10"
 __name__ = "first_line"
 
 import linecache
-import os
 import re
 import sys
 from log_config import logger
@@ -54,9 +53,9 @@ class FirstLine:
 
     def __init__(
                  self,
-                 working_file,
-                 debug_dir,
-                 base_script_dir
+                 working_file: str,
+                 debug_dir: str,
+                 base_script_dir: str
                  ):
         self.__working_file = working_file
         self.__debug_dir = debug_dir

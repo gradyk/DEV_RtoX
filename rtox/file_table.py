@@ -31,7 +31,8 @@
 
 """
 Parse the file table (if the table exists in the document it means the pre-RTF 
-file included subdocuments).
+file included sub-documents).
+1.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -42,106 +43,159 @@ __date__ = "2019-11-04"
 __name__ = "file_table"
 
 import linecache
-import os
+import psycopg2
 import re
+import rtox.xml_file_tags
+import sys
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 class FiletblParse:
     """
     Process file table in document header.
+    1. Find the beginning and end of the file table.
+    2. Process the text from the working file, by separating the file table
+    into its constituent pieces. [NOTE - Not in current version; may be in
+    future versions.]
+    3. Store the file table text in the rtox_db, filecodes schema.
+    4. Turn the settings into XML tags using the tag style preference set by
+    the user.
     """
 
-    def __init__(self, line_to_read, debug_dir):
+    def __init__(self, line_to_read, debug_dir, working_file, xml_tag_num):
         self.line_to_read = line_to_read
         self.debug_dir = debug_dir
+        self.working_file = working_file
+        self.xml_tag_num = xml_tag_num
 
-    def file_table(self, xml_tag_num):
+    def find_file_table_scope(self):
         """
-        Record a tag about the file table, but do not save all table
-        settings (not relevant for most XML applications).
+        1. Find the beginning and end of a file table.
         """
 
-        if xml_tag_num == "1":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<ts:rendFormat scheme="css" selector="filetbl">\n'
-                '\t\t\t\tp.normal = {}\n'
-                '\t\t\t</ts:rendFormat>\n'
-                '\n'
-            )
-            xml_pattern = '</header>'
+        line_status = 1
+        line_count = self.line_to_read
+        cb_line_count = line_count
+        line_to_parse_start = ""
+        text_to_process = ""
 
-        elif xml_tag_num == "2":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<tei:rendition scheme="css" selector="filetbl">\n'
-                '\t\t\t\tp.normal = {}\n'
-                '\t\t\t</tei:rendition>\n'
-                '\n'
-            )
-            xml_pattern = '</tei:tagsDecl>'
+        # Check if this line is the end of the table.
+        while linecache.getline(self.working_file,
+                                self.line_to_read).rstrip() != '}':
 
-        elif xml_tag_num == "3":
-            xml_tag_set = (
-                '\n'
-                '\t\t\t<rendition scheme="css" selector="filetbl">\n'
-                '\t\t\t\tp.normal = {}\n'
-                '\t\t\t</rendition>\n'
-                '\n'
-            )
-            xml_pattern = '</ts:tagsDecl>'
+            # Find beginning and end of line to process and extract text to
+            # process.
+            while line_status == 1:
+                line_to_parse_start = linecache.getline(self.working_file,
+                                                        line_count)
+                if re.search(r'{', line_to_parse_start[0]):
+                    cb_line_count = line_count
+                else:
+                    line_count += 1
 
+                if re.search(r'}', line_to_parse_start):
+                    line_status = 0
+                else:
+                    line_status = 0
+                    cb_line_count += 1
+
+            running_line = ""
+            while line_status == 0:
+                line_to_parse_end = linecache.getline(self.working_file,
+                                                      cb_line_count)
+                if re.search(r'}', line_to_parse_end):
+                    line_status = 1
+                    running_line = line_to_parse_end.rstrip()
+                else:
+                    line_status = 0
+                    cb_line_count += 1
+                    running_line = running_line + line_to_parse_end.rstrip()
+
+            line_to_process = line_to_parse_start.rstrip() + running_line
+
+            text_to_process = line_to_process[line_to_process.
+                                              find("{") +
+                                              1:line_to_process.find("}")]
+
+            self.line_to_read = line_count
+
+        # 2. Process the file table.
+        #    [As of this version, file tables are not processed in RtoX. The
+        #     file table code is stored in the rtox_db, filecodes schema.
+        #     As a general rule, information contained in file tables is not
+        #     helpful in XML files used for content analysis. Future versions
+        #     of RtoX may process file tables.]
+
+        if text_to_process is None:
+            text_to_process = ""
         else:
-            xml_tag_set = (
-                '\n'
-                '\t<ts:rendFormat scheme="css" selector="filetbl">\n'
-                '\t\tp.normal = {}\n'
-                '\t</ts:rendFormat>\n'
-                '\n'
-            )
-            xml_pattern = '</header>'
+            pass
 
-        xfile = os.path.join(self.debug_dir, "working_xml_file.xml")
+        return text_to_process
 
-        line_len = FiletblParse.file_len(
-            xfile=xfile)
+    @staticmethod
+    def file_db(text_to_process):
+        """
+        3. Store the settings for the file table in the rtox_db, filecodes
+        schema.
+        """
 
-        line_count = 0
-        while line_count < line_len:
+        from debugdir.config_dict import config_dictionary
 
-            line_to_parse = linecache.getline(xfile, self.line_to_read)
-            match = re.search(______________, line_to_parse)
-            if match:
-                line_count -= 1
+        host = config_dictionary.get("host")
+        database = config_dictionary.get("database")
+        user = config_dictionary.get("user")
+        password = config_dictionary.get("password")
 
-                with open(xfile, "r") as xfile_temp:
-                    lines = xfile_temp.readlines()
+        con = psycopg2.connect(host=host, database=database, user=user,
+                               password=password)
+        con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+        cur = con.cursor()
 
-                if len(lines) > int(line_count):
-                    lines[line_count] = xml_tag_set
+        try:
+            postgres_insert_query = """INSERT INTO rtox_db.filecodes.filecodes
+                    (FILETBL) VALUES (%s)"""
+            record_to_insert = text_to_process
+            cur.execute(postgres_insert_query, record_to_insert)
+            con.commit()
 
-                with open(xfile, "w") as xfile_update:
-                    xfile_update.writelines(lines)
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write("Problem entering filecodes in database.\n"
+                             f"Error number {pg_err}; {err}\n")
 
-                line_count = line_len + 1
+        if con is not None:
+            cur.close()
+            con.close()
 
-            else:
-                line_count += 1
+    @staticmethod
+    def tag_it(self):
+        """
+        4. Call the module/functions that turns the file codes into XML tags.
+        """
 
-        # TODO this needs to get written to a dictionary here - call
-        #  update_rtf_file_codes??
-        file_code_list = {"filetbl": 'Skipped'}
+        file_tags_vars = rtox.xml_file_tags.XMLTagSets.file_tags(
+            self=rtox.xml_file_tags.XMLTagSets(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num))
+        xml_tags = file_tags_vars[0]
+        ns = file_tags_vars[1]
+        prefix = file_tags_vars[2]
+        xml_pattern_two = file_tags_vars[3]
 
-        return file_code_list
+        rtox.xml_file_tags.XMLTagSets.tags_to_db(
+            self=rtox.xml_file_tags.XMLTagSets(debug_dir=self.debug_dir,
+                                               xml_tag_num=self.xml_tag_num),
+            ns=ns, prefix=prefix, xml_pattern_two=xml_pattern_two,
+            xml_tags=xml_tags)
 
     @staticmethod
     def file_len(xfile):
         """
-        Determines number of lines in XML file for help in placing tags.
+        Determines number of lines in the XML file for help in placing tags.
         """
         i = -1
-        with open(xfile) as \
-                file_size:
+        with open(xfile) as file_size:
             for i, l in enumerate(file_size):
                 pass
         return i + 1

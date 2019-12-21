@@ -30,45 +30,61 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare csv files for use in processing.
+Insert file table tag sets into appropriate place in the XML working file.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-11-29"
-__name__ = "csv_prep"
+__date__ = "2019-12-13"
+__name__ = "xml_file_tags"
 
-import csv
 import os
+from lxml import etree as et
 
 
-class CSVFiles:
+class XMLTagSets:
 
-    def __init__(self,
-                 debug_dir
-                ):
-        self.__debug_dir = debug_dir
+    def __init__(self, debug_dir, xml_tag_num):
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
 
-    def style_csv(self):
-        # Prepare style sheet code csv file.
-        style_file = os.path.join(self.__debug_dir, "styles.csv")
-        line = ["code", "additive", "para_next_style", "bold",
-                "italic", "underline", "small_caps",
-                "strikethrough", "style_name"]
+    def file_tags(self):
+        """
+        Record a tag about the file table.
+        """
 
-        with open(style_file, 'w') as temp_file:
-            temp_file_writer = \
-                csv.writer(temp_file, delimiter=",",
-                           quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            temp_file_writer.writerow(line)
+        tag_insert = ("""
+            \n
+            \t\t\t\tp.normal = {}\n
+            \n""")
 
+        xml_tag_list = [
+            ["1", tag_insert, "http://www.w3.org/1999/xml", None, "rendFormat"],
+            ["2", tag_insert, "http://www.tei-c.org/ns/1.0", "tei",
+             "rendition"],
+            ["3", tag_insert, "http://kennethgrady.com/ns/1.0.0", "ts",
+             "rendition"],
+            ["4", tag_insert, "http://www.w3.org/1999/xml", None, "rendFormat"]
+        ]
 
-class CSVPrep:
+        xml_tags = xml_tag_list[int(self.xml_tag_num)][1]
+        ns = xml_tag_list[int(self.xml_tag_num)][2]
+        prefix = xml_tag_list[int(self.xml_tag_num)][3]
+        xml_pattern_two = xml_tag_list[int(self.xml_tag_num)][4]
 
-    def __init__(self, debug_dir):
-        self.__debug_dir = debug_dir
+        return xml_tags, ns, prefix, xml_pattern_two
 
-    def run_prep(self):
-        CSVFiles.style_csv(self=CSVFiles(debug_dir=self.__debug_dir))
+    def tags_to_db(self, xml_tags, xml_pattern_two, ns, prefix):
+
+        rtf_tags_file = os.path.join(self.debug_dir, "rtf_tags.xml")
+        tree = et.parse(rtf_tags_file)
+        root = tree.getroot()
+        namespace = "{%s}" % ns
+        nsmapped = {prefix: ns}
+        et.SubElement(root, namespace + xml_pattern_two,
+                      nsmap=nsmapped, scheme="css").text = xml_tags
+
+        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "wb") as file:
+            file.write(et.tostring(root, pretty_print=True))

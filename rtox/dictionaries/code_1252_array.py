@@ -30,48 +30,12 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare the rtf codes xml ile.
+Character identifiers for Western European (1252) character set.
 """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2019-11-27"
-__name__ = "rtf_codes_file_prep"
-
-import os
-from lxml import etree as et
-
-
-class RTFCodesPrep:
-
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: int
-                 ):
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
-
-    def rtf_codes_to_xml_prep(self):
-        """
-        Open the file in which the XML tags and text will be
-        added as the conversion progresses. Add first line and header tags to
-        the file.
-        """
-
-        xml_list = [[1, "http://www.w3.org/1999/xml", None],
-                    [2, "http://www.tei-c.org/ns/1.0", "tei"],
-                    [3, "http://kennethgrady.com/ns/1.0.0", "ts"],
-                    [None, "http://www.w3.org/1999/xml", None]]
-
-        ns = xml_list[int(self.xml_tag_num)-1][1]
-        prefix = xml_list[int(self.xml_tag_num)][2]
-
-        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "w+") as rcx:
-
-            namespace = "{%s}" % ns
-            nsmapped = {prefix: ns}
-            root = et.Element(namespace + "rtfCodes", nsmap=nsmapped)
-            root_string = et.tostring(root, method="html").decode("utf-8")
-            rcx.write(root_string)
+CP1252toUnicodeMap = \
+    [
+        ["00", "0000", "NUL"],
+        ["01", "0001", "SOH"],
+        
+    ]

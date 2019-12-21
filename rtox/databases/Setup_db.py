@@ -158,6 +158,10 @@ if __name__ == "Setup_db":
         self=rtox.databases.table_structure.TableStructure(con=con_pass,
                                                            cur=cur_pass))
 
+    rtox.databases.table_structure.TableStructure.file_table(
+        self=rtox.databases.table_structure.TableStructure(con=con_pass,
+                                                           cur=cur_pass))
+
     rtox.databases.table_structure.TableStructure.tables_finished(
         self=rtox.databases.table_structure.TableStructure(con=con_pass,
                                                            cur=cur_pass))

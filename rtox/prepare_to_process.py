@@ -47,7 +47,6 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
 __name__ = "prepare_to_process"
 
-import rtox.csv_prep
 import rtox.input_file_prep
 import os
 import rtox.prelim_routine
@@ -57,8 +56,13 @@ import rtox.databases.database_clean
 
 class PrepareToProcess:
 
-    def __init__(self, base_script_dir="", config_file="", debug_dir="",
-                 input_file_name="", output_file_name=""):
+    def __init__(self,
+                 base_script_dir="",
+                 config_file="",
+                 debug_dir="",
+                 input_file_name="",
+                 output_file_name=""
+                 ):
         self.base_script_dir = base_script_dir
         self.config_file = config_file
         self.debug_dir = debug_dir
@@ -142,8 +146,12 @@ class PrepareToProcess:
 
 
 class StartProcess:
-    def __init__(self, base_script_dir, debug_dir, input_file_name,
-                 output_file_name):
+    def __init__(self,
+                 base_script_dir: str,
+                 debug_dir: str,
+                 input_file_name: str,
+                 output_file_name: str
+                 ):
         self.base_script_dir = base_script_dir
         self.debug_dir = debug_dir
         self.input_file_name = input_file_name
@@ -165,8 +173,3 @@ class StartProcess:
                 debug_dir=self.debug_dir, xml_tag_num=xml_tag_num))
 
         return working_file
-
-    def csv_setup(self):
-        # Set up csv files for processed rtf codes.
-        rtox.csv_prep.CSVPrep.run_prep(
-            self=rtox.csv_prep.CSVPrep(debug_dir=self.debug_dir))

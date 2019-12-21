@@ -48,7 +48,10 @@ import os
 
 class Configuration:
 
-    def __init__(self, debug_dir, config_file):
+    def __init__(self,
+                 debug_dir: str,
+                 config_file: str
+                 ):
         self.config_file = config_file
         self.debug_dir = debug_dir
 

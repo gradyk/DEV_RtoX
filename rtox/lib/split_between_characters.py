@@ -30,59 +30,38 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Insert color table tag sets into appropriate place in the XML working file.
+Split a string between two characters.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-12-13"
-__name__ = "xml_color_tags"
-
-import os
-from lxml import etree as et
+__date__ = "2019-12-16"
+__name__ = "table_boundaries"
 
 
-class XMLTagSets:
+class SplitBetween:
 
-    def __init__(self, debug_dir, xml_tag_num):
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+    def __init__(self, text_to_process, split_characters):
+        self.text_to_process = text_to_process
+        self.split_characters = split_characters
 
-    def color_tags(self):
+    def split_between(self):
         """
-        Record a tag about the color table.
+        Splits the text_to_process between two characters into
+        separate items in a list (result_list).
         """
 
-        tag_insert = ('\n\t\t\t\tp.normal = {\n\t\t\t\t\tcolor:rgb(0,0,0);\n'
-                      '\t\t\t\t}\n\n')
+        chars = '}{'
+        if len(chars) is not 2:
+            raise IndexError("Argument chars must contain two characters.")
 
-        xml_tag_list = [
-            ["1", tag_insert, "http://www.w3.org/1999/xml", None, "rendFormat"],
-            ["2", tag_insert, "http://www.tei-c.org/ns/1.0", "tei",
-             "rendition"],
-            ["3", tag_insert, "http://kennethgrady.com/ns/1.0.0", "ts",
-             "rendition"],
-            ["4", tag_insert, "http://www.w3.org/1999/xml", None, "rendFormat"]
-        ]
+        result_list = [self.split_characters[1] + line +
+                       self.split_characters[0] for line in
+                       self.text_to_process.split(self.split_characters)]
 
-        xml_tags = xml_tag_list[int(self.xml_tag_num)][1]
-        ns = xml_tag_list[int(self.xml_tag_num)][2]
-        prefix = xml_tag_list[int(self.xml_tag_num)][3]
-        xml_pattern_two = xml_tag_list[int(self.xml_tag_num)][4]
+        result_list[0] = result_list[0][1:]
+        result_list[-1] = result_list[-1][:-1]
 
-        return xml_tags, ns, prefix, xml_pattern_two
-
-    def tags_to_db(self, xml_tags, xml_pattern_two, ns, prefix):
-
-        rtf_tags_file = os.path.join(self.debug_dir, "rtf_tags.xml")
-        tree = et.parse(rtf_tags_file)
-        root = tree.getroot()
-        namespace = "{%s}" % ns
-        nsmapped = {prefix: ns}
-        et.SubElement(root, namespace + xml_pattern_two,
-                      nsmap=nsmapped, scheme="css").text = xml_tags
-
-        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "wb") as file:
-            file.write(et.tostring(root, pretty_print=True))
+        return result_list

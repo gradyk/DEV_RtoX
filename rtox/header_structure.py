@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -48,16 +48,16 @@ import re
 class HeaderStructure:
     """
     Check header for existence and location of sections: <first line>,
-    <font table>, <file table>, <color table>, <style sheet>, <list table>,
+    <font table>, <file table>, <color table>, <stylesheet>, <list table>,
     <rev table>, <rsid table>, <generator>.
     """
 
     def __init__(self,
-                 working_file,
-                 debug_dir
+                 working_file: str,
+                 debug_dir: str
                  ):
-        self.__working_file = working_file
-        self.__debug_dir = debug_dir
+        self.working_file = working_file
+        self.debug_dir = debug_dir
 
     def table_check(self):
         """
@@ -67,17 +67,18 @@ class HeaderStructure:
 
         line_len = HeaderStructure.file_len(
             self=HeaderStructure(
-                debug_dir=self.__debug_dir,
-                working_file=self.__working_file))
+                debug_dir=self.debug_dir,
+                working_file=self.working_file))
 
         header_tables_dict_args = {}
         header_tables = ["rtf", "fonttbl", "filetbl", "colortbl", "stylesheet",
-                         "listtables", "revtbl", "rsidtable", "generator"]
+                         "listtables", "revtbl", "rsidtable", "generator",
+                         "info"]
 
         for header in header_tables:
             line_count = 0
             while line_count < line_len:
-                line_to_read = linecache.getline(self.__working_file,
+                line_to_read = linecache.getline(self.working_file,
                                                  line_count)
                 match = re.search(header, line_to_read)
                 if match:
@@ -87,12 +88,12 @@ class HeaderStructure:
                     line_count += 1
 
         header_table_dict = header_tables_dict_args
-        with open(os.path.join(self.__debug_dir,
+        with open(os.path.join(self.debug_dir,
                                "header_tables_dict.py"), "w+") as file:
             file.write("header_tables_dictionary = " + str(header_table_dict))
 
     def file_len(self):
-        with open(self.__working_file) as \
+        with open(self.working_file) as \
                 file_size:
             for i, l in enumerate(file_size):
                 pass

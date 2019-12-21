@@ -53,7 +53,6 @@ __date__ = "2019-10-22"
 __name__ = "__main__"
 
 # import pytest
-import rtox.csv_prep
 import rtox.docinfo_parser
 import rtox.header_parser
 import rtox.prepare_to_process
@@ -106,20 +105,17 @@ if __name__ == "__main__":
             output_file_name=output_file_name),
         xml_tag_num=xml_tag_num_pass)
 
-    # 6. Set up csv files for processed rtf codes.
-    rtox.csv_prep.CSVPrep.run_prep(
-        self=rtox.csv_prep.CSVPrep(debug_dir=debug_dir_pass))
-
-    # 7. Call the module to process the header.
+    # 6. Call the module to process the header.
     rtox.header_parser.DocHeaderParser.process_header(
         self=rtox.header_parser.DocHeaderParser(
             base_script_dir=base_script_dir_pass, debug_dir=debug_dir_pass,
             working_file=working_file_pass, xml_tag_num=xml_tag_num_pass))
 
-    # 8. Call the module to process the info portion of the document body.
-    rtox.docinfo_parser.DocinfoParse.docinfo_begin(
+    # 7. Call the module to process the info portion of the document body.
+    rtox.docinfo_parser.DocinfoParse.process_docinfo(
         self=rtox.docinfo_parser.DocinfoParse(
             debug_dir=debug_dir_pass,
-            working_file=working_file_pass))
+            working_file=working_file_pass,
+            xml_tag_num=xml_tag_num_pass))
 
-    # 9. Call the module to process the main portion of the document body.
+    # 8. Call the module to process the main portion of the document body.

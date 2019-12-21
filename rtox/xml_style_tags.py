@@ -46,220 +46,59 @@ from lxml import etree as et
 
 class XMLTagSets:
 
-    def __init__(
-                 self,
-                 debug_dir,
-                 xml_tag_num,
-                 code,
-                 additive,
-                 para_next,
-                 bold,
-                 italic,
-                 underline,
-                 small_caps,
-                 strikethrough,
-                 style_name
-                 ):
-        self.__debug_dir = debug_dir
-        self.__xml_tag_num = xml_tag_num
-        self.__code = code
-        self.__additive = additive
-        self.__para_next = para_next
-        self.__bold = bold
-        self.__italic = italic
-        self.__underline = underline
-        self.__small_caps = small_caps
-        self.__strikethrough = strikethrough
-        self.__style_name = style_name
+    def __init__(self,
+                 debug_dir: str,
+                 code: str,
+                 set_styles_vars: list) -> None:
+        self.debug_dir = debug_dir
+        self.code = code
+        self.set_styles_vars = set_styles_vars
 
     def xml_style_tags(self):
-        """
-        Determine which font tag set to use based on user's preferences.
-        """
 
-        if self.__xml_tag_num == "1":
-            tag_vars = XMLTagSets.plain_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    xml_tag_num=self.__xml_tag_num,
-                    code=self.__code,
-                    additive=self.__additive,
-                    para_next=self.__para_next,
-                    bold=self.__bold,
-                    italic=self.__italic,
-                    underline=self.__underline,
-                    small_caps=self.__small_caps,
-                    strikethrough=self.__strikethrough,
-                    style_name=self.__style_name))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        # These assignments were done to help readability.
+        code = self.set_styles_vars[0]
+        italic = self.set_styles_vars[1]
+        bold = self.set_styles_vars[2]
+        underline = self.set_styles_vars[3]
+        strikethrough = self.set_styles_vars[4]
+        small_caps = self.set_styles_vars[5]
+        additive = self.set_styles_vars[6]
+        style_name = self.set_styles_vars[7]
+        style_next_paragraph = self.set_styles_vars[8]
 
-        elif self.__xml_tag_num == "2":
-            tag_vars = XMLTagSets.tei_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    xml_tag_num=self.__xml_tag_num,
-                    code=self.__code,
-                    additive=self.__additive,
-                    para_next=self.__para_next,
-                    bold=self.__bold,
-                    italic=self.__italic,
-                    underline=self.__underline,
-                    small_caps=self.__small_caps,
-                    strikethrough=self.__strikethrough,
-                    style_name=self.__style_name))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        tag_insert = (f'n\t\t\t#{code}''{\n\t\t\t\titalic: 'f'{italic};\n'
+                      f'\t\t\t\tbold: {bold};\n\t\t\t\tunderline: '
+                      f'{underline};\n\t\t\t\tstrikethrough: '
+                      f'{strikethrough}\n\t\t\t\tsmall_caps: {small_caps};\n'
+                      f'\t\t\t\t\tadditive: {additive};\n\t\t\t\tstyle_name:'
+                      f' {style_name}\n'
+                      f'\t\t\t\tstyle_next_paragraph: '
+                      f'{style_next_paragraph};''\n\t\t\t}\n'
+                      )
 
-        elif self.__xml_tag_num == "3":
-            tag_vars = XMLTagSets.tpres_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    xml_tag_num=self.__xml_tag_num,
-                    code=self.__code,
-                    additive=self.__additive,
-                    para_next=self.__para_next,
-                    bold=self.__bold,
-                    italic=self.__italic,
-                    underline=self.__underline,
-                    small_caps=self.__small_caps,
-                    strikethrough=self.__strikethrough,
-                    style_name=self.__style_name))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        xml_tags = [
+            ["1", tag_insert, "http://www.w3.org/1999/xml", None, "p",
+                "rendition"],
+            ["2", tag_insert, "http://www.tei-c.org/ns/1.0", "tei", "p",
+                "rendition"],
+            ["3", tag_insert, "http://kennethgrady.com/ns/1.0.0", "ts",
+                "revisionDesc", "rendFormat"],
+            ["4", tag_insert, "http://www.w3.org/1999/xml", None, "p",
+                "rendition"]
+            ]
 
-        else:
-            tag_vars = XMLTagSets.plain_xml(
-                self=XMLTagSets(
-                    debug_dir=self.__debug_dir,
-                    xml_tag_num=self.__xml_tag_num,
-                    code=self.__code,
-                    additive=self.__additive,
-                    para_next=self.__para_next,
-                    bold=self.__bold,
-                    italic=self.__italic,
-                    underline=self.__underline,
-                    small_caps=self.__small_caps,
-                    strikethrough=self.__strikethrough,
-                    style_name=self.__style_name))
-            xml_tag_set_pass = tag_vars[0]
-            xml_pattern_pass = tag_vars[1]
-            xml_pattern_two_pass = tag_vars[2]
-            ns_pass = tag_vars[3]
-            prefix_pass = tag_vars[4]
+        return xml_tags
 
-        XMLTagSets.make_new_tags(
-            self=XMLTagSets(
-                debug_dir=self.__debug_dir,
-                xml_tag_num=self.__xml_tag_num,
-                code=self.__code,
-                additive=self.__additive,
-                para_next=self.__para_next,
-                bold=self.__bold,
-                italic=self.__italic,
-                underline=self.__underline,
-                small_caps=self.__small_caps,
-                strikethrough=self.__strikethrough,
-                style_name=self.__style_name),
-            xml_tag_set=xml_tag_set_pass,
-            xml_pattern_two=xml_pattern_two_pass,
-            ns=ns_pass,
-            prefix=prefix_pass)
+    def make_new_tags(self, xml_tags, xml_pattern_two, ns, prefix):
 
-    def plain_xml(self):
-        """
-        Tag set for plain xml.
-        :return: xml_tag_set: tags to wrap font codes
-        :return: xml_pattern:
-        :return: xml_pattern_two:
-        :return: ns: namespace
-        """
-        xml_tag_set = (
-            f'\n\t\t\t#{self.__code}'
-            ' {\n'
-            f'\t\t\t\tadditive: {self.__additive};\n'
-            f'\t\t\t\tpara_next: {self.__para_next};\n'
-            f'\t\t\t\tbold: {self.__bold};\n'
-            f'\t\t\t\titalic: {self.__italic};\n'
-            f'\t\t\t\tunderline: {self.__underline};\n'
-            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
-            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
-            f'\t\t\t\tstyle_name: {self.__style_name}\n'
-            '\t\t\t}'
-            f'\n'
-        )
-        prefix = None
-        ns = "http://www.w3.org/1999/xml"
-        xml_pattern = "p"
-        xml_pattern_two = "rendition"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
-
-    def tei_xml(self):
-        """
-        Tag set for TEI. See plain_xml for returns.
-        """
-        xml_tag_set = (
-            f'\n\t\t\t#{self.__code}'
-            ' {\n'
-            f'\t\t\t\tadditive: {self.__additive};\n'
-            f'\t\t\t\tpara_next: {self.__para_next};\n'
-            f'\t\t\t\tbold: {self.__bold};\n'
-            f'\t\t\t\titalic: {self.__italic};\n'
-            f'\t\t\t\tunderline: {self.__underline};\n'
-            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
-            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
-            f'\t\t\t\tstyle_name: {self.__style_name}\n'
-            '\t\t\t}'
-            f'\n'
-        )
-        prefix = "tei"
-        ns = "http://www.tei-c.org/ns/1.0"
-        xml_pattern = "p"
-        xml_pattern_two = "rendition"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
-
-    def tpres_xml(self):
-        """
-        Tag set for TPRES. See plain_xml for returns.
-        """
-        xml_tag_set = (
-            f'\n\t\t\t#{self.__code}'
-            ' {\n'
-            f'\t\t\t\tadditive: {self.__additive};\n'
-            f'\t\t\t\tpara_next: {self.__para_next};\n'
-            f'\t\t\t\tbold: {self.__bold};\n'
-            f'\t\t\t\titalic: {self.__italic};\n'
-            f'\t\t\t\tunderline: {self.__underline};\n'
-            f'\t\t\t\tsmall_caps: {self.__small_caps};\n'
-            f'\t\t\t\tstrikethrough: {self.__strikethrough}\n'
-            f'\t\t\t\tstyle_name: {self.__style_name}\n'
-            '\t\t\t}'
-            f'\n'
-        )
-        prefix = "ts"
-        ns = "http://kennethgrady.com/ns/1.0.0"
-        xml_pattern = "revisionDesc"
-        xml_pattern_two = "rendFormat"
-        return xml_tag_set, xml_pattern, xml_pattern_two, ns, prefix
-
-    def make_new_tags(self, xml_tag_set, xml_pattern_two, ns, prefix):
-
-        rtf_tags_file = os.path.join(self.__debug_dir, "rtf_tags.xml")
+        rtf_tags_file = os.path.join(self.debug_dir, "rtf_tags.xml")
         tree = et.parse(rtf_tags_file)
         root = tree.getroot()
         namespace = "{%s}" % ns
         nsmapped = {prefix: ns}
         et.SubElement(root, namespace + xml_pattern_two,
-                      nsmap=nsmapped, scheme="css").text = xml_tag_set
+                      nsmap=nsmapped, scheme="css").text = xml_tags
 
-        with open(os.path.join(self.__debug_dir, "rtf_tags.xml"), "wb") as file:
+        with open(os.path.join(self.debug_dir, "rtf_tags.xml"), "wb") as file:
             file.write(et.tostring(root, pretty_print=True))

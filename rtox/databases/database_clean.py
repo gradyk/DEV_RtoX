@@ -69,20 +69,6 @@ class DBClean:
             sys.stdout.write(f"Error {pg_err}, {err}.\n")
 
         try:
-            cur.execute(f"DELETE FROM stylecodes.emphasis")
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write(f"Error {pg_err}, {err}.\n")
-
-        try:
-            cur.execute(f"DELETE FROM stylecodes.misc")
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write(f"Error {pg_err}, {err}.\n")
-
-        try:
             cur.execute(f"DELETE FROM stylecodes.style_type")
             con.commit()
         except psycopg2.DatabaseError as err:
@@ -130,6 +116,20 @@ class DBClean:
         except psycopg2.DatabaseError as err:
             pg_err = str(err.pgcode)
             sys.stdout.write(f"Error {pg_err}, {err}.\n")
+
+        try:
+            cur.execute(f'DELETE FROM filecodes.filecodes')
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write(f'Error {pg_err}, {err}.\n')
+
+        try:
+            cur.execute(f'DELETE FROM colorcodes.colorcodes')
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write(f'Error {pg_err}, {err}.\n')
 
         if con is not None:
             cur.close()

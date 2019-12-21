@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -45,109 +45,37 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
 __name__ = "docinfo_parser"
 
-import rtox.doc_info_read
+import rtox.docinfo_read
 
 
 class DocinfoParse:
 
-    def __init__(self, debug_dir, working_file):
+    def __init__(self,
+                 debug_dir: str,
+                 working_file: str,
+                 xml_tag_num: int):
         self.debug_dir = debug_dir
         self.working_file = working_file
+        self.xml_tag_num = xml_tag_num
 
-    def docinfo_begin(self):
-
+    def process_docinfo(self):
         # Process info section of document.
-
         # Find beginning of info section.
-        info_start_vars = rtox.doc_info_read.DocInfoRead.info_start(
-            self=rtox.doc_info_read.DocInfoRead(
-                debug_dir=self.debug_dir,
-                working_file=self.working_file))
-        line_counter_pass = info_start_vars[0]
-        line_number_pass = info_start_vars[1]
-        line_to_scan_pass = info_start_vars[2]
 
-        if line_counter_pass < line_number_pass:
+        table = "info"
+        from debugdir.header_tables_dict import header_tables_dictionary as htd
 
-            running_line = ""
-            # Test for end of info section.
-            first_test_vars = rtox.doc_info_read.DocInfoRead.info_end_test(
-                self=rtox.doc_info_read.DocInfoRead(
+        if table in htd.keys():
+
+            line_to_check = htd[table]
+
+            rtox.docinfo_read.InfoParse.find_docinfo(
+                self=rtox.docinfo_read.InfoParse(
+                    working_file=self.working_file,
                     debug_dir=self.debug_dir,
-                    working_file=self.working_file),
-                line_counter=line_counter_pass,
-                running_line=running_line)
-            running_line_pass = first_test_vars
+                    line_to_read=line_to_check,
+                    xml_tag_num=self.xml_tag_num,
+                    table=table))
 
         else:
-            running_line_pass = line_to_scan_pass
             pass
-
-        text_to_process_pass = rtox.doc_info_read.DocInfoRead.process_text(
-            line_to_scan=line_to_scan_pass,
-            running_line=running_line_pass)
-
-        chars = "}{"
-        info_list = rtox.doc_info_read.DocInfoRead.split_between(
-            text_to_process=text_to_process_pass,
-            chars=chars)
-
-        docinfo_vars = rtox.doc_info_read.DocInfoRead.docinfo_for_db(
-            result_list=info_list)
-        title = docinfo_vars[0]
-        subject = docinfo_vars[1]
-        author = docinfo_vars[2]
-        manager = docinfo_vars[3]
-        company = docinfo_vars[4]
-        operator = docinfo_vars[5]
-        category = docinfo_vars[6]
-        comment = docinfo_vars[7]
-        doccomm = docinfo_vars[8]
-        hlinkbase = docinfo_vars[9]
-        version = docinfo_vars[10]
-        edmins = docinfo_vars[11]
-        nofpages = docinfo_vars[12]
-        nofwords = docinfo_vars[13]
-        nofchars = docinfo_vars[14]
-        nofcharsws = docinfo_vars[15]
-        vern = docinfo_vars[16]
-        keywords = docinfo_vars[17]
-        c_year = docinfo_vars[18]
-        c_month = docinfo_vars[19]
-        c_day = docinfo_vars[20]
-        c_hour = docinfo_vars[21]
-        c_minutes = docinfo_vars[22]
-        c_seconds = docinfo_vars[23]
-        r_year = docinfo_vars[24]
-        r_month = docinfo_vars[25]
-        r_day = docinfo_vars[26]
-        r_hour = docinfo_vars[27]
-        r_minutes = docinfo_vars[28]
-        r_seconds = docinfo_vars[29]
-        p_year = docinfo_vars[30]
-        p_month = docinfo_vars[31]
-        p_day = docinfo_vars[32]
-        p_hour = docinfo_vars[33]
-        p_minutes = docinfo_vars[34]
-        p_seconds = docinfo_vars[35]
-        b_year = docinfo_vars[36]
-        b_month = docinfo_vars[37]
-        b_day = docinfo_vars[38]
-        b_hour = docinfo_vars[39]
-        b_minutes = docinfo_vars[40]
-        b_seconds = docinfo_vars[41]
-
-        rtox.doc_info_read.DocInfoRead.docinfo_db(
-            title=title, subject=subject, author=author, manager=manager,
-            company=company, operator=operator, category=category,
-            comment=comment, doccomm=doccomm, hlinkbase=hlinkbase,
-            version=version, edmins=edmins, nofpages=nofpages,
-            nofwords=nofwords, nofchars=nofchars, nofcharsws=nofcharsws,
-            vern=vern, keywords=keywords, c_year=c_year, c_month=c_month,
-            c_day=c_day, c_hour=c_hour, c_minutes=c_minutes,
-            c_seconds=c_seconds,
-            r_year=r_year, r_month=r_month, r_day=r_day, r_hour=r_hour,
-            r_minutes=r_minutes, r_seconds=r_seconds, p_year=p_year,
-            p_month=p_month, p_day=p_day, p_hour=p_hour, p_minutes=p_minutes,
-            p_seconds=p_seconds, b_year=b_year, b_month=b_month, b_day=b_day,
-            b_hour=b_hour, b_minutes=b_minutes, b_seconds=b_seconds)

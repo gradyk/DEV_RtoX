@@ -55,34 +55,18 @@ class TableStructure:
         sys.stdout.write("Starting table creation... \n")
         sys.stdout.write("Creating style code tables...\n")
         try:
-            self.cur.execute("""CREATE TABLE STYLECODES.EMPHASIS(
-                BOLD int,
-                ITALIC int,
-                UNDERLINE int,
-                STRIKETHROUGH int,
-                SMALL_CAPS int
-                )""")
-
-        except psycopg2.DatabaseError as err:
-            TableStructure.error_code(err=err)
-
-        try:
-            self.cur.execute("""CREATE TABLE STYLECODES.MISC(
-                ADDITIVE char(1),
-                STYLE_NEXT_PARAGRAPH int,
-                STYLE_NAME char(40)
-                )""")
-        except psycopg2.DatabaseError as err:
-            TableStructure.error_code(err=err)
-
-        try:
             self.cur.execute("""CREATE TABLE STYLECODES.STYLE_TYPE(
-                PARAGRAPH_STYLE int,
-                SECTION_STYLE int,
-                CHARACTER_STYLE int,
-                TABLE_STYLE int,
-                TABLE_ROW_STYLE int
+                CODE varchar(10),
+                BOLD varchar(2),
+                ITALIC varchar(2),
+                UNDERLINE varchar(2),
+                STRIKETHROUGH varchar(2),
+                SMALL_CAPS varchar(2),
+                ADDITIVE varchar(10),
+                STYLE_NEXT_PARAGRAPH varchar(10),
+                STYLE_NAME varchar
                 )""")
+
         except psycopg2.DatabaseError as err:
             TableStructure.error_code(err=err)
 
@@ -90,15 +74,15 @@ class TableStructure:
         sys.stdout.write("Creating font codes table...\n")
         try:
             self.cur.execute("""CREATE TABLE FONTCODES.FONTINFO(
-                FONTNUM char(2),
-                NAME char(255),
-                FCHARSET char(10),
-                FPRQ char(10),
-                PANOSE char(10),
-                FONTFAMILY char(255),
-                ALTNAME char(255),
+                FONTNUM varchar(4),
+                FNAME varchar,
+                FCHARSET varchar(6),
+                FPRQ varchar(3),
+                PANOSE varchar,
+                FONTFAMILY varchar,
+                ALTNAME varchar,
                 FONTEMB boolean,
-                CPG char(4)
+                CPG varchar(6)
             )""")
 
         except psycopg2.DatabaseError as err:
@@ -200,6 +184,16 @@ class TableStructure:
                 STRIKETHROUGH int,
                 SMALL_CAPS int,
                 TEXT text
+            )""")
+
+        except psycopg2.DatabaseError as err:
+            TableStructure.error_code(err=err)
+
+    def file_table(self):
+        sys.stdout.write("Creating file codes table...\n")
+        try:
+            self.cur.execute("""CREATE TABLE FILECODES.FILECODES(
+                FILETBL text
             )""")
 
         except psycopg2.DatabaseError as err:

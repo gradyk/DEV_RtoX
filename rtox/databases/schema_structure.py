@@ -48,7 +48,9 @@ from psycopg2 import sql
 
 class SchemaStructure:
 
-    def __init__(self, con, cur):
+    def __init__(self,
+                 con,
+                 cur) -> None:
         self.con = con
         self.cur = cur
 
@@ -57,7 +59,8 @@ class SchemaStructure:
         sys.stdout.write("Starting schema creation... \n")
 
         # List of schemas to set up, if they don't already exist.
-        schema_family = ["fontcodes", "stylecodes", "docinfocodes", "doccodes"]
+        schema_family = ["fontcodes", "stylecodes", "docinfocodes",
+                         "doccodes", "filecodes"]
 
         for schema in schema_family:
             try:
@@ -70,7 +73,7 @@ class SchemaStructure:
                 SchemaStructure.error_code(err=err)
 
     @staticmethod
-    def error_code(err):
+    def error_code(err) -> None:
 
         if str(err.pgcode) == "3F000":
             # Schema already exists.
