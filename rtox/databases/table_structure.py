@@ -167,24 +167,46 @@ class TableStructure:
         except psycopg2.DatabaseError as err:
             TableStructure.error_code(err=err)
 
-    def doc_table(self):
-        sys.stdout.write("Creating document codes table...\n")
+    def doc_cs_table(self):
+        sys.stdout.write("Creating document (text line) codes table...\n")
         try:
-            self.cur.execute("""CREATE TABLE DOCCODES.DOCCODES(
-                PAR int,
-                PARD int,
-                SECT int,
-                SECTD int,
-                FS int,
-                FOOTNOTE int,
-                FONT_CODE char(4),
-                BOLD int,
-                ITALIC int,
-                UNDERLINE int,
-                STRIKETHROUGH int,
-                SMALL_CAPS int,
+            self.cur.execute("""CREATE TABLE DOCCODES.CSLINECODES(
+                LINENO varchar(10),
+                FS varchar(4),
+                BOLD varchar(4),
+                ITALIC varchar(4),
+                UNDERLINE varchar(4),
+                STRIKETHROUGH varchar(4),
+                SMALL_CAPS varchar(4),
                 TEXT text
             )""")
+
+        except psycopg2.DatabaseError as err:
+            TableStructure.error_code(err=err)
+
+    def doc_ps_table(self):
+        sys.stdout.write("Creating document (section, paragraph) codes table "
+                         "...\n")
+        try:
+            self.cur.execute("""CREATE TABLE DOCCODES.PARASECTCODES(
+                LINENO varchar(10),
+                PAR varchar(4),
+                PARD varchar(4),
+                SECT varchar(4),
+                SECTD varchar(4)
+            )""")
+
+        except psycopg2.DatabaseError as err:
+            TableStructure.error_code(err=err)
+
+    def doc_fn_table(self):
+        sys.stdout.write("Creating document (footnotes) codes table "
+                         "...\n")
+        try:
+            self.cur.execute("""CREATE TABLE DOCCODES.FOOTNOTES(
+                        LINENO varchar(10),
+                        LINEEND varchar(4)
+                    )""")
 
         except psycopg2.DatabaseError as err:
             TableStructure.error_code(err=err)

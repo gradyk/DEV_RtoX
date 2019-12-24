@@ -37,38 +37,17 @@ __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-12-21"
-__name__ = "doc_parser"
-
-# Local application imports
-import rtox.text
-import rtox.footnote
-# import rtox.section_paragraph
+__date__ = "2019-12-22"
+__name__ = "section_paragraph"
 
 
-class TextParse:
+import psycopg2
+import re
+import rtox.lib.text_boundaries
+import sys
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
-    def __init__(self,
-                 working_file: str,
-                 debug_dir: str,
-                 xml_tag_num: str,
-                 ) -> None:
-        self.working_file = working_file
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
 
-    def doc_body(self):
 
-        rtox.text.CSLine.cs_line_process(
-            self=rtox.text.CSLine(
-                working_file=self.working_file,
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
 
-        rtox.footnote.Footnotes.footnote_line_process(
-            self=rtox.footnote.Footnotes(
-                working_file=self.working_file,
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
-
-        # rtox.section_paragraph._______.________()
+paragraphs have style and font codes

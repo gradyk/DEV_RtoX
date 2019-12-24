@@ -39,10 +39,9 @@ and output file name.
 4. Set which XML tag file to use based on the user's preference.
 5. Copy the input file to a working file for use during processing,
 and create a file for XML tags that will become the XML output file.
-6. [Setup csv file(s) for storing codes -- WILL BE DELETED ONCE DATABASE FULLY
-FUNCTIONAL.]
-7. Call the module to process the header.
-8. Call the module to process the info portion of the document body.
+6. Call the module to process the header.
+7. Call the module to process the info portion of the document body.
+8. Call the module to process the document body.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -52,7 +51,11 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
+# Standard library imports
 # import pytest
+
+# Local application imports
+import rtox.doc_parser
 import rtox.docinfo_parser
 import rtox.header_parser
 import rtox.prepare_to_process
@@ -119,3 +122,7 @@ if __name__ == "__main__":
             xml_tag_num=xml_tag_num_pass))
 
     # 8. Call the module to process the main portion of the document body.
+    rtox.doc_parser.TextParse.doc_body(self=rtox.doc_parser.TextParse(
+        debug_dir=debug_dir_pass,
+        working_file=working_file_pass,
+        xml_tag_num=xml_tag_num_pass))

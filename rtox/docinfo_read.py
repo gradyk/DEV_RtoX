@@ -196,9 +196,16 @@ class SetInfo:
                 result = "None"
                 return result
             else:
-                result = test[0].replace("{\\" + info_part, "").replace("}", "")
-                result = result.lstrip()
-                return result
+                pattern = r'\s(\w+|\s|\W)+'
+                info_text = re.search(pattern, self.info_code)
+                if info_text:
+                    result_pre_1 = info_text[0].rstrip()
+                    result = result_pre_1[:-1]
+                    return result
+                else:
+                    result = "None"
+                    return result
+
         except TypeError:
             result = "None"
             return result

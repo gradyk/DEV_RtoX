@@ -111,7 +111,21 @@ class DBClean:
             sys.stdout.write(f"Error {pg_err}, {err}.\n")
 
         try:
-            cur.execute(f"DELETE FROM doccodes.doccodes")
+            cur.execute(f"DELETE FROM doccodes.cslinecodes")
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write(f"Error {pg_err}, {err}.\n")
+
+        try:
+            cur.execute(f"DELETE FROM doccodes.parasectcodes")
+            con.commit()
+        except psycopg2.DatabaseError as err:
+            pg_err = str(err.pgcode)
+            sys.stdout.write(f"Error {pg_err}, {err}.\n")
+
+        try:
+            cur.execute(f"DELETE FROM doccodes.footnotes")
             con.commit()
         except psycopg2.DatabaseError as err:
             pg_err = str(err.pgcode)

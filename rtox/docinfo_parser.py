@@ -59,9 +59,9 @@ class DocinfoParse:
         self.xml_tag_num = xml_tag_num
 
     def process_docinfo(self):
-        # Process info section of document.
-        # Find beginning of info section.
-
+        """
+        Process info section of document.
+        """
         table = "info"
         from debugdir.header_tables_dict import header_tables_dictionary as htd
 

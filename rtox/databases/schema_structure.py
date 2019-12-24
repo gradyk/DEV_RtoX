@@ -60,7 +60,7 @@ class SchemaStructure:
 
         # List of schemas to set up, if they don't already exist.
         schema_family = ["fontcodes", "stylecodes", "docinfocodes",
-                         "doccodes", "filecodes"]
+                         "cslinecodes", "parasectcodes", "filecodes"]
 
         for schema in schema_family:
             try:

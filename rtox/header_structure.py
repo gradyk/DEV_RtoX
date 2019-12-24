@@ -65,7 +65,7 @@ class HeaderStructure:
         record the line on which the table starts.
         """
 
-        line_len = HeaderStructure.file_len(
+        file_length = HeaderStructure.working_file_length(
             self=HeaderStructure(
                 debug_dir=self.debug_dir,
                 working_file=self.working_file))
@@ -77,10 +77,10 @@ class HeaderStructure:
 
         for header in header_tables:
             line_count = 0
-            while line_count < line_len:
+            while line_count < file_length:
                 line_to_read = linecache.getline(self.working_file,
                                                  line_count)
-                match = re.search(header, line_to_read)
+                match = re.search(r'{\\'+header, line_to_read)
                 if match:
                     header_tables_dict_args.update({header: line_count})
                     line_count += 1
@@ -92,7 +92,7 @@ class HeaderStructure:
                                "header_tables_dict.py"), "w+") as file:
             file.write("header_tables_dictionary = " + str(header_table_dict))
 
-    def file_len(self):
+    def working_file_length(self):
         with open(self.working_file) as \
                 file_size:
             for i, l in enumerate(file_size):
