@@ -40,7 +40,11 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
 __name__ = "input_file_prep"
 
+# From standard libraries
 import os
+
+# From local application
+import rtox.lib.convert_1252_to_unicode
 
 
 class InputPrep:
@@ -66,9 +70,12 @@ class InputPrep:
                 input_file_copy:
             read_file = input_file_copy.read()
 
-        with open(os.path.join(self.debug_dir, "working_input_file.txt"),
-                  "w+") as working_rtf_file:
-            working_rtf_file.write(read_file)
+        with open(os.path.join(self.debug_dir, "working_input_file_pre.txt"),
+                  "w+") as working_rtf_file_pre:
+            working_rtf_file_pre.write(read_file)
+
+        rtox.lib.convert_1252_to_unicode.convert_ms1252(
+            debug_dir=self.debug_dir)
 
         # Open the file in which the XML tags and text will be
         # added as the conversion progresses. Add first line and header tags to
