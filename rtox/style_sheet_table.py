@@ -39,15 +39,12 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "style_sheet"
+__name__ = "style_sheet_table"
 
-import psycopg2
 import re
 import rtox.lib.split_between_characters
 import rtox.lib.table_boundaries
 import rtox.xml_style_tags
-import sys
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 class StyleSheetParse:
@@ -56,12 +53,14 @@ class StyleSheetParse:
                  debug_dir: str,
                  xml_tag_num: str,
                  line_number: str,
-                 table: str) -> None:
+                 table: str,
+                 styles_status_list: list) -> None:
         self.working_file = working_file
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
         self.line_number = line_number
         self.table = table
+        self.styles_status_list = styles_status_list
 
     def find_styles(self):
         """
@@ -82,49 +81,66 @@ class StyleSheetParse:
 
         """
         3. Separate each style code string into its parts and return the 
-        values for each part so that they can be stored in the rtox_db database.
+        values for each part and save the results in a dictionary.
         """
         for style_code in style_code_strings:
 
-            try:
-
-                code_vars = SetStyles.code(self=SetStyles(
-                    style_code=style_code))
-                status = code_vars[0]
-                code = code_vars[1]
-
-                if status == 1:
-
-                    italic = SetStyles.italic(
-                        self=SetStyles(style_code=style_code))
-                    bold = SetStyles.bold(self=SetStyles(style_code=style_code))
-                    underline = SetStyles.underline(
-                        self=SetStyles(style_code=style_code))
-                    strikethrough = SetStyles.strikethrough(
-                        self=SetStyles(style_code=style_code))
-                    small_caps = SetStyles.small_caps(
-                        self=SetStyles(style_code=style_code))
-                    additive = SetStyles.additive(
-                        self=SetStyles(style_code=style_code))
-                    style_name = SetStyles.style_name(
-                        self=SetStyles(style_code=style_code))
-                    style_next_paragraph = SetStyles.style_next_paragraph(
-                        self=SetStyles(style_code=style_code))
-
-                    set_styles_vars = [code, italic, bold, underline,
-                                       strikethrough, small_caps, additive,
-                                       style_name, style_next_paragraph]
-
-                    StoreStyles.style_db(
-                        self=StoreStyles(set_styles_vars=set_styles_vars,
-                                         debug_dir=self.debug_dir,
-                                         code=code))
-
-                else:
+            options = [
+                r"{\s",
+                r"{\*\cs",
+                r"{\ds",
+                r"{\trowd",
+                r"{\tsrowd",
+                ]
+            for option in options:
+                if re.match(re.escape(option), style_code) is None:
                     pass
+                else:
 
-            except TypeError:
-                pass
+                    try:
+
+                        code_vars = SetStyles.code(self=SetStyles(
+                            style_code=style_code))
+                        status = code_vars[0]
+                        code = code_vars[1]
+
+                        if status == 1:
+
+                            italic = SetStyles.italic(
+                                self=SetStyles(style_code=style_code))
+                            bold = SetStyles.bold(self=SetStyles(
+                                style_code=style_code))
+                            underline = SetStyles.underline(
+                                self=SetStyles(style_code=style_code))
+                            strikethrough = SetStyles.strikethrough(
+                                self=SetStyles(style_code=style_code))
+                            small_caps = SetStyles.small_caps(
+                                self=SetStyles(style_code=style_code))
+                            additive = SetStyles.additive(
+                                self=SetStyles(style_code=style_code))
+                            style_name = SetStyles.style_name(
+                                self=SetStyles(style_code=style_code))
+                            style_next_paragraph = SetStyles.\
+                                style_next_paragraph(
+                                    self=SetStyles(style_code=style_code))
+
+                            set_styles_vars = [code, italic, bold, underline,
+                                               strikethrough, small_caps,
+                                               additive, style_name,
+                                               style_next_paragraph]
+
+                            self.styles_status_list = StoreStyle.store_style(
+                                self=StoreStyle(
+                                    set_styles_vars=set_styles_vars,
+                                    styles_status_list=self.styles_status_list))
+
+                        else:
+                            pass
+
+                    except TypeError:
+                        pass
+
+        return self.styles_status_list
 
 
 class SetStyles:
@@ -147,8 +163,8 @@ class SetStyles:
         ]
 
         status = 0
-        for key in code_styles:
-            test = re.search(re.escape(key) + r'[0-9]*', self.style_code)
+        for item in code_styles:
+            test = re.match(re.escape(item) + r'[0-9]*', self.style_code)
             if test is not None:
                 test = test[0]
                 code = test.replace("{\\", "")
@@ -159,7 +175,7 @@ class SetStyles:
 
         return status, code
 
-    def italic(self) -> str:
+    def italic(self) -> int:
         """
 
         """
@@ -167,15 +183,15 @@ class SetStyles:
             test = re.search(r"\\i[0-9]*", self.style_code)
             italic = test[0].replace("\\i", "")
             if italic == "":
-                italic = "1"
+                italic = 1
             else:
                 pass
             return italic
         except TypeError:
-            italic = "0"
+            italic = 0
             return italic
 
-    def bold(self) -> str:
+    def bold(self) -> int:
         """
 
         """
@@ -183,15 +199,15 @@ class SetStyles:
             test = re.search(r"\\b[0-9]*", self.style_code)
             bold = test[0].replace("\\b", "")
             if bold == "":
-                bold = "1"
+                bold = 1
             else:
                 pass
             return bold
         except TypeError:
-            bold = "0"
+            bold = 0
             return bold
 
-    def underline(self) -> str:
+    def underline(self) -> int:
         """
 
         """
@@ -199,15 +215,15 @@ class SetStyles:
             test = re.search(r"\\ul[0-9]*", self.style_code)
             underline = test[0].replace("\\ul", "")
             if underline == "":
-                underline = "1"
+                underline = 1
             else:
                 pass
             return underline
         except TypeError:
-            underline = "0"
+            underline = 0
             return underline
 
-    def strikethrough(self) -> str:
+    def strikethrough(self) -> int:
         """
 
         """
@@ -215,15 +231,15 @@ class SetStyles:
             test = re.search(r"\\strike[0-9]*", self.style_code)
             strikethrough = test[0].replace("\\strike", "")
             if strikethrough == "":
-                strikethrough = "1"
+                strikethrough = 1
             else:
                 pass
             return strikethrough
         except TypeError:
-            strikethrough = "0"
+            strikethrough = 0
             return strikethrough
 
-    def small_caps(self) -> str:
+    def small_caps(self) -> int:
         """
 
         """
@@ -231,12 +247,12 @@ class SetStyles:
             test = re.search(r"\\scaps[0-9]*", self.style_code)
             small_caps = test[0].replace("\\scaps", "")
             if small_caps == "":
-                small_caps = "1"
+                small_caps = 1
             else:
                 pass
             return small_caps
         except TypeError:
-            small_caps = "0"
+            small_caps = 0
             return small_caps
 
     def additive(self) -> bool:
@@ -268,81 +284,40 @@ class SetStyles:
             style_name = "None"
             return style_name
 
-    def style_next_paragraph(self) -> str:
+    def style_next_paragraph(self) -> int:
         """
 
         """
         try:
             test = re.search(r"\\snext[0-9]*", self.style_code)
             style_next_paragraph = test[0].replace("\\", "")
+            style_next_paragraph = int(style_next_paragraph)
             return style_next_paragraph
         except TypeError:
-            style_next_paragraph = "0"
+            style_next_paragraph = 0
             return style_next_paragraph
 
 
-class StoreStyles:
+class StoreStyle:
     def __init__(self,
                  set_styles_vars: list,
-                 debug_dir: str,
-                 code: str
-                 ) -> None:
+                 styles_status_list: list) -> None:
         self.set_styles_vars = set_styles_vars
-        self.debug_dir = debug_dir
-        self.code = code
+        self.styles_status_list = styles_status_list
 
-    def style_db(self) -> None:
-        """
-        13. Store the settings for each font code in the rtox_db, fontcode
-        schema.
-        """
+    def store_style(self):
 
-        from debugdir.config_dict import config_dictionary
+        settings = (("code", self.set_styles_vars[0]),
+                    ("italic", self.set_styles_vars[1]),
+                    ("bold", self.set_styles_vars[2]),
+                    ("underline", self.set_styles_vars[3]),
+                    ("strikethrough", self.set_styles_vars[4]),
+                    ("small_caps", self.set_styles_vars[5]),
+                    ("additive", self.set_styles_vars[6]),
+                    ("style_name", self.set_styles_vars[7]),
+                    ("style_next_paragraph", self.set_styles_vars[8])
+                    )
 
-        host = config_dictionary.get("host")
-        database = config_dictionary.get("database")
-        user = config_dictionary.get("user")
-        password = config_dictionary.get("password")
+        self.styles_status_list.append((self.set_styles_vars[0], settings))
 
-        con = psycopg2.connect(host=host, database=database, user=user,
-                               password=password)
-        con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = con.cursor()
-
-        try:
-            postgres_insert_query = """INSERT INTO rtox_db.stylecodes.style_type
-                (CODE, ITALIC, BOLD, UNDERLINE, STRIKETHROUGH, SMALL_CAPS, 
-                ADDITIVE, STYLE_NAME, STYLE_NEXT_PARAGRAPH) VALUES (
-                %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-
-            record_to_insert = (self.set_styles_vars[0],
-                                self.set_styles_vars[1],
-                                self.set_styles_vars[2],
-                                self.set_styles_vars[3],
-                                self.set_styles_vars[4],
-                                self.set_styles_vars[5],
-                                self.set_styles_vars[6],
-                                self.set_styles_vars[7],
-                                self.set_styles_vars[8])
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering style codes in database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        if con is not None:
-            cur.close()
-            con.close()
-
-    def tag_it(self) -> None:
-        """
-        Write the style information to a csv file.
-        """
-
-        rtox.xml_style_tags.XMLTagSets.xml_style_tags(
-            self=rtox.xml_style_tags.XMLTagSets(
-                debug_dir=self.debug_dir,
-                code=self.code,
-                set_styles_vars=self.set_styles_vars))
+        return self.styles_status_list

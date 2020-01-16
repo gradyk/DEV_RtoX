@@ -65,55 +65,63 @@ class DocHeaderParser:
                  base_script_dir: str,
                  debug_dir: str,
                  working_file: str,
-                 xml_tag_num: str
+                 xml_tag_num: str,
+                 styles_status_list: list
                  ) -> None:
         self.debug_dir = debug_dir
         self.working_file = working_file
         self.base_script_dir = base_script_dir
         self.xml_tag_num = xml_tag_num
+        self.styles_status_list = styles_status_list
 
-    def process_header(self) -> None:
+    def process_header(self):
         # Determine header structure of rtf input document.
         HeaderParse.header_structure(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # Process first line of rtf input document.
         HeaderParse.rtf_first_line(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # Process font table rtf codes.
         HeaderParse.font_table(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # Process file table rtf codes.
         HeaderParse.file_table(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # Process color table rtf codes.
         HeaderParse.color_table(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # Process style sheet table rtf codes.
-        HeaderParse.style_sheet_table(
+        self.styles_status_list = HeaderParse.style_sheet_table(
             self=HeaderParse(debug_dir=self.debug_dir,
                              working_file=self.working_file,
                              base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num))
+                             xml_tag_num=self.xml_tag_num,
+                             styles_status_list=self.styles_status_list))
 
         # HeaderParse.list_table(
         #   xml_tag_num=xml_tag_num_pass)
@@ -127,6 +135,8 @@ class DocHeaderParser:
         # HeaderParse.generator(
         #   xml_tag_num=xml_tag_num_pass)
 
+        return self.styles_status_list
+
 
 class HeaderParse:
 
@@ -134,12 +144,14 @@ class HeaderParse:
                  debug_dir: str,
                  working_file: str,
                  base_script_dir: str,
-                 xml_tag_num: str
+                 xml_tag_num: str,
+                 styles_status_list: list
                  ) -> None:
         self.debug_dir = debug_dir
         self.working_file = working_file
         self.base_script_dir = base_script_dir
         self.xml_tag_num = xml_tag_num
+        self.styles_status_list = styles_status_list
 
     def header_structure(self):
         """
@@ -242,7 +254,7 @@ class HeaderParse:
         else:
             pass
 
-    def style_sheet_table(self) -> None:
+    def style_sheet_table(self) -> list:
         """
         If there is a stylesheet table, process the style settings for each
         style and store them in the rtox_db database, stylecodes schema.
@@ -255,15 +267,19 @@ class HeaderParse:
 
             line_to_check = htd[table]
 
-            rtox.style_sheet_table.StyleSheetParse.find_styles(
-                self=rtox.style_sheet_table.StyleSheetParse(
-                    working_file=self.working_file,
-                    debug_dir=self.debug_dir,
-                    xml_tag_num=self.xml_tag_num,
-                    table=table,
-                    line_number=line_to_check))
+            self.styles_status_list = rtox.style_sheet_table.StyleSheetParse\
+                .find_styles(
+                            self=rtox.style_sheet_table.StyleSheetParse(
+                                working_file=self.working_file,
+                                debug_dir=self.debug_dir,
+                                xml_tag_num=self.xml_tag_num,
+                                table=table,
+                                line_number=line_to_check,
+                                styles_status_list=self.styles_status_list))
         else:
             pass
+
+        return self.styles_status_list
 
     # TODO Put these in the proper order and complete the modules.
     # def rsid_table(self):

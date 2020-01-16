@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -30,56 +30,31 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Check for stylesheet(s) and parse if present.
+Sectd signifies that the section just beginning uses the same formatting as
+the preceding section.
 """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2019-11-20"
-__name__ = "misc_defs"
-
+# From standard library
 import linecache
+import os
 import re
 
 
-# Find beginning and end of line to process and extract text to
-# process.
-while line_status == 1:
-    line_to_parse_start = linecache.getline(self.__working_file,
-                                            line_count)
-    open_bracket = re.search(r'{', line_to_parse_start[0])
-    if open_bracket:
-        cb_line_count = line_count
+def sectd(working_file: str,
+          line_to_read: str,
+          styles_status_list: list,
+          debug_dir: str,
+          ) -> None:
+
+    search_area = linecache.getline(working_file, line_to_read)
+
+    match = re.search(r"\\s[0-9]+", search_area)
+    if match is not None:
+        set_style = match[0].replace("\\s", "")
+        with open(os.path.join(debug_dir, "working_xml_file.xml"),
+                  "a") as wxf_pre:
+            wxf_pre.write(styles_status_list[set_style])
     else:
-        line_count += 1
+        pass
 
-    close_bracket = re.search(r'}', line_to_parse_start)
-    if close_bracket:
-        line_status = 0
-        self.__style_state = 1
-    else:
-        line_status = 0
-        self.__style_state = 0
-        cb_line_count += 1
-
-running_line = ""
-while line_status == 0:
-    line_to_parse_end = linecache.getline(self.__working_file,
-                                          cb_line_count)
-    close_bracket = re.search(r'}', line_to_parse_end)
-    if close_bracket:
-        line_status = 1
-        running_line = line_to_parse_end.rstrip()
-    else:
-        line_status = 0
-        cb_line_count += 1
-        running_line = running_line + line_to_parse_end.rstrip()
-        continue
-
-line_to_process = line_to_parse_start.rstrip() + running_line
-
-text_to_process = line_to_process[
-                  line_to_process.find("{")
-                  + 1:line_to_process.find("}")]
+    linecache.clearcache()

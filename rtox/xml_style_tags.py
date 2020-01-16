@@ -44,6 +44,8 @@ import os
 from lxml import etree as et
 
 
+# TODO Drop this module as no longer relevant? Or, keep it and add function
+#  call to style_sheet_table?
 class XMLTagSets:
 
     def __init__(self,

@@ -40,9 +40,13 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
 __name__ = "header_structure"
 
+# Standard library imports
 import linecache
 import os
 import re
+
+# Local application imports
+import rtox.lib.file_length
 
 
 class HeaderStructure:
@@ -65,10 +69,9 @@ class HeaderStructure:
         record the line on which the table starts.
         """
 
-        file_length = HeaderStructure.working_file_length(
-            self=HeaderStructure(
-                debug_dir=self.debug_dir,
-                working_file=self.working_file))
+        file_length = rtox.lib.file_length.FileStats.working_file_length(
+                self=rtox.lib.file_length.FileStats(
+                    working_file=self.working_file))
 
         header_tables_dict_args = {}
         header_tables = ["rtf", "fonttbl", "filetbl", "colortbl", "stylesheet",
@@ -92,9 +95,4 @@ class HeaderStructure:
                                "header_tables_dict.py"), "w+") as file:
             file.write("header_tables_dictionary = " + str(header_table_dict))
 
-    def working_file_length(self):
-        with open(self.working_file) as \
-                file_size:
-            for i, l in enumerate(file_size):
-                pass
-        return i + 1
+        linecache.clearcache()

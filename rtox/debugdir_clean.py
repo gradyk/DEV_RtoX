@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  Copyright (c) 2019. Kenneth A. Grady
+#  Copyright (c) 2020. Kenneth A. Grady
 #
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -30,61 +30,30 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare the input file for processing.
+As the first step in RtoX, clean out the debugdir directory of files from
+the prior run.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "input_file_prep"
+__date__ = "2020-01-09"
+__name__ = "debugdir_clean"
 
 # From standard libraries
 import os
+import shutil
+import sys
 
-# From local application
-import rtox.lib.convert_1252_to_unicode
 
-
-class InputPrep:
-
-    def __init__(self,
-                 input_file_name: str,
-                 debug_dir: str,
-                 base_script_dir: str
-                 ):
-        self.input_file = input_file_name
-        self.debug_dir = debug_dir
-        self.base_script_dir = base_script_dir
-
-    def input_file_prep(self):
-        """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Create a working
-        xml file where tags will be placed and insert a header section.
-        """
-
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.base_script_dir, self.input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
-
-        with open(os.path.join(self.debug_dir, "working_input_file_pre.txt"),
-                  "w+") as working_rtf_file_pre:
-            working_rtf_file_pre.write(read_file)
-
-        rtox.lib.convert_1252_to_unicode.convert_ms1252(
-            debug_dir=self.debug_dir)
-
-        working_rtf_file = os.path.join(self.debug_dir,
-                                        "working_input_file.txt")
-
-        # Create the file in which the XML tags and text will be
-        # added as the conversion progresses.
-        working_xml_file = open(os.path.join(self.debug_dir,
-                                "working_xml_file.xml"), "w+")
-
-        working_xml_file.close()
-
-        return working_rtf_file
+def cleaner():
+    # TODO Check to see what happens if debugdir is already empty.
+    folder = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
+                          "debugdir")
+    print(folder)
+    for filename in os.listdir(folder):
+        try:
+            os.remove(filename)
+        except Exception as e:
+            print(f"Failed to delete {filename}. Reason: {e}")

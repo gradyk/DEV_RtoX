@@ -30,7 +30,9 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+Iterates through each line of the RTF file (starting at the \\info line or
+line 0). Records in a list every line starting with one of a specified list
+of keywords (keyword, line number). Returns the list.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -40,35 +42,111 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-21"
 __name__ = "doc_parser"
 
+# Standard library imports
+import linecache
+import re
+
 # Local application imports
-import rtox.text
-import rtox.footnote
-# import rtox.section_paragraph
+import rtox.lib.file_length
+import rtox.lib.keyword_end
+import rtox.line_parser
 
 
-class TextParse:
+class DocParse:
 
     def __init__(self,
                  working_file: str,
                  debug_dir: str,
                  xml_tag_num: str,
+                 cs_status_dict: dict,
+                 styles_status_list: list
                  ) -> None:
         self.working_file = working_file
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
+        self.cs_status_dict = cs_status_dict
+        self.styles_status_list = styles_status_list
 
     def doc_body(self):
 
-        rtox.text.CSLine.cs_line_process(
-            self=rtox.text.CSLine(
-                working_file=self.working_file,
+        # Determine whether to start at the info line or line 0.
+        from debugdir.header_tables_dict import header_tables_dictionary as htd
+
+        if "info" in htd.keys():
+            line_to_read = htd["info"]
+        else:
+            line_to_read = 0
+
+        # Check the number of lines in the working file.
+        file_length = rtox.lib.file_length.FileStats.working_file_length(
+            self=rtox.lib.file_length.FileStats(
+                working_file=self.working_file))
+
+        kw_list = []
+
+        while line_to_read <= file_length:
+
+            area_search = linecache.getline(self.working_file, line_to_read)
+            cs = re.match(r"{\\cs", area_search, re.M)
+            par = re.match(r"\\par\n", area_search, re.M)
+            pard = re.match(r"\\pard", area_search, re.M)
+            sect = re.match(r"\\sect\n", area_search, re.M)
+            sectd = re.match(r"\\sectd", area_search, re.M)
+            header_start = re.match(r"{\\header", area_search, re.M)
+
+            if header_start:
+                header_end = rtox.lib.keyword_end.keyword_end(
+                    working_file=self.working_file,
+                    line_number=line_to_read)
+            else:
+                header_end = None
+
+            footnote_start = re.match(r"{\\footnote", area_search, re.M)
+
+            if footnote_start:
+                footnote_end = rtox.lib.keyword_end.keyword_end(
+                    working_file=self.working_file,
+                    line_number=line_to_read)
+            else:
+                footnote_end = None
+
+            keywords = [(cs, "cs"),
+                        (par, "par"),
+                        (pard, "pard"),
+                        (sect, "sect"),
+                        (sectd, "sectd"),
+                        (header_start, "header_beg"),
+                        (header_end, "header_end"),
+                        (footnote_start, "footnote_beg"),
+                        (footnote_end, "footnote_end")
+                        ]
+
+            for kw, value in keywords:
+                if kw:
+                    new = (value, line_to_read)
+                    kw_list.append(new)
+                else:
+                    pass
+
+            line_to_read += 1
+
+        linecache.clearcache()
+
+        body_line = rtox.line_parser.LineParser.body_line_prep(
+            self=rtox.line_parser.LineParser(
+                kw_list=kw_list,
+                cs_status_dict=self.cs_status_dict,
+                styles_status_list=self.styles_status_list,
                 debug_dir=self.debug_dir,
+                working_file=self.working_file,
                 xml_tag_num=self.xml_tag_num))
 
-        rtox.footnote.Footnotes.footnote_line_process(
-            self=rtox.footnote.Footnotes(
-                working_file=self.working_file,
+        rtox.line_parser.LineParser.line_parse(
+            self=rtox.line_parser.LineParser(
+                kw_list=kw_list,
+                cs_status_dict=self.cs_status_dict,
+                styles_status_list=self.styles_status_list,
                 debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
-
-        # rtox.section_paragraph._______.________()
+                working_file=self.working_file,
+                xml_tag_num=self.xml_tag_num),
+            body_line=body_line)

@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -29,26 +29,38 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 """
-Tag dictionary for TEI tags.
+Finds the end of the {\\cs line and captures the contents of the {\\cs...}
+keyword.
 """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "xml_tags"
+# From standard library
+import linecache
+import re
 
-xml_tags = {
-        "paragraph":        "<p>",
-        "title":            "<title>",
-        "heading":          "<head>",
-        "footnote":         "<note>",
-        'italic':           '<hi rend="italic">',
-        'bold':             '<hi rend="bold">',
-        'underscore':       '<hi rend="underscore">',
-        "list":             "<list>",
-        "rendition":        "<rendition>",
-}
+
+def keyword_end_alt(working_file: str,
+                    keyword_open: str
+                    ) -> str:
+
+    line_number = keyword_open
+
+    close_test = 0
+    running_line = ""
+    while close_test == 0:
+        line_to_search = linecache.getline(working_file,
+                                           line_number)
+        test_close_bracket = re.search("}\n", line_to_search)
+        if test_close_bracket is not None:
+            running_line = running_line + line_to_search
+            close_test = 1
+        else:
+            running_line = running_line + line_to_search
+            line_number += 1
+
+    keyword_line_pre = running_line.replace("{\\", "")
+    keyword_line = keyword_line_pre.replace("\n", "").replace("}", "")
+
+    linecache.clearcache()
+
+    return keyword_line

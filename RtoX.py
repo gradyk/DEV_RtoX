@@ -55,15 +55,20 @@ __name__ = "__main__"
 # import pytest
 
 # Local application imports
+from typing import List
+from typing import Tuple
+
 import rtox.doc_parser
 import rtox.docinfo_parser
 import rtox.header_parser
 import rtox.prepare_to_process
-import rtox.style_sheet_table
+import rtox.debugdir_clean
+import rtox.line_parser
 
 
 if __name__ == "__main__":
-    # pytest.main()
+    # 0. Remove working files from last run (clean out debugdir).
+    rtox.debugdir_clean.cleaner()
 
     # 1. Set basic variables.
     file_structure_vars = rtox.prepare_to_process.PrepareToProcess\
@@ -73,6 +78,23 @@ if __name__ == "__main__":
     debug_dir_pass = file_structure_vars[2]
     input_file_name_pass = file_structure_vars[3]
     output_file_name_pass = file_structure_vars[4]
+
+    cs_status_dict = {"italic": 0,
+                      "bold": 0,
+                      "underline": 0,
+                      "strikethrough": 0,
+                      "small_caps": 0}
+
+    styles_status_list = [("code", (("code", "0"),
+                                    ("italic", 0),
+                                    ("bold", 0),
+                                    ("underline", 0),
+                                    ("strikethrough", 0),
+                                    ("small_caps", 0),
+                                    ("additive", False),
+                                    ("style_name", None),
+                                    ("style_next_paragraph", "")))
+                          ]
 
     # 2. Get and store configuration information.
     prelim_routine_vars = rtox.prepare_to_process.PrepareToProcess\
@@ -108,21 +130,29 @@ if __name__ == "__main__":
             output_file_name=output_file_name),
         xml_tag_num=xml_tag_num_pass)
 
-    # 6. Call the module to process the header.
+    # 6. Process the header.
     rtox.header_parser.DocHeaderParser.process_header(
         self=rtox.header_parser.DocHeaderParser(
-            base_script_dir=base_script_dir_pass, debug_dir=debug_dir_pass,
-            working_file=working_file_pass, xml_tag_num=xml_tag_num_pass))
+            base_script_dir=base_script_dir_pass,
+            debug_dir=debug_dir_pass,
+            working_file=working_file_pass,
+            xml_tag_num=xml_tag_num_pass,
+            styles_status_list=styles_status_list))
 
-    # 7. Call the module to process the info portion of the document body.
+    # 7. Process the info portion of the document body.
     rtox.docinfo_parser.DocinfoParse.process_docinfo(
         self=rtox.docinfo_parser.DocinfoParse(
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
             xml_tag_num=xml_tag_num_pass))
 
-    # 8. Call the module to process the main portion of the document body.
-    rtox.doc_parser.TextParse.doc_body(self=rtox.doc_parser.TextParse(
-        debug_dir=debug_dir_pass,
-        working_file=working_file_pass,
-        xml_tag_num=xml_tag_num_pass))
+    # 8. Process the main portion of the document body.
+    kw_list = rtox.doc_parser.DocParse.doc_body(
+        self=rtox.doc_parser.DocParse(
+            debug_dir=debug_dir_pass,
+            working_file=working_file_pass,
+            xml_tag_num=xml_tag_num_pass,
+            cs_status_dict=cs_status_dict,
+            styles_status_list=styles_status_list))
+
+    # [LAST STEP] Add xml header and pretty-print xml file (add_xml_header.py).

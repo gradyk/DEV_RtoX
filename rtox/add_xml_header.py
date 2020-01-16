@@ -1,7 +1,7 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
-#  Copyright (c) 2019. Kenneth A. Grady
+#  Copyright (c) 2020. Kenneth A. Grady
 #
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -30,40 +30,47 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Tag dictionary for TPRES tags.
+Add a header to the working xml file based on the tag style selected by the
+user. Pretty-print the working xml file and write it to the output file
+selected. by the user.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "tpres_tags"
+__date__ = "2020-01-09"
+__name__ = "add_xml_header"
 
-xml_tags = {
-        "para-beg":         "<pBody>",
-        "para-attr":        "<pBody ",
-        "para-end":         "</pBody>",
-        "title-beg":        "<generalTitle>",
-        "title-attr":       "<generalTitle ",
-        "title-end":        "</generalTitle>",
-        "heading-beg":      "<headDiv>",
-        "heading-attr":     "<headDiv ",
-        "heading-end":      "</headDiv>",
-        "footnote-beg":     "<footNote>",
-        "footnote-attr":    "<footNote ",
-        "footnote-end":     "</footNote>",
-        "italic-beg":       '<hiText rend="italic">',
-        "italic-end":       "</hiText>",
-        "bold-beg":         '<hiText rend="bold">',
-        "bold-end":         '</hiText>',
-        "underscore-beg":   '<hiText rend="underscore">',
-        "underscore-end":   "</hiText>",
-        "list-beg":         "<listGenl>",
-        "list-attr":        "<listGenl ",
-        "list-end":         "</listGenl>",
-        "rend-beg":         "<rendFormat>",
-        "rend-attr":        "rendFormat ",
-        "rend-end":         "</rendFormat>"
-}
+import lxml.etree as etree
+import os
 
+
+def add_header(debug_dir, base_script_dir, xml_tag_num, output_file):
+
+    working_xml_file = open(os.path.join(debug_dir, "working_xml_file.xml"),
+                            "w+")
+
+    # TODO Consider moving this dict or even the whole xml_tag issue to a
+    #  separate lib function.
+    xml_tag_dict = {
+        "1": "plainheader.xml",
+        "2": "teiheader.xml",
+        "3": "tpresheader.xml",
+        }
+
+    try:
+        file_name = xml_tag_dict[xml_tag_num]
+        insert = open(os.path.join(base_script_dir, file_name), "r")
+        insert_tags = insert.read()
+        working_xml_file.seek(0)
+        working_xml_file.write(insert_tags)
+
+    except TypeError:
+        pass
+
+    final_xml_file = open(os.path.join(base_script_dir, output_file), "w")
+
+    etree.parse(working_xml_file).write(final_xml_file, encoding="utf-8")
+    working_xml_file.close()
+    final_xml_file.close()

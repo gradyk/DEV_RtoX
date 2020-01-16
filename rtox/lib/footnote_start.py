@@ -30,61 +30,59 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare the input file for processing.
+Starting from the beginning of a footnote (as identified in kw_list),
+process the footnote and write the necessary tags to the working xml file.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-10-26"
-__name__ = "input_file_prep"
+__date__ = "2019-12-22"
+__name__ = "footnote"
 
-# From standard libraries
+# Standard library imports
+import importlib
 import os
 
-# From local application
-import rtox.lib.convert_1252_to_unicode
 
-
-class InputPrep:
+class FootnoteBlock:
 
     def __init__(self,
-                 input_file_name: str,
+                 working_file: str,
                  debug_dir: str,
-                 base_script_dir: str
-                 ):
-        self.input_file = input_file_name
+                 xml_tag_num: str,
+                 ) -> None:
+        self.working_file = working_file
         self.debug_dir = debug_dir
-        self.base_script_dir = base_script_dir
+        self.xml_tag_num = xml_tag_num
 
-    def input_file_prep(self):
+    def footnote_start(self):
         """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Create a working
-        xml file where tags will be placed and insert a header section.
+        Read the the doc starting at the footnote line indicated in kw_list.
+        Find the end of the footnote and insert that line with a label in
+        kw_list. Insert a footnote start tag. (Wait to insert the footnote
+        end tag until that entry is reached in kw_list).
         """
 
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.base_script_dir, self.input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
+        # Possible xml tag dictionaries.
+        options = {
+            "1": "xml_tag_dict",
+            "2": "tei_tag_dict",
+            "3": "tpres_tag_dict",
+        }
 
-        with open(os.path.join(self.debug_dir, "working_input_file_pre.txt"),
-                  "w+") as working_rtf_file_pre:
-            working_rtf_file_pre.write(read_file)
+        tag_dict = {}
 
-        rtox.lib.convert_1252_to_unicode.convert_ms1252(
-            debug_dir=self.debug_dir)
+        # Import xml tag dictionary based on user xml tag style preference.
+        if options[self.xml_tag_num]:
+            value = options[self.xml_tag_num]
+            function_call = "from rtox.dictionaries.xml_tags import " + \
+                            value + " as tag_dict"
+            importlib.import_module(function_call)
+        else:
+            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 
-        working_rtf_file = os.path.join(self.debug_dir,
-                                        "working_input_file.txt")
-
-        # Create the file in which the XML tags and text will be
-        # added as the conversion progresses.
-        working_xml_file = open(os.path.join(self.debug_dir,
-                                "working_xml_file.xml"), "w+")
-
-        working_xml_file.close()
-
-        return working_rtf_file
+        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                  "a") as wxf_pre:
+            wxf_pre.write(tag_dict["footnote-beg"])
