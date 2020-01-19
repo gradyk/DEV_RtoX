@@ -30,58 +30,38 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Process page header blocks in the RTF doc body.
+
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-11"
-__name__ = "header_start"
+__date__ = "2020-01-09"
+__name__ = "final_step"
 
-# From standard libraries
-import importlib
+import lxml.etree as etree
 import os
 
 
-class HeaderBlock:
+class FinalStep:
 
     def __init__(self,
-                 working_file: str,
-                 debug_dir: str,
-                 xml_tag_num: str,
-                 ) -> None:
-        self.working_file = working_file
+                 debug_dir: str) -> None:
         self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
 
-    def header_start(self):
-        """
-        Read the the doc starting at the footnote line indicated in kw_list.
-        Find the end of the footnote and insert that line with a label in
-        kw_list. Insert a footnote start tag. (Wait to insert the footnote
-        end tag until that entry is reached in kw_list).
+    def final_step(self):
         """
 
-        # Possible xml tag dictionaries.
-        options = {
-            "1": "xml_tag_dict",
-            "2": "tei_tag_dict",
-            "3": "tpres_tag_dict",
-        }
+        """
+        # Check for proper closing tag in file. If it isn't present, insert
+        # if (based on user's tag style preference). Then format.
 
-        tag_dict = {}
+        with open(os.path.join(self.debug_dir, "new_xml_file.xml"), "a") as \
+                test_file:
+            test_file.write("</ts:pBody>\n</ts:matterBody>\n</ts:matterText"
+                            ">\n</ts:TPRES>")
 
-        # Import xml tag dictionary based on user xml tag style preference.
-        if options[self.xml_tag_num]:
-            value = options[self.xml_tag_num]
-            function_call = "from rtox.dictionaries.xml_tags import " + \
-                            value + " as tag_dict"
-            importlib.import_module(function_call)
-        else:
-            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
-
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "a") as wxf_pre:
-            wxf_pre.write(tag_dict["header-beg"])
+        new_xml_file = open(os.path.join(self.debug_dir, "new_xml_file.xml"),
+                            "r")
+        etree.parse(new_xml_file)

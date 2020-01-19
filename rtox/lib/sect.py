@@ -39,8 +39,15 @@ beginning of section tag.
 import os
 
 
-# TODO Tags inserted need to vary depending on user tag style choice.
-def tag_insert(debug_dir: str):
+class Sect:
+    def __init__(self,
+                 debug_dir: str):
+        self.debug_dir = debug_dir
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "a") as wxf_pre:
-        wxf_pre.write("</section><section>")
+
+# TODO Tags inserted need to vary depending on user tag style choice.
+def tag_insert(self):
+
+    with open(os.path.join(self.debug_dir, "working_xml_file.xml"), "a") as \
+            wxf_pre:
+        wxf_pre.write("</ts:section><ts:section>")

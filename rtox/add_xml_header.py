@@ -31,8 +31,9 @@
 
 """
 Add a header to the working xml file based on the tag style selected by the
-user. Pretty-print the working xml file and write it to the output file
-selected. by the user.
+user. To do this, start a new file and add the appropriate header.
+Next, add what is in the working_xml_file. Pretty-print the working xml file
+and write it to the output file selected. by the user.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -48,8 +49,9 @@ import os
 
 def add_header(debug_dir, base_script_dir, xml_tag_num, output_file):
 
-    working_xml_file = open(os.path.join(debug_dir, "working_xml_file.xml"),
-                            "w+")
+    working_xml_file_pre = open(os.path.join(debug_dir, "working_xml_file.xml"),
+                                "r")
+    working_xml_file = working_xml_file_pre.read()
 
     # TODO Consider moving this dict or even the whole xml_tag issue to a
     #  separate lib function.
@@ -63,14 +65,17 @@ def add_header(debug_dir, base_script_dir, xml_tag_num, output_file):
         file_name = xml_tag_dict[xml_tag_num]
         insert = open(os.path.join(base_script_dir, file_name), "r")
         insert_tags = insert.read()
-        working_xml_file.seek(0)
-        working_xml_file.write(insert_tags)
+
+        with open(os.path.join(debug_dir, "new_xml_file.xml"), "w+") as \
+                new_xml_file:
+            new_xml_file.seek(0)
+            new_xml_file.write(insert_tags)
+
+        with open(os.path.join(debug_dir, "new_xml_file.xml"), "a") as \
+                new_xml_file:
+            new_xml_file.write(working_xml_file)
 
     except TypeError:
         pass
 
-    final_xml_file = open(os.path.join(base_script_dir, output_file), "w")
-
-    etree.parse(working_xml_file).write(final_xml_file, encoding="utf-8")
-    working_xml_file.close()
-    final_xml_file.close()
+    working_xml_file_pre.close()

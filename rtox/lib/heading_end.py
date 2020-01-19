@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -30,29 +30,45 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-As the first step in RtoX, clean out the debugdir directory of files from
-the prior run.
+Process page header blocks in the RTF doc body.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-09"
-__name__ = "debugdir_clean"
+__date__ = "2020-01-18"
+__name__ = "heading_end"
 
 # From standard libraries
+import importlib
 import os
-import shutil
-import sys
 
 
-def cleaner():
-    # TODO Check to see what happens if debugdir is already empty.
-    folder = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                          "debugdir")
-    for filename in os.listdir(folder):
-        try:
-            os.remove(os.path.join(folder, filename))
-        except OSError:
-            pass
+class HeadingBlock:
+    def __init__(self,
+                 debug_dir: str,
+                 xml_tag_num: str) -> None:
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
+
+    def heading_end(self):
+        # Possible xml tag dictionaries.
+        options = {
+            "1": "xml_tag_dict",
+            "2": "tei_tag_dict",
+            "3": "tpres_tag_dict",
+        }
+
+        # Import xml tag dictionary based on user xml tag style preference.
+        if options[self.xml_tag_num]:
+            value = options[self.xml_tag_num]
+            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
+            tag_dict_pre = {value: getattr(xtags, value)}
+            tag_dict = tag_dict_pre[value]
+        else:
+            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+
+        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                  "a") as wxf_pre:
+            wxf_pre.write(tag_dict["heading-end"])

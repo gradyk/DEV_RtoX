@@ -46,8 +46,10 @@ import rtox.lib.par
 import rtox.lib.pard
 import rtox.lib.sect
 import rtox.lib.sectd
-import rtox.lib.header_start
+import rtox.lib.footnote_end
 import rtox.lib.footnote_start
+import rtox.lib.heading_end
+import rtox.lib.heading_start
 
 
 class LineParser:
@@ -76,18 +78,35 @@ class LineParser:
 
         return body_line
 
-    def line_parse(self, body_line):
-        options_dict = {"cs": body_line.cs_process,
-                        "par": body_line.par_process,
-                        "pard": body_line.pard_process,
-                        "sect": body_line.sect_process,
-                        "sectd": body_line.sectd_process,
-                        "header": body_line.header_process,
-                        "footnote": body_line.footnote_process}
+    def wo_body_line_prep(self):
+        wo_body_line = WODocLine(debug_dir=self.debug_dir,
+                                 xml_tag_num=self.xml_tag_num)
+
+        return wo_body_line
+
+    def line_parse(self, body_line, wo_body_line):
+        options_dict_body_line = {
+            "cs": body_line.cs_process,
+            "pard": body_line.pard_process,
+            "sectd": body_line.sectd_process,
+        }
+
+        options_dict_wo_body_line = {
+            "par": wo_body_line.par_process,
+            "sect": wo_body_line.sect_process,
+            "heading_beg": wo_body_line.heading_start_process,
+            "heading_end": wo_body_line.heading_end_process,
+            "footnote_beg": wo_body_line.footnote_start_process,
+            "footnote_end": wo_body_line.footnote_end_process
+        }
 
         for a, b in self.kw_list:
-            to_do = options_dict[a]
-            to_do(b)
+            try:
+                to_do = options_dict_body_line[a]
+                to_do(b)
+            except KeyError:
+                to_do = options_dict_wo_body_line[a]
+                to_do()
 
 
 class DocLine:
@@ -117,17 +136,12 @@ class DocLine:
                                  xml_tag_num=self.xml_tag_num,
                                  debug_dir=self.debug_dir)
 
-    def par_process(self, line_to_read):
-        rtox.lib.par.tag_insert(debug_dir=self.debug_dir)
-
     def pard_process(self, line_to_read):
         rtox.lib.pard.pard(working_file=self.working_file,
                            line_to_read=line_to_read,
                            styles_status_list=self.styles_status_list,
+                           xml_tag_num=self.xml_tag_num,
                            debug_dir=self.debug_dir)
-
-    def sect_process(self, line_to_read):
-        rtox.lib.sect.tag_insert(debug_dir=self.debug_dir)
 
     def sectd_process(self, line_to_read):
         rtox.lib.sectd.sectd(working_file=self.working_file,
@@ -135,16 +149,42 @@ class DocLine:
                              styles_status_list=self.styles_status_list,
                              debug_dir=self.debug_dir)
 
-    def header_process(self, line_to_read):
-        rtox.lib.header_start.HeaderBlock.header_start(
-            self=rtox.lib.header_start.HeaderBlock(
+
+class WODocLine:
+    def __init__(self,
+                 debug_dir: str,
+                 xml_tag_num: str) -> None:
+        self.debug_dir = debug_dir
+        self.xml_tag_num = xml_tag_num
+
+    def par_process(self):
+        rtox.lib.par.Par.tag_insert(self=rtox.lib.par.Par(
+            debug_dir=self.debug_dir))
+
+    def sect_process(self):
+        rtox.lib.sect.tag_insert(self=WODocLine(debug_dir=self.debug_dir,
+                                                xml_tag_num=self.xml_tag_num))
+
+    def heading_start_process(self):
+        rtox.lib.heading_start.HeadingBlock.heading_start(
+            self=rtox.lib.heading_start.HeadingBlock(
                 debug_dir=self.debug_dir,
-                working_file=self.working_file,
                 xml_tag_num=self.xml_tag_num))
 
-    def footnote_process(self, line_to_read):
+    def heading_end_process(self):
+        rtox.lib.heading_end.HeadingBlock.heading_end(
+            self=rtox.lib.heading_end.HeadingBlock(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num))
+
+    def footnote_start_process(self):
         rtox.lib.footnote_start.FootnoteBlock.footnote_start(
             self=rtox.lib.footnote_start.FootnoteBlock(
                 debug_dir=self.debug_dir,
-                working_file=self.working_file,
+                xml_tag_num=self.xml_tag_num))
+
+    def footnote_end_process(self):
+        rtox.lib.footnote_end.FootnoteBlock.footnote_end(
+            self=rtox.lib.footnote_end.FootnoteBlock(
+                debug_dir=self.debug_dir,
                 xml_tag_num=self.xml_tag_num))

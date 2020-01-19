@@ -54,16 +54,15 @@ __name__ = "__main__"
 # Standard library imports
 # import pytest
 
-# Local application imports
-from typing import List
-from typing import Tuple
-
+# From local application
+import rtox.add_xml_header
+import rtox.debugdir_clean
 import rtox.doc_parser
 import rtox.docinfo_parser
+import rtox.final_step
 import rtox.header_parser
 import rtox.prepare_to_process
-import rtox.debugdir_clean
-import rtox.line_parser
+import rtox.tag_closer
 
 
 if __name__ == "__main__":
@@ -79,22 +78,13 @@ if __name__ == "__main__":
     input_file_name_pass = file_structure_vars[3]
     output_file_name_pass = file_structure_vars[4]
 
-    cs_status_dict = {"italic": 0,
-                      "bold": 0,
-                      "underline": 0,
-                      "strikethrough": 0,
-                      "small_caps": 0}
+    cs_status_dict = {"italic": "0",
+                      "bold": "0",
+                      "underline": "0",
+                      "strikethrough": "0",
+                      "small_caps": "0"}
 
-    styles_status_list = [("code", (("code", "0"),
-                                    ("italic", 0),
-                                    ("bold", 0),
-                                    ("underline", 0),
-                                    ("strikethrough", 0),
-                                    ("small_caps", 0),
-                                    ("additive", False),
-                                    ("style_name", None),
-                                    ("style_next_paragraph", "")))
-                          ]
+    styles_status_list = []
 
     # 2. Get and store configuration information.
     prelim_routine_vars = rtox.prepare_to_process.PrepareToProcess\
@@ -155,4 +145,17 @@ if __name__ == "__main__":
             cs_status_dict=cs_status_dict,
             styles_status_list=styles_status_list))
 
-    # [LAST STEP] Add xml header and pretty-print xml file (add_xml_header.py).
+    # 9. Close open tags where possible and produce list of remaining open tags.
+    rtox.tag_closer.TagCloser.tag_closer(
+        self=rtox.tag_closer.TagCloser(
+            debug_dir=debug_dir_pass))
+
+    # 10. Add xml header.
+    rtox.add_xml_header.add_header(debug_dir=debug_dir_pass,
+                                   base_script_dir=base_script_dir_pass,
+                                   xml_tag_num=xml_tag_num_pass,
+                                   output_file=output_file_name)
+
+    # 11. Do a format check and close open tags where possible.
+    rtox.final_step.FinalStep.final_step(
+        self=rtox.final_step.FinalStep(debug_dir=debug_dir_pass))

@@ -41,40 +41,51 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-12"
 __name__ = "tag_closer"
 
-stack = []
+# From standard libraries
+import os
 
 
-def tag_closer():
-    with open("parse_test_1.txt", 'r') as parse_file:
-        for line in parse_file:
-            print("INPUT LINE:", line)
-            ltag = line.find('<')
-            if ltag > -1:
-                rtag = line.find('>')
-                if rtag > -1:
-                    # Found left and right brackets: grab tag
-                    tag = line[ltag+1: rtag]
-                    open_tag = tag[0] != '/'
-                    if open_tag:
-                        # Add tag to stack
-                        stack.append(tag)
-                        print("TRACE open", stack)
-                    else:
-                        tag = tag[1:]
-                        if len(stack) == 0:
-                            print("No blocks are open; tried to close", tag)
+class TagCloser:
+    def __init__(self,
+                 debug_dir: str,
+                 ):
+        self.debug_dir = debug_dir
+
+    def tag_closer(self):
+
+        stack = []
+
+        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                               'r') as parse_file:
+            for line in parse_file:
+                print("INPUT LINE:", line)
+                ltag = line.find('<')
+                if ltag > -1:
+                    rtag = line.find('>')
+                    if rtag > -1:
+                        # Found left and right brackets: grab tag
+                        tag = line[ltag+1: rtag]
+                        open_tag = tag[0] != '/'
+                        if open_tag:
+                            # Add tag to stack
+                            stack.append(tag)
+                            print("TRACE open", stack)
                         else:
-                            if stack[-1] == tag:
-                                # Close the block
-                                stack.pop()
-                                print("TRACE close", tag, stack)
+                            tag = tag[1:]
+                            if len(stack) == 0:
+                                print("No blocks are open; tried to close", tag)
                             else:
-                                print("Tried to close", tag,
-                                      "but most recent open "
-                                      "block is", stack[0])
-                                if tag in stack:
-                                    stack.remove(tag)
-                                    print("Prior block closed; continuing")
+                                if stack[-1] == tag:
+                                    # Close the block
+                                    stack.pop()
+                                    print("TRACE close", tag, stack)
+                                else:
+                                    print("Tried to close", tag,
+                                          "but most recent open "
+                                          "block is", stack[0])
+                                    if tag in stack:
+                                        stack.remove(tag)
+                                        print("Prior block closed; continuing")
 
-    if len(stack):
-        print("Blocks still open at EOF:", stack)
+        if len(stack):
+            print("Blocks still open at EOF:", stack)

@@ -39,7 +39,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-22"
-__name__ = "footnote"
+__name__ = "footnote_start"
 
 # Standard library imports
 import importlib
@@ -49,11 +49,9 @@ import os
 class FootnoteBlock:
 
     def __init__(self,
-                 working_file: str,
                  debug_dir: str,
                  xml_tag_num: str,
                  ) -> None:
-        self.working_file = working_file
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
 
@@ -72,14 +70,12 @@ class FootnoteBlock:
             "3": "tpres_tag_dict",
         }
 
-        tag_dict = {}
-
         # Import xml tag dictionary based on user xml tag style preference.
         if options[self.xml_tag_num]:
             value = options[self.xml_tag_num]
-            function_call = "from rtox.dictionaries.xml_tags import " + \
-                            value + " as tag_dict"
-            importlib.import_module(function_call)
+            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
+            tag_dict_pre = {value: getattr(xtags, value)}
+            tag_dict = tag_dict_pre[value]
         else:
             from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 

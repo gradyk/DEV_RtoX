@@ -98,14 +98,12 @@ def cs_tag_write(cs_line_dict: dict, text: str, cs_status_dict: dict,
         "3": "tpres_tag_dict",
     }
 
-    tag_dict = {}
-
     # Import xml tag dictionary based on user xml tag style preference.
     if options[xml_tag_num]:
         value = options[xml_tag_num]
-        function_call = "from rtox.dictionaries.xml_tags import " + \
-                        value + " as tag_dict"
-        importlib.import_module(function_call)
+        xtags = importlib.import_module("rtox.dictionaries.xml_tags")
+        tag_dict_pre = {value: getattr(xtags, value)}
+        tag_dict = tag_dict_pre[value]
     else:
         from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 
@@ -115,19 +113,19 @@ def cs_tag_write(cs_line_dict: dict, text: str, cs_status_dict: dict,
         cs_status_dict_value = cs_status_dict[key]
         if cs_line_dict[key] == cs_status_dict_value:
             pass
-        elif cs_line_dict[key] >= 1 and cs_status_dict_value < 1:
+        elif cs_line_dict[key] >= "1" and cs_status_dict_value < "1":
             with open(os.path.join(debug_dir, "working_xml_file.xml"),
                       "a") as wxf_pre:
-                wxf_pre.write(tag_dict[key+"_beg"])
+                wxf_pre.write(tag_dict[key+"-beg"])
 
-        elif cs_line_dict[key] < 1 and cs_status_dict_value >= 1:
+        elif cs_line_dict[key] < "1" and cs_status_dict_value >= "1":
             with open(os.path.join(debug_dir, "working_xml_file.xml"),
                       "a") as wxf_pre:
-                wxf_pre.write(tag_dict[key+"_end"])
+                wxf_pre.write(tag_dict[key+"-end"])
 
         update_dict = {key: cs_line_dict[key]}
         cs_status_dict.update(update_dict)
 
     with open(os.path.join(debug_dir, "working_xml_file.xml"),
               "a") as wxf_pre:
-        wxf_pre.write(tag_dict[text])
+        wxf_pre.write(text)

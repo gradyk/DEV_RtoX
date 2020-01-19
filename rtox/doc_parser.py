@@ -49,6 +49,7 @@ import re
 # Local application imports
 import rtox.lib.file_length
 import rtox.lib.keyword_end
+import rtox.lib.xml_transition_tags
 import rtox.line_parser
 
 
@@ -92,14 +93,14 @@ class DocParse:
             pard = re.match(r"\\pard", area_search, re.M)
             sect = re.match(r"\\sect\n", area_search, re.M)
             sectd = re.match(r"\\sectd", area_search, re.M)
-            header_start = re.match(r"{\\header", area_search, re.M)
+            heading_start = re.match(r"{\\header", area_search, re.M)
 
-            if header_start:
-                header_end = rtox.lib.keyword_end.keyword_end(
+            if heading_start:
+                heading_end = rtox.lib.keyword_end.keyword_end(
                     working_file=self.working_file,
                     line_number=line_to_read)
             else:
-                header_end = None
+                heading_end = None
 
             footnote_start = re.match(r"{\\footnote", area_search, re.M)
 
@@ -110,13 +111,14 @@ class DocParse:
             else:
                 footnote_end = None
 
+            # TODO Consider whether key and value should be switched.
             keywords = [(cs, "cs"),
                         (par, "par"),
                         (pard, "pard"),
                         (sect, "sect"),
                         (sectd, "sectd"),
-                        (header_start, "header_beg"),
-                        (header_end, "header_end"),
+                        (heading_start, "heading_beg"),
+                        (heading_end, "heading_end"),
                         (footnote_start, "footnote_beg"),
                         (footnote_end, "footnote_end")
                         ]
@@ -132,7 +134,23 @@ class DocParse:
 
         linecache.clearcache()
 
+        # Insert transition tags in the working_xml_file based on the user's
+        # tag style preference.
+        rtox.lib.xml_transition_tags.XMLTransition.xml_transition_tags(
+            self=rtox.lib.xml_transition_tags.XMLTransition(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num))
+
         body_line = rtox.line_parser.LineParser.body_line_prep(
+            self=rtox.line_parser.LineParser(
+                kw_list=kw_list,
+                cs_status_dict=self.cs_status_dict,
+                styles_status_list=self.styles_status_list,
+                debug_dir=self.debug_dir,
+                working_file=self.working_file,
+                xml_tag_num=self.xml_tag_num))
+
+        wo_body_line = rtox.line_parser.LineParser.wo_body_line_prep(
             self=rtox.line_parser.LineParser(
                 kw_list=kw_list,
                 cs_status_dict=self.cs_status_dict,
@@ -149,4 +167,5 @@ class DocParse:
                 debug_dir=self.debug_dir,
                 working_file=self.working_file,
                 xml_tag_num=self.xml_tag_num),
-            body_line=body_line)
+            body_line=body_line,
+            wo_body_line=wo_body_line)
