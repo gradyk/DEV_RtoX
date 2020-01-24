@@ -58,7 +58,7 @@ class TagCloser:
         with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
                                'r') as parse_file:
             for line in parse_file:
-                print("INPUT LINE:", line)
+                # print("INPUT LINE:", line)
                 ltag = line.find('<')
                 if ltag > -1:
                     rtag = line.find('>')
@@ -69,23 +69,26 @@ class TagCloser:
                         if open_tag:
                             # Add tag to stack
                             stack.append(tag)
-                            print("TRACE open", stack)
+                            # print("TRACE open", stack)
                         else:
                             tag = tag[1:]
                             if len(stack) == 0:
-                                print("No blocks are open; tried to close", tag)
+                                pass
+                                # print("No blocks are open; tried to close",
+                                # tag)
                             else:
                                 if stack[-1] == tag:
                                     # Close the block
                                     stack.pop()
-                                    print("TRACE close", tag, stack)
+                                    # print("TRACE close", tag, stack)
                                 else:
-                                    print("Tried to close", tag,
-                                          "but most recent open "
-                                          "block is", stack[0])
+                                    # print("Tried to close", tag,
+                                    #      "but most recent open "
+                                    #      "block is", stack[0])
                                     if tag in stack:
                                         stack.remove(tag)
-                                        print("Prior block closed; continuing")
+                                    #    print("Prior block closed; continuing")
 
         if len(stack):
-            print("Blocks still open at EOF:", stack)
+            pass
+            # print("Blocks still open at EOF:", stack)

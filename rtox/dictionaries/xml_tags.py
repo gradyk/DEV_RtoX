@@ -84,9 +84,17 @@ tei_tag_dict = {
 }
 
 tpres_tag_dict = {
-        "para-beg":         "<ts:pBody>",
-        "para-attr":        "<ts:pBody ",
-        "para-end":         "</ts:pBody>",
+        "wrapper-beg":      "<ts:TPRES>",
+        "wrapper-end":      "</ts:TPRES>",
+        "body-beg":         "<ts:matterBody>",
+        "body-end":         "</ts:matterBody>",
+        "bodytext-beg":     "<ts:matterText>",
+        "bodytext-end":     "</ts:matterText>",
+        "section-beg":      "<ts:matterDiv>",
+        "section-end":      "</ts:matterDiv>",
+        "paragraph-beg":    "<ts:pBody>",
+        "paragraph-attr":   "<ts:pBody ",
+        "paragraph-end":    "</ts:pBody>",
         "title-beg":        "<ts:generalTitle>",
         "title-attr":       "<ts:generalTitle ",
         "title-end":        "</ts:generalTitle>",
@@ -100,18 +108,18 @@ tpres_tag_dict = {
         "italic-end":       "</ts:hiText>",
         "bold-beg":         '<ts:hiText rend="bold">',
         "bold-end":         '</ts:hiText>',
-        "underscore-beg":   '<ts:hiText rend="underscore">',
-        "underscore-end":   "</hiText>",
+        "underline-beg":    '<ts:hiText rend="underscore">',
+        "underline-end":    "</hiText>",
         "normal-beg":       '<ts:hiText rend="normal">',
         "normal-end":       "</ts:hiText>",
         "list-beg":         "<ts:listGenl>",
         "list-attr":        "<ts:listGenl ",
         "list-end":         "</ts:listGenl>",
-        "rend-beg":         "<ts:rendFormat>",
-        "rend-attr":        "<ts:rendFormat ",
-        "rend-end":         "</ts:rendFormat>",
-        "smallcaps-beg":    '<ts:hiText rend="smallcaps">',
-        "smallcaps-end":    "</ts:hiText>",
-        "start-tags":       "\t<ts:matterText>\n\t\t<ts:matterBody>\n\t\t\t<ts"
-                            ":pBody>"
+        "rendition-beg":    "<ts:rendFormat>",
+        "rendition-attr":   "<ts:rendFormat ",
+        "rendition-end":    "</ts:rendFormat>",
+        "small_caps-beg":    '<ts:hiText rend="smallcaps">',
+        "small_caps-end":    "</ts:hiText>",
+        "start-tags":       "\t<ts:matterText>\n\t\t<ts:matterBody>\n\t\t\t"
+                            "<ts:matterDiv>\n\t\t\t\t<ts:pBody>"
 }

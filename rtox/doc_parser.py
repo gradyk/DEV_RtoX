@@ -53,19 +53,18 @@ import rtox.lib.xml_transition_tags
 import rtox.line_parser
 
 
+# TODO Combine the class with doc_body.
 class DocParse:
 
     def __init__(self,
                  working_file: str,
                  debug_dir: str,
                  xml_tag_num: str,
-                 cs_status_dict: dict,
                  styles_status_list: list
                  ) -> None:
         self.working_file = working_file
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
-        self.cs_status_dict = cs_status_dict
         self.styles_status_list = styles_status_list
 
     def doc_body(self):
@@ -144,7 +143,6 @@ class DocParse:
         body_line = rtox.line_parser.LineParser.body_line_prep(
             self=rtox.line_parser.LineParser(
                 kw_list=kw_list,
-                cs_status_dict=self.cs_status_dict,
                 styles_status_list=self.styles_status_list,
                 debug_dir=self.debug_dir,
                 working_file=self.working_file,
@@ -153,7 +151,6 @@ class DocParse:
         wo_body_line = rtox.line_parser.LineParser.wo_body_line_prep(
             self=rtox.line_parser.LineParser(
                 kw_list=kw_list,
-                cs_status_dict=self.cs_status_dict,
                 styles_status_list=self.styles_status_list,
                 debug_dir=self.debug_dir,
                 working_file=self.working_file,
@@ -162,7 +159,6 @@ class DocParse:
         rtox.line_parser.LineParser.line_parse(
             self=rtox.line_parser.LineParser(
                 kw_list=kw_list,
-                cs_status_dict=self.cs_status_dict,
                 styles_status_list=self.styles_status_list,
                 debug_dir=self.debug_dir,
                 working_file=self.working_file,

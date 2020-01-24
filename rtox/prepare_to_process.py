@@ -47,11 +47,16 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
 __name__ = "prepare_to_process"
 
-import rtox.input_file_prep
+# From standard libraries
+import json
 import os
+
+# From local application
+import rtox.databases.database_clean
+import rtox.input_file_prep
 import rtox.prelim_routine
 import rtox.rtf_codes_file_prep
-import rtox.databases.database_clean
+from rtox.dictionaries.tag_registry import tag_registry_dict
 
 
 class PrepareToProcess:
@@ -144,7 +149,13 @@ class PrepareToProcess:
 
         return tag_dict, xml_tag_num
 
+    def create_working_tag_registry(self):
+        with open(os.path.join(self.debug_dir, "tag_registry.txt"), "w+") as \
+                tag_registry_working_file:
+            json.dump(tag_registry_dict, tag_registry_working_file)
 
+
+# TODO Collapse this class into prep_rtf_file.
 class StartProcess:
     def __init__(self,
                  base_script_dir: str,

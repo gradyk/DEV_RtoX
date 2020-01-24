@@ -35,26 +35,77 @@ the preceding section.
 """
 
 # From standard library
-import linecache
+import json
 import os
-import re
+
+# From local application
+import rtox.lib.open_tag_check
 
 
-def sectd(working_file: str,
-          line_to_read: str,
-          styles_status_list: list,
-          debug_dir: str,
+def sectd(debug_dir: str,
+          xml_tag_num: str
           ) -> None:
 
-    search_area = linecache.getline(working_file, line_to_read)
+    # Determine tag style based on user's preference.
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
 
-    match = re.search(r"\\s[0-9]+", search_area)
-    if match is not None:
-        set_style = match[0].replace("\\s", "")
-        with open(os.path.join(debug_dir, "working_xml_file.xml"),
-                  "a") as wxf_pre:
-            wxf_pre.write(styles_status_list[set_style])
+    status_list = [
+        "small_caps",
+        "strikethrough",
+        "underline",
+        "bold",
+        "italic",
+        "paragraph",
+        "section"
+    ]
+
+    # Check the tag registry to see whether an emphasis tag needs closing
+    # and, if so, close it.
+    for item in status_list:
+        rtox.lib.open_tag_check.TagCheck.tag_check(
+            self=rtox.lib.open_tag_check.TagCheck(
+                debug_dir=debug_dir,
+                xml_tag_num=xml_tag_num),
+            tag_dict=tag_dict,
+            tag_type=item)
+
+    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
+            tag_registry_sectd_pre:
+        tag_registry_sectd = json.load(tag_registry_sectd_pre)
+    # If a section is closed, open a section then open a paragraph.
+    # 0 = status is closed, 1 = status is open
+    if tag_registry_sectd["section"] == "0":
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+                wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + "\n" + tag_dict["section-beg"] + \
+                "\n\t" + tag_dict["paragraph-beg"]
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as \
+                wxf_pre:
+            wxf_pre.write(wxf)
+        pass
     else:
+        # If a section is open, close it, then open a new section, then open
+        # a paragraph.
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+                wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + tag_dict["section-end"] + "\n" + tag_dict[
+                "section-beg"] + "\n\t" + tag_dict["paragraph-beg"]
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as \
+                wxf_pre:
+            wxf_pre.write(wxf)
         pass
 
-    linecache.clearcache()
+    # Update tag registry.
+    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
+            tag_registry_sectd_pre:
+        tag_registry_sectd = json.load(tag_registry_sectd_pre)
+        tag_registry_sectd_update = {"section": "1", "paragraph": "1"}
+        tag_registry_sectd.update(tag_registry_sectd_update)
+    with open(os.path.join(debug_dir, "tag_registry.txt"), "w") as \
+            tag_registry_sectd_final:
+        json.dump(tag_registry_sectd, tag_registry_sectd_final)

@@ -78,12 +78,6 @@ if __name__ == "__main__":
     input_file_name_pass = file_structure_vars[3]
     output_file_name_pass = file_structure_vars[4]
 
-    cs_status_dict = {"italic": "0",
-                      "bold": "0",
-                      "underline": "0",
-                      "strikethrough": "0",
-                      "small_caps": "0"}
-
     styles_status_list = []
 
     # 2. Get and store configuration information.
@@ -120,6 +114,13 @@ if __name__ == "__main__":
             output_file_name=output_file_name),
         xml_tag_num=xml_tag_num_pass)
 
+    # Prepare a working copy of the tag registry.
+    rtox.prepare_to_process.PrepareToProcess.create_working_tag_registry(
+        self=rtox.prepare_to_process.PrepareToProcess(
+            base_script_dir=base_script_dir_pass, config_file=config_file_pass,
+            debug_dir=debug_dir_pass, input_file_name=input_file_name_pass,
+            output_file_name=output_file_name_pass))
+
     # 6. Process the header.
     rtox.header_parser.DocHeaderParser.process_header(
         self=rtox.header_parser.DocHeaderParser(
@@ -142,7 +143,6 @@ if __name__ == "__main__":
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
             xml_tag_num=xml_tag_num_pass,
-            cs_status_dict=cs_status_dict,
             styles_status_list=styles_status_list))
 
     # 9. Close open tags where possible and produce list of remaining open tags.
@@ -156,6 +156,9 @@ if __name__ == "__main__":
                                    xml_tag_num=xml_tag_num_pass,
                                    output_file=output_file_name)
 
-    # 11. Do a format check and close open tags where possible.
-    rtox.final_step.FinalStep.final_step(
-        self=rtox.final_step.FinalStep(debug_dir=debug_dir_pass))
+    # 11. Do file clean up, post processing, and put the renamed file in the
+    # output directory.
+    rtox.final_step.final_step(debug_dir=debug_dir_pass,
+                               xml_tag_num=xml_tag_num_pass,
+                               output_file_name=output_file_name,
+                               base_script_dir=base_script_dir_pass)

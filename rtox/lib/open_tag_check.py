@@ -30,43 +30,42 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+Check for an open tag of the type specified and, if open, close and update
+the tag registry.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-18"
-__name__ = "xml_transition_tags"
+__date__ = "2020-01-22"
+__name__ = "ope_tag_check"
 
-# From standard libraries
+# Standard library imports
 import importlib
+import json
 import os
 
-# From application library
-from rtox.dictionaries.tag_registry import tag_registry_dict as trd
 
+class TagCheck:
 
-class XMLTransition:
-    # TODO No need for a class here, condense into xml_transition_tags.
     def __init__(self,
                  debug_dir: str,
                  xml_tag_num: str) -> None:
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
 
-    def xml_transition_tags(self):
+    def tag_style(self):
         """
-
+        Import xml tag dictionary based on user xml tag style preference.
         """
+        # Possible xml tag dictionaries.
         options = {
             "1": "xml_tag_dict",
             "2": "tei_tag_dict",
             "3": "tpres_tag_dict",
         }
 
-        # Import xml tag dictionary based on user xml tag style preference.
         if options[self.xml_tag_num]:
             value = options[self.xml_tag_num]
             xtags = importlib.import_module("rtox.dictionaries.xml_tags")
@@ -75,12 +74,30 @@ class XMLTransition:
         else:
             from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "w") as working_xml_file:
-            xml_transition_tags = tag_dict["start-tags"]
-            working_xml_file.write(xml_transition_tags)
+        return tag_dict
 
-        trd["bodytext"] = 1
-        trd["section"] = 1
-        trd["paragraph"] = 1
-        trd["body"] = 1
+    def tag_check(self, tag_type: str, tag_dict: dict):
+        with open(os.path.join(self.debug_dir, "tag_registry.txt")) as \
+                trd_j_pre:
+            trd_tag_check = json.load(trd_j_pre)
+            # 0 = status is closed, 1 = status is open
+            if trd_tag_check[tag_type] == "0":
+                pass
+            else:
+                # Update the working tag file.
+                with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                          "r") as wxf_pre:
+                    wxf = wxf_pre.read()
+                    wxf = wxf + tag_dict[tag_type+"-end"]
+                with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                          "w") as wxf_pre:
+                    wxf_pre.write(wxf)
+                # Update the tag registry.
+                with open(os.path.join(self.debug_dir, "tag_registry.txt")) \
+                        as trd_j_pre2:
+                    trd_jp2 = json.load(trd_j_pre2)
+                    trd_jp2_update = {tag_type: "0"}
+                    trd_jp2.update(trd_jp2_update)
+                with open(os.path.join(self.debug_dir, "tag_registry.txt"),
+                          "w") as trd_j_final:
+                    json.dump(trd_jp2, trd_j_final)

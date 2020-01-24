@@ -58,6 +58,13 @@ def convert_ms1252(debug_dir):
             else:
                 pass
 
+        cleanup_dict = {
+            "&":    "&amp;",
+        }
+
+        for key in cleanup_dict:
+            wf_use = wf_use.replace(key, cleanup_dict[key])
+
         with open(os.path.join(debug_dir, "working_input_file.txt"), "w+")\
                 as wf_final:
             wf_final.write(wf_use)

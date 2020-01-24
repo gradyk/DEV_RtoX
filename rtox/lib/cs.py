@@ -44,19 +44,18 @@ __date__ = "2020-01-10"
 __name__ = "cs"
 
 # Standard library imports
-import importlib
 import os
 
 # Local application imports
-import rtox.lib.keyword_end_alt
 import rtox.lib.emphasis
+import rtox.lib.keyword_end_alt
+import rtox.lib.open_tag_check
 
 
 def cs_line_boundaries(working_file: str, line_to_read: str) -> str:
     """
     Find the end of the text line.
     """
-
     text_line = rtox.lib.keyword_end_alt.keyword_end_alt(
             working_file=working_file,
             keyword_open=line_to_read)
@@ -76,56 +75,91 @@ def cs_line_parse(text_line: str) -> tuple:
     small_caps = rtox.lib.emphasis.small_caps(area_search=text_line)
     text = rtox.lib.emphasis.text(area_search=text_line)
 
-    cs_line_dict = {"italic": italic, "bold": bold, "underline": underline,
-                    "strikethrough": strikethrough, "small_caps": small_caps
+    cs_line_dict = {"italic": italic,
+                    "bold": bold,
+                    "underline": underline,
+                    "strikethrough": strikethrough,
+                    "small_caps": small_caps
                     }
 
     return cs_line_dict, text
 
 
-def cs_tag_write(cs_line_dict: dict, text: str, cs_status_dict: dict,
+def cs_tag_write(cs_line_dict: dict, text: str,
                  xml_tag_num: str, debug_dir: str):
     """
-    Based on the settings in the "cs" (text) line, write to the working xml
-    file the tags needed to implement those settings. Then, write the text
-    to which those settings apply.
+    Determine what style tags to use. Check for relevant open tags and close
+    them. Based on the settings in the "cs" (text) line, write to the working
+    xml file the tags needed to implement those settings. Then, write the
+    text \to which those settings apply.
     """
 
-    # Possible xml tag dictionaries.
-    options = {
-        "1": "xml_tag_dict",
-        "2": "tei_tag_dict",
-        "3": "tpres_tag_dict",
-    }
+    # Determine tag style based on user's preference.
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
 
-    # Import xml tag dictionary based on user xml tag style preference.
-    if options[xml_tag_num]:
-        value = options[xml_tag_num]
-        xtags = importlib.import_module("rtox.dictionaries.xml_tags")
-        tag_dict_pre = {value: getattr(xtags, value)}
-        tag_dict = tag_dict_pre[value]
-    else:
-        from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+    # Relevant tags to check to see if they are open and if so close them.
+    status_list = [
+        "italic",
+        "bold",
+        "underline",
+        "strikethrough",
+        "small_caps"
+    ]
+
+    # Check the tag registry to see whether an emphasis tag needs closing.
+    for item in status_list:
+        rtox.lib.open_tag_check.TagCheck.tag_check(
+            self=rtox.lib.open_tag_check.TagCheck(
+                debug_dir=debug_dir,
+                xml_tag_num=xml_tag_num),
+            tag_dict=tag_dict,
+            tag_type=item)
 
     # Add xml tags to working xml file that reflect settings of current
     # text line. As appropriate, update text line status dictionary.
+    list_of_tags = []
+    tag_tracker = 0
     for key in cs_line_dict:
-        cs_status_dict_value = cs_status_dict[key]
-        if cs_line_dict[key] == cs_status_dict_value:
+        if cs_line_dict[key] == "0":  # Means no tags need to be opened.
             pass
-        elif cs_line_dict[key] >= "1" and cs_status_dict_value < "1":
-            with open(os.path.join(debug_dir, "working_xml_file.xml"),
-                      "a") as wxf_pre:
-                wxf_pre.write(tag_dict[key+"-beg"])
+        else:
+            tag_tracker = 1  # Means at least one tag should be opened.
+            list_of_tags.append(key)
 
-        elif cs_line_dict[key] < "1" and cs_status_dict_value >= "1":
-            with open(os.path.join(debug_dir, "working_xml_file.xml"),
-                      "a") as wxf_pre:
-                wxf_pre.write(tag_dict[key+"-end"])
+    if tag_tracker == 1:
+        tag = ""
+        # Open all necessary tags.
+        for item in list_of_tags:
+            tag = tag + tag_dict[item+"-beg"]
 
-        update_dict = {key: cs_line_dict[key]}
-        cs_status_dict.update(update_dict)
+        # To that list of tags, add the cs line text.
+        tag = tag + text
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(text)
+        # Reverse the list of tags to open.
+        list_of_tags.reverse()
+
+        # Add a closing tag for each item in the reversed list.
+        for item in list_of_tags:
+            tag = tag + tag_dict[item+"-end"]
+
+        # Add the tags plus text to the working xml file.
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+                wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + tag
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as \
+                wxf_pre:
+            wxf_pre.write(wxf)
+
+    else:
+        # If no tags needed to be added, just add the text to the file.
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+                wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + text
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as \
+                wxf_pre:
+            wxf_pre.write(wxf)

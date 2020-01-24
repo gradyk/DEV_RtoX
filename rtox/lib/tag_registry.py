@@ -30,36 +30,40 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+For an XML file to validate, it must have a closing tag properly matched to
+every opening tag. The tag registry tracks whether a tag is open and
+must be closed before adding a new open tag of the same type. The registry
+does not depend on the style of XML tags the user chose.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-18"
-__name__ = "xml_transition_tags"
+__date__ = "2020-01-19"
+__name__ = "tag_registry"
 
-# From standard libraries
+# Standard library imports
 import importlib
+import json
 import os
 
-# From application library
-from rtox.dictionaries.tag_registry import tag_registry_dict as trd
 
-
-class XMLTransition:
-    # TODO No need for a class here, condense into xml_transition_tags.
+class TagRegistry:
+    # TODO No need for a class here, condense into tag_check
     def __init__(self,
                  debug_dir: str,
+                 tag_to_check: str,
                  xml_tag_num: str) -> None:
         self.debug_dir = debug_dir
+        self.tag_to_check = tag_to_check
         self.xml_tag_num = xml_tag_num
 
-    def xml_transition_tags(self):
+    def tag_check(self):
         """
 
         """
+        # Possible xml tag dictionaries.
         options = {
             "1": "xml_tag_dict",
             "2": "tei_tag_dict",
@@ -67,6 +71,7 @@ class XMLTransition:
         }
 
         # Import xml tag dictionary based on user xml tag style preference.
+        # Default is a plain XML tag dictionary.
         if options[self.xml_tag_num]:
             value = options[self.xml_tag_num]
             xtags = importlib.import_module("rtox.dictionaries.xml_tags")
@@ -75,12 +80,39 @@ class XMLTransition:
         else:
             from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "w") as working_xml_file:
-            xml_transition_tags = tag_dict["start-tags"]
-            working_xml_file.write(xml_transition_tags)
+        # Check the tag passed to the function (tag_to_check) to see if it is
+        # open.
+        try:
+            with open(os.path.join(self.debug_dir, "tag_registry.json"), "r") \
+                    as trd_pre:
+                trd_general = json.load(trd_pre)
+            registry_value = trd_general[self.tag_to_check]
 
-        trd["bodytext"] = 1
-        trd["section"] = 1
-        trd["paragraph"] = 1
-        trd["body"] = 1
+            # If the tag is not open, move on.
+            if registry_value == 0:
+                pass
+            # If the tag is open, close it.
+            elif registry_value >= 0:
+                tag = self.tag_to_check + "-end"
+                tag_to_insert = tag_dict[tag]
+                with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
+                          "a") as file:
+                    file.write(tag_to_insert)
+                # Update the tag registry.
+                with open(os.path.join(self.debug_dir, "tag_registry.json"),
+                          "r") as trd_general_final:
+                    trd_general = json.load(trd_general_final)
+                    trd_general_update = {self.tag_to_check, 0}
+                    trd_general.update(trd_general_update)
+                with open(os.path.join(self.debug_dir, "tag_registry.json"),
+                          "w") as trd_general_final:
+                    json.dump(trd_general, trd_general_final)
+            else:
+                # TODO This means there is a tag error, what should happen?
+                pass
+
+        except TypeError:
+            # This means the tag_to_check is not in the tag_registry_dict.
+            # TODO This should be a logger result.
+            print("The tag registry dictionary does not contain the "
+                  f"{self.tag_to_check} tag.")

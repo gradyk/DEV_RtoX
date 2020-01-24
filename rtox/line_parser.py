@@ -57,21 +57,18 @@ class LineParser:
     def __init__(self,
                  kw_list: list,
                  working_file: str,
-                 cs_status_dict: dict,
                  xml_tag_num: str,
                  debug_dir: str,
                  styles_status_list: list
                  ) -> None:
         self.kw_list = kw_list
         self.working_file = working_file
-        self.cs_status_dict = cs_status_dict
         self.xml_tag_num = xml_tag_num
         self.debug_dir = debug_dir
         self.styles_status_list = styles_status_list
 
     def body_line_prep(self):
         body_line = DocLine(working_file=self.working_file,
-                            cs_status_dict=self.cs_status_dict,
                             xml_tag_num=self.xml_tag_num,
                             debug_dir=self.debug_dir,
                             styles_status_list=self.styles_status_list)
@@ -87,13 +84,13 @@ class LineParser:
     def line_parse(self, body_line, wo_body_line):
         options_dict_body_line = {
             "cs": body_line.cs_process,
-            "pard": body_line.pard_process,
-            "sectd": body_line.sectd_process,
         }
 
         options_dict_wo_body_line = {
             "par": wo_body_line.par_process,
+            "pard": wo_body_line.pard_process,
             "sect": wo_body_line.sect_process,
+            "sectd": wo_body_line.sectd_process,
             "heading_beg": wo_body_line.heading_start_process,
             "heading_end": wo_body_line.heading_end_process,
             "footnote_beg": wo_body_line.footnote_start_process,
@@ -112,14 +109,12 @@ class LineParser:
 class DocLine:
     def __init__(self,
                  working_file: str,
-                 cs_status_dict: dict,
                  styles_status_list: list,
                  xml_tag_num: str,
                  debug_dir: str) -> None:
         self.debug_dir = debug_dir
         self.working_file = working_file
         self.xml_tag_num = xml_tag_num
-        self.cs_status_dict = cs_status_dict
         self.styles_status_list = styles_status_list
 
     def cs_process(self, line_to_read):
@@ -132,22 +127,8 @@ class DocLine:
         text = line_parse_vars[1]
         rtox.lib.cs.cs_tag_write(cs_line_dict=cs_line_dict,
                                  text=text,
-                                 cs_status_dict=self.cs_status_dict,
                                  xml_tag_num=self.xml_tag_num,
                                  debug_dir=self.debug_dir)
-
-    def pard_process(self, line_to_read):
-        rtox.lib.pard.pard(working_file=self.working_file,
-                           line_to_read=line_to_read,
-                           styles_status_list=self.styles_status_list,
-                           xml_tag_num=self.xml_tag_num,
-                           debug_dir=self.debug_dir)
-
-    def sectd_process(self, line_to_read):
-        rtox.lib.sectd.sectd(working_file=self.working_file,
-                             line_to_read=line_to_read,
-                             styles_status_list=self.styles_status_list,
-                             debug_dir=self.debug_dir)
 
 
 class WODocLine:
@@ -158,12 +139,21 @@ class WODocLine:
         self.xml_tag_num = xml_tag_num
 
     def par_process(self):
-        rtox.lib.par.Par.tag_insert(self=rtox.lib.par.Par(
-            debug_dir=self.debug_dir))
+        rtox.lib.par.tag_insert(
+            debug_dir=self.debug_dir,
+            xml_tag_num=self.xml_tag_num)
+
+    def pard_process(self):
+        rtox.lib.pard.tag_insert(xml_tag_num=self.xml_tag_num,
+                                 debug_dir=self.debug_dir)
 
     def sect_process(self):
-        rtox.lib.sect.tag_insert(self=WODocLine(debug_dir=self.debug_dir,
-                                                xml_tag_num=self.xml_tag_num))
+        rtox.lib.sect.tag_insert(debug_dir=self.debug_dir,
+                                 xml_tag_num=self.xml_tag_num)
+
+    def sectd_process(self):
+        rtox.lib.sectd.sectd(debug_dir=self.debug_dir,
+                             xml_tag_num=self.xml_tag_num)
 
     def heading_start_process(self):
         rtox.lib.heading_start.HeadingBlock.heading_start(

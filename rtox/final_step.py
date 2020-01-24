@@ -40,28 +40,68 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-09"
 __name__ = "final_step"
 
+# From standard libraries
 import lxml.etree as etree
 import os
+from shutil import copy
+
+# From local application
+import rtox.lib.open_tag_check
 
 
-class FinalStep:
+def final_step(debug_dir: str,
+               xml_tag_num: str,
+               output_file_name: str,
+               base_script_dir: str) -> None:
 
-    def __init__(self,
-                 debug_dir: str) -> None:
-        self.debug_dir = debug_dir
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(debug_dir=debug_dir,
+                                              xml_tag_num=xml_tag_num))
 
-    def final_step(self):
-        """
+    # Insert closing tags based on user's style preferences.
 
-        """
-        # Check for proper closing tag in file. If it isn't present, insert
-        # if (based on user's tag style preference). Then format.
+    tag_pairs = [
+        tag_dict["paragraph-beg"]+tag_dict["paragraph-end"],
+        tag_dict["italic-beg"]+tag_dict["italic-end"],
+        tag_dict["bold-beg"]+tag_dict["bold-end"],
+        tag_dict["heading-beg"]+tag_dict["heading-end"],
+        tag_dict["footnote-beg"]+tag_dict["footnote-end"]
 
-        with open(os.path.join(self.debug_dir, "new_xml_file.xml"), "a") as \
-                test_file:
-            test_file.write("</ts:pBody>\n</ts:matterBody>\n</ts:matterText"
-                            ">\n</ts:TPRES>")
+    ]
 
-        new_xml_file = open(os.path.join(self.debug_dir, "new_xml_file.xml"),
-                            "r")
-        etree.parse(new_xml_file)
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as \
+            test_file_pre:
+        test_file = test_file_pre.read()
+        test_file = test_file + \
+            tag_dict["paragraph-end"] + "\n\t\t" + \
+            tag_dict["section-end"] + "\n\t" + \
+            tag_dict["body-end"] + "\n\t" + \
+            tag_dict["bodytext-end"] + "\n" + \
+            tag_dict["wrapper-end"]
+
+        # Run through the file twice looking for empty tag pairs (deleting
+        # empty pairs on the first run through may create new empty pairs).
+        i = 1
+        while i < 3:
+            for item in tag_pairs:
+                test_file = test_file.replace(item, "")
+            i += 1
+
+    # Save the cleaned up file.
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as \
+            final_step_file:
+        final_step_file.write(test_file)
+
+    # Post-process the file.
+    # rtox.post_process._______________
+
+    # Attempt to "prettify" if (indent and line breaks).
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as fp:
+        etree.parse(fp)
+
+    # Put the final xml file in the output directory and rename if per
+    # the user's preference.
+    output_dir = base_script_dir + "/output"
+    copy(os.path.join(debug_dir, "new_xml_file.xml"), output_dir)
+    os.rename(output_dir + "/new_xml_file.xml",
+              output_dir + f'/{output_file_name}')

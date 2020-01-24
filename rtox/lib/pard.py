@@ -30,167 +30,82 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Pard signifies that the paragraph just beginning uses the same formatting as
-the preceding paragraph.
+Par marks the end of a paragraph. It does not include any other coding. The
+necessary steps are: 1) determine user's tag style preference, 2) check for and
+close relevant open tags, 3) close the paragraph tag, 4) insert an open
+paragraph tag, 5) write the tags to the working xml file.
 """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-01-11"
-__name__ = "pard"
-
-
-# From standard library
-import importlib
-import linecache
+# Standard library imports
+import json
 import os
-import re
+
+# From local application
+import rtox.lib.open_tag_check
+import rtox.lib.tag_registry
 
 
-def pard(working_file: str,
-         line_to_read: str,
-         styles_status_list: list,
-         xml_tag_num: str,
-         debug_dir: str
-         ) -> None:
+def tag_insert(debug_dir, xml_tag_num):
 
-    # Search the pard line for the paragraph style code (\\sX).
-    search_area = linecache.getline(working_file, line_to_read)
-    match = re.search(r"\\s[0-9]+", search_area)
-    if match is None:
-        set_style = "s56"
+    # Determine tag style based on user's preference.
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
+
+    status_list = [
+        "small_caps",
+        "strikethrough",
+        "underline",
+        "bold",
+        "italic"
+    ]
+
+    # Check the tag registry to see whether an emphasis tag needs closing
+    # and, if so, close it.
+    for item in status_list:
+        rtox.lib.open_tag_check.TagCheck.tag_check(
+            self=rtox.lib.open_tag_check.TagCheck(
+                debug_dir=debug_dir,
+                xml_tag_num=xml_tag_num),
+            tag_dict=tag_dict,
+            tag_type=item)
+
+    # Check the status of the paragraph tag. It if is closed then
+    # open it.
+    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
+            tag_registry_pard_pre:
+        tag_registry_pard_tag_check = json.load(tag_registry_pard_pre)
+    # 0 = status is closed, 1 = status is open
+    if tag_registry_pard_tag_check["paragraph"] == "0":
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+                wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + tag_dict["paragraph-beg"]
+        with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as \
+                wxf_pre:
+            wxf_pre.write(wxf)
+        pass
     else:
-        set_style = match[0].replace("\\", "")
-
-    # Search the styles_status_list for that paragraph style code. If no such
-    # code exists, use the default paragraph style. Return a dictionary (
-    # di_b) with the settings for the paragraph style code.
-    di = {}
-    b = {}
-
-    code_set = [i for i in styles_status_list if set_style in i]
-    for a, b in code_set:
-        di.setdefault(a, b)
-    di_b = dict(b)
-
-    # Parse the settings.
-    # TODO any need for code, additive, style_name, style_next_paragraph?
-    italic = PardParse.italic(self=PardParse(di_b=di_b))
-    bold = PardParse.bold(self=PardParse(di_b=di_b))
-    underline = PardParse.underline(self=PardParse(di_b=di_b))
-    strikethrough = PardParse.strikethrough(self=PardParse(di_b=di_b))
-    small_caps = PardParse.small_caps(self=PardParse(di_b=di_b))
-
-    # Possible xml tag dictionaries.
-    # TODO consolidate all the xml tag dictionary decisions in one file so it
-    #  is easier to add nex dictionaries.
-    options = {
-        "1": "xml_tag_dict",
-        "2": "tei_tag_dict",
-        "3": "tpres_tag_dict",
-    }
-
-    # Import xml tag dictionary based on user xml tag style preference.
-    if options[xml_tag_num]:
-        value = options[xml_tag_num]
-        xtags = importlib.import_module("rtox.dictionaries.xml_tags")
-        tag_dict_pre = {value: getattr(xtags, value)}
-        tag_dict = tag_dict_pre[value]
-    else:
-        from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
-
-    tag = ""
-    # Use the results to create xml tags.
-    if italic > "0":
-        tag = tag_dict["italic-beg"]
-    else:
+        # If it is open, close it and open a new paragraph (par marks the
+        # end of a paragraph and, presumptively, the beginning of a new
+        # paragraph).
+        with open(os.path.join(debug_dir, "working_xml_file.xml"),
+                  "r") as wxf_pre:
+            wxf = wxf_pre.read()
+            wxf = wxf + tag_dict["paragraph-end"] + "\n" + tag_dict[
+                "paragraph-beg"]
+        with open(os.path.join(debug_dir, "working_xml_file.xml"),
+                  "w") as wxf_pre:
+            wxf_pre.write(wxf)
         pass
 
-    if bold > "0":
-        tag = tag + tag_dict["bold-beg"]
-    else:
-        pass
-
-    if underline > "0":
-        tag = tag + tag_dict["underline-beg"]
-    else:
-        pass
-
-    if strikethrough > "0":
-        tag = tag + tag_dict["strikethrough-beg"]
-    else:
-        pass
-
-    if small_caps > "0":
-        tag = tag + tag_dict["smallcaps-beg"]
-    else:
-        pass
-
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(tag)
-
-        
-class PardParse:
-    def __init__(self,
-                 di_b: dict) -> None:
-        self.di_b = di_b
-
-    def italic(self):
-        """
-
-        """
-        try:
-            italic_value = str(self.di_b["italic"])
-            return italic_value
-        except TypeError:
-            italic_value = "0"
-            return italic_value
-
-    def bold(self):
-        """
-
-        """
-        try:
-            bold_value = str(self.di_b["bold"])
-            return bold_value
-        except TypeError:
-            bold_value = "0"
-            return bold_value
-        
-    def underline(self):
-        """
-
-        """
-        try:
-            underline_value = str(self.di_b["underline"])
-            return underline_value
-        except TypeError:
-            underline_value = "0"
-            return underline_value
-        
-    def strikethrough(self):
-        """
-
-        """
-        try:
-            strikethrough_value = str(self.di_b["strikethrough"])
-            return strikethrough_value
-        except TypeError:
-            strikethrough_value = "0"
-            return strikethrough_value
-        
-    def small_caps(self):
-        """
-
-        """
-        try:
-            small_caps_value = str(self.di_b["small_caps"])
-            return small_caps_value
-        except TypeError:
-            small_caps_value = "0"
-            return small_caps_value
-
-    linecache.clearcache()
+    # Update the tag registry.
+    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
+            tag_registry_pard_pre:
+        tag_registry_pard = json.load(tag_registry_pard_pre)
+        tag_registry_pard_update = {"paragraph": "1"}
+        tag_registry_pard.update(tag_registry_pard_update)
+    with open(os.path.join(debug_dir, "tag_registry.txt"), "w") as \
+            tag_registry_pard_final:
+        json.dump(tag_registry_pard, tag_registry_pard_final)
