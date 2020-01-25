@@ -47,6 +47,7 @@ from shutil import copy
 
 # From local application
 import rtox.lib.open_tag_check
+import rtox.post_process
 
 
 def final_step(debug_dir: str,
@@ -58,17 +59,19 @@ def final_step(debug_dir: str,
         self=rtox.lib.open_tag_check.TagCheck(debug_dir=debug_dir,
                                               xml_tag_num=xml_tag_num))
 
-    # Insert closing tags based on user's style preferences.
-
+    # Remove empty tag pairs, double spaces, ________
     tag_pairs = [
         tag_dict["paragraph-beg"]+tag_dict["paragraph-end"],
         tag_dict["italic-beg"]+tag_dict["italic-end"],
         tag_dict["bold-beg"]+tag_dict["bold-end"],
         tag_dict["heading-beg"]+tag_dict["heading-end"],
-        tag_dict["footnote-beg"]+tag_dict["footnote-end"]
+        tag_dict["footnote-beg"]+tag_dict["footnote-end"],
+        tag_dict["section-beg"]+"\n\t"+tag_dict["section-end"],
+        "  ",
 
     ]
 
+    # Insert closing tags based on user's style preferences.
     with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as \
             test_file_pre:
         test_file = test_file_pre.read()
@@ -93,7 +96,7 @@ def final_step(debug_dir: str,
         final_step_file.write(test_file)
 
     # Post-process the file.
-    # rtox.post_process._______________
+    rtox.post_process.line_cleanup(debug_dir=debug_dir)
 
     # Attempt to "prettify" if (indent and line breaks).
     with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as fp:

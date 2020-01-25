@@ -59,7 +59,9 @@ def convert_ms1252(debug_dir):
                 pass
 
         cleanup_dict = {
-            "&":    "&amp;",
+            "&":        "&amp;",
+            "HT\\tab":  "\t",
+            "\\tab":    "\t",
         }
 
         for key in cleanup_dict:

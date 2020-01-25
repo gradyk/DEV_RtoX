@@ -42,10 +42,13 @@ __date__ = "2019-12-22"
 __name__ = "footnote_start"
 
 # Standard library imports
-import importlib
 import os
 
+# From local appliation
+import rtox.lib.open_tag_check
 
+
+# TODO Combine with footnote_start
 class FootnoteBlock:
 
     def __init__(self,
@@ -63,21 +66,10 @@ class FootnoteBlock:
         end tag until that entry is reached in kw_list).
         """
 
-        # Possible xml tag dictionaries.
-        options = {
-            "1": "xml_tag_dict",
-            "2": "tei_tag_dict",
-            "3": "tpres_tag_dict",
-        }
-
-        # Import xml tag dictionary based on user xml tag style preference.
-        if options[self.xml_tag_num]:
-            value = options[self.xml_tag_num]
-            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
-            tag_dict_pre = {value: getattr(xtags, value)}
-            tag_dict = tag_dict_pre[value]
-        else:
-            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+        tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+            self=rtox.lib.open_tag_check.TagCheck(
+                debug_dir=self.debug_dir,
+                xml_tag_num=self.xml_tag_num))
 
         with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
                   "a") as wxf_pre:

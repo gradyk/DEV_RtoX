@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2019. Kenneth A. Grady
 #
@@ -30,6 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
+# TODO Collapse into working_file_length
 class FileStats:
     """
     Determine the number of lines in the working file.

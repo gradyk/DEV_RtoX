@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -30,38 +30,37 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Process page header blocks in the RTF doc body.
+
 """
+
+# From standard libraries
+import linecache
+import os
+
+import rtox.lib.file_length
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-18"
-__name__ = "heading_end"
-
-# From standard libraries
-import os
-
-# From local application
-import rtox.lib.open_tag_check
+__date__ = "2020-01-24"
+__name__ = "post_process"
 
 
-# TODO Combine with heading_end
-class HeadingBlock:
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: str) -> None:
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+def line_cleanup(debug_dir: str, ):
+    working_file = os.path.join(debug_dir, "new_xml_file.xml")
 
-    def heading_end(self):
-        tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
-            self=rtox.lib.open_tag_check.TagCheck(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num
-            ))
+    file_length = rtox.lib.file_length.FileStats.working_file_length(
+        self=rtox.lib.file_length.FileStats(
+            working_file=working_file))
 
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "a") as wxf_pre:
-            wxf_pre.write(tag_dict["heading-end"])
+    new_file = ""
+    i = 0
+    while i <= file_length:
+        line = linecache.getline(working_file, i)
+        line = line.lstrip("\n")
+        new_file = new_file + line
+        i += 1
+
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as nf:
+        nf.write(new_file)
