@@ -31,8 +31,8 @@
 
 """
 Iterates through each line of the RTF file (starting at the \\info line or
-line 0). Records in a list every line starting with one of a specified list
-of keywords (keyword, line number). Returns the list.
+line 0). Records in a list (kw_list) every line starting with one of a
+specified list of keywords (keyword, line number). Returns the list.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -53,115 +53,105 @@ import rtox.lib.xml_transition_tags
 import rtox.line_parser
 
 
-# TODO Combine the class with doc_body.
-class DocParse:
+def doc_body(working_file: str,
+             debug_dir: str,
+             xml_tag_num: str,
+             styles_status_list: list
+             ) -> list:
 
-    def __init__(self,
-                 working_file: str,
-                 debug_dir: str,
-                 xml_tag_num: str,
-                 styles_status_list: list
-                 ) -> None:
-        self.working_file = working_file
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
-        self.styles_status_list = styles_status_list
+    # Determine whether to start at the info line or line 0.
+    from debugdir.header_tables_dict import header_tables_dictionary as htd
 
-    def doc_body(self):
+    if "info" in htd.keys():
+        line_to_read = htd["info"]
+    else:
+        line_to_read = 0
 
-        # Determine whether to start at the info line or line 0.
-        from debugdir.header_tables_dict import header_tables_dictionary as htd
+    # Check the number of lines in the working file.
+    file_length = rtox.lib.file_length.working_file_length(
+        working_file=working_file)
 
-        if "info" in htd.keys():
-            line_to_read = htd["info"]
+    kw_list = []
+
+    while line_to_read <= file_length:
+
+        area_search = linecache.getline(working_file, line_to_read)
+        cs = re.match(r"{\\cs", area_search, re.M)
+        par = re.match(r"\\par\n", area_search, re.M)
+        pard = re.match(r"\\pard", area_search, re.M)
+        sect = re.match(r"\\sect\n", area_search, re.M)
+        sectd = re.match(r"\\sectd", area_search, re.M)
+        heading_start = re.match(r"{\\header", area_search, re.M)
+
+        if heading_start:
+            heading_end = rtox.lib.keyword_end.keyword_end(
+                working_file=working_file,
+                line_number=line_to_read)
         else:
-            line_to_read = 0
+            heading_end = None
 
-        # Check the number of lines in the working file.
-        file_length = rtox.lib.file_length.FileStats.working_file_length(
-            self=rtox.lib.file_length.FileStats(
-                working_file=self.working_file))
+        footnote_start = re.match(r"{\\footnote", area_search, re.M)
 
-        kw_list = []
+        if footnote_start:
+            footnote_end = rtox.lib.keyword_end.keyword_end(
+                working_file=working_file,
+                line_number=line_to_read)
+        else:
+            footnote_end = None
 
-        while line_to_read <= file_length:
+        # TODO Consider whether key and value should be switched.
+        keywords = [(cs, "cs"),
+                    (par, "par"),
+                    (pard, "pard"),
+                    (sect, "sect"),
+                    (sectd, "sectd"),
+                    (heading_start, "heading_beg"),
+                    (heading_end, "heading_end"),
+                    (footnote_start, "footnote_beg"),
+                    (footnote_end, "footnote_end")
+                    ]
 
-            area_search = linecache.getline(self.working_file, line_to_read)
-            cs = re.match(r"{\\cs", area_search, re.M)
-            par = re.match(r"\\par\n", area_search, re.M)
-            pard = re.match(r"\\pard", area_search, re.M)
-            sect = re.match(r"\\sect\n", area_search, re.M)
-            sectd = re.match(r"\\sectd", area_search, re.M)
-            heading_start = re.match(r"{\\header", area_search, re.M)
-
-            if heading_start:
-                heading_end = rtox.lib.keyword_end.keyword_end(
-                    working_file=self.working_file,
-                    line_number=line_to_read)
+        for kw, value in keywords:
+            if kw:
+                new = (value, line_to_read)
+                kw_list.append(new)
             else:
-                heading_end = None
+                pass
 
-            footnote_start = re.match(r"{\\footnote", area_search, re.M)
+        line_to_read += 1
 
-            if footnote_start:
-                footnote_end = rtox.lib.keyword_end.keyword_end(
-                    working_file=self.working_file,
-                    line_number=line_to_read)
-            else:
-                footnote_end = None
+    linecache.clearcache()
 
-            # TODO Consider whether key and value should be switched.
-            keywords = [(cs, "cs"),
-                        (par, "par"),
-                        (pard, "pard"),
-                        (sect, "sect"),
-                        (sectd, "sectd"),
-                        (heading_start, "heading_beg"),
-                        (heading_end, "heading_end"),
-                        (footnote_start, "footnote_beg"),
-                        (footnote_end, "footnote_end")
-                        ]
+    # Insert transition tags in the working_xml_file based on the user's
+    # tag style preference.
+    rtox.lib.xml_transition_tags.xml_transition_tags(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num)
 
-            for kw, value in keywords:
-                if kw:
-                    new = (value, line_to_read)
-                    kw_list.append(new)
-                else:
-                    pass
+    body_line = rtox.line_parser.LineParser.body_line_prep(
+        self=rtox.line_parser.LineParser(
+            kw_list=kw_list,
+            styles_status_list=styles_status_list,
+            debug_dir=debug_dir,
+            working_file=working_file,
+            xml_tag_num=xml_tag_num))
 
-            line_to_read += 1
+    wo_body_line = rtox.line_parser.LineParser.wo_body_line_prep(
+        self=rtox.line_parser.LineParser(
+            kw_list=kw_list,
+            styles_status_list=styles_status_list,
+            debug_dir=debug_dir,
+            working_file=working_file,
+            xml_tag_num=xml_tag_num))
 
-        linecache.clearcache()
+    rtox.line_parser.LineParser.line_parse(
+        self=rtox.line_parser.LineParser(
+            kw_list=kw_list,
+            styles_status_list=styles_status_list,
+            debug_dir=debug_dir,
+            working_file=working_file,
+            xml_tag_num=xml_tag_num),
+        body_line=body_line,
+        wo_body_line=wo_body_line)
 
-        # Insert transition tags in the working_xml_file based on the user's
-        # tag style preference.
-        rtox.lib.xml_transition_tags.XMLTransition.xml_transition_tags(
-            self=rtox.lib.xml_transition_tags.XMLTransition(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
-
-        body_line = rtox.line_parser.LineParser.body_line_prep(
-            self=rtox.line_parser.LineParser(
-                kw_list=kw_list,
-                styles_status_list=self.styles_status_list,
-                debug_dir=self.debug_dir,
-                working_file=self.working_file,
-                xml_tag_num=self.xml_tag_num))
-
-        wo_body_line = rtox.line_parser.LineParser.wo_body_line_prep(
-            self=rtox.line_parser.LineParser(
-                kw_list=kw_list,
-                styles_status_list=self.styles_status_list,
-                debug_dir=self.debug_dir,
-                working_file=self.working_file,
-                xml_tag_num=self.xml_tag_num))
-
-        rtox.line_parser.LineParser.line_parse(
-            self=rtox.line_parser.LineParser(
-                kw_list=kw_list,
-                styles_status_list=self.styles_status_list,
-                debug_dir=self.debug_dir,
-                working_file=self.working_file,
-                xml_tag_num=self.xml_tag_num),
-            body_line=body_line,
-            wo_body_line=wo_body_line)
+    return kw_list

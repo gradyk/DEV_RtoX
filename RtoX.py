@@ -106,8 +106,8 @@ if __name__ == "__main__":
     xml_tag_num_pass = xml_vars[1]
 
     # 5. Prepare a copy of the input file and the file for XML tags.
-    working_file_pass = rtox.prepare_to_process.StartProcess.prep_rtf_file(
-        self=rtox.prepare_to_process.StartProcess(
+    working_file_pass = rtox.prepare_to_process.PrepareToProcess.prep_rtf_file(
+        self=rtox.prepare_to_process.PrepareToProcess(
             base_script_dir=base_script_dir_pass,
             debug_dir=debug_dir_pass,
             input_file_name=input_file_name,
@@ -138,12 +138,11 @@ if __name__ == "__main__":
             xml_tag_num=xml_tag_num_pass))
 
     # 8. Process the main portion of the document body.
-    kw_list = rtox.doc_parser.DocParse.doc_body(
-        self=rtox.doc_parser.DocParse(
+    kw_list = rtox.doc_parser.doc_body(
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
             xml_tag_num=xml_tag_num_pass,
-            styles_status_list=styles_status_list))
+            styles_status_list=styles_status_list)
 
     # 9. Close open tags where possible and produce list of remaining open tags.
     rtox.tag_closer.TagCloser.tag_closer(
@@ -153,8 +152,7 @@ if __name__ == "__main__":
     # 10. Add xml header.
     rtox.add_xml_header.add_header(debug_dir=debug_dir_pass,
                                    base_script_dir=base_script_dir_pass,
-                                   xml_tag_num=xml_tag_num_pass,
-                                   output_file=output_file_name)
+                                   xml_tag_num=xml_tag_num_pass)
 
     # 11. Do file clean up, post processing, and put the renamed file in the
     # output directory.

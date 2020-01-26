@@ -50,15 +50,18 @@ __name__ = "Setup_db"
 # See https://kb.objectrocket.com/postgresql/
 # python-error-handling-with-the-psycopg2-postgresql-adapter-645
 
+# From standard libraries
 import os
 import psycopg2
 import psycopg2.errorcodes
-import rtox.databases.database_config
-import rtox.databases.schema_structure
-import rtox.databases.table_structure
 import sys
 from psycopg2 import sql
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+
+# From local application
+import rtox.databases.database_config
+import rtox.databases.schema_structure
+import rtox.databases.table_structure
 
 
 class SetupDatabase:

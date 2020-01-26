@@ -156,25 +156,21 @@ class WODocLine:
                              xml_tag_num=self.xml_tag_num)
 
     def heading_start_process(self):
-        rtox.lib.heading_start.HeadingBlock.heading_start(
-            self=rtox.lib.heading_start.HeadingBlock(
+        rtox.lib.heading_start.heading_start(
                 debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
+                xml_tag_num=self.xml_tag_num)
 
     def heading_end_process(self):
-        rtox.lib.heading_end.HeadingBlock.heading_end(
-            self=rtox.lib.heading_end.HeadingBlock(
+        rtox.lib.heading_end.heading_end(
                 debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
+                xml_tag_num=self.xml_tag_num)
 
     def footnote_start_process(self):
-        rtox.lib.footnote_start.FootnoteBlock.footnote_start(
-            self=rtox.lib.footnote_start.FootnoteBlock(
+        rtox.lib.footnote_start.footnote_start(
                 debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
+                xml_tag_num=self.xml_tag_num)
 
     def footnote_end_process(self):
-        rtox.lib.footnote_end.FootnoteBlock.footnote_end(
-            self=rtox.lib.footnote_end.FootnoteBlock(
+        rtox.lib.footnote_end.footnote_end(
                 debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
+                xml_tag_num=self.xml_tag_num)

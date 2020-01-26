@@ -47,21 +47,14 @@ import os
 import rtox.lib.open_tag_check
 
 
-# TODO Combine with heading_end
-class HeadingBlock:
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: str) -> None:
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+def heading_end(debug_dir: str,
+                xml_tag_num: str):
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num
+        ))
 
-    def heading_end(self):
-        tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
-            self=rtox.lib.open_tag_check.TagCheck(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num
-            ))
-
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "a") as wxf_pre:
-            wxf_pre.write(tag_dict["heading-end"])
+    with open(os.path.join(debug_dir, "working_xml_file.xml"),
+              "a") as wxf_pre:
+        wxf_pre.write(tag_dict["heading-end"])

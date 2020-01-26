@@ -69,6 +69,7 @@ xml_tag_dict = {
         "rend-end":         "</>",
         "smallcaps-beg":    "<>",
         "smallcaps-end":    "</>",
+        "xmlheader":        "plainheader.xml",
 }
 
 tei_tag_dict = {
@@ -81,6 +82,7 @@ tei_tag_dict = {
         'underscore':       '<hi rend="underscore">',
         "list":             "<list>",
         "rendition":        "<rendition>",
+        "xmlheader":        "teiheader.xml"
 }
 
 tpres_tag_dict = {
@@ -121,5 +123,6 @@ tpres_tag_dict = {
         "small_caps-beg":    '<ts:hiText rend="smallcaps">',
         "small_caps-end":    "</ts:hiText>",
         "start-tags":       "\t<ts:matterText>\n\t\t<ts:matterBody>\n\t\t\t"
-                            "<ts:matterDiv>\n\t\t\t\t<ts:pBody>"
+                            "<ts:matterDiv>\n\t\t\t\t<ts:pBody>",
+        "tpresheader":      "tpresheader.xml"
 }

@@ -47,29 +47,20 @@ import os
 import rtox.lib.open_tag_check
 
 
-# TODO Combine with footnote_end
-class FootnoteBlock:
+def footnote_end(debug_dir: str,
+                 xml_tag_num: str,):
+    """
+    Read the the doc starting at the footnote line indicated in kw_list.
+    Find the end of the footnote and insert that line with a label in
+    kw_list. Insert a footnote start tag. (Wait to insert the footnote
+    end tag until that entry is reached in kw_list).
+    """
 
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: str,
-                 ) -> None:
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
 
-    def footnote_end(self):
-        """
-        Read the the doc starting at the footnote line indicated in kw_list.
-        Find the end of the footnote and insert that line with a label in
-        kw_list. Insert a footnote start tag. (Wait to insert the footnote
-        end tag until that entry is reached in kw_list).
-        """
-
-        tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
-            self=rtox.lib.open_tag_check.TagCheck(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num))
-
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "a") as wxf_pre:
-            wxf_pre.write(tag_dict["footnote-end"])
+    with open(os.path.join(debug_dir, "working_xml_file.xml"),
+              "a") as wxf_pre:
+        wxf_pre.write(tag_dict["footnote-end"])

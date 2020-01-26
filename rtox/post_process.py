@@ -50,9 +50,8 @@ __name__ = "post_process"
 def line_cleanup(debug_dir: str, ):
     working_file = os.path.join(debug_dir, "new_xml_file.xml")
 
-    file_length = rtox.lib.file_length.FileStats.working_file_length(
-        self=rtox.lib.file_length.FileStats(
-            working_file=working_file))
+    file_length = rtox.lib.file_length.working_file_length(
+            working_file=working_file)
 
     new_file = ""
     i = 0

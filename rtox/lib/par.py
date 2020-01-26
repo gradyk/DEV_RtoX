@@ -42,7 +42,6 @@ import os
 
 # From local application
 import rtox.lib.open_tag_check
-import rtox.lib.tag_registry
 
 
 def tag_insert(debug_dir, xml_tag_num):

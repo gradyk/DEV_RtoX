@@ -49,70 +49,62 @@ import json
 import os
 
 
-class TagRegistry:
-    # TODO No need for a class here, condense into tag_check
-    def __init__(self,
-                 debug_dir: str,
-                 tag_to_check: str,
-                 xml_tag_num: str) -> None:
-        self.debug_dir = debug_dir
-        self.tag_to_check = tag_to_check
-        self.xml_tag_num = xml_tag_num
+def tag_check(debug_dir: str,
+              tag_to_check: str,
+              xml_tag_num: str):
+    """
 
-    def tag_check(self):
-        """
+    """
+    # Possible xml tag dictionaries.
+    options = {
+        "1": "xml_tag_dict",
+        "2": "tei_tag_dict",
+        "3": "tpres_tag_dict",
+    }
 
-        """
-        # Possible xml tag dictionaries.
-        options = {
-            "1": "xml_tag_dict",
-            "2": "tei_tag_dict",
-            "3": "tpres_tag_dict",
-        }
+    # Import xml tag dictionary based on user xml tag style preference.
+    # Default is a plain XML tag dictionary.
+    if options[xml_tag_num]:
+        value = options[xml_tag_num]
+        xtags = importlib.import_module("rtox.dictionaries.xml_tags")
+        tag_dict_pre = {value: getattr(xtags, value)}
+        tag_dict = tag_dict_pre[value]
+    else:
+        from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
 
-        # Import xml tag dictionary based on user xml tag style preference.
-        # Default is a plain XML tag dictionary.
-        if options[self.xml_tag_num]:
-            value = options[self.xml_tag_num]
-            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
-            tag_dict_pre = {value: getattr(xtags, value)}
-            tag_dict = tag_dict_pre[value]
+    # Check the tag passed to the function (tag_to_check) to see if it is
+    # open.
+    try:
+        with open(os.path.join(debug_dir, "tag_registry.json"), "r") \
+                as trd_pre:
+            trd_general = json.load(trd_pre)
+        registry_value = trd_general[tag_to_check]
+
+        # If the tag is not open, move on.
+        if registry_value == 0:
+            pass
+        # If the tag is open, close it.
+        elif registry_value >= 0:
+            tag = tag_to_check + "-end"
+            tag_to_insert = tag_dict[tag]
+            with open(os.path.join(debug_dir, "working_xml_file.xml"),
+                      "a") as file:
+                file.write(tag_to_insert)
+            # Update the tag registry.
+            with open(os.path.join(debug_dir, "tag_registry.json"),
+                      "r") as trd_general_final:
+                trd_general = json.load(trd_general_final)
+                trd_general_update = {tag_to_check, 0}
+                trd_general.update(trd_general_update)
+            with open(os.path.join(debug_dir, "tag_registry.json"),
+                      "w") as trd_general_final:
+                json.dump(trd_general, trd_general_final)
         else:
-            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+            # TODO This means there is a tag error, what should happen?
+            pass
 
-        # Check the tag passed to the function (tag_to_check) to see if it is
-        # open.
-        try:
-            with open(os.path.join(self.debug_dir, "tag_registry.json"), "r") \
-                    as trd_pre:
-                trd_general = json.load(trd_pre)
-            registry_value = trd_general[self.tag_to_check]
-
-            # If the tag is not open, move on.
-            if registry_value == 0:
-                pass
-            # If the tag is open, close it.
-            elif registry_value >= 0:
-                tag = self.tag_to_check + "-end"
-                tag_to_insert = tag_dict[tag]
-                with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                          "a") as file:
-                    file.write(tag_to_insert)
-                # Update the tag registry.
-                with open(os.path.join(self.debug_dir, "tag_registry.json"),
-                          "r") as trd_general_final:
-                    trd_general = json.load(trd_general_final)
-                    trd_general_update = {self.tag_to_check, 0}
-                    trd_general.update(trd_general_update)
-                with open(os.path.join(self.debug_dir, "tag_registry.json"),
-                          "w") as trd_general_final:
-                    json.dump(trd_general, trd_general_final)
-            else:
-                # TODO This means there is a tag error, what should happen?
-                pass
-
-        except TypeError:
-            # This means the tag_to_check is not in the tag_registry_dict.
-            # TODO This should be a logger result.
-            print("The tag registry dictionary does not contain the "
-                  f"{self.tag_to_check} tag.")
+    except TypeError:
+        # This means the tag_to_check is not in the tag_registry_dict.
+        # TODO This should be a logger result.
+        print("The tag registry dictionary does not contain the "
+              f"{tag_to_check} tag.")

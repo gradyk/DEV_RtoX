@@ -50,7 +50,6 @@ import os
 import rtox.lib.open_tag_check
 
 
-# TODO Tags inserted need to vary depending on user tag style choice.
 def tag_insert(debug_dir: str, xml_tag_num: str):
 
     # Determine tag style based on user's preference.

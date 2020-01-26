@@ -154,20 +154,6 @@ class PrepareToProcess:
                 tag_registry_working_file:
             json.dump(tag_registry_dict, tag_registry_working_file)
 
-
-# TODO Collapse this class into prep_rtf_file.
-class StartProcess:
-    def __init__(self,
-                 base_script_dir: str,
-                 debug_dir: str,
-                 input_file_name: str,
-                 output_file_name: str
-                 ):
-        self.base_script_dir = base_script_dir
-        self.debug_dir = debug_dir
-        self.input_file_name = input_file_name
-        self.output_file_name = output_file_name
-
     def prep_rtf_file(self, xml_tag_num):
         """
         1. Create a copy of the input file for use during processing.

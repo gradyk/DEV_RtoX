@@ -41,46 +41,37 @@ __date__ = "2020-01-18"
 __name__ = "xml_transition_tags"
 
 # From standard libraries
-import importlib
+import json
 import os
 
 # From application library
-from rtox.dictionaries.tag_registry import tag_registry_dict as trd
+import rtox.lib.open_tag_check
 
 
-class XMLTransition:
-    # TODO No need for a class here, condense into xml_transition_tags.
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: str) -> None:
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+def xml_transition_tags(debug_dir: str,
+                        xml_tag_num: str):
+    """
 
-    def xml_transition_tags(self):
-        """
+    """
+    tag_dict = rtox.lib.open_tag_check.TagCheck.tag_style(
+        self=rtox.lib.open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
 
-        """
-        options = {
-            "1": "xml_tag_dict",
-            "2": "tei_tag_dict",
-            "3": "tpres_tag_dict",
-        }
+    with open(os.path.join(debug_dir, "working_xml_file.xml"),
+              "w") as working_xml_file:
+        xml_tags = tag_dict["start-tags"]
+        working_xml_file.write(xml_tags)
 
-        # Import xml tag dictionary based on user xml tag style preference.
-        if options[self.xml_tag_num]:
-            value = options[self.xml_tag_num]
-            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
-            tag_dict_pre = {value: getattr(xtags, value)}
-            tag_dict = tag_dict_pre[value]
-        else:
-            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
-
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                  "w") as working_xml_file:
-            xml_transition_tags = tag_dict["start-tags"]
-            working_xml_file.write(xml_transition_tags)
-
-        trd["bodytext"] = 1
-        trd["section"] = 1
-        trd["paragraph"] = 1
-        trd["body"] = 1
+    # Update the tag registry.
+    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
+            tag_registry_par_pre:
+        tag_registry_par = json.load(tag_registry_par_pre)
+        tag_registry_par_update = {"bodytext": "1",
+                                   "section": "1",
+                                   "paragraph": "1",
+                                   "body": "1"}
+        tag_registry_par.update(tag_registry_par_update)
+    with open(os.path.join(debug_dir, "tag_registry.txt"), "w") as \
+            tag_registry_par_final:
+        json.dump(tag_registry_par, tag_registry_par_final)

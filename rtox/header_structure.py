@@ -69,9 +69,8 @@ class HeaderStructure:
         record the line on which the table starts.
         """
 
-        file_length = rtox.lib.file_length.FileStats.working_file_length(
-                self=rtox.lib.file_length.FileStats(
-                    working_file=self.working_file))
+        file_length = rtox.lib.file_length.working_file_length(
+                working_file=self.working_file)
 
         header_tables_dict_args = {}
         header_tables = ["rtf", "fonttbl", "filetbl", "colortbl", "stylesheet",

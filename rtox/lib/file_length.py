@@ -30,19 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-# TODO Collapse into working_file_length
-class FileStats:
-    """
-    Determine the number of lines in the working file.
-    """
-
-    def __init__(self,
-                 working_file: str
-                 ) -> None:
-        self.working_file = working_file
-
-    def working_file_length(self) -> int:
-        with open(self.working_file) as file_size:
-            for i, l in enumerate(file_size):
-                pass
-        return i + 1
+def working_file_length(working_file: str) -> int:
+    with open(working_file) as file_size:
+        for i, l in enumerate(file_size):
+            pass
+    return i + 1
