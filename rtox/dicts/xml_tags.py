@@ -124,5 +124,5 @@ tpres_tag_dict = {
         "small_caps-end":    "</ts:hiText>",
         "start-tags":       "\t<ts:matterText>\n\t\t<ts:matterBody>\n\t\t\t"
                             "<ts:matterDiv>\n\t\t\t\t<ts:pBody>",
-        "tpresheader":      "tpresheader.xml"
+        "xmlheader":      "tpresheader.xml"
 }

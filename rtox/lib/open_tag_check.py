@@ -68,11 +68,11 @@ class TagCheck:
 
         if options[self.xml_tag_num]:
             value = options[self.xml_tag_num]
-            xtags = importlib.import_module("rtox.dictionaries.xml_tags")
+            xtags = importlib.import_module("rtox.dicts.xml_tags")
             tag_dict_pre = {value: getattr(xtags, value)}
             tag_dict = tag_dict_pre[value]
         else:
-            from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+            from rtox.dicts.xml_tags import xml_tag_dict as tag_dict
 
         return tag_dict
 

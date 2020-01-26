@@ -56,7 +56,7 @@ import rtox.databases.database_clean
 import rtox.input_file_prep
 import rtox.prelim_routine
 import rtox.rtf_codes_file_prep
-from rtox.dictionaries.tag_registry import tag_registry_dict
+from rtox.dicts.tag_registry import tag_registry_dict
 
 
 class PrepareToProcess:

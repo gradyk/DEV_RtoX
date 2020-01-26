@@ -42,7 +42,7 @@ import os
 import re
 
 # From local application
-from rtox.dictionaries.code_1252_array import cp1252_to_unicode_dict as cpdict
+from rtox.dicts.code_1252_array import cp1252_to_unicode_dict as cpdict
 
 
 def convert_ms1252(debug_dir):

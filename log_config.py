@@ -56,9 +56,11 @@ logger = logging.getLogger(__name__)
 conhandler = logging.StreamHandler()
 conhandler.setLevel(logging.INFO)
 
+base_dir_pre = os.path.dirname(os.path.abspath(sys.argv[0]))
+base_dir = base_dir_pre + "/logs"
+
 filehandler_debug = logging.handlers.RotatingFileHandler(
-    filename=os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                          "rtox.log"),  mode="w",  maxBytes=8000,
+    filename=os.path.join(base_dir, "rtox.log"),  mode="w",  maxBytes=8000,
     backupCount=20)
 filehandler_debug.setLevel(logging.DEBUG)
 

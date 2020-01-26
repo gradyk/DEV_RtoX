@@ -70,7 +70,7 @@ def tag_check(debug_dir: str,
         tag_dict_pre = {value: getattr(xtags, value)}
         tag_dict = tag_dict_pre[value]
     else:
-        from rtox.dictionaries.xml_tags import xml_tag_dict as tag_dict
+        from rtox.dicts.xml_tags import xml_tag_dict as tag_dict
 
     # Check the tag passed to the function (tag_to_check) to see if it is
     # open.

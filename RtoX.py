@@ -99,8 +99,10 @@ if __name__ == "__main__":
     # 4. Set the file for XML tags.
     xml_vars = rtox.prepare_to_process.PrepareToProcess.xml_tag_pref(
         self=rtox.prepare_to_process.PrepareToProcess(
-            base_script_dir=base_script_dir_pass, config_file=config_file_pass,
-            debug_dir=debug_dir_pass, input_file_name=input_file_name_pass,
+            base_script_dir=base_script_dir_pass,
+            config_file=config_file_pass,
+            debug_dir=debug_dir_pass,
+            input_file_name=input_file_name_pass,
             output_file_name=output_file_name_pass))
     tag_dict_pass = xml_vars[0]
     xml_tag_num_pass = xml_vars[1]
