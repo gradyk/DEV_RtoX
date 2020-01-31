@@ -152,8 +152,11 @@ class PrepareToProcess:
         else:
             pass
 
-        file_list = [[1, "xml_tags.py"], [2, "tei_tags.py"],
-                     [3, "tpres_tags.py"], [4, "xml_tags.py"]]
+        file_list = [[1, "xml_tags.py"],
+                     [2, "tei_tags.py"],
+                     [3, "tpres_tags.py"],
+                     [4, "xml_tags.py"]
+                     ]
 
         tag_file = file_list[int(xml_tag_num)-1][1]
         tag_dict = os.path.join(self.debug_dir, tag_file)

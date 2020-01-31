@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 This is the main script for the RtoX program.
 1. Call prepare_to_process and set basic variables: base script

@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 
 """
@@ -70,7 +59,8 @@ def final_step(debug_dir: str,
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
                                      xml_tag_num=xml_tag_num))
 
-    # Remove empty tag pairs, double spaces, ________
+    # Remove empty tag pairs and double spaces. (Empty tag pairs are a
+    # byproduct of RTF coding.)
     tag_pairs = [
         tag_dict["paragraph-beg"]+tag_dict["paragraph-end"],
         tag_dict["italic-beg"]+tag_dict["italic-end"],
@@ -79,27 +69,30 @@ def final_step(debug_dir: str,
         tag_dict["footnote-beg"]+tag_dict["footnote-end"],
         tag_dict["section-beg"]+"\n\t"+tag_dict["section-end"],
         "  ",
-
     ]
 
-    # Insert closing tags based on user's style preferences.
+    # Run through the file twice looking for empty tag pairs (deleting
+    # empty pairs on the first run through may create new empty pairs).
     with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as \
             test_file_pre:
         test_file = test_file_pre.read()
-        test_file = test_file + \
-            tag_dict["paragraph-end"] + "\n\t\t" + \
-            tag_dict["section-end"] + "\n\t" + \
-            tag_dict["body-end"] + "\n\t" + \
-            tag_dict["bodytext-end"] + "\n" + \
-            tag_dict["wrapper-end"]
+    i = 1
+    while i < 3:
+        for item in tag_pairs:
+            test_file = test_file.replace(item, "")
+        i += 1
 
-        # Run through the file twice looking for empty tag pairs (deleting
-        # empty pairs on the first run through may create new empty pairs).
-        i = 1
-        while i < 3:
-            for item in tag_pairs:
-                test_file = test_file.replace(item, "")
-            i += 1
+    # Insert closing tags based on user's style preferences.
+    test_file = test_file + \
+        tag_dict["paragraph-end"] + "\n\t\t" + \
+        tag_dict["section-end"] + "\n\t" + \
+        tag_dict["body-end"] + "\n\t" + \
+        tag_dict["bodytext-end"] + "\n" + \
+        tag_dict["wrapper-end"]
+
+    # TODO Clean up back-to-back tag use (e.g., <hiText rend="bold>This
+    #  </hiText><hiText rend="bold">is </hitext> ...).
+    #  tag_dupe.deduper(test_file)
 
     # Save the cleaned up file.
     with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as \
@@ -109,11 +102,12 @@ def final_step(debug_dir: str,
     # Post-process the file.
     post_process.line_cleanup(debug_dir=debug_dir)
 
-    # Attempt to "prettify" if (indent and line breaks).
-    # with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as fp:
-    #    etree.parse(fp)
+    xml_formatted_text = xmlformatter.xmlformatter_start(
+        infile=os.path.join(debug_dir, "new_xml_file.xml"),
+        outfile=os.path.join(debug_dir, "new_xml_file.xml"))
 
-    xmlformatter.cli(infile=os.path.join(debug_dir, "new_xml_file.xml"))
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as new:
+        new.write(xml_formatted_text)
 
     # Put the final xml file in the output directory and rename if per
     # the user's preference.

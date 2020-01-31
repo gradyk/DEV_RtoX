@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -29,29 +29,28 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""
-As the first step in RtoX, clean out the debugdir directory of files from
-the prior run.
-"""
+__name__ = "__main__"
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-01-09"
-__name__ = "debugdir_clean"
-
-# From standard libraries
-import os
 import sys
+from PyQt5 import QtWidgets
+from PyQt5 import uic
 
 
-def cleaner():
-    # TODO Check to see what happens if debugdir is already empty.
-    folder = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                          "debugdir")
-    for filename in os.listdir(folder):
-        try:
-            os.remove(os.path.join(folder, filename))
-        except OSError:
-            pass
+class Ui(QtWidgets.QMainWindow):
+    def __init__(self):
+        super(Ui, self).__init__()
+        uic.loadUi("/Users/gradyke/Documents/DEV_RtoX/Contents/Library"
+                   "/preferences.ui", self)
+
+        self.button = self.findChild(QtWidgets.QPushButton, 'cancelButton')
+        self.button.clicked.connect(self.cancelButtonPressed)
+
+        self.show()
+
+    def cancelButtonPressed(self):
+        print("cancelButtonPressed")
+
+
+app = QtWidgets.QApplication(sys.argv)
+window = Ui()
+app.exec_()

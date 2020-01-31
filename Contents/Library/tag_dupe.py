@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -30,28 +30,63 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-As the first step in RtoX, clean out the debugdir directory of files from
-the prior run.
+
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-09"
-__name__ = "debugdir_clean"
+__date__ = "2020-01-29"
+__name__ = "tag_dupe"
 
 # From standard libraries
+import linecache
 import os
-import sys
+import re
+
+# From local application
 
 
-def cleaner():
-    # TODO Check to see what happens if debugdir is already empty.
-    folder = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])),
-                          "debugdir")
-    for filename in os.listdir(folder):
-        try:
-            os.remove(os.path.join(folder, filename))
-        except OSError:
+@staticmethod
+def deduper(debug_dir: str,
+            test_file: str):
+
+    tag_list = [
+        '<hiText rend="italic">',
+        '<hiText rend="bold">',
+        '<hiText rend="underline">',
+        '<hiText rend="strikethrough">',
+        '<hiText rend="smallcaps">',
+        ]
+
+
+    for tag in tag_list:
+        ctr = 0
+        line = linecache.getline(test_file, ctr)
+        open_test = re.search(tag, line)
+        if open_test:
+            close_test = re.search("</hiText>", line)
+            if close_test is None:
+                ctr_plus = ctr + 1
+            else:
+
+
+
+
+        else:
             pass
+
+            2. find the closing tag (eg, </hiText>)
+
+            3. check to see if there is another tag OF THE SAME TYPE backed up against
+                the closing tag (eg, </hiText><hiText rend="bold">)
+
+            4. if so, find the closing tag for the second open tag (eg, </hiText>)
+
+            5. now delete the middle two tags (eg, </hiText><hiText rend="bold">)
+
+            6. repeat loop until answer to 3 is no
+
+            7. repeat process using next tag (eg, <hiText rend="italic">)
+

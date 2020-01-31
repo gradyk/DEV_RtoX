@@ -46,6 +46,7 @@ import os
 import sys
 import xml.parsers.expat
 from xml.parsers.expat import ExpatError
+from xml.parsers.expat import ParserCreate as Pc
 import xml.parsers.expat.model
 
 
@@ -56,6 +57,7 @@ DEFAULT_INDENT_CHAR = " "
 DEFAULT_INLINE = True
 DEFAULT_ENCODING_INPUT = None
 DEFAULT_ENCODING_OUTPUT = None
+DEFAULT_PRESERVE = ""
 
 
 class Formatter:
@@ -69,7 +71,8 @@ class Formatter:
                  encoding_input=DEFAULT_ENCODING_INPUT,
                  encoding_output=DEFAULT_ENCODING_OUTPUT,
                  inline=DEFAULT_INLINE,
-                 correct=DEFAULT_CORRECT) -> None:
+                 correct=DEFAULT_CORRECT,
+                 preserve=DEFAULT_PRESERVE) -> None:
         # Minify the XML document:
         self.compress = compress
         # Correct text nodes
@@ -85,7 +88,7 @@ class Formatter:
         # Format inline objects:
         self.inline = inline
         # Don't compress this elements and their descendants:
-        self.preserve = []
+        self.preserve = preserve
 
     @property
     def encoding_effective(self):
@@ -105,41 +108,32 @@ class Formatter:
             return string.upper()
         return None
 
-    def enc_encode(self, strg):
-        """ Encode a formatted XML document in target"""
-        if sys.version_info > (3, 0):
-            return strg.encode(self.encoding_effective)  # v3
-        return strg.decode('utf-8').encode(self.encoding_effective)  # v2
-
     @staticmethod
     def enc_output(path, strg):
         """ Output according to encoding """
         fh = sys.stdout
         if strg is not None:
             if path is not None:
-                open(path, "w+b").write(strg)
+                return strg
             elif sys.version_info > (3, 0):
                 with open(os.path.join("/Users/gradyke/Documents/DEV_RtoX/, "
                                        "new_xml_file.xml"), "w") as \
                         new_file_pre:
-                    new_file_pre.write(str(strg))
+                    new_file_pre.write(strg)
                 # fh.buffer.write(strg)
             else:
                 fh.write(strg)
 
-    def format_string(self, xmldoc=""):
-        """ Format a XML document given by xmldoc """
-        token_list = Formatter.TokenList(self)
-        token_list.parser.Parse(xmldoc)
-        return self.enc_encode(str(token_list))
-
+    # First step: format the infile (new_xml_file.xml).
     def format_file(self, file):
-        """ Format a XML document given by path name """
+        """ Format the XML document. """
         fh = open(file, 'rb')
+        # Use Formatter.TokenList to create a list (in order) of tokens in
+        # the file.
         token_list = Formatter.TokenList(self)
         token_list.parser.ParseFile(fh)
         fh.close()
-        return self.enc_encode(str(token_list))
+        return str(token_list)
 
     class TokenList:
         # Being in a cdata section:
@@ -159,7 +153,7 @@ class Formatter:
             # Keep tokens in a list:
             self._list = []
             self.formatter = formatter
-            self.parser = xml.parsers.expat.ParserCreate(encoding=self.formatter.encoding_input)
+            self.parser = Pc(encoding=self.formatter.encoding_input)
             self.parser.specified_attributes = 1
             self.parser.buffer_text = True
             # Push tokens to buffer:
@@ -190,6 +184,8 @@ class Formatter:
             else:
                 raise IndexError
 
+        # TODO For __str__ see: https://lucumr.pocoo.org/2011/1/22/
+        #  forwards-compatible-python/ specifically Recursion Error with str
         def __str__(self):
             """ Returns the formatted XML document in UTF-8. """
             for step in ["configure", "pre_operate", "post_operate"]:
@@ -403,13 +399,13 @@ class Formatter:
         def __init__(self, tklist, arg):
             # Reference Token List:
             self.list = tklist
-            # Token datas:
+            # Token data:
             self.arg = list(arg)
             # Token is placed in an CDATA section:
             self.cdata_section = False
             # Token has content model:
             self.content_model = None
-            # Remove trailing wihtespaces:
+            # Remove trailing whitespaces:
             self.delete_trailing = False
             # Remove leading whitespaces:
             self.delete_leading = False
@@ -418,7 +414,7 @@ class Formatter:
             # Reference to formatter:
             self.formatter = tklist.formatter
             # Insert indenting white spaces:
-            self.indent = False
+            self.indent = True
             # N-th generation of roots descendants:
             self.level = self.list.level_counter
             # Token class:
@@ -431,15 +427,8 @@ class Formatter:
         def __sub__(self, other):
             return self.pos - other.pos
 
-        def __unicode__(self):
+        def __str__(self):
             return ""
-
-        # Workaround, see http://lucumr.pocoo.org/2011/1/22/forwards-
-        # compatible-python/:
-        if sys.version_info > (3, 0):
-            __str__ = lambda x: x.__unicode__()
-        else:
-            __str__ = lambda x: unicode(x).encode('utf-8')
 
         @property
         def end(self):
@@ -483,7 +472,7 @@ class Formatter:
             """ Indent token. """
             # Child of root and no empty node
             if (self.level > 0 and not (self.end and
-                                        self.list[self.pos - 1].start)
+                                        self.list[self.pos-1].start)
                 # not empty node:
                     or self.end and not self.list[self.pos-1].start):
                 return self.indent_create(self.level)
@@ -492,8 +481,8 @@ class Formatter:
         def indent_create(self, times=1):
             """ Returns indent string. """
             if not self.formatter.compress and self.formatter.indent:
-                return f"\n"
-            f"{(times * self.formatter.indent) * self.formatter.indent_char}"
+                indent = f"\n{(times * self.formatter.indent) * self.formatter.indent_char}"
+                return indent
             return ""
 
         @staticmethod
@@ -520,7 +509,7 @@ class Formatter:
             pass
 
     class AttlistDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = self.indent_create()
             strg += f"<!ATTLIST {self.arg[0]} {self.arg[1]}"
             if self.arg[2] is not None:
@@ -537,7 +526,7 @@ class Formatter:
             return strg
 
     class CharacterData(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = self.arg[0]
             if not self.preserve and not self.cdata_section:
                 # Remove empty tokens always in element content!
@@ -566,7 +555,7 @@ class Formatter:
             self.delete_trailing = self.list.whitespace_delete_trailing(self)
 
     class Comment(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = ""
             if self.preserve in [0, 1] and self.indent:
                 strg += self.indent_insert()
@@ -582,14 +571,14 @@ class Formatter:
         pass
 
     class EndCdataSection(Token):
-        def __unicode__(self):
+        def __str__(self):
             return "]]>"
 
         def configure(self):
             self.list.cdata_section = False
 
     class ElementDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = self.indent_create()
             strg += f"<!ELEMENT {self.arg[0]}" \
                     f"{self.evaluate_model(self.arg[1])}>"
@@ -627,7 +616,7 @@ class Formatter:
             return modelstr
 
     class EndDoctypeDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = ""
             if self.list[self.pos - 1].name != "StartDoctypeDecl":
                 strg += self.indent_create(0)
@@ -641,7 +630,7 @@ class Formatter:
             listvar.level_decrement()
             super(Formatter.EndElement, self).__init__(listvar, arg)
 
-        def __unicode__(self):
+        def __str__(self):
             strg = ""
             # Don't close empty nodes on compression mode:
             if not self.formatter.compress or self.list[self.pos-1].name \
@@ -657,7 +646,7 @@ class Formatter:
             self.indent = self.list.token_indent(self)
 
     class EntityDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = self.indent_create()
             strg += "<!ENTITY "
             if self.arg[1]:
@@ -673,14 +662,14 @@ class Formatter:
             return strg
 
     class NotationDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = self.indent_create()
             strg += f"<!NOTATION {self.arg[0]}" \
                     f"{self.identifier(self.arg[2], self.arg[3])}>"
             return strg
 
     class ProcessingInstruction(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = ""
             if self.preserve in [0, 1] and self.indent:
                 strg += self.indent_insert()
@@ -692,14 +681,14 @@ class Formatter:
             self.indent = self.list.token_indent(self)
 
     class StartCdataSection(Token):
-        def __unicode__(self):
+        def __str__(self):
             return "<![CDATA["
 
         def configure(self):
             self.list.cdata_section = True
 
     class StartDoctypeDecl(Token):
-        def __unicode__(self):
+        def __str__(self):
             strg = f"<!DOCTYPE {self.arg[0]}"
             if self.arg[1]:
                 strg += self.identifier(self.arg[1], self.arg[2])
@@ -712,7 +701,7 @@ class Formatter:
             super(Formatter.StartElement, self).__init__(listvar, arg)
             self.list.level_increment()
 
-        def __unicode__(self):
+        def __str__(self):
             strg = ""
             if self.preserve in [0, 1] and self.indent:
                 strg += self.indent_insert()
@@ -737,7 +726,7 @@ class Formatter:
             if len(self.arg) > 1:
                 self.formatter.encoding_internal = self.arg[1]
 
-        def __unicode__(self):
+        def __str__(self):
             strg = f"<?xml{self.attribute('version', self.arg[0])}"
             f"{self.attribute('encoding', self.formatter.encoding_effective)}"
 
@@ -747,7 +736,7 @@ class Formatter:
             return strg
 
 
-def cli(infile):
+def xmlformatter_start(infile, outfile):
     """
     xmlformatter is run as the last step before returning the XML named
     according to the user's preference. The goal is to have a properly
@@ -758,8 +747,8 @@ def cli(infile):
     formatter = ()
     indent = DEFAULT_INDENT
     indent_char = DEFAULT_INDENT_CHAR
-    outfile = None
-    preserve = []
+    outfile = outfile
+    preserve = DEFAULT_PRESERVE
     compress = DEFAULT_COMPRESS
     encoding = DEFAULT_ENCODING_INPUT
     outencoding = DEFAULT_ENCODING_OUTPUT
@@ -768,8 +757,8 @@ def cli(infile):
 
     try:
         formatter = Formatter(indent=indent,
+                              preserve=preserve,
                               compress=compress,
-                              # preserve=preserve,
                               encoding_input=encoding,
                               encoding_output=outencoding,
                               indent_char=indent_char,
@@ -781,4 +770,6 @@ def cli(infile):
         print(f"XML error: {err}")
     except IOError as err:
         print(f"IO error: {err}")
-    formatter.enc_output(outfile, res)
+    xml_formatted_text = formatter.enc_output(outfile, res)
+
+    return xml_formatted_text
