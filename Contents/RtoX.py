@@ -55,7 +55,6 @@ __name__ = "__main__"
 # import pytest
 
 # From local application
-import add_xml_header
 import debugdir_clean
 import doc_parser
 import docinfo_parser
@@ -140,23 +139,16 @@ if __name__ == "__main__":
             xml_tag_num=xml_tag_num_pass))
 
     # 8. Process the main portion of the document body.
-    kw_list = doc_parser.doc_body(
+    doc_parser.doc_body(
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
-            xml_tag_num=xml_tag_num_pass,
-            styles_status_list=styles_status_list)
+            xml_tag_num=xml_tag_num_pass)
 
     # 9. Close open tags where possible and produce list of remaining open tags.
-    tag_closer.TagCloser.tag_closer(
-        self=tag_closer.TagCloser(
-            debug_dir=debug_dir_pass))
+    tag_closer.tag_closer(debug_dir=debug_dir_pass,
+                          xml_tag_num=xml_tag_num_pass)
 
-    # 10. Add xml header.
-    add_xml_header.add_header(debug_dir=debug_dir_pass,
-                              base_script_dir=base_script_dir_pass,
-                              xml_tag_num=xml_tag_num_pass)
-
-    # 11. Do file clean up, post processing, and put the renamed file in the
+    # 10. Do file clean up, post processing, and put the renamed file in the
     # output directory.
     final_step.final_step(debug_dir=debug_dir_pass,
                           xml_tag_num=xml_tag_num_pass,

@@ -42,135 +42,115 @@ __name__ = "line_parser"
 
 # From local application.
 import cs
+import header
+import footnote
 import par
 import pard
 import sect
 import sectd
-import footnote_end
-import footnote_start
-import heading_end
-import heading_start
 
 
-class LineParser:
-
+class Parser:
     def __init__(self,
                  kw_list: list,
+                 line_to_read: str,
                  working_file: str,
-                 xml_tag_num: str,
-                 debug_dir: str,
-                 styles_status_list: list
-                 ) -> None:
-        self.kw_list = kw_list
-        self.working_file = working_file
-        self.xml_tag_num = xml_tag_num
-        self.debug_dir = debug_dir
-        self.styles_status_list = styles_status_list
-
-    def body_line_prep(self):
-        body_line = DocLine(working_file=self.working_file,
-                            xml_tag_num=self.xml_tag_num,
-                            debug_dir=self.debug_dir,
-                            styles_status_list=self.styles_status_list)
-
-        return body_line
-
-    def wo_body_line_prep(self):
-        wo_body_line = WODocLine(debug_dir=self.debug_dir,
-                                 xml_tag_num=self.xml_tag_num)
-
-        return wo_body_line
-
-    def line_parse(self, body_line, wo_body_line):
-        options_dict_body_line = {
-            "cs": body_line.cs_process,
-        }
-
-        options_dict_wo_body_line = {
-            "par": wo_body_line.par_process,
-            "pard": wo_body_line.pard_process,
-            "sect": wo_body_line.sect_process,
-            "sectd": wo_body_line.sectd_process,
-            "heading_beg": wo_body_line.heading_start_process,
-            "heading_end": wo_body_line.heading_end_process,
-            "footnote_beg": wo_body_line.footnote_start_process,
-            "footnote_end": wo_body_line.footnote_end_process
-        }
-
-        for a, b in self.kw_list:
-            try:
-                to_do = options_dict_body_line[a]
-                to_do(b)
-            except KeyError:
-                to_do = options_dict_wo_body_line[a]
-                to_do()
-
-
-class DocLine:
-    def __init__(self,
-                 working_file: str,
-                 styles_status_list: list,
-                 xml_tag_num: str,
-                 debug_dir: str) -> None:
-        self.debug_dir = debug_dir
-        self.working_file = working_file
-        self.xml_tag_num = xml_tag_num
-        self.styles_status_list = styles_status_list
-
-    def cs_process(self, line_to_read):
-        text_line = cs.cs_line_boundaries(
-            working_file=self.working_file,
-            line_to_read=line_to_read)
-
-        line_parse_vars = cs.cs_line_parse(text_line=text_line)
-        cs_line_dict = line_parse_vars[0]
-        text = line_parse_vars[1]
-        cs.cs_tag_write(cs_line_dict=cs_line_dict,
-                        text=text,
-                        xml_tag_num=self.xml_tag_num,
-                        debug_dir=self.debug_dir)
-
-
-class WODocLine:
-    def __init__(self,
                  debug_dir: str,
                  xml_tag_num: str) -> None:
+        self.kw_list = kw_list
+        self.line_to_read = line_to_read
+        self.working_file = working_file
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
 
-    def par_process(self):
-        par.tag_insert(
-            debug_dir=self.debug_dir,
-            xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def cs_open_process(working_file, line_to_read, xml_tag_num, debug_dir,
+                        line):
 
-    def pard_process(self):
-        pard.tag_insert(xml_tag_num=self.xml_tag_num,
-                        debug_dir=self.debug_dir)
+        cs_line_dict, text = cs.cs_line_parse(
+            working_file=working_file,
+            line_to_read=line_to_read)
 
-    def sect_process(self):
-        sect.tag_insert(debug_dir=self.debug_dir,
-                        xml_tag_num=self.xml_tag_num)
+        tag_bag, tag_dict = cs.cs_opening_tags(cs_line_dict=cs_line_dict,
+                                               text=text,
+                                               xml_tag_num=xml_tag_num,
+                                               debug_dir=debug_dir,
+                                               line=line)
+        return tag_bag, tag_dict
 
-    def sectd_process(self):
-        sectd.sectd(debug_dir=self.debug_dir,
-                    xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def cs_close_process(debug_dir, tag_bag, tag_dict):
+        cs.cs_closing_tags(debug_dir=debug_dir, tag_bag=tag_bag,
+                           tag_dict=tag_dict)
 
-    def heading_start_process(self):
-        heading_start.heading_start(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def header_beg_process(debug_dir, xml_tag_num, line):
+        header.header_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                            line=line)
 
-    def heading_end_process(self):
-        heading_end.heading_end(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def header_end_process(debug_dir, xml_tag_num, line):
+        header.header_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                          line=line)
 
-    def footnote_start_process(self):
-        footnote_start.footnote_start(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def footnote_beg_process(debug_dir, xml_tag_num, line):
+        footnote.footnote_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                                line=line)
 
-    def footnote_end_process(self):
-        footnote_end.footnote_end(
-                debug_dir=self.debug_dir,
-                xml_tag_num=self.xml_tag_num)
+    @staticmethod
+    def footnote_end_process(debug_dir, xml_tag_num, line):
+        footnote.footnote_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                              line=line)
+
+    @staticmethod
+    def par_process(debug_dir, xml_tag_num, line):
+        par.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                       line=line)
+
+    @staticmethod
+    def pard_process(debug_dir, xml_tag_num, line):
+        pard.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                        line=line)
+
+    @staticmethod
+    def sect_process(debug_dir, xml_tag_num, line):
+        sect.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                        line=line)
+
+    @staticmethod
+    def sectd_process(debug_dir, xml_tag_num, line):
+        sectd.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                         line=line)
+
+    def line_parse(self):
+        tag_bag = []
+        tag_dict = {}
+
+        process_dict = {
+            "par": Parser.par_process,
+            "pard": Parser.pard_process,
+            "sect": Parser.sect_process,
+            "sectd": Parser.sectd_process,
+            "header_beg": Parser.header_beg_process,
+            "header_end": Parser.header_end_process,
+            "footnote_beg": Parser.footnote_beg_process,
+            "footnote_end": Parser.footnote_end_process,
+            }
+
+        for element in self.kw_list:
+            if element[0] == "cs_beg":
+                tag_bag, tag_dict = Parser.cs_open_process(
+                    line_to_read=element[1],
+                    xml_tag_num=self.xml_tag_num,
+                    debug_dir=self.debug_dir,
+                    line=element[1],
+                    working_file=self.working_file)
+            elif element[0] == "cs_end":
+                Parser.cs_close_process(debug_dir=self.debug_dir,
+                                        tag_bag=tag_bag,
+                                        tag_dict=tag_dict)
+            else:
+                process_dict[element[0]](debug_dir=self.debug_dir,
+                                         xml_tag_num=self.xml_tag_num,
+                                         line=element[1])

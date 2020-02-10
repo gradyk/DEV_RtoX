@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,46 +29,31 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
-
+Method to update the tag registry after tag openings or closings.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-18"
-__name__ = "footnote_end"
+__date__ = "2020-02-06"
+__name__ = "tag_registry_update"
 
-# Standard library imports
+# From standard libraries
+import json
 import os
-
-# From local application
-import open_tag_check
+# import sys
 
 
-def footnote_end(debug_dir: str,
-                 xml_tag_num: str,):
-    """
-    Read the the doc starting at the footnote line indicated in kw_list.
-    Find the end of the footnote and insert that line with a label in
-    kw_list. Insert a footnote start tag. (Wait to insert the footnote
-    end tag until that entry is reached in kw_list).
-    """
+def tag_registry_update(debug_dir: str, tag_update_dict: dict):
 
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+    tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(tag_dict["footnote-end"])
+    with open(tag_registry_file) as tag_registry_pre:
+        tag_registry = json.load(tag_registry_pre)
+        tag_registry.update(tag_update_dict)
+
+    # sys.stdout.write(str(tag_registry))
+    with open(tag_registry_file, "w", encoding='utf-8') as tag_registry_pre:
+        json.dump(tag_registry, tag_registry_pre, ensure_ascii=False)

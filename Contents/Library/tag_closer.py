@@ -30,65 +30,47 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-https://stackoverflow.com/questions/35761133/python-how-to-check-for-open-and-close-tags
-"""
 
+"""
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-01-12"
+__date__ = "2020-02-07"
 __name__ = "tag_closer"
 
 # From standard libraries
 import os
 
+# From local application
+import open_tag_check
 
-class TagCloser:
-    def __init__(self,
-                 debug_dir: str,
-                 ):
-        self.debug_dir = debug_dir
 
-    def tag_closer(self):
+def tag_closer(debug_dir: str, xml_tag_num: str):
 
-        stack = []
+    status_list = [
+        "italic",
+        "bold",
+        "underline",
+        "strikethrough",
+        "small_caps",
+        "paragraph",
+        "section"
+    ]
 
-        with open(os.path.join(self.debug_dir, "working_xml_file.xml"),
-                               'r') as parse_file:
-            for line in parse_file:
-                # print("INPUT LINE:", line)
-                ltag = line.find('<')
-                if ltag > -1:
-                    rtag = line.find('>')
-                    if rtag > -1:
-                        # Found left and right brackets: grab tag
-                        tag = line[ltag+1: rtag]
-                        open_tag = tag[0] != '/'
-                        if open_tag:
-                            # Add tag to stack
-                            stack.append(tag)
-                            # print("TRACE open", stack)
-                        else:
-                            tag = tag[1:]
-                            if len(stack) == 0:
-                                pass
-                                # print("No blocks are open; tried to close",
-                                # tag)
-                            else:
-                                if stack[-1] == tag:
-                                    # Close the block
-                                    stack.pop()
-                                    # print("TRACE close", tag, stack)
-                                else:
-                                    # print("Tried to close", tag,
-                                    #      "but most recent open "
-                                    #      "block is", stack[0])
-                                    if tag in stack:
-                                        stack.remove(tag)
-                                    #    print("Prior block closed; continuing")
+    tag_dict = open_tag_check.TagCheck.tag_style(
+        self=open_tag_check.TagCheck(debug_dir=debug_dir,
+                                     xml_tag_num=xml_tag_num))
 
-        if len(stack):
-            pass
-            # print("Blocks still open at EOF:", stack)
+    open_tag_check.TagCheck.tag_check(
+        self=open_tag_check.TagCheck(debug_dir=debug_dir,
+                                     xml_tag_num=xml_tag_num),
+        status_list=status_list,
+        tag_dict=tag_dict)
+
+    with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
+            xml_file_pre:
+        xml_file = xml_file_pre.read()
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as final_xml:
+        final_xml.write(xml_file)

@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,46 +29,46 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
-"""
-Process page header blocks in the RTF doc body.
-"""
-
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-01-11"
-__name__ = "heading_start"
-
-# From standard libraries
-import os
-
-# From local application
-import open_tag_check
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QApplication, QWidget, QFrame, QLineEdit, \
+    QHBoxLayout, QSplitter
+import sys
+from PyQt5.QtCore import Qt
 
 
-def heading_start(debug_dir: str,
-                  xml_tag_num: str,):
-    """
-    Read the the doc starting at the footnote line indicated in kw_list.
-    Find the end of the footnote and insert that line with a label in
-    kw_list. Insert a footnote start tag. (Wait to insert the footnote
-    end tag until that entry is reached in kw_list).
-    """
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "PyQt5 Splitter"
+        self.top = 200
+        self.left = 500
+        self.width = 400
+        self.height = 300
+        hbox = QHBoxLayout()
+        left = QFrame()
+        left.setFrameShape(QFrame.StyledPanel)
+        bottom = QFrame()
+        bottom.setFrameShape(QFrame.StyledPanel)
+        splitter1 = QSplitter(Qt.Horizontal)
+        splitter1.setStyleSheet('background-color:red')
+        lineedit = QLineEdit()
+        lineedit.setStyleSheet('background-color:green')
+        splitter1.addWidget(left)
+        splitter1.addWidget(lineedit)
+        splitter1.setSizes([200, 200])
+        spliiter2 = QSplitter(Qt.Vertical)
+        spliiter2.addWidget(splitter1)
+        spliiter2.addWidget(bottom)
+        spliiter2.setStyleSheet('background-color:yellow')
+        hbox.addWidget(spliiter2)
+        self.setLayout(hbox)
+        self.setWindowIcon(QtGui.QIcon("icon.png"))
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.show()
 
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(tag_dict["heading-beg"])
+if __name__ == "__main__":
+    App = QApplication(sys.argv)
+    window = Window()
+    sys.exit(App.exec())

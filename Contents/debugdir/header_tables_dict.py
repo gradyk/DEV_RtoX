@@ -1,1 +1,1 @@
-header_tables_dictionary = {'rtf': 1, 'fonttbl': 2, 'colortbl': 6, 'stylesheet': 43, 'info': 174}
+header_tables_dictionary = {'rtf': 1, 'fonttbl': 2, 'colortbl': 6, 'stylesheet': 9, 'info': 24}

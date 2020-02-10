@@ -30,14 +30,18 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Par marks the end of a paragraph. It does not include any other coding. The
-necessary steps are: 1) determine user's tag style preference, 2) check for and
-close relevant open tags, 3) close the paragraph tag, 4) insert an open
-paragraph tag, 5) write the tags to the working xml file.
+
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-01-18"
+__name__ = "footnote"
+
 # Standard library imports
-import json
+import linecache
 import os
 import sys
 
@@ -46,24 +50,45 @@ import open_tag_check
 import tag_registry_update
 
 
-def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
+def footnote_bounds(working_file: str, search_line: str) -> str:
     """
 
     """
-    # Determine tag style based on user's preference.
+    leftb = 0
+    rightb = 0
+    footnote_end_line = "0"
+    while footnote_end_line == "0":
+        line_to_search = linecache.getline(working_file, search_line)
+        for elem in line_to_search:
+            if elem == "{":
+                leftb += 1
+            elif elem == "}":
+                rightb += 1
+            if leftb == rightb:
+                footnote_end_line = search_line
+            else:
+                pass
+        search_line += 1
+
+    linecache.clearcache()
+    return footnote_end_line
+
+
+def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
+    """
+
+    """
     tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+        self=open_tag_check.TagCheck(debug_dir=debug_dir,
+                                     xml_tag_num=xml_tag_num))
 
-    # Check the tag registry to see whether an emphasis tag needs closing
-    # and, if so, close it.
     status_list = [
         "small_caps",
         "strikethrough",
         "underline",
         "bold",
-        "italic"
+        "italic",
+        "paragraph"
     ]
 
     open_tag_check.TagCheck.tag_check(
@@ -73,36 +98,48 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    # Check the status of the paragraph tag. It if is closed then
-    # open it.
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
-    tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
-    with open(tag_registry_file) as tag_registry_pre:
-        tag_registry = json.load(tag_registry_pre)
-    # 0 = closed, 1 = open
-    if tag_registry["paragraph"] == "0":
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
-        sys.stdout.write(tag_dict["paragraph-beg"] + f"{line}")
-        pass
-    else:
-        # If it is open, close it and open a new paragraph (pard marks the
-        # end of a paragraph and, presumptively, the beginning of a new
-        # paragraph).
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["paragraph-end"] + tag_dict[
-                "paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
-        sys.stdout.write(tag_dict["paragraph-end"] + tag_dict[
-                         "paragraph-beg"] + f"{line}")
-        pass
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
+        xml_file.write(tag_dict["footnote-beg"])
+        sys.stdout.write(tag_dict["footnote-beg"] + f"{line}")
 
     # Update the tag registry.
-    tag_update_dict = {"paragraph": "1"}
+    tag_update_dict = {"footnote": "1"}
+    tag_registry_update.tag_registry_update(
+        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+
+
+def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
+    """
+
+    """
+    tag_dict = open_tag_check.TagCheck.tag_style(
+        self=open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num))
+
+    status_list = [
+        "small_caps",
+        "strikethrough",
+        "underline",
+        "bold",
+        "italic",
+        "paragraph"
+    ]
+
+    open_tag_check.TagCheck.tag_check(
+        self=open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num),
+        tag_dict=tag_dict,
+        status_list=status_list)
+
+    with open(os.path.join(debug_dir, "working_xml_file.xml"),
+              "a") as wxf_pre:
+        wxf_pre.write(tag_dict["footnote-end"] + tag_dict["paragraph-beg"])
+        sys.stdout.write(tag_dict["footnote-end"] +
+                         tag_dict["paragraph-beg"] + f"({line})")
+
+    # Update the tag registry.
+    tag_update_dict = {"footnote": "0", "paragraph": "1"}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

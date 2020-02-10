@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -30,9 +33,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Sect marks the end of a section. It does not include any other coding. The
-necessary steps are: (1) insert and end of section tag, and (2) insert a
-beginning of section tag.
+Process page header blocks in the RTF doc body.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -40,28 +41,51 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-11"
-__name__ = "sect"
+__name__ = "header"
 
-# Standard library imports
+# From standard libraries
 import json
+import linecache
 import os
 import sys
 
-# From application library
+# From local application
 import open_tag_check
 import tag_registry_update
 
 
-def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
+def header_bounds(working_file: str, search_line: str) -> str:
+    """
 
-    # Determine tag style based on user's preference.
+    """
+    leftb = 0
+    rightb = 0
+    header_end_line = "0"
+    while header_end_line == "0":
+        line_to_search = linecache.getline(working_file, search_line)
+        for elem in line_to_search:
+            if elem == "{":
+                leftb += 1
+            elif elem == "}":
+                rightb += 1
+            if leftb == rightb:
+                header_end_line = search_line
+            else:
+                pass
+        search_line += 1
+
+    linecache.clearcache()
+    return header_end_line
+
+
+def header_start(debug_dir: str, xml_tag_num: str, line: str):
+    """
+
+    """
     tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+        self=open_tag_check.TagCheck(debug_dir=debug_dir,
+                                     xml_tag_num=xml_tag_num))
 
-    # Check the tag registry to see whether an emphasis or paragraph tag needs
-    # closing and, if so, close it.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -78,37 +102,48 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    # Check the tag registry for the status of a section tag. If it is
-    # closed, open a new section and open a paragraph.
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
-    tag_registry = os.path.join(debug_dir, "tag_registry.json")
-    with open(tag_registry) as tag_registry_pre:
-        tag_registry = json.load(tag_registry_pre)
-    # 0 = closed, 1 = open
-    if tag_registry["section"] == "0":
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["section-beg"] + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
-        sys.stdout.write(tag_dict["section-beg"] + f"{line}" +
-                         tag_dict["paragraph-beg"] + f"{line}")
-        pass
-    else:
-        # If a section tag is open, close it, open a new section and open a
-        # paragraph.
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["section-end"] + tag_dict[
-                "section-beg"] + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            sys.stdout.write(tag_dict["section-end"] +
-                             tag_dict["section-beg"] + f"{line}" + tag_dict[
-                             "paragraph-beg"] + f"{line}")
-            wxf_pre.write(wxf)
-            pass
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
+        xml_file.write(tag_dict["header-beg"])
 
-    # Update tag registry.
-    tag_update_dict = {"section": "1", "paragraph": "1"}
+    sys.stdout.write(tag_dict["header-beg"] + f"{line}")
+
+    # Update the tag registry.
+    tag_update_dict = {"header": "1"}
+    tag_registry_update.tag_registry_update(
+        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+
+
+def header_end(debug_dir: str, xml_tag_num: str, line: str):
+    """
+
+    """
+    tag_dict = open_tag_check.TagCheck.tag_style(
+        self=open_tag_check.TagCheck(debug_dir=debug_dir,
+                                     xml_tag_num=xml_tag_num))
+
+    status_list = [
+        "small_caps",
+        "strikethrough",
+        "underline",
+        "bold",
+        "italic",
+        "paragraph"
+    ]
+
+    open_tag_check.TagCheck.tag_check(
+        self=open_tag_check.TagCheck(
+            debug_dir=debug_dir,
+            xml_tag_num=xml_tag_num),
+        tag_dict=tag_dict,
+        status_list=status_list)
+
+    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
+        xml_file.write(tag_dict["header-end"] + tag_dict["paragraph-beg"])
+
+    sys.stdout.write(tag_dict["header-end"] +
+                     tag_dict["paragraph-beg"] + f"{line}")
+
+    # Update the tag registry.
+    tag_update_dict = {"header": "0", "paragraph": "1"}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

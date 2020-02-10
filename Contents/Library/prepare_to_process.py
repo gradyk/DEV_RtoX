@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 This script covers some preparatory work before the input file can be processed.
 1.
@@ -100,22 +89,19 @@ class PrepareToProcess:
         1. Gather command line and Config.ini settings to run RtoX.
         2. Store the settings in the config_dict.py (config_dictionary).
         """
-        prelim_vars = prelim_routine.Prelim.prelim_settings(
-            prelim_routine.Prelim(
-                config_file=self.config_file,
-                base_script_dir=self.base_script_dir,
-                debug_dir=self.debug_dir))
-        self.base_script_dir = prelim_vars[0]
-        self.debug_dir = prelim_vars[1]
-        self.config_file = prelim_vars[2]
+        self.base_script_dir, self.debug_dir, self.config_file = \
+            prelim_routine.Prelim.prelim_settings(
+                prelim_routine.Prelim(
+                    config_file=self.config_file,
+                    base_script_dir=self.base_script_dir,
+                    debug_dir=self.debug_dir))
 
-        config_vars = prelim_routine.Prelim.create_config_dict(
-            self=prelim_routine.Prelim(
-                config_file=self.config_file,
-                base_script_dir=self.base_script_dir,
-                debug_dir=self.debug_dir))
-        self.input_file_name = config_vars[0]
-        self.output_file_name = config_vars[1]
+        self.input_file_name, self.output_file_name = \
+            prelim_routine.Prelim.create_config_dict(
+                self=prelim_routine.Prelim(
+                    config_file=self.config_file,
+                    base_script_dir=self.base_script_dir,
+                    debug_dir=self.debug_dir))
 
         return self.base_script_dir, self.debug_dir, self.input_file_name, \
             self.output_file_name
@@ -164,9 +150,10 @@ class PrepareToProcess:
         return tag_dict, xml_tag_num
 
     def create_working_tag_registry(self):
-        with open(os.path.join(self.debug_dir, "tag_registry.txt"), "w+") as \
-                tag_registry_working_file:
-            json.dump(tag_registry_dict, tag_registry_working_file)
+        tag_registry_file = os.path.join(self.debug_dir, "tag_registry.json")
+        with open(tag_registry_file, "w", encoding='utf-8') as \
+                tag_registry:
+            json.dump(tag_registry_dict, tag_registry)
 
     def prep_rtf_file(self, xml_tag_num):
         """

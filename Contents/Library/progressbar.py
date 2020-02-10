@@ -1,6 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  !/usr/bin/env python3
 #  -*- coding: utf-8 -*-
 #
@@ -32,40 +29,57 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
-"""
-Process page header blocks in the RTF doc body.
-"""
-
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-01-18"
-__name__ = "heading_end"
-
-# From standard libraries
-import os
-
-# From local application
-import open_tag_check
+import sys
+from PyQt5.QtWidgets import (QWidget, QProgressBar, QPushButton, QApplication)
+from PyQt5.QtCore import QBasicTimer
 
 
-def heading_end(debug_dir: str,
-                xml_tag_num: str):
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num
-        ))
+class Example(QWidget):
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(tag_dict["heading-end"])
+    def __init__(self):
+        super().__init__()
+
+        self.initui()
+
+    def initui(self):
+
+        self.pbar = QProgressBar(self)
+        self.pbar.setGeometry(30, 40, 200, 25)
+
+        self.btn = QPushButton('Start', self)
+        self.btn.move(40, 80)
+        self.btn.clicked.connect(self.doAction)
+
+        self.timer = QBasicTimer()
+        self.step = 0
+
+        self.setGeometry(300, 300, 280, 170)
+        self.setWindowTitle('QProgressBar')
+        self.show()
+
+    def timerEvent(self, e):
+
+        if self.step >= 100:
+
+            self.timer.stop()
+            self.btn.setText('Finished')
+            return
+
+        self.step = self.step + 1
+        self.pbar.setValue(self.step)
+
+    def doAction(self):
+
+        if self.timer.isActive():
+            self.timer.stop()
+            self.btn.setText('Start')
+        else:
+            self.timer.start(100, self)
+            self.btn.setText('Stop')
+
+
+if __name__ == '__main__':
+
+    app = QApplication(sys.argv)
+    ex = Example()
+    sys.exit(app.exec_())

@@ -42,11 +42,12 @@ __name__ = "final_step"
 
 # From standard libraries
 import os
+import sys
 from shutil import copy
 
 # From local application
 import open_tag_check
-import post_process
+# import post_process
 import xmlformatter
 
 
@@ -55,63 +56,79 @@ def final_step(debug_dir: str,
                output_file_name: str,
                base_script_dir: str) -> None:
 
+    new_xml_file = os.path.join(debug_dir, "new_xml_file.xml")
+
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
                                      xml_tag_num=xml_tag_num))
 
-    # Remove empty tag pairs and double spaces. (Empty tag pairs are a
-    # byproduct of RTF coding.)
+    # Converting to RTF creates instances of empty tags.
+    # Run through the file twice looking for empty tags (deleting
+    # empty tags on the first run through may create new empty tags).
     tag_pairs = [
         tag_dict["paragraph-beg"]+tag_dict["paragraph-end"],
         tag_dict["italic-beg"]+tag_dict["italic-end"],
         tag_dict["bold-beg"]+tag_dict["bold-end"],
-        tag_dict["heading-beg"]+tag_dict["heading-end"],
+        tag_dict["header-beg"]+tag_dict["header-end"],
         tag_dict["footnote-beg"]+tag_dict["footnote-end"],
-        tag_dict["section-beg"]+"\n\t"+tag_dict["section-end"],
-        "  ",
+        tag_dict["section-beg"]+tag_dict["section-end"],
+        "  "
     ]
 
-    # Run through the file twice looking for empty tag pairs (deleting
-    # empty pairs on the first run through may create new empty pairs).
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "r") as \
-            test_file_pre:
-        test_file = test_file_pre.read()
-    i = 1
-    while i < 3:
-        for item in tag_pairs:
-            test_file = test_file.replace(item, "")
-        i += 1
+    with open(new_xml_file, "r") as draft_file_pre:
+        draft_file = draft_file_pre.read()
+        i = 1
+        while i < 3:
+            for item in tag_pairs:
+                draft_file = draft_file.replace(item, "")
+            i += 1
+        with open(new_xml_file, "w") as final_file_pre:
+            final_file_pre.write(draft_file)
 
-    # Insert closing tags based on user's style preferences.
-    test_file = test_file + \
-        tag_dict["paragraph-end"] + "\n\t\t" + \
-        tag_dict["section-end"] + "\n\t" + \
-        tag_dict["body-end"] + "\n\t" + \
-        tag_dict["bodytext-end"] + "\n" + \
-        tag_dict["wrapper-end"]
+    # Insert XML closing tags based on user's style preferences.
+    with open(new_xml_file, "r") as final_file_pre:
+        final_file = final_file_pre.read()
+        close_tags = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
+            tag_dict["wrapper-end"]
+    with open(new_xml_file, "w") as final_file_pre:
+        final_file_pre.write(final_file + close_tags)
+
+    sys.stdout.write(tag_dict["body-end"] + tag_dict["bodytext-end"] +
+                     tag_dict["wrapper-end"])
 
     # TODO Clean up back-to-back tag use (e.g., <hiText rend="bold>This
     #  </hiText><hiText rend="bold">is </hitext> ...).
     #  tag_dupe.deduper(test_file)
 
-    # Save the cleaned up file.
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as \
-            final_step_file:
-        final_step_file.write(test_file)
+    # Insert the appropriate header based on the user's preference.
+    # TODO There should be a default header file for each tag style.
+    try:
+        insert = open(os.path.join(base_script_dir+"/input", tag_dict[
+            "xmlheader"]), "r")
+        insert_tags = insert.read()
+
+        with open(new_xml_file, "r") as final_xml_file_pre:
+            final_xml_file = tag_dict["wrapper-beg"] + insert_tags + \
+                             final_xml_file_pre.read()
+        with open(new_xml_file, "w") as final_step_xml_file:
+            final_step_xml_file.write(final_xml_file)
+
+    except TypeError:
+        # TODO A logger message should go here.
+        pass
 
     # Post-process the file.
-    post_process.line_cleanup(debug_dir=debug_dir)
+    # post_process.line_cleanup(debug_dir=debug_dir)
 
     xml_formatted_text = xmlformatter.xmlformatter_start(
-        infile=os.path.join(debug_dir, "new_xml_file.xml"),
-        outfile=os.path.join(debug_dir, "new_xml_file.xml"))
+        infile=new_xml_file, outfile=new_xml_file)
 
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as new:
+    with open(new_xml_file, "w") as new:
         new.write(xml_formatted_text)
 
     # Put the final xml file in the output directory and rename if per
     # the user's preference.
     output_dir = base_script_dir + "/output"
-    copy(os.path.join(debug_dir, "new_xml_file.xml"), output_dir)
+    copy(new_xml_file, output_dir)
     os.rename(output_dir + "/new_xml_file.xml",
               output_dir + f'/{output_file_name}')

@@ -47,9 +47,9 @@ xml_tag_dict = {
         "title-beg":        "<>",
         "title-attr":       "< ",
         "title-end":        "</>",
-        "heading-beg":      "<>",
-        "heading-attr":     "< ",
-        "heading-end":      "</>",
+        "header-beg":      "<>",
+        "header-attr":     "< ",
+        "header-end":      "</>",
         "footnote-beg":     "<>",
         "footnote-attr":    "< ",
         "footnote-end":     "</>",
@@ -86,7 +86,8 @@ tei_tag_dict = {
 }
 
 tpres_tag_dict = {
-        "wrapper-beg":      "<ts:TPRES>",
+        "wrapper-beg":      "<ts:TPRES "
+                            "xmlns:ts='www.kennethgrady.com/ns/1.0.0>'>",
         "wrapper-end":      "</ts:TPRES>",
         "body-beg":         "<ts:matterBody>",
         "body-end":         "</ts:matterBody>",
@@ -100,9 +101,9 @@ tpres_tag_dict = {
         "title-beg":        "<ts:generalTitle>",
         "title-attr":       "<ts:generalTitle ",
         "title-end":        "</ts:generalTitle>",
-        "heading-beg":      "<ts:headDiv>",
-        "heading-attr":     "<ts:headDiv ",
-        "heading-end":      "</ts:headDiv>",
+        "header-beg":       "<ts:headDiv>",
+        "header-attr":      "<ts:headDiv ",
+        "header-end":       "</ts:headDiv>",
         "footnote-beg":     "<ts:footNote>",
         "footnote-attr":    "<ts:footNote ",
         "footnote-end":     "</ts:footNote>",
@@ -120,9 +121,9 @@ tpres_tag_dict = {
         "rendition-beg":    "<ts:rendFormat>",
         "rendition-attr":   "<ts:rendFormat ",
         "rendition-end":    "</ts:rendFormat>",
-        "small_caps-beg":    '<ts:hiText rend="smallcaps">',
-        "small_caps-end":    "</ts:hiText>",
-        "start-tags":       "\t<ts:matterText>\n\t\t<ts:matterBody>\n\t\t\t"
-                            "<ts:matterDiv>\n\t\t\t\t<ts:pBody>",
-        "xmlheader":      "tpresheader.xml"
+        "small_caps-beg":   '<ts:hiText rend="smallcaps">',
+        "small_caps-end":   "</ts:hiText>",
+        "start-tags":       "<ts:matterText><ts:matterBody>"
+                            "<ts:matterDiv><ts:pBody>",
+        "xmlheader":        "tpresheader.xml"
 }

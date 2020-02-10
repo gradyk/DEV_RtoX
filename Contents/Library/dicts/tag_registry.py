@@ -36,9 +36,9 @@ tag_registry_dict = {
     "strikethrough":    "0",
     "small_caps":       "0",
     "footnote":         "0",
-    "heading":          "0",
-    "section":          "1",
-    "paragraph":        "1",
+    "header":           "0",
+    "section":          "0",
+    "paragraph":        "0",
     "body":             "0",
     "bodytext":         "0",
 }

@@ -54,6 +54,7 @@ def keyword_end(working_file: str,
                                         line_number)
         search_area_plus = linecache.getline(working_file,
                                              int(line_number) + 1)
+
         test_close_bracket = re.search("}", search_area[0]) and \
             re.match("}", search_area_plus[0])
         if test_close_bracket is not None:

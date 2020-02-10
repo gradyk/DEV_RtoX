@@ -32,14 +32,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 
 """
@@ -52,15 +44,14 @@ __date__ = "2020-01-18"
 __name__ = "xml_transition_tags"
 
 # From standard libraries
-import json
 import os
 
 # From application library
 import open_tag_check
+import tag_registry_update
 
 
-def xml_transition_tags(debug_dir: str,
-                        xml_tag_num: str):
+def xml_transition_tags(debug_dir: str, xml_tag_num: str, line: str):
     """
 
     """
@@ -73,16 +64,12 @@ def xml_transition_tags(debug_dir: str,
               "w") as working_xml_file:
         xml_tags = tag_dict["start-tags"]
         working_xml_file.write(xml_tags)
+        print(xml_tags + f"{line}")
 
     # Update the tag registry.
-    with open(os.path.join(debug_dir, "tag_registry.txt")) as \
-            tag_registry_par_pre:
-        tag_registry_par = json.load(tag_registry_par_pre)
-        tag_registry_par_update = {"bodytext": "1",
-                                   "section": "1",
-                                   "paragraph": "1",
-                                   "body": "1"}
-        tag_registry_par.update(tag_registry_par_update)
-    with open(os.path.join(debug_dir, "tag_registry.txt"), "w") as \
-            tag_registry_par_final:
-        json.dump(tag_registry_par, tag_registry_par_final)
+    tag_update_dict = {"bodytext":  "1",
+                       "section":   "1",
+                       "paragraph": "1",
+                       "body":      "1"}
+    tag_registry_update.tag_registry_update(
+        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
