@@ -33,44 +33,18 @@
 
 """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-02-07"
-__name__ = "tag_closer"
 
 # From standard libraries
 import os
 
-# From local application
-import open_tag_check
 
+def tag_append(debug_dir: str, tag_update: str):
 
-def tag_closer(debug_dir: str, xml_tag_num: str):
+    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
 
-    status_list = [
-        "italic",
-        "bold",
-        "underline",
-        "strikethrough",
-        "small_caps",
-        "paragraph",
-        "section"
-    ]
-
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(debug_dir=debug_dir,
-                                     xml_tag_num=xml_tag_num))
-
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(debug_dir=debug_dir,
-                                     xml_tag_num=xml_tag_num),
-        status_list=status_list,
-        tag_dict=tag_dict)
-
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
-            xml_file_pre:
+    with open(working_xml_file, "r") as xml_file_pre:
         xml_file = xml_file_pre.read()
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as final_xml:
-        final_xml.write(xml_file)
+        xml_file_update = xml_file + tag_update
+
+    with open(working_xml_file, "w") as xml_file_pre:
+        xml_file_pre.write(xml_file_update)

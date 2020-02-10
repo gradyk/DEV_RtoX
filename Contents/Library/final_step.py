@@ -49,6 +49,7 @@ from shutil import copy
 import open_tag_check
 # import post_process
 import xmlformatter
+import working_xml_file_update
 
 
 def final_step(debug_dir: str,
@@ -56,7 +57,7 @@ def final_step(debug_dir: str,
                output_file_name: str,
                base_script_dir: str) -> None:
 
-    new_xml_file = os.path.join(debug_dir, "new_xml_file.xml")
+    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
 
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
@@ -75,24 +76,23 @@ def final_step(debug_dir: str,
         "  "
     ]
 
-    with open(new_xml_file, "r") as draft_file_pre:
-        draft_file = draft_file_pre.read()
+    with open(working_xml_file, "r") as working_xml_file_pre:
+        updated_xml_file = working_xml_file_pre.read()
         i = 1
         while i < 3:
             for item in tag_pairs:
-                draft_file = draft_file.replace(item, "")
+                updated_xml_file = updated_xml_file.replace(item, "")
             i += 1
-        with open(new_xml_file, "w") as final_file_pre:
-            final_file_pre.write(draft_file)
+
+    with open(working_xml_file, "w") as working_xml_file_pre:
+        working_xml_file_pre.write(updated_xml_file)
 
     # Insert XML closing tags based on user's style preferences.
-    with open(new_xml_file, "r") as final_file_pre:
-        final_file = final_file_pre.read()
-        close_tags = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
-            tag_dict["wrapper-end"]
-    with open(new_xml_file, "w") as final_file_pre:
-        final_file_pre.write(final_file + close_tags)
-
+    tag_update = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
+        tag_dict["wrapper-end"]
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
     sys.stdout.write(tag_dict["body-end"] + tag_dict["bodytext-end"] +
                      tag_dict["wrapper-end"])
 
@@ -106,11 +106,10 @@ def final_step(debug_dir: str,
         insert = open(os.path.join(base_script_dir+"/input", tag_dict[
             "xmlheader"]), "r")
         insert_tags = insert.read()
-
-        with open(new_xml_file, "r") as final_xml_file_pre:
+        with open(working_xml_file, "r") as final_xml_file_pre:
             final_xml_file = tag_dict["wrapper-beg"] + insert_tags + \
                              final_xml_file_pre.read()
-        with open(new_xml_file, "w") as final_step_xml_file:
+        with open(working_xml_file, "w") as final_step_xml_file:
             final_step_xml_file.write(final_xml_file)
 
     except TypeError:
@@ -121,14 +120,14 @@ def final_step(debug_dir: str,
     # post_process.line_cleanup(debug_dir=debug_dir)
 
     xml_formatted_text = xmlformatter.xmlformatter_start(
-        infile=new_xml_file, outfile=new_xml_file)
+        infile=working_xml_file, outfile=working_xml_file)
 
-    with open(new_xml_file, "w") as new:
+    with open(working_xml_file, "w") as new:
         new.write(xml_formatted_text)
 
     # Put the final xml file in the output directory and rename if per
     # the user's preference.
     output_dir = base_script_dir + "/output"
-    copy(new_xml_file, output_dir)
-    os.rename(output_dir + "/new_xml_file.xml",
+    copy(working_xml_file, output_dir)
+    os.rename(output_dir + "/working_xml_file.xml",
               output_dir + f'/{output_file_name}')

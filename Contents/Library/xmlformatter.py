@@ -117,14 +117,14 @@ class Formatter:
                 return strg
             elif sys.version_info > (3, 0):
                 with open(os.path.join("/Users/gradyke/Documents/DEV_RtoX/, "
-                                       "new_xml_file.xml"), "w") as \
+                                       "working_xml_file.xml"), "w") as \
                         new_file_pre:
                     new_file_pre.write(strg)
                 # fh.buffer.write(strg)
             else:
                 fh.write(strg)
 
-    # First step: format the infile (new_xml_file.xml).
+    # First step: format the infile (working_xml_file.xml).
     def format_file(self, file):
         """ Format the XML document. """
         fh = open(file, 'rb')

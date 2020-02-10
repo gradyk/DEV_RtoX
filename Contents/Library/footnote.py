@@ -42,12 +42,12 @@ __name__ = "footnote"
 
 # Standard library imports
 import linecache
-import os
 import sys
 
 # From local application
 import open_tag_check
 import tag_registry_update
+import working_xml_file_update
 
 
 def footnote_bounds(working_file: str, search_line: str) -> str:
@@ -98,9 +98,13 @@ def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
-        xml_file.write(tag_dict["footnote-beg"])
-        sys.stdout.write(tag_dict["footnote-beg"] + f"{line}")
+    tag_update = tag_dict["footnote-beg"]
+
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
+
+    sys.stdout.write(tag_dict["footnote-beg"] + f"{line}")
 
     # Update the tag registry.
     tag_update_dict = {"footnote": "1"}
@@ -133,11 +137,11 @@ def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "a") as wxf_pre:
-        wxf_pre.write(tag_dict["footnote-end"] + tag_dict["paragraph-beg"])
-        sys.stdout.write(tag_dict["footnote-end"] +
-                         tag_dict["paragraph-beg"] + f"({line})")
+    tag_update = tag_dict["footnote-end"] + tag_dict["paragraph-beg"]
+
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
 
     # Update the tag registry.
     tag_update_dict = {"footnote": "0", "paragraph": "1"}

@@ -44,6 +44,7 @@ import sys
 # From local application
 import open_tag_check
 import tag_registry_update
+import working_xml_file_update
 
 
 def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
@@ -75,29 +76,25 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
 
     # Check the status of the paragraph tag. It if is closed then
     # open it.
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
     tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry_file) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
     # 0 = closed, 1 = open
     if tag_registry["paragraph"] == "0":
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = tag_dict["paragraph-beg"]
+        working_xml_file_update.tag_append(
+            debug_dir=debug_dir,
+            tag_update=tag_update)
         sys.stdout.write(tag_dict["paragraph-beg"] + f"{line}")
         pass
     else:
         # If it is open, close it and open a new paragraph (pard marks the
         # end of a paragraph and, presumptively, the beginning of a new
         # paragraph).
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["paragraph-end"] + tag_dict[
-                "paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
+        working_xml_file_update.tag_append(
+            debug_dir=debug_dir,
+            tag_update=tag_update)
         sys.stdout.write(tag_dict["paragraph-end"] + tag_dict[
                          "paragraph-beg"] + f"{line}")
         pass

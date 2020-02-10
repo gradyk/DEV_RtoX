@@ -50,6 +50,7 @@ import sys
 # From application library
 import open_tag_check
 import tag_registry_update
+import working_xml_file_update
 
 
 def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
@@ -80,33 +81,27 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
 
     # Check the tag registry for the status of a section tag. If it is
     # closed, open a new section and open a paragraph.
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
     tag_registry = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
     # 0 = closed, 1 = open
     if tag_registry["section"] == "0":
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["section-beg"] + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = tag_dict["section-beg"] + tag_dict["paragraph-beg"]
+        working_xml_file_update.tag_append(
+            debug_dir=debug_dir,
+            tag_update=tag_update)
         sys.stdout.write(tag_dict["section-beg"] + f"{line}" +
                          tag_dict["paragraph-beg"] + f"{line}")
         pass
     else:
         # If a section tag is open, close it, open a new section and open a
         # paragraph.
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read()
-            wxf = wxf + tag_dict["section-end"] + tag_dict[
-                "section-beg"] + tag_dict["paragraph-beg"]
-        with open(working_xml_file, "w") as wxf_pre:
-            sys.stdout.write(tag_dict["section-end"] +
-                             tag_dict["section-beg"] + f"{line}" + tag_dict[
-                             "paragraph-beg"] + f"{line}")
-            wxf_pre.write(wxf)
-            pass
+        tag_update = tag_dict["section-end"] + tag_dict["section-beg"] + \
+                     tag_dict["paragraph-beg"]
+        working_xml_file_update.tag_append(
+            debug_dir=debug_dir,
+            tag_update=tag_update)
+        pass
 
     # Update tag registry.
     tag_update_dict = {"section": "1", "paragraph": "1"}

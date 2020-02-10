@@ -108,7 +108,7 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
             debug_dir=debug_dir,
             xml_tag_num=xml_tag_num))
 
-    # Check the tag registry to see whether an emphasis tag needs closing.
+    # Check the tag registry to see whether any emphasis tags need closing.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -124,8 +124,9 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
         tag_dict=tag_dict,
         status_list=status_list)
 
-    # Add XML tags to working_xml_file that reflect settings of current
-    # text line. As appropriate, update text line status dictionary.
+    # From the cs line, create a list (list_of_tags) of emphasis tags which
+    # need to be added to the working_xml_file. Add those tags to the file
+    # and to a tag_bag.
     list_of_tags = []
     tag_tracker = 0
     for key in cs_line_dict:
@@ -149,6 +150,11 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
                 tag_update_dict=tag_update_dict)
             sys.stdout.write(tag_dict[lot_item+"-beg"] + f"{line}")
 
+            tag_update_dict = {lot_item: "1"}
+            tag_registry_update.tag_registry_update(
+                debug_dir=debug_dir,
+                tag_update_dict=tag_update_dict)
+
         # To that list of tags, add the cs line text.
         tag_insert = tag + text
 
@@ -169,17 +175,21 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
 
 
 def cs_closing_tags(debug_dir: str, tag_dict: str, tag_bag: list):
+    """
+
+    """
 
     working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
     tag = ""
 
+    # If the tag_bag is empty, exit.
     if not tag_bag:
         pass
     else:
-        # Reverse the list of tags.
+        # If there are tags in the tag_bag, reverse the order of the tags.
         tag_bag.reverse()
 
-        # Add a closing tag for each item in the reversed list.
+        # Add a closing tag for each tag in the reversed list.
         for tag_item in tag_bag:
             tag = tag + tag_dict[tag_item+"-end"]
             # Update the tag registry.
@@ -189,7 +199,12 @@ def cs_closing_tags(debug_dir: str, tag_dict: str, tag_bag: list):
                 tag_update_dict=tag_update_dict)
             sys.stdout.write(tag_dict[tag_item+"-end"])
 
-        # Add the tags plus text to the working xml file.
+            tag_update_dict = {tag_item: "0"}
+            tag_registry_update.tag_registry_update(
+                debug_dir=debug_dir,
+                tag_update_dict=tag_update_dict)
+
+        # Add the tags to the working_xml_file.
         with open(working_xml_file, "r") as wxf_pre:
             wxf = wxf_pre.read() + tag
         with open(working_xml_file, "w") as wxf_pre:

@@ -50,7 +50,7 @@ import Contents.Library.file_length
 
 
 def line_cleanup(debug_dir: str, ):
-    working_file = os.path.join(debug_dir, "new_xml_file.xml")
+    working_file = os.path.join(debug_dir, "working_xml_file.xml")
 
     file_length = Contents.Library.file_length.working_file_length(
             working_file=working_file)
@@ -63,5 +63,5 @@ def line_cleanup(debug_dir: str, ):
         new_file = new_file + line
         i += 1
 
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as nf:
+    with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as nf:
         nf.write(new_file)

@@ -44,14 +44,13 @@ __date__ = "2020-01-11"
 __name__ = "header"
 
 # From standard libraries
-import json
 import linecache
-import os
 import sys
 
 # From local application
 import open_tag_check
 import tag_registry_update
+import working_xml_file_update
 
 
 def header_bounds(working_file: str, search_line: str) -> str:
@@ -102,8 +101,11 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
-        xml_file.write(tag_dict["header-beg"])
+    tag_update = tag_dict["header-beg"]
+
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
 
     sys.stdout.write(tag_dict["header-beg"] + f"{line}")
 
@@ -137,8 +139,11 @@ def header_end(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    with open(os.path.join(debug_dir, "new_xml_file.xml"), "w") as xml_file:
-        xml_file.write(tag_dict["header-end"] + tag_dict["paragraph-beg"])
+    tag_update = tag_dict["header-end"] + tag_dict["paragraph-beg"]
+
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
 
     sys.stdout.write(tag_dict["header-end"] +
                      tag_dict["paragraph-beg"] + f"{line}")
