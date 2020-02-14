@@ -34,6 +34,14 @@ Check line for keyword. Suitable keywords: par, pard, sect, sectd, header,
 footnote.
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2019-10-26"
+__name__ = "Contents.Library.keyword_start"
+
+
 # From standard library
 import linecache
 import re

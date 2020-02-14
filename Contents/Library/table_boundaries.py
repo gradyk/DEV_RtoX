@@ -64,10 +64,8 @@ class TableBounds:
         self.line_number = line_number
         self.table = table
 
-    def table_start_end(self) -> tuple:
+    def table_start_end(self) -> str:
 
-        table_open = self.line_number
-        table_close = self.line_number
         running_line = ""
         table_status = 0
 
@@ -77,7 +75,6 @@ class TableBounds:
             test_close_bracket = re.search("}", line_to_search[0])
             if test_close_bracket is not None:
                 running_line = running_line + line_to_search.rstrip()
-                table_close = self.line_number
                 table_status = 1
             else:
                 running_line = running_line + line_to_search.rstrip()
@@ -88,4 +85,4 @@ class TableBounds:
         text_to_process = text_to_process_pre.replace("\n", "").\
             replace("}}", "}")
 
-        return table_open, table_close, text_to_process
+        return text_to_process

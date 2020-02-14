@@ -45,7 +45,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
-__name__ = "prepare_to_process"
+__name__ = "Contents.Library.prepare_to_process"
 
 # From standard libraries
 import json
@@ -126,8 +126,8 @@ class PrepareToProcess:
 
     def xml_tag_pref(self):
         """
-        Determine user's preference for XML tag style and use the appropriate
-        dictionary.
+        Determine the user's preference for XML tag style and use the
+        appropriate dictionary (tag_dict).
         """
 
         from config_dict import config_dictionary as rtf_settings_dict
@@ -138,11 +138,14 @@ class PrepareToProcess:
         else:
             pass
 
-        file_list = [[1, "xml_tags.py"],
-                     [2, "tei_tags.py"],
-                     [3, "tpres_tags.py"],
-                     [4, "xml_tags.py"]
-                     ]
+        # TODO Need to make more flexible so other tag dicts can be added by
+        #  the user.
+        file_list = [
+            [1, "xml_tags.py"],
+            [2, "tei_tags.py"],
+            [3, "tpres_tags.py"],
+            [4, "xml_tags.py"]
+            ]
 
         tag_file = file_list[int(xml_tag_num)-1][1]
         tag_dict = os.path.join(self.debug_dir, tag_file)
@@ -155,10 +158,19 @@ class PrepareToProcess:
                 tag_registry:
             json.dump(tag_registry_dict, tag_registry)
 
+    def create_header_table_dict(self):
+        header_tables_dict = os.path.join(self.debug_dir,
+                                          "header_tables_dict.json")
+        with open(header_tables_dict, "w+", encoding="utf-8") as \
+                header_tables:
+            json.dump({}, header_tables)
+
     def prep_rtf_file(self, xml_tag_num):
         """
-        1. Create a copy of the input file for use during processing.
-        2. Create an XML file to hold tags (it will become the output file).
+        Create a copy of the input file for use during processing (
+        working_input_file).
+        Create an XML file to hold tags during processing (
+        working_xml_file).
         """
         working_file = input_file_prep.InputPrep.input_file_prep(
             input_file_prep.

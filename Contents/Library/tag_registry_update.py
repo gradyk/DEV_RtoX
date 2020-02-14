@@ -38,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-06"
-__name__ = "tag_registry_update"
+__name__ = "Contents.Library.tag_registry_update"
 
 # From standard libraries
 import json
@@ -54,6 +54,7 @@ def tag_registry_update(debug_dir: str, tag_update_dict: dict):
         tag_registry = json.load(tag_registry_pre)
         tag_registry.update(tag_update_dict)
 
+    # TODO change the next line into a logger.
     # sys.stdout.write(str(tag_registry))
     with open(tag_registry_file, "w", encoding='utf-8') as tag_registry_pre:
         json.dump(tag_registry, tag_registry_pre, ensure_ascii=False)

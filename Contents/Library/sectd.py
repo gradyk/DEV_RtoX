@@ -34,6 +34,13 @@ Sectd signifies that the section just beginning uses the same formatting as
 the preceding section.
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-01-11"
+__name__ = "Contents.Library.sectd"
+
 # Standard library imports
 import json
 import os
@@ -78,27 +85,23 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         tag_registry = json.load(tag_registry_pre)
     # 0 = closed, 1 = open
     if tag_registry["section"] == "0":
-        tag_update = tag_dict["section-beg"] + tag_dict["paragraph-beg"]
+        tag_update = tag_dict["section-beg"]
         working_xml_file_update.tag_append(
             debug_dir=debug_dir,
             tag_update=tag_update)
-        sys.stdout.write(tag_dict["section-beg"] + f"{line}" +
-                         tag_dict["paragraph-beg"] + f"{line}")
+        sys.stdout.write(tag_dict["section-beg"] + f"{line}")
         pass
     else:
-        # If a section tag is open, close it, open a new section and open a
-        # paragraph.
-        tag_update = tag_dict["section-end"] + tag_dict[
-                "section-beg"] + tag_dict["paragraph-beg"]
+        # If a section tag is open, close it and open a new section.
+        tag_update = tag_dict["section-end"] + tag_dict["section-beg"]
         working_xml_file_update.tag_append(
             debug_dir=debug_dir,
             tag_update=tag_update)
         sys.stdout.write(tag_dict["section-end"] +
-                         tag_dict["section-beg"] + f"{line}" + tag_dict[
-                         "paragraph-beg"] + f"{line}")
+                         tag_dict["section-beg"] + f"{line}")
         pass
 
     # Update tag registry.
-    tag_update_dict = {"section": "1", "paragraph": "1"}
+    tag_update_dict = {"section": "1"}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

@@ -33,7 +33,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Process page header blocks in the RTF doc body.
+Parse text and settings in the RTF file wrapped by the header keyword ({
+\\header ...}).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -41,7 +42,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-11"
-__name__ = "header"
+__name__ = "Contents.Library.header"
 
 # From standard libraries
 import linecache
@@ -79,12 +80,16 @@ def header_bounds(working_file: str, search_line: str) -> str:
 
 def header_start(debug_dir: str, xml_tag_num: str, line: str):
     """
-
+    Before inserting an opening XML tag for a header, check for open tags
+    that need to be closed and (if any) close them. Insert the opening
+    header tag. Update the tag_registry after inserting tags.
     """
+    # Retrieve the correct tag dictionary to use.
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
                                      xml_tag_num=xml_tag_num))
 
+    # Check for open tags.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -101,6 +106,7 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
+    # Insert the opening header tag.
     tag_update = tag_dict["header-beg"]
 
     working_xml_file_update.tag_append(
@@ -117,12 +123,16 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
 
 def header_end(debug_dir: str, xml_tag_num: str, line: str):
     """
-
+    Before inserting a closing XML tag for a header, check for open tags
+    and (if any) close them. Insert the closing header tag. Updated the
+    tag registry.
     """
+    # Retrieve the correct tag dictionary to use.
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
                                      xml_tag_num=xml_tag_num))
 
+    # Check for open tags.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -139,6 +149,11 @@ def header_end(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
+    # TODO At least in TPRES, a header may be embedded in a paragraph or fall
+    #  at the end or beginning of a paragraph. See also footnote.
+    # Insert the header closing tag. Note that a header is ending is
+    # different than a footnote ending. Headers are separate blocks and need
+    # a paragraph opening tag afterwards.
     tag_update = tag_dict["header-end"] + tag_dict["paragraph-beg"]
 
     working_xml_file_update.tag_append(

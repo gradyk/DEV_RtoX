@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 Process the first line of the RTF file, capturing codes.
 """
@@ -49,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-10"
-__name__ = "first_line"
+__name__ = "Contents.Library.first_line"
 
 import linecache
 import re
@@ -59,11 +48,10 @@ from Contents.log_config import logger
 
 class FirstLine:
     """
-    Process Header first line settings.
+    Process the settings in the first line of the RTF file.
     """
 
-    def __init__(
-                 self,
+    def __init__(self,
                  working_file: str,
                  debug_dir: str,
                  base_script_dir: str
@@ -73,8 +61,10 @@ class FirstLine:
         self.__base_script_dir = base_script_dir
 
     def line_parse(self):
+        # TODO Break line parse into separate defs for each
+        #  step.
         """
-        Parse first line of input file with keywords:
+        Parse the first line of RTF input file checking the  keywords:
         "rtf1", "ansi", "ansicpg1252", "uc1".
         Check for language keywords; check for style codes.
         """
@@ -85,39 +75,45 @@ class FirstLine:
         try:
             line_to_read.encode(encoding="us-ascii")
         except UnicodeEncodeError:
+            # TODO Substitute code to convert the file to ascii.
             logger.critical(msg="RTF file is not ASCII encoded. This "
                                 "version of the program needs an ASCII "
                                 "encoded file. RtoX will now quit.\n")
             sys.exit(1)
 
-        # Check for opening bracket.
+        # Check for an opening bracket.
         if line_to_read[0] == "{":
             pass
         else:
+            # TODO This should be rare. Try inserting a { and rerunning the
+            #  above line.
             logger.critical(msg="Document does not start with '{'. "
                                 "This version of RtoX cannot convert it to an "
                                 "XML file. RtoX will now quit.")
             sys.exit(1)
 
-        # Record keyword rtfN.
+        # TODO Rework this section of the module (e.g., use a list).
+        # Record the setting for the keyword rtfN.
         pattern_rtf = re.search(r'rtf[0-9]+', line_to_read)
         if pattern_rtf:
             rtf_code = pattern_rtf[0].replace('rtf', "")
             rtf_file_codes.update({"rtf": rtf_code})
             pass
         else:
+            # TODO Do something other than just throw an error?
             logger.critical(msg="Document does not start with 'rtfN'. "
                                 "This version of RtoX cannot convert it to an "
                                 "XML file. RtoX will now quit.")
             sys.exit(1)
 
-        # Check for keyword ansi.
+        # Check for the keyword ansi.
         pattern_ansi = re.search(r'ansi', line_to_read)
         if pattern_ansi:
             rtf_code = pattern_ansi[0].replace('ansi', "")
             rtf_file_codes.update({"ansi": rtf_code})
             pass
         else:
+            # TODO Provide solutions for other character sets.
             logger.critical(msg="Document does not use the ANSI "
                                 "character set. This version of "
                                 "RtoX does not handle "
@@ -127,13 +123,14 @@ class FirstLine:
                                 "now quit.\n")
             sys.exit(1)
 
-        # Check for keyword ansicpg1252.
+        # Check for the keyword ansicpg1252.
         pattern_cpg = re.search(r'ansicpg1252', line_to_read)
         if pattern_cpg:
             rtf_code = pattern_cpg[0].replace("ansicpg", "")
             rtf_file_codes.update({"code_pg": rtf_code})
             pass
         else:
+            # TODO Provide solutions for other code pages.
             logger.critical(msg="Document did not use ANSI code page 1252 "
                                 "when writing the Unicode to ANSI "
                                 "conversion. RtoX will now quit.")
@@ -143,6 +140,7 @@ class FirstLine:
         # Check for language keywords.
         pattern_upr = re.search(r'upr', line_to_read)
         if pattern_upr:
+            # TODO Write code that converts file to unicode only.
             logger.critical(msg="This version of RtoX does not support "
                                 "conversion of mixed ANSI and Unicode "
                                 "in RTF files. RtoX will now quit.\n")
@@ -156,11 +154,14 @@ class FirstLine:
             rtf_file_codes.update({"uc": rtf_code})
             pass
         else:
+            # TODO Write code that converts file to unicode only.
             logger.critical(msg="This version of RtoX does not support "
                                 "ANSI characters without Unicode "
                                 "equivalents. RtoX will now quit.\n")
             sys.exit(1)
 
+        # TODO This section could be handled better through a list or
+        #  dictionary.
         pattern_lang = re.search(r'deflang[0-9]+', line_to_read)
         if pattern_lang:
             rtf_code = pattern_lang[0].replace("deflang", "")

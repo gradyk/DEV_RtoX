@@ -30,7 +30,10 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+This module checks for open tags using a list (status_list). If any tags on
+the list are open, they are closed by inserting closing tags into the
+working_xml_file. The tag_registry is updated. These steps are performed by
+open_tag_check.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +41,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-07"
-__name__ = "tag_closer"
+__name__ = "Contents.Library.tag_closer"
 
 # From standard libraries
 import os
@@ -68,9 +71,3 @@ def tag_closer(debug_dir: str, xml_tag_num: str):
                                      xml_tag_num=xml_tag_num),
         status_list=status_list,
         tag_dict=tag_dict)
-
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "r") as \
-            xml_file_pre:
-        xml_file = xml_file_pre.read()
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as final_xml:
-        final_xml.write(xml_file)

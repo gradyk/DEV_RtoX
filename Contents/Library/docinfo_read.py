@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Each rtf file, after the header section, may have an "info" section that
+Each RTF file, after the header section, may have an "info" section that
 captures metadata about the document. This module controls the processing of
 the "info" section.
 """
@@ -40,16 +40,21 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-29"
-__name__ = "docinfo_read"
+__name__ = "Contents.Library.docinfo_read"
 
+# From standard libraries
 import psycopg2
 import re
-import table_boundaries
-import split_between_characters
 import sys
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
+# From local applications
+import table_boundaries
+import split_between_characters
 
+
+# TODO This entire module needs to be reworked (see line_parser for an
+#  example of what to do). Query: how will this info be used?
 class InfoParse:
 
     def __init__(self,
@@ -68,7 +73,7 @@ class InfoParse:
         """
         1. Find the beginning and end of the info section.
         """
-        tse_vars = table_boundaries.TableBounds.table_start_end(
+        text_to_process = table_boundaries.TableBounds.table_start_end(
             self=table_boundaries.TableBounds(
                 line_number=self.line_to_read,
                 table=self.table))
@@ -76,7 +81,7 @@ class InfoParse:
         # 2. Split the info code list into separate strings, one per info code.
         info_code_strings = split_between_characters.SplitBetween. \
             split_between(self=split_between_characters.SplitBetween(
-                            text_to_process=tse_vars[2],
+                            text_to_process=text_to_process,
                             split_characters="}{"))
 
         # 3. Separate each info code string into its parts and return the
@@ -212,7 +217,7 @@ class SetInfo:
 
     def creatim(self) -> list:
         """
-        _.
+
         """
         try:
             test = re.search("creatim", self.info_code)

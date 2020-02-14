@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 This script controls parsing of the info section of the document.
 1. Find beginning of document info section.
@@ -54,8 +43,13 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
-__name__ = "docinfo_parser"
+__name__ = "Contents.Library.docinfo_parser"
 
+# From standard libraries
+import json
+import os
+
+# From local applications
 import docinfo_read
 
 
@@ -74,11 +68,13 @@ class DocinfoParse:
         Process info section of document.
         """
         table = "info"
-        from header_tables_dict import header_tables_dictionary as htd
+        with open(os.path.join(self.debug_dir, "header_tables_dict.json")) as \
+                header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
 
-        if table in htd.keys():
+        if table in header_tables_dict.keys():
 
-            line_to_check = htd[table]
+            line_to_check = header_tables_dict[table]
 
             docinfo_read.InfoParse.find_docinfo(
                 self=docinfo_read.InfoParse(

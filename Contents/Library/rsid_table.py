@@ -38,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "rsid_table"
+__name__ = "Contents.Library.rsid_table"
 
 
 class RSIDTable:

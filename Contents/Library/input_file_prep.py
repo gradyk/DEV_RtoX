@@ -38,7 +38,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
-__name__ = "input_file_prep"
+__name__ = "Contents.Library.input_file_prep"
 
 # From standard libraries
 import os
@@ -74,6 +74,9 @@ class InputPrep:
                   "w+") as working_rtf_file_pre:
             working_rtf_file_pre.write(read_file)
 
+        # TODO this should be more flexible allowing for other code pages as
+        #  the starting point.
+        # Convert from MS1252 code page to unicode.
         convert_1252_to_unicode.convert_ms1252(
             debug_dir=self.debug_dir)
 

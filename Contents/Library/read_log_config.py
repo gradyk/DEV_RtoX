@@ -1,7 +1,7 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#  -*- coding: utf-8 -*-
 #
-#  Copyright (c) 2019. Kenneth A. Grady
+#  Copyright (c) 2020. Kenneth A. Grady
 #
 #  Redistribution and use in source and binary forms, with or without
 #  modification, are permitted provided that the following conditions are met:
@@ -37,49 +37,48 @@ __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2019-12-24"
-__name__ = "build_xml"
+__date__ = "2020-02-13"
+__name__ = "Contents.Library.read_log_config"
 
-# From standard libraries
-import psycopg2
+
+import os
+import json
+import logging
+import logging.config
 import sys
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
-def table_union():
-    from config_dict import config_dictionary
+def setup_logging(
+    default_file="log_config.json",
+    default_level=logging.INFO,
+    env_key='LOG_CFG'
+    ):
+    """
+    Setup logging configuration
+    """
+    main_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
+    file_to_get = os.path.join(main_directory, default_file)
+    value = os.getenv(env_key, None)
+    if value:
+        file_to_get = value
+    if os.path.exists(file_to_get):
+        with open(file_to_get, 'rt') as log_config_file:
+            config = json.load(log_config_file)
+        logging.config.dictConfig(config)
+    else:
+        logging.basicConfig(level=default_level)
 
-    host = config_dictionary.get("host")
-    database = config_dictionary.get("database")
-    user = config_dictionary.get("user")
-    password = config_dictionary.get("password")
-
-    con = psycopg2.connect(host=host, database=database, user=user,
-                           password=password)
-    con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-    cur = con.cursor()
-
-    try:
-
-        build_doc = """(DELETE FROM rtox_db.final.table_name);
-        CREATE TABLE rtox_db.final.table_name AS (SELECT * FROM 
-        rtox_db.doccodes.cslinecodes UNION ALL 
-        SELECT lineno, lineend, null as Col3, null as Col4, null as Col5, null 
-        as Col6, null as Col7, null as Col8 FROM rtox_db.doccodes.footnotes X
-        ORDER BY lineno);"""
-
-        cur.execute(build_doc)
-        con.commit()
-
-    except psycopg2.DatabaseError as err:
-        pg_err = str(err.pgcode)
-        sys.stdout.write("Problem entering style codes in database.\n"
-                         f"Error number {pg_err}; {err}\n")
-
-    if con is not None:
-        cur.close()
-        con.close()
+# THIS IS TO SET UP A NEW LOGGING LEVEL, SEE
+# https://stackoverflow.com/questions/2183233/how-to-add-a-custom-
+# loglevel-to-pythons-logging-facility
+# NEED TO ADD A HANDLER TO THE LOG_CONFIG FILE FOR EACH NEW LEVEL THAT
+# SPECIFIES WHERE THE MESSAGES GO.
+DEBUG_LEVELV_NUM = 9
+logging.addLevelName(DEBUG_LEVELV_NUM, "DEBUGV")
 
 
-if __name__ == "build_xml":
-    table_union()
+def debugv(self, message, *args, **kws):
+    if self.isEnabledFor(DEBUG_LEVELV_NUM):
+        # Yes, logger takes its '*args' as 'args'.
+        self._log(DEBUG_LEVELV_NUM, message, args, **kws)
+logging.Logger.debugv = debugv

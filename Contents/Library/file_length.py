@@ -29,6 +29,8 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+__name__ = "Contents.Library.file_length"
+
 
 def working_file_length(working_file: str) -> int:
     with open(working_file) as file_size:

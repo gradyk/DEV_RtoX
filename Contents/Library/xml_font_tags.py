@@ -38,12 +38,14 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-21"
-__name__ = "xml_font_tags"
+__name__ = "Contents.Library.xml_font_tags"
 
 import os
 from lxml import etree as et
 
 
+# TODO Consider what to do with this module as part of overall font table
+#  resolution.
 class XMLTagSets:
 
     def __init__(self,

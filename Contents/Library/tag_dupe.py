@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+When converting an RTF file to an XML file, some unwanted back-to-back tag
+combinations are created.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +39,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-29"
-__name__ = "tag_dupe"
+__name__ = "Contents.Library.tag_dupe"
 
 # From standard libraries
 import linecache
@@ -49,8 +50,7 @@ import re
 
 
 @staticmethod
-def deduper(debug_dir: str,
-            test_file: str):
+def tag_deduper(debug_dir: str, test_file: str):
 
     tag_list = [
         '<hiText rend="italic">',
@@ -70,10 +70,6 @@ def deduper(debug_dir: str,
             if close_test is None:
                 ctr_plus = ctr + 1
             else:
-
-
-
-
         else:
             pass
 
@@ -89,4 +85,28 @@ def deduper(debug_dir: str,
             6. repeat loop until answer to 3 is no
 
             7. repeat process using next tag (eg, <hiText rend="italic">)
+
+[ALTERNATIVE]
+def tag_deduper(debug_dir: str, tag_dict: dict):
+    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
+
+    back_to_back_tag_list = [
+        "italic-beg",
+        "bold-beg",
+        "underline-beg",
+        "strikethrough-beg",
+        "small-caps-beg"
+    ]
+
+    with open(working_xml_file, "r") as working_xml_file_pre:
+        working_file = working_xml_file_pre.read()
+
+
+
+        for tag in back_to_back_tag_list:
+
+            [SEARCH FOR BACK TO BACK TAGS]
+            [REPLACE BACK TO BACK TAGS WITH ONE TAG SET]
+        [LOOP END]
+
 

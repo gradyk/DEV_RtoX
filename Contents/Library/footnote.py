@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+Parse text and settings in the RTF file wrapped by the footnote keyword ({
+\\footnote ...}).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +39,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-18"
-__name__ = "footnote"
+__name__ = "Contents.Library.footnote"
 
 # Standard library imports
 import linecache
@@ -52,22 +53,29 @@ import working_xml_file_update
 
 def footnote_bounds(working_file: str, search_line: str) -> str:
     """
-
+    A footnote is bounded by an opening brace and keyword ({\\footnote)
+    and a closing brace (}). The opening is easy to identify. The closing can
+    be determined by counting opening and closing braces until the count
+    matches.
     """
-    leftb = 0
-    rightb = 0
+    left_brace = 0
+    right_brace = 0
     footnote_end_line = "0"
     while footnote_end_line == "0":
         line_to_search = linecache.getline(working_file, search_line)
-        for elem in line_to_search:
-            if elem == "{":
-                leftb += 1
-            elif elem == "}":
-                rightb += 1
-            if leftb == rightb:
+        for character in line_to_search:
+            if character == "{":
+                left_brace += 1
+            elif character == "}":
+                right_brace += 1
+            else:
+                pass
+
+            if left_brace == right_brace:
                 footnote_end_line = search_line
             else:
                 pass
+
         search_line += 1
 
     linecache.clearcache()
@@ -76,12 +84,19 @@ def footnote_bounds(working_file: str, search_line: str) -> str:
 
 def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
     """
-
+    Before inserting an opening XML tag for a footnote, check for open tags
+    that need to be closed and (if any) close them. Insert the opening
+    footnote tag. Update the tag_registry after inserting tags.
     """
+    # Retrieve the correct tag dictionary to use.
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(debug_dir=debug_dir,
                                      xml_tag_num=xml_tag_num))
 
+    # TODO At least in TPRES, a footnote can be embedded in a paragraph or at
+    #  the end of a paragraph. If embedded, the paragraph tag should not be
+    #  closed before the footnote or opened after it. See also header.
+    # Check for and close open tags.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -98,12 +113,12 @@ def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
+    # Add the opening footnote tag.
     tag_update = tag_dict["footnote-beg"]
 
     working_xml_file_update.tag_append(
         debug_dir=debug_dir,
         tag_update=tag_update)
-
     sys.stdout.write(tag_dict["footnote-beg"] + f"{line}")
 
     # Update the tag registry.
@@ -114,13 +129,19 @@ def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
 
 def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
     """
-
+    Before inserting a closing XML tag for a footnote, check for open tags
+    and (if any) close them. Insert the closing footnote tag. Updated the
+    tag registry.
     """
+    # TODO Should that tag_dict be determined at the outset and passed as a
+    #  variable?
+    # Retrieve the correct tag dictionary to use.
     tag_dict = open_tag_check.TagCheck.tag_style(
         self=open_tag_check.TagCheck(
             debug_dir=debug_dir,
             xml_tag_num=xml_tag_num))
 
+    # Check for and close open tags.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -137,13 +158,15 @@ def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
         tag_dict=tag_dict,
         status_list=status_list)
 
-    tag_update = tag_dict["footnote-end"] + tag_dict["paragraph-beg"]
+    # Add the closing footnote tag.
+    tag_update = tag_dict["footnote-end"]
 
     working_xml_file_update.tag_append(
         debug_dir=debug_dir,
         tag_update=tag_update)
+    sys.stdout.write(f" ({line})" + tag_dict["footnote-end"])
 
     # Update the tag registry.
-    tag_update_dict = {"footnote": "0", "paragraph": "1"}
+    tag_update_dict = {"footnote": "0"}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

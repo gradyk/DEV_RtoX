@@ -49,9 +49,10 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-26"
-__name__ = "header_structure"
+__name__ = "Contents.Library.header_structure"
 
 # Standard library imports
+import json
 import linecache
 import os
 import re
@@ -76,33 +77,33 @@ class HeaderStructure:
 
     def table_check(self):
         """
-        Check input file for each possible table in header. If located,
-        record the line on which the table starts.
+        Check input file for each possible table in the RTF file header. If
+        located, record the line on which the table starts.
         """
-
         file_length = Contents.Library.file_length.working_file_length(
                 working_file=self.working_file)
 
-        header_tables_dict_args = {}
-        header_tables = ["rtf", "fonttbl", "filetbl", "colortbl", "stylesheet",
-                         "listtables", "revtbl", "rsidtable", "generator",
-                         "info"]
+        header_tables_dict = os.path.join(self.debug_dir,
+                                          "header_tables_dict.json")
 
-        for header in header_tables:
-            line_count = 0
-            while line_count < file_length:
-                line_to_read = linecache.getline(self.working_file,
-                                                 line_count)
-                match = re.search(r'{\\'+header, line_to_read)
-                if match:
-                    header_tables_dict_args.update({header: line_count})
-                    line_count += 1
-                else:
-                    line_count += 1
+        header_tables_list = ["rtf", "fonttbl", "filetbl", "colortbl",
+                              "stylesheet", "listtables", "revtbl",
+                              "rsidtable", "generator", "info"]
 
-        header_table_dict = header_tables_dict_args
-        with open(os.path.join(self.debug_dir,
-                               "header_tables_dict.py"), "w+") as file:
-            file.write("header_tables_dictionary = " + str(header_table_dict))
+        with open(header_tables_dict) as header_tables_pre:
+            header_tables = json.load(header_tables_pre)
+
+            for header in header_tables_list:
+                line_count = 0
+                while line_count < file_length:
+                    line_to_read = linecache.getline(self.working_file,
+                                                     line_count)
+                    match = re.search(r'{\\'+header, line_to_read)
+                    if match:
+                        header_tables_update = {header: line_count}
+                        header_tables.update(header_tables_update)
+                        line_count += 1
+                    else:
+                        line_count += 1
 
         linecache.clearcache()

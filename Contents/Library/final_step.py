@@ -30,7 +30,17 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+After the appropriate tags have been inserted into the working_xml_file,
+several clean up operations need to be performed. They include:
+1) Removing empty tag pairs (e.g., <p></p>).
+2) Putting closing tags at the end of the working_xml_file that match the
+opening tags added ot the file.
+3) Adding the first line of the file and any header that precedes the main body.
+4) Post-processing the file. This may include steps such as adding tags (
+e.g., putting quoted material in tags).
+5) Indenting and formatting the working_xml_file.
+6) Copying the working_xml_file to the output directory and changing the file
+name to the name specified in the user's preferences.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -38,7 +48,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-09"
-__name__ = "final_step"
+__name__ = "Contents.Library.final_step"
 
 # From standard libraries
 import os
@@ -116,8 +126,13 @@ def final_step(debug_dir: str,
         # TODO A logger message should go here.
         pass
 
+    # TODO create a set of post process steps.
     # Post-process the file.
-    # post_process.line_cleanup(debug_dir=debug_dir)
+    # post_process.tag_cleanup(debug_dir=debug_dir)
+
+    # TODO Create a snapshot of the working_xml_file to store in case of tag
+    #  mismatch problems (the next step wipes out the working_xml_file while
+    #  processing).
 
     xml_formatted_text = xmlformatter.xmlformatter_start(
         infile=working_xml_file, outfile=working_xml_file)
@@ -125,7 +140,7 @@ def final_step(debug_dir: str,
     with open(working_xml_file, "w") as new:
         new.write(xml_formatted_text)
 
-    # Put the final xml file in the output directory and rename if per
+    # Put the final XML file in the output directory and rename it per
     # the user's preference.
     output_dir = base_script_dir + "/output"
     copy(working_xml_file, output_dir)

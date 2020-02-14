@@ -38,14 +38,14 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-21"
-__name__ = "xml_style_tags"
+__name__ = "Contents.Library.xml_style_tags"
 
 import os
 from lxml import etree as et
 
 
-# TODO Drop this module as no longer relevant? Or, keep it and add function
-#  call to style_sheet_table?
+# TODO Consider what to do with this module as part of overall style table
+#  resolution.
 class XMLTagSets:
 
     def __init__(self,

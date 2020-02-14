@@ -40,7 +40,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
-__name__ = "log_config"
+__name__ = "Contents.log_config"
 
 import logging
 import os

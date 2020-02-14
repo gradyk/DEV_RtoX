@@ -30,7 +30,9 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Format and compress XML documents.
+Format and compress the working_xml_file. This is the last step before the
+file is moved to the folder designated by the user for the output file,
+and the file is renamed to the output file name designated by the user.
 [Based on xmlformatter by P. Andreas Moeller.]
 """
 
@@ -39,7 +41,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-26"
-__name__ = "xmlformatter"
+__name__ = "Contents.Library.xmlformatter"
 
 import re
 import os
@@ -73,7 +75,7 @@ class Formatter:
                  inline=DEFAULT_INLINE,
                  correct=DEFAULT_CORRECT,
                  preserve=DEFAULT_PRESERVE) -> None:
-        # Minify the XML document:
+        # Minify the XML document: TODO Does this do anything?
         self.compress = compress
         # Correct text nodes
         self.correct = correct
@@ -87,7 +89,7 @@ class Formatter:
         self.indent_char = indent_char
         # Format inline objects:
         self.inline = inline
-        # Don't compress this elements and their descendants:
+        # Don't compress these elements and their descendants:
         self.preserve = preserve
 
     @property

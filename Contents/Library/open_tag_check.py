@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Check for an open tag of the type specified and, if open, close and update
+The tag registry maintains the status of open and closed tags. Check for an
+open tag of the type specified and, if open, close and update
 the tag registry.
 """
 
@@ -39,7 +40,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-22"
-__name__ = "ope_tag_check"
+__name__ = "Contents.Library.open_tag_check"
 
 # Standard library imports
 import importlib
@@ -49,6 +50,7 @@ import sys
 
 # From local application
 import tag_registry_update
+import working_xml_file_update
 
 
 class TagCheck:
@@ -61,9 +63,11 @@ class TagCheck:
 
     def tag_style(self):
         """
-        Import xml tag dictionary based on user XML tag style preference.
+        Import an XML tag dictionary based on user XML tag style preference.
         """
 
+        # TODO allow for possibility that the user did not express a
+        #  preference. Also put this function in a separate .py.
         # Possible xml tag dictionaries.
         options = {
             "1": "xml_tag_dict",
@@ -82,13 +86,16 @@ class TagCheck:
         return tag_dict
 
     def tag_check(self, tag_dict: dict, status_list: list):
+        """
+        The tag_dict includes tags for various settings based on the style
+        chosen by the user (e.g., TEI, TPRES). The status_list identifies the
+        specific tags to check.
+        """
 
-        working_xml_file = os.path.join(self.debug_dir,
-                                        "working_xml_file.xml")
         tag_registry = os.path.join(self.debug_dir, "tag_registry.json")
 
-        with open(tag_registry) as trd_j:
-            tag_registry_data = json.load(trd_j)
+        with open(tag_registry) as tag_registry_data_pre:
+            tag_registry_data = json.load(tag_registry_data_pre)
 
             for tag_type in status_list:
                 # 0 = closed, 1 = open
@@ -96,11 +103,10 @@ class TagCheck:
                     pass
                 else:
                     # Update the working_xml_file.
-                    with open(working_xml_file, "r") as wxf_pre:
-                        wxf = wxf_pre.read()
-                        wxf = wxf + tag_dict[tag_type+"-end"]
-                    with open(working_xml_file, "w") as wxf_pre:
-                        wxf_pre.write(wxf)
+                    tag_update = tag_dict[tag_type+"-end"]
+                    working_xml_file_update.tag_append(
+                        debug_dir=self.debug_dir,
+                        tag_update=tag_update)
                     sys.stdout.write(tag_dict[tag_type+"-end"])
 
                     # Update the tag registry.

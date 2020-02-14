@@ -30,7 +30,8 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+Each keyword "line" (which may consist of several lines in the RTF input
+file) must be parsed to extract settings and text.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -51,6 +52,13 @@ import sectd
 
 
 class Parser:
+    # TODO Do pard and sectd need opening and closing functions and setting
+    #  parsings?
+    """
+    The line parser calls a function (or, in the case of the cs, footnote,
+    and header keywords a beginning and closing function) to parse the
+    settings and text for the keyword.
+    """
     def __init__(self,
                  kw_list: list,
                  line_to_read: str,
@@ -64,8 +72,8 @@ class Parser:
         self.xml_tag_num = xml_tag_num
 
     @staticmethod
-    def cs_open_process(working_file, line_to_read, xml_tag_num, debug_dir,
-                        line):
+    def cs_open_process(working_file: str, line_to_read: str, xml_tag_num: str,
+                        debug_dir: str):
 
         cs_line_dict, text = cs.cs_line_parse(
             working_file=working_file,
@@ -75,53 +83,56 @@ class Parser:
                                                text=text,
                                                xml_tag_num=xml_tag_num,
                                                debug_dir=debug_dir,
-                                               line=line)
+                                               line=line_to_read)
         return tag_bag, tag_dict
 
     @staticmethod
-    def cs_close_process(debug_dir, tag_bag, tag_dict):
+    def cs_close_process(debug_dir: str, tag_bag: list, tag_dict: str,
+                         line_to_read: str):
         cs.cs_closing_tags(debug_dir=debug_dir, tag_bag=tag_bag,
-                           tag_dict=tag_dict)
+                           tag_dict=tag_dict, line=line_to_read)
 
     @staticmethod
-    def header_beg_process(debug_dir, xml_tag_num, line):
-        header.header_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                            line=line)
-
-    @staticmethod
-    def header_end_process(debug_dir, xml_tag_num, line):
-        header.header_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                          line=line)
-
-    @staticmethod
-    def footnote_beg_process(debug_dir, xml_tag_num, line):
+    def footnote_beg_process(debug_dir: str, xml_tag_num: str,
+                             line_to_read: str):
         footnote.footnote_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                                line=line)
+                                line=line_to_read)
 
     @staticmethod
-    def footnote_end_process(debug_dir, xml_tag_num, line):
+    def footnote_end_process(debug_dir: str, xml_tag_num: str,
+                             line_to_read: str):
         footnote.footnote_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                              line=line)
+                              line=line_to_read)
 
     @staticmethod
-    def par_process(debug_dir, xml_tag_num, line):
+    def header_beg_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
+        header.header_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                            line=line_to_read)
+
+    @staticmethod
+    def header_end_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
+        header.header_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+                          line=line_to_read)
+
+    @staticmethod
+    def par_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
         par.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                       line=line)
+                       line=line_to_read)
 
     @staticmethod
-    def pard_process(debug_dir, xml_tag_num, line):
+    def pard_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
         pard.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                        line=line)
+                        line=line_to_read)
 
     @staticmethod
-    def sect_process(debug_dir, xml_tag_num, line):
+    def sect_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
         sect.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                        line=line)
+                        line=line_to_read)
 
     @staticmethod
-    def sectd_process(debug_dir, xml_tag_num, line):
+    def sectd_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
         sectd.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
-                         line=line)
+                         line=line_to_read)
 
     def line_parse(self):
         tag_bag = []
@@ -139,18 +150,20 @@ class Parser:
             }
 
         for element in self.kw_list:
-            if element[0] == "cs_beg":
+            keyword = element[0]
+            line_number = element[1]
+            if keyword == "cs_beg":
                 tag_bag, tag_dict = Parser.cs_open_process(
-                    line_to_read=element[1],
+                    line_to_read=line_number,
                     xml_tag_num=self.xml_tag_num,
                     debug_dir=self.debug_dir,
-                    line=element[1],
                     working_file=self.working_file)
-            elif element[0] == "cs_end":
+            elif keyword == "cs_end":
                 Parser.cs_close_process(debug_dir=self.debug_dir,
                                         tag_bag=tag_bag,
-                                        tag_dict=tag_dict)
+                                        tag_dict=tag_dict,
+                                        line_to_read=line_number)
             else:
-                process_dict[element[0]](debug_dir=self.debug_dir,
-                                         xml_tag_num=self.xml_tag_num,
-                                         line=element[1])
+                process_dict[keyword](debug_dir=self.debug_dir,
+                                      xml_tag_num=self.xml_tag_num,
+                                      line_to_read=line_number)

@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 This module controls parsing the document header. Evaluation results are
 stored in the rtox_db, schema associated with the table.
@@ -60,8 +49,13 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
-__name__ = "header_parser"
+__name__ = "Contents.Library.header_parser"
 
+# From standard libraries
+import json
+import os
+
+# From local application
 import color_table
 import file_table
 import first_line
@@ -86,65 +80,37 @@ class DocHeaderParser:
         self.styles_status_list = styles_status_list
 
     def process_header(self):
-        # Determine header structure of rtf input document.
-        HeaderParse.header_structure(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
+        # TODO Complete list table, rev table, rsid table, generator parsers
+        #  and turn them on here.
 
-        # Process first line of rtf input document.
-        HeaderParse.rtf_first_line(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
+        header_tables = os.path.join(self.debug_dir, "header_tables_dict.json")
 
-        # Process font table rtf codes.
-        HeaderParse.font_table(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
+        header_parse_class = HeaderParse(
+            debug_dir=self.debug_dir,
+            working_file=self.working_file,
+            base_script_dir=self.base_script_dir,
+            xml_tag_num=self.xml_tag_num,
+            styles_status_list=self.styles_status_list,
+            header_tables=header_tables)
 
-        # Process file table rtf codes.
-        HeaderParse.file_table(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
+        process_list = [
+            HeaderParse.header_structure,
+            HeaderParse.rtf_first_line,
+            HeaderParse.font_table,
+            HeaderParse.file_table,
+            HeaderParse.color_table,
+            # HeaderParse.list_table,
+            # HeaderParse.rev_table,
+            # HeaderParse.rsid_table,
+            # HeaderParse.generator
+        ]
 
-        # Process color table rtf codes.
-        HeaderParse.color_table(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
+        for process in process_list:
+            process(self=header_parse_class)
 
-        # Process style sheet table rtf codes.
+        # Process style sheet table RTF codes.
         self.styles_status_list = HeaderParse.style_sheet_table(
-            self=HeaderParse(debug_dir=self.debug_dir,
-                             working_file=self.working_file,
-                             base_script_dir=self.base_script_dir,
-                             xml_tag_num=self.xml_tag_num,
-                             styles_status_list=self.styles_status_list))
-
-        # HeaderParse.list_table(
-        #   xml_tag_num=xml_tag_num_pass)
-
-        # HeaderParse.rev_table(
-        #   xml_tag_num=xml_tag_num_pass)
-
-        # HeaderParse.rsid_table(
-        #   xml_tag_num=xml_tag_num_pass)
-
-        # HeaderParse.generator(
-        #   xml_tag_num=xml_tag_num_pass)
+            self=header_parse_class)
 
         return self.styles_status_list
 
@@ -156,13 +122,15 @@ class HeaderParse:
                  working_file: str,
                  base_script_dir: str,
                  xml_tag_num: str,
-                 styles_status_list: list
+                 styles_status_list: list,
+                 header_tables: str
                  ) -> None:
         self.debug_dir = debug_dir
         self.working_file = working_file
         self.base_script_dir = base_script_dir
         self.xml_tag_num = xml_tag_num
         self.styles_status_list = styles_status_list
+        self.header_tables = header_tables
 
     def header_structure(self):
         """
@@ -184,17 +152,20 @@ class HeaderParse:
                 working_file=self.working_file,
                 base_script_dir=self.base_script_dir))
 
+    # TODO This entire section on tables can be condensed (why does filetbl
+    #  need +1?).
     def font_table(self) -> None:
         """
         If there is a font table, process the font settings for each font
         number and store them in the rtox_db database, fontcodes schema.
         """
         table = "fonttbl"
-        from header_tables_dict import header_tables_dictionary as htd
+        with open(self.header_tables) as header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
 
-        if table in htd.keys():
+        if table in header_tables_dict.keys():
 
-            line_to_check = htd[table]
+            line_to_check = header_tables_dict[table]
 
             font_table.FonttblParse.find_fonts(
                 self=font_table.FonttblParse(
@@ -211,9 +182,12 @@ class HeaderParse:
         If a file table exists in RTF file, add appropriate tags to XML file.
         """
 
-        from header_tables_dict import header_tables_dictionary as htd
-        if "filetbl" in htd.keys():
-            line_to_read = htd['filetbl'] + 1
+        with open(self.header_tables) as header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
+
+        table = "filetbl"
+        if table in header_tables_dict.keys():
+            line_to_read = header_tables_dict[table] + 1
 
             text_to_process = \
                 file_table.FiletblParse.find_file_table_scope(
@@ -241,9 +215,12 @@ class HeaderParse:
         If a color table exists in RTF file, add appropriate tags to XML file.
         """
 
-        from header_tables_dict import header_tables_dictionary as htd
-        if "colortbl" in htd.keys():
-            line_to_read = htd['colortbl']
+        with open(self.header_tables) as header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
+
+        table = "colortbl"
+        if table in header_tables_dict.keys():
+            line_to_read = header_tables_dict[table]
 
             text_to_process = \
                 color_table.ColortblParse.find_color_table_scope(
@@ -272,11 +249,12 @@ class HeaderParse:
         """
 
         table = "stylesheet"
-        from header_tables_dict import header_tables_dictionary as htd
+        with open(self.header_tables) as header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
 
-        if table in htd.keys():
+        if table in header_tables_dict.keys():
 
-            line_to_check = htd[table]
+            line_to_check = header_tables_dict[table]
 
             self.styles_status_list = style_sheet_table.StyleSheetParse\
                 .find_styles(

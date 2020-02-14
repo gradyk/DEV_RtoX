@@ -36,6 +36,14 @@ close relevant open tags, 3) close the paragraph tag, 4) insert an open
 paragraph tag, 5) write the tags to the working xml file.
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-02-13"
+__name__ = "Contents.Library.par"
+
+
 # Standard library imports
 import json
 import os
@@ -79,8 +87,11 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
     tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry_file) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
-    # 0 = closed, 1 = open
-    if tag_registry["paragraph"] == "0":
+
+    tag_closed = "0"
+    tag_open = "1"
+
+    if tag_registry["paragraph"] == tag_closed:
         tag_update = tag_dict["paragraph-beg"]
         working_xml_file_update.tag_append(
             debug_dir=debug_dir,
@@ -88,7 +99,7 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         sys.stdout.write(tag_dict["paragraph-beg"] + f"{line}")
         pass
     else:
-        # If it is open, close it and open a new paragraph (pard marks the
+        # If it is open, close it and open a new paragraph (par marks the
         # end of a paragraph and, presumptively, the beginning of a new
         # paragraph).
         tag_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
@@ -100,6 +111,6 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         pass
 
     # Update the tag registry.
-    tag_update_dict = {"paragraph": "1"}
+    tag_update_dict = {"paragraph": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

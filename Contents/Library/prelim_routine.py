@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 First processing step for RTF file.
 1. Establish the directory for the main script (RtoX.py) and confirm the
@@ -59,21 +48,21 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-09"
-__name__ = "prelim_routine"
+__name__ = "Contents.Library.prelim_routine"
 
+# From standard libraries
 import os
 import sys
+
+# From local application
 import read_configuration
 from Contents.log_config import logger
 
 
 class Prelim:
 
-    def __init__(self,
-                 config_file: str,
-                 base_script_dir: str,
-                 debug_dir: str
-                 ):
+    def __init__(self, config_file: str, base_script_dir: str, debug_dir: str
+                 ) -> None:
         self.config_file = config_file
         self.base_script_dir = base_script_dir
         self.debug_dir = debug_dir
@@ -91,6 +80,7 @@ class Prelim:
                                 "RtoX.py as the main script.")
             sys.exit(1)
 
+        # TODO Update this with move to json log config and general config.
         # Set the directory for the config file and confirm it exists.
         self.config_file = os.path.join(self.base_script_dir, "Config.ini")
 
@@ -137,14 +127,11 @@ class Prelim:
         TODO Change this to just logging the configuration in the rtox.log file.
         """
 
-        config_file_dict_args = read_configuration.Configuration\
-            .get_system_arguments()
+        config_file_dict_args = read_configuration.get_system_arguments()
 
-        config_settings_dict = \
-            read_configuration.Configuration.get_configuration(
-                read_configuration.Configuration(
-                    config_file=self.config_file, debug_dir=self.debug_dir),
-                config_file_dict_args=config_file_dict_args)
+        config_settings_dict = read_configuration.get_configuration(
+            config_file=self.config_file, debug_dir=self.debug_dir,
+            config_file_dict_args=config_file_dict_args)
 
         # file_to_convert and file_to_produce are from the command line.
         if config_settings_dict.get("input") is not None:

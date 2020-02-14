@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,18 +29,9 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
-Process color table (version 0.1.0a0 notes the existence of the table in the
-XML file and the codes dictionary, but does not parse the table).
-1.
+Process the RTF file color table. The current version of RtoX otes the
+existence of the table inthe codes dictionary, but does not parse the table.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -51,7 +39,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "color_table"
+__name__ = "Contents.Library.color_table"
 
 import linecache
 import psycopg2
@@ -60,6 +48,9 @@ import xml_color_tags
 import sys
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
+
+# TODO this module needs to be updated to reflect coding changes (e.g.,
+#  file length in a separate module, change from using db to csv or dict).
 
 class ColortblParse:
     """

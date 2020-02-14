@@ -39,55 +39,49 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-23"
-__name__ = "read_configuration"
+__name__ = "Contents.Library.read_configuration"
 
-import configparser
+# From standard libraries
 import argparse
+import configparser
 import os
 
 
-class Configuration:
+def get_system_arguments():
+    """
+    Read the arguments from the command line.
+    """
 
-    def __init__(self,
-                 debug_dir: str,
-                 config_file: str
-                 ):
-        self.config_file = config_file
-        self.debug_dir = debug_dir
+    parser = argparse.ArgumentParser(description="Process command line "
+                                                 "arguments for RtoX.py.")
 
-    @staticmethod
-    def get_system_arguments():
-        """
-        Read the arguments from the command line.
-        """
+    parser.add_argument("--input", required=True, help="RTF file to "
+                                                       "convert.")
+    parser.add_argument("--output", required=True, help="XML file to "
+                                                        "produce.")
 
-        parser = argparse.ArgumentParser(description="Process command line "
-                                                     "arguments for RtoX.py.")
+    config_args = vars(parser.parse_args())
 
-        parser.add_argument("--input", required=True, help="RTF file to "
-                                                           "convert.")
-        parser.add_argument("--output", required=True, help="XML file to "
-                                                            "produce.")
+    return config_args
 
-        config_args = vars(parser.parse_args())
 
-        return config_args
+def get_configuration(config_file: str, debug_dir: str,
+                      config_file_dict_args):
+    """
+    1. Pull user configuration settings from Config.ini.
+    2. Put key:value pairs in from command line and Config.ini into
+    config_setting_dict dictionary.
+    """
 
-    def get_configuration(self, config_file_dict_args):
-        """
-        1. Pull user configuration settings from Config.ini.
-        2. Put key:value pairs in from command line and Config.ini into
-        config_setting_dict dictionary.
-        """
+    config = configparser.ConfigParser()
+    config.read(config_file)
+    for section in config.sections():
+        for key, value in config.items(section):
+            config_file_dict_args.update({key: value})
+    config_settings_dict = config_file_dict_args
 
-        config = configparser.ConfigParser()
-        config.read(self.config_file)
-        for section in config.sections():
-            for key, val in config.items(section):
-                config_file_dict_args.update({key: val})
-        config_settings_dict = config_file_dict_args
+    # TODO Convert this to a json dump and retrievals to json load.
+    with open(os.path.join(debug_dir, "config_dict.py"), "w+") as config_dict:
+        config_dict.write("config_dictionary = " + str(config_settings_dict))
 
-        with open(os.path.join(self.debug_dir, "config_dict.py"), "w+") as f:
-            f.write("config_dictionary = " + str(config_settings_dict))
-
-        return config_settings_dict
+    return config_settings_dict

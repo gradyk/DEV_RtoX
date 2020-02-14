@@ -30,9 +30,10 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Iterates through each line of the RTF file (starting at the \\info line or
-line 0). Records in a list (kw_list) every line starting with one of a
-specified list of keywords (keyword, line number). Returns the list.
+Iterates through each line of the RTF file (starting at the \\info line or,
+if there is no info table, at line 0). Record in a list (kw_list) every line
+starting with one of a specified list of keywords (keyword, line number).
+Return the list. This list is fed to the line_parser.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -40,11 +41,14 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-21"
-__name__ = "doc_parser"
+__name__ = "Contents.Library.doc_parser"
 
 # From Standard library
+import json
 import linecache
+import os
 import re
+# import sys
 
 # From local application
 import cs
@@ -56,18 +60,17 @@ import Contents.Library.file_length
 
 
 def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
-    """
-
-    """
     # Determine whether to start at the info line or line 0.
-    from header_tables_dict import header_tables_dictionary as htd
+    with open(os.path.join(debug_dir, "header_tables_dict.json")) as \
+            header_tables_dict_pre:
+        header_tables_dict = json.load(header_tables_dict_pre)
 
-    if "info" in htd.keys():
-        line_to_read = htd["info"]
+    if "info" in header_tables_dict.keys():
+        line_to_read = header_tables_dict["info"]
     else:
         line_to_read = 0
 
-    # Check the number of lines in the working file.
+    # Determine the number of lines in the working_input_file.
     file_length = Contents.Library.file_length.working_file_length(
         working_file=working_file)
 
@@ -76,9 +79,15 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
     header_end_line = ""
     footnote_end_line = ""
 
+    # Loop through each line in the working_input_file recording the keyword
+    # and line number for each line that starts with a keyword (note: this
+    # searches for a very limited number of RTF keywords). For three
+    # keywords (cs, header, footnote), the beginning and end of the keyword must
+    # be captured.
     while line_to_read <= file_length:
 
         area_search = linecache.getline(working_file, line_to_read)
+
         cs_kw_beg = re.match(r"{\\cs", area_search, re.M)
         if cs_kw_beg:
             cs_end_line = cs.cs_bounds(working_file=working_file,
@@ -113,6 +122,8 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
             footnote_kw_end = None
             pass
 
+        # Create the keyword list (kw_list) based on the keyword and the line
+        # on which it starts or ends.
         keywords = [(cs_kw_beg, "cs_beg", line_to_read),
                     (cs_kw_end, "cs_end", cs_end_line),
                     (par_kw, "par", line_to_read),
@@ -135,15 +146,20 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
 
     linecache.clearcache()
 
-    # Sorts kw_list in ascending order according to value.
-    listlen = len(kw_list)
-    for i in range(0, listlen):
-        for j in range(0, listlen - i - 1):
+    # Sort the kw_list in ascending order according to line number.
+    kw_list_length = len(kw_list)
+    for i in range(0, kw_list_length):
+        for j in range(0, kw_list_length - i - 1):
             if kw_list[j][1] > kw_list[j + 1][1]:
                 tempo = kw_list[j]
                 kw_list[j] = kw_list[j + 1]
                 kw_list[j + 1] = tempo
 
+    # TODO put a logger here that will write the kw_list to a file when a
+    #  certain log level is set.
+    # sys.stdout.write(str(kw_list))
+
+    # TODO Should this be in a separate file? A separate def?
     # Insert transition tags in the working_xml_file based on the user's
     # tag style preference.
     xml_transition_tags.xml_transition_tags(
@@ -151,6 +167,7 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
             xml_tag_num=xml_tag_num,
             line="0")
 
+    # TODO Should RtoX call this?
     line_parser.Parser.line_parse(
         self=line_parser.Parser(kw_list=kw_list,
                                 debug_dir=debug_dir,

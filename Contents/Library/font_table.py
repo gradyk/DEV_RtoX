@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 Parse the font table and pass the values to the rtox_db, fontcodes schema.
 """
@@ -49,21 +38,24 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-31"
-__name__ = "font_table"
+__name__ = "Contents.Library.font_table"
 
-import table_boundaries
-import split_between_characters
+# From standard libraries
 import psycopg2
 import re
-import xml_font_tags
 import sys
+
+# From local application
+import split_between_characters
+import table_boundaries
+import xml_font_tags
 from Contents.log_config import logger
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 class FonttblParse:
     """
-    Process Header font table settings.
+    Process font table settings from the RTF header.
     1. Find the beginning and end of a font code definition.
     2. Process the text from the working file, by separating the font code
     into its constituent pieces (e.g., font number, font family).
@@ -86,24 +78,27 @@ class FonttblParse:
 
     def find_fonts(self) -> None:
         """
-        1. Find the beginning and end of the table.
+        Find the start and end of the font table and then parse the font
+        table into font code strings and each string into its constituent parts.
         """
-        tse_vars = table_boundaries.TableBounds.table_start_end(
+        # Find the text to process in the table.
+        text_to_process = table_boundaries.TableBounds.table_start_end(
             self=table_boundaries.TableBounds(
                 line_number=self.line_to_read,
                 table=self.table))
 
-        # 2. Split the font code list into separate strings, one per font code.
+        # Split the font code list into separate strings, one per font code.
         font_code_strings = split_between_characters.SplitBetween.\
             split_between(self=split_between_characters.SplitBetween(
-                            text_to_process=tse_vars[2],
+                            text_to_process=text_to_process,
                             split_characters="}{"))
 
-        # 3. Separate each font code string into its parts and return the
-        # values for each part so that they can be stored in the rtox_db
-        # database.
+        # TODO Continue using database for storage?
+        # Separate each font code string into its parts and return the
+        # values for each part.
         for font_code in font_code_strings:
-
+            # TODO Could this be simplified using a list (fontnum,
+            #  fontfamily, etc) and a string plus f string?
             fontnum = SetFonts.fontnum(self=SetFonts(font_code=font_code))
             fontfamily = SetFonts.fontfamily(self=SetFonts(font_code=font_code))
             fcharset = SetFonts.fcharset(self=SetFonts(font_code=font_code))
@@ -121,6 +116,7 @@ class FonttblParse:
                 debug_dir=self.debug_dir,
                 xml_tag_num=self.xml_tag_num,
                 set_font_vars=set_font_vars))
+
             StoreFonts.tag_it(self=StoreFonts(
                 debug_dir=self.debug_dir,
                 xml_tag_num=self.xml_tag_num,
@@ -136,7 +132,7 @@ class SetFonts:
 
     def fontnum(self) -> str:
         """
-        4. Each font code is defined by a unique font number (e.g.,
+        Each font code is defined by a unique font number (e.g.,
         fontnum = f0).
         """
 
@@ -145,13 +141,15 @@ class SetFonts:
             fontnum = test[0].replace("\\", "")
             return fontnum
         except TypeError:
+            # TODO The remedy here is not to quit but simply to provide the
+            #  information. This is not critical to the program's function.
             logger.debug(msg="There is an error in the font table "
                              f'A font number is missing. RtoX will now quit.\n')
             sys.exit(1)
 
     def fontfamily(self) -> str:
         """
-        5. Each font code may define its font family.
+        Each font code may define its font family.
         """
 
         # TODO Update font names to valid names for XML/HTML.
@@ -175,7 +173,7 @@ class SetFonts:
 
     def fcharset(self) -> str:
         """
-        6. Each font code may define the character set it uses.
+        Each font code may define the character set it uses.
         """
         try:
             test = re.search(r'\\fcharset([0-9])+', self.font_code)
@@ -187,7 +185,7 @@ class SetFonts:
 
     def fprq(self) -> str:
         """
-        7. Each font code may define the font pitch (default, fixed or
+        Each font code may define the font pitch (default, fixed or
         variable).
         """
         try:
@@ -200,7 +198,7 @@ class SetFonts:
 
     def panose(self) -> str:
         """
-        8. If present, it contains a 10-byte Panose 1 number. Each byte
+        If present, it contains a 10-byte Panose 1 number. Each byte
         represents a single font property as defined by the Panose 1 standard
         specification.
         """
@@ -214,7 +212,7 @@ class SetFonts:
 
     def fname(self) -> str:
         """
-        9. Each code may have a non-tagged name.
+        Each code may have a non-tagged name.
         """
         try:
             test = re.search(r'(\s\w+)+(;)*', self.font_code)
@@ -227,7 +225,7 @@ class SetFonts:
 
     def altname(self) -> str:
         """
-        10. Each font code may use an alternative name.
+        Each font code may use an alternative name.
         """
         try:
             test = re.search(re.compile(r'\\\*\\falt\s'), self.font_code)
@@ -239,7 +237,7 @@ class SetFonts:
 
     def fontemb(self) -> bool:
         """
-        11. Each code may contain an embedded font. At present, RtoX does not
+        Each code may contain an embedded font. At present, RtoX does not
         support capturing information about the embedded font.
         """
         try:
@@ -255,7 +253,7 @@ class SetFonts:
 
     def cpg(self) -> str:
         """
-        12. Each font code may use a specified code page (e.g. Windows 1252).
+        Each font code may use a specified code page (e.g. Microsoft 1252).
         """
         try:
             test = re.search(r'{\\cpg([0-9])+', self.font_code)
@@ -278,7 +276,7 @@ class StoreFonts:
 
     def font_db(self) -> None:
         """
-        13. Store the settings for each font code in the rtox_db, fontcode
+        Store the settings for each font code in the rtox_db, fontcode
         schema.
         """
 
@@ -316,9 +314,12 @@ class StoreFonts:
             cur.close()
             con.close()
 
+    # TODO The whole tag creation and writing process does not result in
+    #  anything used in the final product. Decide what to do with these and
+    #  associated functions.
     def tag_it(self, fontnum: str, fontfamily: str) -> None:
         """
-        14. Turn the font code into XML tags.
+        Turn the font code into XML tags.
         """
 
         xml_font_tags_vars = xml_font_tags.XMLTagSets.xml_font_tags(

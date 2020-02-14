@@ -33,7 +33,9 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+As the working_xml_file transitions from the header to the body of the
+document, certain tags need to be opened (the exact tags depend on the user's
+tag style preference). They are (in order): <text><body><section><paragraph>.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -41,14 +43,15 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-18"
-__name__ = "xml_transition_tags"
+__name__ = "Contents.Library.xml_transition_tags"
 
 # From standard libraries
-import os
+import sys
 
 # From application library
 import open_tag_check
 import tag_registry_update
+import working_xml_file_update
 
 
 def xml_transition_tags(debug_dir: str, xml_tag_num: str, line: str):
@@ -60,11 +63,12 @@ def xml_transition_tags(debug_dir: str, xml_tag_num: str, line: str):
             debug_dir=debug_dir,
             xml_tag_num=xml_tag_num))
 
-    with open(os.path.join(debug_dir, "working_xml_file.xml"),
-              "w") as working_xml_file:
-        xml_tags = tag_dict["start-tags"]
-        working_xml_file.write(xml_tags)
-        print(xml_tags + f"{line}")
+    tag_update = tag_dict["start-tags"]
+    working_xml_file_update.tag_append(
+        debug_dir=debug_dir,
+        tag_update=tag_update)
+
+    sys.stdout.write(tag_dict["start-tags"] + f"{line}")
 
     # Update the tag registry.
     tag_update_dict = {"bodytext":  "1",

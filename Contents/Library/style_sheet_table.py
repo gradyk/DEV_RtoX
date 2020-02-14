@@ -41,11 +41,15 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
 __name__ = "style_sheet_table"
 
+# From standard libraries
 import re
+
+# From local application
 import split_between_characters
 import table_boundaries
 
 
+# TODO This entire module should be reviewed and re-written to shorten it.
 class StyleSheetParse:
     def __init__(self,
                  working_file: str,
@@ -65,7 +69,7 @@ class StyleSheetParse:
         """
         1. Find the beginning and end of the table.
         """
-        tse_vars = table_boundaries.TableBounds.table_start_end(
+        text_to_process = table_boundaries.TableBounds.table_start_end(
             self=table_boundaries.TableBounds(
                 line_number=self.line_number,
                 table=self.table))
@@ -75,7 +79,7 @@ class StyleSheetParse:
         """
         style_code_strings = split_between_characters.SplitBetween.\
             split_between(self=split_between_characters.SplitBetween(
-                            text_to_process=tse_vars[2],
+                            text_to_process=text_to_process,
                             split_characters="}{"))
 
         """
@@ -91,37 +95,27 @@ class StyleSheetParse:
                 r"{\trowd",
                 r"{\tsrowd",
                 ]
+
             for option in options:
                 if re.match(re.escape(option), style_code) is None:
                     pass
                 else:
-
                     try:
 
-                        code_vars = SetStyles.code(self=SetStyles(
-                            style_code=style_code))
-                        status = code_vars[0]
-                        code = code_vars[1]
+                        status, code = code_set(style_code=style_code)
 
                         if status == 1:
 
-                            italic = SetStyles.italic(
-                                self=SetStyles(style_code=style_code))
-                            bold = SetStyles.bold(self=SetStyles(
-                                style_code=style_code))
-                            underline = SetStyles.underline(
-                                self=SetStyles(style_code=style_code))
-                            strikethrough = SetStyles.strikethrough(
-                                self=SetStyles(style_code=style_code))
-                            small_caps = SetStyles.small_caps(
-                                self=SetStyles(style_code=style_code))
-                            additive = SetStyles.additive(
-                                self=SetStyles(style_code=style_code))
-                            style_name = SetStyles.style_name(
-                                self=SetStyles(style_code=style_code))
-                            style_next_paragraph = SetStyles.\
-                                style_next_paragraph(
-                                    self=SetStyles(style_code=style_code))
+                            italic = italic_set(style_code=style_code)
+                            bold = bold_set(style_code=style_code)
+                            underline = underline_set(style_code=style_code)
+                            strikethrough = strikethrough_set(
+                                style_code=style_code)
+                            small_caps = small_caps_set(style_code=style_code)
+                            additive = additive_set(style_code=style_code)
+                            style_name = style_name_set(style_code=style_code)
+                            style_next_paragraph = style_next_paragraph_set(
+                                style_code=style_code)
 
                             set_styles_vars = [code, italic, bold, underline,
                                                strikethrough, small_caps,
@@ -137,164 +131,167 @@ class StyleSheetParse:
                             pass
 
                     except TypeError:
+                        # TODO Need something here - logger?
                         pass
 
         return self.styles_status_list
 
 
-class SetStyles:
-    def __init__(self,
-                 style_code: str
-                 ):
-        self.style_code = style_code
+def code_set(style_code: str) -> tuple:
+    """
 
-    def code(self) -> tuple:
-        """
+    """
+    code = None
+    code_styles = [
+        r"{\s",
+        r"{\*\cs",
+        r"{\ds",
+        r"{\trowd",
+        r"{\tsrowd",
+    ]
 
-        """
-        code = None
-        code_styles = [
-            r"{\s",
-            r"{\*\cs",
-            r"{\ds",
-            r"{\trowd",
-            r"{\tsrowd",
-        ]
+    status = 0
+    for item in code_styles:
+        test = re.match(re.escape(item) + r'[0-9]*', style_code)
+        if test is not None:
+            test = test[0]
+            code = test.replace("{\\", "")
+            code = code.replace("*\\", "")
+            status = 1
+        else:
+            pass
 
-        status = 0
-        for item in code_styles:
-            test = re.match(re.escape(item) + r'[0-9]*', self.style_code)
-            if test is not None:
-                test = test[0]
-                code = test.replace("{\\", "")
-                code = code.replace("*\\", "")
-                status = 1
-            else:
-                pass
+    return status, code
 
-        return status, code
 
-    def italic(self) -> int:
-        """
+def italic_set(style_code: str) -> int:
+    """
 
-        """
-        try:
-            test = re.search(r"\\i[0-9]*", self.style_code)
-            italic = test[0].replace("\\i", "")
-            if italic == "":
-                italic = 1
-            else:
-                pass
-            return italic
-        except TypeError:
-            italic = 0
-            return italic
+    """
+    try:
+        test = re.search(r"\\i[0-9]*", style_code)
+        italic = test[0].replace("\\i", "")
+        if italic == "":
+            italic = 1
+        else:
+            pass
+        return italic
+    except TypeError:
+        italic = 0
+        return italic
 
-    def bold(self) -> int:
-        """
 
-        """
-        try:
-            test = re.search(r"\\b[0-9]*", self.style_code)
-            bold = test[0].replace("\\b", "")
-            if bold == "":
-                bold = 1
-            else:
-                pass
-            return bold
-        except TypeError:
-            bold = 0
-            return bold
+def bold_set(style_code: str) -> int:
+    """
 
-    def underline(self) -> int:
-        """
+    """
+    try:
+        test = re.search(r"\\b[0-9]*", style_code)
+        bold = test[0].replace("\\b", "")
+        if bold == "":
+            bold = 1
+        else:
+            pass
+        return bold
+    except TypeError:
+        bold = 0
+        return bold
 
-        """
-        try:
-            test = re.search(r"\\ul[0-9]*", self.style_code)
-            underline = test[0].replace("\\ul", "")
-            if underline == "":
-                underline = 1
-            else:
-                pass
-            return underline
-        except TypeError:
-            underline = 0
-            return underline
 
-    def strikethrough(self) -> int:
-        """
+def underline_set(style_code: str) -> int:
+    """
 
-        """
-        try:
-            test = re.search(r"\\strike[0-9]*", self.style_code)
-            strikethrough = test[0].replace("\\strike", "")
-            if strikethrough == "":
-                strikethrough = 1
-            else:
-                pass
-            return strikethrough
-        except TypeError:
-            strikethrough = 0
-            return strikethrough
+    """
+    try:
+        test = re.search(r"\\ul[0-9]*", style_code)
+        underline = test[0].replace("\\ul", "")
+        if underline == "":
+            underline = 1
+        else:
+            pass
+        return underline
+    except TypeError:
+        underline = 0
+        return underline
 
-    def small_caps(self) -> int:
-        """
 
-        """
-        try:
-            test = re.search(r"\\scaps[0-9]*", self.style_code)
-            small_caps = test[0].replace("\\scaps", "")
-            if small_caps == "":
-                small_caps = 1
-            else:
-                pass
-            return small_caps
-        except TypeError:
-            small_caps = 0
-            return small_caps
+def strikethrough_set(style_code: str) -> int:
+    """
 
-    def additive(self) -> bool:
-        """
+    """
+    try:
+        test = re.search(r"\\strike[0-9]*", style_code)
+        strikethrough = test[0].replace("\\strike", "")
+        if strikethrough == "":
+            strikethrough = 1
+        else:
+            pass
+        return strikethrough
+    except TypeError:
+        strikethrough = 0
+        return strikethrough
 
-        """
-        try:
-            if re.search(r'\\additive', self.style_code) is not None:
-                additive = True
-                return additive
-            else:
-                additive = False
-                return additive
-        except TypeError:
+
+def small_caps_set(style_code: str) -> int:
+    """
+
+    """
+    try:
+        test = re.search(r"\\scaps[0-9]*", style_code)
+        small_caps = test[0].replace("\\scaps", "")
+        if small_caps == "":
+            small_caps = 1
+        else:
+            pass
+        return small_caps
+    except TypeError:
+        small_caps = 0
+        return small_caps
+
+
+def additive_set(style_code: str) -> bool:
+    """
+
+    """
+    try:
+        if re.search(r'\\additive', style_code) is not None:
+            additive = True
+            return additive
+        else:
             additive = False
             return additive
+    except TypeError:
+        additive = False
+        return additive
 
-    def style_name(self) -> str:
-        """
 
-        """
-        pattern = r'\s(\w+|\s|\W)+'
-        styledef = re.search(pattern, self.style_code)
-        if styledef:
-            style_name_pre_1 = styledef[0].rstrip()
-            style_name = style_name_pre_1[:-1]
-            return style_name
-        else:
-            style_name = "None"
-            return style_name
+def style_name_set(style_code: str) -> str:
+    """
 
-    def style_next_paragraph(self) -> int:
-        """
+    """
+    pattern = r'\s(\w+|\s|\W)+'
+    styledef = re.search(pattern, style_code)
+    if styledef:
+        style_name_pre_1 = styledef[0].rstrip()
+        style_name = style_name_pre_1[:-1]
+        return style_name
+    else:
+        style_name = "None"
+        return style_name
 
-        """
-        try:
-            test = re.search(r"\\snext[0-9]*", self.style_code)
-            style_next_paragraph = test[0].replace("\\", "")
-            style_next_paragraph = int(style_next_paragraph)
-            return style_next_paragraph
-        except TypeError:
-            style_next_paragraph = 0
-            return style_next_paragraph
+
+def style_next_paragraph_set(style_code: str) -> int:
+    """
+
+    """
+    try:
+        test = re.search(r"\\snext[0-9]*", style_code)
+        style_next_paragraph = test[0].replace("\\", "")
+        style_next_paragraph = int(style_next_paragraph)
+        return style_next_paragraph
+    except TypeError:
+        style_next_paragraph = 0
+        return style_next_paragraph
 
 
 class StoreStyle:

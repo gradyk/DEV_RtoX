@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -32,14 +29,6 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
 """
 Parse the file table (if the table exists in the document it means the pre-RTF 
 file included sub-documents).
@@ -51,7 +40,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "file_table"
+__name__ = "Contents.Library.file_table"
 
 # From standard libraries
 import linecache
@@ -76,7 +65,11 @@ class FiletblParse:
     the user.
     """
 
-    def __init__(self, line_to_read, debug_dir, working_file, xml_tag_num):
+    def __init__(self,
+                 line_to_read: str,
+                 debug_dir: str,
+                 working_file: str,
+                 xml_tag_num: str):
         self.line_to_read = line_to_read
         self.debug_dir = debug_dir
         self.working_file = working_file
@@ -147,6 +140,7 @@ class FiletblParse:
 
         return text_to_process
 
+    # TODO Replace db as storage?
     @staticmethod
     def file_db(text_to_process):
         """
@@ -204,6 +198,7 @@ class FiletblParse:
             ns=ns, prefix=prefix, xml_pattern_two=xml_pattern_two,
             xml_tags=xml_tags)
 
+    # TODO Replace with call to file_length.
     @staticmethod
     def file_len(xfile):
         """

@@ -39,7 +39,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "list_tables"
+__name__ = "Contents.Library.list_tables"
 
 
 class ListTables:

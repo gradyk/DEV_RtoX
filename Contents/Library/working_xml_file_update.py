@@ -30,9 +30,15 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-
+Updates the working_xml_file by inserting new tags from other modules.
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-02-07"
+__name__ = "Contents.Library.working_xml_file_update"
 
 # From standard libraries
 import os

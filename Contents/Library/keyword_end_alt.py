@@ -33,27 +33,37 @@
 Finds the end of the {\\cs line.
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-02-13"
+__name__ = "Contents.Library.keyword_end_alt"
+
 # From standard library
 import linecache
 
 
+# TODO Compare this to footnote_end_alt: they seem to be the same. Why can't
+#  footnote_end_alt be replace by this generic function? (the return would be
+#  changed to keyword_end_line)
 def keyword_end_alt(working_file: str,
                     keyword_open: str
                     ) -> str:
 
     search_line = keyword_open
 
-    leftb = 0
-    rightb = 0
+    left_brace = 0
+    right_brace = 0
     cs_end_line = "0"
     while cs_end_line == "0":
         line_to_search = linecache.getline(working_file, search_line)
         for elem in line_to_search:
             if elem == "{":
-                leftb += 1
+                left_brace += 1
             elif elem == "}":
-                rightb += 1
-            if leftb == rightb:
+                right_brace += 1
+            if left_brace == right_brace:
                 cs_end_line = search_line
             else:
                 pass

@@ -38,18 +38,17 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-27"
-__name__ = "rtf_codes_file_prep"
+__name__ = "Contents.Library.rtf_codes_file_prep"
 
 import os
 from lxml import etree as et
 
 
+# TODO While this class/function creates the rtf_tags file (which other
+#  functions may contribute to) the rtf_tags file is not used by anything.
 class RTFCodesPrep:
 
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: int
-                 ):
+    def __init__(self, debug_dir: str, xml_tag_num: int) -> None:
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
 

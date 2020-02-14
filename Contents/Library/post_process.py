@@ -29,9 +29,11 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-
 """
-
+The process of converting an RTF file to an XML file creates some verbosity.
+For example, we end up with tag combinations such as: <emphasis
+rend="italic">text</emphasis><emphasis rend="italic>more text</emphasis>.
+The post-process module cleans up such verbosity.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -39,29 +41,12 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-24"
-__name__ = "post_process"
+__name__ = "Contents.Library.post_process"
 
 # From standard libraries
-import linecache
-import os
 
 # From application library
-import Contents.Library.file_length
+import Contents.Library.tag_dupe
 
 
-def line_cleanup(debug_dir: str, ):
-    working_file = os.path.join(debug_dir, "working_xml_file.xml")
-
-    file_length = Contents.Library.file_length.working_file_length(
-            working_file=working_file)
-
-    new_file = ""
-    i = 0
-    while i <= file_length:
-        line = linecache.getline(working_file, i)
-        line = line.lstrip("\n")
-        new_file = new_file + line
-        i += 1
-
-    with open(os.path.join(debug_dir, "working_xml_file.xml"), "w") as nf:
-        nf.write(new_file)
+tag_dupe.tag_deduper()

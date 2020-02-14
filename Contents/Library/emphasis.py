@@ -33,10 +33,19 @@
 
 """
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-02-12"
+__name__ = "Contents.Library.emphasis"
+
 # From standard library
 import re
 
 
+# TODO This module should be reworked (e.g., use a list and loop instead of a
+#  function for each emphasis type).
 def italic(area_search: str) -> str:
     """
 
