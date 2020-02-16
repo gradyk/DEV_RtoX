@@ -62,27 +62,17 @@ from Contents.Library.dicts.tag_registry import tag_registry_dict
 class PrepareToProcess:
 
     def __init__(self,
-                 base_script_dir="",
-                 config_file="",
-                 debug_dir="",
-                 input_file_name="",
-                 output_file_name=""
+                 base_script_dir: str,
+                 config_file: str,
+                 debug_dir: str,
+                 input_file_name: str,
+                 output_file_name: str
                  ):
         self.base_script_dir = base_script_dir
         self.config_file = config_file
         self.debug_dir = debug_dir
         self.input_file_name = input_file_name
         self.output_file_name = output_file_name
-
-    def file_structure(self):
-        base_script_dir_pass = self.base_script_dir
-        config_file_pass = self.config_file
-        debug_dir_pass = self.debug_dir
-        input_file_name_pass = self.input_file_name
-        output_file_name_pass = self.output_file_name
-
-        return base_script_dir_pass, config_file_pass, debug_dir_pass,\
-            input_file_name_pass, output_file_name_pass
 
     def prelim_routine(self):
         """
@@ -134,7 +124,7 @@ class PrepareToProcess:
 
         xml_tag_num = rtf_settings_dict.get("tag-style")
         if xml_tag_num is None:
-            xml_tag_num = 4
+            xml_tag_num = 1
         else:
             pass
 
@@ -143,8 +133,7 @@ class PrepareToProcess:
         file_list = [
             [1, "xml_tags.py"],
             [2, "tei_tags.py"],
-            [3, "tpres_tags.py"],
-            [4, "xml_tags.py"]
+            [3, "tpres_tags.py"]
             ]
 
         tag_file = file_list[int(xml_tag_num)-1][1]
@@ -173,10 +162,9 @@ class PrepareToProcess:
         working_xml_file).
         """
         working_file = input_file_prep.InputPrep.input_file_prep(
-            input_file_prep.
-            InputPrep(input_file_name=self.input_file_name,
-                      debug_dir=self.debug_dir,
-                      base_script_dir=self.base_script_dir))
+            input_file_prep.InputPrep(input_file_name=self.input_file_name,
+                                      debug_dir=self.debug_dir,
+                                      base_script_dir=self.base_script_dir))
 
         rtf_codes_file_prep.RTFCodesPrep.rtf_codes_to_xml_prep(
             self=rtf_codes_file_prep.RTFCodesPrep(
