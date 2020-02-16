@@ -43,74 +43,47 @@ __date__ = "2020-01-22"
 __name__ = "Contents.Library.open_tag_check"
 
 # Standard library imports
-import importlib
 import json
+import logging
 import os
-import sys
 
 # From local application
 import tag_registry_update
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
-class TagCheck:
+def tag_check(debug_dir: str, tag_dict: dict, status_list: list):
+    """
+    Check for and, if necessary, close open tags. The status_list provides
+    the tags to check.
+    """
 
-    def __init__(self,
-                 debug_dir: str,
-                 xml_tag_num: str) -> None:
-        self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+    tag_registry = os.path.join(debug_dir, "tag_registry.json")
 
-    def tag_style(self):
-        """
-        Import an XML tag dictionary based on user XML tag style preference.
-        """
+    with open(tag_registry) as tag_registry_data_pre:
+        tag_registry_data = json.load(tag_registry_data_pre)
 
-        # TODO allow for possibility that the user did not express a
-        #  preference. Also put this function in a separate .py.
-        # Possible xml tag dictionaries.
-        options = {
-            "1": "xml_tag_dict",
-            "2": "tei_tag_dict",
-            "3": "tpres_tag_dict",
-        }
+        for tag_type in status_list:
+            tag_closed = "0"
 
-        if options[self.xml_tag_num]:
-            value = options[self.xml_tag_num]
-            xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
-            tag_dict_pre = {value: getattr(xtags, value)}
-            tag_dict = tag_dict_pre[value]
-        else:
-            from Contents.Library.dicts.xml_tags import xml_tag_dict as tag_dict
+            if tag_registry_data[tag_type] == tag_closed:
+                pass
+            else:
+                # Update the working_xml_file.
+                tag_update = tag_dict[tag_type+"-end"]
+                working_xml_file_update.tag_append(
+                    debug_dir=debug_dir,
+                    tag_update=tag_update)
+                try:
+                    if logger_debug.isEnabledFor(logging.DEBUG):
+                        msg = str(tag_dict[tag_type+"-end"])
+                        logger_debug.error(msg)
+                except AttributeError:
+                    logging.exception("Check setLevel for logger_debug.")
 
-        return tag_dict
-
-    def tag_check(self, tag_dict: dict, status_list: list):
-        """
-        The tag_dict includes tags for various settings based on the style
-        chosen by the user (e.g., TEI, TPRES). The status_list identifies the
-        specific tags to check.
-        """
-
-        tag_registry = os.path.join(self.debug_dir, "tag_registry.json")
-
-        with open(tag_registry) as tag_registry_data_pre:
-            tag_registry_data = json.load(tag_registry_data_pre)
-
-            for tag_type in status_list:
-                # 0 = closed, 1 = open
-                if tag_registry_data[tag_type] == "0":
-                    pass
-                else:
-                    # Update the working_xml_file.
-                    tag_update = tag_dict[tag_type+"-end"]
-                    working_xml_file_update.tag_append(
-                        debug_dir=self.debug_dir,
-                        tag_update=tag_update)
-                    sys.stdout.write(tag_dict[tag_type+"-end"])
-
-                    # Update the tag registry.
-                    tag_update_dict = {tag_type: "0"}
-                    tag_registry_update.tag_registry_update(
-                        debug_dir=self.debug_dir,
-                        tag_update_dict=tag_update_dict)
+                # Update the tag registry.
+                tag_update_dict = {tag_type: "0"}
+                tag_registry_update.tag_registry_update(
+                    debug_dir=debug_dir,
+                    tag_update_dict=tag_update_dict)

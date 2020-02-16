@@ -45,13 +45,16 @@ __name__ = "Contents.Library.pard"
 
 # Standard library imports
 import json
+import logging
 import os
-import sys
+
 
 # From local application
 import open_tag_check
 import tag_registry_update
+import tag_style
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
 def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
@@ -59,10 +62,7 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
 
     """
     # Determine tag style based on user's preference.
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Check the tag registry to see whether an emphasis tag needs closing
     # and, if so, close it.
@@ -74,12 +74,8 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         "italic"
     ]
 
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num),
-        tag_dict=tag_dict,
-        status_list=status_list)
+    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                             tag_dict=tag_dict)
 
     # Check the status of the paragraph tag. It if is closed then
     # open it.
@@ -92,22 +88,29 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
 
     if tag_registry["paragraph"] == tag_closed:
         tag_update = tag_dict["paragraph-beg"]
-        working_xml_file_update.tag_append(
-            debug_dir=debug_dir,
-            tag_update=tag_update)
-        sys.stdout.write(tag_dict["paragraph-beg"] + f"{line}")
-        pass
+        working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                           tag_update=tag_update)
+        try:
+            if logger_debug.isEnabledFor(logging.DEBUG):
+                msg = str(tag_dict["paragraph-beg"] + f"{line}")
+                logger_debug.error(msg)
+        except AttributeError:
+            logging.exception("Check setLevel for logger_debug.")
+
     else:
         # If it is open, close it and open a new paragraph (pard marks the
         # end of a paragraph and, presumptively, the beginning of a new
         # paragraph).
         tag_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
-        working_xml_file_update.tag_append(
-            debug_dir=debug_dir,
-            tag_update=tag_update)
-        sys.stdout.write(tag_dict["paragraph-end"] + tag_dict[
+        working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                           tag_update=tag_update)
+        try:
+            if logger_debug.isEnabledFor(logging.DEBUG):
+                msg = str(tag_dict["paragraph-end"] + tag_dict[
                          "paragraph-beg"] + f"{line}")
-        pass
+                logger_debug.error(msg)
+        except AttributeError:
+            logging.exception("Check setLevel for logger_debug.")
 
     # Update the tag registry.
     tag_update_dict = {"paragraph": tag_open}

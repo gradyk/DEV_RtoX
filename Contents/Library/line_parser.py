@@ -60,12 +60,12 @@ class Parser:
     settings and text for the keyword.
     """
     def __init__(self,
-                 kw_list: list,
+                 keyword_linenumber_list: list,
                  line_to_read: str,
                  working_file: str,
                  debug_dir: str,
                  xml_tag_num: str) -> None:
-        self.kw_list = kw_list
+        self.keyword_linenumber_list = keyword_linenumber_list
         self.line_to_read = line_to_read
         self.working_file = working_file
         self.debug_dir = debug_dir
@@ -149,7 +149,7 @@ class Parser:
             "footnote_end": Parser.footnote_end_process,
             }
 
-        for element in self.kw_list:
+        for element in self.keyword_linenumber_list:
             keyword = element[0]
             line_number = element[1]
             if keyword == "cs_beg":

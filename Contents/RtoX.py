@@ -52,6 +52,7 @@ __date__ = "2019-10-22"
 __name__ = "__main__"
 
 # From standard libraries
+import logging
 # import pytest
 
 # From local application
@@ -68,10 +69,10 @@ import tag_closer
 #  app package. This will permanently suppress __pycache__
 
 if __name__ == "__main__":
-    # 0. Remove working files from last run (clean out debugdir).
+    # Remove working files from last run (clean out debugdir).
     debugdir_clean.cleaner()
 
-    # 1. Set basic variables.
+    # Set basic variables.
     file_structure_vars = prepare_to_process.PrepareToProcess\
         .file_structure(self=prepare_to_process.PrepareToProcess())
     base_script_dir_pass = file_structure_vars[0]
@@ -82,7 +83,7 @@ if __name__ == "__main__":
 
     styles_status_list = []
 
-    # 2. Get and store configuration information.
+    # Get and store configuration information.
     prelim_routine_vars = prepare_to_process.PrepareToProcess\
         .prelim_routine(
             self=prepare_to_process.PrepareToProcess(
@@ -95,10 +96,10 @@ if __name__ == "__main__":
     input_file_name = prelim_routine_vars[2]
     output_file_name = prelim_routine_vars[3]
 
-    # 3. Clean the database.
+    # Clean the database.
     prepare_to_process.PrepareToProcess.rtox_db_clean()
 
-    # 4. Set the file for XML tags.
+    # Set the file for XML tags.
     # TODO Note that tag_dict_pass is not used. The proper tag_dict is
     #  determined elsewhere. Need to decide how users will identify and
     #  provide tag dictionaries.
@@ -111,7 +112,7 @@ if __name__ == "__main__":
                 input_file_name=input_file_name_pass,
                 output_file_name=output_file_name_pass))
 
-    # 5. Prepare a copy of the input file and the file for XML tags.
+    # Prepare a copy of the input file and the file for XML tags.
     working_file_pass = prepare_to_process.PrepareToProcess.prep_rtf_file(
         self=prepare_to_process.PrepareToProcess(
             base_script_dir=base_script_dir_pass,
@@ -120,21 +121,21 @@ if __name__ == "__main__":
             output_file_name=output_file_name),
         xml_tag_num=xml_tag_num_pass)
 
-    # 6. Prepare a working copy of the tag registry.
+    # Prepare a working copy of the tag registry.
     prepare_to_process.PrepareToProcess.create_working_tag_registry(
         self=prepare_to_process.PrepareToProcess(
             base_script_dir=base_script_dir_pass, config_file=config_file_pass,
             debug_dir=debug_dir_pass, input_file_name=input_file_name_pass,
             output_file_name=output_file_name_pass))
 
-    # _. Create dictionary to store header table information.
+    # Create dictionary to store header table information.
     prepare_to_process.PrepareToProcess.create_header_table_dict(
         self=prepare_to_process.PrepareToProcess(
             base_script_dir=base_script_dir_pass, config_file=config_file_pass,
             debug_dir=debug_dir_pass, input_file_name=input_file_name_pass,
             output_file_name=output_file_name_pass))
 
-    # 7. Process the header.
+    # Process the header.
     header_parser.DocHeaderParser.process_header(
         self=header_parser.DocHeaderParser(
             base_script_dir=base_script_dir_pass,
@@ -143,25 +144,24 @@ if __name__ == "__main__":
             xml_tag_num=xml_tag_num_pass,
             styles_status_list=styles_status_list))
 
-    # 8. Process the info portion of the document body.
+    # Process the info portion of the document body.
     docinfo_parser.DocinfoParse.process_docinfo(
         self=docinfo_parser.DocinfoParse(
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
             xml_tag_num=xml_tag_num_pass))
 
-    # 9. Process the main portion of the document body.
+    # Process the main portion of the document body.
     doc_parser.doc_body(
             debug_dir=debug_dir_pass,
             working_file=working_file_pass,
             xml_tag_num=xml_tag_num_pass)
 
-    # 10. Close open tags where possible and produce list of remaining open
-    # tags.
+    # Close open tags where possible and produce list of remaining open tags.
     tag_closer.tag_closer(debug_dir=debug_dir_pass,
                           xml_tag_num=xml_tag_num_pass)
 
-    # 11. Do file clean up, post processing, and put the renamed file in the
+    # Do file clean up, post processing, and put the renamed file in the
     # output directory.
     final_step.final_step(debug_dir=debug_dir_pass,
                           xml_tag_num=xml_tag_num_pass,

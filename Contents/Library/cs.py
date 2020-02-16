@@ -46,7 +46,7 @@ __name__ = "Contents.Library.cs"
 
 # Standard library imports
 import linecache
-import os
+import logging
 import sys
 
 # Local application imports
@@ -54,6 +54,9 @@ import emphasis
 import keyword_end_alt
 import open_tag_check
 import tag_registry_update
+import tag_style
+import working_xml_file_update
+from read_log_config import logger_debug
 
 
 def cs_bounds(working_file: str, line_to_read: str) -> str:
@@ -61,9 +64,8 @@ def cs_bounds(working_file: str, line_to_read: str) -> str:
     Start with the line that includes the keyword "{\\cs..." find the end of
     the text line (marked by a closing brace "}").
     """
-    cs_end_line = keyword_end_alt.keyword_end_alt(
-            working_file=working_file,
-            keyword_open=line_to_read)
+    cs_end_line = keyword_end_alt.keyword_end_alt(working_file=working_file,
+                                                  keyword_open=line_to_read)
 
     return cs_end_line
 
@@ -104,13 +106,8 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
     working_xml_file any text in the cs line to which those settings apply.
     """
 
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
-
     # Determine tag style based on user's preference.
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Check the tag registry to see whether any emphasis tags need closing.
     status_list = [
@@ -121,21 +118,20 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
         "italic"
     ]
 
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num),
-        tag_dict=tag_dict,
-        status_list=status_list)
+    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                             tag_dict=tag_dict)
 
     # From the cs line, create a list (list_of_tags) of emphasis tags which
     # need to be added to the working_xml_file. Add those tags to the file
     # and to a tag_bag.
     list_of_tags = []
     tag_tracker = 0
-    # 0 = closed, 1 = open
+
+    tag_closed = "0"
+    tag_open = "1"
+
     for key in cs_line_dict:
-        if cs_line_dict[key] == "0":
+        if cs_line_dict[key] == tag_closed:
             pass
         else:
             tag_tracker = 1
@@ -150,28 +146,29 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
             tag_bag.append(lot_item)
 
             # Update the tag registry.
-            tag_update_dict = {lot_item: "1"}
+            tag_update_dict = {lot_item: tag_open}
             tag_registry_update.tag_registry_update(
                 debug_dir=debug_dir,
                 tag_update_dict=tag_update_dict)
-            sys.stdout.write(tag_dict[lot_item+"-beg"] + f"{line}")
+            try:
+                if logger_debug.isEnabledFor(logging.DEBUG):
+                    msg = str(tag_dict[lot_item+"-beg"] + f" {line}")
+                    logger_debug.error(msg)
+            except AttributeError:
+                logging.exception("Check setLevel for logger_debug.")
 
         # To that list of tags, add the cs line text and write to the
         # working_xml_file: contents of the file, plus the tag string,
         # plus the text.
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read() + tag + text
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = tag + text
+        working_xml_file_update.tag_append(debug_dir, tag_update)
 
     else:
-        # If no tags needed to be added, just add the cs line text and write
+        # If no tags need to be added, just add the cs line text and write
         # to the working_xml_file: contents of the file plus the text.
         tag_bag = []
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read() + text
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = text
+        working_xml_file_update.tag_append(debug_dir, tag_update)
 
     return tag_bag, tag_dict
 
@@ -184,8 +181,8 @@ def cs_closing_tags(debug_dir: str, tag_dict: str, tag_bag: list, line: str):
     paragraph). Or, it may happen after processing the nested lines if they
     exist.
     """
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
     tag = ""
+    tag_closed = "0"
 
     # If the tag_bag is empty, no tags need to be closed and control should
     # be returned to the line_parser module.
@@ -200,17 +197,20 @@ def cs_closing_tags(debug_dir: str, tag_dict: str, tag_bag: list, line: str):
             tag = tag + tag_dict[tag_item+"-end"]
 
             # Update the tag registry.
-            tag_update_dict = {tag_item: "0"}
+            tag_update_dict = {tag_item: tag_closed}
             tag_registry_update.tag_registry_update(
                 debug_dir=debug_dir,
                 tag_update_dict=tag_update_dict)
-            sys.stdout.write(f"{line}" + tag_dict[tag_item+"-end"])
+            try:
+                if logger_debug.isEnabledFor(logging.DEBUG):
+                    msg = str(f"{line} " + tag_dict[tag_item+"-end"])
+                    logger_debug.error(msg)
+            except AttributeError:
+                logging.exception("Check setLevel for logger_debug.")
 
         # Add the closing tags to the working_xml_file.
-        with open(working_xml_file, "r") as wxf_pre:
-            wxf = wxf_pre.read() + tag
-        with open(working_xml_file, "w") as wxf_pre:
-            wxf_pre.write(wxf)
+        tag_update = tag
+        working_xml_file_update.tag_append(debug_dir, tag_update)
 
     # Empty the tag_bag (this step prevents unwanted closing tags from being
     # added when there are nested tags in the cs text line).

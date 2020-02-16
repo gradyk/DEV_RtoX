@@ -46,29 +46,31 @@ __date__ = "2020-01-18"
 __name__ = "Contents.Library.xml_transition_tags"
 
 # From standard libraries
-import sys
+import logging
 
 # From application library
-import open_tag_check
 import tag_registry_update
+import tag_style
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
-def xml_transition_tags(debug_dir: str, xml_tag_num: str, line: str):
+def xml_transition_tags(debug_dir: str, xml_tag_num: str, line="0"):
     """
 
     """
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+    # Retrieve correct tag dictionary.
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     tag_update = tag_dict["start-tags"]
-    working_xml_file_update.tag_append(
-        debug_dir=debug_dir,
-        tag_update=tag_update)
-
-    sys.stdout.write(tag_dict["start-tags"] + f"{line}")
+    working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                       tag_update=tag_update)
+    try:
+        if logger_debug.isEnabledFor(logging.DEBUG):
+            msg = str(tag_dict["start-tags"] + f"{line}")
+            logger_debug.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_debug.")
 
     # Update the tag registry.
     tag_update_dict = {"bodytext":  "1",

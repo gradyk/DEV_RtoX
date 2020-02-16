@@ -30,37 +30,39 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-This module checks for open tags using a list (status_list). If any tags on
-the list are open, they are closed by inserting closing tags into the
-working_xml_file. The tag_registry is updated. These steps are performed by
-open_tag_check.
+The user can express a preference for XML tag style, which dictates the XML
+tag dictionary used. Without a preference, the program defaults to XML plain.
 """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-02-07"
-__name__ = "Contents.Library.tag_closer"
+__date__ = "2020-02-16"
+__name__ = "Contents.Library.tag_style"
 
-# From local application
-import open_tag_check
-import tag_style
+# From standard libraries
+import importlib
 
 
-def tag_closer(debug_dir: str, xml_tag_num: str):
+def tag_dict_selection(xml_tag_num: str):
+    """
+    Import an XML tag dictionary based on user XML tag style preference.
+    """
+    # Possible XML tag dictionaries.
+    options = {
+        "1": "xml_tag_dict",
+        "2": "tei_tag_dict",
+        "3": "tpres_tag_dict",
+    }
 
-    status_list = [
-        "italic",
-        "bold",
-        "underline",
-        "strikethrough",
-        "small_caps",
-        "paragraph",
-        "section"
-    ]
+    try:
+        value = options[xml_tag_num]
+        xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
+        tag_dict_pre = {value: getattr(xtags, value)}
+        tag_dict = tag_dict_pre[value]
+    except (TypeError, SyntaxError):
+        raise ("You did not express a tag style preference. "
+               "Plain XML will be used.")
 
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
-    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
-                             tag_dict=tag_dict)
+    return tag_dict

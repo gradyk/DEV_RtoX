@@ -31,9 +31,10 @@
 
 """
 Iterates through each line of the RTF file (starting at the \\info line or,
-if there is no info table, at line 0). Record in a list (kw_list) every line
-starting with one of a specified list of keywords (keyword, line number).
-Return the list. This list is fed to the line_parser.
+if there is no info table, at line 0). Record in a list
+(keyword_linenumber_list) every line starting with one of a specified list of
+keywords (keyword, line number). Return the list. This list is fed to the
+line_parser module.
 """
 
 __author__ = "Kenneth A. Grady"
@@ -43,9 +44,10 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-21"
 __name__ = "Contents.Library.doc_parser"
 
-# From Standard library
+# From standard libraries
 import json
 import linecache
+import logging
 import os
 import re
 # import sys
@@ -54,8 +56,9 @@ import re
 import cs
 import footnote
 import header
-import xml_transition_tags
 import line_parser
+from read_log_config import logger_mismatch
+import xml_transition_tags
 import Contents.Library.file_length
 
 
@@ -74,7 +77,7 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
     file_length = Contents.Library.file_length.working_file_length(
         working_file=working_file)
 
-    kw_list = []
+    keyword_linenumber_list = []
     cs_end_line = ""
     header_end_line = ""
     footnote_end_line = ""
@@ -88,57 +91,58 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
 
         area_search = linecache.getline(working_file, line_to_read)
 
-        cs_kw_beg = re.match(r"{\\cs", area_search, re.M)
-        if cs_kw_beg:
+        cs_keyword_begin = re.match(r"{\\cs", area_search, re.M)
+        if cs_keyword_begin:
             cs_end_line = cs.cs_bounds(working_file=working_file,
                                        line_to_read=line_to_read)
-            cs_kw_end = True
+            cs_keyword_end = True
         else:
-            cs_kw_end = None
+            cs_keyword_end = None
             pass
 
-        par_kw = re.match(r"\\par\n", area_search, re.M)
-        pard_kw = re.match(r"\\pard", area_search, re.M)
-        sect_kw = re.match(r"\\sect\n", area_search, re.M)
-        sectd_kw = re.match(r"\\sectd", area_search, re.M)
-        header_kw_beg = re.match(r"{\\header", area_search, re.M)
+        par_keyword = re.match(r"\\par\n", area_search, re.M)
+        pard_keyword = re.match(r"\\pard", area_search, re.M)
+        sect_keyword = re.match(r"\\sect\n", area_search, re.M)
+        sectd_keyword = re.match(r"\\sectd", area_search, re.M)
+        header_keyword_begin = re.match(r"{\\header", area_search, re.M)
 
-        if header_kw_beg:
+        if header_keyword_begin:
             header_end_line = header.header_bounds(working_file=working_file,
                                                    search_line=line_to_read)
-            header_kw_end = True
+            header_keyword_end = True
         else:
-            header_kw_end = None
+            header_keyword_end = None
             pass
 
-        footnote_kw_beg = re.match(r"{\\footnote", area_search, re.M)
+        footnote_keyword_begin = re.match(r"{\\footnote", area_search, re.M)
 
-        if footnote_kw_beg:
+        if footnote_keyword_begin:
             footnote_end_line = footnote.footnote_bounds(
                 working_file=working_file,
                 search_line=line_to_read)
-            footnote_kw_end = True
+            footnote_keyword_end = True
         else:
-            footnote_kw_end = None
+            footnote_keyword_end = None
             pass
 
-        # Create the keyword list (kw_list) based on the keyword and the line
-        # on which it starts or ends.
-        keywords = [(cs_kw_beg, "cs_beg", line_to_read),
-                    (cs_kw_end, "cs_end", cs_end_line),
-                    (par_kw, "par", line_to_read),
-                    (pard_kw, "pard", line_to_read),
-                    (sect_kw, "sect", line_to_read),
-                    (sectd_kw, "sectd", line_to_read),
-                    (header_kw_beg, "header_beg", line_to_read),
-                    (header_kw_end, "header_end", header_end_line),
-                    (footnote_kw_beg, "footnote_beg", line_to_read),
-                    (footnote_kw_end, "footnote_end", footnote_end_line)
-                    ]
+        # Create the keyword list (keyword_linenumber_list) based on the
+        # keyword and the line on which it starts or ends.
+        keyword_process_list = [
+            (cs_keyword_begin, "cs_beg", line_to_read),
+            (cs_keyword_end, "cs_end", cs_end_line),
+            (par_keyword, "par", line_to_read),
+            (pard_keyword, "pard", line_to_read),
+            (sect_keyword, "sect", line_to_read),
+            (sectd_keyword, "sectd", line_to_read),
+            (header_keyword_begin, "header_beg", line_to_read),
+            (header_keyword_end, "header_end", header_end_line),
+            (footnote_keyword_begin, "footnote_beg", line_to_read),
+            (footnote_keyword_end, "footnote_end", footnote_end_line)
+            ]
 
-        for kw, tagtype, line in keywords:
-            if kw is not None:
-                kw_list.append((tagtype, int(line)))
+        for keyword, tag_type, line_number in keyword_process_list:
+            if keyword is not None:
+                keyword_linenumber_list.append((tag_type, int(line_number)))
             else:
                 pass
 
@@ -146,30 +150,35 @@ def doc_body(working_file: str, debug_dir: str, xml_tag_num: str) -> None:
 
     linecache.clearcache()
 
-    # Sort the kw_list in ascending order according to line number.
-    kw_list_length = len(kw_list)
-    for i in range(0, kw_list_length):
-        for j in range(0, kw_list_length - i - 1):
-            if kw_list[j][1] > kw_list[j + 1][1]:
-                tempo = kw_list[j]
-                kw_list[j] = kw_list[j + 1]
-                kw_list[j + 1] = tempo
+    # Sort the keyword_linenumber_list in ascending order according to
+    # line number.
+    keyword_linenumber_list_length = len(keyword_linenumber_list)
+    for i in range(0, keyword_linenumber_list_length):
+        for j in range(0, keyword_linenumber_list_length - i - 1):
+            if keyword_linenumber_list[j][1] > \
+                    keyword_linenumber_list[j + 1][1]:
+                tempo = keyword_linenumber_list[j]
+                keyword_linenumber_list[j] = keyword_linenumber_list[j + 1]
+                keyword_linenumber_list[j + 1] = tempo
 
-    # TODO put a logger here that will write the kw_list to a file when a
-    #  certain log level is set.
-    # sys.stdout.write(str(kw_list))
+    # TODO put a logger here that will write the keyword_linenumber_list to a
+    #  file when the debug log level is set.
+    try:
+        if logger_mismatch.isEnabledFor(logging.ERROR):
+            msg = str(keyword_linenumber_list)
+            logger_mismatch.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_mismatch.")
 
     # TODO Should this be in a separate file? A separate def?
     # Insert transition tags in the working_xml_file based on the user's
     # tag style preference.
-    xml_transition_tags.xml_transition_tags(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num,
-            line="0")
+    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir,
+                                            xml_tag_num=xml_tag_num)
 
     # TODO Should RtoX call this?
     line_parser.Parser.line_parse(
-        self=line_parser.Parser(kw_list=kw_list,
+        self=line_parser.Parser(keyword_linenumber_list=keyword_linenumber_list,
                                 debug_dir=debug_dir,
                                 xml_tag_num=xml_tag_num,
                                 line_to_read=line_to_read,

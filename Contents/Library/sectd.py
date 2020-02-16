@@ -43,22 +43,21 @@ __name__ = "Contents.Library.sectd"
 
 # Standard library imports
 import json
+import logging
 import os
-import sys
 
 # From application library
 import open_tag_check
 import tag_registry_update
+import tag_style
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
 def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
 
     # Determine tag style based on user's preference.
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Check the tag registry to see whether an emphasis or paragraph tag needs
     # closing and, if so, close it.
@@ -71,37 +70,43 @@ def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
         "paragraph"
     ]
 
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num),
-        tag_dict=tag_dict,
-        status_list=status_list)
+    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                             tag_dict=tag_dict)
 
     # Check the tag registry for the status of a section tag. If it is
     # closed, open a new section and open a paragraph.
     tag_registry = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
-    # 0 = closed, 1 = open
-    if tag_registry["section"] == "0":
+
+    tag_closed = "0"
+    tag_open = "1"
+
+    if tag_registry["section"] == tag_closed:
         tag_update = tag_dict["section-beg"]
-        working_xml_file_update.tag_append(
-            debug_dir=debug_dir,
-            tag_update=tag_update)
-        sys.stdout.write(tag_dict["section-beg"] + f"{line}")
-        pass
+        working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                           tag_update=tag_update)
+        try:
+            if logger_debug.isEnabledFor(logging.DEBUG):
+                msg = str(tag_dict["section-beg"] + f"{line}")
+                logger_debug.error(msg)
+        except AttributeError:
+            logging.exception("Check setLevel for logger_debug.")
+
     else:
         # If a section tag is open, close it and open a new section.
         tag_update = tag_dict["section-end"] + tag_dict["section-beg"]
-        working_xml_file_update.tag_append(
-            debug_dir=debug_dir,
-            tag_update=tag_update)
-        sys.stdout.write(tag_dict["section-end"] +
-                         tag_dict["section-beg"] + f"{line}")
-        pass
+        working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                           tag_update=tag_update)
+        try:
+            if logger_debug.isEnabledFor(logging.DEBUG):
+                msg = str(tag_dict["section-end"] +
+                          tag_dict["section-beg"] + f"{line}")
+                logger_debug.error(msg)
+        except AttributeError:
+            logging.exception("Check setLevel for logger_debug.")
 
     # Update tag registry.
-    tag_update_dict = {"section": "1"}
+    tag_update_dict = {"section": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

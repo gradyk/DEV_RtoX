@@ -51,15 +51,16 @@ __date__ = "2020-01-09"
 __name__ = "Contents.Library.final_step"
 
 # From standard libraries
+import logging
 import os
-import sys
 from shutil import copy
 
 # From local application
-import open_tag_check
+import tag_style
 # import post_process
 import xmlformatter
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
 def final_step(debug_dir: str,
@@ -69,9 +70,7 @@ def final_step(debug_dir: str,
 
     working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
 
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(debug_dir=debug_dir,
-                                     xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Converting to RTF creates instances of empty tags.
     # Run through the file twice looking for empty tags (deleting
@@ -100,11 +99,15 @@ def final_step(debug_dir: str,
     # Insert XML closing tags based on user's style preferences.
     tag_update = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
         tag_dict["wrapper-end"]
-    working_xml_file_update.tag_append(
-        debug_dir=debug_dir,
-        tag_update=tag_update)
-    sys.stdout.write(tag_dict["body-end"] + tag_dict["bodytext-end"] +
-                     tag_dict["wrapper-end"])
+    working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                       tag_update=tag_update)
+    try:
+        if logger_debug.isEnabledFor(logging.DEBUG):
+            msg = str(tag_dict["body-end"] + tag_dict["bodytext-end"] +
+                      tag_dict["wrapper-end"])
+            logger_debug.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_debug.")
 
     # TODO Clean up back-to-back tag use (e.g., <hiText rend="bold>This
     #  </hiText><hiText rend="bold">is </hitext> ...).
@@ -123,8 +126,7 @@ def final_step(debug_dir: str,
             final_step_xml_file.write(final_xml_file)
 
     except TypeError:
-        # TODO A logger message should go here.
-        pass
+        logging.exception("There was a problem inserting the xmlheader.")
 
     # TODO create a set of post process steps.
     # Post-process the file.

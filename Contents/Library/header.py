@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
-#  !/usr/bin/env python3
-#  -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -46,12 +43,14 @@ __name__ = "Contents.Library.header"
 
 # From standard libraries
 import linecache
-import sys
+import logging
 
 # From local application
 import open_tag_check
 import tag_registry_update
+import tag_style
 import working_xml_file_update
+from read_log_config import logger_debug
 
 
 def header_bounds(working_file: str, search_line: str) -> str:
@@ -85,9 +84,7 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
     header tag. Update the tag_registry after inserting tags.
     """
     # Retrieve the correct tag dictionary to use.
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(debug_dir=debug_dir,
-                                     xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Check for open tags.
     status_list = [
@@ -99,24 +96,24 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
         "paragraph"
     ]
 
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num),
-        tag_dict=tag_dict,
-        status_list=status_list)
+    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                             tag_dict=tag_dict)
 
     # Insert the opening header tag.
     tag_update = tag_dict["header-beg"]
 
-    working_xml_file_update.tag_append(
-        debug_dir=debug_dir,
-        tag_update=tag_update)
-
-    sys.stdout.write(tag_dict["header-beg"] + f"{line}")
+    working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                       tag_update=tag_update)
+    try:
+        if logger_debug.isEnabledFor(logging.DEBUG):
+            msg = str(tag_dict["header-beg"] + f"{line}")
+            logger_debug.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_debug.")
 
     # Update the tag registry.
-    tag_update_dict = {"header": "1"}
+    tag_open = "1"
+    tag_update_dict = {"header": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
 
@@ -128,9 +125,7 @@ def header_end(debug_dir: str, xml_tag_num: str, line: str):
     tag registry.
     """
     # Retrieve the correct tag dictionary to use.
-    tag_dict = open_tag_check.TagCheck.tag_style(
-        self=open_tag_check.TagCheck(debug_dir=debug_dir,
-                                     xml_tag_num=xml_tag_num))
+    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
 
     # Check for open tags.
     status_list = [
@@ -142,12 +137,8 @@ def header_end(debug_dir: str, xml_tag_num: str, line: str):
         "paragraph"
     ]
 
-    open_tag_check.TagCheck.tag_check(
-        self=open_tag_check.TagCheck(
-            debug_dir=debug_dir,
-            xml_tag_num=xml_tag_num),
-        tag_dict=tag_dict,
-        status_list=status_list)
+    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                             tag_dict=tag_dict)
 
     # TODO At least in TPRES, a header may be embedded in a paragraph or fall
     #  at the end or beginning of a paragraph. See also footnote.
@@ -156,14 +147,19 @@ def header_end(debug_dir: str, xml_tag_num: str, line: str):
     # a paragraph opening tag afterwards.
     tag_update = tag_dict["header-end"] + tag_dict["paragraph-beg"]
 
-    working_xml_file_update.tag_append(
-        debug_dir=debug_dir,
-        tag_update=tag_update)
-
-    sys.stdout.write(tag_dict["header-end"] +
-                     tag_dict["paragraph-beg"] + f"{line}")
+    working_xml_file_update.tag_append(debug_dir=debug_dir,
+                                       tag_update=tag_update)
+    try:
+        if logger_debug.isEnabledFor(logging.DEBUG):
+            msg = str(tag_dict["header-end"] +
+                      tag_dict["paragraph-beg"] + f"{line}")
+            logger_debug.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_debug.")
 
     # Update the tag registry.
-    tag_update_dict = {"header": "0", "paragraph": "1"}
+    tag_closed = "0"
+    tag_open = "1"
+    tag_update_dict = {"header": tag_closed, "paragraph": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

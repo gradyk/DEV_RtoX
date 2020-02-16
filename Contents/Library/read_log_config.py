@@ -40,45 +40,74 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-13"
 __name__ = "Contents.Library.read_log_config"
 
-
+# From standard libraries
+import logging.handlers
 import os
-import json
-import logging
-import logging.config
 import sys
 
+directory = os.path.dirname(sys.argv[0])
+os.chdir(os.path.join(directory + "/logs"))
 
-def setup_logging(
-    default_file="log_config.json",
-    default_level=logging.INFO,
-    env_key='LOG_CFG'
-    ):
-    """
-    Setup logging configuration
-    """
-    main_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-    file_to_get = os.path.join(main_directory, default_file)
-    value = os.getenv(env_key, None)
-    if value:
-        file_to_get = value
-    if os.path.exists(file_to_get):
-        with open(file_to_get, 'rt') as log_config_file:
-            config = json.load(log_config_file)
-        logging.config.dictConfig(config)
-    else:
-        logging.basicConfig(level=default_level)
+# ----First logger----
+logger_basic = logging.getLogger("basic_level_logging")
 
-# THIS IS TO SET UP A NEW LOGGING LEVEL, SEE
-# https://stackoverflow.com/questions/2183233/how-to-add-a-custom-
-# loglevel-to-pythons-logging-facility
-# NEED TO ADD A HANDLER TO THE LOG_CONFIG FILE FOR EACH NEW LEVEL THAT
-# SPECIFIES WHERE THE MESSAGES GO.
-DEBUG_LEVELV_NUM = 9
-logging.addLevelName(DEBUG_LEVELV_NUM, "DEBUGV")
+# Create handlers
+console_handler = logging.StreamHandler()
+file_handler = logging.handlers.RotatingFileHandler(
+    filename="rtox_basic.log", mode="w+")
+logger_basic.setLevel(logging.INFO)
+
+# Create formatters
+console_format = logging.Formatter(
+    '%(asctime)s | %(name)s | %(levelname)s | %(filename)s | %(lineno)d | '
+    '%(message)s')
+file_format = logging.Formatter(
+    '%(asctime)s | %(name)s | %(levelname)s | %(filename)s | %(lineno)d | '
+    '%(message)s')
+
+# Add formatters to handlers
+console_handler.setFormatter(console_format)
+file_handler.setFormatter(file_format)
+
+# Add handlers to the logger
+logger_basic.addHandler(console_handler)
+logger_basic.addHandler(file_handler)
 
 
-def debugv(self, message, *args, **kws):
-    if self.isEnabledFor(DEBUG_LEVELV_NUM):
-        # Yes, logger takes its '*args' as 'args'.
-        self._log(DEBUG_LEVELV_NUM, message, args, **kws)
-logging.Logger.debugv = debugv
+# ----Second logger----
+logger_mismatch = logging.getLogger("Logger_Mismatch")
+# logger_mismatch.setLevel(logging.ERROR)
+logger_mismatch.propagate = False
+
+# Create handlers
+mismatch_file_handler = logging.handlers.RotatingFileHandler(
+    filename="rtox_mismatch.log", mode="w+")
+
+# Create formatters
+mismatch_format = logging.Formatter("%(message)s")
+
+# Add formatters to handlers
+mismatch_file_handler.setFormatter(mismatch_format)
+
+# Add handlers to the logger
+logger_mismatch.addHandler(mismatch_file_handler)
+
+
+# ----Third logger----
+logger_debug = logging.getLogger("Logger_Debug")
+logger_debug.setLevel(logging.DEBUG)
+logger_debug.propagate = False
+
+# Create handlers
+debug_file_handler = logging.handlers.RotatingFileHandler(
+    filename="rtox_debug.log", mode="w+")
+debug_file_handler.terminator = ""
+
+# Create formatters
+debug_format = logging.Formatter('%(message)s')
+
+# Add formatters to handlers
+debug_file_handler.setFormatter(debug_format)
+
+# Add handlers to the logger
+logger_debug.addHandler(debug_file_handler)
