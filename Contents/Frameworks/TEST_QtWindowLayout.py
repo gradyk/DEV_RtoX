@@ -29,16 +29,51 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-tag_registry_dict = {
-    "italic":           "0",
-    "bold":             "0",
-    "underline":        "0",
-    "strikethrough":    "0",
-    "small_caps":       "0",
-    "footnote":         "0",
-    "header":           "0",
-    "section":          "0",
-    "paragraph":        "0",
-    "body":             "0",
-    "bodytext":         "0",
-}
+from PyQt5 import QtGui
+from PyQt5.QtWidgets import QApplication, QWidget, QFrame, QLineEdit, \
+    QHBoxLayout, QSplitter
+import sys
+from PyQt5.QtCore import Qt
+
+
+class Window(QWidget):
+    def __init__(self):
+        super().__init__()
+        self.title = "RtoX"
+        self.top = 150
+        self.left = 100
+        self.width = 1000
+        self.height = 750
+
+        hbox = QHBoxLayout()
+        left = QFrame()
+        left.setFrameShape(QFrame.StyledPanel)
+        bottom = QFrame()
+        bottom.setFrameShape(QFrame.StyledPanel)
+
+        splitter1 = QSplitter(Qt.Horizontal)
+        splitter1.setStyleSheet('background-color:#DCDCDC')
+        lineedit = QLineEdit()
+        lineedit.setStyleSheet('background-color:#DCDCDC')
+        splitter1.addWidget(left)
+        splitter1.addWidget(lineedit)
+        splitter1.setSizes([200, 200])
+
+        spliiter2 = QSplitter(Qt.Vertical)
+        spliiter2.addWidget(splitter1)
+        spliiter2.addWidget(bottom)
+        spliiter2.setStyleSheet('background-color:yellow')
+
+        hbox.addWidget(spliiter2)
+
+        self.setLayout(hbox)
+        self.setWindowIcon(QtGui.QIcon("icon.png"))
+        self.setWindowTitle(self.title)
+        self.setGeometry(self.left, self.top, self.width, self.height)
+        self.show()
+
+
+if __name__ == "__main__":
+    App = QApplication(sys.argv)
+    window = Window()
+    sys.exit(App.exec())

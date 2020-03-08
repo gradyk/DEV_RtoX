@@ -47,9 +47,7 @@ import linecache
 # TODO Compare this to footnote_end_alt: they seem to be the same. Why can't
 #  footnote_end_alt be replace by this generic function? (the return would be
 #  changed to keyword_end_line)
-def keyword_end_alt(working_file: str,
-                    keyword_open: str
-                    ) -> str:
+def keyword_end_alt(working_file: str, keyword_open: str) -> str:
 
     search_line = keyword_open
 

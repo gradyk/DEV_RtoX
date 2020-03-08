@@ -42,14 +42,12 @@ __name__ = "Contents.Library.read_log_config"
 
 # From standard libraries
 import logging.handlers
-import os
-import sys
 
-directory = os.path.dirname(sys.argv[0])
-os.chdir(os.path.join(directory + "/logs"))
 
 # ----First logger----
 logger_basic = logging.getLogger("basic_level_logging")
+logger_basic.setLevel(logging.CRITICAL)
+logger_basic.propagate = False
 
 # Create handlers
 console_handler = logging.StreamHandler()
@@ -70,7 +68,6 @@ console_handler.setFormatter(console_format)
 file_handler.setFormatter(file_format)
 
 # Add handlers to the logger
-logger_basic.addHandler(console_handler)
 logger_basic.addHandler(file_handler)
 
 

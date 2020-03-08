@@ -73,16 +73,15 @@ class InfoParse:
         """
         1. Find the beginning and end of the info section.
         """
-        text_to_process = table_boundaries.TableBounds.table_start_end(
-            self=table_boundaries.TableBounds(
+        text_to_process = table_boundaries.TableBoundsController.find_table_start_end(
+            self=table_boundaries.TableBoundsController(
                 line_number=self.line_to_read,
                 table=self.table))
 
         # 2. Split the info code list into separate strings, one per info code.
-        info_code_strings = split_between_characters.SplitBetween. \
-            split_between(self=split_between_characters.SplitBetween(
+        info_code_strings = split_between_characters.split_between(
                             text_to_process=text_to_process,
-                            split_characters="}{"))
+                            split_characters="}{")
 
         # 3. Separate each info code string into its parts and return the
         # values for each part so that they can be stored in the rtox_db

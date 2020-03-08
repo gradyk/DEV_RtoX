@@ -48,15 +48,16 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-09"
-__name__ = "Contents.Library.prelim_routine"
+__name__ = "Contents.Library.extract_config_settings"
 
 # From standard libraries
+import logging
 import os
 import sys
 
 # From local application
 import read_configuration
-from Contents.log_config import logger
+from read_log_config import logger_basic, logger_debug
 
 
 class Prelim:
@@ -76,19 +77,20 @@ class Prelim:
         main_script = os.path.join(self.base_script_dir, "RtoX.py")
 
         if main_script and not os.path.isfile(main_script):
-            logger.critical(msg="What script are you using? The program uses "
-                                "RtoX.py as the main script.")
-            sys.exit(1)
+            try:
+                logger_basic.critical(msg="What script are you using? The "
+                                          "program uses RtoX.py as the "
+                                          "main script. The program will now "
+                                          "quit.")
+                sys.exit(1)
+            except AttributeError:
+                logging.exception(msg="There is something wrong with the "
+                                      "program installation. The program "
+                                      "will now quit.")
+                sys.exit(1)
 
-        # TODO Update this with move to json log config and general config.
-        # Set the directory for the config file and confirm it exists.
+        # Set the path for the Config.ini file.
         self.config_file = os.path.join(self.base_script_dir, "Config.ini")
-
-        if self.config_file and not os.path.isfile(self.config_file):
-            logger.critical(msg="RtoX cannot find the configuration "
-                                "file (Config.ini). Please make sure it is "
-                                'in the folder "DEV_RtoX".')
-            sys.exit(1)
 
         # Set the debug_dir directory to store working files created by the
         # program.
@@ -99,7 +101,7 @@ class Prelim:
             current_in_path = 1
             temp = []
         else:
-            logger.debug(msg="The base directory is not in sys.path.")
+            logger_debug.debug(msg="The base directory is not in sys.path.")
             sys.exit(1)
 
         # Copy all of sys.path to temp and list the base directory last.
@@ -124,7 +126,6 @@ class Prelim:
         """
         Depending on the user's preference (problem-report-level),
         report the settings before running the remainder of the program.
-        TODO Change this to just logging the configuration in the rtox.log file.
         """
 
         config_file_dict_args = read_configuration.get_system_arguments()
@@ -133,84 +134,90 @@ class Prelim:
             config_file=self.config_file, debug_dir=self.debug_dir,
             config_file_dict_args=config_file_dict_args)
 
-        # file_to_convert and file_to_produce are from the command line.
+        # Get the input file from the command line.
+        input_file = ""
+
         if config_settings_dict.get("input") is not None:
             input_file = config_settings_dict.get("input")
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f"The file you want to convert is "
-                                f"{input_file}.")
-        else:
-            logger.critical(msg="You did not provide a file to convert. The "
-                                "program must have a file to convert and will "
-                                "now quit.")
-            sys.exit(1)
+            try:
+                logger_basic.isEnabledFor(level=10)
+                logger_basic.info(msg=f"The file you want to convert is "
+                                      f"{input_file}.")
+            except TypeError:
+                logging.exception("There is a logging problem: user input "
+                                  "file.")
 
+        else:
+            try:
+                logger_basic.critical(msg="You did not provide a file to "
+                                          "convert. The program must have a "
+                                          "file to convert and will now quit.")
+                sys.exit(1)
+            except TypeError:
+                logging.exception("There is a logging problem: input file "
+                                  "absent.")
+
+        # Get the name of the output file from the command line.
         if config_settings_dict.get("output") is not None:
             output_file = config_settings_dict.get("output")
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f"The file you want to produce is "
-                                f"{output_file}.")
+            try:
+                logger_basic.isEnabledFor(level=10)
+                logger_basic.info(msg=f"The file you want to produce is "
+                                      f"{output_file}.")
+            except TypeError:
+                logging.exception("There is a logging problem: user output "
+                                  "file.")
         else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="The converted file will have the same base "
-                                "name as your original file, but with a .xml "
-                                "extension.")
+            try:
+                logger_basic.isEnabledFor(level=10)
+                logger_basic.info(msg="The converted file will have the same "
+                                      "base name as your original file, but "
+                                      "with a .xml extension.")
+            except TypeError:
+                logging.exception("There is a logging problem: default output "
+                                  "file.")
+
             output_file = os.path.splitext(input_file)[0]+'.xml'
 
-        # These settings come from the Config.ini file.
-        tag_style = config_settings_dict.get("tag-style")
+        # Settings for the following variables are supplied by the program:
+        # debugdir and base_script_dir.
 
+        # These settings come from the Config.ini file.
+        # TODO Program needs to allow for different responses on these inputs.
+        tag_style = config_settings_dict.get("tag-style")
         convert_symbol = config_settings_dict.get("convert-symbol")
         convert_caps = config_settings_dict.get("convert-caps")
         report_level = config_settings_dict.get("problem-report-level")
         xml_indenting = config_settings_dict.get("xml-indenting")
         create_lists = config_settings_dict.get("create-lists")
 
-        # Settings for the following variables are supplied by the program:
-        # debugdir and base_script_dir.
+        user_input_choices_dict = {
+            tag_style: f'You chose "{tag_style}" for your XML tags.',
+            convert_symbol: f"You chose to have all symbols converted "
+                            f"to UTF-8 characters.",
+            # TODO What is convert_caps supposed to do?
+            convert_caps: "",
+            report_level: f"You selected a problem report level of "
+                          f"{report_level}.",
+            xml_indenting: f"You chose to have XML indenting turned on.",
+            create_lists: "You chose to have create lists turned on."
+            }
 
-        if tag_style:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f'You chose "{tag_style}" for your XML tags.')
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="You did not choose a tag style. The program "
-                            "defaults to XML tags.")
-        if convert_symbol:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f"You chose to have all symbols converted "
-                            f"to UTF-8 characters.")
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="Symbols will not be converted to UTF-8 "
-                                'characters and may appear as a "?" or other '
-                                "character in the text.")
-        if convert_caps:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="")
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="")
-        if report_level:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f"You selected a problem report level of "
-                            f"{report_level}.")
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="The default problem report level is 3.")
-        if xml_indenting:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg=f"You chose to have XML indenting turned on.")
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="The default option is no XML indenting.")
-        if create_lists:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg="You chose to have create lists turned on.")
-        else:
-            if logger.isEnabledFor(level=10):
-                logger.info(msg='The default option for creating lists is '
-                                '"off".')
+        for menu_item in user_input_choices_dict:
+            if menu_item:
+                try:
+                    logger_basic.isEnabledFor(level=10)
+                    logger_basic.info(msg=user_input_choices_dict[menu_item])
+                except TypeError:
+                    logging.exception(f"There is a logging problem: "
+                                      f"{menu_item}.")
+            else:
+                try:
+                    logger_basic.isEnabledFor(level=10)
+                    logger_basic.info(msg=f"The program will be set at "
+                                          f"default for: {menu_item}.")
+                except TypeError:
+                    logging.exception("")
 
         return input_file, output_file
 
@@ -220,10 +227,15 @@ class Prelim:
         Log an error message if the configuration (as recorded in the
         config_file_dict) is not valid.
         """
+        try:
+            logger_basic.isEnabledFor(level=10)
 
-        logger.critical(msg="You did not provide information the RtoX program "
-                            "needs. The program will now quit.")
-        sys.exit(1)
+            logger_basic.critical(msg="You did not provide information the "
+                                      "RtoX program needs. The program will "
+                                      "now quit.")
+            sys.exit(1)
+        except TypeError:
+            logging.exception("")
 
     @staticmethod
     def print_output_error_message():
@@ -231,6 +243,12 @@ class Prelim:
         Log a message if no file_to_produce is specified.
         """
         # TODO Check that program can handle no name provided properly.
-        logger.info(msg="You did not provide a file name for the converted "
-                        "file. The program will use the name of the file to "
-                        "convert and change the extension to .xml")
+        try:
+            logger_basic.isEnabledFor(level=10)
+
+            logger_basic.info(msg="You did not provide a file name for the "
+                                  "converted file. The program will use the "
+                                  "name of the file to convert and change "
+                                  "the extension to .xml")
+        except TypeError:
+            logging.exception("")

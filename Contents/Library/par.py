@@ -51,18 +51,14 @@ import os
 # From local application
 import open_tag_check
 import tag_registry_update
-import tag_style
 import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def tag_insert(debug_dir: str, xml_tag_num: str, line: str):
+def tag_insert(debug_dir: str, tag_dict: dict, line: str):
     """
 
     """
-    # Determine tag style based on user's preference.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # Check the tag registry to see whether an emphasis tag needs closing
     # and, if so, close it.
     status_list = [

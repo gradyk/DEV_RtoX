@@ -48,7 +48,7 @@ from lxml import etree as et
 #  functions may contribute to) the rtf_tags file is not used by anything.
 class RTFCodesPrep:
 
-    def __init__(self, debug_dir: str, xml_tag_num: int) -> None:
+    def __init__(self, debug_dir: str, xml_tag_num: str) -> None:
         self.debug_dir = debug_dir
         self.xml_tag_num = xml_tag_num
 
@@ -59,9 +59,9 @@ class RTFCodesPrep:
         the file.
         """
 
-        xml_list = [[1, "http://www.w3.org/1999/xml", None],
-                    [2, "http://www.tei-c.org/ns/1.0", "tei"],
-                    [3, "http://kennethgrady.com/ns/1.0.0", "ts"],
+        xml_list = [["1", "http://www.w3.org/1999/xml", None],
+                    ["2", "http://www.tei-c.org/ns/1.0", "tei"],
+                    ["3", "http://kennethgrady.com/ns/1.0.0", "ts"],
                     [None, "http://www.w3.org/1999/xml", None]]
 
         ns = xml_list[int(self.xml_tag_num)-1][1]

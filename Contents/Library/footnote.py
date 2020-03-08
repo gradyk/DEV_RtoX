@@ -48,12 +48,11 @@ import logging
 # From local application
 import open_tag_check
 import tag_registry_update
-import tag_style
 import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def footnote_bounds(working_file: str, search_line: str) -> str:
+def footnote_bounds(working_input_file: str, line_to_search: str) -> str:
     """
     A footnote is bounded by an opening brace and keyword ({\\footnote)
     and a closing brace (}). The opening is easy to identify. The closing can
@@ -64,7 +63,7 @@ def footnote_bounds(working_file: str, search_line: str) -> str:
     right_brace = 0
     footnote_end_line = "0"
     while footnote_end_line == "0":
-        line_to_search = linecache.getline(working_file, search_line)
+        line_to_search = linecache.getline(working_input_file, line_to_search)
         for character in line_to_search:
             if character == "{":
                 left_brace += 1
@@ -74,25 +73,22 @@ def footnote_bounds(working_file: str, search_line: str) -> str:
                 pass
 
             if left_brace == right_brace:
-                footnote_end_line = search_line
+                footnote_end_line = line_to_search
             else:
                 pass
 
-        search_line += 1
+        line_to_search += 1
 
     linecache.clearcache()
     return footnote_end_line
 
 
-def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
+def footnote_start(debug_dir: str, tag_dict: dict, line: str):
     """
     Before inserting an opening XML tag for a footnote, check for open tags
     that need to be closed and (if any) close them. Insert the opening
     footnote tag. Update the tag_registry after inserting tags.
     """
-    # Retrieve the correct tag dictionary to use.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # TODO At least in TPRES, a footnote can be embedded in a paragraph or at
     #  the end of a paragraph. If embedded, the paragraph tag should not be
     #  closed before the footnote or opened after it. See also header.
@@ -128,7 +124,7 @@ def footnote_start(debug_dir: str, xml_tag_num: str, line: str):
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
 
 
-def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
+def footnote_end(debug_dir: str, tag_dict: dict, line: str):
     """
     Before inserting a closing XML tag for a footnote, check for open tags
     and (if any) close them. Insert the closing footnote tag. Updated the
@@ -136,9 +132,6 @@ def footnote_end(debug_dir: str, xml_tag_num: str, line: str):
     """
     # TODO Should that tag_dict be determined at the outset and passed as a
     #  variable?
-    # Retrieve the correct tag dictionary to use.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # Check for and close open tags.
     status_list = [
         "small_caps",

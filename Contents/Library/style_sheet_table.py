@@ -1,38 +1,24 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  Copyright (c) 2019. Kenneth A. Grady
+#  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-Parse stylesheet(s).
-1.
-"""
+""" Parse the style sheet table and pass the values to a dictionary. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -42,278 +28,249 @@ __date__ = "2019-11-04"
 __name__ = "style_sheet_table"
 
 # From standard libraries
+import json
+import os
 import re
 
-# From local application
-import split_between_characters
-import table_boundaries
 
-
-# TODO This entire module should be reviewed and re-written to shorten it.
-class StyleSheetParse:
+class StyleSheetParse(object):
+    """ An RTF file uses the following structure for a stylesheet (if present):
+    <stylesheet>        '{' \\stylesheet <style>+ '}'
+    <style>             '{' <styledef>?<keycode>? <formatting> <additivie>?
+                            <based>? <next>? <autoupd>? <link>?
+                            <stylename>?';''}'
+    <styledef>          \\s |\\*\\cs | \\ds | \ts\tsrowd
+    <keycode>           '{' \\keycode <keys> '}'
+    <keys>              ( \\shift? & \\ctrl? & \alt?) <key>
+    <additive>          \additive
+    <based>             \\sbasedon
+    <next>              \\snext
+    <autoupd>           \\sautoupd
+    <hidden>            \\shidden
+    <link>              \\slinkN
+    <locked>            \\slocked
+    <personal>          \\spersonal
+    <compose>           \\scompose
+    <reply>             \\sreply
+    <formatting>        (<brdrder> | <parfmt> | <apoctl> | <tabdef> |
+                        <shading> | <chrfmt>)+
+    <styleid>           \\styrsidN
+    <semihidden>        \\ssemihidden
+    <stylename>         #PCDATA
+    """
     def __init__(self,
-                 working_file: str,
-                 debug_dir: str,
-                 xml_tag_num: str,
-                 line_number: str,
-                 table: str,
-                 styles_status_list: list) -> None:
-        self.working_file = working_file
+                 code_strings_to_process: list,
+                 debug_dir: str) -> None:
+        self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
-        self.line_number = line_number
-        self.table = table
-        self.styles_status_list = styles_status_list
 
-    def find_styles(self):
-        """
-        1. Find the beginning and end of the table.
-        """
-        text_to_process = table_boundaries.TableBounds.table_start_end(
-            self=table_boundaries.TableBounds(
-                line_number=self.line_number,
-                table=self.table))
+        code_string = StyleSheetParse.process_code_strings(
+            self=StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
 
-        """
-        2. Split the style code list into separate strings, one per style code.
-        """
-        style_code_strings = split_between_characters.SplitBetween.\
-            split_between(self=split_between_characters.SplitBetween(
-                            text_to_process=text_to_process,
-                            split_characters="}{"))
+        StyleSheetParse.process_style_codes(
+            self=StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir),
+            code_string=code_string)
 
-        """
-        3. Separate each style code string into its parts and return the 
-        values for each part and save the results in a dictionary.
-        """
-        for style_code in style_code_strings:
+    def process_code_strings(self):
 
-            options = [
-                r"{\s",
-                r"{\*\cs",
-                r"{\ds",
-                r"{\trowd",
-                r"{\tsrowd",
-                ]
+        for code_string in self.code_strings_to_process:
 
-            for option in options:
-                if re.match(re.escape(option), style_code) is None:
-                    pass
-                else:
-                    try:
+            StyleSheetParse.process_style_codes(
+                self=StyleSheetParse(
+                    code_strings_to_process=self.code_strings_to_process,
+                    debug_dir=self.debug_dir),
+                code_string=code_string)
+            
+            return code_string
 
-                        status, code = code_set(style_code=style_code)
+    def process_style_codes(self, code_string: str):
+        """ Parse each style code string into its constituent setting and
+        store them in a dictionary under the style code number. """
 
-                        if status == 1:
+        get_style_codes = GetStyleCodes(code_string=code_string,
+                                        debug_dir=self.debug_dir)
 
-                            italic = italic_set(style_code=style_code)
-                            bold = bold_set(style_code=style_code)
-                            underline = underline_set(style_code=style_code)
-                            strikethrough = strikethrough_set(
-                                style_code=style_code)
-                            small_caps = small_caps_set(style_code=style_code)
-                            additive = additive_set(style_code=style_code)
-                            style_name = style_name_set(style_code=style_code)
-                            style_next_paragraph = style_next_paragraph_set(
-                                style_code=style_code)
+        try:
 
-                            set_styles_vars = [code, italic, bold, underline,
-                                               strikethrough, small_caps,
-                                               additive, style_name,
-                                               style_next_paragraph]
+            stylecode = GetStyleCodes.stylecode_set(
+                self=get_style_codes)
+            italic = GetStyleCodes.italic_set(self=get_style_codes)
+            bold = GetStyleCodes.bold_set(self=get_style_codes)
+            underline = GetStyleCodes.underline_set(
+                self=get_style_codes)
+            strikethrough = GetStyleCodes.strikethrough_set(
+                self=get_style_codes)
+            small_caps = GetStyleCodes.small_caps_set(
+                self=get_style_codes)
+            additive = GetStyleCodes.additive_set(
+                self=get_style_codes)
+            style_name = GetStyleCodes.style_name_set(
+                self=get_style_codes)
+            style_next_paragraph = GetStyleCodes.\
+                style_next_paragraph_set(self=get_style_codes)
 
-                            self.styles_status_list = StoreStyle.store_style(
-                                self=StoreStyle(
-                                    set_styles_vars=set_styles_vars,
-                                    styles_status_list=self.styles_status_list))
+            return stylecode, italic, bold, underline, \
+                strikethrough, small_caps, additive, style_name, \
+                style_next_paragraph
 
-                        else:
-                            pass
-
-                    except TypeError:
-                        # TODO Need something here - logger?
-                        pass
-
-        return self.styles_status_list
-
-
-def code_set(style_code: str) -> tuple:
-    """
-
-    """
-    code = None
-    code_styles = [
-        r"{\s",
-        r"{\*\cs",
-        r"{\ds",
-        r"{\trowd",
-        r"{\tsrowd",
-    ]
-
-    status = 0
-    for item in code_styles:
-        test = re.match(re.escape(item) + r'[0-9]*', style_code)
-        if test is not None:
-            test = test[0]
-            code = test.replace("{\\", "")
-            code = code.replace("*\\", "")
-            status = 1
-        else:
+        except TypeError:
+            # TODO Need something here - logger?
             pass
 
-    return status, code
 
+class GetStyleCodes(object):
 
-def italic_set(style_code: str) -> int:
-    """
+    def __init__(self, code_string: str, debug_dir: str) -> None:
+        self.code_string = code_string
+        self.debug_dir = debug_dir
 
-    """
-    try:
-        test = re.search(r"\\i[0-9]*", style_code)
-        italic = test[0].replace("\\i", "")
-        if italic == "":
-            italic = 1
-        else:
-            pass
-        return italic
-    except TypeError:
-        italic = 0
-        return italic
+    def stylecode_set(self) -> str:
+        """  """
+        stylecode = ""
+        code_styles = [
+            r"{\s",
+            r"{\*\cs",
+            r"{\ds",
+            r"{\trowd",
+            r"{\tsrowd",
+        ]
 
+        for item in code_styles:
+            test = re.match(re.escape(item) + r'[0-9]*', self.code_string)
+            if test is not None:
+                test = test[0]
+                stylecode = test.replace("{\\", "")
+                stylecode = stylecode.replace("*\\", "")
+            else:
+                pass
 
-def bold_set(style_code: str) -> int:
-    """
+        return stylecode
 
-    """
-    try:
-        test = re.search(r"\\b[0-9]*", style_code)
-        bold = test[0].replace("\\b", "")
-        if bold == "":
-            bold = 1
-        else:
-            pass
-        return bold
-    except TypeError:
-        bold = 0
-        return bold
+    def italic_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\i[0-9]*", self.code_string)
+            italic = test[0].replace("\\i", "")
+            if italic == "":
+                italic = "1"
+            else:
+                pass
+            return italic
+        except TypeError:
+            italic = "0"
+            return italic
 
+    def bold_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\b[0-9]*", self.code_string)
+            bold = test[0].replace("\\b", "")
+            if bold == "":
+                bold = "1"
+            else:
+                pass
+            return bold
+        except TypeError:
+            bold = "0"
+            return bold
 
-def underline_set(style_code: str) -> int:
-    """
+    def underline_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\ul[0-9]*", self.code_string)
+            underline = test[0].replace("\\ul", "")
+            if underline == "":
+                underline = "1"
+            else:
+                pass
+            return underline
+        except TypeError:
+            underline = "0"
+            return underline
 
-    """
-    try:
-        test = re.search(r"\\ul[0-9]*", style_code)
-        underline = test[0].replace("\\ul", "")
-        if underline == "":
-            underline = 1
-        else:
-            pass
-        return underline
-    except TypeError:
-        underline = 0
-        return underline
+    def strikethrough_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\strike[0-9]*", self.code_string)
+            strikethrough = test[0].replace("\\strike", "")
+            if strikethrough == "":
+                strikethrough = "1"
+            else:
+                pass
+            return strikethrough
+        except TypeError:
+            strikethrough = "0"
+            return strikethrough
 
+    def small_caps_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\scaps[0-9]*", self.code_string)
+            small_caps = test[0].replace("\\scaps", "")
+            if small_caps == "":
+                small_caps = "1"
+            else:
+                pass
+            return small_caps
+        except TypeError:
+            small_caps = "0"
+            return small_caps
 
-def strikethrough_set(style_code: str) -> int:
-    """
-
-    """
-    try:
-        test = re.search(r"\\strike[0-9]*", style_code)
-        strikethrough = test[0].replace("\\strike", "")
-        if strikethrough == "":
-            strikethrough = 1
-        else:
-            pass
-        return strikethrough
-    except TypeError:
-        strikethrough = 0
-        return strikethrough
-
-
-def small_caps_set(style_code: str) -> int:
-    """
-
-    """
-    try:
-        test = re.search(r"\\scaps[0-9]*", style_code)
-        small_caps = test[0].replace("\\scaps", "")
-        if small_caps == "":
-            small_caps = 1
-        else:
-            pass
-        return small_caps
-    except TypeError:
-        small_caps = 0
-        return small_caps
-
-
-def additive_set(style_code: str) -> bool:
-    """
-
-    """
-    try:
-        if re.search(r'\\additive', style_code) is not None:
-            additive = True
-            return additive
-        else:
+    def additive_set(self) -> bool:
+        """  """
+        try:
+            if re.search(r'\\additive', self.code_string) is not None:
+                additive = True
+                return additive
+            else:
+                additive = False
+                return additive
+        except TypeError:
             additive = False
             return additive
-    except TypeError:
-        additive = False
-        return additive
 
+    def style_name_set(self) -> str:
+        """  """
+        pattern = r'\s(\w+|\s|\W)+'
+        styledef = re.search(pattern, self.code_string)
+        if styledef:
+            style_name_pre_1 = styledef[0].rstrip()
+            style_name = style_name_pre_1[:-1]
+            return style_name
+        else:
+            style_name = "None"
+            return style_name
 
-def style_name_set(style_code: str) -> str:
-    """
+    def style_next_paragraph_set(self) -> str:
+        """  """
+        try:
+            test = re.search(r"\\snext[0-9]*", self.code_string)
+            style_next_paragraph = test[0].replace("\\", "")
+            return style_next_paragraph
+        except TypeError:
+            style_next_paragraph = "0"
+            return style_next_paragraph
 
-    """
-    pattern = r'\s(\w+|\s|\W)+'
-    styledef = re.search(pattern, style_code)
-    if styledef:
-        style_name_pre_1 = styledef[0].rstrip()
-        style_name = style_name_pre_1[:-1]
-        return style_name
-    else:
-        style_name = "None"
-        return style_name
+    def store_style(self, stylecode: str, italic: str, bold: str, underline:
+                    str, strikethrough: str, small_caps: str, additive: bool,
+                    style_name: str, style_next_paragraph: str):
 
+        with open(os.path.join(self.debug_dir, "style_file.json"), "w+") as \
+                style_file_pre:
 
-def style_next_paragraph_set(style_code: str) -> int:
-    """
+            style_file_updater = {stylecode:
+                                  {"italic": italic,
+                                   "bold": bold,
+                                   "underline": underline,
+                                   "strikethrough": strikethrough,
+                                   "small_caps": small_caps,
+                                   "additive": additive,
+                                   "style_name": style_name,
+                                   "style_next_paragraph": style_next_paragraph}
+                                  }
 
-    """
-    try:
-        test = re.search(r"\\snext[0-9]*", style_code)
-        style_next_paragraph = test[0].replace("\\", "")
-        style_next_paragraph = int(style_next_paragraph)
-        return style_next_paragraph
-    except TypeError:
-        style_next_paragraph = 0
-        return style_next_paragraph
-
-
-class StoreStyle:
-    def __init__(self,
-                 set_styles_vars: list,
-                 styles_status_list: list) -> None:
-        self.set_styles_vars = set_styles_vars
-        self.styles_status_list = styles_status_list
-
-    def store_style(self):
-
-        settings = (("code", self.set_styles_vars[0]),
-                    ("italic", self.set_styles_vars[1]),
-                    ("bold", self.set_styles_vars[2]),
-                    ("underline", self.set_styles_vars[3]),
-                    ("strikethrough", self.set_styles_vars[4]),
-                    ("small_caps", self.set_styles_vars[5]),
-                    ("additive", self.set_styles_vars[6]),
-                    ("style_name", self.set_styles_vars[7]),
-                    ("style_next_paragraph", self.set_styles_vars[8])
-                    )
-
-        self.styles_status_list.append((self.set_styles_vars[0], settings))
-
-        return self.styles_status_list
+            json.dump(style_file_updater, style_file_pre)

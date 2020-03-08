@@ -50,28 +50,16 @@ import logging
 
 # From application library
 import tag_registry_update
-import tag_style
 import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def xml_transition_tags(debug_dir: str, xml_tag_num: str, line="0"):
-    """
-
-    """
-    # Retrieve correct tag dictionary.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
+def xml_transition_tags(debug_dir: str, tag_dict: dict, line="0"):
+    """ Insert the XML tags to start the document portion of the XML file (
+    after the header). """
     tag_update = tag_dict["start-tags"]
     working_xml_file_update.tag_append(debug_dir=debug_dir,
                                        tag_update=tag_update)
-    try:
-        if logger_debug.isEnabledFor(logging.DEBUG):
-            msg = str(tag_dict["start-tags"] + f"{line}")
-            logger_debug.error(msg)
-    except AttributeError:
-        logging.exception("Check setLevel for logger_debug.")
-
     # Update the tag registry.
     tag_update_dict = {"bodytext":  "1",
                        "section":   "1",
@@ -79,3 +67,11 @@ def xml_transition_tags(debug_dir: str, xml_tag_num: str, line="0"):
                        "body":      "1"}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+
+    # Used for debugging.
+    try:
+        if logger_debug.isEnabledFor(logging.DEBUG):
+            msg = str(tag_dict["start-tags"] + f"{line}")
+            logger_debug.error(msg)
+    except AttributeError:
+        logging.exception("Check setLevel for logger_debug.")

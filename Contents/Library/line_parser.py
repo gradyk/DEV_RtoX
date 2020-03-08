@@ -51,7 +51,7 @@ import sect
 import sectd
 
 
-class Parser:
+class LineParseController:
     # TODO Do pard and sectd need opening and closing functions and setting
     #  parsings?
     """
@@ -62,76 +62,72 @@ class Parser:
     def __init__(self,
                  keyword_linenumber_list: list,
                  line_to_read: str,
-                 working_file: str,
+                 working_input_file: str,
                  debug_dir: str,
-                 xml_tag_num: str) -> None:
+                 tag_dict: dict) -> None:
         self.keyword_linenumber_list = keyword_linenumber_list
         self.line_to_read = line_to_read
-        self.working_file = working_file
+        self.working_input_file = working_input_file
         self.debug_dir = debug_dir
-        self.xml_tag_num = xml_tag_num
+        self.tag_dict = tag_dict
 
-    @staticmethod
-    def cs_open_process(working_file: str, line_to_read: str, xml_tag_num: str,
-                        debug_dir: str):
+    def cs_open_process(self, line_to_read: str):
 
         cs_line_dict, text = cs.cs_line_parse(
-            working_file=working_file,
+            working_file=self.working_input_file,
             line_to_read=line_to_read)
 
-        tag_bag, tag_dict = cs.cs_opening_tags(cs_line_dict=cs_line_dict,
-                                               text=text,
-                                               xml_tag_num=xml_tag_num,
-                                               debug_dir=debug_dir,
-                                               line=line_to_read)
-        return tag_bag, tag_dict
+        tag_bag = cs.cs_opening_tags(cs_line_dict=cs_line_dict,
+                                     text=text,
+                                     debug_dir=self.debug_dir,
+                                     line=line_to_read,
+                                     tag_dict=self.tag_dict)
+        return tag_bag
 
-    @staticmethod
-    def cs_close_process(debug_dir: str, tag_bag: list, tag_dict: str,
-                         line_to_read: str):
-        cs.cs_closing_tags(debug_dir=debug_dir, tag_bag=tag_bag,
-                           tag_dict=tag_dict, line=line_to_read)
+    def cs_close_process(self, line_to_read: str, tag_bag: list):
+        cs.cs_closing_tags(debug_dir=self.debug_dir,
+                           tag_bag=tag_bag,
+                           tag_dict=self.tag_dict,
+                           line=line_to_read)
 
-    @staticmethod
-    def footnote_beg_process(debug_dir: str, xml_tag_num: str,
-                             line_to_read: str):
-        footnote.footnote_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def footnote_beg_process(self,  line_to_read: str):
+        footnote.footnote_start(debug_dir=self.debug_dir,
+                                tag_dict=self.tag_dict,
                                 line=line_to_read)
 
-    @staticmethod
-    def footnote_end_process(debug_dir: str, xml_tag_num: str,
-                             line_to_read: str):
-        footnote.footnote_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def footnote_end_process(self, line_to_read: str):
+        footnote.footnote_end(debug_dir=self.debug_dir,
+                              tag_dict=self.tag_dict,
                               line=line_to_read)
 
-    @staticmethod
-    def header_beg_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        header.header_start(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def header_beg_process(self, line_to_read: str):
+        header.header_start(debug_dir=self.debug_dir,
+                            tag_dict=self.tag_dict,
                             line=line_to_read)
 
-    @staticmethod
-    def header_end_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        header.header_end(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def header_end_process(self, line_to_read: str):
+        header.header_end(debug_dir=self.debug_dir,
+                          tag_dict=self.tag_dict,
                           line=line_to_read)
 
-    @staticmethod
-    def par_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        par.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def par_process(self, line_to_read: str):
+        par.tag_insert(debug_dir=self.debug_dir,
+                       tag_dict=self.tag_dict,
                        line=line_to_read)
 
-    @staticmethod
-    def pard_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        pard.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def pard_process(self, line_to_read: str):
+        pard.tag_insert(debug_dir=self.debug_dir,
+                        tag_dict=self.tag_dict,
                         line=line_to_read)
 
-    @staticmethod
-    def sect_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        sect.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def sect_process(self, line_to_read: str):
+        sect.tag_insert(debug_dir=self.debug_dir,
+                        tag_dict=self.tag_dict,
                         line=line_to_read)
 
-    @staticmethod
-    def sectd_process(debug_dir: str, xml_tag_num: str, line_to_read: str):
-        sectd.tag_insert(debug_dir=debug_dir, xml_tag_num=xml_tag_num,
+    def sectd_process(self, line_to_read: str):
+        sectd.tag_insert(debug_dir=self.debug_dir,
+                         tag_dict=self.tag_dict,
                          line=line_to_read)
 
     def line_parse(self):
@@ -139,31 +135,37 @@ class Parser:
         tag_dict = {}
 
         process_dict = {
-            "par": Parser.par_process,
-            "pard": Parser.pard_process,
-            "sect": Parser.sect_process,
-            "sectd": Parser.sectd_process,
-            "header_beg": Parser.header_beg_process,
-            "header_end": Parser.header_end_process,
-            "footnote_beg": Parser.footnote_beg_process,
-            "footnote_end": Parser.footnote_end_process,
+            "par":          LineParseController.par_process,
+            "pard":         LineParseController.pard_process,
+            "sect":         LineParseController.sect_process,
+            "sectd":        LineParseController.sectd_process,
+            "header_beg":   LineParseController.header_beg_process,
+            "header_end":   LineParseController.header_end_process,
+            "footnote_beg": LineParseController.footnote_beg_process,
+            "footnote_end": LineParseController.footnote_end_process,
             }
 
         for element in self.keyword_linenumber_list:
             keyword = element[0]
             line_number = element[1]
             if keyword == "cs_beg":
-                tag_bag, tag_dict = Parser.cs_open_process(
-                    line_to_read=line_number,
-                    xml_tag_num=self.xml_tag_num,
-                    debug_dir=self.debug_dir,
-                    working_file=self.working_file)
+                tag_bag = LineParseController.cs_open_process(
+                    self=LineParseController(
+                        debug_dir=self.debug_dir,
+                        working_input_file=self.working_input_file,
+                        keyword_linenumber_list=self.keyword_linenumber_list,
+                        line_to_read=self.line_to_read,
+                        tag_dict=tag_dict),
+                    line_to_read=line_number)
             elif keyword == "cs_end":
-                Parser.cs_close_process(debug_dir=self.debug_dir,
-                                        tag_bag=tag_bag,
-                                        tag_dict=tag_dict,
-                                        line_to_read=line_number)
+                LineParseController.cs_close_process(
+                    self=LineParseController(
+                        debug_dir=self.debug_dir,
+                        working_input_file=self.working_input_file,
+                        keyword_linenumber_list=self.keyword_linenumber_list,
+                        line_to_read=self.line_to_read,
+                        tag_dict=tag_dict),
+                    tag_bag=tag_bag,
+                    line_to_read=line_number)
             else:
-                process_dict[keyword](debug_dir=self.debug_dir,
-                                      xml_tag_num=self.xml_tag_num,
-                                      line_to_read=line_number)
+                process_dict[keyword](line_to_read=line_number)

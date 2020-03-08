@@ -47,26 +47,23 @@ __name__ = "Contents.Library.cs"
 # Standard library imports
 import linecache
 import logging
-import sys
 
 # Local application imports
 import emphasis
 import keyword_end_alt
 import open_tag_check
 import tag_registry_update
-import tag_style
 import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def cs_bounds(working_file: str, line_to_read: str) -> str:
+def cs_bounds(working_file: str, line_to_search: str) -> str:
     """
     Start with the line that includes the keyword "{\\cs..." find the end of
     the text line (marked by a closing brace "}").
     """
     cs_end_line = keyword_end_alt.keyword_end_alt(working_file=working_file,
-                                                  keyword_open=line_to_read)
-
+                                                  keyword_open=line_to_search)
     return cs_end_line
 
 
@@ -95,20 +92,15 @@ def cs_line_parse(line_to_read: str, working_file: str) -> tuple:
 
 
 def cs_opening_tags(cs_line_dict: dict, text: str,
-                    xml_tag_num: str, debug_dir: str,
+                    tag_dict: dict, debug_dir: str,
                     line: str):
     """
-    Determine what tag_dict (style tags) to use based on the user's
-    preference. Check for open cs tags (e.g., an open italic tag) and close
+    Check for open cs tags (e.g., an open italic tag) and close
     them. Based on the settings in the cs (text) line, write to the
     working_xml_file the tags implementing those settings. Store the types
     of tags (e.g., italic, bold) in the tag_bag. Then, write to the
     working_xml_file any text in the cs line to which those settings apply.
     """
-
-    # Determine tag style based on user's preference.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # Check the tag registry to see whether any emphasis tags need closing.
     status_list = [
         "small_caps",
@@ -121,7 +113,7 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)
 
-    # From the cs line, create a list (list_of_tags) of emphasis tags which
+    # From the cs line, create a list of emphasis tags (list_of_tags) which
     # need to be added to the working_xml_file. Add those tags to the file
     # and to a tag_bag.
     list_of_tags = []
@@ -170,10 +162,10 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
         tag_update = text
         working_xml_file_update.tag_append(debug_dir, tag_update)
 
-    return tag_bag, tag_dict
+    return tag_bag
 
 
-def cs_closing_tags(debug_dir: str, tag_dict: str, tag_bag: list, line: str):
+def cs_closing_tags(debug_dir: str, tag_dict: dict, tag_bag: list, line: str):
     """
     All tags opened by cs_opening_tags must be closed. This may happen
     immediately after we write the tags and text to the working_xml_file if

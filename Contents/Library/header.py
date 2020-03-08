@@ -53,39 +53,34 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def header_bounds(working_file: str, search_line: str) -> str:
-    """
-
-    """
+def header_bounds(working_input_file: str, line_to_search: str) -> str:
+    """ Find the beginning and end of the header keyword. """
     leftb = 0
     rightb = 0
     header_end_line = "0"
     while header_end_line == "0":
-        line_to_search = linecache.getline(working_file, search_line)
+        line_to_search = linecache.getline(working_input_file, line_to_search)
         for elem in line_to_search:
             if elem == "{":
                 leftb += 1
             elif elem == "}":
                 rightb += 1
             if leftb == rightb:
-                header_end_line = search_line
+                header_end_line = line_to_search
             else:
                 pass
-        search_line += 1
+        line_to_search += 1
 
     linecache.clearcache()
     return header_end_line
 
 
-def header_start(debug_dir: str, xml_tag_num: str, line: str):
+def header_start(debug_dir: str, tag_dict: dict, line: str):
     """
     Before inserting an opening XML tag for a header, check for open tags
     that need to be closed and (if any) close them. Insert the opening
     header tag. Update the tag_registry after inserting tags.
     """
-    # Retrieve the correct tag dictionary to use.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # Check for open tags.
     status_list = [
         "small_caps",
@@ -118,15 +113,12 @@ def header_start(debug_dir: str, xml_tag_num: str, line: str):
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
 
 
-def header_end(debug_dir: str, xml_tag_num: str, line: str):
+def header_end(debug_dir: str, tag_dict: dict, line: str):
     """
     Before inserting a closing XML tag for a header, check for open tags
     and (if any) close them. Insert the closing header tag. Updated the
     tag registry.
     """
-    # Retrieve the correct tag dictionary to use.
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
-
     # Check for open tags.
     status_list = [
         "small_caps",

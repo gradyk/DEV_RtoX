@@ -40,29 +40,28 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-16"
 __name__ = "Contents.Library.split_between_characters"
 
+# From standard libraries
+import logging
 
-class SplitBetween:
+# From application library
+from read_log_config import logger_basic
 
-    def __init__(self, text_to_process: str, split_characters: str) -> None:
-        self.text_to_process = text_to_process
-        self.split_characters = split_characters
 
-    def split_between(self):
-        """
-        Splits the text_to_process between two characters into
-        separate items in a list (result_list).
-        """
+def split_between(text_to_process: str, split_characters: str):
+    """
+    Splits the text_to_process between two characters into
+    separate items in a list (result_list).
+    """
 
-        chars = '}{'
-        if len(chars) is not 2:
-            # TODO Need logger here.
-            raise IndexError("Argument chars must contain two characters.")
+    try:
+        len(split_characters) is 2
+    except TypeError:
+        if logger_basic.isEnabledFor(logging.DEBUG):
+            logger_basic.debug(
+                msg="'split_characters' must be two characters (you provided "
+                    f"{split_characters} as the split_characters.")
 
-        result_list = [self.split_characters[1] + line +
-                       self.split_characters[0] for line in
-                       self.text_to_process.split(self.split_characters)]
+    text_to_process = text_to_process.replace("}{", "}|{")
+    code_strings_list = text_to_process.split("|")
 
-        result_list[0] = result_list[0][1:]
-        result_list[-1] = result_list[-1][:-1]
-
-        return result_list
+    return code_strings_list

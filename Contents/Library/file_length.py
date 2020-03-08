@@ -32,8 +32,8 @@
 __name__ = "Contents.Library.file_length"
 
 
-def working_file_length(working_file: str) -> int:
-    with open(working_file) as file_size:
+def working_input_file_length(working_input_file: str) -> int:
+    with open(working_input_file) as file_size:
         for i, l in enumerate(file_size):
             pass
     return i + 1
