@@ -1,33 +1,22 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  Copyright (c) 2019. Kenneth A. Grady
+#  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """
 Each RTF file, after the header section, may have an "info" section that
@@ -43,400 +32,243 @@ __date__ = "2019-11-29"
 __name__ = "Contents.Library.docinfo_read"
 
 # From standard libraries
-import psycopg2
+import json
+import os
 import re
-import sys
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 # From local applications
+import header_parser_step_two
 import table_boundaries
 import split_between_characters
 
 
-# TODO This entire module needs to be reworked (see line_parser for an
-#  example of what to do). Query: how will this info be used?
-class InfoParse:
+class InfoParseController(object):
 
     def __init__(self,
-                 working_file: str,
+                 working_input_file: str,
                  debug_dir: str,
                  line_to_read: str,
-                 xml_tag_num: int,
                  table: str):
-        self.working_file = working_file
+        self.working_input_file = working_input_file
         self.debug_dir = debug_dir
         self.line_to_read = line_to_read
-        self.xml_tag_num = xml_tag_num
         self.table = table
 
-    def find_docinfo(self):
-        """
-        1. Find the beginning and end of the info section.
-        """
-        text_to_process = table_boundaries.TableBoundsController.find_table_start_end(
-            self=table_boundaries.TableBoundsController(
-                line_number=self.line_to_read,
-                table=self.table))
+        self.process_info_section()
 
-        # 2. Split the info code list into separate strings, one per info code.
-        info_code_strings = split_between_characters.split_between(
-                            text_to_process=text_to_process,
-                            split_characters="}{")
+    def process_info_section(self) -> None:
 
-        # 3. Separate each info code string into its parts and return the
-        # values for each part so that they can be stored in the rtox_db
-        # database.
-        for info_code in info_code_strings:
+        info_parse_controller = InfoParseController(
+            working_input_file=self.working_input_file,
+            debug_dir=self.debug_dir,
+            line_to_read=self.line_to_read,
+            table=self.table)
 
-            info_part = "title"
-            title = SetInfo.info_part_test(self=SetInfo(info_code=info_code),
-                                           info_part=info_part)
-            info_part = "subject"
-            subject = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        table_boundaries_file_updater = \
+            InfoParseController.find_info_section_boundaries(
+                self=info_parse_controller)
 
-            info_part = "author"
-            author = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        InfoParseController.create_empty_info_code_strings_file(
+            self=info_parse_controller)
 
-            info_part = "manager"
-            manager = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        text_to_process = InfoParseController.get_info_section_contents(
+            self=info_parse_controller,
+            table_boundaries_file_updater=table_boundaries_file_updater,
+            working_input_file=self.working_input_file)
 
-            info_part = "company"
-            company = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        info_code_strings_list = InfoParseController.get_info_strings_from_text(
+            text_to_process=text_to_process)
 
-            info_part = "operator"
-            operator = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        InfoParseController.info_code_strings_file_update(
+            self=info_parse_controller,
+            info_code_strings_list=info_code_strings_list)
 
-            info_part = "category"
-            category = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+    def find_info_section_boundaries(self) -> dict:
+        """ Find the beginning and end of the info section. """
+        table_start_line, table_first_brace, table_last_line, \
+            table_last_brace = table_boundaries.find_table_start_end(
+                table=self.table, working_input_file=self.working_input_file,
+                table_start_line=self.line_to_read)
 
-            info_part = "comment"
-            comment = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        table_boundaries_file_updater = \
+            {self.table: [table_start_line, table_first_brace,
+                          table_last_line, table_last_brace]}
 
-            info_part = "doccomm"
-            doccomm = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        return table_boundaries_file_updater
 
-            info_part = "hlinkbase"
-            hlinkbase = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+    def create_empty_info_code_strings_file(self) -> None:
+        """ This file will hold code strings from the info table. """
+        with open(os.path.join(self.debug_dir,
+                               "info_code_strings_file.json"), "w+") as \
+                info_code_strings_file_empty:
+            json.dump(info_code_strings_file_empty, "{}")
 
-            info_part = "version"
-            version = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+    def get_info_section_contents(self, table_boundaries_file_updater: dict,
+                                  working_input_file: str) -> str:
+        """ Extract the contents of the info table. """
+        text_to_process = header_parser_step_two.\
+            get_table_contents_as_text_string(
+                table=self.table,
+                table_boundaries_file_updater=table_boundaries_file_updater,
+                working_input_file=working_input_file)
 
-            info_part = "edmins"
-            edmins = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        return text_to_process
 
-            info_part = "nofpages"
-            nofpages = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+    @staticmethod
+    def get_info_strings_from_text(text_to_process: str) -> list:
+        """ Break the info table contents into separate code strings. """
+        info_code_strings_list = split_between_characters.split_between(
+            text_to_process=text_to_process,
+            split_characters="}{")
 
-            info_part = "nofwords"
-            nofwords = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        return info_code_strings_list
 
-            info_part = "nofchars"
-            nofchars = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+    def info_code_strings_file_update(self, info_code_strings_list: list) \
+            -> None:
+        """ Store the info table code strings in a file. """
+        info_code_strings_file = os.path.join(self.debug_dir,
+                                              "info_code_strings_file.json")
 
-            info_part = "nofcharsws"
-            nofcharsws = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
+        info_code_strings_file_updater = {self.table: [info_code_strings_list]}
 
-            info_part = "vern"
-            vern = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
-
-            info_part = "keywords"
-            keywords = SetInfo.info_part_test(self=SetInfo(
-                info_code=info_code), info_part=info_part)
-
-            c_time_data_vars = SetInfo.creatim(self=SetInfo(
-                info_code=info_code))
-            r_time_data_vars = SetInfo.revtim(self=SetInfo(info_code=info_code))
-            p_time_data_vars = SetInfo.printim(self=SetInfo(
-                info_code=info_code))
-            b_time_data_vars = SetInfo.buptim(self=SetInfo(info_code=info_code))
-
-            set_info_vars = [title, subject, author, manager, company,
-                             operator, category, comment, doccomm, hlinkbase,
-                             version, edmins, nofpages, nofwords, nofchars,
-                             nofcharsws, vern, keywords, c_time_data_vars,
-                             r_time_data_vars, p_time_data_vars,
-                             b_time_data_vars
-                             ]
-
-            StoreDocInfo.docinfo_db(
-                self=StoreDocInfo(set_info_vars=set_info_vars))
-
-            # StoreDocInfo.tag_it(
-            #    self=StoreDocInfo(set_info_vars=set_info_vars))
+        with open(info_code_strings_file, "w") as info_code_strings_file_pre:
+            json.dump(info_code_strings_file_updater,
+                      info_code_strings_file_pre)
 
 
-class SetInfo:
-    """
+class ProcessTheInfoCodes(object):
 
-    """
-    def __init__(self,
-                 info_code: str
-                 ) -> None:
-        self.info_code = info_code
+    def __init__(self, debug_dir: str) -> None:
+        self.debug_dir = debug_dir
 
-    def info_part_test(self, info_part) -> str:
-        """
+        with open(os.path.join(
+                self.debug_dir, "info_code_strings_file.json"), "r") as \
+                info_codes_file_pre:
+            self.info_codes_file = json.load(info_codes_file_pre)
 
-        """
+        self.info_code_string = self.extract_info_code_string()
+        self.parse_info_code_string()
+
+    def extract_info_code_string(self) -> str:
+        """ Pull the info code strings out of the file one at a time. """
+        for info_code in self.info_codes_file:
+            info_code_string = self.info_codes_file[info_code]
+
+            return info_code_string
+
+    def parse_info_code_string(self):
+        """ Parse each code string. """
+        info_part_list = [
+                "title",
+                "subject",
+                "author",
+                "manager",
+                "company",
+                "operator",
+                "category",
+                "comment",
+                "doccomm",
+                "hlinkbase",
+                "version",
+                "edmins",
+                "nofpages",
+                "nofwords",
+                "nofchars",
+                "nofcharsws",
+                "vern",
+                "keywords"
+            ]
+
+        for info_part in info_part_list:
+
+            info_part_contents = GetPartContents.extract_info_part_contents(
+                self=GetPartContents(info_code_string=self.info_code_string),
+                info_part=info_part)
+
+            info_part_updater = {info_part: info_part_contents}
+
+            ProcessTheInfoCodes.update_info_file(
+                self=ProcessTheInfoCodes(debug_dir=self.debug_dir),
+                info_part_updater=info_part_updater)
+
+    def parse_time_components(self):
+
+        time_part_list = [
+            "creatim",
+            "revtim",
+            "printim",
+            "buptim"
+        ]
+
+        for time_part in time_part_list:
+            info_part_updater = {}
+            try:
+                test = re.search(time_part, self.info_code_string)
+                if test is None:
+                    info_part_updater = {time_part: {"yr":  0, "mo": 0, "dy": 0,
+                                                     "hr":  0, "min": 0,
+                                                     "sec": 0}}
+                else:
+                    time_string = test[0].replace("{\\"+time_part,
+                                                  "").replace("}", "")
+                    time_string_list = time_string.split("\\")
+                    for time_item in time_string_list:
+                        info_part_updater = GetPartContents.\
+                            extract_time_part_contents(time_item=time_item)
+            except TypeError:
+                info_part_updater = {time_part: {"yr": 0, "mo": 0, "dy": 0,
+                                                 "hr": 0, "min": 0, "sec": 0}}
+
+            ProcessTheInfoCodes.update_info_file(
+                self=ProcessTheInfoCodes(debug_dir=self.debug_dir),
+                info_part_updater=info_part_updater)
+
+    def update_info_file(self, info_part_updater: dict) -> None:
+
+        with open(os.path.join(self.debug_dir, "info_codes_file.json"), "w+") \
+                as info_codes_file_pre:
+            json.dump(info_part_updater, info_codes_file_pre)
+
+
+class GetPartContents(object):
+
+    def __init__(self, info_code_string: str) -> None:
+        self.info_code_string = info_code_string
+
+    def extract_info_part_contents(self, info_part) -> str:
+        """ For each part in the info table, extract the contents. """
         try:
-            test = re.search(info_part, self.info_code)
+            test = re.search(info_part, self.info_code_string)
             if test is None:
                 result = "None"
                 return result
             else:
                 pattern = r'\s(\w+|\s|\W)+'
-                info_text = re.search(pattern, self.info_code)
+                info_text = re.search(pattern, self.info_code_string)
                 if info_text:
-                    result_pre_1 = info_text[0].rstrip()
-                    result = result_pre_1[:-1]
+                    pre_result = info_text[0].rstrip()
+                    result = pre_result[:-1]
                     return result
                 else:
                     result = "None"
                     return result
-
         except TypeError:
             result = "None"
             return result
 
-    def creatim(self) -> list:
-        """
-
-        """
-        try:
-            test = re.search("creatim", self.info_code)
-            if test is None:
-                c_time_data_vars = [0, 0, 0, 0, 0, 0]
-                return c_time_data_vars
-            else:
-                cat_time = test[0].replace("{\\creatim", "").replace("}", "")
-                cat_time_list = cat_time.split("\\")
-                for time_item in cat_time_list:
-                    c_time_data_vars = TimeData.time_data(
-                                        time_item=time_item)
-                    return c_time_data_vars
-        except TypeError:
-            c_time_data_vars = [0, 0, 0, 0, 0, 0]
-            return c_time_data_vars
-
-    def revtim(self) -> list:
-        """
-        _.
-        """
-        try:
-            test = re.search("revtim", self.info_code)
-            if test is None:
-                r_time_data_vars = [0, 0, 0, 0, 0, 0]
-                return r_time_data_vars
-            cat_time = test[0].replace("{\\revtim", "").replace("}", "")
-            cat_time_list = cat_time.split("\\")
-            for time_item in cat_time_list:
-                r_time_data_vars = TimeData.time_data(
-                                    time_item=time_item)
-                return r_time_data_vars
-        except TypeError:
-            r_time_data_vars = [0, 0, 0, 0, 0, 0]
-            return r_time_data_vars
-
-    def printim(self) -> list:
-        """
-
-        """
-        try:
-            test = re.search("printim", self.info_code)
-            if test is None:
-                p_time_data_vars = [0, 0, 0, 0, 0, 0]
-                return p_time_data_vars
-            cat_time = test[0].replace("{\\printim", "").replace("}", "")
-            cat_time_list = cat_time.split("\\")
-            for time_item in cat_time_list:
-                p_time_data_vars = TimeData.time_data(
-                                    time_item=time_item)
-                return p_time_data_vars
-        except TypeError:
-            p_time_data_vars = [0, 0, 0, 0, 0, 0]
-            return p_time_data_vars
-
-    def buptim(self) -> list:
-        """
-
-        """
-        try:
-            test = re.search("buptim", self.info_code)
-            if test is None:
-                b_time_data_vars = [0, 0, 0, 0, 0, 0]
-                return b_time_data_vars
-            cat_time = test[0].replace("{\\buptim", "").replace("}", "")
-            cat_time_list = cat_time.split("\\")
-            for time_item in cat_time_list:
-                b_time_data_vars = TimeData.time_data(
-                                    time_item=time_item)
-                return b_time_data_vars
-        except TypeError:
-            b_time_data_vars = [0, 0, 0, 0, 0, 0]
-            return b_time_data_vars
-
-
-class StoreDocInfo:
-    """
-
-    """
-    def __init__(self,
-                 set_info_vars: list
-                 ):
-        self.set_info_vars = set_info_vars
-
-    def docinfo_db(self):
-        """
-
-        """
-        from config_dict import config_dictionary
-
-        host = config_dictionary.get("host")
-        database = config_dictionary.get("database")
-        user = config_dictionary.get("user")
-        password = config_dictionary.get("password")
-
-        con = psycopg2.connect(host=host, database=database, user=user,
-                               password=password)
-        con.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-        cur = con.cursor()
-
-        try:
-            postgres_insert_query = """INSERT INTO 
-            rtox_db.docinfocodes.general(title, subject, author, manager, 
-            company, operator, category, comment, doccomm, hlinkbase, 
-            version, edmins, nofpages, nofwords, nofchars, nofcharsws,
-            vern, keywords) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s,
-            %s, %s, %s, %s, %s, %s, %s, %s, %s)"""
-            record_to_insert = (self.set_info_vars[0], self.set_info_vars[1],
-                                self.set_info_vars[2], self.set_info_vars[3],
-                                self.set_info_vars[4], self.set_info_vars[5],
-                                self.set_info_vars[6], self.set_info_vars[7],
-                                self.set_info_vars[8], self.set_info_vars[9],
-                                self.set_info_vars[10], self.set_info_vars[11],
-                                self.set_info_vars[12], self.set_info_vars[13],
-                                self.set_info_vars[14], self.set_info_vars[15],
-                                self.set_info_vars[16], self.set_info_vars[17])
-
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            # TODO Replace sys.stdouts (several) with logger.
-            sys.stdout.write("Problem entering docinfo (general) codes in "
-                             "database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        try:
-            postgres_insert_query = """INSERT INTO 
-            rtox_db.docinfocodes.create(year, month, day, hour, minutes, 
-            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
-            array = self.set_info_vars[18]
-            record_to_insert = (array[0], array[1], array[2], array[3],
-                                array[4], array[5])
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering docinfo (creatim) codes in "
-                             "database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        try:
-            postgres_insert_query = """INSERT INTO 
-            rtox_db.docinfocodes.revise(year, month, day, hour, minutes, 
-            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
-            array = self.set_info_vars[19]
-            record_to_insert = (array[0], array[1], array[2], array[3],
-                                array[4], array[5])
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering docinfo (revtim) codes in "
-                             "database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        try:
-            postgres_insert_query = """INSERT INTO 
-            rtox_db.docinfocodes.print(year, month, day, hour, minutes, 
-            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
-            array = self.set_info_vars[20]
-            record_to_insert = (array[0], array[1], array[2], array[3],
-                                array[4], array[5])
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering docinfo (printim) codes in "
-                             "database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        try:
-            postgres_insert_query = """INSERT INTO 
-            rtox_db.docinfocodes.backup(year, month, day, hour, minutes, 
-            seconds) VALUES (%s, %s, %s, %s, %s, %s)"""
-            array = self.set_info_vars[21]
-            record_to_insert = (array[0], array[1], array[2], array[3],
-                                array[4], array[5])
-            cur.execute(postgres_insert_query, record_to_insert)
-            con.commit()
-        except psycopg2.DatabaseError as err:
-            pg_err = str(err.pgcode)
-            sys.stdout.write("Problem entering docinfo (buptim) codes in "
-                             "database.\n"
-                             f"Error number {pg_err}; {err}\n")
-
-        if con is not None:
-            cur.close()
-            con.close()
-
-
-class TimeData:
-    """
-
-    """
-    def __init__(self,
-                 time_item: str
-                 ) -> None:
-        self.time_item = time_item
-
     @staticmethod
-    def time_data(time_item) -> list:
-        """
+    def extract_time_part_contents(time_item) -> dict:
+        """ For each time part in the info table, extract the contents. """
+        info_part_updater = {}
+        time_data_list = ["yr", "mo", "dy", "hr", "min", "sec"]
 
-        """
-        time_data_test = ["yr", "mo", "dy", "hr", "min", "sec"]
-        time_data_vars = []
+        for item in time_data_list:
 
-        for item in time_data_test:
+            if re.search(r"\\"+item, time_item) is None:
+                item_value = 0
+            else:
+                item_value = time_item.replace('\\'+item, "")
 
-            try:
-                test = re.search(r"\\"+item, time_item)
-                if test is None:
-                    item = 0
-                else:
-                    item = test[0].replace('\\'+item, "")
-            except TypeError:
-                item = 0
+            info_part_updater = info_part_updater.update({item: item_value})
 
-            time_data_vars.append(int(item))
-
-        return time_data_vars
+        return info_part_updater

@@ -10,7 +10,7 @@
 #  Software Foundation, either version 3 of the License, or (at your option)
 #  any later version.
 #
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
 #  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 #  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 #  more details.
@@ -41,7 +41,8 @@ class StyleSheetParse(object):
                             <stylename>?';''}'
     <styledef>          \\s |\\*\\cs | \\ds | \ts\tsrowd
     <keycode>           '{' \\keycode <keys> '}'
-    <keys>              ( \\shift? & \\ctrl? & \alt?) <key>
+    <keys>              ( \\shift? & \\ctrl? & \alt?)
+    <key>               \fn | #PCDATA
     <additive>          \additive
     <based>             \\sbasedon
     <next>              \\snext
@@ -79,13 +80,19 @@ class StyleSheetParse(object):
 
         for code_string in self.code_strings_to_process:
 
-            StyleSheetParse.process_style_codes(
-                self=StyleSheetParse(
-                    code_strings_to_process=self.code_strings_to_process,
-                    debug_dir=self.debug_dir),
-                code_string=code_string)
-            
-            return code_string
+            # Ignore code strings that start with the \*\cs control word in
+            # the style sheet.
+            if re.match(r"({)\\\*\\(cs)", code_string) is not None:
+
+                StyleSheetParse.process_style_codes(self=StyleSheetParse(
+                        code_strings_to_process=self.code_strings_to_process,
+                        debug_dir=self.debug_dir),
+                    code_string=code_string)
+
+                return code_string
+
+            else:
+                pass
 
     def process_style_codes(self, code_string: str):
         """ Parse each style code string into its constituent setting and
@@ -132,11 +139,11 @@ class GetStyleCodes(object):
         """  """
         stylecode = ""
         code_styles = [
-            r"{\s",
-            r"{\*\cs",
-            r"{\ds",
-            r"{\trowd",
-            r"{\tsrowd",
+            r"{\s",  # Paragraph style code
+            r"{\ds",  # Section style code
+            r'{\ts',  # Table style code
+            r"{\trowd",  #
+            r"{\tsrowd",  # Table style definitions
         ]
 
         for item in code_styles:
@@ -255,9 +262,30 @@ class GetStyleCodes(object):
             style_next_paragraph = "0"
             return style_next_paragraph
 
+    def font_alignment_set(self) -> str:
+        """  """
+        font_align_list = [
+            "faauto",
+            "fahang",
+            "facenter",
+            "faroman",
+            "favar",
+            "fafixed"
+        ]
+
+        for item in font_align_list:
+            try:
+                test = re.search(r"\\"+item, self.code_string)
+                font_align = test[0].replace("\\", "")
+                return font_align
+            except TypeError:
+                font_align = "faauto"
+                return font_align
+
     def store_style(self, stylecode: str, italic: str, bold: str, underline:
                     str, strikethrough: str, small_caps: str, additive: bool,
-                    style_name: str, style_next_paragraph: str):
+                    style_name: str, style_next_paragraph: str,
+                    font_align: str) -> None:
 
         with open(os.path.join(self.debug_dir, "style_file.json"), "w+") as \
                 style_file_pre:
@@ -270,7 +298,9 @@ class GetStyleCodes(object):
                                    "small_caps": small_caps,
                                    "additive": additive,
                                    "style_name": style_name,
-                                   "style_next_paragraph": style_next_paragraph}
+                                   "style_next_paragraph": style_next_paragraph,
+                                   "font_align": font_align
+                                   }
                                   }
 
             json.dump(style_file_updater, style_file_pre)

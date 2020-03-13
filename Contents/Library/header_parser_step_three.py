@@ -18,9 +18,7 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-
-"""
+"""  """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -37,9 +35,9 @@ import os
 import color_table
 import file_table
 import font_table
+# import generator
 # import para_group_table
 # import rsid_table
-# import sf_restrictions_table
 import style_sheet_table
 # import track_changes_table
 # import upi_group_table
@@ -50,10 +48,11 @@ class ProcessTheTables(object):
     def __init__(self, debug_dir: str, working_input_file: str) -> None:
         self.debug_dir = debug_dir
         self.working_input_file = working_input_file
+
         self.ProcessTheTables = ProcessTheTables(
             debug_dir=debug_dir, working_input_file=working_input_file)
 
-        ProcessTheTables.analyze_table_code_strings_controller(self)
+        self.analyze_table_code_strings_controller()
 
     def analyze_table_code_strings_controller(self):
 
@@ -75,17 +74,19 @@ class ProcessTheTables(object):
                 code_strings_to_process = code_strings[table][0]
 
                 table_parser_function_list = {
-                    "fonttbl": ProcessTheTables.font_table_parser,
-                    "filetbl": ProcessTheTables.file_table_parser,
-                    "colortbl": ProcessTheTables.color_table_parser,
-                    "stylesheet": ProcessTheTables.style_sheet_table_parser,
-                    "rsid": ProcessTheTables.process_rsid_table,
-                    "sf_restrictions":
-                        ProcessTheTables.process_sf_restrictions_table,
+                    "fonttbl": ProcessTheTables.process_font_table,
+                    "filetbl": ProcessTheTables.process_file_table,
+                    "colortbl": ProcessTheTables.process_color_table,
+                    "stylesheet": ProcessTheTables.process_style_sheet_table,
+                    "listtable": ProcessTheTables.process_list_table,
+                    "para_group":
+                        ProcessTheTables.process_para_group_properties_table,
                     "track_changes":
                         ProcessTheTables.process_track_changes_table,
+                    "rsid": ProcessTheTables.process_rsid_table,
                     "upi_group": ProcessTheTables.process_upi_group,
-                    "para_groups": ProcessTheTables.process_para_group_table}
+                    "generator": ProcessTheTables.process_generator
+                    }
 
                 code_function = table_parser_function_list[table]
 
@@ -95,7 +96,7 @@ class ProcessTheTables(object):
             code_function(self=self.ProcessTheTables,
                           code_strings_to_process=code_strings_to_process)
 
-    def font_table_parser(self, code_strings_to_process: list):
+    def process_font_table(self, code_strings_to_process: list):
         """ Process the code settings for each font number and store the
         settings in a dictionary. """
 
@@ -103,21 +104,21 @@ class ProcessTheTables(object):
                                 code_strings_to_process=code_strings_to_process)
 
     @staticmethod
-    def file_table_parser(code_strings_to_process: list):
+    def process_file_table(code_strings_to_process: list):
         """ Process the code settings for each file number and store the
         settings in a dictionary. """
 
         file_table.FiletblParse(code_strings_to_process=code_strings_to_process)
 
     @staticmethod
-    def color_table_parser(code_strings_to_process: list):
+    def process_color_table(code_strings_to_process: list):
         """ Process the code settings for each color number and store the
         settings in a dictionary. """
 
         color_table.ColortblParse(
             code_strings_to_process=code_strings_to_process)
 
-    def style_sheet_table_parser(self, code_strings_to_process: list):
+    def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
         settings in a dictionary. """
 
@@ -125,18 +126,31 @@ class ProcessTheTables(object):
             code_strings_to_process=code_strings_to_process,
             debug_dir=self.debug_dir)
 
-    # TODO Put these in the proper order and complete the modules.
-    def process_rsid_table(self):
+        # TODO sf_restrictions (style and formatting restrictions) is part of
+        #  style sheet table
+
+    # TODO Build modules for these tables.
+    def process_list_table(self):
+        # \listtable
         pass
 
-    def process_sf_restrictions_table(self):
+    def process_para_group_properties_table(self):
+        # \pgptbl
         pass
 
     def process_track_changes_table(self):
+        # \*\revtbl
+        pass
+
+    def process_rsid_table(self):
+        # \*\rsidtbl
         pass
 
     def process_upi_group(self):
+        # \*\protusertbl (user protection information group)
         pass
 
-    def process_para_group_table(self):
+    def process_generator(self):
+        # \*\generator (emitter application stamps the doc with its name,
+        # version and build number
         pass

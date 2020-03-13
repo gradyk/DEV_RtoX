@@ -3,36 +3,23 @@
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-Each keyword "line" (which may consist of several lines in the RTF input
-file) must be parsed to extract settings and text.
-"""
+""" Each keyword "line" (which may consist of several lines in the RTF input
+file) must be parsed to extract settings and text. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -54,11 +41,9 @@ import sectd
 class LineParseController:
     # TODO Do pard and sectd need opening and closing functions and setting
     #  parsings?
-    """
-    The line parser calls a function (or, in the case of the cs, footnote,
-    and header keywords a beginning and closing function) to parse the
-    settings and text for the keyword.
-    """
+    """ The line parser calls a function (or, in the case of the cs, footnote,
+        and header keywords a beginning and closing function) to parse the
+        settings and text for the keyword. """
     def __init__(self,
                  keyword_linenumber_list: list,
                  line_to_read: str,
@@ -71,66 +56,78 @@ class LineParseController:
         self.debug_dir = debug_dir
         self.tag_dict = tag_dict
 
-    def cs_open_process(self, line_to_read: str):
+    def cs_open_process(self, line_to_read: str) -> list:
 
         cs_line_dict, text = cs.cs_line_parse(
-            working_file=self.working_input_file,
+            working_input_file=self.working_input_file,
             line_to_read=line_to_read)
 
-        tag_bag = cs.cs_opening_tags(cs_line_dict=cs_line_dict,
-                                     text=text,
-                                     debug_dir=self.debug_dir,
-                                     line=line_to_read,
-                                     tag_dict=self.tag_dict)
+        tag_bag = cs.cs_process_controller_start(
+            cs_line_dict=cs_line_dict,
+            text=text,
+            debug_dir=self.debug_dir,
+            line=line_to_read,
+            tag_dict=self.tag_dict,
+            working_input_file=self.working_input_file,
+            line_to_search=line_to_read)
+
         return tag_bag
 
-    def cs_close_process(self, line_to_read: str, tag_bag: list):
-        cs.cs_closing_tags(debug_dir=self.debug_dir,
-                           tag_bag=tag_bag,
-                           tag_dict=self.tag_dict,
-                           line=line_to_read)
+    def cs_close_process(self, line_to_read: str, tag_bag: list) -> None:
+        cs.insert_closing_cs_tags(debug_dir=self.debug_dir,
+                                  tag_bag=tag_bag,
+                                  tag_dict=self.tag_dict,
+                                  line=line_to_read)
 
-    def footnote_beg_process(self,  line_to_read: str):
-        footnote.footnote_start(debug_dir=self.debug_dir,
-                                tag_dict=self.tag_dict,
-                                line=line_to_read)
+    def footnote_beg_process(self,  line_to_read: str) -> None:
+        footnote.footnote_process_controller_start(
+            debug_dir=self.debug_dir,
+            tag_dict=self.tag_dict,
+            line=line_to_read,
+            working_input_file=self.working_input_file,
+            line_to_search=line_to_read)
 
-    def footnote_end_process(self, line_to_read: str):
-        footnote.footnote_end(debug_dir=self.debug_dir,
-                              tag_dict=self.tag_dict,
-                              line=line_to_read)
+    def footnote_end_process(self, line_to_read: str) -> None:
+        footnote.footnote_process_controller_end(
+            debug_dir=self.debug_dir,
+            tag_dict=self.tag_dict,
+            line=line_to_read)
 
-    def header_beg_process(self, line_to_read: str):
-        header.header_start(debug_dir=self.debug_dir,
+    def header_beg_process(self, line_to_read: str) -> None:
+        header.header_process_controller_start(
+            debug_dir=self.debug_dir,
+            tag_dict=self.tag_dict,
+            line=line_to_read,
+            working_input_file=self.working_input_file,
+            line_to_search=line_to_read)
+
+    def header_end_process(self, line_to_read: str) -> None:
+        header.header_process_controller_end(
+            debug_dir=self.debug_dir,
+            tag_dict=self.tag_dict,
+            line=line_to_read)
+
+    def par_process(self, line_to_read: str) -> None:
+        par.par_tag_process(debug_dir=self.debug_dir,
                             tag_dict=self.tag_dict,
                             line=line_to_read)
 
-    def header_end_process(self, line_to_read: str):
-        header.header_end(debug_dir=self.debug_dir,
-                          tag_dict=self.tag_dict,
-                          line=line_to_read)
+    def pard_process(self, line_to_read: str) -> None:
+        pard.pard_tag_process(debug_dir=self.debug_dir,
+                              tag_dict=self.tag_dict,
+                              line=line_to_read)
 
-    def par_process(self, line_to_read: str):
-        par.tag_insert(debug_dir=self.debug_dir,
-                       tag_dict=self.tag_dict,
-                       line=line_to_read)
+    def sect_process(self, line_to_read: str) -> None:
+        sect.sect_tag_process(debug_dir=self.debug_dir,
+                              tag_dict=self.tag_dict,
+                              line=line_to_read)
 
-    def pard_process(self, line_to_read: str):
-        pard.tag_insert(debug_dir=self.debug_dir,
-                        tag_dict=self.tag_dict,
-                        line=line_to_read)
+    def sectd_process(self, line_to_read: str) -> None:
+        sectd.sectd_tag_process(debug_dir=self.debug_dir,
+                                tag_dict=self.tag_dict,
+                                line=line_to_read)
 
-    def sect_process(self, line_to_read: str):
-        sect.tag_insert(debug_dir=self.debug_dir,
-                        tag_dict=self.tag_dict,
-                        line=line_to_read)
-
-    def sectd_process(self, line_to_read: str):
-        sectd.tag_insert(debug_dir=self.debug_dir,
-                         tag_dict=self.tag_dict,
-                         line=line_to_read)
-
-    def line_parse(self):
+    def line_parse(self) -> None:
         tag_bag = []
         tag_dict = {}
 
@@ -142,7 +139,7 @@ class LineParseController:
             "header_beg":   LineParseController.header_beg_process,
             "header_end":   LineParseController.header_end_process,
             "footnote_beg": LineParseController.footnote_beg_process,
-            "footnote_end": LineParseController.footnote_end_process,
+            "footnote_end": LineParseController.footnote_end_process
             }
 
         for element in self.keyword_linenumber_list:

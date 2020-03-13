@@ -10,7 +10,7 @@
 #  Software Foundation, either version 3 of the License, or (at your option)
 #  any later version.
 #
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
 #  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 #  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 #  more details.
@@ -18,9 +18,7 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-
-"""
+"""  """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -73,10 +71,6 @@ if __name__ == "__main__":
         prepare_to_process.PrepareToProcess.extract_config_settings(
             self=preparetoprocess)
 
-    # TODO Drop this when database use is dropped in favor of dicts, etc.
-    # Clean the database.
-    prepare_to_process.PrepareToProcess.rtox_db_clean()
-
     # Get the user's preference for XML tag style.
     xml_tag_num_pass = prepare_to_process.PrepareToProcess.\
         extract_users_preferred_xml_tag_style()
@@ -104,7 +98,7 @@ if __name__ == "__main__":
         working_input_file=working_input_file_pass)
 
     # Process the table portion of the header.
-    header_parser_step_two.HeaderParseTableController(
+    header_parser_step_two.process_the_tables(
         working_input_file=working_input_file_pass,
         debug_dir=debug_dir_pass)
 
@@ -119,6 +113,7 @@ if __name__ == "__main__":
                                          xml_tag_num=xml_tag_num_pass))
 
     # Process the main portion of the document body.
+    # TODO Add capability to handle numbered paragraphs: spec p.48.
     line_to_get = doc_parser.choose_starting_line_number(
         debug_dir=debug_dir_pass)
     tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num_pass)

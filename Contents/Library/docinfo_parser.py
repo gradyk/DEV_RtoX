@@ -29,14 +29,7 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""
-This script controls parsing of the info section of the document.
-1. Find beginning of document info section.
-2. Find end of document info section.
-3. Split the info section into categories (each category bounded by "{" "}").
-4. Capture settings in each category and write them to the rtox_db,
-docinfocodes schema, docinfocodes tables.
- """
+""" """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -53,7 +46,7 @@ import os
 import docinfo_read
 
 
-class DocinfoParse:
+class DocinfoParse(object):
 
     def __init__(self,
                  debug_dir: str,
@@ -64,9 +57,8 @@ class DocinfoParse:
         self.xml_tag_num = xml_tag_num
 
     def process_docinfo(self):
-        """
-        Process info section of document.
-        """
+        """ Parse the info section of document and save the information in a
+        dictionary. """
         table = "info"
         with open(os.path.join(self.debug_dir, "header_tables_dict.json")) as \
                 header_tables_dict_pre:

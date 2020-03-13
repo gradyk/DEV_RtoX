@@ -29,10 +29,9 @@
 #  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-"""
-When converting an RTF file to an XML file, some unwanted back-to-back tag
-combinations are created.
-"""
+# TODO Complete this module (tag_dupe.py).
+""" When converting an RTF file to an XML file, some unwanted back-to-back tag
+combinations are created. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"

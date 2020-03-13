@@ -3,37 +3,24 @@
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-Sect marks the end of a section. It does not include any other coding. The
-necessary steps are: (1) insert and end of section tag, and (2) insert a
-beginning of section tag.
-"""
+""" Sect marks the end of a section. It does not include any other coding. The
+    necessary steps are: (1) insert and end of section tag, and (2) insert a
+    beginning of section tag. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -54,10 +41,18 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def tag_insert(debug_dir: str, tag_dict: dict, line: str):
+def sect_tag_process(debug_dir: str, tag_dict: dict, line: str):
 
-    # Check the tag registry to see whether an emphasis or paragraph tag needs
-    # closing and, if so, close it.
+    open_emphasis_tag_cleanup(debug_dir=debug_dir, tag_dict=tag_dict)
+
+    section_tag_cleanup(debug_dir=debug_dir, tag_dict=tag_dict, line=line)
+
+    update_tag_registry(debug_dir=debug_dir)
+
+
+def open_emphasis_tag_cleanup(debug_dir: str, tag_dict: dict):
+    """ Check the tag registry to see whether an emphasis tag needs closing
+        and close them. """
     status_list = [
         "small_caps",
         "strikethrough",
@@ -70,14 +65,16 @@ def tag_insert(debug_dir: str, tag_dict: dict, line: str):
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)
 
-    # Check the tag registry for the status of a section tag. If it is
-    # closed, open a new section and open a paragraph.
+
+def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
+    """ If the tag registry shows a closed section, insert an open
+        section tag and an open paragraph tag. If it shows an open section,
+        close it and open a new section and a new paragraph. """
     tag_registry = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
 
     tag_closed = "0"
-    tag_open = "1"
 
     if tag_registry["section"] == tag_closed:
         tag_update = tag_dict["section-beg"]
@@ -91,12 +88,12 @@ def tag_insert(debug_dir: str, tag_dict: dict, line: str):
             logging.exception("Check setLevel for logger_debug.")
 
     else:
-        # If a section tag is open, close it and open a new section.
         tag_update = tag_dict["section-end"] + tag_dict["section-beg"]
         working_xml_file_update.tag_append(debug_dir=debug_dir,
                                            tag_update=tag_update)
 
-    # Update tag registry.
+
+def update_tag_registry(debug_dir: str, tag_open="1"):
     tag_update_dict = {"section": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)

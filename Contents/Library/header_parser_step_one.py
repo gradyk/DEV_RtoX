@@ -39,8 +39,9 @@ class PretableController(object):
     def __init__(self, working_input_file: str, debug_dir: str) -> None:
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
-        PretableController.determine_header_structure(self)
-        PretableController.process_pretable_controlwords(self)
+
+        self.determine_header_structure()
+        self.process_pretable_controlwords()
 
     def determine_header_structure(self):
         """

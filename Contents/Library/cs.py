@@ -3,39 +3,26 @@
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-In an RTF file, a line which begins with the keyword {\\cs... and ends with a }
-is a text line. The "cs" stands for "character setting". The relevant
+""" A line which begins with the keyword {\\cs... and ends with a }
+is a text line (not to be confused with {\\*\\cs ...} which marks a
+character style). The "cs" stands for "character setting". The relevant
 settings for XML purposes are: italic, bold, underline, strikethrough,
-and small caps. We also need to capture the text at the end of the line,
-to which those settings apply.
-"""
+and small caps. RtoX also captures the text to which those settings apply. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -57,22 +44,33 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def cs_bounds(working_file: str, line_to_search: str) -> str:
-    """
-    Start with the line that includes the keyword "{\\cs..." find the end of
-    the text line (marked by a closing brace "}").
-    """
-    cs_end_line = keyword_end_alt.keyword_end_alt(working_file=working_file,
-                                                  keyword_open=line_to_search)
+def cs_process_controller_start(working_input_file: str, line_to_search: str,
+                                debug_dir: str, tag_dict: dict, line: str,
+                                cs_line_dict: dict, text: str):
+
+    determine_cs_bounds(working_input_file=working_input_file,
+                        line_to_search=line_to_search)
+
+    open_emphasis_tag_cleanup_start(debug_dir=debug_dir, tag_dict=tag_dict)
+
+    insert_opening_cs_tag(debug_dir=debug_dir, tag_dict=tag_dict,
+                          line=line, cs_line_dict=cs_line_dict,
+                          text=text)
+
+
+def determine_cs_bounds(working_input_file: str, line_to_search: str) -> str:
+    """ Find the boundaries of the keyword. """
+    cs_end_line = keyword_end_alt.keyword_end_alt(
+        working_file=working_input_file,
+        keyword_open=line_to_search)
+
     return cs_end_line
 
 
-def cs_line_parse(line_to_read: str, working_file: str) -> tuple:
-    """
-    Find the settings for each relevant variable and capture the text to
-    which those settings apply.
-    """
-    area_search = linecache.getline(working_file, line_to_read)
+def cs_line_parse(line_to_read: str, working_input_file: str) -> tuple:
+    """ Find the settings for each relevant variable in the keyword and
+        capture the text to which those settings apply. """
+    area_search = linecache.getline(working_input_file, line_to_read)
 
     italic = emphasis.italic(area_search=area_search)
     bold = emphasis.bold(area_search=area_search)
@@ -91,17 +89,8 @@ def cs_line_parse(line_to_read: str, working_file: str) -> tuple:
     return cs_line_dict, text
 
 
-def cs_opening_tags(cs_line_dict: dict, text: str,
-                    tag_dict: dict, debug_dir: str,
-                    line: str):
-    """
-    Check for open cs tags (e.g., an open italic tag) and close
-    them. Based on the settings in the cs (text) line, write to the
-    working_xml_file the tags implementing those settings. Store the types
-    of tags (e.g., italic, bold) in the tag_bag. Then, write to the
-    working_xml_file any text in the cs line to which those settings apply.
-    """
-    # Check the tag registry to see whether any emphasis tags need closing.
+def open_emphasis_tag_cleanup_start(tag_dict: dict, debug_dir: str) -> None:
+    """ Check for open emphasis tags and close them. """
     status_list = [
         "small_caps",
         "strikethrough",
@@ -113,9 +102,11 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)
 
-    # From the cs line, create a list of emphasis tags (list_of_tags) which
-    # need to be added to the working_xml_file. Add those tags to the file
-    # and to a tag_bag.
+
+def insert_opening_cs_tag(cs_line_dict: dict, text: str,
+                          tag_dict: dict, debug_dir: str,
+                          line: str):
+
     list_of_tags = []
     tag_tracker = 0
 
@@ -149,15 +140,13 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
             except AttributeError:
                 logging.exception("Check setLevel for logger_debug.")
 
-        # To that list of tags, add the cs line text and write to the
-        # working_xml_file: contents of the file, plus the tag string,
-        # plus the text.
+        # To the string of tags, add the cs line text. Write the string to the
+        # working_xml_file.
         tag_update = tag + text
         working_xml_file_update.tag_append(debug_dir, tag_update)
 
     else:
-        # If no tags need to be added, just add the cs line text and write
-        # to the working_xml_file: contents of the file plus the text.
+        # If no tags need to be added, just write the text to the file.
         tag_bag = []
         tag_update = text
         working_xml_file_update.tag_append(debug_dir, tag_update)
@@ -165,14 +154,13 @@ def cs_opening_tags(cs_line_dict: dict, text: str,
     return tag_bag
 
 
-def cs_closing_tags(debug_dir: str, tag_dict: dict, tag_bag: list, line: str):
-    """
-    All tags opened by cs_opening_tags must be closed. This may happen
-    immediately after we write the tags and text to the working_xml_file if
-    the cs text line does not contain any nested tags (e.g., a footnote or
-    paragraph). Or, it may happen after processing the nested lines if they
-    exist.
-    """
+def insert_closing_cs_tags(debug_dir: str, tag_dict: dict, tag_bag: list,
+                           line: str):
+    """ All tags opened by cs_opening_tags must be closed. This may happen
+        immediately after we write the tags and text to the working_xml_file if
+        the cs text line does not contain any nested tags (e.g., a footnote or
+        paragraph). Or, it may happen after processing the nested lines if they
+        exist. """
     tag = ""
     tag_closed = "0"
 
@@ -204,6 +192,6 @@ def cs_closing_tags(debug_dir: str, tag_dict: dict, tag_bag: list, line: str):
         tag_update = tag
         working_xml_file_update.tag_append(debug_dir, tag_update)
 
-    # Empty the tag_bag (this step prevents unwanted closing tags from being
-    # added when there are nested tags in the cs text line).
+    # Emptying the tag_bag prevents unwanted closing tags from being
+    # added when there are nested tags in the cs text line.
     tag_bag.clear()

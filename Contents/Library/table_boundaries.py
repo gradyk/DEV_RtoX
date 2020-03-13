@@ -47,11 +47,11 @@ def find_table_start_end(table: str, working_input_file: str,
     left_brace_count = 0
     right_brace_count = 0
 
-    startint_string = linecache.getline(working_input_file, line_to_search)
-    line_length = len(startint_string)
+    starting_string = linecache.getline(working_input_file, line_to_search)
+    line_length = len(starting_string)
 
-    table_first_brace = startint_string.find(table) - 2
-    string_to_search = startint_string[table_first_brace:line_length]
+    table_first_brace = starting_string.find(table) - 2
+    string_to_search = starting_string[table_first_brace:line_length]
 
     while table_last_brace == 0:
 

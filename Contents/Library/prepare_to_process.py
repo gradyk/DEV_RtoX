@@ -47,10 +47,9 @@ import os
 
 # From local application
 import input_file_prep
-import Contents.Library.databases.database_clean
 import prelim_routine
 import rtf_codes_file_prep
-from Contents.Library.dicts.tag_registry import tag_registry_dict
+from opening_tag_registry_dict import opening_tag_registry_dict
 
 
 class PrepareToProcess:
@@ -83,24 +82,6 @@ class PrepareToProcess:
             self.output_file_name
 
     @staticmethod
-    def rtox_db_clean():
-        """ Remove all rows from the rtox_db database tables. (They aren't
-        removed at the end of the prior RtoX run in case they are needed for
-        debugging purposes.) """
-        # TODO Assuming use of the db is dropped, this function can be dropped.
-        from config_dict import config_dictionary
-
-        host_pass = config_dictionary.get("host")
-        database_pass = config_dictionary.get("database")
-        user_pass = config_dictionary.get("user")
-        password_pass = config_dictionary.get("password")
-
-        Contents.Library.databases.database_clean.DBClean.db_clean(
-            self=Contents.Library.databases.
-            database_clean.DBClean(host=host_pass, database=database_pass,
-                                   user=user_pass, password=password_pass))
-
-    @staticmethod
     def extract_users_preferred_xml_tag_style():
         """ Extract the user's preference for XML tag style. """
         from config_dict import config_dictionary as rtf_settings_dict
@@ -117,7 +98,7 @@ class PrepareToProcess:
         tag_registry_file = os.path.join(self.debug_dir, "tag_registry.json")
         with open(tag_registry_file, "w", encoding='utf-8') as \
                 tag_registry:
-            json.dump(tag_registry_dict, tag_registry)
+            json.dump(opening_tag_registry_dict, tag_registry)
 
     def create_header_table_dict(self):
         """ Dictionary for storing which tables are in the RTF file header

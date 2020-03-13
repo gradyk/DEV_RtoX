@@ -3,36 +3,23 @@
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-Parse text and settings in the RTF file wrapped by the footnote keyword ({
-\\footnote ...}).
-"""
+""" Parse text and settings in the RTF file wrapped by the footnote keyword ({
+\\footnote ...}). """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -52,13 +39,28 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def footnote_bounds(working_input_file: str, line_to_search: str) -> str:
-    """
-    A footnote is bounded by an opening brace and keyword ({\\footnote)
-    and a closing brace (}). The opening is easy to identify. The closing can
-    be determined by counting opening and closing braces until the count
-    matches.
-    """
+def footnote_process_controller_start(working_input_file: str,
+                                      line_to_search: str,
+                                      debug_dir: str, tag_dict: dict,
+                                      line: str) -> None:
+
+    determine_footnote_bounds(working_input_file=working_input_file,
+                              line_to_search=line_to_search)
+
+    open_emphasis_tag_cleanup_start(debug_dir=debug_dir, tag_dict=tag_dict)
+
+    insert_opening_footnote_tag(debug_dir=debug_dir, tag_dict=tag_dict,
+                                line=line)
+
+    update_tag_registry_start(debug_dir=debug_dir)
+
+
+def determine_footnote_bounds(working_input_file: str,
+                              line_to_search: str) -> str:
+    """ A footnote is bounded by an opening brace and keyword ({\\footnote)
+        and a closing brace (}). The opening is easy to identify. The closing
+        can be determined by counting opening and closing braces until the count
+        matches. """
     left_brace = 0
     right_brace = 0
     footnote_end_line = "0"
@@ -83,16 +85,12 @@ def footnote_bounds(working_input_file: str, line_to_search: str) -> str:
     return footnote_end_line
 
 
-def footnote_start(debug_dir: str, tag_dict: dict, line: str):
-    """
-    Before inserting an opening XML tag for a footnote, check for open tags
-    that need to be closed and (if any) close them. Insert the opening
-    footnote tag. Update the tag_registry after inserting tags.
-    """
+def open_emphasis_tag_cleanup_start(debug_dir: str, tag_dict: dict) -> None:
+    """ Check for open tags that need to be closed and close them. Insert the
+    opening footnote tag. Update the tag_registry after inserting tags. """
     # TODO At least in TPRES, a footnote can be embedded in a paragraph or at
     #  the end of a paragraph. If embedded, the paragraph tag should not be
     #  closed before the footnote or opened after it. See also header.
-    # Check for and close open tags.
     status_list = [
         "small_caps",
         "strikethrough",
@@ -105,6 +103,9 @@ def footnote_start(debug_dir: str, tag_dict: dict, line: str):
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)
 
+
+def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
+                                line: str) -> None:
     # Add the opening footnote tag.
     tag_update = tag_dict["footnote-beg"]
 
@@ -117,22 +118,28 @@ def footnote_start(debug_dir: str, tag_dict: dict, line: str):
     except AttributeError:
         logging.exception("Check setLevel for logger_debug.")
 
-    # Update the tag registry.
+
+def update_tag_registry_start(debug_dir: str):
     tag_open = "1"
     tag_update_dict = {"footnote": tag_open}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
 
 
-def footnote_end(debug_dir: str, tag_dict: dict, line: str):
-    """
-    Before inserting a closing XML tag for a footnote, check for open tags
-    and (if any) close them. Insert the closing footnote tag. Updated the
-    tag registry.
-    """
-    # TODO Should that tag_dict be determined at the outset and passed as a
-    #  variable?
-    # Check for and close open tags.
+def footnote_process_controller_end(debug_dir: str, tag_dict: dict,
+                                    line: str) -> None:
+
+    open_emphasis_tag_cleanup_end(debug_dir=debug_dir, tag_dict=tag_dict)
+
+    insert_closing_footnote_tag(debug_dir=debug_dir, tag_dict=tag_dict,
+                                line=line)
+
+    update_tag_registry_end(debug_dir=debug_dir)
+
+
+def open_emphasis_tag_cleanup_end(debug_dir: str, tag_dict: dict) -> None:
+    """ Check for open tags and close them. Insert the closing footnote tag.
+        Updated the tag registry. """
     status_list = [
         "small_caps",
         "strikethrough",
@@ -145,7 +152,10 @@ def footnote_end(debug_dir: str, tag_dict: dict, line: str):
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)
 
-    # Add the closing footnote tag.
+
+def insert_closing_footnote_tag(debug_dir: str, tag_dict: dict,
+                                line: str) -> None:
+
     tag_update = tag_dict["footnote-end"]
 
     working_xml_file_update.tag_append(debug_dir=debug_dir,
@@ -157,8 +167,8 @@ def footnote_end(debug_dir: str, tag_dict: dict, line: str):
     except AttributeError:
         logging.exception("Check setLevel for logger_debug.")
 
-    # Update the tag registry.
-    tag_closed = "0"
+
+def update_tag_registry_end(debug_dir: str, tag_closed="0") -> None:
     tag_update_dict = {"footnote": tag_closed}
     tag_registry_update.tag_registry_update(
         debug_dir=debug_dir, tag_update_dict=tag_update_dict)
