@@ -50,11 +50,9 @@ class DocinfoParse(object):
 
     def __init__(self,
                  debug_dir: str,
-                 working_file: str,
-                 xml_tag_num: int):
+                 working_input_file: str):
         self.debug_dir = debug_dir
-        self.working_file = working_file
-        self.xml_tag_num = xml_tag_num
+        self.working_input_file = working_input_file
 
     def process_docinfo(self):
         """ Parse the info section of document and save the information in a
@@ -68,13 +66,12 @@ class DocinfoParse(object):
 
             line_to_check = header_tables_dict[table]
 
-            docinfo_read.InfoParse.find_docinfo(
-                self=docinfo_read.InfoParse(
-                    working_file=self.working_file,
+            docinfo_read.InfoParseController.process_info_section(
+                self=docinfo_read.InfoParseController(
                     debug_dir=self.debug_dir,
                     line_to_read=line_to_check,
-                    xml_tag_num=self.xml_tag_num,
-                    table=table))
+                    table=table,
+                    working_input_file=self.working_input_file))
 
         else:
             pass

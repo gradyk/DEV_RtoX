@@ -108,12 +108,13 @@ if __name__ == "__main__":
 
     # Process the info portion of the document body.
     docinfo_parser.DocinfoParse.process_docinfo(
-        self=docinfo_parser.DocinfoParse(debug_dir=debug_dir_pass,
-                                         working_file=working_input_file_pass,
-                                         xml_tag_num=xml_tag_num_pass))
+        self=docinfo_parser.DocinfoParse(
+            debug_dir=debug_dir_pass,
+            working_input_file=working_input_file_pass))
 
     # Process the main portion of the document body.
     # TODO Add capability to handle numbered paragraphs: spec p.48.
+    # TODO Add capability to handle tables: spec p.59.
     line_to_get = doc_parser.choose_starting_line_number(
         debug_dir=debug_dir_pass)
     tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num_pass)

@@ -44,6 +44,8 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
+# TODO Extend the parsing of cs styles to cover font character formatting as
+#  described in spec beginning at p.78.
 def cs_process_controller_start(working_input_file: str, line_to_search: str,
                                 debug_dir: str, tag_dict: dict, line: str,
                                 cs_line_dict: dict, text: str):
