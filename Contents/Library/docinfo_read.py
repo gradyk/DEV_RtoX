@@ -54,8 +54,6 @@ class InfoParseController(object):
         self.line_to_read = line_to_read
         self.table = table
 
-        self.process_info_section()
-
     def process_info_section(self) -> None:
 
         info_parse_controller = InfoParseController(
@@ -67,9 +65,6 @@ class InfoParseController(object):
         table_boundaries_file_updater = \
             InfoParseController.find_info_section_boundaries(
                 self=info_parse_controller)
-
-        InfoParseController.create_empty_info_code_strings_file(
-            self=info_parse_controller)
 
         text_to_process = InfoParseController.get_info_section_contents(
             self=info_parse_controller,
@@ -95,13 +90,6 @@ class InfoParseController(object):
                           table_last_line, table_last_brace]}
 
         return table_boundaries_file_updater
-
-    def create_empty_info_code_strings_file(self) -> None:
-        """ This file will hold code strings from the info table. """
-        with open(os.path.join(self.debug_dir,
-                               "info_code_strings_file.json"), "w+") as \
-                info_code_strings_file_empty:
-            json.dump(info_code_strings_file_empty, "{}")
 
     def get_info_section_contents(self, table_boundaries_file_updater: dict,
                                   working_input_file: str) -> str:

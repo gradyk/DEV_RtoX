@@ -37,6 +37,7 @@ import header_parser_step_two
 import header_parser_step_three
 import prepare_to_process
 import tag_closer
+import xml_transition_tags
 
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
@@ -92,6 +93,10 @@ if __name__ == "__main__":
     prepare_to_process.PrepareToProcess.create_header_table_dict(
         self=preparetoprocess)
 
+    # Create list to store rtf file codes.
+    prepare_to_process.PrepareToProcess.create_rtf_file_codes_file(
+        self=preparetoprocess)
+
     # Process the pre-table portion of the header.
     header_parser_step_one.PretableController(
         debug_dir=debug_dir_pass,
@@ -102,9 +107,11 @@ if __name__ == "__main__":
         working_input_file=working_input_file_pass,
         debug_dir=debug_dir_pass)
 
-    header_parser_step_three.ProcessTheTables(
-        working_input_file=working_input_file_pass,
-        debug_dir=debug_dir_pass)
+    header_parser_step_three.ProcessTheTables.\
+        analyze_table_code_strings_controller(
+            self=header_parser_step_three.ProcessTheTables(
+                debug_dir=debug_dir_pass,
+                working_input_file=working_input_file_pass))
 
     # Process the info portion of the document body.
     docinfo_parser.DocinfoParse.process_docinfo(
@@ -117,25 +124,28 @@ if __name__ == "__main__":
     # TODO Add capability to handle tables: spec p.59.
     line_to_get = doc_parser.choose_starting_line_number(
         debug_dir=debug_dir_pass)
+
     tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num_pass)
+
     file_length = doc_parser.find_length_working_input_file(
         working_input_file=working_input_file_pass)
 
-    keyword_process_list, line_to_search = \
+    keyword_translation_stack, line_to_search = \
         doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
             self=doc_parser.GetKeywordsAndLinenumbers(
                 working_input_file=working_input_file_pass,
-                file_length=file_length, line_to_get=line_to_get,
-                debug_dir=debug_dir_pass))
+                file_length=file_length, line_to_get=line_to_get))
 
-    doc_parser.sort_keyword_linenumber_list(
-        keyword_linenumber_list=keyword_linenumber_list)
-    doc_parser.insert_transition_tags(
-        debug_dir=debug_dir_pass, tag_dict=tag_dict)
+    keyword_translation_stack = doc_parser.sort_keyword_translation_stack(
+        keyword_translation_stack=keyword_translation_stack)
+
+    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir_pass,
+                                            tag_dict=tag_dict)
+
     doc_parser.parse_each_keyword_line(
-        keyword_linenumber_list=keyword_linenumber_list,
+        keyword_translation_stack=keyword_translation_stack,
         debug_dir=debug_dir_pass, tag_dict=tag_dict,
-        working_input_file=working_input_file_pass, line_to_read=____)
+        working_input_file=working_input_file_pass)
 
     # Close open tags where possible and produce list of remaining open tags.
     tag_closer.tag_closer(debug_dir=debug_dir_pass,

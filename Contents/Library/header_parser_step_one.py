@@ -70,6 +70,6 @@ class PretableController(object):
             rtf_file_lead_parse.code_process(
                 working_input_file=self.working_input_file)
 
-        rtf_file_lead_parse.update_rtf_file_codes_dict(
+        rtf_file_lead_parse.update_rtf_file_codes_list(
             rtf_file_codes_update=rtf_file_codes_update,
             debug_dir=self.debug_dir)

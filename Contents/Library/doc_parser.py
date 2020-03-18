@@ -3,39 +3,26 @@
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
+#  This file is part of RtoX.
 #
-#  1. Redistributions of source code must retain the above copyright notice,
-#  this list of conditions and the following disclaimer.
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
 #
-#  2. Redistributions in binary form must reproduce the above copyright
-#  notice, this list of conditions and the following disclaimer in the
-#  documentation and/or other materials provided with the distribution.
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
 #
-#  3. Neither the name of the copyright holder nor the names of its
-#  contributors may be used to endorse or promote products derived
-#  from this software without specific prior written permission.
-#
-#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-#  AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-#  PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
-#  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-#  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-#  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-#  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-#  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-#  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-#  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-"""
-Iterates through each line of the RTF file (starting at the \\info line or,
+""" Iterates through each line of the RTF file (starting at the \\info line or,
 if there is no info table, at line 0). Records in a list
-(keyword_linenumber_list) every line that starts with one of a specified list of
-keywords (keyword, line number). Returns the list. This list is fed to the
-line_parser module.
-"""
+(keyword_translation_stack) every line that starts with one of a specified
+list of keywords (keyword, line number). Returns the list. This list is fed
+to the line_parser module. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -57,12 +44,11 @@ import footnote
 import header
 import line_parser
 import tag_style
-import xml_transition_tags
 import Contents.Library.file_length
 from read_log_config import logger_mismatch
 
 
-def choose_starting_line_number(debug_dir: str) -> str:
+def choose_starting_line_number(debug_dir: str) -> int:
     """ Determine whether to start at the info line or line 0. """
     with open(os.path.join(debug_dir, "header_tables_dict.json")) as \
             header_tables_dict_pre:
@@ -72,7 +58,7 @@ def choose_starting_line_number(debug_dir: str) -> str:
         line_to_get = header_tables_dict["info"]
         return line_to_get
     except TypeError:
-        line_to_get = "0"
+        line_to_get = 1
     return line_to_get
 
 
@@ -89,260 +75,160 @@ def find_length_working_input_file(working_input_file: str):
     return file_length
 
 
-def search_for_cs_keyword(line_to_search: str):
-    """ Search the line to search for the cs keyword. If present, find the
-    beginning and end of the keyword. """
-    try:
-        cs_keyword_begin = re.match(r"{\\cs", line_to_search, re.M)
-    except TypeError:
-        cs_keyword_begin = None
-    return cs_keyword_begin
-
-
-def identify_cs_keyword_bounds(line_to_search: str, working_input_file: str):
-    """ If the cs keyword is in the line to search, find the keyword
-    beginning and end. """
-    cs_end_line = cs.cs_bounds(working_file=working_input_file,
-                               line_to_search=line_to_search)
-    return cs_end_line
-
-
-def search_for_par_keyword(line_to_search: str):
-    """ Search the line to search for the par keyword, which marks the end of a
-    paragraph. """
-    par_keyword = re.match(r"\\par[\s]?(\\n)?", line_to_search, re.M)
-    return par_keyword
-
-
-def search_for_pard_keyword(line_to_search: str):
-    """ Search the line to search for the pard keyword. It indicates how the
-    following paragraph should be formatted. """
-    pard_keyword = re.match(r"\\pard\\", line_to_search, re.M)
-    return pard_keyword
-
-
-def search_for_sect_keyword(line_to_search: str):
-    """ Search the line to search for the sect keyword, which marks the end
-    of a section. """
-    sect_keyword = re.match(r"\\sect[\s]?(\\n)?", line_to_search, re.M)
-    return sect_keyword
-
-
-def search_for_sectd_keyword(line_to_search: str):
-    """ Search the line to search for the pard keyword. It indicates how the
-    following paragraph should be formatted. """
-    sectd_keyword = re.match(r"\\sectd\\", line_to_search, re.M)
-    return sectd_keyword
-
-
-def search_for_header_keyword(line_to_search: str):
-    """ Search the line to search for the header keyword. """
-    try:
-        header_keyword_begin = re.match(r"{\\header", line_to_search, re.M)
-    except TypeError:
-        header_keyword_begin = None
-    return header_keyword_begin
-
-
-def identify_header_keyword_bounds(line_to_search: str,
-                                   working_input_file: str):
-    """ If the header keyword is in the line to search, find the keyword
-    beginning and end. """
-    header_end_line = header.header_bounds(
-        working_input_file=working_input_file,
-        line_to_search=line_to_search)
-    return header_end_line
-
-
-def search_for_footnote_keyword(line_to_search: str):
-    """ Search the line to search for the footnote keyword. """
-    try:
-        footnote_keyword_begin = re.match(r"{\\footnote", line_to_search, re.M)
-    except TypeError:
-        footnote_keyword_begin = None
-    return footnote_keyword_begin
-
-
-def identify_footnote_keyword_bounds(line_to_search: str,
-                                     working_input_file: str):
-    """ If the footnote keyword is in the line to search, find the beginning
-    and end of the keyword. """
-    footnote_end_line = footnote.footnote_bounds(
-        working_input_file=working_input_file,
-        line_to_search=line_to_search)
-    return footnote_end_line
-
-
 class GetKeywordsAndLinenumbers:
     """ Loop through each line in the working_input_file recording the keyword
         and line number for each line that starts with a keyword (note: this
         searches for a very limited number of RTF keywords). For three
         keywords (cs, header, footnote), the beginning and end of the keyword
         must be captured. """
-    def __init__(self, working_input_file: str, line_to_get: str,
-                 file_length: str, debug_dir: str):
+    def __init__(self, working_input_file: str, line_to_get: int,
+                 file_length: int):
         self.working_input_file = working_input_file
         self.line_to_get = line_to_get
         self.file_length = file_length
-        self.line_to_search = identify_line_to_search(
-            working_input_file=self.working_input_file,
-            line_to_get=self.line_to_get)
-        self.keyword_linenumber_list = []
-        self.keyword_linenumber_list = os.path.join(
-            debug_dir, "keyword_linenumber_list.json")
+        self.line_to_search = self.line_to_get
+        self.keyword_translation_stack = []
 
     def line_keyword_checker_processor(self):
         super().__init__()
         while self.line_to_get <= self.file_length:
 
-            cs_keyword_begin, cs_keyword_end, cs_end_line = \
-                GetKeywordsAndLinenumbers.cs_keyword_checker(self)
-            par_keyword = GetKeywordsAndLinenumbers.par_keyword_checker(self)
-            pard_keyword = GetKeywordsAndLinenumbers.pard_keyword_checker(self)
-            sect_keyword = GetKeywordsAndLinenumbers.sect_keyword_checker(self)
-            sectd_keyword = GetKeywordsAndLinenumbers.\
-                sectd_keyword_checker(self)
-            header_keyword_begin, header_keyword_end, header_end_line = \
-                GetKeywordsAndLinenumbers.header_keyword_checker(self)
-            footnote_keyword_begin, footnote_keyword_end, footnote_end_line = \
-                GetKeywordsAndLinenumbers.footnote_keyword_checker(self)
-
-            keyword_tag_translation_list = [
-                (cs_keyword_begin, "cs_beg", self.line_to_get),
-                (cs_keyword_end, "cs_end", cs_end_line),
-                (par_keyword, "par", self.line_to_get),
-                (pard_keyword, "pard", self.line_to_get),
-                (sect_keyword, "sect", self.line_to_get),
-                (sectd_keyword, "sectd", self.line_to_get),
-                (header_keyword_begin, "header_beg", self.line_to_get),
-                (header_keyword_end, "header_end", header_end_line),
-                (footnote_keyword_begin, "footnote_beg", self.line_to_get),
-                (footnote_keyword_end, "footnote_end", footnote_end_line)
-                ]
-
-            GetKeywordsAndLinenumbers.build_keyword_linenumber_list(
-                self=self,
-                keyword_tag_translation_list=keyword_tag_translation_list)
+            GetKeywordsAndLinenumbers.cs_keyword_checker(self)
+            GetKeywordsAndLinenumbers.par_keyword_checker(self)
+            GetKeywordsAndLinenumbers.pard_keyword_checker(self)
+            GetKeywordsAndLinenumbers.sect_keyword_checker(self)
+            GetKeywordsAndLinenumbers.sectd_keyword_checker(self)
+            GetKeywordsAndLinenumbers.header_keyword_checker(self)
+            GetKeywordsAndLinenumbers.footnote_keyword_checker(self)
+            self.keyword_translation_stack = GetKeywordsAndLinenumbers.\
+                retrieve_keyword_translation_stack(self)
 
             self.line_to_get += 1
 
-            self.line_to_search = identify_line_to_search(
-                working_input_file=self.working_input_file,
-                line_to_get=self.line_to_get)
+            self.line_to_search = self.line_to_get
 
-    def build_keyword_linenumber_list(self, keyword_tag_translation_list: list):
-        """ Create the keyword list (keyword_linenumber_list) based on the
-        keyword and the line on which it starts or ends. """
-        for keyword, tag_type, line_number in keyword_tag_translation_list:
-            if keyword is not None:
-                with open(self.keyword_linenumber_list, "r") as \
-                        keyword_linenumber_list_pre:
-                    keyword_linenumber_list = \
-                        json.load(keyword_linenumber_list_pre)
-                    keyword_linenumber_list.update((tag_type, int(line_number)))
-            else:
-                pass
+        return self.keyword_translation_stack, self.line_to_search
 
-    def cs_keyword_checker(self):
-        cs_keyword_end = None
-        cs_end_line = "0"
-        cs_keyword_begin = search_for_cs_keyword(
-            line_to_search=self.line_to_search)
+    def cs_keyword_checker(self) -> None:
+        try:
+            search_text = linecache.getline(self.working_input_file,
+                                                    self.line_to_search)
+            cs_keyword_begin = re.match(r"{\\cs", search_text, re.M)
+        except TypeError:
+            cs_keyword_begin = None
+
         if cs_keyword_begin is not None:
             cs_keyword_end = True
-            cs_end_line = identify_cs_keyword_bounds(
-                line_to_search=self.line_to_search,
-                working_input_file=self.working_input_file)
-        return cs_keyword_begin, cs_keyword_end, cs_end_line
+            cs_end_line = cs.determine_cs_bounds(
+                working_input_file=self.working_input_file,
+                line_to_search=self.line_to_search)
+            self.keyword_translation_stack.append(
+                (cs_keyword_begin, "cs_beg", self.line_to_get))
+            self.keyword_translation_stack.append(
+                (cs_keyword_end, "cs_end", cs_end_line))
+        else:
+            pass
 
-    def par_keyword_checker(self):
-        par_keyword = search_for_par_keyword(line_to_search=self.line_to_search)
-        return par_keyword
+    def par_keyword_checker(self) -> None:
+        search_text = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        par_keyword = re.match(r"\\par[\s]?(\\n)?", search_text, re.M)
+        self.keyword_translation_stack.append(
+            (par_keyword, "par", self.line_to_get))
 
-    def pard_keyword_checker(self):
-        pard_keyword = search_for_pard_keyword(
-            line_to_search=self.line_to_search)
-        return pard_keyword
+    def pard_keyword_checker(self) -> None:
+        search_text = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        pard_keyword = re.match(r"\\pard\\", search_text, re.M)
+        self.keyword_translation_stack.append(
+            (pard_keyword, "pard", self.line_to_get))
 
-    def sect_keyword_checker(self):
-        sect_keyword = search_for_sect_keyword(
-            line_to_search=self.line_to_search)
-        return sect_keyword
+    def sect_keyword_checker(self) -> None:
+        search_text = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        sect_keyword = re.match(r"\\sect[\s]?(\\n)?", search_text, re.M)
+        self.keyword_translation_stack.append(
+            (sect_keyword, "sect", self.line_to_get))
 
-    def sectd_keyword_checker(self):
-        sectd_keyword = search_for_sectd_keyword(
-            line_to_search=self.line_to_search)
-        return sectd_keyword
+    def sectd_keyword_checker(self) -> None:
+        search_text = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        sectd_keyword = re.match(r"\\sectd\\", search_text, re.M)
+        self.keyword_translation_stack.append(
+            (sectd_keyword, "sectd", self.line_to_get))
 
-    def header_keyword_checker(self):
-        header_keyword_end = None
-        header_end_line = "0"
-        header_keyword_begin = search_for_header_keyword(
-            line_to_search=self.line_to_search)
+    def header_keyword_checker(self) -> None:
+        search_text = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        try:
+            header_keyword_begin = re.match(r"{\\header", search_text,
+                                            re.M)
+        except TypeError:
+            header_keyword_begin = None
+
         if header_keyword_begin is not None:
             header_keyword_end = True
-            header_end_line = identify_header_keyword_bounds(
-                line_to_search=self.line_to_search,
-                working_input_file=self.working_input_file)
-        return header_keyword_begin, header_keyword_end, header_end_line
+            header_end_line = header.determine_header_bounds(
+                working_input_file=self.working_input_file,
+                line_to_search=self.line_to_search)
+            self.keyword_translation_stack.append(
+                (header_keyword_begin, "header_beg", self.line_to_get))
+            self.keyword_translation_stack.append(
+                (header_keyword_end, "header_end", header_end_line))
 
     def footnote_keyword_checker(self):
-        footnote_keyword_end = None
-        footnote_end_line = "0"
-        footnote_keyword_begin = search_for_footnote_keyword(
-            line_to_search=self.line_to_search)
+        self.line_to_search = linecache.getline(self.working_input_file,
+                                                self.line_to_search)
+        try:
+            footnote_keyword_begin = re.match(r"{\\footnote",
+                                              self.line_to_search, re.M)
+        except TypeError:
+            footnote_keyword_begin = None
         if footnote_keyword_begin is not None:
             footnote_keyword_end = True
-            footnote_end_line = identify_footnote_keyword_bounds(
-                line_to_search=self.line_to_search,
-                working_input_file=self.working_input_file)
-        return footnote_keyword_begin, footnote_keyword_end, footnote_end_line
+            footnote_end_line = footnote.determine_footnote_bounds(
+                working_input_file=self.working_input_file,
+                line_to_search=self.line_to_search)
+            self.keyword_translation_stack.append(
+                (footnote_keyword_begin, "footnote_beg", self.line_to_get))
+            self.keyword_translation_stack.append(
+                (footnote_keyword_end, "footnote_end", footnote_end_line))
+
+    def retrieve_keyword_translation_stack(self):
+        return self. keyword_translation_stack
 
 
-def identify_line_to_search(working_input_file: str, line_to_get: str):
-    """ Get the working_input_file line to search for keywords. """
-    line_to_search = linecache.getline(working_input_file, line_to_get)
-    return line_to_search
-
-
-def sort_keyword_linenumber_list(keyword_linenumber_list: list):
+def sort_keyword_translation_stack(keyword_translation_stack: list):
     """ Sort the keyword_linenumber_list in ascending order according to
     line number. """
-    # TODO This may not work if list entries are in ().
-    keyword_linenumber_list_length = len(keyword_linenumber_list)
-    for i in range(0, keyword_linenumber_list_length):
-        for j in range(0, keyword_linenumber_list_length - i - 1):
-            if keyword_linenumber_list[j][1] > \
-                    keyword_linenumber_list[j + 1][1]:
-                tempo = keyword_linenumber_list[j]
-                keyword_linenumber_list[j] = keyword_linenumber_list[j + 1]
-                keyword_linenumber_list[j + 1] = tempo
-
+    # TODO Does this work if list entries are in ().
+    keyword_translation_stack_length = len(keyword_translation_stack)
+    for i in range(0, keyword_translation_stack_length):
+        for j in range(0, keyword_translation_stack_length - i - 1):
+            if keyword_translation_stack[j][2] > \
+                    keyword_translation_stack[j + 1][2]:
+                tempo = keyword_translation_stack[j]
+                keyword_translation_stack[j] = keyword_translation_stack[j + 1]
+                keyword_translation_stack[j + 1] = tempo
     try:
         if logger_mismatch.isEnabledFor(logging.ERROR):
-            msg = str(keyword_linenumber_list)
+            msg = str(keyword_translation_stack)
             logger_mismatch.error(msg)
     except AttributeError:
         logging.exception("Check setLevel for logger_mismatch.")
 
-
-def insert_transition_tags(debug_dir: str, tag_dict: dict):
-    """ Insert transition tags in the working_xml_file based on the user's
-    tag style preference. """
-    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir,
-                                            tag_dict=tag_dict)
+    return keyword_translation_stack
 
 
-def parse_each_keyword_line(keyword_linenumber_list: list,
+def parse_each_keyword_line(keyword_translation_stack: list,
                             debug_dir: str, working_input_file: str,
-                            tag_dict: dict, line_to_read: str):
-    """ Use the line parse function to interpret each controlwords in the
-    keyword_linenumber_list and insert the appropriate XML tag(s) in the
+                            tag_dict: dict):
+    """ Use the line parse function to interpret each control word in the
+    keyword_translation_stack and insert the appropriate XML tag(s) in the
     working_xml_file. """
     line_parser.LineParseController.line_parse(
         self=line_parser.LineParseController(
-            keyword_linenumber_list=keyword_linenumber_list,
+            keyword_translation_stack=keyword_translation_stack,
             debug_dir=debug_dir,
             tag_dict=tag_dict,
-            line_to_read=line_to_read,
             working_input_file=working_input_file))

@@ -123,13 +123,13 @@ def code_process(working_input_file: str):
     return rtf_file_codes_update
 
 
-def update_rtf_file_codes_dict(rtf_file_codes_update: dict, debug_dir: str):
+def update_rtf_file_codes_list(rtf_file_codes_update: list, debug_dir: str):
     """ Update the rtf_file_codes dictionary with codes extracted from
-    pretable controlwords. """
+    pretable control words. """
     rtf_file_codes_file = os.path.join(debug_dir, "rtf_file_codes.json")
-    with open(rtf_file_codes_file) as rtf_file_codes_file_pre:
+    with open(rtf_file_codes_file, "r") as rtf_file_codes_file_pre:
         rtf_file_codes = json.load(rtf_file_codes_file_pre)
-        rtf_file_codes.update(rtf_file_codes_update)
+        rtf_file_codes.append(rtf_file_codes_update)
     with open(rtf_file_codes_file, "w", encoding='utf-8') as \
             rtf_file_codes_file_pre:
         json.dump(rtf_file_codes, rtf_file_codes_file_pre,
@@ -137,4 +137,4 @@ def update_rtf_file_codes_dict(rtf_file_codes_update: dict, debug_dir: str):
 
     # Used for debugging purposes.
     if logger_debug.isEnabledFor(logging.ERROR):
-        logger_debug(msg=str(rtf_file_codes))
+        logger_debug.debug(msg=str(rtf_file_codes))

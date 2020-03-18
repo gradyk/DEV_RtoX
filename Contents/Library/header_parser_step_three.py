@@ -49,11 +49,6 @@ class ProcessTheTables(object):
         self.debug_dir = debug_dir
         self.working_input_file = working_input_file
 
-        self.ProcessTheTables = ProcessTheTables(
-            debug_dir=debug_dir, working_input_file=working_input_file)
-
-        self.analyze_table_code_strings_controller()
-
     def analyze_table_code_strings_controller(self):
 
         code_strings_file = os.path.join(self.debug_dir,
@@ -85,7 +80,8 @@ class ProcessTheTables(object):
                         ProcessTheTables.process_track_changes_table,
                     "rsid": ProcessTheTables.process_rsid_table,
                     "upi_group": ProcessTheTables.process_upi_group,
-                    "generator": ProcessTheTables.process_generator
+                    "generator": ProcessTheTables.process_generator,
+                    "info": ProcessTheTables.process_info
                     }
 
                 code_function = table_parser_function_list[table]
@@ -93,7 +89,9 @@ class ProcessTheTables(object):
             else:
                 pass
 
-            code_function(self=self.ProcessTheTables,
+            code_function(self=ProcessTheTables(
+                          debug_dir=self.debug_dir,
+                          working_input_file=self.working_input_file),
                           code_strings_to_process=code_strings_to_process)
 
     def process_font_table(self, code_strings_to_process: list):
@@ -130,27 +128,31 @@ class ProcessTheTables(object):
         #  style sheet table
 
     # TODO Build modules for these tables.
-    def process_list_table(self):
+    def process_list_table(self, code_strings_to_process: list):
         # \listtable
         pass
 
-    def process_para_group_properties_table(self):
+    def process_para_group_properties_table(self,
+                                            code_strings_to_process: list):
         # \pgptbl
         pass
 
-    def process_track_changes_table(self):
+    def process_track_changes_table(self, code_strings_to_process: list):
         # \*\revtbl
         pass
 
-    def process_rsid_table(self):
+    def process_rsid_table(self, code_strings_to_process: list):
         # \*\rsidtbl
         pass
 
-    def process_upi_group(self):
+    def process_upi_group(self, code_strings_to_process: list):
         # \*\protusertbl (user protection information group)
         pass
 
-    def process_generator(self):
+    def process_generator(self, code_strings_to_process: list):
         # \*\generator (emitter application stamps the doc with its name,
         # version and build number
+        pass
+
+    def process_info(self, code_strings_to_process: list):
         pass

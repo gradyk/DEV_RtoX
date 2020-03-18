@@ -45,31 +45,67 @@ class LineParseController:
         and header keywords a beginning and closing function) to parse the
         settings and text for the keyword. """
     def __init__(self,
-                 keyword_linenumber_list: list,
-                 line_to_read: str,
+                 keyword_translation_stack: list,
                  working_input_file: str,
                  debug_dir: str,
                  tag_dict: dict) -> None:
-        self.keyword_linenumber_list = keyword_linenumber_list
-        self.line_to_read = line_to_read
+        self.keyword_translation_stack = keyword_translation_stack
+
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
         self.tag_dict = tag_dict
 
+    def line_parse(self) -> None:
+        tag_bag = []
+        tag_dict = {}
+
+        process_dict = {
+            "par":          LineParseController.par_process,
+            "pard":         LineParseController.pard_process,
+            "sect":         LineParseController.sect_process,
+            "sectd":        LineParseController.sectd_process,
+            "header_beg":   LineParseController.header_beg_process,
+            "header_end":   LineParseController.header_end_process,
+            "footnote_beg": LineParseController.footnote_beg_process,
+            "footnote_end": LineParseController.footnote_end_process
+            }
+
+        for element in self.keyword_translation_stack:
+            keyword = element[1]
+            line_number = element[2]
+            if keyword == "cs_beg":
+                tag_bag = LineParseController.cs_open_process(
+                    self=LineParseController(
+                        debug_dir=self.debug_dir,
+                        working_input_file=self.working_input_file,
+                        keyword_translation_stack=self.keyword_translation_stack,
+                        tag_dict=tag_dict),
+                    line_to_read=line_number)
+            elif keyword == "cs_end":
+                LineParseController.cs_close_process(
+                    self=LineParseController(
+                        debug_dir=self.debug_dir,
+                        working_input_file=self.working_input_file,
+                        keyword_translation_stack=self.keyword_translation_stack,
+                        tag_dict=tag_dict),
+                    tag_bag=tag_bag,
+                    line_to_read=line_number)
+            else:
+                process_dict[keyword](line_to_read=line_number)
+
     def cs_open_process(self, line_to_read: str) -> list:
 
         cs_line_dict, text = cs.cs_line_parse(
-            working_input_file=self.working_input_file,
-            line_to_read=line_to_read)
+            line_to_read=line_to_read,
+            working_input_file=self.working_input_file)
 
-        tag_bag = cs.cs_process_controller_start(
-            cs_line_dict=cs_line_dict,
-            text=text,
-            debug_dir=self.debug_dir,
-            line=line_to_read,
-            tag_dict=self.tag_dict,
-            working_input_file=self.working_input_file,
-            line_to_search=line_to_read)
+        cs.open_emphasis_tag_cleanup_start(tag_dict=self.tag_dict,
+                                           debug_dir=self.debug_dir)
+
+        tag_bag = cs.insert_opening_cs_tag(cs_line_dict=cs_line_dict, text=text,
+                                           tag_dict=self.tag_dict,
+                                           debug_dir=self.debug_dir,
+                                           line_to_read=line_to_read)
 
         return tag_bag
 
@@ -80,12 +116,15 @@ class LineParseController:
                                   line=line_to_read)
 
     def footnote_beg_process(self,  line_to_read: str) -> None:
-        footnote.footnote_process_controller_start(
-            debug_dir=self.debug_dir,
-            tag_dict=self.tag_dict,
-            line=line_to_read,
-            working_input_file=self.working_input_file,
-            line_to_search=line_to_read)
+
+        footnote.open_emphasis_tag_cleanup_start(debug_dir=self.debug_dir,
+                                                 tag_dict=self.tag_dict)
+
+        footnote.insert_opening_footnote_tag(debug_dir=self.debug_dir,
+                                             tag_dict=self.tag_dict,
+                                             line_to_read=line_to_read)
+
+        footnote.update_tag_registry_start(debug_dir=self.debug_dir)
 
     def footnote_end_process(self, line_to_read: str) -> None:
         footnote.footnote_process_controller_end(
@@ -94,12 +133,15 @@ class LineParseController:
             line=line_to_read)
 
     def header_beg_process(self, line_to_read: str) -> None:
-        header.header_process_controller_start(
-            debug_dir=self.debug_dir,
-            tag_dict=self.tag_dict,
-            line=line_to_read,
-            working_input_file=self.working_input_file,
-            line_to_search=line_to_read)
+
+        header.open_emphasis_tag_cleanup_start(debug_dir=self.debug_dir,
+                                               tag_dict=self.tag_dict)
+
+        header.insert_opening_header_tag(debug_dir=self.debug_dir,
+                                         tag_dict=self.tag_dict,
+                                         line_to_read=line_to_read)
+
+        header.update_tag_registry_start(debug_dir=self.debug_dir)
 
     def header_end_process(self, line_to_read: str) -> None:
         header.header_process_controller_end(
@@ -126,43 +168,3 @@ class LineParseController:
         sectd.sectd_tag_process(debug_dir=self.debug_dir,
                                 tag_dict=self.tag_dict,
                                 line=line_to_read)
-
-    def line_parse(self) -> None:
-        tag_bag = []
-        tag_dict = {}
-
-        process_dict = {
-            "par":          LineParseController.par_process,
-            "pard":         LineParseController.pard_process,
-            "sect":         LineParseController.sect_process,
-            "sectd":        LineParseController.sectd_process,
-            "header_beg":   LineParseController.header_beg_process,
-            "header_end":   LineParseController.header_end_process,
-            "footnote_beg": LineParseController.footnote_beg_process,
-            "footnote_end": LineParseController.footnote_end_process
-            }
-
-        for element in self.keyword_linenumber_list:
-            keyword = element[0]
-            line_number = element[1]
-            if keyword == "cs_beg":
-                tag_bag = LineParseController.cs_open_process(
-                    self=LineParseController(
-                        debug_dir=self.debug_dir,
-                        working_input_file=self.working_input_file,
-                        keyword_linenumber_list=self.keyword_linenumber_list,
-                        line_to_read=self.line_to_read,
-                        tag_dict=tag_dict),
-                    line_to_read=line_number)
-            elif keyword == "cs_end":
-                LineParseController.cs_close_process(
-                    self=LineParseController(
-                        debug_dir=self.debug_dir,
-                        working_input_file=self.working_input_file,
-                        keyword_linenumber_list=self.keyword_linenumber_list,
-                        line_to_read=self.line_to_read,
-                        tag_dict=tag_dict),
-                    tag_bag=tag_bag,
-                    line_to_read=line_number)
-            else:
-                process_dict[keyword](line_to_read=line_number)

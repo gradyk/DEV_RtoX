@@ -32,6 +32,9 @@ __name__ = "Contents.Library.tag_style"
 # From standard libraries
 import importlib
 
+# From local application
+from read_log_config import logger_basic
+
 
 def tag_dict_selection(xml_tag_num: str):
     """ Import an XML tag dictionary based on user XML tag style preference. """
@@ -48,7 +51,11 @@ def tag_dict_selection(xml_tag_num: str):
         tag_dict_pre = {value: getattr(xtags, value)}
         tag_dict = tag_dict_pre[value]
     except (TypeError, SyntaxError):
-        raise ("You did not express a tag style preference. "
-               "Plain XML will be used.")
+        value = options[1]
+        xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
+        tag_dict_pre = {value: getattr(xtags, value)}
+        tag_dict = tag_dict_pre[value]
+        logger_basic.debug(msg="You did not express a tag style preference. " \
+                               "Plain XML will be used.")
 
     return tag_dict

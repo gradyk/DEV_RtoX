@@ -46,22 +46,9 @@ from read_log_config import logger_debug
 
 # TODO Extend the parsing of cs styles to cover font character formatting as
 #  described in spec beginning at p.78.
-def cs_process_controller_start(working_input_file: str, line_to_search: str,
-                                debug_dir: str, tag_dict: dict, line: str,
-                                cs_line_dict: dict, text: str):
-
-    determine_cs_bounds(working_input_file=working_input_file,
-                        line_to_search=line_to_search)
-
-    open_emphasis_tag_cleanup_start(debug_dir=debug_dir, tag_dict=tag_dict)
-
-    insert_opening_cs_tag(debug_dir=debug_dir, tag_dict=tag_dict,
-                          line=line, cs_line_dict=cs_line_dict,
-                          text=text)
-
-
-def determine_cs_bounds(working_input_file: str, line_to_search: str) -> str:
+def determine_cs_bounds(working_input_file: str, line_to_search: int) -> str:
     """ Find the boundaries of the keyword. """
+
     cs_end_line = keyword_end_alt.keyword_end_alt(
         working_file=working_input_file,
         keyword_open=line_to_search)
@@ -107,7 +94,7 @@ def open_emphasis_tag_cleanup_start(tag_dict: dict, debug_dir: str) -> None:
 
 def insert_opening_cs_tag(cs_line_dict: dict, text: str,
                           tag_dict: dict, debug_dir: str,
-                          line: str):
+                          line_to_read: str):
 
     list_of_tags = []
     tag_tracker = 0
@@ -137,8 +124,8 @@ def insert_opening_cs_tag(cs_line_dict: dict, text: str,
                 tag_update_dict=tag_update_dict)
             try:
                 if logger_debug.isEnabledFor(logging.DEBUG):
-                    msg = str(tag_dict[lot_item+"-beg"] + f" {line}")
-                    logger_debug.error(msg)
+                    logger_debug.error(msg=str(tag_dict[lot_item+"-beg"] +
+                                               f" {line_to_read}"))
             except AttributeError:
                 logging.exception("Check setLevel for logger_debug.")
 

@@ -62,9 +62,7 @@ class StyleSheetParse(object):
     <semihidden>        \\ssemihidden
     <stylename>         #PCDATA
     """
-    def __init__(self,
-                 code_strings_to_process: list,
-                 debug_dir: str) -> None:
+    def __init__(self, code_strings_to_process: list, debug_dir: str) -> None:
         self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
         self.code_stack = []

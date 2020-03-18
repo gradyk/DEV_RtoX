@@ -39,22 +39,6 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def footnote_process_controller_start(working_input_file: str,
-                                      line_to_search: str,
-                                      debug_dir: str, tag_dict: dict,
-                                      line: str) -> None:
-
-    determine_footnote_bounds(working_input_file=working_input_file,
-                              line_to_search=line_to_search)
-
-    open_emphasis_tag_cleanup_start(debug_dir=debug_dir, tag_dict=tag_dict)
-
-    insert_opening_footnote_tag(debug_dir=debug_dir, tag_dict=tag_dict,
-                                line=line)
-
-    update_tag_registry_start(debug_dir=debug_dir)
-
-
 def determine_footnote_bounds(working_input_file: str,
                               line_to_search: str) -> str:
     """ A footnote is bounded by an opening brace and keyword ({\\footnote)
@@ -105,7 +89,7 @@ def open_emphasis_tag_cleanup_start(debug_dir: str, tag_dict: dict) -> None:
 
 
 def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
-                                line: str) -> None:
+                                line_to_read: str) -> None:
     # Add the opening footnote tag.
     tag_update = tag_dict["footnote-beg"]
 
@@ -113,8 +97,8 @@ def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
                                        tag_update=tag_update)
     try:
         if logger_debug.isEnabledFor(logging.DEBUG):
-            msg = str(tag_dict["footnote-beg"] + f"{line}")
-            logger_debug.error(msg)
+            logger_debug.error(msg=str(tag_dict["footnote-beg"] +
+                                       f"{line_to_read}"))
     except AttributeError:
         logging.exception("Check setLevel for logger_debug.")
 

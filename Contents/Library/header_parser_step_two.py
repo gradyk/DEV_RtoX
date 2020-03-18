@@ -44,11 +44,7 @@ def process_the_tables(debug_dir: str, working_input_file: str):
     with open(header_tables_dict) as header_tables_dict_pre:
         header_tables_dict = json.load(header_tables_dict_pre)
 
-    tables_list = ["fonttbl", "filetbl", "colortbl",
-                   "stylesheet", "listtables", "revtbl",
-                   "rsidtable", "generator", "info"]
-
-    for header_table in tables_list:
+    for header_table in header_tables_dict:
 
         table, table_start_line, table_empty = check_for_empty_table(
                 header_tables_dict=header_tables_dict,
@@ -67,8 +63,6 @@ def process_the_tables(debug_dir: str, working_input_file: str):
             table_boundaries_file_update(
                 table_boundaries_file_updater=table_boundaries_file_updater,
                 debug_dir=debug_dir)
-
-            create_empty_code_strings_dict(debug_dir=debug_dir)
 
             text_to_process = get_table_contents_as_text_string(
                 working_input_file=working_input_file,
@@ -147,13 +141,6 @@ def table_boundaries_file_update(table_boundaries_file_updater: dict,
                                          "table_boundaries.json")
     with open(table_boundaries_file, "w") as table_pre:
         json.dump(table_boundaries_file_updater, table_pre)
-
-
-def create_empty_code_strings_dict(debug_dir: str,):
-
-    with open(os.path.join(debug_dir, "code_strings_file.json"), "w+") as \
-            code_strings_file_empty:
-        json.dump(code_strings_file_empty, "{}")
 
 
 def get_table_contents_as_text_string(

@@ -109,6 +109,26 @@ class PrepareToProcess:
                 header_tables:
             json.dump({}, header_tables)
 
+    def create_rtf_file_codes_file(self):
+        rtf_file_codes = os.path.join(self.debug_dir, "rtf_file_codes.json")
+
+        with open (rtf_file_codes, "w+") as rtf_file_codes_prep:
+            json.dump([], rtf_file_codes_prep)
+
+    def create_empty_code_strings_dict(self):
+
+        with open(os.path.join(self.debug_dir,
+                               "code_strings_file.json"), "w+") as \
+                code_strings_file_empty:
+            json.dump({}, code_strings_file_empty)
+
+    def create_empty_info_code_strings_file(self) -> None:
+        """ This file will hold code strings from the info table. """
+        with open(os.path.join(self.debug_dir,
+                               "info_code_strings_file.json"), "w+") as \
+                info_code_strings_file_empty:
+            json.dump({}, info_code_strings_file_empty)
+
     def prepare_working_input_file(self):
         """ Create a copy of the input file for use during processing (
         working_input_file). """
