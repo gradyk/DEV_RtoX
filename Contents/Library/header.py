@@ -41,17 +41,22 @@ from read_log_config import logger_debug
 
 def determine_header_bounds(working_input_file: str,
                             line_to_search: int) -> str:
-    """ Find the beginning and end of the header keyword. """
+    """ A header is bounded by an opening brace and keyword ({\\header)
+        and a closing brace (}). The opening is easy to identify. The closing
+        can be determined by counting opening and closing braces until the count
+        matches. """
     left_brace = 0
     right_brace = 0
     header_end_line = "0"
     while header_end_line == "0":
         search_text = linecache.getline(working_input_file, line_to_search)
-        for elem in search_text:
-            if elem == "{":
+        for character in search_text:
+            if character == "{":
                 left_brace += 1
-            elif elem == "}":
+            elif character == "}":
                 right_brace += 1
+            else:
+                pass
             if left_brace == right_brace:
                 header_end_line = line_to_search
             else:

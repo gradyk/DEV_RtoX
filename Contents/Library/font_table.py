@@ -63,11 +63,6 @@ class FonttblParse(object):
 
     def process_code_strings(self):
 
-        FonttblParse.prepare_font_file(
-            self=FonttblParse(
-                debug_dir=self.debug_dir,
-                code_strings_to_process=self.code_strings_to_process))
-
         master_code_stack = []
         for code_string in self.code_strings_to_process:
 
@@ -89,11 +84,6 @@ class FonttblParse(object):
 
             store_font_contents(debug_dir=self.debug_dir,
                                 master_code_stack=master_code_stack)
-
-    def prepare_font_file(self):
-        with open(os.path.join(self.debug_dir, "font_file.json"), "w+") as \
-                font_file_pre:
-            json.dump([], font_file_pre)
 
     def process_font_codes(self, code_string: str, code_stack: list):
         """ Parse each font code string into its constituent setting and

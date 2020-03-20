@@ -69,11 +69,6 @@ class StyleSheetParse(object):
 
     def process_code_strings(self):
 
-        StyleSheetParse.prepare_style_file(
-            self=StyleSheetParse(
-                debug_dir=self.debug_dir,
-                code_strings_to_process=self.code_strings_to_process))
-
         master_code_stack = []
         for code_string in self.code_strings_to_process:
 
@@ -98,12 +93,6 @@ class StyleSheetParse(object):
 
         store_style_contents(debug_dir=self.debug_dir,
                              master_code_stack=master_code_stack)
-
-    def prepare_style_file(self):
-
-        with open(os.path.join(self.debug_dir, "style_file.json"), "w+") as \
-                style_file_pre:
-            json.dump([], style_file_pre)
 
     def process_style_codes(self, code_string: str, code_stack: list):
         """ Parse each style code string into its constituent setting and

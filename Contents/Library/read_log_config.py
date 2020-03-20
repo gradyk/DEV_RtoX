@@ -73,7 +73,7 @@ logger_basic.addHandler(file_handler)
 
 # ----Second logger----
 logger_mismatch = logging.getLogger("Logger_Mismatch")
-# logger_mismatch.setLevel(logging.ERROR)
+logger_mismatch.setLevel(logging.ERROR)
 logger_mismatch.propagate = False
 
 # Create handlers

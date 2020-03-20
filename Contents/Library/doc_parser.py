@@ -112,87 +112,95 @@ class GetKeywordsAndLinenumbers:
     def cs_keyword_checker(self) -> None:
         try:
             search_text = linecache.getline(self.working_input_file,
-                                                    self.line_to_search)
+                                            self.line_to_search)
             cs_keyword_begin = re.match(r"{\\cs", search_text, re.M)
         except TypeError:
             cs_keyword_begin = None
 
         if cs_keyword_begin is not None:
-            cs_keyword_end = True
             cs_end_line = cs.determine_cs_bounds(
                 working_input_file=self.working_input_file,
                 line_to_search=self.line_to_search)
             self.keyword_translation_stack.append(
-                (cs_keyword_begin, "cs_beg", self.line_to_get))
+                (True, "cs_beg", self.line_to_get))
             self.keyword_translation_stack.append(
-                (cs_keyword_end, "cs_end", cs_end_line))
+                (True, "cs_end", cs_end_line))
         else:
             pass
 
     def par_keyword_checker(self) -> None:
         search_text = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+                                        self.line_to_search)
         par_keyword = re.match(r"\\par[\s]?(\\n)?", search_text, re.M)
-        self.keyword_translation_stack.append(
-            (par_keyword, "par", self.line_to_get))
+        if par_keyword is not None:
+            self.keyword_translation_stack.append(
+                (True, "par", self.line_to_get))
+        else:
+            pass
 
     def pard_keyword_checker(self) -> None:
         search_text = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+                                        self.line_to_search)
         pard_keyword = re.match(r"\\pard\\", search_text, re.M)
-        self.keyword_translation_stack.append(
-            (pard_keyword, "pard", self.line_to_get))
+        if pard_keyword is not None:
+            self.keyword_translation_stack.append(
+                (True, "pard", self.line_to_get))
+        else:
+            pass
 
     def sect_keyword_checker(self) -> None:
         search_text = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+                                        self.line_to_search)
         sect_keyword = re.match(r"\\sect[\s]?(\\n)?", search_text, re.M)
-        self.keyword_translation_stack.append(
-            (sect_keyword, "sect", self.line_to_get))
+        if sect_keyword is not None:
+            self.keyword_translation_stack.append(
+                (True, "sect", self.line_to_get))
+        else:
+            pass
 
     def sectd_keyword_checker(self) -> None:
         search_text = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+                                        self.line_to_search)
         sectd_keyword = re.match(r"\\sectd\\", search_text, re.M)
-        self.keyword_translation_stack.append(
-            (sectd_keyword, "sectd", self.line_to_get))
+        if sectd_keyword is not None:
+            self.keyword_translation_stack.append(
+                (True, "sectd", self.line_to_get))
+        else:
+            pass
 
     def header_keyword_checker(self) -> None:
         search_text = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+                                        self.line_to_search)
         try:
             header_keyword_begin = re.match(r"{\\header", search_text,
                                             re.M)
         except TypeError:
             header_keyword_begin = None
-
         if header_keyword_begin is not None:
-            header_keyword_end = True
             header_end_line = header.determine_header_bounds(
                 working_input_file=self.working_input_file,
                 line_to_search=self.line_to_search)
             self.keyword_translation_stack.append(
-                (header_keyword_begin, "header_beg", self.line_to_get))
+                (True, "header_beg", self.line_to_get))
             self.keyword_translation_stack.append(
-                (header_keyword_end, "header_end", header_end_line))
+                (True, "header_end", header_end_line))
 
     def footnote_keyword_checker(self):
-        self.line_to_search = linecache.getline(self.working_input_file,
-                                                self.line_to_search)
+        search_text = linecache.getline(self.working_input_file,
+                                        self.line_to_search)
         try:
-            footnote_keyword_begin = re.match(r"{\\footnote",
-                                              self.line_to_search, re.M)
+            footnote_keyword_begin = re.match(r"{\\footnote", search_text,
+                                              re.M)
         except TypeError:
             footnote_keyword_begin = None
         if footnote_keyword_begin is not None:
-            footnote_keyword_end = True
             footnote_end_line = footnote.determine_footnote_bounds(
                 working_input_file=self.working_input_file,
                 line_to_search=self.line_to_search)
             self.keyword_translation_stack.append(
-                (footnote_keyword_begin, "footnote_beg", self.line_to_get))
+                (True, "footnote_beg", self.line_to_get))
             self.keyword_translation_stack.append(
-                (footnote_keyword_end, "footnote_end", footnote_end_line))
+                (True, "footnote_end", footnote_end_line))
 
     def retrieve_keyword_translation_stack(self):
         return self. keyword_translation_stack
@@ -211,9 +219,10 @@ def sort_keyword_translation_stack(keyword_translation_stack: list):
                 keyword_translation_stack[j] = keyword_translation_stack[j + 1]
                 keyword_translation_stack[j + 1] = tempo
     try:
+        print(str(keyword_translation_stack))
+        logging.getLogger("Logger Mismatch")
         if logger_mismatch.isEnabledFor(logging.ERROR):
-            msg = str(keyword_translation_stack)
-            logger_mismatch.error(msg)
+            logger_mismatch.error(str(keyword_translation_stack))
     except AttributeError:
         logging.exception("Check setLevel for logger_mismatch.")
 

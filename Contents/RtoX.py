@@ -28,6 +28,7 @@ __date__ = "2019-10-22"
 __name__ = "__main__"
 
 # From local application
+import create_files
 import debugdir_clean
 import doc_parser
 import docinfo_parser
@@ -48,112 +49,78 @@ if __name__ == "__main__":
     # purposes, but cleaned out at the beginning of a run.
     debugdir_clean.cleaner()
 
-    # Set basic variables.
-    base_script_dir_pass = ""
-    config_file_pass = "Config.ini"
-    debug_dir_pass = ""
-    input_file_name_pass = ""
-    output_file_name_pass = ""
-
-    styles_status_list = []
-
     # Get and store configuration information.
-    # TODO Renaming needed: preparetoprocess, prepare_to_process,
-    #  PrepareToProcess
-    preparetoprocess = prepare_to_process.PrepareToProcess(
-        base_script_dir=base_script_dir_pass,
-        config_file=config_file_pass,
-        debug_dir=debug_dir_pass,
-        input_file_name=input_file_name_pass,
-        output_file_name=output_file_name_pass)
+    base_script_dir, debug_dir, config_file = \
+        prepare_to_process.extract_config_settings(
+            base_script_dir="", debug_dir="", config_file="Config.ini")
 
-    # TODO Break this into four function calls?
-    base_script_dir_pass, debug_dir_pass, input_file_name, output_file_name = \
-        prepare_to_process.PrepareToProcess.extract_config_settings(
-            self=preparetoprocess)
+    input_file_name, output_file_name = \
+        prepare_to_process.extract_file_info(
+            base_script_dir=base_script_dir, debug_dir=debug_dir,
+            config_file=config_file)
 
     # Get the user's preference for XML tag style.
-    xml_tag_num_pass = prepare_to_process.PrepareToProcess.\
-        extract_users_preferred_xml_tag_style()
+    xml_tag_num = prepare_to_process.extract_users_xml_tag_style()
 
-    # Prepare a working copy of the input file.
-    working_input_file_pass = prepare_to_process.PrepareToProcess\
-        .prepare_working_input_file(
-            self=preparetoprocess)
-
-    # Prepare a working copy of the file for XML tags.
-    prepare_to_process.PrepareToProcess.prepare_working_xml_file(
-        self=preparetoprocess, xml_tag_num=xml_tag_num_pass)
-
-    # Prepare a working copy of the tag registry.
-    prepare_to_process.PrepareToProcess.create_working_tag_registry(
-        self=preparetoprocess)
-
-    # Create dictionary to store header table information.
-    prepare_to_process.PrepareToProcess.create_header_table_dict(
-        self=preparetoprocess)
-
-    # Create list to store rtf file codes.
-    prepare_to_process.PrepareToProcess.create_rtf_file_codes_file(
-        self=preparetoprocess)
+    # Prepare working files.
+    working_input_file = create_files.initiate_working_files(
+        xml_tag_num=xml_tag_num, debug_dir=debug_dir,
+        input_file_name=input_file_name,
+        base_script_dir=base_script_dir)
 
     # Process the pre-table portion of the header.
     header_parser_step_one.PretableController(
-        debug_dir=debug_dir_pass,
-        working_input_file=working_input_file_pass)
+        working_input_file=working_input_file, debug_dir=debug_dir)
 
     # Process the table portion of the header.
     header_parser_step_two.process_the_tables(
-        working_input_file=working_input_file_pass,
-        debug_dir=debug_dir_pass)
+        working_input_file=working_input_file, debug_dir=debug_dir)
 
     header_parser_step_three.ProcessTheTables.\
         analyze_table_code_strings_controller(
             self=header_parser_step_three.ProcessTheTables(
-                debug_dir=debug_dir_pass,
-                working_input_file=working_input_file_pass))
+                working_input_file=working_input_file, debug_dir=debug_dir))
 
     # Process the info portion of the document body.
     docinfo_parser.DocinfoParse.process_docinfo(
         self=docinfo_parser.DocinfoParse(
-            debug_dir=debug_dir_pass,
-            working_input_file=working_input_file_pass))
+            working_input_file=working_input_file, debug_dir=debug_dir))
 
     # Process the main portion of the document body.
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
     line_to_get = doc_parser.choose_starting_line_number(
-        debug_dir=debug_dir_pass)
+        debug_dir=debug_dir)
 
-    tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num_pass)
+    tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num)
 
     file_length = doc_parser.find_length_working_input_file(
-        working_input_file=working_input_file_pass)
+        working_input_file=working_input_file)
 
     keyword_translation_stack, line_to_search = \
         doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
             self=doc_parser.GetKeywordsAndLinenumbers(
-                working_input_file=working_input_file_pass,
+                working_input_file=working_input_file,
                 file_length=file_length, line_to_get=line_to_get))
 
     keyword_translation_stack = doc_parser.sort_keyword_translation_stack(
         keyword_translation_stack=keyword_translation_stack)
 
-    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir_pass,
+    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir,
                                             tag_dict=tag_dict)
 
     doc_parser.parse_each_keyword_line(
         keyword_translation_stack=keyword_translation_stack,
-        debug_dir=debug_dir_pass, tag_dict=tag_dict,
-        working_input_file=working_input_file_pass)
+        debug_dir=debug_dir, tag_dict=tag_dict,
+        working_input_file=working_input_file)
 
     # Close open tags where possible and produce list of remaining open tags.
-    tag_closer.tag_closer(debug_dir=debug_dir_pass,
-                          xml_tag_num=xml_tag_num_pass)
+    tag_closer.tag_closer(debug_dir=debug_dir,
+                          xml_tag_num=xml_tag_num)
 
     # Do file clean up, post-processing, and put the renamed file in the
     # output directory.
-    final_step.final_step(debug_dir=debug_dir_pass,
-                          xml_tag_num=xml_tag_num_pass,
+    final_step.final_step(debug_dir=debug_dir,
+                          xml_tag_num=xml_tag_num,
                           output_file_name=output_file_name,
-                          base_script_dir=base_script_dir_pass)
+                          base_script_dir=base_script_dir)

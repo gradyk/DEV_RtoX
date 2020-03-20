@@ -50,14 +50,12 @@ class LineParseController:
                  debug_dir: str,
                  tag_dict: dict) -> None:
         self.keyword_translation_stack = keyword_translation_stack
-
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
         self.tag_dict = tag_dict
 
     def line_parse(self) -> None:
         tag_bag = []
-        tag_dict = {}
 
         process_dict = {
             "par":          LineParseController.par_process,
@@ -79,7 +77,7 @@ class LineParseController:
                         debug_dir=self.debug_dir,
                         working_input_file=self.working_input_file,
                         keyword_translation_stack=self.keyword_translation_stack,
-                        tag_dict=tag_dict),
+                        tag_dict=self.tag_dict),
                     line_to_read=line_number)
             elif keyword == "cs_end":
                 LineParseController.cs_close_process(
@@ -87,11 +85,18 @@ class LineParseController:
                         debug_dir=self.debug_dir,
                         working_input_file=self.working_input_file,
                         keyword_translation_stack=self.keyword_translation_stack,
-                        tag_dict=tag_dict),
+                        tag_dict=self.tag_dict),
                     tag_bag=tag_bag,
                     line_to_read=line_number)
             else:
-                process_dict[keyword](line_to_read=line_number)
+                process_dict[keyword](
+                    self=LineParseController(
+                        debug_dir=self.debug_dir,
+                        working_input_file=self.working_input_file,
+                        tag_dict=self.tag_dict,
+                        keyword_translation_stack=
+                        self.keyword_translation_stack),
+                    line_to_read=line_number)
 
     def cs_open_process(self, line_to_read: str) -> list:
 

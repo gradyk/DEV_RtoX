@@ -40,7 +40,7 @@ from read_log_config import logger_debug
 
 
 def determine_footnote_bounds(working_input_file: str,
-                              line_to_search: str) -> str:
+                              line_to_search: int) -> str:
     """ A footnote is bounded by an opening brace and keyword ({\\footnote)
         and a closing brace (}). The opening is easy to identify. The closing
         can be determined by counting opening and closing braces until the count
@@ -49,20 +49,18 @@ def determine_footnote_bounds(working_input_file: str,
     right_brace = 0
     footnote_end_line = "0"
     while footnote_end_line == "0":
-        line_to_search = linecache.getline(working_input_file, line_to_search)
-        for character in line_to_search:
+        search_text = linecache.getline(working_input_file, line_to_search)
+        for character in search_text:
             if character == "{":
                 left_brace += 1
             elif character == "}":
                 right_brace += 1
             else:
                 pass
-
             if left_brace == right_brace:
                 footnote_end_line = line_to_search
             else:
                 pass
-
         line_to_search += 1
 
     linecache.clearcache()
