@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+#  !/usr/bin/env python3
+#   -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -18,11 +18,26 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-__name__ = "Contents.Library.file_length"
+"""  """
+
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-05-05"
+__name__ = "Contents.Library.file_stats"
 
 
-def working_input_file_length(working_input_file: str) -> int:
-    with open(working_input_file) as file_size:
-        for i, l in enumerate(file_size):
-            pass
-    return i + 1
+def file_stats_calculator(working_input_file: str) -> tuple:
+    file = open(working_input_file, "r")
+
+    number_of_lines = 0
+    number_of_characters = 0
+    for line in file:
+        line = line.strip("\n")
+        number_of_lines += 1
+        number_of_characters += len(line)
+
+    file.close()
+
+    return number_of_lines, number_of_characters

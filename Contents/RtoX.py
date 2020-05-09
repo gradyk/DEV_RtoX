@@ -38,7 +38,7 @@ import header_parser_step_two
 import header_parser_step_three
 import prepare_to_process
 import tag_closer
-import xml_transition_tags
+# import xml_transition_tags
 
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
@@ -82,37 +82,37 @@ if __name__ == "__main__":
                 working_input_file=working_input_file, debug_dir=debug_dir))
 
     # Process the info portion of the document body.
-    docinfo_parser.DocinfoParse.process_docinfo(
-        self=docinfo_parser.DocinfoParse(
-            working_input_file=working_input_file, debug_dir=debug_dir))
+    docinfo_parser.process_docinfo(
+        working_input_file=working_input_file, debug_dir=debug_dir)
 
     # Process the main portion of the document body.
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
-    line_to_get = doc_parser.choose_starting_line_number(
+
+    line_to_get = doc_parser.main_doc_parser(
+        working_input_file=working_input_file,
         debug_dir=debug_dir)
+    # old: line_to_get = doc_parser.choose_starting_line_number(
+    #      debug_dir=debug_dir)
 
-    tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num)
-
-    file_length = doc_parser.find_length_working_input_file(
-        working_input_file=working_input_file)
-
-    keyword_translation_stack, line_to_search = \
-        doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
-            self=doc_parser.GetKeywordsAndLinenumbers(
-                working_input_file=working_input_file,
-                file_length=file_length, line_to_get=line_to_get))
-
-    keyword_translation_stack = doc_parser.sort_keyword_translation_stack(
-        keyword_translation_stack=keyword_translation_stack)
-
-    xml_transition_tags.xml_transition_tags(debug_dir=debug_dir,
-                                            tag_dict=tag_dict)
-
-    doc_parser.parse_each_keyword_line(
-        keyword_translation_stack=keyword_translation_stack,
-        debug_dir=debug_dir, tag_dict=tag_dict,
-        working_input_file=working_input_file)
+    # tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num)
+    #
+    # keyword_translation_stack, line_to_search = \
+    #     doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
+    #         self=doc_parser.GetKeywordsAndLinenumbers(
+    #             working_input_file=working_input_file,
+    #             line_to_get=line_to_get))
+    #
+    # keyword_translation_stack = doc_parser.sort_keyword_translation_stack(
+    #     keyword_translation_stack=keyword_translation_stack)
+    #
+    # xml_transition_tags.xml_transition_tags(debug_dir=debug_dir,
+    #                                         tag_dict=tag_dict)
+    #
+    # doc_parser.parse_each_keyword_line(
+    #     keyword_translation_stack=keyword_translation_stack,
+    #     debug_dir=debug_dir, tag_dict=tag_dict,
+    #     working_input_file=working_input_file)
 
     # Close open tags where possible and produce list of remaining open tags.
     tag_closer.tag_closer(debug_dir=debug_dir,

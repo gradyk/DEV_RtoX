@@ -78,43 +78,42 @@ def create_header_table_dict(debug_dir: str) -> None:
 
 
 def create_rtf_file_codes_file(debug_dir: str) -> None:
+    """  """
     rtf_file_codes = os.path.join(debug_dir, "rtf_file_codes.json")
-
     with open(rtf_file_codes, "w+") as rtf_file_codes_prep:
         json.dump([], rtf_file_codes_prep)
 
 
-def create_empty_code_strings_dict(debug_dir: str) -> None:
-    with open(os.path.join(debug_dir,
-                           "code_strings_file.json"), "w+") as \
-            code_strings_file_empty:
-        json.dump({}, code_strings_file_empty)
-
-
 def create_empty_info_code_strings_file(debug_dir: str) -> None:
-    """ This file will hold code strings from the info table. """
-    with open(os.path.join(debug_dir,
-                           "info_code_strings_file.json"), "w+") as \
-            info_code_strings_file_empty:
+    """ File to hold code strings from the info table. """
+    info_code_strings = os.path.join(debug_dir, "info_code_strings_file.json")
+    with open(info_code_strings, "w+") as info_code_strings_file_empty:
         json.dump({}, info_code_strings_file_empty)
 
 
+def create_empty_code_strings_dict(debug_dir: str) -> None:
+    """ File to hold code strings from a table. """
+    code_strings_file = os.path.join(debug_dir, "code_strings_file.json")
+    with open(code_strings_file, "w+") as code_strings_file_empty:
+        json.dump({}, code_strings_file_empty)
+
+
 def create_font_file(debug_dir: str) -> None:
-    with open(os.path.join(debug_dir, "font_file.json"), "w+") as \
-            font_file_pre:
+    """ File to hold code strings from the font table. """
+    font_file = os.path.join(debug_dir, "font_file.json")
+    with open(font_file, "w+") as font_file_pre:
         json.dump([], font_file_pre)
 
 
 def create_style_file(debug_dir: str) -> None:
-
-    with open(os.path.join(debug_dir, "style_file.json"), "w+") as \
-            style_file_pre:
+    """ File to hold code strings from the style table. """
+    style_file = os.path.join(debug_dir, "style_file.json")
+    with open(style_file, "w+") as style_file_pre:
         json.dump([], style_file_pre)
 
 
 def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
-    """ Create an XML file to hold tags during processing (
-        working_xml_file)."""
+    """ XML file to hold tags during processing. """
     rtf_codes_file_prep.RTFCodesPrep.rtf_codes_to_xml_prep(
         self=rtf_codes_file_prep.RTFCodesPrep(
             debug_dir=debug_dir, xml_tag_num=xml_tag_num))
@@ -122,8 +121,7 @@ def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
 
 def create_working_input_file(input_file_name: str, debug_dir: str,
                               base_script_dir: str) -> str:
-    """ Create a copy of the input file for use during processing (
-        working_input_file). """
+    """ Copy of the input file for use during processing. """
     working_input_file = input_file_prep.InputPrep.input_file_prep(
         input_file_prep.InputPrep(input_file_name=input_file_name,
                                   debug_dir=debug_dir,

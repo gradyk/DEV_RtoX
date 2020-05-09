@@ -39,8 +39,8 @@ import working_xml_file_update
 from read_log_config import logger_debug
 
 
-def determine_header_bounds(working_input_file: str,
-                            line_to_search: int) -> str:
+def find_header_close_boundary(working_input_file: str,
+                               line_to_search: int) -> str:
     """ A header is bounded by an opening brace and keyword ({\\header)
         and a closing brace (}). The opening is easy to identify. The closing
         can be determined by counting opening and closing braces until the count
@@ -68,8 +68,7 @@ def determine_header_bounds(working_input_file: str,
 
 
 def open_emphasis_tag_cleanup_start(debug_dir: str, tag_dict: dict):
-    """ Check for open tags and close them. Insert the opening
-    header tag. Update the tag_registry. """
+    """ Check for open tags and close them. """
     status_list = [
         "small_caps",
         "strikethrough",

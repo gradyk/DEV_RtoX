@@ -30,7 +30,7 @@
 #  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 """
-Prepare the rtf codes xml ile.
+Prepare the rtf codes xml file.
 """
 
 __author__ = "Kenneth A. Grady"

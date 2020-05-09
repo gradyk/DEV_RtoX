@@ -10,7 +10,7 @@
 #  Software Foundation, either version 3 of the License, or (at your option)
 #  any later version.
 #
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
 #  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 #  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
 #  more details.
@@ -38,7 +38,6 @@ import re
 
 # From local applications
 import header_parser_step_two
-import table_boundaries
 import split_between_characters
 
 
@@ -47,11 +46,13 @@ class InfoParseController(object):
     def __init__(self,
                  working_input_file: str,
                  debug_dir: str,
-                 line_to_read: str,
+                 table_start_line: int,
+                 table_start_index: int,
                  table: str):
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
-        self.line_to_read = line_to_read
+        self.table_start_line = table_start_line
+        self.table_start_index = table_start_index
         self.table = table
 
     def process_info_section(self) -> None:
@@ -59,16 +60,20 @@ class InfoParseController(object):
         info_parse_controller = InfoParseController(
             working_input_file=self.working_input_file,
             debug_dir=self.debug_dir,
-            line_to_read=self.line_to_read,
+            table_start_line=self.table_start_line,
+            table_start_index=self.table_start_index,
             table=self.table)
 
-        table_boundaries_file_updater = \
-            InfoParseController.find_info_section_boundaries(
-                self=info_parse_controller)
+        header_tables_file = os.path.join(self.debug_dir,
+                                          "header_tables_dict.json")
+
+        with open(header_tables_file) as header_tables_dict:
+            header_tables = json.load(header_tables_dict)
+        info_table_boundaries = header_tables["info"]
 
         text_to_process = InfoParseController.get_info_section_contents(
             self=info_parse_controller,
-            table_boundaries_file_updater=table_boundaries_file_updater,
+            info_table_boundaries=info_table_boundaries,
             working_input_file=self.working_input_file)
 
         info_code_strings_list = InfoParseController.get_info_strings_from_text(
@@ -78,26 +83,13 @@ class InfoParseController(object):
             self=info_parse_controller,
             info_code_strings_list=info_code_strings_list)
 
-    def find_info_section_boundaries(self) -> dict:
-        """ Find the beginning and end of the info section. """
-        table_start_line, table_first_brace, table_last_line, \
-            table_last_brace = table_boundaries.find_table_start_end(
-                table=self.table, working_input_file=self.working_input_file,
-                table_start_line=self.line_to_read)
-
-        table_boundaries_file_updater = \
-            {self.table: [table_start_line, table_first_brace,
-                          table_last_line, table_last_brace]}
-
-        return table_boundaries_file_updater
-
-    def get_info_section_contents(self, table_boundaries_file_updater: dict,
+    def get_info_section_contents(self, info_table_boundaries: dict,
                                   working_input_file: str) -> str:
         """ Extract the contents of the info table. """
         text_to_process = header_parser_step_two.\
             get_table_contents_as_text_string(
                 table=self.table,
-                table_boundaries_file_updater=table_boundaries_file_updater,
+                table_boundaries=info_table_boundaries,
                 working_input_file=working_input_file)
 
         return text_to_process

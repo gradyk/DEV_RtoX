@@ -31,67 +31,57 @@ __name__ = "Contents.Library.header_parser_step_two"
 import json
 import linecache
 import os
+import re
 
 # From local application
 import split_between_characters
-import table_boundaries
 
 
 def process_the_tables(debug_dir: str, working_input_file: str):
 
-    header_tables_dict = os.path.join(debug_dir, "header_tables_dict.json")
+    header_tables_file = os.path.join(debug_dir, "header_tables_dict.json")
 
-    with open(header_tables_dict) as header_tables_dict_pre:
+    with open(header_tables_file) as header_tables_dict_pre:
         header_tables_dict = json.load(header_tables_dict_pre)
 
-    for header_table in header_tables_dict:
+        for header_table in header_tables_dict:
 
-        table, table_start_line, table_empty = check_for_empty_table(
-                header_tables_dict=header_tables_dict,
-                table=header_table, working_input_file=working_input_file)
+            table, table_start_line, table_empty = check_for_empty_table(
+                    header_tables_dict=header_tables_dict,
+                    table=header_table, working_input_file=working_input_file)
 
-        table_updater = table_emptyorfull_file_update(
-                table=table, table_start_line=table_start_line,
-                table_empty=table_empty, debug_dir=debug_dir)
+            table_updater = table_emptyorfull_file_update(
+                    table=table, table_start_line=table_start_line,
+                    table_empty=table_empty, debug_dir=debug_dir)
 
-        if table_updater[table][1] is not True:
+            if table_updater[table][1] is not True:
 
-            table_boundaries_file_updater = find_table_boundaries(
-                    table=table, table_updater=table_updater,
-                    working_input_file=working_input_file)
+                table_boundaries = header_tables_dict[header_table]
 
-            table_boundaries_file_update(
-                table_boundaries_file_updater=table_boundaries_file_updater,
-                debug_dir=debug_dir)
+                text_to_process = get_table_contents_as_text_string(
+                    working_input_file=working_input_file,
+                    table_boundaries=table_boundaries,
+                    table=table)
 
-            text_to_process = get_table_contents_as_text_string(
-                working_input_file=working_input_file,
-                table_boundaries_file_updater=table_boundaries_file_updater,
-                table=table)
+                code_strings_list = get_code_strings_from_text(
+                    text_to_process=text_to_process)
 
-            code_strings_list = get_code_strings_from_text(
-                text_to_process=text_to_process)
+                code_strings_file_update(
+                    table=table, code_strings_list=code_strings_list,
+                    debug_dir=debug_dir)
 
-            code_strings_file_update(
-                table=table, code_strings_list=code_strings_list,
-                debug_dir=debug_dir)
-
-        else:
-            pass
+            else:
+                pass
 
 
 def check_for_empty_table(table: str, header_tables_dict: dict,
                           working_input_file: str) -> tuple:
 
-    table_start_line = header_tables_dict[table]
+    table_start_line = header_tables_dict[table][0]
 
     line_to_search = linecache.getline(working_input_file, table_start_line)
-
-    table_start_line_index = line_to_search.index(table) + len(table)
-
-    if line_to_search[table_start_line_index + 1] == "}" or \
-            (line_to_search[table_start_line_index + 1] == " "
-             and line_to_search[table_start_line_index + 2] == "}"):
+    if re.search(r"{\\" + table + r"}", line_to_search) is True or \
+            re.search(r"{\\" + table + r" }", line_to_search) is True:
         table_empty = True
     else:
         table_empty = False
@@ -114,48 +104,17 @@ def table_emptyorfull_file_update(table: str, table_start_line: str,
     return table_updater
 
 
-def find_table_boundaries(table: str, table_updater: dict,
-                          working_input_file: str):
+def get_table_contents_as_text_string(table: str, table_boundaries: dict,
+                                      working_input_file: str):
 
-    table_start_line = table_updater[table][0]
-
-    table_start_line, table_first_brace, table_last_line, \
-        table_last_brace = \
-        table_boundaries.find_table_start_end(
-            working_input_file=working_input_file,
-            table_start_line=table_start_line, table=table)
-
-    table_boundaries_file_updater = {table:
-                                     [table_start_line,
-                                      table_first_brace,
-                                      table_last_line,
-                                      table_last_brace]}
-
-    return table_boundaries_file_updater
-
-
-def table_boundaries_file_update(table_boundaries_file_updater: dict,
-                                 debug_dir: str):
-
-    table_boundaries_file = os.path.join(debug_dir,
-                                         "table_boundaries.json")
-    with open(table_boundaries_file, "w") as table_pre:
-        json.dump(table_boundaries_file_updater, table_pre)
-
-
-def get_table_contents_as_text_string(
-        table: str, table_boundaries_file_updater: dict,
-        working_input_file: str):
-
-    table_start_line = table_boundaries_file_updater[table][0]
-    table_last_line = table_boundaries_file_updater[table][2]
+    table_start_line = table_boundaries[0]
+    table_last_line = table_boundaries[2]
 
     string_to_slice = ""
     controlword_line = table_start_line
     while controlword_line < table_last_line + 1:
-        string_to_slice = string_to_slice + \
-                          linecache.getline(working_input_file,
-                                            controlword_line)
+        string_to_slice = string_to_slice + linecache.getline(
+            working_input_file, controlword_line)
         controlword_line += 1
 
     string_to_slice = string_to_slice.replace("\n", "")

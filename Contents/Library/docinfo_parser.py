@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
@@ -36,32 +35,20 @@ import os
 import docinfo_read
 
 
-class DocinfoParse(object):
+def process_docinfo(debug_dir: str, working_input_file: str):
+    """ Parse the info section of document and save the information in a
+    dictionary. """
+    with open(os.path.join(debug_dir, "header_tables_dict.json")) as \
+            header_tables_dict_pre:
+        header_tables_dict = json.load(header_tables_dict_pre)
 
-    def __init__(self,
-                 debug_dir: str,
-                 working_input_file: str):
-        self.debug_dir = debug_dir
-        self.working_input_file = working_input_file
+        table_start_line = header_tables_dict["info"][0]
+        table_start_index = header_tables_dict["info"][1]
 
-    def process_docinfo(self):
-        """ Parse the info section of document and save the information in a
-        dictionary. """
-        table = "info"
-        with open(os.path.join(self.debug_dir, "header_tables_dict.json")) as \
-                header_tables_dict_pre:
-            header_tables_dict = json.load(header_tables_dict_pre)
-
-        if table in header_tables_dict.keys():
-
-            line_to_check = header_tables_dict[table]
-
-            docinfo_read.InfoParseController.process_info_section(
-                self=docinfo_read.InfoParseController(
-                    debug_dir=self.debug_dir,
-                    line_to_read=line_to_check,
-                    table=table,
-                    working_input_file=self.working_input_file))
-
-        else:
-            pass
+        docinfo_read.InfoParseController.process_info_section(
+            self=docinfo_read.InfoParseController(
+                debug_dir=debug_dir,
+                table_start_line=table_start_line,
+                table_start_index=table_start_index,
+                table="info",
+                working_input_file=working_input_file))
