@@ -39,7 +39,7 @@ def define_boundaries_capture_contents(working_input_file: str,
     """ Define the boundaries of an RTF table or group, while capturing
     the contents of the table or group. """
     group_info = {}
-    group_text = ""
+    group_contents = ""
     search_line = group_start_line
     string_to_search = linecache.getline(working_input_file, search_line)
     string_to_search = string_to_search.replace("\n", "")
@@ -50,19 +50,21 @@ def define_boundaries_capture_contents(working_input_file: str,
 
     while index < length_string_to_search:
 
-        if string_to_search[index] != "{":
+        if string_to_search[index] == "{":
             deck.append(string_to_search[index])
+            group_contents = group_contents + string_to_search[index]
             index += 1
         elif string_to_search[index] == "}":
             deck.popleft()
+            group_contents = group_contents + string_to_search[index]
             index += 1
 
             if not deck:
                 group_end_line = search_line
-                group_end_index = string_to_search(index)
+                group_end_index = index
                 group_id = str(group_start_line) + "_" + str(group_start_index)
                 group_info.update({group_id:
-                                   [group_text,
+                                   [group_contents,
                                     group_start_line,
                                     group_start_index,
                                     group_end_line,
@@ -70,58 +72,57 @@ def define_boundaries_capture_contents(working_input_file: str,
 
                 return group_info
         else:
+            group_contents = group_contents + string_to_search[index]
             index += 1
             pass
 
-    index = 0
-    search_line += 1
-    group_text = string_to_search[group_start_index:length_string_to_search]
+    tracker = search_line + 1
     file_metrics = file_stats.file_stats_calculator(
         working_input_file=working_input_file)
     length_working_input_file = file_metrics[0]
 
-    while search_line <= length_working_input_file:
+    while tracker <= length_working_input_file:
+        index = 0
+        search_line = tracker
         string_to_search = linecache.getline(working_input_file, search_line)
         string_to_search = string_to_search.replace("\n", "")
+        string_to_search = string_to_search[index:]
         length_string_to_search = len(string_to_search)
-        string_to_search = string_to_search[index:length_string_to_search]
 
         while index < length_string_to_search:
 
             if string_to_search[index] == "{":
                 deck.append(string_to_search[index])
-                index += 1
+
             elif string_to_search[index] == "}":
                 deck.popleft()
-                index += 1
 
                 if not deck:  # Means if deck becomes empty
                     group_end_line = search_line
                     group_end_index = index
-                    group_text = group_text + string_to_search[0:index]
+                    group_contents = group_contents + string_to_search[0:index]
                     group_id = str(group_start_line) + "_" + str(
                         group_start_index)
                     group_info.update({group_id:
-                                       [group_text,
+                                       [group_contents,
                                         group_start_line,
                                         group_start_index,
                                         group_end_line,
                                         group_end_index]})
                     return group_info
             else:
-                index += 1
-                group_text = group_text + string_to_search
                 pass
 
-        search_line += 1
-        index = 0
+            group_contents = group_contents + string_to_search[index]
+            index += 1
+
+        tracker += 1
 
     group_end_line = search_line
     group_end_index = index
-    group_text = group_text + string_to_search
     group_id = str(group_start_line) + "_" + str(group_start_index)
     group_info.update({group_id:
-                       [group_text,
+                       [group_contents,
                         group_start_line,
                         group_start_index,
                         group_end_line,

@@ -1,6 +1,4 @@
-"""
-Character identifiers for Western European (1252) character set.
-"""
+""" Character identifiers for Western European (1252) character set. """
 
 cp1252_to_unicode_dict = {
         "00": "NUL",

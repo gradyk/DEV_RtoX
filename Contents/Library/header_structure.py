@@ -74,8 +74,8 @@ def build_header_tables_dict(working_input_file: str, debug_dir: str) -> None:
                 if table_search:
                     table_start_line = line_count
                     table_start_index = line_to_read.find(table) - 2
-                    table_boundaries_info =\
-                        group_boundaries_no_contents.define_boundaries_without_contents(
+                    table_boundaries_info = group_boundaries_no_contents.\
+                        define_boundaries_without_contents(
                             table=table,
                             working_input_file=working_input_file,
                             table_start_line=table_start_line,

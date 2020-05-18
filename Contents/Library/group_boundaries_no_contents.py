@@ -51,7 +51,7 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
 
     deck = deque()
     length_string_to_search = len(string_to_search)
-    index = string_to_search.find(table) - 2
+    index = table_start_index
     group_start_index = table_start_index
 
     while index < length_string_to_search:
@@ -65,7 +65,7 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
 
             if not deck:  # mMeans if deck becomes empty
                 group_end_line = search_line
-                group_end_index = string_to_search.index()
+                group_end_index = index
                 table_boundaries_info.update({table: [group_start_line,
                                                       group_start_index,
                                                       group_end_line,

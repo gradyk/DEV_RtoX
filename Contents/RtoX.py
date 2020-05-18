@@ -89,9 +89,15 @@ if __name__ == "__main__":
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
+    control_word_info_dict = create_files.initiate_control_word_info_file(
+        base_script_dir=base_script_dir)
+
+    control_word_func_dict = create_files.initiate_control_word_func_file(
+        base_script_dir=base_script_dir)
+
     line_to_get = doc_parser.main_doc_parser(
         working_input_file=working_input_file,
-        debug_dir=debug_dir)
+        debug_dir=debug_dir, control_word_func_dict=control_word_func_dict)
     # old: line_to_get = doc_parser.choose_starting_line_number(
     #      debug_dir=debug_dir)
 

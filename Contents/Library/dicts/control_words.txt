@@ -1,0 +1,1411 @@
+Control_Word,Category,Action,Function
+\',Special Characters,Symbol,cw_not_coded
+\-,Special Characters,Symbol,cw_not_coded
+\*,Special Characters,Symbol,cw_not_coded
+\:,Special Characters,Symbol,cw_not_coded
+\\,Special Characters,Symbol,cw_not_coded
+\_,Special Characters,Symbol,cw_not_coded
+\{,Special Characters,Symbol,cw_not_coded
+\|,Special Characters,Symbol,cw_not_coded
+\},Special Characters,Symbol,cw_not_coded
+\~,Special Characters,Symbol,cw_not_coded
+\ab,Associated Character Properties,Toggle,cw_not_coded
+\absh,Positioned Objects and Frames,Value,cw_not_coded
+\abslock,Positioned Objects and Frames,Flag,cw_not_coded
+\absnoovrlpN,Positioned Objects and Frames,Toggle,cw_not_coded
+\absw,Positioned Objects and Frames,Value,cw_not_coded
+\acaps,Associated Character Properties,Toggle,cw_not_coded
+\acccomma,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\accdot,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\accnone,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\acccircle,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\accunderdot,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\acf,Associated Character Properties,Value,cw_not_coded
+\additive,Style Sheet,Flag,cw_not_coded
+\adjustright,Section Formatting Properties,Flag,cw_not_coded
+\adn,Associated Character Properties,Value,cw_not_coded
+\aenddoc,Document Formatting Properties,Flag,cw_not_coded
+\aendnotes,Document Formatting Properties,Flag,cw_not_coded
+\aexpnd,Associated Character Properties,Value,cw_not_coded
+\af,Associated Character Properties,Value,cw_not_coded
+\affixed,Paragraph Formatting Properties,Flag,cw_not_coded
+\afs,Associated Character Properties,Value,cw_not_coded
+\aftnbj,Document Formatting Properties,Flag,cw_not_coded
+\aftncn,Document Formatting Properties,Destination,cw_not_coded
+\aftnnalc,Document Formatting Properties,Flag,cw_not_coded
+\aftnnar,Document Formatting Properties,Flag,cw_not_coded
+\aftnnauc,Document Formatting Properties,Flag,cw_not_coded
+\aftnnchi,Document Formatting Properties,Flag,cw_not_coded
+\aftnnchosung,Document Formatting Properties,Flag,cw_not_coded
+\aftnncnum,Document Formatting Properties,Flag,cw_not_coded
+\aftnndbar,Document Formatting Properties,Flag,cw_not_coded
+\aftnndbnum,Document Formatting Properties,Flag,cw_not_coded
+\aftnndbnumd,Document Formatting Properties,Flag,cw_not_coded
+\aftnndbnumk,Document Formatting Properties,Flag,cw_not_coded
+\aftnndbnumt,Document Formatting Properties,Flag,cw_not_coded
+\aftnnganada,Document Formatting Properties,Flag,cw_not_coded
+\aftnngbnum,Document Formatting Properties,Flag,cw_not_coded
+\aftnngbnumd,Document Formatting Properties,Flag,cw_not_coded
+\aftnngbnumk,Document Formatting Properties,Flag,cw_not_coded
+\aftnngbnuml,Document Formatting Properties,Flag,cw_not_coded
+\aftnnrlc,Document Formatting Properties,Flag,cw_not_coded
+\aftnnruc,Document Formatting Properties,Flag,cw_not_coded
+\aftnnzodiac,Document Formatting Properties,Flag,cw_not_coded
+\aftnnzodiacd,Document Formatting Properties,Flag,cw_not_coded
+\aftnnzodiacl,Document Formatting Properties,Flag,cw_not_coded
+\aftnrestart,Document Formatting Properties,Flag,cw_not_coded
+\aftnrstcont,Document Formatting Properties,Flag,cw_not_coded
+\aftnsep,Document Formatting Properties,Destination,cw_not_coded
+\aftnsepc,Document Formatting Properties,Destination,cw_not_coded
+\aftnstart,Document Formatting Properties,Value,cw_not_coded
+\aftntj,Document Formatting Properties,Flag,cw_not_coded
+\ai,Associated Character Properties,Toggle,cw_not_coded
+\alang,Associated Character Properties,Value,cw_not_coded
+\allowfieldendsel,Document Formatting Properties,Flag,cw_not_coded
+\allprot,Document Formatting Properties,Flag,cw_not_coded
+\alntblind,Document Formatting Properties,Flag,cw_not_coded
+\alt,Style Sheet,Flag,cw_not_coded
+\animtextN,Font (Character) Formatting Properties,Value,cw_not_coded
+\annotation,Comments (Annotations),Destination,cw_not_coded
+\annotprot,Document Formatting Properties,Flag,cw_not_coded
+\ansi,Character Set,Flag,cw_not_coded
+\ansicpgN,Unicode RTF,Value,cw_not_coded
+\aoutl,Associated Character Properties,Toggle,cw_not_coded
+\ApplyBrkRules,Document Formatting Properties,Flag,cw_not_coded
+\ascaps,Associated Character Properties,Toggle,cw_not_coded
+\ashad,Associated Character Properties,Toggle,cw_not_coded
+\asianbrkrule,Document Formatting Properties,Flag,cw_not_coded
+\aspalpha,Paragraph Formatting Properties,Toggle,cw_not_coded
+\aspnum,Paragraph Formatting Properties,Toggle,cw_not_coded
+\astrike,Associated Character Properties,Toggle,cw_not_coded
+\atnauthor,Comments (Annotations),Destination,cw_not_coded
+\atndate,Comments (Annotations),Destination,cw_not_coded
+\atnicn,Comments (Annotations),Destination,cw_not_coded
+\atnid,Comments (Annotations),Destination,cw_not_coded
+\atnparent,Comments (Annotations),Destination,cw_not_coded
+\atnref,Comments (Annotations),Destination,cw_not_coded
+\atntime,Comments (Annotations),Destination,cw_not_coded
+\atrfend,Comments (Annotations),Destination,cw_not_coded
+\atrfstart,Comments (Annotations),Destination,cw_not_coded
+\aul,Associated Character Properties,Toggle,cw_not_coded
+\auld,Associated Character Properties,Toggle,cw_not_coded
+\auldb,Associated Character Properties,Toggle,cw_not_coded
+\aulnone,Associated Character Properties,Toggle,cw_not_coded
+\aulw,Associated Character Properties,Toggle,cw_not_coded
+\aup,Associated Character Properties,Value,cw_not_coded
+\author,Information Group,Destination,cw_not_coded
+\autofmtoverride,Document Formatting Properties,Flag,cw_not_coded
+\b,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\background,Word through Word RTF for Drawing Objects (Shades),Destination,cw_not_coded
+\bdbfhdr,Document Formatting Properties,Flag,cw_not_coded
+\bdrrlswsix,Document Formatting Properties,Flag,cw_not_coded
+\bgbdiag,Paragraph Shading,Flag,cw_not_coded
+\bgcross,Paragraph Shading,Flag,cw_not_coded
+\bgdcross,Paragraph Shading,Flag,cw_not_coded
+\bgdkbdiag,Paragraph Shading,Flag,cw_not_coded
+\bgdkcross,Paragraph Shading,Flag,cw_not_coded
+\bgdkdcross,Paragraph Shading,Flag,cw_not_coded
+\bgdkfdiag,Paragraph Shading,Flag,cw_not_coded
+\bgdkhoriz,Paragraph Shading,Flag,cw_not_coded
+\bgdkvert,Paragraph Shading,Flag,cw_not_coded
+\bgfdiag,Paragraph Shading,Flag,cw_not_coded
+\bghoriz,Paragraph Shading,Flag,cw_not_coded
+\bgvert,Paragraph Shading,Flag,cw_not_coded
+\bin,Pictures,Value,cw_not_coded
+\binfsxn,Section Formatting Properties,Value,cw_not_coded
+\binsxn,Section Formatting Properties,Value,cw_not_coded
+\bkmkcolf,Bookmarks,Value,cw_not_coded
+\bkmkcoll,Bookmarks,Value,cw_not_coded
+\bkmkend,Bookmarks,Destination,cw_not_coded
+\bkmkpub,Macintosh Edition Manager Publisher Objects,Flag,cw_not_coded
+\bkmkstart,Bookmarks,Destination,cw_not_coded
+\bliptagN,Pictures,Value,cw_not_coded
+\blipuid,Pictures,Value,cw_not_coded
+\blipupiN,Pictures,Value,cw_not_coded
+\blue,Color Table,Value,cw_not_coded
+\bookfold,Document Formatting Properties,Flag,cw_not_coded
+\bookfoldrev,Document Formatting Properties,Flag,cw_not_coded
+\bookfoldsheetsN,Document Formatting Properties,Value,cw_not_coded
+\box,Paragraph Borders,Flag,cw_not_coded
+\brdrartN,Document Formatting Properties,Value,cw_not_coded
+\brdrb,Paragraph Borders,Flag,cw_not_coded
+\brdrbar,Paragraph Borders,Flag,cw_not_coded
+\brdrbtw,Paragraph Borders,Flag,cw_not_coded
+\brdrcf,Paragraph Borders,Value,cw_not_coded
+\brdrdash,Paragraph Borders,Flag,cw_not_coded
+\brdrdashd,Paragraph Text,Flag,cw_not_coded
+\brdrdashdd,Paragraph Text,Flag,cw_not_coded
+\brdrdashdotstr,Paragraph Text,Flag,cw_not_coded
+\brdrdashsm,Paragraph Text,Flag,cw_not_coded
+\brdrdb,Paragraph Borders,Flag,cw_not_coded
+\brdrdot,Paragraph Borders,Flag,cw_not_coded
+\brdremboss,Paragraph Text,Flag,cw_not_coded
+\brdrengrave,Paragraph Text,Flag,cw_not_coded
+\brdrframe,Paragraph Borders,Flag,cw_not_coded
+\brdrhair,Paragraph Borders,Flag,cw_not_coded
+\brdrinset,Paragraph Text,Flag,cw_not_coded
+\brdrl,Paragraph Borders,Flag,cw_not_coded
+\brdrnil,Paragraph Borders,Flag,cw_not_coded
+\brdroutset,Paragraph Text,Flag,cw_not_coded
+\brdrr,Paragraph Borders,Flag,cw_not_coded
+\brdrs,Paragraph Borders,Flag,cw_not_coded
+\brdrsh,Paragraph Borders,Flag,cw_not_coded
+\brdrt,Paragraph Borders,Flag,cw_not_coded
+\brdrtbl,Paragraph Borders,Flag,cw_not_coded
+\brdrth,Paragraph Borders,Flag,cw_not_coded
+\brdrthtnlg,Paragraph Text,Flag,cw_not_coded
+\brdrthtnmg,Paragraph Text,Flag,cw_not_coded
+\brdrthtnsg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthlg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthmg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthsg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthtnlg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthtnmg,Paragraph Text,Flag,cw_not_coded
+\brdrtnthtnsg,Paragraph Text,Flag,cw_not_coded
+\brdrtriple,Paragraph Text,Flag,cw_not_coded
+\brdrw,Paragraph Borders,Value,cw_not_coded
+\brdrwavy,Paragraph Text,Flag,cw_not_coded
+\brdrwavydb,Paragraph Text,Flag,cw_not_coded
+\brkfrm,Document Formatting Properties,Flag,cw_not_coded
+\brsp,Paragraph Borders,Value,cw_not_coded
+\bullet,Special Characters,Symbol,cw_not_coded
+\buptim,Information Group,Destination,cw_not_coded
+\bxe,Index Entries,Flag,cw_not_coded
+\caps,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\category,Information Group,Destination,cw_not_coded
+\cb,Font (Character) Formatting Properties,Value,cw_not_coded
+\cbpat,Paragraph Shading,Value,cw_not_coded
+\cchs,Font (Character) Formatting Properties,Value,cw_not_coded
+\cell,Special Characters,Symbol,cw_not_coded
+\cellx,Table Definitions,Value,cw_not_coded
+\cf,Font (Character) Formatting Properties,Value,cw_not_coded
+\cfpat,Paragraph Shading,Value,cw_not_coded
+\cgridN,Font (Character) Formatting Properties,Value,cw_not_coded
+\charrsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\charscalex,Font (Character) Formatting Properties,Value,cw_not_coded
+\charscalexN,Character Text,Value,cw_not_coded
+\chatn,Special Characters,Symbol,cw_not_coded
+\chbgbdiag,Character Text,Flag,cw_not_coded
+\chbgcross,Character Text,Flag,cw_not_coded
+\chbgdcross,Character Text,Flag,cw_not_coded
+\chbgdkbdiag,Character Text,Flag,cw_not_coded
+\chbgdkcross,Character Text,Flag,cw_not_coded
+\chbgdkdcross,Character Text,Flag,cw_not_coded
+\chbgdkfdiag,Character Text,Flag,cw_not_coded
+\chbgdkhoriz,Character Text,Flag,cw_not_coded
+\chbgdkvert,Character Text,Flag,cw_not_coded
+\chbgfdiag,Character Text,Flag,cw_not_coded
+\chbghoriz,Character Text,Flag,cw_not_coded
+\chbgvert,Character Text,Flag,cw_not_coded
+\chbrdr,Character Text,Flag,cw_not_coded
+\chcbpatN,Character Text,Value,cw_not_coded
+\chcfpatN,Character Text,Value,cw_not_coded
+\chdate,Special Characters,Symbol,cw_not_coded
+\chdpa,Special Characters,Symbol,cw_not_coded
+\chdpl,Special Characters,Symbol,cw_not_coded
+\chftn,Special Characters,Symbol,cw_not_coded
+\chftnsep,Special Characters,Symbol,cw_not_coded
+\chftnsepc,Special Characters,Symbol,cw_not_coded
+\chpgn,Special Characters,Symbol,cw_not_coded
+\chshdngN,Character Text,Value,cw_not_coded
+\chtime,Special Characters,Symbol,cw_not_coded
+\clbgbdiag,Table Definitions,Flag,cw_not_coded
+\clbgcross,Table Definitions,Flag,cw_not_coded
+\clbgdcross,Table Definitions,Flag,cw_not_coded
+\clbgdkbdiag,Table Definitions,Flag,cw_not_coded
+\clbgdkcross,Table Definitions,Flag,cw_not_coded
+\clbgdkdcross,Table Definitions,Flag,cw_not_coded
+\clbgdkfdiag,Table Definitions,Flag,cw_not_coded
+\clbgdkhor,Table Definitions,Flag,cw_not_coded
+\clbgdkvert,Table Definitions,Flag,cw_not_coded
+\clbgfdiag,Table Definitions,Flag,cw_not_coded
+\clbghoriz,Table Definitions,Flag,cw_not_coded
+\clbgvert,Table Definitions,Flag,cw_not_coded
+\clbrdrb,Table Definitions,Flag,cw_not_coded
+\clbrdrl,Table Definitions,Flag,cw_not_coded
+\clbrdrr,Table Definitions,Flag,cw_not_coded
+\clbrdrt,Table Definitions,Flag,cw_not_coded
+\clcbpat,Table Definitions,Value,cw_not_coded
+\clcbpatrawN,Table Definitions,Value,cw_not_coded
+\clcfpat,Table Definitions,Value,cw_not_coded
+\clcfpatrawN,Table Definitions,Value,cw_not_coded
+\cldgll,Table Definitions,Flag,cw_not_coded
+\cldglu,Table Definitions,Flag,cw_not_coded
+\clFitText,Table Definitions,Flag,cw_not_coded
+\clftsWidthN,Table Definitions,Value,cw_not_coded
+\clmgf,Table Definitions,Flag,cw_not_coded
+\clmrg,Table Definitions,Flag,cw_not_coded
+\clNoWrap,Table Definitions,Flag,cw_not_coded
+\clpadbN,Table Definitions,Value,cw_not_coded
+\clpadfbN,Table Definitions,Value,cw_not_coded
+\clpadflN,Table Definitions,Value,cw_not_coded
+\clpadfrN,Table Definitions,Value,cw_not_coded
+\clpadftN,Table Definitions,Value,cw_not_coded
+\clpadlN,Table Definitions,Value,cw_not_coded
+\clpadrN,Table Definitions,Value,cw_not_coded
+\clpadtN,Table Definitions,Value,cw_not_coded
+\clshdng,Table Definitions,Value,cw_not_coded
+\clshdngraw,Table Definitions,Value,cw_not_coded
+\clshdrawnil,Table Definitions,Flag,cw_not_coded
+\cltxbtlr,Table Definitions,Flag,cw_not_coded
+\cltxlrtb,Table Definitions,Flag,cw_not_coded
+\cltxlrtb,Table Definitions,Flag,cw_not_coded
+\cltxlrtbv,Table Definitions,Flag,cw_not_coded
+\cltxtbrl,Table Definitions,Flag,cw_not_coded
+\cltxtbrl,Table Definitions,Flag,cw_not_coded
+\cltxtbrlv,Table Definitions,Flag,cw_not_coded
+\clvertalb,Table Definitions,Flag,cw_not_coded
+\clvertalc,Table Definitions,Flag,cw_not_coded
+\clvertalt,Table Definitions,Flag,cw_not_coded
+\clvmgf,Table Definitions,Flag,cw_not_coded
+\clvmrg,Table Definitions,Flag,cw_not_coded
+\clwWidthN,Table Definitions,Value,cw_not_coded
+\collapsed,Paragraph Formatting Properties,Flag,cw_not_coded
+\colno,Section Formatting Properties,Value,cw_not_coded
+\colortbl,Color Table,Destination,cw_not_coded
+\cols,Section Formatting Properties,Value,cw_not_coded
+\colsr,Section Formatting Properties,Value,cw_not_coded
+\colsx,Section Formatting Properties,Value,cw_not_coded
+\column,Special Characters,Symbol,cw_not_coded
+\colw,Section Formatting Properties,Value,cw_not_coded
+\comment,Information Group,Destination,cw_not_coded
+\company,Information Group,Destination,cw_not_coded
+\cpg,Code Page Support,Value,cw_not_coded
+\crauthN,Character Text,Value,cw_not_coded
+\crdateN,Character Text,Value,cw_not_coded
+\creatim,Information Group,Destination,cw_not_coded
+\cs,Font (Character) Formatting Properties,Value,cw_not_coded
+\ctrl,Style Sheet,Flag,cw_not_coded
+\ctsN,Document Formatting Properties,Value,cw_not_coded
+\cufiN,Paragraph Formatting Properties,Value,cw_not_coded
+\culiN,Paragraph Formatting Properties,Value,cw_not_coded
+\curiN,Paragraph Formatting Properties,Value,cw_not_coded
+\cvmme,Document Formatting Properties,Flag,cw_not_coded
+\datafield,Fields,Destination,cw_not_coded
+\date,Fields,Flag,cw_not_coded
+\dbch,Associated Character Properties,Flag,cw_not_coded
+\deff,Font Table,Value,cw_not_coded
+\defformat,Document Formatting Properties,Flag,cw_not_coded
+\deflang,Document Formatting Properties,Value,cw_not_coded
+\deflangfe,Document Formatting Properties,Value,cw_not_coded
+\defshp,Pictures,Flag,cw_not_coded
+\deftab,Document Formatting Properties,Value,cw_not_coded
+\deleted,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\delrsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\dfrauthN,Paragraph Text,Value,cw_not_coded
+\dfrdateN,Paragraph Text,Value,cw_not_coded
+\dfrmtxtx,Positioned Objects and Frames,Value,cw_not_coded
+\dfrmtxty,Positioned Objects and Frames,Value,cw_not_coded
+\dfrstart,Paragraph Text,Value,cw_not_coded
+\dfrstop,Paragraph Text,Value,cw_not_coded
+\dfrxst,Paragraph Text,Value,cw_not_coded
+\dghoriginN,Document Formatting Properties,Value,cw_not_coded
+\dghshowN,Document Formatting Properties,Value,cw_not_coded
+\dghspaceN,Document Formatting Properties,Value,cw_not_coded
+\dgmargin,Document Formatting Properties,Flag,cw_not_coded
+\dgsnap,Document Formatting Properties,Flag,cw_not_coded
+\dgvoriginN,Document Formatting Properties,Value,cw_not_coded
+\dgvshowN,Document Formatting Properties,Value,cw_not_coded
+\dgvspaceN,Document Formatting Properties,Value,cw_not_coded
+\dibitmap,Pictures,Value,cw_not_coded
+\dn,Font (Character) Formatting Properties,Value,cw_not_coded
+\dntblnsbdb,Document Formatting Properties,Flag,cw_not_coded
+\do,Drawing Objects,Destination,cw_not_coded
+\dobxcolumn,Drawing Objects,Flag,cw_not_coded
+\dobxmargin,Drawing Objects,Flag,cw_not_coded
+\dobxpage,Drawing Objects,Flag,cw_not_coded
+\dobymargin,Drawing Objects,Flag,cw_not_coded
+\dobypage,Drawing Objects,Flag,cw_not_coded
+\dobypara,Drawing Objects,Flag,cw_not_coded
+\doccomm,Information Group,Destination,cw_not_coded
+\doctemp,Document Formatting Properties,Flag,cw_not_coded
+\doctypeN,Document Formatting Properties,Value,cw_not_coded
+\docvar,Document Variables,Destination,cw_not_coded
+\dodhgt,Drawing Objects,Value,cw_not_coded
+\dolock,Drawing Objects,Flag,cw_not_coded
+\donotshowcomments,Document Formatting Properties,Flag,cw_not_coded
+\donotshowinsdel,Document Formatting Properties,Flag,cw_not_coded
+\donotshowmarkup,Document Formatting Properties,Flag,cw_not_coded
+\donotshowprops,Document Formatting Properties,Flag,cw_not_coded
+\dpaendhol,Drawing Objects,Flag,cw_not_coded
+\dpaendl,Drawing Objects,Value,cw_not_coded
+\dpaendsol,Drawing Objects,Flag,cw_not_coded
+\dpaendw,Drawing Objects,Value,cw_not_coded
+\dparc,Drawing Objects,Flag,cw_not_coded
+\dparcflipx,Drawing Objects,Flag,cw_not_coded
+\dparcflipy,Drawing Objects,Flag,cw_not_coded
+\dpastarthol,Drawing Objects,Flag,cw_not_coded
+\dpastartl,Drawing Objects,Value,cw_not_coded
+\dpastartsol,Drawing Objects,Flag,cw_not_coded
+\dpastartw,Drawing Objects,Value,cw_not_coded
+\dpcallout,Drawing Objects,Flag,cw_not_coded
+\dpcoa,Drawing Objects,Value,cw_not_coded
+\dpcoaccent,Drawing Objects,Flag,cw_not_coded
+\dpcobestfit,Drawing Objects,Flag,cw_not_coded
+\dpcoborder,Drawing Objects,Flag,cw_not_coded
+\dpcodabs,Drawing Objects,Value,cw_not_coded
+\dpcodbottom,Drawing Objects,Flag,cw_not_coded
+\dpcodcenter,Drawing Objects,Flag,cw_not_coded
+\dpcodescent,Drawing Objects,Value,cw_not_coded
+\dpcodtop,Drawing Objects,Flag,cw_not_coded
+\dpcolength,Drawing Objects,Value,cw_not_coded
+\dpcominusx,Drawing Objects,Flag,cw_not_coded
+\dpcominusy,Drawing Objects,Flag,cw_not_coded
+\dpcooffset,Drawing Objects,Value,cw_not_coded
+\dpcosmarta,Drawing Objects,Flag,cw_not_coded
+\dpcotdouble,Drawing Objects,Flag,cw_not_coded
+\dpcotright,Drawing Objects,Flag,cw_not_coded
+\dpcotsingle,Drawing Objects,Flag,cw_not_coded
+\dpcottriple,Drawing Objects,Flag,cw_not_coded
+\dpcount,Drawing Objects,Value,cw_not_coded
+\dpellipse,Drawing Objects,Flag,cw_not_coded
+\dpendgroup,Drawing Objects,Flag,cw_not_coded
+\dpfillbgcb,Drawing Objects,Value,cw_not_coded
+\dpfillbgcg,Drawing Objects,Value,cw_not_coded
+\dpfillbgcr,Drawing Objects,Value,cw_not_coded
+\dpfillbggray,Drawing Objects,Value,cw_not_coded
+\dpfillbgpal,Drawing Objects,Flag,cw_not_coded
+\dpfillfgcb,Drawing Objects,Value,cw_not_coded
+\dpfillfgcg,Drawing Objects,Value,cw_not_coded
+\dpfillfgcr,Drawing Objects,Value,cw_not_coded
+\dpfillfggray,Drawing Objects,Value,cw_not_coded
+\dpfillfgpal,Drawing Objects,Flag,cw_not_coded
+\dpfillpat,Drawing Objects,Value,cw_not_coded
+\dpgroup,Drawing Objects,Flag,cw_not_coded
+\dpline,Drawing Objects,Flag,cw_not_coded
+\dplinecob,Drawing Objects,Value,cw_not_coded
+\dplinecog,Drawing Objects,Value,cw_not_coded
+\dplinecor,Drawing Objects,Value,cw_not_coded
+\dplinedado,Drawing Objects,Flag,cw_not_coded
+\dplinedadodo,Drawing Objects,Flag,cw_not_coded
+\dplinedash,Drawing Objects,Flag,cw_not_coded
+\dplinedot,Drawing Objects,Flag,cw_not_coded
+\dplinegray,Drawing Objects,Value,cw_not_coded
+\dplinehollow,Drawing Objects,Flag,cw_not_coded
+\dplinepal,Drawing Objects,Flag,cw_not_coded
+\dplinesolid,Drawing Objects,Flag,cw_not_coded
+\dplinew,Drawing Objects,Value,cw_not_coded
+\dppolycount,Drawing Objects,Value,cw_not_coded
+\dppolygon,Drawing Objects,Flag,cw_not_coded
+\dppolyline,Drawing Objects,Flag,cw_not_coded
+\dpptx,Drawing Objects,Value,cw_not_coded
+\dppty,Drawing Objects,Value,cw_not_coded
+\dprect,Drawing Objects,Flag,cw_not_coded
+\dproundr,Drawing Objects,Flag,cw_not_coded
+\dpshadow,Drawing Objects,Flag,cw_not_coded
+\dpshadx,Drawing Objects,Value,cw_not_coded
+\dpshady,Drawing Objects,Value,cw_not_coded
+\dptxbtlr,Drawing Objects,Flag,cw_not_coded
+\dptxbx,Drawing Objects,Flag,cw_not_coded
+\dptxbxmar,Drawing Objects,Value,cw_not_coded
+\dptxbxtext,Drawing Objects,Destination,cw_not_coded
+\dptxlrtb,Drawing Objects,Flag,cw_not_coded
+\dptxlrtbv,Drawing Objects,Flag,cw_not_coded
+\dptxtbrl,Drawing Objects,Flag,cw_not_coded
+\dptxtbrlv,Drawing Objects,Flag,cw_not_coded
+\dpx,Drawing Objects,Value,cw_not_coded
+\dpxsize,Drawing Objects,Value,cw_not_coded
+\dpy,Drawing Objects,Value,cw_not_coded
+\dpysize,Drawing Objects,Value,cw_not_coded
+\dropcapli,Positioned Objects and Frames,Value,cw_not_coded
+\dropcapt,Positioned Objects and Frames,Value,cw_not_coded
+\ds,Section Formatting Properties,Value,cw_not_coded
+\dxfrtext,Positioned Objects and Frames,Value,cw_not_coded
+\dy,Information Group,Value,cw_not_coded
+\edmins,Information Group,Value,cw_not_coded
+\embo,Character Text,Toggle,cw_not_coded
+\emdash,Special Characters,Symbol,cw_not_coded
+\emfblip,Pictures,Flag,cw_not_coded
+\emspace,Special Characters,Symbol,cw_not_coded
+\endash,Special Characters,Symbol,cw_not_coded
+\enddoc,Document Formatting Properties,Flag,cw_not_coded
+\endnhere,Section Formatting Properties,Flag,cw_not_coded
+\end notes,Document Formatting Properties,Flag,cw_not_coded
+\enforceprotN,Document Formatting Properties,Value,cw_not_coded
+\enspace,Special Characters,Symbol,cw_not_coded
+\expnd,Font (Character) Formatting Properties,Value,cw_not_coded
+\expndtw,Font (Character) Formatting Properties,Value,cw_not_coded
+\expshrtn,Document Formatting Properties,Flag,cw_not_coded
+\f,Font (Character) Formatting Properties,Value,cw_not_coded
+\faauto,Paragraph Formatting Properties,Value,cw_not_coded
+\facenter,Paragraph Formatting Properties,Flag,cw_not_coded
+\facingp,Document Formatting Properties,Flag,cw_not_coded
+\fahang,Paragraph Formatting Properties,Flag,cw_not_coded
+\falt,Font Table,Destination,cw_not_coded
+\faroman,Paragraph Formatting Properties,Flag,cw_not_coded
+\favar,Paragraph Formatting Properties,Flag,cw_not_coded
+\fbiasN,Font Table,Value,cw_not_coded
+\fbidi,Font Table,Flag,cw_not_coded
+\fchars,Document Formatting Properties,Destination,cw_not_coded
+\fcharset,Font Table,Value,cw_not_coded
+\fdecor,Font Table,Flag,cw_not_coded
+\fet,Document Formatting Properties,Value,cw_not_coded
+\fetch,Font Table,Flag,cw_not_coded
+\ffdefres,Form Fields,Value,cw_not_coded
+\ffdeftext,Form Fields,Destination,cw_not_coded
+\ffentrymcr,Form Fields,Destination,cw_not_coded
+\ffexitmcr,Form Fields,Destination,cw_not_coded
+\ffformat,Form Fields,Destination,cw_not_coded
+\ffhaslistboxN,Form Fields,Value,cw_not_coded
+\ffhelptext,Form Fields,Destination,cw_not_coded
+\ffhpsN,Form Fields,Value,cw_not_coded
+\ffl,Form Fields,Destination,cw_not_coded
+\ffmaxlen,Form Fields,Value,cw_not_coded
+\ffname,Form Fields,Destination,cw_not_coded
+\ffownhelpN,Form Fields,Value,cw_not_coded
+\ffownstatN,Form Fields,Value,cw_not_coded
+\ffprotN,Form Fields,Value,cw_not_coded
+\ffrecalcN,Form Fields,Value,cw_not_coded
+\ffresN,Form Fields,Value,cw_not_coded
+\ffsizeN,Form Fields,Value,cw_not_coded
+\ffstattext,Form Fields,Destination,cw_not_coded
+\fftypeN,Form Fields,Value,cw_not_coded
+\fftypetxtN,Form Fields,Value,cw_not_coded
+\fi,Paragraph Formatting Properties,Value,cw_not_coded
+\fid,File Table,Value,cw_not_coded
+\field,Fields,Destination,cw_not_coded
+\file,File Table,Destination,cw_not_coded
+\filetbl,File Table,Destination,cw_not_coded
+\fittextN,Font (Character) Formatting Properties,Value,cw_not_coded
+\fldalt,Document Formatting Properties,Flag,cw_not_coded
+\fIddirty,Fields,Flag,cw_not_coded
+\fldedit,Fields,Flag,cw_not_coded
+\fldinst,Fields,Destination,cw_not_coded
+\fldlock,Fields,Flag,cw_not_coded
+\fldpriv,Fields,Flag,cw_not_coded
+\fldrslt,Fields,Destination,cw_not_coded
+\fldtype,Fields,Destination,cw_not_coded
+\fmodern,Font Table,Flag,cw_not_coded
+\fn,Style Sheet,Value,cw_not_coded
+\fname,Font Table,Destination,cw_not_coded
+\fnetwork,File Table,Flag,cw_not_coded
+\fnil,Font Table,Flag,cw_not_coded
+\fnonfilesys,File Table,Flag,cw_not_coded
+\fontemb,Font Table,Destination,cw_not_coded
+\fontfile,Font Table,Destination,cw_not_coded
+\fonttbl,Font Table,Destination,cw_not_coded
+\footer,Headers and Footers,Destination,cw_not_coded
+\footer,Headers and Footers,Destination,cw_not_coded
+\footerf,Headers and Footers,Destination,cw_not_coded
+\footerl,Headers and Footers,Destination,cw_not_coded
+\footery,Section Formatting Properties,Value,cw_not_coded
+\footnote,Footnotes,Destination,cw_not_coded
+\formdisp,Document Formatting Properties,Flag,cw_not_coded
+\formfield,Form Fields,Destination,cw_not_coded
+\formprot,Document Formatting Properties,Flag,cw_not_coded
+\formshade,Document Formatting Properties,Flag,cw_not_coded
+\fosnum,File Table,Value,cw_not_coded
+\fprq,Font Table,Value,cw_not_coded
+\fracwidth,Document Formatting Properties,Flag,cw_not_coded
+\frelative,File Table,Value,cw_not_coded
+\frmtxbtlr,Positioned Objects and Frames,Flag,cw_not_coded
+\frmtxlrtb,Positioned Objects and Frames,Flag,cw_not_coded
+\frmtxlrtbv,Positioned Objects and Frames,Flag,cw_not_coded
+\frmtxtbrl,Positioned Objects and Frames,Flag,cw_not_coded
+\frmtxtbrlv,Positioned Objects and Frames,Flag,cw_not_coded
+\froman,Font Table,Flag,cw_not_coded
+\fromhtml,Document Formatting Properties,Flag,cw_not_coded
+\fromtext,Document Formatting Properties,Flag,cw_not_coded
+\fs,Font (Character) Formatting Properties,Value,cw_not_coded
+\fscript,Font Table,Flag,cw_not_coded
+\fswiss,Font Table,Flag,cw_not_coded
+\ftnalt,Document Formatting Properties,Flag,cw_not_coded
+\ftnbj,Document Formatting Properties,Flag,cw_not_coded
+\ftncn,Document Formatting Properties,Destination,cw_not_coded
+\ftnil,Font Table,Flag,cw_not_coded
+\ftnlytwnine,Document Formatting Properties,Flag,cw_not_coded
+\ftnnalc,Document Formatting Properties,Flag,cw_not_coded
+\ftnnar,Document Formatting Properties,Flag,cw_not_coded
+\ftnnauc,Document Formatting Properties,Flag,cw_not_coded
+\ftnnchi,Document Formatting Properties,Flag,cw_not_coded
+\ftnnchosung,Document Formatting Properties,Flag,cw_not_coded
+\ftnncnum,Document Formatting Properties,Flag,cw_not_coded
+\ftnndbar,Document Formatting Properties,Flag,cw_not_coded
+\ftnndbnum,Document Formatting Properties,Flag,cw_not_coded
+\ftnndbnumd,Document Formatting Properties,Flag,cw_not_coded
+\ftnndbnumk,Document Formatting Properties,Flag,cw_not_coded
+\ftnndbnumt,Document Formatting Properties,Flag,cw_not_coded
+\ftnnganada,Document Formatting Properties,Flag,cw_not_coded
+\ftnngbnum,Document Formatting Properties,Flag,cw_not_coded
+\ftnngbnumd,Document Formatting Properties,Flag,cw_not_coded
+\ftnngbnumk,Document Formatting Properties,Flag,cw_not_coded
+\ftnngbnuml,Document Formatting Properties,Flag,cw_not_coded
+\ftnnrlc,Document Formatting Properties,Flag,cw_not_coded
+\ftnnruc,Document Formatting Properties,Flag,cw_not_coded
+\ftnnzodiac,Document Formatting Properties,Flag,cw_not_coded
+\ftnnzodiacd,Document Formatting Properties,Flag,cw_not_coded
+\ftnnzodiacl,Document Formatting Properties,Flag,cw_not_coded
+\ftn restart,Document Formatting Properties,Flag,cw_not_coded
+\ftnrstcont,Document Formatting Properties,Flag,cw_not_coded
+\ftnrstpg,Document Formatting Properties,Flag,cw_not_coded
+\ftnsep,Document Formatting Properties,Destination,cw_not_coded
+\ftnsepc,Document Formatting Properties,Destination,cw_not_coded
+\ftn start,Document Formatting Properties,Value,cw_not_coded
+\ftntj,Document Formatting Properties,Flag,cw_not_coded
+\fttruetype,Font Table,Flag,cw_not_coded
+\fvaliddos,File Table,Flag,cw_not_coded
+\fvalidhpfs,File Table,Flag,cw_not_coded
+\fvalidmac,File Table,Flag,cw_not_coded
+\fvalidntfs,File Table,Flag,cw_not_coded
+\g,Font (Character) Formatting Properties,Destination,cw_not_coded
+\gcw,Font (Character) Formatting Properties,Value,cw_not_coded
+\generator,Generator,Destination,cw_not_coded
+\green,Color Table,Value,cw_not_coded
+\gridtbl,Font (Character) Formatting Properties,Destination,cw_not_coded
+\g utter,Document Formatting Properties,Value,cw_not_coded
+\gutterprl,Document Formatting Properties,Flag,cw_not_coded
+\guttersxn,Section Formatting Properties,Value,cw_not_coded
+\header,Headers and Footers,Destination,cw_not_coded
+\header,Headers and Footers,Destination,cw_not_coded
+\headerf,Headers and Footers,Destination,cw_not_coded
+\headerl,Headers and Footers,Destination,cw_not_coded
+\headery,Section Formatting Properties,Value,cw_not_coded
+\hich,Associated Character Properties,Flag,cw_not_coded
+\highlight,Highlighting,Value,cw_not_coded
+\hlfr,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\hlinkbase,Information Group,Value,cw_not_coded
+\hlloc,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\hlsrc,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\horzdoc,Document Formatting Properties,Flag,cw_not_coded
+\horzsect,Section Formatting Properties,Flag,cw_not_coded
+\hr,Information Group,Value,cw_not_coded
+\htmautsp,Document Formatting Properties,Flag,cw_not_coded
+\htmlbase,Control Words Introduced bv Other Microsoft Products,Flag,cw_not_coded
+\htmlrtf,Control Words Introduced bv Other Microsoft Products,Toggle,cw_not_coded
+\htmltag,Control Words Introduced bv Other Microsoft Products,Destination,cw_not_coded
+\hyphauto,Document Formatting Properties,Toggle,cw_not_coded
+\hyphcaps,Document Formatting Properties,Toggle,cw_not_coded
+\hyphconsec,Document Formatting Properties,Value,cw_not_coded
+\hyphhotz,Document Formatting Properties,Value,cw_not_coded
+\hyphpar,Paragraph Formatting Properties,Toggle,cw_not_coded
+\i,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\id,Information Group,Value,cw_not_coded
+\ilvl,Paragraph Text,Value,cw_not_coded
+\impr,Character Text,Toggle,cw_not_coded
+\info,Information Group,Destination,cw_not_coded
+\insrsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\intbl,Paragraph Formatting Properties,Flag,cw_not_coded
+\ipgpN,Paragraph Group Properties,Value,cw_not_coded
+\irowbandN,Table Definitions,Value,cw_not_coded
+\irowN,Table Definitions,Value,cw_not_coded
+\itapN,Paragraph Formatting Properties,Value,cw_not_coded
+\ixe,Index Entries,Flag,cw_not_coded
+\jcompress,Document Formatting Properties,Flag,cw_not_coded
+\jexpand,Document Formatting Properties,Flag,cw_not_coded
+Njpegblip,Pictures,Flag,cw_not_coded
+\jsksu,Document Formatting Properties,Flag,cw_not_coded
+\keep,Paragraph Formatting Properties,Flag,cw_not_coded
+\keepn,Paragraph Formatting Properties,Flag,cw_not_coded
+\kerning,Font (Character) Formatting Properties,Value,cw_not_coded
+\keycode,Style Sheet,Destination,cw_not_coded
+\keywords,Information Group,Destination,cw_not_coded
+\ksulangN,Document Formatting Properties,Value,cw_not_coded
+\landscape,Document Formatting Properties,Flag,cw_not_coded
+\lang,Font (Character) Formatting Properties,Value,cw_not_coded
+\langfeN,Font (Character) Formatting Properties,Value,cw_not_coded
+\langfenpN,Font (Character) Formatting Properties,Value,cw_not_coded
+\langnpN,Font (Character) Formatting Properties,Value,cw_not_coded
+\lastrow,Table Definitions,Flag,cw_not_coded
+\latentstyles,Style and Formatting Restrictions,Destination,cw_not_coded
+\lbrN,Special Characters,Symbol,cw_not_coded
+\lchars,Document Formatting Properties,Destination,cw_not_coded
+\ldblquote,Special Characters,Symbol,cw_not_coded
+\level,Paragraph Formatting Properties,Value,cw_not_coded
+\levelfollowN,List Table,Value,cw_not_coded
+\levelindentN,List Table,Value,cw_not_coded
+\leveljcN,List Table,Value,cw_not_coded
+\leveljcnN,List Table,Value,cw_not_coded
+\levellegalN,List Table,Value,cw_not_coded
+\levelnfcN,List Table,Value,cw_not_coded
+MevelnfcnN,List Table,Value,cw_not_coded
+\levelnorestartN,List Table,Value,cw_not_coded
+\levelnumbers,List Table,Destination,cw_not_coded
+\leveloldN,List Table,Value,cw_not_coded
+\levelpictureN,List Table,Value,cw_not_coded
+\levelprevN,List Table,Value,cw_not_coded
+\levelprevspaceN,List Table,Value,cw_not_coded
+\levelspaceN,List Table,Value,cw_not_coded
+\levelstartatN,List Table,Value,cw_not_coded
+\leveltemplateidN,List Table,Value,cw_not_coded
+\leveltext,List Table,Value,cw_not_coded
+\li,Paragraph Formatting Properties,Value,cw_not_coded
+\line,Special Characters,Symbol,cw_not_coded
+\linebetcol,Section Formatting Properties,Flag,cw_not_coded
+\linecont,Section Formatting Properties,Flag,cw_not_coded
+\linemod,Section Formatting Properties,Value,cw_not_coded
+\lineppage,Section Formatting Properties,Flag,cw_not_coded
+\linerestart,Section Formatting Properties,Flag,cw_not_coded
+\linestart,Document Formatting Properties,Value,cw_not_coded
+Vinestarts,Section Formatting Properties,Value,cw_not_coded
+\linex,Section Formatting Properties,Value,cw_not_coded
+\linkself,Objects,Flag,cw_not_coded
+\linkstyles,Document Formatting Properties,Flag,cw_not_coded
+\linkval,Information Group,Value,cw_not_coded
+\iinN,Paragraph Formatting Properties,Value,cw_not_coded
+\lisaN,Paragraph Formatting Properties,Value,cw_not_coded
+\lisbN,Paragraph Formatting Properties,Value,cw_not_coded
+\listhybrid,List Table,Flag,cw_not_coded
+\listidN,List Table,Value,cw_not_coded
+\listname,List Table,Destination,cw_not_coded
+\MstoverridecountN,List Table,Value,cw_not_coded
+VistoverrideformatN,List Table,Value,cw_not_coded
+\listoverridestartN,List Table,Value,cw_not_coded
+\MstpictureN,List Table,Value,cw_not_coded
+\NstrestarthdnN,List Table,Value,cw_not_coded
+\MstsimpleN,List Table,Value,cw_not_coded
+\liststyleidN,List Table,Value,cw_not_coded
+\liststylename,List Table,Value,cw_not_coded
+\NsttemplateidN,List Table,Value,cw_not_coded
+\listtext,Paragraph Text,Destination,cw_not_coded
+\lnbrkrule,Document Formatting Properties,Flag,cw_not_coded
+\lndscpsxn,Section Formatting Properties,Flag,cw_not_coded
+\lnongrid,Document Formatting Properties,Flag,cw_not_coded
+\loch,Associated Character Properties,Flag,cw_not_coded
+\lquote,Special Characters,Symbol,cw_not_coded
+\ls,List Table,Value,cw_not_coded
+\lsdlockeddefN,Style and Formatting Restrictions,Value,cw_not_coded
+\lsdlockedexcept,Style and Formatting Restrictions,Destination,cw_not_coded
+\lsdstimaxN,Style and Formatting Restrictions,Value,cw_not_coded
+\ltrch,Font (Character) Formatting Properties,Flag,cw_not_coded
+\ltrdoc,Document Formatting Properties,Flag,cw_not_coded
+\ltrmark,Special Characters,Symbol,cw_not_coded
+\ltrpar,Paragraph Formatting Properties,Flag,cw_not_coded
+\ltrrow,Table Definitions,Flag,cw_not_coded
+\ltrsect,Section Formatting Properties,Flag,cw_not_coded
+\lytcalctblwd,Document Formatting Properties,Flag,cw_not_coded
+\lytexcttp,Document Formatting Properties,Flag,cw_not_coded
+\lytprtmet,Document Formatting Properties,Flag,cw_not_coded
+\lyttblrtgr,Document Formatting Properties,Flag,cw_not_coded
+\mac,Character Set,Flag,cw_not_coded
+\macpict,Pictures,Flag,cw_not_coded
+\makebackup,Document Formatting Properties,Flag,cw_not_coded
+\manager,Information Group,Destination,cw_not_coded
+\margb,Document Formatting Properties,Value,cw_not_coded
+\margbsxn,Section Formatting Properties,Value,cw_not_coded
+\margl,Document Formatting Properties,Value,cw_not_coded
+\marglsxn,Section Formatting Properties,Value,cw_not_coded
+\margmirror,Document Formatting Properties,Flag,cw_not_coded
+\margr,Document Formatting Properties,Value,cw_not_coded
+\margrsxn,Section Formatting Properties,Value,cw_not_coded
+\margt,Document Formatting Properties,Value,cw_not_coded
+\margtsxn,Section Formatting Properties,Value,cw_not_coded
+\mhtmltag,Control Words Introduced bv Other Microsoft Products,Destination,cw_not_coded
+\min,Information Group,Value,cw_not_coded
+\mo,Information Group,Value,cw_not_coded
+\msmcap,Document Formatting Properties,Flag,cw_not_coded
+\nestcell,Table Definitions,Symbol,cw_not_coded
+\nestrow,Table Definitions,Symbol,cw_not_coded
+\nesttableprops,Table Definitions,Destination,cw_not_coded
+\newtblstyruls,Document Formatting Properties,Flag,cw_not_coded
+\nextfile,Document Formatting Properties,Destination,cw_not_coded
+\nobrkwrptbl,Document Formatting Properties,Flag,cw_not_coded
+\nocolbal,Document Formatting Properties,Flag,cw_not_coded
+\nocompatoptions,Document Formatting Properties,Flag,cw_not_coded
+\nocwrap,Paragraph Formatting Properties,Flag,cw_not_coded
+\noextrasprl,Document Formatting Properties,Flag,cw_not_coded
+\nofchars,Information Group,Value,cw_not_coded
+\nofcharsws,Information Group,Value,cw_not_coded
+\nofpages,Information Group,Value,cw_not_coded
+\nofwords,Information Group,Value,cw_not_coded
+\nogrowautofit,Document Formatting Properties,Flag,cw_not_coded
+\nojkernpunct,Document Formatting Properties,Flag,cw_not_coded
+\nolead,Document Formatting Properties,Flag,cw_not_coded
+\noline,Paragraph Formatting Properties,Flag,cw_not_coded
+\nolnhtadjtbl,Document Formatting Properties,Flag,cw_not_coded
+\nonesttables,Table Definitions,Destination,cw_not_coded
+\nonshppict,Pictures,Flag,cw_not_coded
+\nooverflow,Paragraph Formatting Properties,Flag,cw_not_coded
+\noproof,Font (Character) Formatting Properties,Flag,cw_not_coded
+\nosectexpand,Font (Character) Formatting Properties,Flag,cw_not_coded
+\nosnaplinegrid,Paragraph Formatting Properties,Flag,cw_not_coded
+\nospaceforul,Document Formatting Properties,Flag,cw_not_coded
+\nosupersub,Font (Character) Formatting Properties,Flag,cw_not_coded
+\notabind,Document Formatting Properties,Flag,cw_not_coded
+\noultrlspc,Document Formatting Properties,Flag,cw_not_coded
+\nowidctlpar,Paragraph Formatting Properties,Flag,cw_not_coded
+\nowrap,Positioned Objects and Frames,Flag,cw_not_coded
+\nowwrap,Paragraph Formatting Properties,Flag,cw_not_coded
+\noxlattoyen,Document Formatting Properties,Flag,cw_not_coded
+\objalias,Objects,Destination,cw_not_coded
+\objalign,Objects,Value,cw_not_coded
+\objattph,Objects,Flag,cw_not_coded
+\objautlink,Objects,Flag,cw_not_coded
+\objclass,Objects,Destination,cw_not_coded
+\objcropb,Objects,Value,cw_not_coded
+\objcropl,Objects,Value,cw_not_coded
+\objcropr,Objects,Value,cw_not_coded
+\objcropt,Objects,Value,cw_not_coded
+\objdata,Objects,Destination,cw_not_coded
+\object,Objects,Destination,cw_not_coded
+\objemb,Objects,Flag,cw_not_coded
+\objh,Objects,Value,cw_not_coded
+\objhtml,Objects,Flag,cw_not_coded
+\objicemb,Objects,Flag,cw_not_coded
+\objlink,Objects,Flag,cw_not_coded
+\objlock,Objects,Flag,cw_not_coded
+\objname,Objects,Destination,cw_not_coded
+\objocx,Objects,Flag,cw_not_coded
+\objpub,Objects,Flag,cw_not_coded
+\objscalex,Objects,Value,cw_not_coded
+\objscaley,Objects,Value,cw_not_coded
+\objsect,Objects,Destination,cw_not_coded
+\objsetsize,Objects,Flag,cw_not_coded
+\objsub,Objects,Flag,cw_not_coded
+\objtime,Objects,Destination,cw_not_coded
+\objtransy,Objects,Value,cw_not_coded
+\objupdate,Objects,Flag,cw_not_coded
+\objw,Objects,Value,cw_not_coded
+\oldas,Document Formatting Properties,Flag,cw_not_coded
+\oldcprops,Track Changes (Revision Marks),Destination,cw_not_coded
+\oldlinewrap,Document Formatting Properties,Flag,cw_not_coded
+\oldpprops,Track Changes (Revision Marks),Destination,cw_not_coded
+\oldsprops,Track Changes (Revision Marks),Destination,cw_not_coded
+\oldtprops,Track Changes (Revision Marks),Destination,cw_not_coded
+\operator,Information Group,Destination,cw_not_coded
+\otblrul,Document Formatting Properties,Flag,cw_not_coded
+\outl,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\outlinelevelN,Paragraph Text,Value,cw_not_coded
+\overlay,Paragraph Text,Flag,cw_not_coded
+\page,Special Characters,Symbol,cw_not_coded
+\pagebb,Paragraph Formatting Properties,Flag,cw_not_coded
+\panose,Font Table,Destination,cw_not_coded
+\paperh,Document Formatting Properties,Value,cw_not_coded
+\paperw,Document Formatting Properties,Value,cw_not_coded
+\par,Special Characters,Symbol,cw_not_coded
+\pararsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\pard,Paragraph Formatting Properties,Flag,cw_not_coded
+\pc,Character Set,Flag,cw_not_coded
+\pca,Character Set,Flag,cw_not_coded
+\pgbrdrb,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdrfoot,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdrhead,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdrl,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdroptN,Document Formatting Properties,Value,cw_not_coded
+\pgbrdrr,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdrsnap,Document Formatting Properties,Flag,cw_not_coded
+\pgbrdrt,Document Formatting Properties,Flag,cw_not_coded
+\pghsxn,Section Formatting Properties,Value,cw_not_coded
+\pgnbidia,Section Formatting Properties,Flag,cw_not_coded
+\pgnbidib,Section Formatting Properties,Flag,cw_not_coded
+\pgnchosung,Bullets and Numbering,Flag,cw_not_coded
+\pgncnum,Bullets and Numbering,Flag,cw_not_coded
+\pgncont,Section Formatting Properties,Flag,cw_not_coded
+\pgndbnum,Section Formatting Properties,Flag,cw_not_coded
+\pgndbnumd,Section Formatting Properties,Flag,cw_not_coded
+\pgndbnumk,Bullets and Numbering,Flag,cw_not_coded
+\pgndbnumt,Bullets and Numbering,Flag,cw_not_coded
+\pgndec,Section Formatting Properties,Flag,cw_not_coded
+\pgndecd,Section Formatting Properties,Flag,cw_not_coded
+\pgnganada,Bullets and Numbering,Flag,cw_not_coded
+\pgngbnum,Bullets and Numbering,Flag,cw_not_coded
+\pgngbnumd,Bullets and Numbering,Flag,cw_not_coded
+\pgngbnumk,Bullets and Numbering,Flag,cw_not_coded
+\pgngbnuml,Bullets and Numbering,Flag,cw_not_coded
+\pgnhindia,Section Formatting Properties,Flag,cw_not_coded
+\pgnhindib,Section Formatting Properties,Flag,cw_not_coded
+\pgnhindic,Section Formatting Properties,Flag,cw_not_coded
+\pgnhindid,Section Formatting Properties,Flag,cw_not_coded
+\pgnhn,Section Formatting Properties,Value,cw_not_coded
+\pgnhnsc,Section Formatting Properties,Flag,cw_not_coded
+\pgnhnsh,Section Formatting Properties,Flag,cw_not_coded
+\pgnhnsm,Section Formatting Properties,Flag,cw_not_coded
+\pgnhnsn,Section Formatting Properties,Flag,cw_not_coded
+\pgnhnsp,Section Formatting Properties,Flag,cw_not_coded
+\pgnidN,Section Formatting Properties,Value,cw_not_coded
+\pgnlcltr,Section Formatting Properties,Flag,cw_not_coded
+\pgnlcrm,Section Formatting Properties,Flag,cw_not_coded
+\pgnrestart,Section Formatting Properties,Flag,cw_not_coded
+\pgnstart,Document Formatting Properties,Value,cw_not_coded
+\pgnstarts,Section Formatting Properties,Value,cw_not_coded
+\pgnthaia,Section Formatting Properties,Flag,cw_not_coded
+\pgnthaib,Section Formatting Properties,Flag,cw_not_coded
+\pgnthaic,Section Formatting Properties,Flag,cw_not_coded
+\pgnucltr,Section Formatting Properties,Flag,cw_not_coded
+\pgnucrm,Section Formatting Properties,Flag,cw_not_coded
+\pgnvieta,Section Formatting Properties,Flag,cw_not_coded
+\pgnx,Section Formatting Properties,Value,cw_not_coded
+\pgny,Section Formatting Properties,Value,cw_not_coded
+\pgnzodiac,Bullets and Numbering,Flag,cw_not_coded
+\pgnzodiacd,Bullets and Numbering,Flag,cw_not_coded
+\pgnzodiacl,Bullets and Numbering,Flag,cw_not_coded
+\pgp,Paragraph Group Properties,Destination,cw_not_coded
+\pgptbl,Paragraph Group Properties,Destination,cw_not_coded
+\pgwsxn,Section Formatting Properties,Value,cw_not_coded
+\phcol,Positioned Objects and Frames,Flag,cw_not_coded
+\phmrg,Positioned Objects and Frames,Flag,cw_not_coded
+\phpg,Positioned Objects and Frames,Flag,cw_not_coded
+\picbmp,Pictures,Flag,cw_not_coded
+\picbpp,Pictures,Value,cw_not_coded
+\piccropb,Pictures,Value,cw_not_coded
+\piccropl,Pictures,Value,cw_not_coded
+\piccropr,Pictures,Value,cw_not_coded
+\piccropt,Pictures,Value,cw_not_coded
+\pich,Pictures,Value,cw_not_coded
+\pichgoal,Pictures,Value,cw_not_coded
+\picprop,Pictures,Destination,cw_not_coded
+\picscaled,Pictures,Flag,cw_not_coded
+\picscalex,Pictures,Value,cw_not_coded
+\picscaley,Pictures,Value,cw_not_coded
+\pict,Pictures,Destination,cw_not_coded
+\picw,Pictures,Value,cw_not_coded
+\picwgoal,Pictures,Value,cw_not_coded
+\plain,Font (Character) Formatting Properties,Flag,cw_not_coded
+\pmmetafile,Pictures,Value,cw_not_coded
+\pn,Bullets and Numbering,Destination,cw_not_coded
+\pnacross,Bullets and Numbering,Flag,cw_not_coded
+\pnaiu ,Bullets and Numbering,Flag,cw_not_coded
+\pnaiud,Bullets and Numbering,Flag,cw_not_coded
+\pnaiueo,Bullets and Numbering,Flag,cw_not_coded
+\pnaiueod,Bullets and Numbering,Flag,cw_not_coded
+\pnb,Bullets and Numbering,Toggle,cw_not_coded
+\pnbidia,Bullets and Numbering,Flag,cw_not_coded
+\pnbidib,Bullets and Numbering,Flag,cw_not_coded
+\pncaps,Bullets and Numbering,Toggle,cw_not_coded
+\pncard,Bullets and Numbering,Flag,cw_not_coded
+\pncf,Bullets and Numbering,Value,cw_not_coded
+\pnchosung,Bullets and Numbering,Flag,cw_not_coded
+\pncnum,Bullets and Numbering,Flag,cw_not_coded
+\pndbnum,Bullets and Numbering,Flag,cw_not_coded
+\pndbnumd,Bullets and Numbering,Flag,cw_not_coded
+\pndbnumk,Bullets and Numbering,Flag,cw_not_coded
+\pndbnuml,Bullets and Numbering,Flag,cw_not_coded
+\pndbnumt,Bullets and Numbering,Flag,cw_not_coded
+\pndec,Bullets and Numbering,Flag,cw_not_coded
+\pndecd,Bullets and Numbering,Flag,cw_not_coded
+\pnf,Bullets and Numbering,Value,cw_not_coded
+\pnfs,Bullets and Numbering,Value,cw_not_coded
+\pnganada,Bullets and Numbering,Flag,cw_not_coded
+\pnganada,Bullets and Numbering,Flag,cw_not_coded
+\pngblip,Pictures,Flag,cw_not_coded
+\pngbnum,Bullets and Numbering,Flag,cw_not_coded
+\pngbnumd,Bullets and Numbering,Flag,cw_not_coded
+\pngbnumk,Bullets and Numbering,Flag,cw_not_coded
+\pngbnuml,Bullets and Numbering,Flag,cw_not_coded
+\pnhang,Bullets and Numbering,Flag,cw_not_coded
+\pni,Bullets and Numbering,Toggle,cw_not_coded
+\pnindent,Bullets and Numbering,Value,cw_not_coded
+\pniroha,Bullets and Numbering,Flag,cw_not_coded
+\pnirohad,Bullets and Numbering,Flag,cw_not_coded
+\pnlcltr,Bullets and Numbering,Flag,cw_not_coded
+\pnlcrm,Bullets and Numbering,Flag,cw_not_coded
+\pnlvl,Bullets and Numbering,Value,cw_not_coded
+\pnlvlblt,Bullets and Numbering,Flag,cw_not_coded
+\pnlvlbody,Bullets and Numbering,Flag,cw_not_coded
+\pnlvlcont,Bullets and Numbering,Flag,cw_not_coded
+\pnnumonce,Bullets and Numbering,Flag,cw_not_coded
+\pnord,Bullets and Numbering,Flag,cw_not_coded
+\pnordt,Bullets and Numbering,Flag,cw_not_coded
+\pnprev,Bullets and Numbering,Flag,cw_not_coded
+\pnqc,Bullets and Numbering,Flag,cw_not_coded
+\pnql,Bullets and Numbering,Flag,cw_not_coded
+\pnqr,Bullets and Numbering,Flag,cw_not_coded
+\pnrauthN,Paragraph Text,Value,cw_not_coded
+\pnrdateN,Paragraph Text,Value,cw_not_coded
+\pnrestart,Bullets and Numbering,Flag,cw_not_coded
+\pnrnfcN,Paragraph Text,Value,cw_not_coded
+\pnrnot,Paragraph Text,Flag,cw_not_coded
+\pnrpnbrN,Paragraph Text,Value,cw_not_coded
+\pnrrgbN,Paragraph Text,Value,cw_not_coded
+\pnrstartN,Paragraph Text,Value,cw_not_coded
+\pnrstopN,Paragraph Text,Value,cw_not_coded
+\pnrxstN,Paragraph Text,Value,cw_not_coded
+\pnscaps,Bullets and Numbering,Toggle,cw_not_coded
+\pnseclvl,Bullets and Numbering,Destination,cw_not_coded
+\pnsp,Bullets and Numbering,Value,cw_not_coded
+\pnstart,Bullets and Numbering,Value,cw_not_coded
+\pnstrike,Bullets and Numbering,Toggle,cw_not_coded
+\pntext,Bullets and Numbering,Destination,cw_not_coded
+\pntxta,Bullets and Numbering,Destination,cw_not_coded
+\pntxtb,Bullets and Numbering,Destination,cw_not_coded
+\pnucltr,Bullets and Numbering,Flag,cw_not_coded
+\pnucrm,Bullets and Numbering,Flag,cw_not_coded
+\pnul,Bullets and Numbering,Toggle,cw_not_coded
+\pnuld,Bullets and Numbering,Flag,cw_not_coded
+\pnuldash,Bullets and Numbering,Flag,cw_not_coded
+\pnuldashd,Bullets and Numbering,Flag,cw_not_coded
+\pnuldashdd,Bullets and Numbering,Flag,cw_not_coded
+\pnuldb,Bullets and Numbering,Flag,cw_not_coded
+\pnulhair,Bullets and Numbering,Flag,cw_not_coded
+\pnulnone,Bullets and Numbering,Flag,cw_not_coded
+\pnulth,Bullets and Numbering,Flag,cw_not_coded
+\pnulw,Bullets and Numbering,Flag,cw_not_coded
+\pnulwave,Bullets and Numbering,Flag,cw_not_coded
+\pnzodiac,Bullets and Numbering,Flag,cw_not_coded
+\pnzodiacd,Bullets and Numbering,Flag,cw_not_coded
+\pnzodiacl,Bullets and Numbering,Flag,cw_not_coded
+\posnegx,Positioned Objects and Frames,Value,cw_not_coded
+\posnegy,Positioned Objects and Frames,Value,cw_not_coded
+\posx,Positioned Objects and Frames,Value,cw_not_coded
+\posxc,Positioned Objects and Frames,Flag,cw_not_coded
+\posxi,Positioned Objects and Frames,Flag,cw_not_coded
+\posxl,Positioned Objects and Frames,Flag,cw_not_coded
+\posxo,Positioned Objects and Frames,Flag,cw_not_coded
+\posxr,Positioned Objects and Frames,Flag,cw_not_coded
+\posy,Positioned Objects and Frames,Value,cw_not_coded
+\posyb,Positioned Objects and Frames,Flag,cw_not_coded
+\posyc,Positioned Objects and Frames,Flag,cw_not_coded
+\posyil,Positioned Objects and Frames,Flag,cw_not_coded
+\posyin,Paragraph Text,Flag,cw_not_coded
+\posyout,Paragraph Text,Flag,cw_not_coded
+\posyt,Positioned Objects and Frames,Flag,cw_not_coded
+\prcolbl,Document Formatting Properties,Flag,cw_not_coded
+\printdata,Document Formatting Properties,Flag,cw_not_coded
+\printim,Information Group,Destination,cw_not_coded
+\private,Document Formatting Properties,Destination,cw_not_coded
+\propname,Information Group,Value,cw_not_coded
+\proptype,Information Group,Value,cw_not_coded
+\protend,Protection Exceptions,Destination,cw_not_coded
+\protlevelN,Document Formatting Properties,Value,cw_not_coded
+\protstart,Protection Exceptions,Destination,cw_not_coded
+\protusertbl,User Protection Information,Destination,cw_not_coded
+\psover,Document Formatting Properties,Flag,cw_not_coded
+\psz,Document Formatting Properties,Value,cw_not_coded
+\pubauto,Macintosh Edition Manager Publisher Objects,Flag,cw_not_coded
+\pvmrg,Positioned Objects and Frames,Flag,cw_not_coded
+\pvpara,Positioned Objects and Frames,Flag,cw_not_coded
+\pvpg,Positioned Objects and Frames,Flag,cw_not_coded
+\pwdN,Control Words Introduced bv Other Microsoft Products,Destination,cw_not_coded
+\pxe,Index Entries,Destination,cw_not_coded
+\qc,Paragraph Formatting Properties,Flag,cw_not_coded
+\qd,Paragraph Formatting Properties,Flag,cw_not_coded
+\qj,Paragraph Formatting Properties,Flag,cw_not_coded
+\qk,Paragraph Formatting Properties,Flag,cw_not_coded
+\qi,Paragraph Formatting Properties,Flag,cw_not_coded
+\qmspace,Special Characters,Symbol,cw_not_coded
+\qr,Paragraph Formatting Properties,Flag,cw_not_coded
+\qt,Paragraph Formatting Properties,Flag,cw_not_coded
+\rawbgdkbdiag,Table Definitions,Flag,cw_not_coded
+\rawclbgbdiag,Table Definitions,Flag,cw_not_coded
+\rawclbgcross,Table Definitions,Flag,cw_not_coded
+\rawclbgdcross,Table Definitions,Flag,cw_not_coded
+\rawclbgdkcross,Table Definitions,Flag,cw_not_coded
+\rawclbgdkdcross,Table Definitions,Flag,cw_not_coded
+\rawclbgdkfdiag,Table Definitions,Flag,cw_not_coded
+\rawclbgdkhor,Table Definitions,Flag,cw_not_coded
+\rawclbgdkvert,Table Definitions,Flag,cw_not_coded
+\rawclbgfdiag,Table Definitions,Flag,cw_not_coded
+\rawclbghoriz,Table Definitions,Flag,cw_not_coded
+\rawclbgvert,Table Definitions,Flag,cw_not_coded
+\rdblquote,Special Characters,Symbol,cw_not_coded
+\readprot,Document Formatting Properties,Flag,cw_not_coded
+\red,Color Table,Value,cw_not_coded
+\rempersonalinfo,Document Formatting Properties,Flag,cw_not_coded
+\result,Objects,Destination,cw_not_coded
+\revauth,Font (Character) Formatting Properties,Value,cw_not_coded
+\revauthdelN,Character Text,Value,cw_not_coded
+\revbar,Document Formatting Properties,Value,cw_not_coded
+\revdttm,Font (Character) Formatting Properties,Value,cw_not_coded
+\revdttmdelN,Character Text,Value,cw_not_coded
+\revised,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\revisions,Document Formatting Properties,Flag,cw_not_coded
+\revprop,Document Formatting Properties,Value,cw_not_coded
+\revprot,Document Formatting Properties,Flag,cw_not_coded
+\revtbl,Track Changes,Destination,cw_not_coded
+\revtim,Information Group,Destination,cw_not_coded
+\ri,Paragraph Formatting Properties,Value,cw_not_coded
+\rinN,Paragraph Formatting Properties,Value,cw_not_coded
+\row,Special Characters,Symbol,cw_not_coded
+\rquote,Special Characters,Symbol,cw_not_coded
+\rsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\rsidrootN,Track Changes (Revision Marks),Value,cw_not_coded
+\rsidtbl,Track Changes (Revision Marks),Destination,cw_not_coded
+\rsltbmp,Objects,Flag,cw_not_coded
+\rslthtml,Objects,Flag,cw_not_coded
+\rsltmerge,Objects,Flag,cw_not_coded
+\rsltpict,Objects,Flag,cw_not_coded
+\rsltrtf,Objects,Flag,cw_not_coded
+\rslttxt,Objects,Flag,cw_not_coded
+\rtf,RTF Version,Destination,cw_not_coded
+\rtlch,Font (Character) Formatting Properties,Flag,cw_not_coded
+\rtldoc,Document Formatting Properties,Flag,cw_not_coded
+\rtlgutter,Document Formatting Properties,Flag,cw_not_coded
+\rtlmark,Special Characters,Symbol,cw_not_coded
+\rtlpar,Paragraph Formatting Properties,Flag,cw_not_coded
+\rtlrow,Table Definitions,Flag,cw_not_coded
+\rtlsect,Section Formatting Properties,Flag,cw_not_coded
+\rxe,Index Entries,Destination,cw_not_coded
+\s,Paragraph Formatting Properties,Value,cw_not_coded
+\sa,Paragraph Formatting Properties,Value,cw_not_coded
+\saautoN,Paragraph Formatting Properties,Toggle,cw_not_coded
+\saftnnalc,Section Formatting Properties,Flag,cw_not_coded
+\saftnnar,Section Formatting Properties,Flag,cw_not_coded
+\saftnnauc,Section Formatting Properties,Flag,cw_not_coded
+\saftnnchi,Section Formatting Properties,Flag,cw_not_coded
+\saftnnchosung,Section Formatting Properties,Flag,cw_not_coded
+\saftnncnum,Section Formatting Properties,Flag,cw_not_coded
+\saftnndbar,Section Formatting Properties,Flag,cw_not_coded
+\saftnndbnum,Section Formatting Properties,Flag,cw_not_coded
+\saftnndbnumd,Section Formatting Properties,Flag,cw_not_coded
+\saftnndbnumk,Section Formatting Properties,Flag,cw_not_coded
+\saftnndbnumt,Section Formatting Properties,Flag,cw_not_coded
+\saftnnganada,Section Formatting Properties,Flag,cw_not_coded
+\saftnngbnum,Section Formatting Properties,Flag,cw_not_coded
+\saftnngbnumd,Section Formatting Properties,Flag,cw_not_coded
+\saftnngbnumk,Section Formatting Properties,Flag,cw_not_coded
+\saftnngbnuml,Section Formatting Properties,Flag,cw_not_coded
+\saftnnrlc,Section Formatting Properties,Flag,cw_not_coded
+\saftnnruc,Section Formatting Properties,Flag,cw_not_coded
+\saftnnzodiac,Section Formatting Properties,Flag,cw_not_coded
+\saftnnzodiacd,Section Formatting Properties,Flag,cw_not_coded
+\saftnnzodiacl,Section Formatting Properties,Flag,cw_not_coded
+\saftnrestart,Section Formatting Properties,Flag,cw_not_coded
+\saftnrstcont,Section Formatting Properties,Flag,cw_not_coded
+\saftnstart,Section Formatting Properties,Flag,cw_not_coded
+\sautoupd,Style Sheet,Flag,cw_not_coded
+\sb,Paragraph Formatting Properties,Value,cw_not_coded
+\sbasedon,Style Sheet,Value,cw_not_coded
+\sbautoN,Paragraph Formatting Properties,Toggle,cw_not_coded
+\sbkcol,Section Formatting Properties,Flag,cw_not_coded
+\sbkeven,Section Formatting Properties,Flag,cw_not_coded
+\sbknone,Section Formatting Properties,Flag,cw_not_coded
+\sbkodd,Section Formatting Properties,Flag,cw_not_coded
+\sbkpage,Section Formatting Properties,Flag,cw_not_coded
+\sbys,Paragraph Formatting Properties,Flag,cw_not_coded
+\scaps,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\scompose,Style Sheet,Flag,cw_not_coded
+\sec,Information Group,Value,cw_not_coded
+\sect,Special Characters,Symbol,cw_not_coded
+\sectd,Section Formatting Properties,Flag,cw_not_coded
+\sectdefaultcl,Section Formatting Properties,Value,cw_not_coded
+\sectexpandN,Section Formatting Properties,Value,cw_not_coded
+\sectlinegridN,Section Formatting Properties,Value,cw_not_coded
+\sectnum,Special Characters,Symbol,cw_not_coded
+\sectrsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\sectspecifycl,Section Formatting Properties,Value,cw_not_coded
+\sectspecifygenN,Section Formatting Properties,Flag,cw_not_coded
+\sectspecifyl,Section Formatting Properties,Value,cw_not_coded
+\sectunlocked,Section Formatting Properties,Flag,cw_not_coded
+\sftnbj,Section Formatting Properties,Flag,cw_not_coded
+\sftnnalc,Section Formatting Properties,Flag,cw_not_coded
+\sftnnar,Section Formatting Properties,Flag,cw_not_coded
+\sftnnauc,Section Formatting Properties,Flag,cw_not_coded
+\sftnnchi,Section Formatting Properties,Flag,cw_not_coded
+\sftnnchosung,Section Formatting Properties,Flag,cw_not_coded
+\sftnncnum,Section Formatting Properties,Flag,cw_not_coded
+\sftnndbar,Section Formatting Properties,Flag,cw_not_coded
+\sftnndbnum,Section Formatting Properties,Flag,cw_not_coded
+\sftnndbnumd,Section Formatting Properties,Flag,cw_not_coded
+\sftnndbnumk,Section Formatting Properties,Flag,cw_not_coded
+\sftnndbnumt,Section Formatting Properties,Flag,cw_not_coded
+\sftnnganada,Section Formatting Properties,Flag,cw_not_coded
+\sftnngbnum,Section Formatting Properties,Flag,cw_not_coded
+\sftnngbnumd,Section Formatting Properties,Flag,cw_not_coded
+\sftnngbnumk,Section Formatting Properties,Flag,cw_not_coded
+\sftnngbnuml,Section Formatting Properties,Flag,cw_not_coded
+\sftnnrlc,Section Formatting Properties,Flag,cw_not_coded
+\sftnnruc,Section Formatting Properties,Flag,cw_not_coded
+\sftnnzodiac,Section Formatting Properties,Flag,cw_not_coded
+\sftnnzodiacd,Section Formatting Properties,Flag,cw_not_coded
+\sftnnzodiacl,Section Formatting Properties,Flag,cw_not_coded
+\sftnrestart,Section Formatting Properties,Flag,cw_not_coded
+\sftnrstcont,Section Formatting Properties,Flag,cw_not_coded
+\sftnrstpg,Section Formatting Properties,Flag,cw_not_coded
+\sftnstart,Section Formatting Properties,Flag,cw_not_coded
+\sftntj,Section Formatting Properties,Flag,cw_not_coded
+\shad,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\shading,Paragraph Shading,Value,cw_not_coded
+\shidden,Style Sheet,Flag,cw_not_coded
+\shift,Style Sheet,Flag,cw_not_coded
+\shpbottomN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpbxcolumn,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbxignore,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbxmargin,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbxpage,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbyignore,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbymargin,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbypage,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpbypara,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shpfblwtxtN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpfhdrN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpgrp,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpleftN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shplidN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shplockanchor,Word through Word RTF for Drawing Objects (Shades),Flag,cw_not_coded
+\shppict,Pictures,Destination,cw_not_coded
+\shprightN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shprslt,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shptopN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shptxt,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpwrkN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpwrN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\shpzN,Word through Word RTF for Drawing Objects (Shades),Value,cw_not_coded
+\sl,Paragraph Formatting Properties,Value,cw_not_coded
+\slinkN,Style Sheet,Value,cw_not_coded
+\slmult,Paragraph Formatting Properties,Value,cw_not_coded
+\slocked,Style Sheet,Flagged,cw_not_coded
+\snaptogridincell,Document Formatting Properties,Flag,cw_not_coded
+\snext,Style Sheet,Value,cw_not_coded
+\softcol,Special Characters,Flag,cw_not_coded
+\softlheight,Special Characters,Value,cw_not_coded
+\softline,Special Characters,Flag,cw_not_coded
+\softpage,Special Characters,Flag,cw_not_coded
+\spersonal,Style Sheet,Flag,cw_not_coded
+\splytwnine,Document Formatting Properties,Flag,cw_not_coded
+\sprsbsp,Document Formatting Properties,Flag,cw_not_coded
+\sprslnsp,Document Formatting Properties,Flag,cw_not_coded
+\sprsspbf,Document Formatting Properties,Flag,cw_not_coded
+\sprstsm,Document Formatting Properties,Flag,cw_not_coded
+\sprstsp,Document Formatting Properties,Flag,cw_not_coded
+\spv,Paragraph Formatting Properties,Flag,cw_not_coded
+\sreply,Style Sheet,Flag,cw_not_coded
+\ssemihidden,Style Sheet,Flag,cw_not_coded
+\staticval,Information Group,Value,cw_not_coded
+\stextflow,Section Text,Value,cw_not_coded
+\strike,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\strikedl,Character Text,Toggle,cw_not_coded
+\stshfbiN,Default Fonts,Value,cw_not_coded
+\stshfdbchN,Default Fonts,Value,cw_not_coded
+\stshfhichN,Default Fonts,Value,cw_not_coded
+\stshflochN,Default Fonts,Value,cw_not_coded
+\stylelock,Document Formatting Properties,Flag,cw_not_coded
+\stylelockbackcomp,Document Formatting Properties,Flag,cw_not_coded
+\stylelockenforced,Document Formatting Properties,Flag,cw_not_coded
+\stylesheet,Style Sheet,Destination,cw_not_coded
+\styrsidN,Track Changes (Revision Marks),Value,cw_not_coded
+\sub,Font (Character) Formatting Properties,Flag,cw_not_coded
+\subdocument,Paragraph Formatting Properties,Value,cw_not_coded
+\subfontbysize,Document Formatting Properties,Flag,cw_not_coded
+\subject,Information Group,Destination,cw_not_coded
+\super,Font (Character) Formatting Properties,Flag,cw_not_coded
+\svb,Word through Word RTF for Drawing Objects (Shades),Destination,cw_not_coded
+\swpbdr,Document Formatting Properties,Flag,cw_not_coded
+\tab,Special Characters,Symbol,cw_not_coded
+\tabsnoovrlp,Table Definitions,Flag,cw_not_coded
+\taprtl,Table Definitions,Flag,cw_not_coded
+\tb,Tabs,Value,cw_not_coded
+\tbllkbestfit,Table Definitions,Flag,cw_not_coded
+\tbllkborder,Table Definitions,Flag,cw_not_coded
+\tbllkcolor,Table Definitions,Flag,cw_not_coded
+\tbllkfont,Table Definitions,Flag,cw_not_coded
+\tbllkhdrcols,Table Definitions,Flag,cw_not_coded
+\tbllkhdrrows,Table Definitions,Flag,cw_not_coded
+\tbllklastcol,Table Definitions,Flag,cw_not_coded
+\tbllklastrow,Table Definitions,Flag,cw_not_coded
+\tbllkshading,Table Definitions,Flag,cw_not_coded
+\tblrsidN,Table Definitions,Flag,cw_not_coded
+\tc,Table of Contents Entries,Destination,cw_not_coded
+\tcelld,Table Definitions,Flag,cw_not_coded
+\tcf,Table of Contents Entries,Value,cw_not_coded
+\tcl,Table of Contents Entries,Value,cw_not_coded
+\tcn,Table of Contents Entries,Flag,cw_not_coded
+\tdfrmtxtBottomN,Table Definitions,Value,cw_not_coded
+\tdfrmtxtLeftN,Table Definitions,Value,cw_not_coded
+\tdfrmtxtRightN,Table Definitions,Value,cw_not_coded
+\tdfrmtxtTopN,Table Definitions,Value,cw_not_coded
+\template,Document Formatting Properties,Destination,cw_not_coded
+\time,Fields,Flag,cw_not_coded
+\title,Information Group,Destination,cw_not_coded
+\titlepg,Section Formatting Properties,Flag,cw_not_coded
+\tldot,Tabs,Flag,cw_not_coded
+\tleq,Tabs,Flag,cw_not_coded
+\tlhyph,Tabs,Flag,cw_not_coded
+\tlmdot,Tabs,Flag,cw_not_coded
+\tlth,Tabs,Flag,cw_not_coded
+\tlul,Tabs,Flag,cw_not_coded
+\toplinepunct,Document Formatting Properties,Flag,cw_not_coded
+\tphcol,Table Definitions,Flag,cw_not_coded
+\tphmrg,Table Definitions,Flag,cw_not_coded
+\tphpg,Table Definitions,Flag,cw_not_coded
+\tposnegxN,Table Definitions,Value,cw_not_coded
+\tposnegyN,Table Definitions,Value,cw_not_coded
+\tposxc,Table Definitions,Flag,cw_not_coded
+\tposxi,Table Definitions,Flag,cw_not_coded
+\tposxl,Table Definitions,Flag,cw_not_coded
+\tposXN,Table Definitions,Value,cw_not_coded
+\tposxo,Table Definitions,Flag,cw_not_coded
+\tposxr,Table Definitions,Flag,cw_not_coded
+\tposy,Table Definitions,Flag,cw_not_coded
+\tposyb,Table Definitions,Flag,cw_not_coded
+\tposyc,Table Definitions,Flag,cw_not_coded
+\tposyil,Table Definitions,Flag,cw_not_coded
+\tposyin,Table Definitions,Flag,cw_not_coded
+\tposyoutv,Table Definitions,Flag,cw_not_coded
+\tposyt,Table Definitions,Flag,cw_not_coded
+\tpvmrg,Table Definitions,Flag,cw_not_coded
+\tpvpara,Table Definitions,Flag,cw_not_coded
+\tpvpg,Table Definitions,Flag,cw_not_coded
+\tqc,Tabs,Flag,cw_not_coded
+\tqdec,Tabs,Flag,cw_not_coded
+\tqr,Tabs,Flag,cw_not_coded
+\transmf,Document Formatting Properties,Flag,cw_not_coded
+\trauthN,Table Definitions,Value,cw_not_coded
+\trautofitN,Table Definitions,Toggle,cw_not_coded
+\trbgbdiag,Table Definitions,Flag,cw_not_coded
+\trbgcross,Table Definitions,Flag,cw_not_coded
+\trbgdcross,Table Definitions,Flag,cw_not_coded
+\trbgdkbdiag,Table Definitions,Flag,cw_not_coded
+\trbgdkcross,Table Definitions,Flag,cw_not_coded
+\trbgdkdcross,Table Definitions,Flag,cw_not_coded
+\trbgdkfdiag,Table Definitions,Flag,cw_not_coded
+\trbgdkhor,Table Definitions,Flag,cw_not_coded
+\trbgdkvert,Table Definitions,Flag,cw_not_coded
+\trbgfdiag,Table Definitions,Flag,cw_not_coded
+\trbghoriz,Table Definitions,Flag,cw_not_coded
+\trbgvert,Table Definitions,Flag,cw_not_coded
+\trbrdrb,Table Definitions,Flag,cw_not_coded
+\trbrdrh,Table Definitions,Flag,cw_not_coded
+\trbrdrl,Table Definitions,Flag,cw_not_coded
+\trbrdrr,Table Definitions,Flag,cw_not_coded
+\trbrdrt,Table Definitions,Flag,cw_not_coded
+\trbrdrv,Table Definitions,Flag,cw_not_coded
+\trcbpatN,Table Definitions,Value,cw_not_coded
+\trcfpatN,Table Definitions,Value,cw_not_coded
+\trdateN,Table Definitions,Value,cw_not_coded
+\trftsWidthAN,Table Definitions,Value,cw_not_coded
+\trftsWidthBN,Table Definitions,Value,cw_not_coded
+\trftsWidthN,Table Definitions,Value,cw_not_coded
+\trgaph,Table Definitions,Value,cw_not_coded
+\trhdr,Table Definitions,Flag,cw_not_coded
+\trkeep,Table Definitions,Flag,cw_not_coded
+\trleft,Table Definitions,Value,cw_not_coded
+\trowd,Table Definitions,Flag,cw_not_coded
+\trpaddbN,Table Definitions,Value,cw_not_coded
+\trpaddfbN,Table Definitions,Value,cw_not_coded
+\trpaddflN,Table Definitions,Value,cw_not_coded
+\trpaddfrN,Table Definitions,Value,cw_not_coded
+\trpaddftN,Table Definitions,Value,cw_not_coded
+\trpaddlN,Table Definitions,Value,cw_not_coded
+\trpaddrN,Table Definitions,Value,cw_not_coded
+\trappdtN,Table Definitions,Value,cw_not_coded
+\trpatN,Table Definitions,Value,cw_not_coded
+\trqc,Table Definitions,Flag,cw_not_coded
+\trql,Table Definitions,Flag,cw_not_coded
+\trqr,Table Definitions,Flag,cw_not_coded
+\trrh,Table Definitions,Value,cw_not_coded
+\trshdngN,Table Definitions,Value,cw_not_coded
+\trspdbN,Table Definitions,Value,cw_not_coded
+\trspdfbN,Table Definitions,Value,cw_not_coded
+\trspdflN,Table Definitions,Value,cw_not_coded
+\trspdfrN,Table Definitions,Value,cw_not_coded
+\trspdftN,Table Definitions,Value,cw_not_coded
+\trspdlN,Table Definitions,Value,cw_not_coded
+\trspdrN,Table Definitions,Value,cw_not_coded
+\trspdtN,Table Definitions,Value,cw_not_coded
+\truncatefontheight,Document Formatting Properties,Flag,cw_not_coded
+\trwWidthAN,Table Definitions,Value,cw_not_coded
+\trwWidthBN,Table Definitions,Value,cw_not_coded
+\trwWidthN,Table Definitions,Value,cw_not_coded
+\ts,Style Sheet,Value,cw_not_coded
+\tsbgbdiag,Table Styles,Flag,cw_not_coded
+\tsbgcross,Table Styles,Flag,cw_not_coded
+\tsbgdcross,Table Styles,Flag,cw_not_coded
+\tsbgdkbdiag,Table Styles,Flag,cw_not_coded
+\tsbgdkcross,Table Styles,Flag,cw_not_coded
+\tsbgdkdcross,Table Styles,Flag,cw_not_coded
+\tsbgdkfdiag,Table Styles,Flag,cw_not_coded
+\tsbgdkhor,Table Styles,Flag,cw_not_coded
+\tsbgdkvert,Table Styles,Flag,cw_not_coded
+\tsbgfdiag,Table Styles,Flag,cw_not_coded
+\tsbghoriz,Table Styles,Flag,cw_not_coded
+\tsbgvert,Table Styles,Flag,cw_not_coded
+\tsbrdrb,Table Styles,Flag,cw_not_coded
+\tsbrdrdgl,Table Styles,Flag,cw_not_coded
+\tsbrdrdgr,Table Styles,Flag,cw_not_coded
+\tsbrdrh,Table Styles,Flag,cw_not_coded
+\tsbrdrl,Table Styles,Flag,cw_not_coded
+\tsbrdrr,Table Styles,Flag,cw_not_coded
+\tsbrdrr,Table Styles,Flag,cw_not_coded
+\tsbrdrt,Table Styles,Flag,cw_not_coded
+\tsbrdrv,Table Styles,Flag,cw_not_coded
+\tscbandhorzeven,Table Styles,Flag,cw_not_coded
+\tscbandhorzodd,Table Styles,Flag,cw_not_coded
+\tscbandsh,Table Styles,Flag,cw_not_coded
+\tscbandsv,Table Styles,Flag,cw_not_coded
+\tscbandverteven,Table Styles,Flag,cw_not_coded
+\tscbandvertodd,Table Styles,Flag,cw_not_coded
+\tscellcbpatN,Table Styles,Value,cw_not_coded
+\tscellcfpatN,Table Styles,Value,cw_not_coded
+\tscellpaddbN,Table Styles,Value,cw_not_coded
+\tscellpaddfbN,Table Styles,Value,cw_not_coded
+\tscellpaddflN,Table Styles,Value,cw_not_coded
+\tscellpaddfrN,Table Styles,Value,cw_not_coded
+\tscellpaddftN,Table Styles,Value,cw_not_coded
+\tscellpaddlN,Table Styles,Value,cw_not_coded
+\tscellpaddrN,Table Styles,Value,cw_not_coded
+\tscellpaddtN,Table Styles,Value,cw_not_coded
+\tscellpctN,Table Styles,Value,cw_not_coded
+\tscellwidth,Table Styles,Flag,cw_not_coded
+\tscellwidthfts,Table Styles,Flag,cw_not_coded
+\tscfirstcol,Table Styles,Flag,cw_not_coded
+\tscfirstrow,Table Styles,Flag,cw_not_coded
+\tsclastcol,Table Styles,Flag,cw_not_coded
+\tsclastrow,Table Styles,Flag,cw_not_coded
+\tscnecell,Table Styles,Flag,cw_not_coded
+\tscnwcell,Table Styles,Flag,cw_not_coded
+\tscsecell,Table Styles,Flag,cw_not_coded
+\tscswcell,Table Styles,Flag,cw_not_coded
+\tsd,Table Styles,Flag,cw_not_coded
+\tsnowrap,Table Styles,Flag,cw_not_coded
+\tsrowd,Style Sheet,Flag,cw_not_coded
+\tsvertalb,Table Styles,Flag,cw_not_coded
+\tsvertalc,Table Styles,Flag,cw_not_coded
+\tsvertalt,Table Styles,Flag,cw_not_coded
+\twoonone,Document Formatting Properties,Flag,cw_not_coded
+\tx,Tabs,Value,cw_not_coded
+\txe,Index Entries,Destination,cw_not_coded
+\ucN,Unicode RTF,Value,cw_not_coded
+\ud,Unicode RTF,Destination,cw_not_coded
+\ul,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulcN,Font (Character) Formatting Properties,Value,cw_not_coded
+\uld,Font (Character) Formatting Properties,Flag,cw_not_coded
+\uldash,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\uldashd,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\uldashdd,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\uldb,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulhair,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulhwave,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulldash,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulnone,Font (Character) Formatting Properties,Flag,cw_not_coded
+\ulth,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulth,Character Text,Toggle,cw_not_coded
+\ulthd,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulthdash,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulthdashd,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulthdashdd,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulthldash,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ululdbwave,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\ulw,Font (Character) Formatting Properties,Flag,cw_not_coded
+\ulwave,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\uN,Unicode RTF,Value,cw_not_coded
+\up,Font (Character) Formatting Properties,Value,cw_not_coded
+\upr,Unicode RTF,Destination,cw_not_coded
+\urtfN,Control Words Introduced bv Other Microsoft Products,Destination,cw_not_coded
+\useltbaln,Document Formatting Properties,Flag,cw_not_coded
+\userprops,Information Group,Destination,cw_not_coded
+\v,Font (Character) Formatting Properties,Toggle,cw_not_coded
+\vern,Information Group,Value,cw_not_coded
+\version,Information Group,Value,cw_not_coded
+\vertalb,Section Formatting Properties,Flag,cw_not_coded
+\vertalc,Section Formatting Properties,Flag,cw_not_coded
+\vertalj,Section Formatting Properties,Flag,cw_not_coded
+\vertalt,Section Formatting Properties,Flag,cw_not_coded
+\vertdoc,Document Formatting Properties,Flag,cw_not_coded
+\vertsect,Section Formatting Properties,Flag,cw_not_coded
+\viewbkspN,Document Formatting Properties,Flag,cw_not_coded
+\viewkindN,Document Formatting Properties,Value,cw_not_coded
+\viewnobound,Document Formatting Properties,Flag,cw_not_coded
+\viewscaleN,Document Formatting Properties,Value,cw_not_coded
+\viewzkN,Document Formatting Properties,Value,cw_not_coded
+\wbitmap,Pictures,Value,cw_not_coded
+\wbmbitspixel,Pictures,Value,cw_not_coded
+\wbmplanes,Pictures,Value,cw_not_coded
+\wbmwidthbytes,Pictures,Value,cw_not_coded
+\webhidden,Font (Character) Formatting Properties,Flag,cw_not_coded
+\widctlpar,Paragraph Formatting Properties,Flag,cw_not_coded
+\widowctrl,Document Formatting Properties,Flag,cw_not_coded
+\windowcaption,Document Formatting Properties,Value,cw_not_coded
+\wmetafile,Pictures,Value,cw_not_coded
+\wpeqn,Fields,Flag,cw_not_coded
+\wpjst,Document Formatting Properties,Flag,cw_not_coded
+\wpsp,Document Formatting Properties,Flag,cw_not_coded
+\wraptrsp,Document Formatting Properties,Flag,cw_not_coded
+\wrppunct,Document Formatting Properties,Flag,cw_not_coded
+\xe,Index Entries,Destination,cw_not_coded
+\xef,Index Entries,Value,cw_not_coded
+\yr,Information Group,Value,cw_not_coded
+\ytsN,Paragraph Formatting Properties,Value,cw_not_coded
+\yxe,Index Entries,Flag,cw_not_coded
+\zwbo,Special Characters,Symbol,cw_not_coded
+\zwj,Special Characters,Symbol,cw_not_coded
+\zwnbo,Special Characters,Symbol,cw_not_coded
+\zwnj,Special Characters,Symbol,cw_not_coded

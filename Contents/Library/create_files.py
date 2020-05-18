@@ -52,11 +52,11 @@ def initiate_working_files(xml_tag_num: str, debug_dir: str,
 
     create_working_xml_file(xml_tag_num=xml_tag_num, debug_dir=debug_dir)
 
-    working_input_file_pass = create_working_input_file(
+    working_input_file = create_working_input_file(
         debug_dir=debug_dir, input_file_name=input_file_name,
         base_script_dir=base_script_dir)
 
-    return working_input_file_pass
+    return working_input_file
 
 
 def create_working_tag_registry(debug_dir: str) -> None:
@@ -128,3 +128,18 @@ def create_working_input_file(input_file_name: str, debug_dir: str,
                                   base_script_dir=base_script_dir))
 
     return working_input_file
+
+
+def initiate_control_word_info_file(base_script_dir: str) -> str:
+    dict_dir = os.path.join(base_script_dir, "dicts")
+    control_word_info_dict = os.path.join(dict_dir,
+                                          "control_words_info_dict.json")
+    return control_word_info_dict
+
+
+def initiate_control_word_func_file(base_script_dir: str) -> str:
+    dict_dir = os.path.join(base_script_dir, "dicts")
+    control_word_func_dict = os.path.join(dict_dir,
+                                          "control_words_func_dict.json")
+    return control_word_func_dict
+

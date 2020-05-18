@@ -69,8 +69,8 @@ class InputPrep:
         convert_1252_to_unicode.convert_ms1252(
             debug_dir=self.debug_dir)
 
-        working_rtf_file = os.path.join(self.debug_dir,
-                                        "working_input_file.txt")
+        working_input_file = os.path.join(self.debug_dir,
+                                          "working_input_file.txt")
 
         # Create the file in which the XML tags and text will be
         # added as the conversion progresses.
@@ -79,4 +79,4 @@ class InputPrep:
 
         working_xml_file.close()
 
-        return working_rtf_file
+        return working_input_file
