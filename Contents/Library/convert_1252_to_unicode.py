@@ -63,10 +63,11 @@ def convert_ms1252(debug_dir):
                                           "working_input_file_pre.txt")
     with open(working_input_file_pre, "r") as working_file:
         working_file_use = working_file.read()
-        test = re.findall(r"\\'[A_Z0-9][A-Z0-9]", working_file_use)
+        test = re.findall(r"\\'[a-z0-9][a-z0-9]", working_file_use)
 
         for item in test:
             item_clean = item.replace("\\'", "")
+            item_clean = item_clean.upper()
             if item_clean in code_page_dict.keys():
                 working_file_use = \
                     working_file_use.replace(item, code_page_dict[item_clean])
@@ -76,8 +77,8 @@ def convert_ms1252(debug_dir):
         # Convert miscellaneous characters to unicode.
         cleanup_dict = {
             "&":        "&amp;",
-            "HT\\tab":  "\t",
-            "\\tab":    "\t",
+            "HT\\tab":  " ",
+            "\\tab":    " ",
         }
 
         for key in cleanup_dict:

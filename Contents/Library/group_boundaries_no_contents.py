@@ -43,6 +43,8 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
                                        table_start_index: int) -> dict:
     """ Define the boundaries of an RTF table or group, without capturing
     the contents of the table or group. """
+    # TODO Review this module and make it parallel to the
+    #  group_boundaries_capture_contents.py module.
     table_boundaries_info = {}
     group_start_line = table_start_line
     search_line = table_start_line

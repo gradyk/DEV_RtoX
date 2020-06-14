@@ -36,47 +36,38 @@ import os
 import convert_1252_to_unicode
 
 
-class InputPrep:
+def input_file_prep(input_file_name: str,
+                    debug_dir: str,
+                    base_script_dir: str):
+    """
+    Copy the input_file to a working file called
+    "working_input_file.txt" in the debug directory. Create a working
+    xml file where tags will be placed and insert a header section.
+    """
 
-    def __init__(self,
-                 input_file_name: str,
-                 debug_dir: str,
-                 base_script_dir: str
-                 ):
-        self.input_file = input_file_name
-        self.debug_dir = debug_dir
-        self.base_script_dir = base_script_dir
+    # Copy input file to working_input_file.data in debugdir.
+    with open(os.path.join(base_script_dir, input_file_name)) as \
+            input_file_copy:
+        read_file = input_file_copy.read()
 
-    def input_file_prep(self):
-        """
-        Copy the input_file to a working file called
-        "working_input_file.data" in the debug directory. Create a working
-        xml file where tags will be placed and insert a header section.
-        """
+    with open(os.path.join(debug_dir, "working_input_file_pre.txt"),
+              "w+") as working_rtf_file_pre:
+        working_rtf_file_pre.write(read_file)
 
-        # Copy input file to working_input_file.data in debugdir.
-        with open(os.path.join(self.base_script_dir, self.input_file)) as \
-                input_file_copy:
-            read_file = input_file_copy.read()
+    # TODO this should be more flexible allowing for other code pages as
+    #  the starting point.
+    # Convert from MS1252 code page to unicode.
+    convert_1252_to_unicode.convert_ms1252(
+        debug_dir=debug_dir)
 
-        with open(os.path.join(self.debug_dir, "working_input_file_pre.txt"),
-                  "w+") as working_rtf_file_pre:
-            working_rtf_file_pre.write(read_file)
+    working_input_file = os.path.join(debug_dir,
+                                      "working_input_file.txt")
 
-        # TODO this should be more flexible allowing for other code pages as
-        #  the starting point.
-        # Convert from MS1252 code page to unicode.
-        convert_1252_to_unicode.convert_ms1252(
-            debug_dir=self.debug_dir)
+    # Create the file in which the XML tags and text will be
+    # added as the conversion progresses.
+    working_xml_file = open(os.path.join(debug_dir,
+                            "working_xml_file.xml"), "w+")
 
-        working_input_file = os.path.join(self.debug_dir,
-                                          "working_input_file.txt")
+    working_xml_file.close()
 
-        # Create the file in which the XML tags and text will be
-        # added as the conversion progresses.
-        working_xml_file = open(os.path.join(self.debug_dir,
-                                "working_xml_file.xml"), "w+")
-
-        working_xml_file.close()
-
-        return working_input_file
+    return working_input_file

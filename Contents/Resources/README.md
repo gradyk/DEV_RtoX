@@ -205,7 +205,7 @@ The software gives you three options for XML tags: 1) plain XML
   tags, 2) tags from the Text Encoding Initiative (TEI), and 3) tags from the
    Tribunal Proceedings and Resolutions Encoding System (TPRES). 
 
-## Plans for the RtoX Software Package
+## Plans for the RtoX Package
 
 The RtoX software package is one part of a larger suite of tools under the
  name Oliver™. Oliver recognizes that content creation, data, and content

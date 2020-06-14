@@ -44,6 +44,10 @@ def cw_csv_builder():
                     line_count += 1
                 else:
                     key = f'{row[0]}'
+                    if key[-1] == "N":
+                        key = key.rstrip("N")
+                    else:
+                        pass
                     cw_not_coded = None
                     something = {key: cw_not_coded}
                     cw_dict.update(something)

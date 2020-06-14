@@ -18,27 +18,22 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-""" The RTF specification includes over 1,400 control words. RtoX does not
-process most of those control words. But, this file contains the functions
-for those control words RtoX does process.
-See https://stackoverflow.com/questions/9168340/
-using-a-dictionary-to-select-function-to-execute/9168387#9168387"""
-
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-05-13"
-__name__ = "Contents.Library.control_word_functions"
+import os
 
 
-class DestinationFunctions():
-    def __init__(self, match, cw_base):
-        self.match = match
-        self.cw_base = cw_base
+def single_line_rtf_file():
+    base_script_dir = '/Users/gradyke/Documents/DEV_RtoX/Contents'
+    debug_dir = os.path.join(base_script_dir, "debugdir")
 
-    def new_function(self):
-        pass
+    with open(os.path.join(debug_dir, "working_input_file.txt"), "r") as \
+            input_file_pre:
+        input_file = input_file_pre.read()
+        input_file = input_file.replace("\n", "")
 
-    def cw_italic(self):
-        pass
+    with open(os.path.join(debug_dir, "working_input_single_line.txt"),
+              "w+") as single_line_input_file_pre:
+        single_line_input_file_pre.write(input_file)
+
+
+if __name__ == "__main__":
+    single_line_rtf_file()

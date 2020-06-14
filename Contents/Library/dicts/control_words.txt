@@ -323,6 +323,7 @@ Control_Word,Category,Action,Function
 \docvar,Document Variables,Destination,cw_not_coded
 \dodhgt,Drawing Objects,Value,cw_not_coded
 \dolock,Drawing Objects,Flag,cw_not_coded
+\donotembedlingdata,Document Formatting Properties,Flag,cw_not_coded
 \donotshowcomments,Document Formatting Properties,Flag,cw_not_coded
 \donotshowinsdel,Document Formatting Properties,Flag,cw_not_coded
 \donotshowmarkup,Document Formatting Properties,Flag,cw_not_coded
@@ -420,7 +421,7 @@ Control_Word,Category,Action,Function
 \endash,Special Characters,Symbol,cw_not_coded
 \enddoc,Document Formatting Properties,Flag,cw_not_coded
 \endnhere,Section Formatting Properties,Flag,cw_not_coded
-\end notes,Document Formatting Properties,Flag,cw_not_coded
+\endnotes,Document Formatting Properties,Flag,cw_not_coded
 \enforceprotN,Document Formatting Properties,Value,cw_not_coded
 \enspace,Special Characters,Symbol,cw_not_coded
 \expnd,Font (Character) Formatting Properties,Value,cw_not_coded
@@ -535,12 +536,12 @@ Control_Word,Category,Action,Function
 \ftnnzodiac,Document Formatting Properties,Flag,cw_not_coded
 \ftnnzodiacd,Document Formatting Properties,Flag,cw_not_coded
 \ftnnzodiacl,Document Formatting Properties,Flag,cw_not_coded
-\ftn restart,Document Formatting Properties,Flag,cw_not_coded
+\ftnrestart,Document Formatting Properties,Flag,cw_not_coded
 \ftnrstcont,Document Formatting Properties,Flag,cw_not_coded
 \ftnrstpg,Document Formatting Properties,Flag,cw_not_coded
 \ftnsep,Document Formatting Properties,Destination,cw_not_coded
 \ftnsepc,Document Formatting Properties,Destination,cw_not_coded
-\ftn start,Document Formatting Properties,Value,cw_not_coded
+\ftnstart,Document Formatting Properties,Value,cw_not_coded
 \ftntj,Document Formatting Properties,Flag,cw_not_coded
 \fttruetype,Font Table,Flag,cw_not_coded
 \fvaliddos,File Table,Flag,cw_not_coded
@@ -551,8 +552,9 @@ Control_Word,Category,Action,Function
 \gcw,Font (Character) Formatting Properties,Value,cw_not_coded
 \generator,Generator,Destination,cw_not_coded
 \green,Color Table,Value,cw_not_coded
+\grfdocevents,Document Formatting Properties,Destination,cw_not_coded
 \gridtbl,Font (Character) Formatting Properties,Destination,cw_not_coded
-\g utter,Document Formatting Properties,Value,cw_not_coded
+\gutter,Document Formatting Properties,Value,cw_not_coded
 \gutterprl,Document Formatting Properties,Flag,cw_not_coded
 \guttersxn,Section Formatting Properties,Value,cw_not_coded
 \header,Headers and Footers,Destination,cw_not_coded
@@ -617,7 +619,7 @@ Njpegblip,Pictures,Flag,cw_not_coded
 \leveljcnN,List Table,Value,cw_not_coded
 \levellegalN,List Table,Value,cw_not_coded
 \levelnfcN,List Table,Value,cw_not_coded
-MevelnfcnN,List Table,Value,cw_not_coded
+\levelnfcnN,List Table,Value,cw_not_coded
 \levelnorestartN,List Table,Value,cw_not_coded
 \levelnumbers,List Table,Destination,cw_not_coded
 \leveloldN,List Table,Value,cw_not_coded
@@ -647,15 +649,15 @@ Vinestarts,Section Formatting Properties,Value,cw_not_coded
 \listhybrid,List Table,Flag,cw_not_coded
 \listidN,List Table,Value,cw_not_coded
 \listname,List Table,Destination,cw_not_coded
-\MstoverridecountN,List Table,Value,cw_not_coded
-VistoverrideformatN,List Table,Value,cw_not_coded
+\listoverridecountN,List Table,Value,cw_not_coded
+\listoverrideformatN,List Table,Value,cw_not_coded
 \listoverridestartN,List Table,Value,cw_not_coded
-\MstpictureN,List Table,Value,cw_not_coded
-\NstrestarthdnN,List Table,Value,cw_not_coded
-\MstsimpleN,List Table,Value,cw_not_coded
+\listpictureN,List Table,Value,cw_not_coded
+\listrestarthdnN,List Table,Value,cw_not_coded
+\listsimpleN,List Table,Value,cw_not_coded
 \liststyleidN,List Table,Value,cw_not_coded
 \liststylename,List Table,Value,cw_not_coded
-\NsttemplateidN,List Table,Value,cw_not_coded
+\listtemplateidN,List Table,Value,cw_not_coded
 \listtext,Paragraph Text,Destination,cw_not_coded
 \lnbrkrule,Document Formatting Properties,Flag,cw_not_coded
 \lndscpsxn,Section Formatting Properties,Flag,cw_not_coded
@@ -853,7 +855,7 @@ VistoverrideformatN,List Table,Value,cw_not_coded
 \pmmetafile,Pictures,Value,cw_not_coded
 \pn,Bullets and Numbering,Destination,cw_not_coded
 \pnacross,Bullets and Numbering,Flag,cw_not_coded
-\pnaiu ,Bullets and Numbering,Flag,cw_not_coded
+\pnaiu,Bullets and Numbering,Flag,cw_not_coded
 \pnaiud,Bullets and Numbering,Flag,cw_not_coded
 \pnaiueo,Bullets and Numbering,Flag,cw_not_coded
 \pnaiueod,Bullets and Numbering,Flag,cw_not_coded
@@ -989,6 +991,7 @@ VistoverrideformatN,List Table,Value,cw_not_coded
 \rdblquote,Special Characters,Symbol,cw_not_coded
 \readprot,Document Formatting Properties,Flag,cw_not_coded
 \red,Color Table,Value,cw_not_coded
+\relyonvmlN,Document Formatting Properties,Value,cw_not_coded
 \rempersonalinfo,Document Formatting Properties,Flag,cw_not_coded
 \result,Objects,Destination,cw_not_coded
 \revauth,Font (Character) Formatting Properties,Value,cw_not_coded

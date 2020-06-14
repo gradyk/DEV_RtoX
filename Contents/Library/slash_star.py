@@ -30,19 +30,27 @@ __date__ = "2020-05-16"
 __name__ = "Contents.Library.slash_star"
 
 # From standard libraries
-import Contents.Library.group_boundaries_no_contents
+import Contents.Library.group_boundaries_capture_contents
 
 
 def slash_star_processor(working_input_file: str, parse_index: int,
-                         line_to_parse: int) -> tuple:
-    table_boundaries_info \
-        = Contents.Library.group_boundaries_no_contents \
-        .define_boundaries_without_contents(
-            table=str(line_to_parse) + "_" + str(parse_index),
+                         line_to_parse: int,
+                         shift_text: str) -> tuple:
+    # {group_id:
+    #  [group_contents,
+    #   group_start_line,
+    #   group_start_index,
+    #   group_end_line,
+    #   group_end_index]}
+    print("SLASH STAR BEGIN:")
+    group_id, group_info \
+        = Contents.Library.group_boundaries_capture_contents \
+        .define_boundaries_capture_contents(
             working_input_file=working_input_file,
-            table_start_line=line_to_parse,
-            table_start_index=parse_index)
-    entry = str(line_to_parse) + "_" + str(parse_index)
-    line_to_parse = table_boundaries_info[entry][2]
-    parse_index = table_boundaries_info[entry][3]
+            line_to_parse=line_to_parse,
+            parse_index=parse_index,
+            shift_text=shift_text)
+    line_to_parse = group_info[group_id][3]
+    parse_index = group_info[group_id][4]
+    print("SLASH STAR END")
     return line_to_parse, parse_index

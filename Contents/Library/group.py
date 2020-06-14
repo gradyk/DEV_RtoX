@@ -28,28 +28,23 @@ __date__ = "2020-05-16"
 __name__ = "Contents.Library.group"
 
 # From application library
-import Contents.Library.doc_group_parse
 import Contents.Library.group_boundaries_capture_contents
 
 
 def group_processor(parse_index: int, line_to_parse: int,
                     working_input_file: str,
-                    debug_dir: str, control_word_func_dict: str):
-
+                    shift_text: str) -> tuple:
+    print("GROUP BEGIN:")
     group_start_index = parse_index
-
-    group_info = Contents.Library. \
+    group_id, group_info = Contents.Library. \
         group_boundaries_capture_contents. \
         define_boundaries_capture_contents(
             working_input_file=working_input_file,
-            group_start_line=line_to_parse,
-            group_start_index=group_start_index)
+            line_to_parse=line_to_parse,
+            parse_index=group_start_index,
+            shift_text=shift_text)
+    print("GROUP END")
+    reset_line_to_parse = group_info[group_id][3]  # group_end_line
+    parse_index = group_info[group_id][4]  # group_end_index
 
-    line_to_parse, parse_index = \
-        Contents.Library.doc_group_parse.group_parse_processor(
-            group_info=group_info, debug_dir=debug_dir,
-            control_word_func_dict=control_word_func_dict,
-            line_to_parse=line_to_parse, parse_index=parse_index,
-            working_input_file=working_input_file)
-
-    return line_to_parse, parse_index
+    return group_id, group_info, reset_line_to_parse, parse_index

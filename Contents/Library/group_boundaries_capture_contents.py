@@ -34,98 +34,135 @@ import file_stats
 
 
 def define_boundaries_capture_contents(working_input_file: str,
-                                       group_start_line: int,
-                                       group_start_index: int) -> dict:
+                                       line_to_parse: int,
+                                       parse_index: int,
+                                       shift_text) -> tuple:
     """ Define the boundaries of an RTF table or group, while capturing
     the contents of the table or group. """
     group_info = {}
     group_contents = ""
-    search_line = group_start_line
-    string_to_search = linecache.getline(working_input_file, search_line)
-    string_to_search = string_to_search.replace("\n", "")
+    start_line = line_to_parse
+    start_index = parse_index
+    parse_text = linecache.getline(working_input_file, line_to_parse)
+    parse_text = parse_text.rstrip("\n").rstrip(" ")
+    length_parse_text = len(parse_text)
+
+    if parse_index > (length_parse_text - 3):
+        shift_length = length_parse_text - parse_index
+        shift_text = parse_text[-shift_length]
+        line_to_parse += 1
+        parse_index = 0
+        parse_text = linecache.getline(working_input_file, line_to_parse)
+        parse_text = parse_text.rstrip("\n").rstrip(" ")
+        parse_text = shift_text + parse_text
+        length_parse_text = len(parse_text)
+    else:
+        parse_text = shift_text + parse_text
+        length_parse_text = len(parse_text)
+        pass
 
     deck = deque()
-    length_string_to_search = len(string_to_search)
-    index = group_start_index
 
-    while index < length_string_to_search:
+    while parse_index < length_parse_text:
 
-        if string_to_search[index] == "{":
-            deck.append(string_to_search[index])
-            group_contents = group_contents + string_to_search[index]
-            index += 1
-        elif string_to_search[index] == "}":
+        if parse_text[parse_index] == "{":
+            deck.append(parse_text[parse_index])
+            group_contents = group_contents + parse_text[parse_index]
+            parse_index += 1
+        elif parse_text[parse_index] == "}":
             deck.popleft()
-            group_contents = group_contents + string_to_search[index]
-            index += 1
 
             if not deck:
-                group_end_line = search_line
-                group_end_index = index
-                group_id = str(group_start_line) + "_" + str(group_start_index)
+                group_contents = group_contents + parse_text[parse_index]
+                group_end_line = line_to_parse
+                group_end_index = parse_index + 1
+                group_id = str(line_to_parse) + "_" + str(parse_index)
                 group_info.update({group_id:
                                    [group_contents,
-                                    group_start_line,
-                                    group_start_index,
+                                    line_to_parse,
+                                    parse_index,
                                     group_end_line,
                                     group_end_index]})
-
-                return group_info
+                print("  BOUNDARIES 0")
+                print("    ", start_line, start_index)
+                print("    ", group_info[group_id][0])
+                if group_end_index < length_parse_text:
+                    print("    ", group_end_line, group_end_index,
+                          parse_text[group_end_index])
+                else:
+                    print("    ", group_end_line, group_end_index)
+                return group_id, group_info
+            else:
+                parse_index += 1
         else:
-            group_contents = group_contents + string_to_search[index]
-            index += 1
+            group_contents = group_contents + parse_text[parse_index]
+            parse_index += 1
             pass
 
-    tracker = search_line + 1
+    tracker = line_to_parse + 1
     file_metrics = file_stats.file_stats_calculator(
         working_input_file=working_input_file)
     length_working_input_file = file_metrics[0]
 
     while tracker <= length_working_input_file:
-        index = 0
-        search_line = tracker
-        string_to_search = linecache.getline(working_input_file, search_line)
-        string_to_search = string_to_search.replace("\n", "")
-        string_to_search = string_to_search[index:]
-        length_string_to_search = len(string_to_search)
+        parse_index = 0
+        line_to_parse = tracker
+        parse_text = linecache.getline(working_input_file, line_to_parse)
+        parse_text = parse_text.rstrip("\n").rstrip(" ")
+        parse_text = parse_text[parse_index:]
+        length_parse_text = len(parse_text)
 
-        while index < length_string_to_search:
+        while parse_index < length_parse_text:
 
-            if string_to_search[index] == "{":
-                deck.append(string_to_search[index])
+            if parse_text[parse_index] == "{":
+                deck.append(parse_text[parse_index])
 
-            elif string_to_search[index] == "}":
+            elif parse_text[parse_index] == "}":
                 deck.popleft()
 
                 if not deck:  # Means if deck becomes empty
-                    group_end_line = search_line
-                    group_end_index = index
-                    group_contents = group_contents + string_to_search[0:index]
-                    group_id = str(group_start_line) + "_" + str(
-                        group_start_index)
+                    group_contents = group_contents + parse_text[parse_index]
+                    group_end_line = line_to_parse
+
+                    if parse_text[parse_index] == " ":
+                        group_end_index = parse_index + 2
+                        parse_index += 2
+                    else:
+                        group_end_index = parse_index + 1
+                        parse_index += 1
+                    group_id = str(line_to_parse) + "_" + str(
+                        parse_index)
                     group_info.update({group_id:
                                        [group_contents,
-                                        group_start_line,
-                                        group_start_index,
+                                        line_to_parse,
+                                        parse_index,
                                         group_end_line,
                                         group_end_index]})
-                    return group_info
+                    print("  BOUNDARIES 1")
+                    print("    ", start_line, start_index)
+                    print("    ", group_info[group_id][0])
+                    print("    ", group_end_line, group_end_index,
+                          parse_text[group_end_index])
+                    return group_id, group_info
             else:
                 pass
 
-            group_contents = group_contents + string_to_search[index]
-            index += 1
+            group_contents = group_contents + parse_text[parse_index]
+            parse_index += 1
 
         tracker += 1
 
-    group_end_line = search_line
-    group_end_index = index
-    group_id = str(group_start_line) + "_" + str(group_start_index)
+    group_end_line = line_to_parse
+    group_end_index = parse_index + 1
+    group_id = str(line_to_parse) + "_" + str(parse_index)
     group_info.update({group_id:
                        [group_contents,
-                        group_start_line,
-                        group_start_index,
+                        line_to_parse,
+                        parse_index,
                         group_end_line,
                         group_end_index]})
-
-    return group_info
+    print("  BOUNDARIES 2", group_info[group_id][0],
+          group_end_line, group_end_index,
+          parse_text[group_end_index],
+          parse_text[group_end_index + 1])
+    return group_id, group_info

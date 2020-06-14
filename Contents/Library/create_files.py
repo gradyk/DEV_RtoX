@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#   -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -25,10 +25,13 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2030-03-19"
 __name__ = "Contents.Library.create_files"
 
+# From standard library
 import json
 import os
+import sys
 
-import input_file_prep
+# From application library
+import Contents.Library.input_file_prep
 import rtf_codes_file_prep
 from opening_tag_registry_dict import opening_tag_registry_dict
 
@@ -54,6 +57,9 @@ def initiate_working_files(xml_tag_num: str, debug_dir: str,
 
     working_input_file = create_working_input_file(
         debug_dir=debug_dir, input_file_name=input_file_name,
+        base_script_dir=base_script_dir)
+
+    initiate_control_word_func_missing_keys_file(
         base_script_dir=base_script_dir)
 
     return working_input_file
@@ -122,24 +128,38 @@ def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
 def create_working_input_file(input_file_name: str, debug_dir: str,
                               base_script_dir: str) -> str:
     """ Copy of the input file for use during processing. """
-    working_input_file = input_file_prep.InputPrep.input_file_prep(
-        input_file_prep.InputPrep(input_file_name=input_file_name,
-                                  debug_dir=debug_dir,
-                                  base_script_dir=base_script_dir))
+    working_input_file = Contents.Library.input_file_prep.input_file_prep(
+        input_file_name=input_file_name,
+        debug_dir=debug_dir,
+        base_script_dir=base_script_dir)
 
     return working_input_file
 
 
-def initiate_control_word_info_file(base_script_dir: str) -> str:
-    dict_dir = os.path.join(base_script_dir, "dicts")
-    control_word_info_dict = os.path.join(dict_dir,
-                                          "control_words_info_dict.json")
+def initiate_control_word_info_dict():
+    base_script_dir = os.path.dirname(os.path.abspath(
+        sys.argv[0]))
+    base_script_dir = os.path.join(base_script_dir, "Library/dicts")
+    control_word_info_dict = os.path.join(
+        base_script_dir, "control_word_info_dict.json")
+
     return control_word_info_dict
 
 
-def initiate_control_word_func_file(base_script_dir: str) -> str:
-    dict_dir = os.path.join(base_script_dir, "dicts")
-    control_word_func_dict = os.path.join(dict_dir,
-                                          "control_words_func_dict.json")
+def initiate_control_word_func_dict():
+    base_script_dir = os.path.dirname(os.path.abspath(
+        sys.argv[0]))
+    base_script_dir = os.path.join(base_script_dir, "Library/dicts")
+    control_word_func_dict = os.path.join(
+        base_script_dir, "control_word_func_dict.json")
+
     return control_word_func_dict
 
+
+def initiate_control_word_func_missing_keys_file(base_script_dir: str) -> None:
+    dicts_dir = os.path.join(base_script_dir, "Library/dicts")
+    control_word_func_missing_keys_file = os.path.join(
+        dicts_dir, "control_word_func_missing_keys_file.json")
+    with open(control_word_func_missing_keys_file, "w", encoding='utf-8') \
+            as cwf_file:
+        json.dump({}, cwf_file, ensure_ascii=False)
