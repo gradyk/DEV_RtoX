@@ -43,5 +43,5 @@ def tag_registry_update(debug_dir: str, tag_update_dict: dict) -> None:
 
     # TODO change the next line into a logger.
     # sys.stdout.write(str(tag_registry))
-    with open(tag_registry_file, "w", encoding='utf-8') as tag_registry_pre:
+    with open(tag_registry_file, "w+", encoding='utf-8') as tag_registry_pre:
         json.dump(tag_registry, tag_registry_pre, ensure_ascii=False)

@@ -10,6 +10,11 @@ def keydefs_translate():
 
     keydefs_list = os.path.join(base_script_dir, "TEICombinedList.csv")
     delete_list = os.path.join(base_script_dir, "delete_list.csv")
+    new_string = ""
+
+    container = 1
+    attribute = 0
+    schema = 0
 
     base_string = "analysis: c cl interp interpGrp m pc phr s span spanGrp w " \
                   "certainty: certainty precision respons " \
@@ -43,6 +48,27 @@ def keydefs_translate():
                   "verse: caesura rhyme " \
                   "character data " \
 
+    if container == 1:
+        new_string = container_translate(base_string=base_string,
+                                         keydefs_list=keydefs_list,
+                                         delete_list=delete_list)
+    elif attribute == 1:
+        new_string = attribute_translate(base_string=base_string,
+                                         keydefs_list=keydefs_list,
+                                         delete_list=delete_list)
+
+    elif schema == 1:
+        new_string = schema_translate(base_string=base_string,
+                                      keydefs_list=keydefs_list,
+                                      delete_list=delete_list)
+
+    else:
+        print("You forgot to set container, attribute, or schema!")
+
+    print(new_string)
+
+
+def container_translate(base_string: str, keydefs_list: str, delete_list: str):
     old_string = re.sub(r"[^[a-zA-Z]]", " ", base_string).split()
 
     new_string = ""
@@ -50,7 +76,9 @@ def keydefs_translate():
 
     module_list = [
         "analysis:",
+        "briefing:",  # New in TPRES
         "certainty:",
+        "citing:",  # New in TPRES
         "core:",
         "corpus:",
         "dictionaries:",
@@ -155,7 +183,107 @@ def keydefs_translate():
         else:
             pass
     new_string = new_string.lstrip("\n")
-    print(new_string)
+    return new_string
+
+
+def attribute_translate(base_string: str, keydefs_list: str, delete_list: str):
+    old_string = re.sub(r"[^[a-zA-Z]]", " ", base_string).split()
+    new_string = ""
+    keydefs_dict = {}
+
+    with open(keydefs_list, "r") as keydefs_pre:
+        csv_reader = csv.reader(keydefs_pre, delimiter=',', dialect="excel")
+        for row in csv_reader:
+            if row == 0:
+                row += 1
+            else:
+                keydefs_dict_update = {row[0]: row[1]}
+                keydefs_dict.update(keydefs_dict_update)
+
+    return new_string
+
+
+def schema_translate(base_string: str, keydefs_list: str, delete_list: str):
+    old_string = re.sub(r"[^[a-zA-Z]]", ", ", base_string).split()
+    new_string = ""
+    keydefs_dict = {}
+
+    with open(keydefs_list, "r") as keydefs_pre:
+        csv_reader = csv.reader(keydefs_pre, delimiter=',', dialect="excel")
+        for row in csv_reader:
+            if row == 0:
+                row += 1
+            else:
+                keydefs_dict_update = {row[0]: row[1]}
+                keydefs_dict.update(keydefs_dict_update)
+
+    for entry in old_string:
+        dropped = 0
+        entry = entry.strip(", ")
+
+        cw_open = re.search(r"\([a-zA-Z.]+", entry)
+        if cw_open:
+            pre = "("
+            fixed_entry = cw_open[0].strip("(")
+        else:
+            pre = ""
+            fixed_entry = entry
+
+        cw_divider = re.search(r"\s\|\s", fixed_entry)
+        if cw_divider:
+            divider = "|"
+            fixed_entry = cw_divider[0].strip(" | ")
+        else:
+            divider = ""
+
+        cw_close = re.search(r"[a-zA-Z.]+\)", fixed_entry)
+        if cw_close:
+            post = ")"
+            fixed_entry = cw_close[0].strip(")")
+        else:
+            post = ""
+
+        try:
+            tpres_key_term = keydefs_dict[fixed_entry]
+            tpres_key_term = tpres_key_term.replace(".", "-")
+            new_term = f'\t<xref keyref=\"' + f'{tpres_key_term}\">' + \
+                       f"{pre}" \
+                       f'{tpres_key_term}' + f'{divider}' + \
+                       f'{post}' + '</xref>,\n'
+            new_string = new_string + new_term
+            pre = ""
+            post = ""
+        except KeyError:
+            with open(delete_list) as delete_list_pre:
+                delete_reader = csv.reader(delete_list_pre, delimiter=',',
+                                           dialect="excel")
+                for row in delete_reader:
+                    if row == 0:
+                        row += 1
+                    else:
+                        if fixed_entry == row[0]:
+                            fixed_entry = fixed_entry.replace(".", "-")
+                            new_term = f' <xref keyref=\"' + \
+                                       f'{fixed_entry}\">' + f'{pre}' + \
+                                       f'{fixed_entry}' + f'{post}' + \
+                                       f'</xref><!-- DROPPED -->'
+                            new_string = new_string + new_term
+                            dropped = 1
+                        else:
+                            pass
+            if dropped == 0:
+                fixed_entry = fixed_entry.replace(".", "-")
+                new_term = f'\t<xref keyref=\"' + f'{fixed_entry}\">' + \
+                           f'{pre}' + \
+                           f'{fixed_entry}' + f'{divider}' + \
+                           f'{post}' + \
+                           f'</xref>,<!-- TODO Fix -->\n'
+                new_string = new_string + new_term
+            else:
+                dropped = 0
+                pass
+
+    return new_string
 
 
 if __name__ == "__main__":

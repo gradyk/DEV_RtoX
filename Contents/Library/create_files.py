@@ -25,97 +25,25 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2030-03-19"
 __name__ = "Contents.Library.create_files"
 
-# From standard library
-import json
 import os
-import sys
+import json
 
 # From application library
 import Contents.Library.input_file_prep
 import rtf_codes_file_prep
-from opening_tag_registry_dict import opening_tag_registry_dict
 
 
 def initiate_working_files(xml_tag_num: str, debug_dir: str,
                            input_file_name: str, base_script_dir: str) -> str:
 
-    create_working_tag_registry(debug_dir=debug_dir)
-
-    create_header_table_dict(debug_dir=debug_dir)
-
-    create_rtf_file_codes_file(debug_dir=debug_dir)
-
-    create_empty_code_strings_dict(debug_dir=debug_dir)
-
-    create_empty_info_code_strings_file(debug_dir=debug_dir)
-
-    create_font_file(debug_dir=debug_dir)
-
-    create_style_file(debug_dir=debug_dir)
-
     create_working_xml_file(xml_tag_num=xml_tag_num, debug_dir=debug_dir)
+
+    create_dict_files(base_script_dir=base_script_dir)
 
     working_input_file = create_working_input_file(
         debug_dir=debug_dir, input_file_name=input_file_name,
         base_script_dir=base_script_dir)
-
-    initiate_control_word_func_missing_keys_file(
-        base_script_dir=base_script_dir)
-
     return working_input_file
-
-
-def create_working_tag_registry(debug_dir: str) -> None:
-    """ Dictionary for tracking open and closed XML tags. """
-    tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
-    with open(tag_registry_file, "w", encoding='utf-8') as \
-            tag_registry:
-        json.dump(opening_tag_registry_dict, tag_registry)
-
-
-def create_header_table_dict(debug_dir: str) -> None:
-    """ Dictionary for storing which tables are in the RTF file header
-        and the line number on which each table starts. """
-    header_tables_dict = os.path.join(debug_dir,
-                                      "header_tables_dict.json")
-    with open(header_tables_dict, "w+", encoding="utf-8") as \
-            header_tables:
-        json.dump({}, header_tables)
-
-
-def create_rtf_file_codes_file(debug_dir: str) -> None:
-    """  """
-    rtf_file_codes = os.path.join(debug_dir, "rtf_file_codes.json")
-    with open(rtf_file_codes, "w+") as rtf_file_codes_prep:
-        json.dump([], rtf_file_codes_prep)
-
-
-def create_empty_info_code_strings_file(debug_dir: str) -> None:
-    """ File to hold code strings from the info table. """
-    info_code_strings = os.path.join(debug_dir, "info_code_strings_file.json")
-    with open(info_code_strings, "w+") as info_code_strings_file_empty:
-        json.dump({}, info_code_strings_file_empty)
-
-
-def create_empty_code_strings_dict(debug_dir: str) -> None:
-    """ File to hold code strings from a table. """
-    code_strings_file = os.path.join(debug_dir, "code_strings_file.json")
-    with open(code_strings_file, "w+") as code_strings_file_empty:
-        json.dump({}, code_strings_file_empty)
-
-
-def create_font_file(debug_dir: str) -> None:
-    """ File to hold code strings from the font table. """
-    font_file = os.path.join(debug_dir, "font_file.json")
-    with open(font_file, "w+") as font_file_pre:
-        json.dump([], font_file_pre)
-
-
-def create_style_file(debug_dir: str) -> None:
-    """ File to hold code strings from the style table. """
-    style_file = os.path.join(debug_dir, "style_file.json")
-    with open(style_file, "w+") as style_file_pre:
-        json.dump([], style_file_pre)
 
 
 def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
@@ -125,6 +53,26 @@ def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
             debug_dir=debug_dir, xml_tag_num=xml_tag_num))
 
 
+def create_dict_files(base_script_dir: str) -> None:
+    dict_library = (
+        "header_tables_dict.json",
+        "rtf_file_codes.json",
+        "code_strings_file.json",
+        "table_emptyorfull_dict.json",
+        "font_table_file.json",
+        "color_table_file.json",
+        "style_sheet_table_file.json",
+        "control_word_info_dict.json",
+        "control_word_func_dict.json"
+    )
+
+    for file in dict_library:
+        dict_dir = os.path.join(base_script_dir, "debugdir")
+        dict_path = os.path.join(dict_dir, file)
+        with open(dict_path, "w+") as open_dict:
+            json.dump({}, open_dict)
+
+
 def create_working_input_file(input_file_name: str, debug_dir: str,
                               base_script_dir: str) -> str:
     """ Copy of the input file for use during processing. """
@@ -132,34 +80,4 @@ def create_working_input_file(input_file_name: str, debug_dir: str,
         input_file_name=input_file_name,
         debug_dir=debug_dir,
         base_script_dir=base_script_dir)
-
     return working_input_file
-
-
-def initiate_control_word_info_dict():
-    base_script_dir = os.path.dirname(os.path.abspath(
-        sys.argv[0]))
-    base_script_dir = os.path.join(base_script_dir, "Library/dicts")
-    control_word_info_dict = os.path.join(
-        base_script_dir, "control_word_info_dict.json")
-
-    return control_word_info_dict
-
-
-def initiate_control_word_func_dict():
-    base_script_dir = os.path.dirname(os.path.abspath(
-        sys.argv[0]))
-    base_script_dir = os.path.join(base_script_dir, "Library/dicts")
-    control_word_func_dict = os.path.join(
-        base_script_dir, "control_word_func_dict.json")
-
-    return control_word_func_dict
-
-
-def initiate_control_word_func_missing_keys_file(base_script_dir: str) -> None:
-    dicts_dir = os.path.join(base_script_dir, "Library/dicts")
-    control_word_func_missing_keys_file = os.path.join(
-        dicts_dir, "control_word_func_missing_keys_file.json")
-    with open(control_word_func_missing_keys_file, "w", encoding='utf-8') \
-            as cwf_file:
-        json.dump({}, cwf_file, ensure_ascii=False)

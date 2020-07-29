@@ -1,1 +1,5628 @@
-{"\\'": ["Special Characters", "Symbol"], "\\-": ["Special Characters", "Symbol"], "\\*": ["Special Characters", "Symbol"], "\\:": ["Special Characters", "Symbol"], "\\\\": ["Special Characters", "Symbol"], "\\_": ["Special Characters", "Symbol"], "\\{": ["Special Characters", "Symbol"], "\\|": ["Special Characters", "Symbol"], "\\}": ["Special Characters", "Symbol"], "\\~": ["Special Characters", "Symbol"], "\\ab": ["Associated Character Properties", "Toggle"], "\\absh": ["Positioned Objects and Frames", "Value"], "\\abslock": ["Positioned Objects and Frames", "Flag"], "\\absnoovrlpN": ["Positioned Objects and Frames", "Toggle"], "\\absw": ["Positioned Objects and Frames", "Value"], "\\acaps": ["Associated Character Properties", "Toggle"], "\\acccomma": ["Font (Character) Formatting Properties", "Toggle"], "\\accdot": ["Font (Character) Formatting Properties", "Toggle"], "\\accnone": ["Font (Character) Formatting Properties", "Toggle"], "\\acccircle": ["Font (Character) Formatting Properties", "Toggle"], "\\accunderdot": ["Font (Character) Formatting Properties", "Toggle"], "\\acf": ["Associated Character Properties", "Value"], "\\additive": ["Style Sheet", "Flag"], "\\adjustright": ["Section Formatting Properties", "Flag"], "\\adn": ["Associated Character Properties", "Value"], "\\aenddoc": ["Document Formatting Properties", "Flag"], "\\aendnotes": ["Document Formatting Properties", "Flag"], "\\aexpnd": ["Associated Character Properties", "Value"], "\\af": ["Associated Character Properties", "Value"], "\\affixed": ["Paragraph Formatting Properties", "Flag"], "\\afs": ["Associated Character Properties", "Value"], "\\aftnbj": ["Document Formatting Properties", "Flag"], "\\aftncn": ["Document Formatting Properties", "Destination"], "\\aftnnalc": ["Document Formatting Properties", "Flag"], "\\aftnnar": ["Document Formatting Properties", "Flag"], "\\aftnnauc": ["Document Formatting Properties", "Flag"], "\\aftnnchi": ["Document Formatting Properties", "Flag"], "\\aftnnchosung": ["Document Formatting Properties", "Flag"], "\\aftnncnum": ["Document Formatting Properties", "Flag"], "\\aftnndbar": ["Document Formatting Properties", "Flag"], "\\aftnndbnum": ["Document Formatting Properties", "Flag"], "\\aftnndbnumd": ["Document Formatting Properties", "Flag"], "\\aftnndbnumk": ["Document Formatting Properties", "Flag"], "\\aftnndbnumt": ["Document Formatting Properties", "Flag"], "\\aftnnganada": ["Document Formatting Properties", "Flag"], "\\aftnngbnum": ["Document Formatting Properties", "Flag"], "\\aftnngbnumd": ["Document Formatting Properties", "Flag"], "\\aftnngbnumk": ["Document Formatting Properties", "Flag"], "\\aftnngbnuml": ["Document Formatting Properties", "Flag"], "\\aftnnrlc": ["Document Formatting Properties", "Flag"], "\\aftnnruc": ["Document Formatting Properties", "Flag"], "\\aftnnzodiac": ["Document Formatting Properties", "Flag"], "\\aftnnzodiacd": ["Document Formatting Properties", "Flag"], "\\aftnnzodiacl": ["Document Formatting Properties", "Flag"], "\\aftnrestart": ["Document Formatting Properties", "Flag"], "\\aftnrstcont": ["Document Formatting Properties", "Flag"], "\\aftnsep": ["Document Formatting Properties", "Destination"], "\\aftnsepc": ["Document Formatting Properties", "Destination"], "\\aftnstart": ["Document Formatting Properties", "Value"], "\\aftntj": ["Document Formatting Properties", "Flag"], "\\ai": ["Associated Character Properties", "Toggle"], "\\alang": ["Associated Character Properties", "Value"], "\\allowfieldendsel": ["Document Formatting Properties", "Flag"], "\\allprot": ["Document Formatting Properties", "Flag"], "\\alntblind": ["Document Formatting Properties", "Flag"], "\\alt": ["Style Sheet", "Flag"], "\\animtextN": ["Font (Character) Formatting Properties", "Value"], "\\annotation": ["Comments (Annotations)", "Destination"], "\\annotprot": ["Document Formatting Properties", "Flag"], "\\ansi": ["Character Set", "Flag"], "\\ansicpgN": ["Unicode RTF", "Value"], "\\aoutl": ["Associated Character Properties", "Toggle"], "\\ApplyBrkRules": ["Document Formatting Properties", "Flag"], "\\ascaps": ["Associated Character Properties", "Toggle"], "\\ashad": ["Associated Character Properties", "Toggle"], "\\asianbrkrule": ["Document Formatting Properties", "Flag"], "\\aspalpha": ["Paragraph Formatting Properties", "Toggle"], "\\aspnum": ["Paragraph Formatting Properties", "Toggle"], "\\astrike": ["Associated Character Properties", "Toggle"], "\\atnauthor": ["Comments (Annotations)", "Destination"], "\\atndate": ["Comments (Annotations)", "Destination"], "\\atnicn": ["Comments (Annotations)", "Destination"], "\\atnid": ["Comments (Annotations)", "Destination"], "\\atnparent": ["Comments (Annotations)", "Destination"], "\\atnref": ["Comments (Annotations)", "Destination"], "\\atntime": ["Comments (Annotations)", "Destination"], "\\atrfend": ["Comments (Annotations)", "Destination"], "\\atrfstart": ["Comments (Annotations)", "Destination"], "\\aul": ["Associated Character Properties", "Toggle"], "\\auld": ["Associated Character Properties", "Toggle"], "\\auldb": ["Associated Character Properties", "Toggle"], "\\aulnone": ["Associated Character Properties", "Toggle"], "\\aulw": ["Associated Character Properties", "Toggle"], "\\aup": ["Associated Character Properties", "Value"], "\\author": ["Information Group", "Destination"], "\\autofmtoverride": ["Document Formatting Properties", "Flag"], "\\b": ["Font (Character) Formatting Properties", "Toggle"], "\\background": ["Word through Word RTF for Drawing Objects (Shades)", "Destination"], "\\bdbfhdr": ["Document Formatting Properties", "Flag"], "\\bdrrlswsix": ["Document Formatting Properties", "Flag"], "\\bgbdiag": ["Paragraph Shading", "Flag"], "\\bgcross": ["Paragraph Shading", "Flag"], "\\bgdcross": ["Paragraph Shading", "Flag"], "\\bgdkbdiag": ["Paragraph Shading", "Flag"], "\\bgdkcross": ["Paragraph Shading", "Flag"], "\\bgdkdcross": ["Paragraph Shading", "Flag"], "\\bgdkfdiag": ["Paragraph Shading", "Flag"], "\\bgdkhoriz": ["Paragraph Shading", "Flag"], "\\bgdkvert": ["Paragraph Shading", "Flag"], "\\bgfdiag": ["Paragraph Shading", "Flag"], "\\bghoriz": ["Paragraph Shading", "Flag"], "\\bgvert": ["Paragraph Shading", "Flag"], "\\bin": ["Pictures", "Value"], "\\binfsxn": ["Section Formatting Properties", "Value"], "\\binsxn": ["Section Formatting Properties", "Value"], "\\bkmkcolf": ["Bookmarks", "Value"], "\\bkmkcoll": ["Bookmarks", "Value"], "\\bkmkend": ["Bookmarks", "Destination"], "\\bkmkpub": ["Macintosh Edition Manager Publisher Objects", "Flag"], "\\bkmkstart": ["Bookmarks", "Destination"], "\\bliptagN": ["Pictures", "Value"], "\\blipuid": ["Pictures", "Value"], "\\blipupiN": ["Pictures", "Value"], "\\blue": ["Color Table", "Value"], "\\bookfold": ["Document Formatting Properties", "Flag"], "\\bookfoldrev": ["Document Formatting Properties", "Flag"], "\\bookfoldsheetsN": ["Document Formatting Properties", "Value"], "\\box": ["Paragraph Borders", "Flag"], "\\brdrartN": ["Document Formatting Properties", "Value"], "\\brdrb": ["Paragraph Borders", "Flag"], "\\brdrbar": ["Paragraph Borders", "Flag"], "\\brdrbtw": ["Paragraph Borders", "Flag"], "\\brdrcf": ["Paragraph Borders", "Value"], "\\brdrdash": ["Paragraph Borders", "Flag"], "\\brdrdashd": ["Paragraph Text", "Flag"], "\\brdrdashdd": ["Paragraph Text", "Flag"], "\\brdrdashdotstr": ["Paragraph Text", "Flag"], "\\brdrdashsm": ["Paragraph Text", "Flag"], "\\brdrdb": ["Paragraph Borders", "Flag"], "\\brdrdot": ["Paragraph Borders", "Flag"], "\\brdremboss": ["Paragraph Text", "Flag"], "\\brdrengrave": ["Paragraph Text", "Flag"], "\\brdrframe": ["Paragraph Borders", "Flag"], "\\brdrhair": ["Paragraph Borders", "Flag"], "\\brdrinset": ["Paragraph Text", "Flag"], "\\brdrl": ["Paragraph Borders", "Flag"], "\\brdrnil": ["Paragraph Borders", "Flag"], "\\brdroutset": ["Paragraph Text", "Flag"], "\\brdrr": ["Paragraph Borders", "Flag"], "\\brdrs": ["Paragraph Borders", "Flag"], "\\brdrsh": ["Paragraph Borders", "Flag"], "\\brdrt": ["Paragraph Borders", "Flag"], "\\brdrtbl": ["Paragraph Borders", "Flag"], "\\brdrth": ["Paragraph Borders", "Flag"], "\\brdrthtnlg": ["Paragraph Text", "Flag"], "\\brdrthtnmg": ["Paragraph Text", "Flag"], "\\brdrthtnsg": ["Paragraph Text", "Flag"], "\\brdrtnthlg": ["Paragraph Text", "Flag"], "\\brdrtnthmg": ["Paragraph Text", "Flag"], "\\brdrtnthsg": ["Paragraph Text", "Flag"], "\\brdrtnthtnlg": ["Paragraph Text", "Flag"], "\\brdrtnthtnmg": ["Paragraph Text", "Flag"], "\\brdrtnthtnsg": ["Paragraph Text", "Flag"], "\\brdrtriple": ["Paragraph Text", "Flag"], "\\brdrw": ["Paragraph Borders", "Value"], "\\brdrwavy": ["Paragraph Text", "Flag"], "\\brdrwavydb": ["Paragraph Text", "Flag"], "\\brkfrm": ["Document Formatting Properties", "Flag"], "\\brsp": ["Paragraph Borders", "Value"], "\\bullet": ["Special Characters", "Symbol"], "\\buptim": ["Information Group", "Destination"], "\\bxe": ["Index Entries", "Flag"], "\\caps": ["Font (Character) Formatting Properties", "Toggle"], "\\category": ["Information Group", "Destination"], "\\cb": ["Font (Character) Formatting Properties", "Value"], "\\cbpat": ["Paragraph Shading", "Value"], "\\cchs": ["Font (Character) Formatting Properties", "Value"], "\\cell": ["Special Characters", "Symbol"], "\\cellx": ["Table Definitions", "Value"], "\\cf": ["Font (Character) Formatting Properties", "Value"], "\\cfpat": ["Paragraph Shading", "Value"], "\\cgridN": ["Font (Character) Formatting Properties", "Value"], "\\charrsidN": ["Track Changes (Revision Marks)", "Value"], "\\charscalex": ["Font (Character) Formatting Properties", "Value"], "\\charscalexN": ["Character Text", "Value"], "\\chatn": ["Special Characters", "Symbol"], "\\chbgbdiag": ["Character Text", "Flag"], "\\chbgcross": ["Character Text", "Flag"], "\\chbgdcross": ["Character Text", "Flag"], "\\chbgdkbdiag": ["Character Text", "Flag"], "\\chbgdkcross": ["Character Text", "Flag"], "\\chbgdkdcross": ["Character Text", "Flag"], "\\chbgdkfdiag": ["Character Text", "Flag"], "\\chbgdkhoriz": ["Character Text", "Flag"], "\\chbgdkvert": ["Character Text", "Flag"], "\\chbgfdiag": ["Character Text", "Flag"], "\\chbghoriz": ["Character Text", "Flag"], "\\chbgvert": ["Character Text", "Flag"], "\\chbrdr": ["Character Text", "Flag"], "\\chcbpatN": ["Character Text", "Value"], "\\chcfpatN": ["Character Text", "Value"], "\\chdate": ["Special Characters", "Symbol"], "\\chdpa": ["Special Characters", "Symbol"], "\\chdpl": ["Special Characters", "Symbol"], "\\chftn": ["Special Characters", "Symbol"], "\\chftnsep": ["Special Characters", "Symbol"], "\\chftnsepc": ["Special Characters", "Symbol"], "\\chpgn": ["Special Characters", "Symbol"], "\\chshdngN": ["Character Text", "Value"], "\\chtime": ["Special Characters", "Symbol"], "\\clbgbdiag": ["Table Definitions", "Flag"], "\\clbgcross": ["Table Definitions", "Flag"], "\\clbgdcross": ["Table Definitions", "Flag"], "\\clbgdkbdiag": ["Table Definitions", "Flag"], "\\clbgdkcross": ["Table Definitions", "Flag"], "\\clbgdkdcross": ["Table Definitions", "Flag"], "\\clbgdkfdiag": ["Table Definitions", "Flag"], "\\clbgdkhor": ["Table Definitions", "Flag"], "\\clbgdkvert": ["Table Definitions", "Flag"], "\\clbgfdiag": ["Table Definitions", "Flag"], "\\clbghoriz": ["Table Definitions", "Flag"], "\\clbgvert": ["Table Definitions", "Flag"], "\\clbrdrb": ["Table Definitions", "Flag"], "\\clbrdrl": ["Table Definitions", "Flag"], "\\clbrdrr": ["Table Definitions", "Flag"], "\\clbrdrt": ["Table Definitions", "Flag"], "\\clcbpat": ["Table Definitions", "Value"], "\\clcbpatrawN": ["Table Definitions", "Value"], "\\clcfpat": ["Table Definitions", "Value"], "\\clcfpatrawN": ["Table Definitions", "Value"], "\\cldgll": ["Table Definitions", "Flag"], "\\cldglu": ["Table Definitions", "Flag"], "\\clFitText": ["Table Definitions", "Flag"], "\\clftsWidthN": ["Table Definitions", "Value"], "\\clmgf": ["Table Definitions", "Flag"], "\\clmrg": ["Table Definitions", "Flag"], "\\clNoWrap": ["Table Definitions", "Flag"], "\\clpadbN": ["Table Definitions", "Value"], "\\clpadfbN": ["Table Definitions", "Value"], "\\clpadflN": ["Table Definitions", "Value"], "\\clpadfrN": ["Table Definitions", "Value"], "\\clpadftN": ["Table Definitions", "Value"], "\\clpadlN": ["Table Definitions", "Value"], "\\clpadrN": ["Table Definitions", "Value"], "\\clpadtN": ["Table Definitions", "Value"], "\\clshdng": ["Table Definitions", "Value"], "\\clshdngraw": ["Table Definitions", "Value"], "\\clshdrawnil": ["Table Definitions", "Flag"], "\\cltxbtlr": ["Table Definitions", "Flag"], "\\cltxlrtb": ["Table Definitions", "Flag"], "\\cltxlrtbv": ["Table Definitions", "Flag"], "\\cltxtbrl": ["Table Definitions", "Flag"], "\\cltxtbrlv": ["Table Definitions", "Flag"], "\\clvertalb": ["Table Definitions", "Flag"], "\\clvertalc": ["Table Definitions", "Flag"], "\\clvertalt": ["Table Definitions", "Flag"], "\\clvmgf": ["Table Definitions", "Flag"], "\\clvmrg": ["Table Definitions", "Flag"], "\\clwWidthN": ["Table Definitions", "Value"], "\\collapsed": ["Paragraph Formatting Properties", "Flag"], "\\colno": ["Section Formatting Properties", "Value"], "\\colortbl": ["Color Table", "Destination"], "\\cols": ["Section Formatting Properties", "Value"], "\\colsr": ["Section Formatting Properties", "Value"], "\\colsx": ["Section Formatting Properties", "Value"], "\\column": ["Special Characters", "Symbol"], "\\colw": ["Section Formatting Properties", "Value"], "\\comment": ["Information Group", "Destination"], "\\company": ["Information Group", "Destination"], "\\cpg": ["Code Page Support", "Value"], "\\crauthN": ["Character Text", "Value"], "\\crdateN": ["Character Text", "Value"], "\\creatim": ["Information Group", "Destination"], "\\cs": ["Font (Character) Formatting Properties", "Value"], "\\ctrl": ["Style Sheet", "Flag"], "\\ctsN": ["Document Formatting Properties", "Value"], "\\cufiN": ["Paragraph Formatting Properties", "Value"], "\\culiN": ["Paragraph Formatting Properties", "Value"], "\\curiN": ["Paragraph Formatting Properties", "Value"], "\\cvmme": ["Document Formatting Properties", "Flag"], "\\datafield": ["Fields", "Destination"], "\\date": ["Fields", "Flag"], "\\dbch": ["Associated Character Properties", "Flag"], "\\deff": ["Font Table", "Value"], "\\defformat": ["Document Formatting Properties", "Flag"], "\\deflang": ["Document Formatting Properties", "Value"], "\\deflangfe": ["Document Formatting Properties", "Value"], "\\defshp": ["Pictures", "Flag"], "\\deftab": ["Document Formatting Properties", "Value"], "\\deleted": ["Font (Character) Formatting Properties", "Toggle"], "\\delrsidN": ["Track Changes (Revision Marks)", "Value"], "\\dfrauthN": ["Paragraph Text", "Value"], "\\dfrdateN": ["Paragraph Text", "Value"], "\\dfrmtxtx": ["Positioned Objects and Frames", "Value"], "\\dfrmtxty": ["Positioned Objects and Frames", "Value"], "\\dfrstart": ["Paragraph Text", "Value"], "\\dfrstop": ["Paragraph Text", "Value"], "\\dfrxst": ["Paragraph Text", "Value"], "\\dghoriginN": ["Document Formatting Properties", "Value"], "\\dghshowN": ["Document Formatting Properties", "Value"], "\\dghspaceN": ["Document Formatting Properties", "Value"], "\\dgmargin": ["Document Formatting Properties", "Flag"], "\\dgsnap": ["Document Formatting Properties", "Flag"], "\\dgvoriginN": ["Document Formatting Properties", "Value"], "\\dgvshowN": ["Document Formatting Properties", "Value"], "\\dgvspaceN": ["Document Formatting Properties", "Value"], "\\dibitmap": ["Pictures", "Value"], "\\dn": ["Font (Character) Formatting Properties", "Value"], "\\dntblnsbdb": ["Document Formatting Properties", "Flag"], "\\do": ["Drawing Objects", "Destination"], "\\dobxcolumn": ["Drawing Objects", "Flag"], "\\dobxmargin": ["Drawing Objects", "Flag"], "\\dobxpage": ["Drawing Objects", "Flag"], "\\dobymargin": ["Drawing Objects", "Flag"], "\\dobypage": ["Drawing Objects", "Flag"], "\\dobypara": ["Drawing Objects", "Flag"], "\\doccomm": ["Information Group", "Destination"], "\\doctemp": ["Document Formatting Properties", "Flag"], "\\doctypeN": ["Document Formatting Properties", "Value"], "\\docvar": ["Document Variables", "Destination"], "\\dodhgt": ["Drawing Objects", "Value"], "\\dolock": ["Drawing Objects", "Flag"], "\\donotembedlingdata": ["Document Formatting Properties", "Flag"], "\\donotshowcomments": ["Document Formatting Properties", "Flag"], "\\donotshowinsdel": ["Document Formatting Properties", "Flag"], "\\donotshowmarkup": ["Document Formatting Properties", "Flag"], "\\donotshowprops": ["Document Formatting Properties", "Flag"], "\\dpaendhol": ["Drawing Objects", "Flag"], "\\dpaendl": ["Drawing Objects", "Value"], "\\dpaendsol": ["Drawing Objects", "Flag"], "\\dpaendw": ["Drawing Objects", "Value"], "\\dparc": ["Drawing Objects", "Flag"], "\\dparcflipx": ["Drawing Objects", "Flag"], "\\dparcflipy": ["Drawing Objects", "Flag"], "\\dpastarthol": ["Drawing Objects", "Flag"], "\\dpastartl": ["Drawing Objects", "Value"], "\\dpastartsol": ["Drawing Objects", "Flag"], "\\dpastartw": ["Drawing Objects", "Value"], "\\dpcallout": ["Drawing Objects", "Flag"], "\\dpcoa": ["Drawing Objects", "Value"], "\\dpcoaccent": ["Drawing Objects", "Flag"], "\\dpcobestfit": ["Drawing Objects", "Flag"], "\\dpcoborder": ["Drawing Objects", "Flag"], "\\dpcodabs": ["Drawing Objects", "Value"], "\\dpcodbottom": ["Drawing Objects", "Flag"], "\\dpcodcenter": ["Drawing Objects", "Flag"], "\\dpcodescent": ["Drawing Objects", "Value"], "\\dpcodtop": ["Drawing Objects", "Flag"], "\\dpcolength": ["Drawing Objects", "Value"], "\\dpcominusx": ["Drawing Objects", "Flag"], "\\dpcominusy": ["Drawing Objects", "Flag"], "\\dpcooffset": ["Drawing Objects", "Value"], "\\dpcosmarta": ["Drawing Objects", "Flag"], "\\dpcotdouble": ["Drawing Objects", "Flag"], "\\dpcotright": ["Drawing Objects", "Flag"], "\\dpcotsingle": ["Drawing Objects", "Flag"], "\\dpcottriple": ["Drawing Objects", "Flag"], "\\dpcount": ["Drawing Objects", "Value"], "\\dpellipse": ["Drawing Objects", "Flag"], "\\dpendgroup": ["Drawing Objects", "Flag"], "\\dpfillbgcb": ["Drawing Objects", "Value"], "\\dpfillbgcg": ["Drawing Objects", "Value"], "\\dpfillbgcr": ["Drawing Objects", "Value"], "\\dpfillbggray": ["Drawing Objects", "Value"], "\\dpfillbgpal": ["Drawing Objects", "Flag"], "\\dpfillfgcb": ["Drawing Objects", "Value"], "\\dpfillfgcg": ["Drawing Objects", "Value"], "\\dpfillfgcr": ["Drawing Objects", "Value"], "\\dpfillfggray": ["Drawing Objects", "Value"], "\\dpfillfgpal": ["Drawing Objects", "Flag"], "\\dpfillpat": ["Drawing Objects", "Value"], "\\dpgroup": ["Drawing Objects", "Flag"], "\\dpline": ["Drawing Objects", "Flag"], "\\dplinecob": ["Drawing Objects", "Value"], "\\dplinecog": ["Drawing Objects", "Value"], "\\dplinecor": ["Drawing Objects", "Value"], "\\dplinedado": ["Drawing Objects", "Flag"], "\\dplinedadodo": ["Drawing Objects", "Flag"], "\\dplinedash": ["Drawing Objects", "Flag"], "\\dplinedot": ["Drawing Objects", "Flag"], "\\dplinegray": ["Drawing Objects", "Value"], "\\dplinehollow": ["Drawing Objects", "Flag"], "\\dplinepal": ["Drawing Objects", "Flag"], "\\dplinesolid": ["Drawing Objects", "Flag"], "\\dplinew": ["Drawing Objects", "Value"], "\\dppolycount": ["Drawing Objects", "Value"], "\\dppolygon": ["Drawing Objects", "Flag"], "\\dppolyline": ["Drawing Objects", "Flag"], "\\dpptx": ["Drawing Objects", "Value"], "\\dppty": ["Drawing Objects", "Value"], "\\dprect": ["Drawing Objects", "Flag"], "\\dproundr": ["Drawing Objects", "Flag"], "\\dpshadow": ["Drawing Objects", "Flag"], "\\dpshadx": ["Drawing Objects", "Value"], "\\dpshady": ["Drawing Objects", "Value"], "\\dptxbtlr": ["Drawing Objects", "Flag"], "\\dptxbx": ["Drawing Objects", "Flag"], "\\dptxbxmar": ["Drawing Objects", "Value"], "\\dptxbxtext": ["Drawing Objects", "Destination"], "\\dptxlrtb": ["Drawing Objects", "Flag"], "\\dptxlrtbv": ["Drawing Objects", "Flag"], "\\dptxtbrl": ["Drawing Objects", "Flag"], "\\dptxtbrlv": ["Drawing Objects", "Flag"], "\\dpx": ["Drawing Objects", "Value"], "\\dpxsize": ["Drawing Objects", "Value"], "\\dpy": ["Drawing Objects", "Value"], "\\dpysize": ["Drawing Objects", "Value"], "\\dropcapli": ["Positioned Objects and Frames", "Value"], "\\dropcapt": ["Positioned Objects and Frames", "Value"], "\\ds": ["Section Formatting Properties", "Value"], "\\dxfrtext": ["Positioned Objects and Frames", "Value"], "\\dy": ["Information Group", "Value"], "\\edmins": ["Information Group", "Value"], "\\embo": ["Character Text", "Toggle"], "\\emdash": ["Special Characters", "Symbol"], "\\emfblip": ["Pictures", "Flag"], "\\emspace": ["Special Characters", "Symbol"], "\\endash": ["Special Characters", "Symbol"], "\\enddoc": ["Document Formatting Properties", "Flag"], "\\endnhere": ["Section Formatting Properties", "Flag"], "\\endnotes": ["Document Formatting Properties", "Flag"], "\\enforceprotN": ["Document Formatting Properties", "Value"], "\\enspace": ["Special Characters", "Symbol"], "\\expnd": ["Font (Character) Formatting Properties", "Value"], "\\expndtw": ["Font (Character) Formatting Properties", "Value"], "\\expshrtn": ["Document Formatting Properties", "Flag"], "\\f": ["Font (Character) Formatting Properties", "Value"], "\\faauto": ["Paragraph Formatting Properties", "Value"], "\\facenter": ["Paragraph Formatting Properties", "Flag"], "\\facingp": ["Document Formatting Properties", "Flag"], "\\fahang": ["Paragraph Formatting Properties", "Flag"], "\\falt": ["Font Table", "Destination"], "\\faroman": ["Paragraph Formatting Properties", "Flag"], "\\favar": ["Paragraph Formatting Properties", "Flag"], "\\fbiasN": ["Font Table", "Value"], "\\fbidi": ["Font Table", "Flag"], "\\fchars": ["Document Formatting Properties", "Destination"], "\\fcharset": ["Font Table", "Value"], "\\fdecor": ["Font Table", "Flag"], "\\fet": ["Document Formatting Properties", "Value"], "\\fetch": ["Font Table", "Flag"], "\\ffdefres": ["Form Fields", "Value"], "\\ffdeftext": ["Form Fields", "Destination"], "\\ffentrymcr": ["Form Fields", "Destination"], "\\ffexitmcr": ["Form Fields", "Destination"], "\\ffformat": ["Form Fields", "Destination"], "\\ffhaslistboxN": ["Form Fields", "Value"], "\\ffhelptext": ["Form Fields", "Destination"], "\\ffhpsN": ["Form Fields", "Value"], "\\ffl": ["Form Fields", "Destination"], "\\ffmaxlen": ["Form Fields", "Value"], "\\ffname": ["Form Fields", "Destination"], "\\ffownhelpN": ["Form Fields", "Value"], "\\ffownstatN": ["Form Fields", "Value"], "\\ffprotN": ["Form Fields", "Value"], "\\ffrecalcN": ["Form Fields", "Value"], "\\ffresN": ["Form Fields", "Value"], "\\ffsizeN": ["Form Fields", "Value"], "\\ffstattext": ["Form Fields", "Destination"], "\\fftypeN": ["Form Fields", "Value"], "\\fftypetxtN": ["Form Fields", "Value"], "\\fi": ["Paragraph Formatting Properties", "Value"], "\\fid": ["File Table", "Value"], "\\field": ["Fields", "Destination"], "\\file": ["File Table", "Destination"], "\\filetbl": ["File Table", "Destination"], "\\fittextN": ["Font (Character) Formatting Properties", "Value"], "\\fldalt": ["Document Formatting Properties", "Flag"], "\\fIddirty": ["Fields", "Flag"], "\\fldedit": ["Fields", "Flag"], "\\fldinst": ["Fields", "Destination"], "\\fldlock": ["Fields", "Flag"], "\\fldpriv": ["Fields", "Flag"], "\\fldrslt": ["Fields", "Destination"], "\\fldtype": ["Fields", "Destination"], "\\fmodern": ["Font Table", "Flag"], "\\fn": ["Style Sheet", "Value"], "\\fname": ["Font Table", "Destination"], "\\fnetwork": ["File Table", "Flag"], "\\fnil": ["Font Table", "Flag"], "\\fnonfilesys": ["File Table", "Flag"], "\\fontemb": ["Font Table", "Destination"], "\\fontfile": ["Font Table", "Destination"], "\\fonttbl": ["Font Table", "Destination"], "\\footer": ["Headers and Footers", "Destination"], "\\footerf": ["Headers and Footers", "Destination"], "\\footerl": ["Headers and Footers", "Destination"], "\\footery": ["Section Formatting Properties", "Value"], "\\footnote": ["Footnotes", "Destination"], "\\formdisp": ["Document Formatting Properties", "Flag"], "\\formfield": ["Form Fields", "Destination"], "\\formprot": ["Document Formatting Properties", "Flag"], "\\formshade": ["Document Formatting Properties", "Flag"], "\\fosnum": ["File Table", "Value"], "\\fprq": ["Font Table", "Value"], "\\fracwidth": ["Document Formatting Properties", "Flag"], "\\frelative": ["File Table", "Value"], "\\frmtxbtlr": ["Positioned Objects and Frames", "Flag"], "\\frmtxlrtb": ["Positioned Objects and Frames", "Flag"], "\\frmtxlrtbv": ["Positioned Objects and Frames", "Flag"], "\\frmtxtbrl": ["Positioned Objects and Frames", "Flag"], "\\frmtxtbrlv": ["Positioned Objects and Frames", "Flag"], "\\froman": ["Font Table", "Flag"], "\\fromhtml": ["Document Formatting Properties", "Flag"], "\\fromtext": ["Document Formatting Properties", "Flag"], "\\fs": ["Font (Character) Formatting Properties", "Value"], "\\fscript": ["Font Table", "Flag"], "\\fswiss": ["Font Table", "Flag"], "\\ftnalt": ["Document Formatting Properties", "Flag"], "\\ftnbj": ["Document Formatting Properties", "Flag"], "\\ftncn": ["Document Formatting Properties", "Destination"], "\\ftnil": ["Font Table", "Flag"], "\\ftnlytwnine": ["Document Formatting Properties", "Flag"], "\\ftnnalc": ["Document Formatting Properties", "Flag"], "\\ftnnar": ["Document Formatting Properties", "Flag"], "\\ftnnauc": ["Document Formatting Properties", "Flag"], "\\ftnnchi": ["Document Formatting Properties", "Flag"], "\\ftnnchosung": ["Document Formatting Properties", "Flag"], "\\ftnncnum": ["Document Formatting Properties", "Flag"], "\\ftnndbar": ["Document Formatting Properties", "Flag"], "\\ftnndbnum": ["Document Formatting Properties", "Flag"], "\\ftnndbnumd": ["Document Formatting Properties", "Flag"], "\\ftnndbnumk": ["Document Formatting Properties", "Flag"], "\\ftnndbnumt": ["Document Formatting Properties", "Flag"], "\\ftnnganada": ["Document Formatting Properties", "Flag"], "\\ftnngbnum": ["Document Formatting Properties", "Flag"], "\\ftnngbnumd": ["Document Formatting Properties", "Flag"], "\\ftnngbnumk": ["Document Formatting Properties", "Flag"], "\\ftnngbnuml": ["Document Formatting Properties", "Flag"], "\\ftnnrlc": ["Document Formatting Properties", "Flag"], "\\ftnnruc": ["Document Formatting Properties", "Flag"], "\\ftnnzodiac": ["Document Formatting Properties", "Flag"], "\\ftnnzodiacd": ["Document Formatting Properties", "Flag"], "\\ftnnzodiacl": ["Document Formatting Properties", "Flag"], "\\ftnrestart": ["Document Formatting Properties", "Flag"], "\\ftnrstcont": ["Document Formatting Properties", "Flag"], "\\ftnrstpg": ["Document Formatting Properties", "Flag"], "\\ftnsep": ["Document Formatting Properties", "Destination"], "\\ftnsepc": ["Document Formatting Properties", "Destination"], "\\ftnstart": ["Document Formatting Properties", "Value"], "\\ftntj": ["Document Formatting Properties", "Flag"], "\\fttruetype": ["Font Table", "Flag"], "\\fvaliddos": ["File Table", "Flag"], "\\fvalidhpfs": ["File Table", "Flag"], "\\fvalidmac": ["File Table", "Flag"], "\\fvalidntfs": ["File Table", "Flag"], "\\g": ["Font (Character) Formatting Properties", "Destination"], "\\gcw": ["Font (Character) Formatting Properties", "Value"], "\\generator": ["Generator", "Destination"], "\\green": ["Color Table", "Value"], "\\gridtbl": ["Font (Character) Formatting Properties", "Destination"], "\\gutter": ["Document Formatting Properties", "Value"], "\\gutterprl": ["Document Formatting Properties", "Flag"], "\\guttersxn": ["Section Formatting Properties", "Value"], "\\header": ["Headers and Footers", "Destination"], "\\headerf": ["Headers and Footers", "Destination"], "\\headerl": ["Headers and Footers", "Destination"], "\\headery": ["Section Formatting Properties", "Value"], "\\hich": ["Associated Character Properties", "Flag"], "\\highlight": ["Highlighting", "Value"], "\\hlfr": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\hlinkbase": ["Information Group", "Value"], "\\hlloc": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\hlsrc": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\horzdoc": ["Document Formatting Properties", "Flag"], "\\horzsect": ["Section Formatting Properties", "Flag"], "\\hr": ["Information Group", "Value"], "\\htmautsp": ["Document Formatting Properties", "Flag"], "\\htmlbase": ["Control Words Introduced bv Other Microsoft Products", "Flag"], "\\htmlrtf": ["Control Words Introduced bv Other Microsoft Products", "Toggle"], "\\htmltag": ["Control Words Introduced bv Other Microsoft Products", "Destination"], "\\hyphauto": ["Document Formatting Properties", "Toggle"], "\\hyphcaps": ["Document Formatting Properties", "Toggle"], "\\hyphconsec": ["Document Formatting Properties", "Value"], "\\hyphhotz": ["Document Formatting Properties", "Value"], "\\hyphpar": ["Paragraph Formatting Properties", "Toggle"], "\\i": ["Font (Character) Formatting Properties", "Toggle"], "\\id": ["Information Group", "Value"], "\\ilvl": ["Paragraph Text", "Value"], "\\impr": ["Character Text", "Toggle"], "\\info": ["Information Group", "Destination"], "\\insrsidN": ["Track Changes (Revision Marks)", "Value"], "\\intbl": ["Paragraph Formatting Properties", "Flag"], "\\ipgpN": ["Paragraph Group Properties", "Value"], "\\irowbandN": ["Table Definitions", "Value"], "\\irowN": ["Table Definitions", "Value"], "\\itapN": ["Paragraph Formatting Properties", "Value"], "\\ixe": ["Index Entries", "Flag"], "\\jcompress": ["Document Formatting Properties", "Flag"], "\\jexpand": ["Document Formatting Properties", "Flag"], "Njpegblip": ["Pictures", "Flag"], "\\jsksu": ["Document Formatting Properties", "Flag"], "\\keep": ["Paragraph Formatting Properties", "Flag"], "\\keepn": ["Paragraph Formatting Properties", "Flag"], "\\kerning": ["Font (Character) Formatting Properties", "Value"], "\\keycode": ["Style Sheet", "Destination"], "\\keywords": ["Information Group", "Destination"], "\\ksulangN": ["Document Formatting Properties", "Value"], "\\landscape": ["Document Formatting Properties", "Flag"], "\\lang": ["Font (Character) Formatting Properties", "Value"], "\\langfeN": ["Font (Character) Formatting Properties", "Value"], "\\langfenpN": ["Font (Character) Formatting Properties", "Value"], "\\langnpN": ["Font (Character) Formatting Properties", "Value"], "\\lastrow": ["Table Definitions", "Flag"], "\\latentstyles": ["Style and Formatting Restrictions", "Destination"], "\\lbrN": ["Special Characters", "Symbol"], "\\lchars": ["Document Formatting Properties", "Destination"], "\\ldblquote": ["Special Characters", "Symbol"], "\\level": ["Paragraph Formatting Properties", "Value"], "\\levelfollowN": ["List Table", "Value"], "\\levelindentN": ["List Table", "Value"], "\\leveljcN": ["List Table", "Value"], "\\leveljcnN": ["List Table", "Value"], "\\levellegalN": ["List Table", "Value"], "\\levelnfcN": ["List Table", "Value"], "MevelnfcnN": ["List Table", "Value"], "\\levelnorestartN": ["List Table", "Value"], "\\levelnumbers": ["List Table", "Destination"], "\\leveloldN": ["List Table", "Value"], "\\levelpictureN": ["List Table", "Value"], "\\levelprevN": ["List Table", "Value"], "\\levelprevspaceN": ["List Table", "Value"], "\\levelspaceN": ["List Table", "Value"], "\\levelstartatN": ["List Table", "Value"], "\\leveltemplateidN": ["List Table", "Value"], "\\leveltext": ["List Table", "Value"], "\\li": ["Paragraph Formatting Properties", "Value"], "\\line": ["Special Characters", "Symbol"], "\\linebetcol": ["Section Formatting Properties", "Flag"], "\\linecont": ["Section Formatting Properties", "Flag"], "\\linemod": ["Section Formatting Properties", "Value"], "\\lineppage": ["Section Formatting Properties", "Flag"], "\\linerestart": ["Section Formatting Properties", "Flag"], "\\linestart": ["Document Formatting Properties", "Value"], "Vinestarts": ["Section Formatting Properties", "Value"], "\\linex": ["Section Formatting Properties", "Value"], "\\linkself": ["Objects", "Flag"], "\\linkstyles": ["Document Formatting Properties", "Flag"], "\\linkval": ["Information Group", "Value"], "\\iinN": ["Paragraph Formatting Properties", "Value"], "\\lisaN": ["Paragraph Formatting Properties", "Value"], "\\lisbN": ["Paragraph Formatting Properties", "Value"], "\\listhybrid": ["List Table", "Flag"], "\\listidN": ["List Table", "Value"], "\\listname": ["List Table", "Destination"], "\\MstoverridecountN": ["List Table", "Value"], "VistoverrideformatN": ["List Table", "Value"], "\\listoverridestartN": ["List Table", "Value"], "\\MstpictureN": ["List Table", "Value"], "\\NstrestarthdnN": ["List Table", "Value"], "\\MstsimpleN": ["List Table", "Value"], "\\liststyleidN": ["List Table", "Value"], "\\liststylename": ["List Table", "Value"], "\\NsttemplateidN": ["List Table", "Value"], "\\listtext": ["Paragraph Text", "Destination"], "\\lnbrkrule": ["Document Formatting Properties", "Flag"], "\\lndscpsxn": ["Section Formatting Properties", "Flag"], "\\lnongrid": ["Document Formatting Properties", "Flag"], "\\loch": ["Associated Character Properties", "Flag"], "\\lquote": ["Special Characters", "Symbol"], "\\ls": ["List Table", "Value"], "\\lsdlockeddefN": ["Style and Formatting Restrictions", "Value"], "\\lsdlockedexcept": ["Style and Formatting Restrictions", "Destination"], "\\lsdstimaxN": ["Style and Formatting Restrictions", "Value"], "\\ltrch": ["Font (Character) Formatting Properties", "Flag"], "\\ltrdoc": ["Document Formatting Properties", "Flag"], "\\ltrmark": ["Special Characters", "Symbol"], "\\ltrpar": ["Paragraph Formatting Properties", "Flag"], "\\ltrrow": ["Table Definitions", "Flag"], "\\ltrsect": ["Section Formatting Properties", "Flag"], "\\lytcalctblwd": ["Document Formatting Properties", "Flag"], "\\lytexcttp": ["Document Formatting Properties", "Flag"], "\\lytprtmet": ["Document Formatting Properties", "Flag"], "\\lyttblrtgr": ["Document Formatting Properties", "Flag"], "\\mac": ["Character Set", "Flag"], "\\macpict": ["Pictures", "Flag"], "\\makebackup": ["Document Formatting Properties", "Flag"], "\\manager": ["Information Group", "Destination"], "\\margb": ["Document Formatting Properties", "Value"], "\\margbsxn": ["Section Formatting Properties", "Value"], "\\margl": ["Document Formatting Properties", "Value"], "\\marglsxn": ["Section Formatting Properties", "Value"], "\\margmirror": ["Document Formatting Properties", "Flag"], "\\margr": ["Document Formatting Properties", "Value"], "\\margrsxn": ["Section Formatting Properties", "Value"], "\\margt": ["Document Formatting Properties", "Value"], "\\margtsxn": ["Section Formatting Properties", "Value"], "\\mhtmltag": ["Control Words Introduced bv Other Microsoft Products", "Destination"], "\\min": ["Information Group", "Value"], "\\mo": ["Information Group", "Value"], "\\msmcap": ["Document Formatting Properties", "Flag"], "\\nestcell": ["Table Definitions", "Symbol"], "\\nestrow": ["Table Definitions", "Symbol"], "\\nesttableprops": ["Table Definitions", "Destination"], "\\newtblstyruls": ["Document Formatting Properties", "Flag"], "\\nextfile": ["Document Formatting Properties", "Destination"], "\\nobrkwrptbl": ["Document Formatting Properties", "Flag"], "\\nocolbal": ["Document Formatting Properties", "Flag"], "\\nocompatoptions": ["Document Formatting Properties", "Flag"], "\\nocwrap": ["Paragraph Formatting Properties", "Flag"], "\\noextrasprl": ["Document Formatting Properties", "Flag"], "\\nofchars": ["Information Group", "Value"], "\\nofcharsws": ["Information Group", "Value"], "\\nofpages": ["Information Group", "Value"], "\\nofwords": ["Information Group", "Value"], "\\nogrowautofit": ["Document Formatting Properties", "Flag"], "\\nojkernpunct": ["Document Formatting Properties", "Flag"], "\\nolead": ["Document Formatting Properties", "Flag"], "\\noline": ["Paragraph Formatting Properties", "Flag"], "\\nolnhtadjtbl": ["Document Formatting Properties", "Flag"], "\\nonesttables": ["Table Definitions", "Destination"], "\\nonshppict": ["Pictures", "Flag"], "\\nooverflow": ["Paragraph Formatting Properties", "Flag"], "\\noproof": ["Font (Character) Formatting Properties", "Flag"], "\\nosectexpand": ["Font (Character) Formatting Properties", "Flag"], "\\nosnaplinegrid": ["Paragraph Formatting Properties", "Flag"], "\\nospaceforul": ["Document Formatting Properties", "Flag"], "\\nosupersub": ["Font (Character) Formatting Properties", "Flag"], "\\notabind": ["Document Formatting Properties", "Flag"], "\\noultrlspc": ["Document Formatting Properties", "Flag"], "\\nowidctlpar": ["Paragraph Formatting Properties", "Flag"], "\\nowrap": ["Positioned Objects and Frames", "Flag"], "\\nowwrap": ["Paragraph Formatting Properties", "Flag"], "\\noxlattoyen": ["Document Formatting Properties", "Flag"], "\\objalias": ["Objects", "Destination"], "\\objalign": ["Objects", "Value"], "\\objattph": ["Objects", "Flag"], "\\objautlink": ["Objects", "Flag"], "\\objclass": ["Objects", "Destination"], "\\objcropb": ["Objects", "Value"], "\\objcropl": ["Objects", "Value"], "\\objcropr": ["Objects", "Value"], "\\objcropt": ["Objects", "Value"], "\\objdata": ["Objects", "Destination"], "\\object": ["Objects", "Destination"], "\\objemb": ["Objects", "Flag"], "\\objh": ["Objects", "Value"], "\\objhtml": ["Objects", "Flag"], "\\objicemb": ["Objects", "Flag"], "\\objlink": ["Objects", "Flag"], "\\objlock": ["Objects", "Flag"], "\\objname": ["Objects", "Destination"], "\\objocx": ["Objects", "Flag"], "\\objpub": ["Objects", "Flag"], "\\objscalex": ["Objects", "Value"], "\\objscaley": ["Objects", "Value"], "\\objsect": ["Objects", "Destination"], "\\objsetsize": ["Objects", "Flag"], "\\objsub": ["Objects", "Flag"], "\\objtime": ["Objects", "Destination"], "\\objtransy": ["Objects", "Value"], "\\objupdate": ["Objects", "Flag"], "\\objw": ["Objects", "Value"], "\\oldas": ["Document Formatting Properties", "Flag"], "\\oldcprops": ["Track Changes (Revision Marks)", "Destination"], "\\oldlinewrap": ["Document Formatting Properties", "Flag"], "\\oldpprops": ["Track Changes (Revision Marks)", "Destination"], "\\oldsprops": ["Track Changes (Revision Marks)", "Destination"], "\\oldtprops": ["Track Changes (Revision Marks)", "Destination"], "\\operator": ["Information Group", "Destination"], "\\otblrul": ["Document Formatting Properties", "Flag"], "\\outl": ["Font (Character) Formatting Properties", "Toggle"], "\\outlinelevelN": ["Paragraph Text", "Value"], "\\overlay": ["Paragraph Text", "Flag"], "\\page": ["Special Characters", "Symbol"], "\\pagebb": ["Paragraph Formatting Properties", "Flag"], "\\panose": ["Font Table", "Destination"], "\\paperh": ["Document Formatting Properties", "Value"], "\\paperw": ["Document Formatting Properties", "Value"], "\\par": ["Special Characters", "Symbol"], "\\pararsidN": ["Track Changes (Revision Marks)", "Value"], "\\pard": ["Paragraph Formatting Properties", "Flag"], "\\pc": ["Character Set", "Flag"], "\\pca": ["Character Set", "Flag"], "\\pgbrdrb": ["Document Formatting Properties", "Flag"], "\\pgbrdrfoot": ["Document Formatting Properties", "Flag"], "\\pgbrdrhead": ["Document Formatting Properties", "Flag"], "\\pgbrdrl": ["Document Formatting Properties", "Flag"], "\\pgbrdroptN": ["Document Formatting Properties", "Value"], "\\pgbrdrr": ["Document Formatting Properties", "Flag"], "\\pgbrdrsnap": ["Document Formatting Properties", "Flag"], "\\pgbrdrt": ["Document Formatting Properties", "Flag"], "\\pghsxn": ["Section Formatting Properties", "Value"], "\\pgnbidia": ["Section Formatting Properties", "Flag"], "\\pgnbidib": ["Section Formatting Properties", "Flag"], "\\pgnchosung": ["Bullets and Numbering", "Flag"], "\\pgncnum": ["Bullets and Numbering", "Flag"], "\\pgncont": ["Section Formatting Properties", "Flag"], "\\pgndbnum": ["Section Formatting Properties", "Flag"], "\\pgndbnumd": ["Section Formatting Properties", "Flag"], "\\pgndbnumk": ["Bullets and Numbering", "Flag"], "\\pgndbnumt": ["Bullets and Numbering", "Flag"], "\\pgndec": ["Section Formatting Properties", "Flag"], "\\pgndecd": ["Section Formatting Properties", "Flag"], "\\pgnganada": ["Bullets and Numbering", "Flag"], "\\pgngbnum": ["Bullets and Numbering", "Flag"], "\\pgngbnumd": ["Bullets and Numbering", "Flag"], "\\pgngbnumk": ["Bullets and Numbering", "Flag"], "\\pgngbnuml": ["Bullets and Numbering", "Flag"], "\\pgnhindia": ["Section Formatting Properties", "Flag"], "\\pgnhindib": ["Section Formatting Properties", "Flag"], "\\pgnhindic": ["Section Formatting Properties", "Flag"], "\\pgnhindid": ["Section Formatting Properties", "Flag"], "\\pgnhn": ["Section Formatting Properties", "Value"], "\\pgnhnsc": ["Section Formatting Properties", "Flag"], "\\pgnhnsh": ["Section Formatting Properties", "Flag"], "\\pgnhnsm": ["Section Formatting Properties", "Flag"], "\\pgnhnsn": ["Section Formatting Properties", "Flag"], "\\pgnhnsp": ["Section Formatting Properties", "Flag"], "\\pgnidN": ["Section Formatting Properties", "Value"], "\\pgnlcltr": ["Section Formatting Properties", "Flag"], "\\pgnlcrm": ["Section Formatting Properties", "Flag"], "\\pgnrestart": ["Section Formatting Properties", "Flag"], "\\pgnstart": ["Document Formatting Properties", "Value"], "\\pgnstarts": ["Section Formatting Properties", "Value"], "\\pgnthaia": ["Section Formatting Properties", "Flag"], "\\pgnthaib": ["Section Formatting Properties", "Flag"], "\\pgnthaic": ["Section Formatting Properties", "Flag"], "\\pgnucltr": ["Section Formatting Properties", "Flag"], "\\pgnucrm": ["Section Formatting Properties", "Flag"], "\\pgnvieta": ["Section Formatting Properties", "Flag"], "\\pgnx": ["Section Formatting Properties", "Value"], "\\pgny": ["Section Formatting Properties", "Value"], "\\pgnzodiac": ["Bullets and Numbering", "Flag"], "\\pgnzodiacd": ["Bullets and Numbering", "Flag"], "\\pgnzodiacl": ["Bullets and Numbering", "Flag"], "\\pgp": ["Paragraph Group Properties", "Destination"], "\\pgptbl": ["Paragraph Group Properties", "Destination"], "\\pgwsxn": ["Section Formatting Properties", "Value"], "\\phcol": ["Positioned Objects and Frames", "Flag"], "\\phmrg": ["Positioned Objects and Frames", "Flag"], "\\phpg": ["Positioned Objects and Frames", "Flag"], "\\picbmp": ["Pictures", "Flag"], "\\picbpp": ["Pictures", "Value"], "\\piccropb": ["Pictures", "Value"], "\\piccropl": ["Pictures", "Value"], "\\piccropr": ["Pictures", "Value"], "\\piccropt": ["Pictures", "Value"], "\\pich": ["Pictures", "Value"], "\\pichgoal": ["Pictures", "Value"], "\\picprop": ["Pictures", "Destination"], "\\picscaled": ["Pictures", "Flag"], "\\picscalex": ["Pictures", "Value"], "\\picscaley": ["Pictures", "Value"], "\\pict": ["Pictures", "Destination"], "\\picw": ["Pictures", "Value"], "\\picwgoal": ["Pictures", "Value"], "\\plain": ["Font (Character) Formatting Properties", "Flag"], "\\pmmetafile": ["Pictures", "Value"], "\\pn": ["Bullets and Numbering", "Destination"], "\\pnacross": ["Bullets and Numbering", "Flag"], "\\pnaiu": ["Bullets and Numbering", "Flag"], "\\pnaiud": ["Bullets and Numbering", "Flag"], "\\pnaiueo": ["Bullets and Numbering", "Flag"], "\\pnaiueod": ["Bullets and Numbering", "Flag"], "\\pnb": ["Bullets and Numbering", "Toggle"], "\\pnbidia": ["Bullets and Numbering", "Flag"], "\\pnbidib": ["Bullets and Numbering", "Flag"], "\\pncaps": ["Bullets and Numbering", "Toggle"], "\\pncard": ["Bullets and Numbering", "Flag"], "\\pncf": ["Bullets and Numbering", "Value"], "\\pnchosung": ["Bullets and Numbering", "Flag"], "\\pncnum": ["Bullets and Numbering", "Flag"], "\\pndbnum": ["Bullets and Numbering", "Flag"], "\\pndbnumd": ["Bullets and Numbering", "Flag"], "\\pndbnumk": ["Bullets and Numbering", "Flag"], "\\pndbnuml": ["Bullets and Numbering", "Flag"], "\\pndbnumt": ["Bullets and Numbering", "Flag"], "\\pndec": ["Bullets and Numbering", "Flag"], "\\pndecd": ["Bullets and Numbering", "Flag"], "\\pnf": ["Bullets and Numbering", "Value"], "\\pnfs": ["Bullets and Numbering", "Value"], "\\pnganada": ["Bullets and Numbering", "Flag"], "\\pngblip": ["Pictures", "Flag"], "\\pngbnum": ["Bullets and Numbering", "Flag"], "\\pngbnumd": ["Bullets and Numbering", "Flag"], "\\pngbnumk": ["Bullets and Numbering", "Flag"], "\\pngbnuml": ["Bullets and Numbering", "Flag"], "\\pnhang": ["Bullets and Numbering", "Flag"], "\\pni": ["Bullets and Numbering", "Toggle"], "\\pnindent": ["Bullets and Numbering", "Value"], "\\pniroha": ["Bullets and Numbering", "Flag"], "\\pnirohad": ["Bullets and Numbering", "Flag"], "\\pnlcltr": ["Bullets and Numbering", "Flag"], "\\pnlcrm": ["Bullets and Numbering", "Flag"], "\\pnlvl": ["Bullets and Numbering", "Value"], "\\pnlvlblt": ["Bullets and Numbering", "Flag"], "\\pnlvlbody": ["Bullets and Numbering", "Flag"], "\\pnlvlcont": ["Bullets and Numbering", "Flag"], "\\pnnumonce": ["Bullets and Numbering", "Flag"], "\\pnord": ["Bullets and Numbering", "Flag"], "\\pnordt": ["Bullets and Numbering", "Flag"], "\\pnprev": ["Bullets and Numbering", "Flag"], "\\pnqc": ["Bullets and Numbering", "Flag"], "\\pnql": ["Bullets and Numbering", "Flag"], "\\pnqr": ["Bullets and Numbering", "Flag"], "\\pnrauthN": ["Paragraph Text", "Value"], "\\pnrdateN": ["Paragraph Text", "Value"], "\\pnrestart": ["Bullets and Numbering", "Flag"], "\\pnrnfcN": ["Paragraph Text", "Value"], "\\pnrnot": ["Paragraph Text", "Flag"], "\\pnrpnbrN": ["Paragraph Text", "Value"], "\\pnrrgbN": ["Paragraph Text", "Value"], "\\pnrstartN": ["Paragraph Text", "Value"], "\\pnrstopN": ["Paragraph Text", "Value"], "\\pnrxstN": ["Paragraph Text", "Value"], "\\pnscaps": ["Bullets and Numbering", "Toggle"], "\\pnseclvl": ["Bullets and Numbering", "Destination"], "\\pnsp": ["Bullets and Numbering", "Value"], "\\pnstart": ["Bullets and Numbering", "Value"], "\\pnstrike": ["Bullets and Numbering", "Toggle"], "\\pntext": ["Bullets and Numbering", "Destination"], "\\pntxta": ["Bullets and Numbering", "Destination"], "\\pntxtb": ["Bullets and Numbering", "Destination"], "\\pnucltr": ["Bullets and Numbering", "Flag"], "\\pnucrm": ["Bullets and Numbering", "Flag"], "\\pnul": ["Bullets and Numbering", "Toggle"], "\\pnuld": ["Bullets and Numbering", "Flag"], "\\pnuldash": ["Bullets and Numbering", "Flag"], "\\pnuldashd": ["Bullets and Numbering", "Flag"], "\\pnuldashdd": ["Bullets and Numbering", "Flag"], "\\pnuldb": ["Bullets and Numbering", "Flag"], "\\pnulhair": ["Bullets and Numbering", "Flag"], "\\pnulnone": ["Bullets and Numbering", "Flag"], "\\pnulth": ["Bullets and Numbering", "Flag"], "\\pnulw": ["Bullets and Numbering", "Flag"], "\\pnulwave": ["Bullets and Numbering", "Flag"], "\\pnzodiac": ["Bullets and Numbering", "Flag"], "\\pnzodiacd": ["Bullets and Numbering", "Flag"], "\\pnzodiacl": ["Bullets and Numbering", "Flag"], "\\posnegx": ["Positioned Objects and Frames", "Value"], "\\posnegy": ["Positioned Objects and Frames", "Value"], "\\posx": ["Positioned Objects and Frames", "Value"], "\\posxc": ["Positioned Objects and Frames", "Flag"], "\\posxi": ["Positioned Objects and Frames", "Flag"], "\\posxl": ["Positioned Objects and Frames", "Flag"], "\\posxo": ["Positioned Objects and Frames", "Flag"], "\\posxr": ["Positioned Objects and Frames", "Flag"], "\\posy": ["Positioned Objects and Frames", "Value"], "\\posyb": ["Positioned Objects and Frames", "Flag"], "\\posyc": ["Positioned Objects and Frames", "Flag"], "\\posyil": ["Positioned Objects and Frames", "Flag"], "\\posyin": ["Paragraph Text", "Flag"], "\\posyout": ["Paragraph Text", "Flag"], "\\posyt": ["Positioned Objects and Frames", "Flag"], "\\prcolbl": ["Document Formatting Properties", "Flag"], "\\printdata": ["Document Formatting Properties", "Flag"], "\\printim": ["Information Group", "Destination"], "\\private": ["Document Formatting Properties", "Destination"], "\\propname": ["Information Group", "Value"], "\\proptype": ["Information Group", "Value"], "\\protend": ["Protection Exceptions", "Destination"], "\\protlevelN": ["Document Formatting Properties", "Value"], "\\protstart": ["Protection Exceptions", "Destination"], "\\protusertbl": ["User Protection Information", "Destination"], "\\psover": ["Document Formatting Properties", "Flag"], "\\psz": ["Document Formatting Properties", "Value"], "\\pubauto": ["Macintosh Edition Manager Publisher Objects", "Flag"], "\\pvmrg": ["Positioned Objects and Frames", "Flag"], "\\pvpara": ["Positioned Objects and Frames", "Flag"], "\\pvpg": ["Positioned Objects and Frames", "Flag"], "\\pwdN": ["Control Words Introduced bv Other Microsoft Products", "Destination"], "\\pxe": ["Index Entries", "Destination"], "\\qc": ["Paragraph Formatting Properties", "Flag"], "\\qd": ["Paragraph Formatting Properties", "Flag"], "\\qj": ["Paragraph Formatting Properties", "Flag"], "\\qk": ["Paragraph Formatting Properties", "Flag"], "\\qi": ["Paragraph Formatting Properties", "Flag"], "\\qmspace": ["Special Characters", "Symbol"], "\\qr": ["Paragraph Formatting Properties", "Flag"], "\\qt": ["Paragraph Formatting Properties", "Flag"], "\\rawbgdkbdiag": ["Table Definitions", "Flag"], "\\rawclbgbdiag": ["Table Definitions", "Flag"], "\\rawclbgcross": ["Table Definitions", "Flag"], "\\rawclbgdcross": ["Table Definitions", "Flag"], "\\rawclbgdkcross": ["Table Definitions", "Flag"], "\\rawclbgdkdcross": ["Table Definitions", "Flag"], "\\rawclbgdkfdiag": ["Table Definitions", "Flag"], "\\rawclbgdkhor": ["Table Definitions", "Flag"], "\\rawclbgdkvert": ["Table Definitions", "Flag"], "\\rawclbgfdiag": ["Table Definitions", "Flag"], "\\rawclbghoriz": ["Table Definitions", "Flag"], "\\rawclbgvert": ["Table Definitions", "Flag"], "\\rdblquote": ["Special Characters", "Symbol"], "\\readprot": ["Document Formatting Properties", "Flag"], "\\red": ["Color Table", "Value"], "\\relyonvmlN": ["Document Formatting Properties", "Value"], "\\rempersonalinfo": ["Document Formatting Properties", "Flag"], "\\result": ["Objects", "Destination"], "\\revauth": ["Font (Character) Formatting Properties", "Value"], "\\revauthdelN": ["Character Text", "Value"], "\\revbar": ["Document Formatting Properties", "Value"], "\\revdttm": ["Font (Character) Formatting Properties", "Value"], "\\revdttmdelN": ["Character Text", "Value"], "\\revised": ["Font (Character) Formatting Properties", "Toggle"], "\\revisions": ["Document Formatting Properties", "Flag"], "\\revprop": ["Document Formatting Properties", "Value"], "\\revprot": ["Document Formatting Properties", "Flag"], "\\revtbl": ["Track Changes", "Destination"], "\\revtim": ["Information Group", "Destination"], "\\ri": ["Paragraph Formatting Properties", "Value"], "\\rinN": ["Paragraph Formatting Properties", "Value"], "\\row": ["Special Characters", "Symbol"], "\\rquote": ["Special Characters", "Symbol"], "\\rsidN": ["Track Changes (Revision Marks)", "Value"], "\\rsidrootN": ["Track Changes (Revision Marks)", "Value"], "\\rsidtbl": ["Track Changes (Revision Marks)", "Destination"], "\\rsltbmp": ["Objects", "Flag"], "\\rslthtml": ["Objects", "Flag"], "\\rsltmerge": ["Objects", "Flag"], "\\rsltpict": ["Objects", "Flag"], "\\rsltrtf": ["Objects", "Flag"], "\\rslttxt": ["Objects", "Flag"], "\\rtf": ["RTF Version", "Destination"], "\\rtlch": ["Font (Character) Formatting Properties", "Flag"], "\\rtldoc": ["Document Formatting Properties", "Flag"], "\\rtlgutter": ["Document Formatting Properties", "Flag"], "\\rtlmark": ["Special Characters", "Symbol"], "\\rtlpar": ["Paragraph Formatting Properties", "Flag"], "\\rtlrow": ["Table Definitions", "Flag"], "\\rtlsect": ["Section Formatting Properties", "Flag"], "\\rxe": ["Index Entries", "Destination"], "\\s": ["Paragraph Formatting Properties", "Value"], "\\sa": ["Paragraph Formatting Properties", "Value"], "\\saautoN": ["Paragraph Formatting Properties", "Toggle"], "\\saftnnalc": ["Section Formatting Properties", "Flag"], "\\saftnnar": ["Section Formatting Properties", "Flag"], "\\saftnnauc": ["Section Formatting Properties", "Flag"], "\\saftnnchi": ["Section Formatting Properties", "Flag"], "\\saftnnchosung": ["Section Formatting Properties", "Flag"], "\\saftnncnum": ["Section Formatting Properties", "Flag"], "\\saftnndbar": ["Section Formatting Properties", "Flag"], "\\saftnndbnum": ["Section Formatting Properties", "Flag"], "\\saftnndbnumd": ["Section Formatting Properties", "Flag"], "\\saftnndbnumk": ["Section Formatting Properties", "Flag"], "\\saftnndbnumt": ["Section Formatting Properties", "Flag"], "\\saftnnganada": ["Section Formatting Properties", "Flag"], "\\saftnngbnum": ["Section Formatting Properties", "Flag"], "\\saftnngbnumd": ["Section Formatting Properties", "Flag"], "\\saftnngbnumk": ["Section Formatting Properties", "Flag"], "\\saftnngbnuml": ["Section Formatting Properties", "Flag"], "\\saftnnrlc": ["Section Formatting Properties", "Flag"], "\\saftnnruc": ["Section Formatting Properties", "Flag"], "\\saftnnzodiac": ["Section Formatting Properties", "Flag"], "\\saftnnzodiacd": ["Section Formatting Properties", "Flag"], "\\saftnnzodiacl": ["Section Formatting Properties", "Flag"], "\\saftnrestart": ["Section Formatting Properties", "Flag"], "\\saftnrstcont": ["Section Formatting Properties", "Flag"], "\\saftnstart": ["Section Formatting Properties", "Flag"], "\\sautoupd": ["Style Sheet", "Flag"], "\\sb": ["Paragraph Formatting Properties", "Value"], "\\sbasedon": ["Style Sheet", "Value"], "\\sbautoN": ["Paragraph Formatting Properties", "Toggle"], "\\sbkcol": ["Section Formatting Properties", "Flag"], "\\sbkeven": ["Section Formatting Properties", "Flag"], "\\sbknone": ["Section Formatting Properties", "Flag"], "\\sbkodd": ["Section Formatting Properties", "Flag"], "\\sbkpage": ["Section Formatting Properties", "Flag"], "\\sbys": ["Paragraph Formatting Properties", "Flag"], "\\scaps": ["Font (Character) Formatting Properties", "Toggle"], "\\scompose": ["Style Sheet", "Flag"], "\\sec": ["Information Group", "Value"], "\\sect": ["Special Characters", "Symbol"], "\\sectd": ["Section Formatting Properties", "Flag"], "\\sectdefaultcl": ["Section Formatting Properties", "Value"], "\\sectexpandN": ["Section Formatting Properties", "Value"], "\\sectlinegridN": ["Section Formatting Properties", "Value"], "\\sectnum": ["Special Characters", "Symbol"], "\\sectrsidN": ["Track Changes (Revision Marks)", "Value"], "\\sectspecifycl": ["Section Formatting Properties", "Value"], "\\sectspecifygenN": ["Section Formatting Properties", "Flag"], "\\sectspecifyl": ["Section Formatting Properties", "Value"], "\\sectunlocked": ["Section Formatting Properties", "Flag"], "\\sftnbj": ["Section Formatting Properties", "Flag"], "\\sftnnalc": ["Section Formatting Properties", "Flag"], "\\sftnnar": ["Section Formatting Properties", "Flag"], "\\sftnnauc": ["Section Formatting Properties", "Flag"], "\\sftnnchi": ["Section Formatting Properties", "Flag"], "\\sftnnchosung": ["Section Formatting Properties", "Flag"], "\\sftnncnum": ["Section Formatting Properties", "Flag"], "\\sftnndbar": ["Section Formatting Properties", "Flag"], "\\sftnndbnum": ["Section Formatting Properties", "Flag"], "\\sftnndbnumd": ["Section Formatting Properties", "Flag"], "\\sftnndbnumk": ["Section Formatting Properties", "Flag"], "\\sftnndbnumt": ["Section Formatting Properties", "Flag"], "\\sftnnganada": ["Section Formatting Properties", "Flag"], "\\sftnngbnum": ["Section Formatting Properties", "Flag"], "\\sftnngbnumd": ["Section Formatting Properties", "Flag"], "\\sftnngbnumk": ["Section Formatting Properties", "Flag"], "\\sftnngbnuml": ["Section Formatting Properties", "Flag"], "\\sftnnrlc": ["Section Formatting Properties", "Flag"], "\\sftnnruc": ["Section Formatting Properties", "Flag"], "\\sftnnzodiac": ["Section Formatting Properties", "Flag"], "\\sftnnzodiacd": ["Section Formatting Properties", "Flag"], "\\sftnnzodiacl": ["Section Formatting Properties", "Flag"], "\\sftnrestart": ["Section Formatting Properties", "Flag"], "\\sftnrstcont": ["Section Formatting Properties", "Flag"], "\\sftnrstpg": ["Section Formatting Properties", "Flag"], "\\sftnstart": ["Section Formatting Properties", "Flag"], "\\sftntj": ["Section Formatting Properties", "Flag"], "\\shad": ["Font (Character) Formatting Properties", "Toggle"], "\\shading": ["Paragraph Shading", "Value"], "\\shidden": ["Style Sheet", "Flag"], "\\shift": ["Style Sheet", "Flag"], "\\shpbottomN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpbxcolumn": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbxignore": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbxmargin": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbxpage": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbyignore": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbymargin": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbypage": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpbypara": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shpfblwtxtN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpfhdrN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpgrp": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpleftN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shplidN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shplockanchor": ["Word through Word RTF for Drawing Objects (Shades)", "Flag"], "\\shppict": ["Pictures", "Destination"], "\\shprightN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shprslt": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shptopN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shptxt": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpwrkN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpwrN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\shpzN": ["Word through Word RTF for Drawing Objects (Shades)", "Value"], "\\sl": ["Paragraph Formatting Properties", "Value"], "\\slinkN": ["Style Sheet", "Value"], "\\slmult": ["Paragraph Formatting Properties", "Value"], "\\slocked": ["Style Sheet", "Flagged"], "\\snaptogridincell": ["Document Formatting Properties", "Flag"], "\\snext": ["Style Sheet", "Value"], "\\softcol": ["Special Characters", "Flag"], "\\softlheight": ["Special Characters", "Value"], "\\softline": ["Special Characters", "Flag"], "\\softpage": ["Special Characters", "Flag"], "\\spersonal": ["Style Sheet", "Flag"], "\\splytwnine": ["Document Formatting Properties", "Flag"], "\\sprsbsp": ["Document Formatting Properties", "Flag"], "\\sprslnsp": ["Document Formatting Properties", "Flag"], "\\sprsspbf": ["Document Formatting Properties", "Flag"], "\\sprstsm": ["Document Formatting Properties", "Flag"], "\\sprstsp": ["Document Formatting Properties", "Flag"], "\\spv": ["Paragraph Formatting Properties", "Flag"], "\\sreply": ["Style Sheet", "Flag"], "\\ssemihidden": ["Style Sheet", "Flag"], "\\staticval": ["Information Group", "Value"], "\\stextflow": ["Section Text", "Value"], "\\strike": ["Font (Character) Formatting Properties", "Toggle"], "\\strikedl": ["Character Text", "Toggle"], "\\stshfbiN": ["Default Fonts", "Value"], "\\stshfdbchN": ["Default Fonts", "Value"], "\\stshfhichN": ["Default Fonts", "Value"], "\\stshflochN": ["Default Fonts", "Value"], "\\stylelock": ["Document Formatting Properties", "Flag"], "\\stylelockbackcomp": ["Document Formatting Properties", "Flag"], "\\stylelockenforced": ["Document Formatting Properties", "Flag"], "\\stylesheet": ["Style Sheet", "Destination"], "\\styrsidN": ["Track Changes (Revision Marks)", "Value"], "\\sub": ["Font (Character) Formatting Properties", "Flag"], "\\subdocument": ["Paragraph Formatting Properties", "Value"], "\\subfontbysize": ["Document Formatting Properties", "Flag"], "\\subject": ["Information Group", "Destination"], "\\super": ["Font (Character) Formatting Properties", "Flag"], "\\svb": ["Word through Word RTF for Drawing Objects (Shades)", "Destination"], "\\swpbdr": ["Document Formatting Properties", "Flag"], "\\tab": ["Special Characters", "Symbol"], "\\tabsnoovrlp": ["Table Definitions", "Flag"], "\\taprtl": ["Table Definitions", "Flag"], "\\tb": ["Tabs", "Value"], "\\tbllkbestfit": ["Table Definitions", "Flag"], "\\tbllkborder": ["Table Definitions", "Flag"], "\\tbllkcolor": ["Table Definitions", "Flag"], "\\tbllkfont": ["Table Definitions", "Flag"], "\\tbllkhdrcols": ["Table Definitions", "Flag"], "\\tbllkhdrrows": ["Table Definitions", "Flag"], "\\tbllklastcol": ["Table Definitions", "Flag"], "\\tbllklastrow": ["Table Definitions", "Flag"], "\\tbllkshading": ["Table Definitions", "Flag"], "\\tblrsidN": ["Table Definitions", "Flag"], "\\tc": ["Table of Contents Entries", "Destination"], "\\tcelld": ["Table Definitions", "Flag"], "\\tcf": ["Table of Contents Entries", "Value"], "\\tcl": ["Table of Contents Entries", "Value"], "\\tcn": ["Table of Contents Entries", "Flag"], "\\tdfrmtxtBottomN": ["Table Definitions", "Value"], "\\tdfrmtxtLeftN": ["Table Definitions", "Value"], "\\tdfrmtxtRightN": ["Table Definitions", "Value"], "\\tdfrmtxtTopN": ["Table Definitions", "Value"], "\\template": ["Document Formatting Properties", "Destination"], "\\time": ["Fields", "Flag"], "\\title": ["Information Group", "Destination"], "\\titlepg": ["Section Formatting Properties", "Flag"], "\\tldot": ["Tabs", "Flag"], "\\tleq": ["Tabs", "Flag"], "\\tlhyph": ["Tabs", "Flag"], "\\tlmdot": ["Tabs", "Flag"], "\\tlth": ["Tabs", "Flag"], "\\tlul": ["Tabs", "Flag"], "\\toplinepunct": ["Document Formatting Properties", "Flag"], "\\tphcol": ["Table Definitions", "Flag"], "\\tphmrg": ["Table Definitions", "Flag"], "\\tphpg": ["Table Definitions", "Flag"], "\\tposnegxN": ["Table Definitions", "Value"], "\\tposnegyN": ["Table Definitions", "Value"], "\\tposxc": ["Table Definitions", "Flag"], "\\tposxi": ["Table Definitions", "Flag"], "\\tposxl": ["Table Definitions", "Flag"], "\\tposXN": ["Table Definitions", "Value"], "\\tposxo": ["Table Definitions", "Flag"], "\\tposxr": ["Table Definitions", "Flag"], "\\tposy": ["Table Definitions", "Flag"], "\\tposyb": ["Table Definitions", "Flag"], "\\tposyc": ["Table Definitions", "Flag"], "\\tposyil": ["Table Definitions", "Flag"], "\\tposyin": ["Table Definitions", "Flag"], "\\tposyoutv": ["Table Definitions", "Flag"], "\\tposyt": ["Table Definitions", "Flag"], "\\tpvmrg": ["Table Definitions", "Flag"], "\\tpvpara": ["Table Definitions", "Flag"], "\\tpvpg": ["Table Definitions", "Flag"], "\\tqc": ["Tabs", "Flag"], "\\tqdec": ["Tabs", "Flag"], "\\tqr": ["Tabs", "Flag"], "\\transmf": ["Document Formatting Properties", "Flag"], "\\trauthN": ["Table Definitions", "Value"], "\\trautofitN": ["Table Definitions", "Toggle"], "\\trbgbdiag": ["Table Definitions", "Flag"], "\\trbgcross": ["Table Definitions", "Flag"], "\\trbgdcross": ["Table Definitions", "Flag"], "\\trbgdkbdiag": ["Table Definitions", "Flag"], "\\trbgdkcross": ["Table Definitions", "Flag"], "\\trbgdkdcross": ["Table Definitions", "Flag"], "\\trbgdkfdiag": ["Table Definitions", "Flag"], "\\trbgdkhor": ["Table Definitions", "Flag"], "\\trbgdkvert": ["Table Definitions", "Flag"], "\\trbgfdiag": ["Table Definitions", "Flag"], "\\trbghoriz": ["Table Definitions", "Flag"], "\\trbgvert": ["Table Definitions", "Flag"], "\\trbrdrb": ["Table Definitions", "Flag"], "\\trbrdrh": ["Table Definitions", "Flag"], "\\trbrdrl": ["Table Definitions", "Flag"], "\\trbrdrr": ["Table Definitions", "Flag"], "\\trbrdrt": ["Table Definitions", "Flag"], "\\trbrdrv": ["Table Definitions", "Flag"], "\\trcbpatN": ["Table Definitions", "Value"], "\\trcfpatN": ["Table Definitions", "Value"], "\\trdateN": ["Table Definitions", "Value"], "\\trftsWidthAN": ["Table Definitions", "Value"], "\\trftsWidthBN": ["Table Definitions", "Value"], "\\trftsWidthN": ["Table Definitions", "Value"], "\\trgaph": ["Table Definitions", "Value"], "\\trhdr": ["Table Definitions", "Flag"], "\\trkeep": ["Table Definitions", "Flag"], "\\trleft": ["Table Definitions", "Value"], "\\trowd": ["Table Definitions", "Flag"], "\\trpaddbN": ["Table Definitions", "Value"], "\\trpaddfbN": ["Table Definitions", "Value"], "\\trpaddflN": ["Table Definitions", "Value"], "\\trpaddfrN": ["Table Definitions", "Value"], "\\trpaddftN": ["Table Definitions", "Value"], "\\trpaddlN": ["Table Definitions", "Value"], "\\trpaddrN": ["Table Definitions", "Value"], "\\trappdtN": ["Table Definitions", "Value"], "\\trpatN": ["Table Definitions", "Value"], "\\trqc": ["Table Definitions", "Flag"], "\\trql": ["Table Definitions", "Flag"], "\\trqr": ["Table Definitions", "Flag"], "\\trrh": ["Table Definitions", "Value"], "\\trshdngN": ["Table Definitions", "Value"], "\\trspdbN": ["Table Definitions", "Value"], "\\trspdfbN": ["Table Definitions", "Value"], "\\trspdflN": ["Table Definitions", "Value"], "\\trspdfrN": ["Table Definitions", "Value"], "\\trspdftN": ["Table Definitions", "Value"], "\\trspdlN": ["Table Definitions", "Value"], "\\trspdrN": ["Table Definitions", "Value"], "\\trspdtN": ["Table Definitions", "Value"], "\\truncatefontheight": ["Document Formatting Properties", "Flag"], "\\trwWidthAN": ["Table Definitions", "Value"], "\\trwWidthBN": ["Table Definitions", "Value"], "\\trwWidthN": ["Table Definitions", "Value"], "\\ts": ["Style Sheet", "Value"], "\\tsbgbdiag": ["Table Styles", "Flag"], "\\tsbgcross": ["Table Styles", "Flag"], "\\tsbgdcross": ["Table Styles", "Flag"], "\\tsbgdkbdiag": ["Table Styles", "Flag"], "\\tsbgdkcross": ["Table Styles", "Flag"], "\\tsbgdkdcross": ["Table Styles", "Flag"], "\\tsbgdkfdiag": ["Table Styles", "Flag"], "\\tsbgdkhor": ["Table Styles", "Flag"], "\\tsbgdkvert": ["Table Styles", "Flag"], "\\tsbgfdiag": ["Table Styles", "Flag"], "\\tsbghoriz": ["Table Styles", "Flag"], "\\tsbgvert": ["Table Styles", "Flag"], "\\tsbrdrb": ["Table Styles", "Flag"], "\\tsbrdrdgl": ["Table Styles", "Flag"], "\\tsbrdrdgr": ["Table Styles", "Flag"], "\\tsbrdrh": ["Table Styles", "Flag"], "\\tsbrdrl": ["Table Styles", "Flag"], "\\tsbrdrr": ["Table Styles", "Flag"], "\\tsbrdrt": ["Table Styles", "Flag"], "\\tsbrdrv": ["Table Styles", "Flag"], "\\tscbandhorzeven": ["Table Styles", "Flag"], "\\tscbandhorzodd": ["Table Styles", "Flag"], "\\tscbandsh": ["Table Styles", "Flag"], "\\tscbandsv": ["Table Styles", "Flag"], "\\tscbandverteven": ["Table Styles", "Flag"], "\\tscbandvertodd": ["Table Styles", "Flag"], "\\tscellcbpatN": ["Table Styles", "Value"], "\\tscellcfpatN": ["Table Styles", "Value"], "\\tscellpaddbN": ["Table Styles", "Value"], "\\tscellpaddfbN": ["Table Styles", "Value"], "\\tscellpaddflN": ["Table Styles", "Value"], "\\tscellpaddfrN": ["Table Styles", "Value"], "\\tscellpaddftN": ["Table Styles", "Value"], "\\tscellpaddlN": ["Table Styles", "Value"], "\\tscellpaddrN": ["Table Styles", "Value"], "\\tscellpaddtN": ["Table Styles", "Value"], "\\tscellpctN": ["Table Styles", "Value"], "\\tscellwidth": ["Table Styles", "Flag"], "\\tscellwidthfts": ["Table Styles", "Flag"], "\\tscfirstcol": ["Table Styles", "Flag"], "\\tscfirstrow": ["Table Styles", "Flag"], "\\tsclastcol": ["Table Styles", "Flag"], "\\tsclastrow": ["Table Styles", "Flag"], "\\tscnecell": ["Table Styles", "Flag"], "\\tscnwcell": ["Table Styles", "Flag"], "\\tscsecell": ["Table Styles", "Flag"], "\\tscswcell": ["Table Styles", "Flag"], "\\tsd": ["Table Styles", "Flag"], "\\tsnowrap": ["Table Styles", "Flag"], "\\tsrowd": ["Style Sheet", "Flag"], "\\tsvertalb": ["Table Styles", "Flag"], "\\tsvertalc": ["Table Styles", "Flag"], "\\tsvertalt": ["Table Styles", "Flag"], "\\twoonone": ["Document Formatting Properties", "Flag"], "\\tx": ["Tabs", "Value"], "\\txe": ["Index Entries", "Destination"], "\\ucN": ["Unicode RTF", "Value"], "\\ud": ["Unicode RTF", "Destination"], "\\ul": ["Font (Character) Formatting Properties", "Toggle"], "\\ulcN": ["Font (Character) Formatting Properties", "Value"], "\\uld": ["Font (Character) Formatting Properties", "Flag"], "\\uldash": ["Font (Character) Formatting Properties", "Toggle"], "\\uldashd": ["Font (Character) Formatting Properties", "Toggle"], "\\uldashdd": ["Font (Character) Formatting Properties", "Toggle"], "\\uldb": ["Font (Character) Formatting Properties", "Toggle"], "\\ulhair": ["Font (Character) Formatting Properties", "Toggle"], "\\ulhwave": ["Font (Character) Formatting Properties", "Toggle"], "\\ulldash": ["Font (Character) Formatting Properties", "Toggle"], "\\ulnone": ["Font (Character) Formatting Properties", "Flag"], "\\ulth": ["Character Text", "Toggle"], "\\ulthd": ["Font (Character) Formatting Properties", "Toggle"], "\\ulthdash": ["Font (Character) Formatting Properties", "Toggle"], "\\ulthdashd": ["Font (Character) Formatting Properties", "Toggle"], "\\ulthdashdd": ["Font (Character) Formatting Properties", "Toggle"], "\\ulthldash": ["Font (Character) Formatting Properties", "Toggle"], "\\ululdbwave": ["Font (Character) Formatting Properties", "Toggle"], "\\ulw": ["Font (Character) Formatting Properties", "Flag"], "\\ulwave": ["Font (Character) Formatting Properties", "Toggle"], "\\uN": ["Unicode RTF", "Value"], "\\up": ["Font (Character) Formatting Properties", "Value"], "\\upr": ["Unicode RTF", "Destination"], "\\urtfN": ["Control Words Introduced bv Other Microsoft Products", "Destination"], "\\useltbaln": ["Document Formatting Properties", "Flag"], "\\userprops": ["Information Group", "Destination"], "\\v": ["Font (Character) Formatting Properties", "Toggle"], "\\vern": ["Information Group", "Value"], "\\version": ["Information Group", "Value"], "\\vertalb": ["Section Formatting Properties", "Flag"], "\\vertalc": ["Section Formatting Properties", "Flag"], "\\vertalj": ["Section Formatting Properties", "Flag"], "\\vertalt": ["Section Formatting Properties", "Flag"], "\\vertdoc": ["Document Formatting Properties", "Flag"], "\\vertsect": ["Section Formatting Properties", "Flag"], "\\viewbkspN": ["Document Formatting Properties", "Flag"], "\\viewkindN": ["Document Formatting Properties", "Value"], "\\viewnobound": ["Document Formatting Properties", "Flag"], "\\viewscaleN": ["Document Formatting Properties", "Value"], "\\viewzkN": ["Document Formatting Properties", "Value"], "\\wbitmap": ["Pictures", "Value"], "\\wbmbitspixel": ["Pictures", "Value"], "\\wbmplanes": ["Pictures", "Value"], "\\wbmwidthbytes": ["Pictures", "Value"], "\\webhidden": ["Font (Character) Formatting Properties", "Flag"], "\\widctlpar": ["Paragraph Formatting Properties", "Flag"], "\\widowctrl": ["Document Formatting Properties", "Flag"], "\\windowcaption": ["Document Formatting Properties", "Value"], "\\wmetafile": ["Pictures", "Value"], "\\wpeqn": ["Fields", "Flag"], "\\wpjst": ["Document Formatting Properties", "Flag"], "\\wpsp": ["Document Formatting Properties", "Flag"], "\\wraptrsp": ["Document Formatting Properties", "Flag"], "\\wrppunct": ["Document Formatting Properties", "Flag"], "\\xe": ["Index Entries", "Destination"], "\\xef": ["Index Entries", "Value"], "\\yr": ["Information Group", "Value"], "\\ytsN": ["Paragraph Formatting Properties", "Value"], "\\yxe": ["Index Entries", "Flag"], "\\zwbo": ["Special Characters", "Symbol"], "\\zwj": ["Special Characters", "Symbol"], "\\zwnbo": ["Special Characters", "Symbol"], "\\zwnj": ["Special Characters", "Symbol"], "\\grfdocevents": ["Document Formatting Properties", "Destination"], "\\levelnfcnN": ["List Table", "Value"], "\\listoverridecountN": ["List Table", "Value"], "\\listoverrideformatN": ["List Table", "Value"], "\\listpictureN": ["List Table", "Value"], "\\listrestarthdnN": ["List Table", "Value"], "\\listsimpleN": ["List Table", "Value"], "\\listtemplateidN": ["List Table", "Value"]}
+{
+    "\\'": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\-": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\*": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\:": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\\\": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\_": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\{": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\|": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\}": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\~": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\ab": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\absh": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\abslock": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\absnoovrlpN": [
+        "Positioned Objects and Frames",
+        "Toggle"
+    ],
+    "\\absw": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\acaps": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\acccomma": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\accdot": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\accnone": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\acccircle": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\accunderdot": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\acf": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\additive": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\adjustright": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\adn": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\aenddoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aendnotes": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aexpnd": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\af": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\affixed": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\afs": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\aftnbj": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftncn": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\aftnnalc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnar": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnauc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnchi": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnchosung": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnncnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnndbar": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnndbnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnndbnumd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnndbnumk": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnndbnumt": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnganada": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnngbnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnngbnumd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnngbnumk": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnngbnuml": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnrlc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnruc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnzodiac": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnzodiacd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnnzodiacl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnrestart": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnrstcont": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aftnsep": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\aftnsepc": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\aftnstart": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\aftntj": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ai": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\alang": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\allowfieldendsel": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\allprot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\alntblind": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\alt": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\animtextN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\annotation": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\annotprot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ansi": [
+        "Character Set",
+        "Flag"
+    ],
+    "\\ansicpgN": [
+        "Unicode RTF",
+        "Value"
+    ],
+    "\\aoutl": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\ApplyBrkRules": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ascaps": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\ashad": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\asianbrkrule": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\aspalpha": [
+        "Paragraph Formatting Properties",
+        "Toggle"
+    ],
+    "\\aspnum": [
+        "Paragraph Formatting Properties",
+        "Toggle"
+    ],
+    "\\astrike": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\atnauthor": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atndate": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atnicn": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atnid": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atnparent": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atnref": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atntime": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atrfend": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\atrfstart": [
+        "Comments (Annotations)",
+        "Destination"
+    ],
+    "\\aul": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\auld": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\auldb": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\aulnone": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\aulw": [
+        "Associated Character Properties",
+        "Toggle"
+    ],
+    "\\aup": [
+        "Associated Character Properties",
+        "Value"
+    ],
+    "\\author": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\autofmtoverride": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\b": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\background": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Destination"
+    ],
+    "\\bdbfhdr": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\bdrrlswsix": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\bgbdiag": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgcross": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdcross": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkbdiag": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkcross": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkdcross": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkfdiag": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkhoriz": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgdkvert": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgfdiag": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bghoriz": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bgvert": [
+        "Paragraph Shading",
+        "Flag"
+    ],
+    "\\bin": [
+        "Pictures",
+        "Value"
+    ],
+    "\\binfsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\binsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\bkmkcolf": [
+        "Bookmarks",
+        "Value"
+    ],
+    "\\bkmkcoll": [
+        "Bookmarks",
+        "Value"
+    ],
+    "\\bkmkend": [
+        "Bookmarks",
+        "Destination"
+    ],
+    "\\bkmkpub": [
+        "Macintosh Edition Manager Publisher Objects",
+        "Flag"
+    ],
+    "\\bkmkstart": [
+        "Bookmarks",
+        "Destination"
+    ],
+    "\\bliptagN": [
+        "Pictures",
+        "Value"
+    ],
+    "\\blipuid": [
+        "Pictures",
+        "Value"
+    ],
+    "\\blipupiN": [
+        "Pictures",
+        "Value"
+    ],
+    "\\blue": [
+        "Color Table",
+        "Value"
+    ],
+    "\\bookfold": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\bookfoldrev": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\bookfoldsheetsN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\box": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrartN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\brdrb": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrbar": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrbtw": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrcf": [
+        "Paragraph Borders",
+        "Value"
+    ],
+    "\\brdrdash": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrdashd": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrdashdd": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrdashdotstr": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrdashsm": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrdb": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrdot": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdremboss": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrengrave": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrframe": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrhair": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrinset": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrl": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrnil": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdroutset": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrr": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrs": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrsh": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrt": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrtbl": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrth": [
+        "Paragraph Borders",
+        "Flag"
+    ],
+    "\\brdrthtnlg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrthtnmg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrthtnsg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthlg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthmg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthsg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthtnlg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthtnmg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtnthtnsg": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrtriple": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrw": [
+        "Paragraph Borders",
+        "Value"
+    ],
+    "\\brdrwavy": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brdrwavydb": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\brkfrm": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\brsp": [
+        "Paragraph Borders",
+        "Value"
+    ],
+    "\\bullet": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\buptim": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\bxe": [
+        "Index Entries",
+        "Flag"
+    ],
+    "\\caps": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\category": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\cb": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\cbpat": [
+        "Paragraph Shading",
+        "Value"
+    ],
+    "\\cchs": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\cell": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\cellx": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\cf": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\cfpat": [
+        "Paragraph Shading",
+        "Value"
+    ],
+    "\\cgridN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\charrsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\charscalex": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\charscalexN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\chatn": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chbgbdiag": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgcross": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdcross": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkbdiag": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkcross": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkdcross": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkfdiag": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkhoriz": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgdkvert": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgfdiag": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbghoriz": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbgvert": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chbrdr": [
+        "Character Text",
+        "Flag"
+    ],
+    "\\chcbpatN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\chcfpatN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\chdate": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chdpa": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chdpl": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chftn": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chftnsep": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chftnsepc": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chpgn": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\chshdngN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\chtime": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\clbgbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkhor": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgdkvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbghoriz": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbgvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbrdrb": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbrdrl": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbrdrr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clbrdrt": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clcbpat": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clcbpatrawN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clcfpat": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clcfpatrawN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\cldgll": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cldglu": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clFitText": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clftsWidthN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clmgf": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clmrg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clNoWrap": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clpadbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadfbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadflN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadfrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadftN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadlN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clpadtN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clshdng": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clshdngraw": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\clshdrawnil": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cltxbtlr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cltxlrtb": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cltxlrtbv": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cltxtbrl": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\cltxtbrlv": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clvertalb": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clvertalc": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clvertalt": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clvmgf": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clvmrg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\clwWidthN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\collapsed": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\colno": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\colortbl": [
+        "Color Table",
+        "Destination"
+    ],
+    "\\cols": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\colsr": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\colsx": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\column": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\colw": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\comment": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\company": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\cpg": [
+        "Code Page Support",
+        "Value"
+    ],
+    "\\crauthN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\crdateN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\creatim": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\cs": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\ctrl": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\ctsN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\cufiN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\culiN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\curiN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\cvmme": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\datafield": [
+        "Fields",
+        "Destination"
+    ],
+    "\\date": [
+        "Fields",
+        "Flag"
+    ],
+    "\\dbch": [
+        "Associated Character Properties",
+        "Flag"
+    ],
+    "\\deff": [
+        "Font Table",
+        "Value"
+    ],
+    "\\defformat": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\deflang": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\deflangfe": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\defshp": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\deftab": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\deleted": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\delrsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\dfrauthN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\dfrdateN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\dfrmtxtx": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\dfrmtxty": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\dfrstart": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\dfrstop": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\dfrxst": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\dghoriginN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dghshowN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dghspaceN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dgmargin": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\dgsnap": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\dgvoriginN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dgvshowN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dgvspaceN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\dibitmap": [
+        "Pictures",
+        "Value"
+    ],
+    "\\dn": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\dntblnsbdb": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\do": [
+        "Drawing Objects",
+        "Destination"
+    ],
+    "\\dobxcolumn": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dobxmargin": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dobxpage": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dobymargin": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dobypage": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dobypara": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\doccomm": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\doctemp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\doctypeN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\docvar": [
+        "Document Variables",
+        "Destination"
+    ],
+    "\\dodhgt": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dolock": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\donotembedlingdata": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\donotshowcomments": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\donotshowinsdel": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\donotshowmarkup": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\donotshowprops": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\dpaendhol": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpaendl": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpaendsol": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpaendw": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dparc": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dparcflipx": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dparcflipy": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpastarthol": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpastartl": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpastartsol": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpastartw": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcallout": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcoa": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcoaccent": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcobestfit": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcoborder": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcodabs": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcodbottom": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcodcenter": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcodescent": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcodtop": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcolength": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcominusx": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcominusy": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcooffset": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpcosmarta": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcotdouble": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcotright": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcotsingle": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcottriple": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpcount": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpellipse": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpendgroup": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpfillbgcb": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillbgcg": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillbgcr": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillbggray": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillbgpal": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpfillfgcb": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillfgcg": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillfgcr": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillfggray": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpfillfgpal": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpfillpat": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpgroup": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpline": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinecob": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dplinecog": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dplinecor": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dplinedado": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinedadodo": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinedash": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinedot": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinegray": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dplinehollow": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinepal": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinesolid": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dplinew": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dppolycount": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dppolygon": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dppolyline": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpptx": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dppty": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dprect": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dproundr": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpshadow": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpshadx": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpshady": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dptxbtlr": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dptxbx": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dptxbxmar": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dptxbxtext": [
+        "Drawing Objects",
+        "Destination"
+    ],
+    "\\dptxlrtb": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dptxlrtbv": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dptxtbrl": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dptxtbrlv": [
+        "Drawing Objects",
+        "Flag"
+    ],
+    "\\dpx": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpxsize": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpy": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dpysize": [
+        "Drawing Objects",
+        "Value"
+    ],
+    "\\dropcapli": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\dropcapt": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\ds": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\dxfrtext": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\dy": [
+        "Information Group",
+        "Value"
+    ],
+    "\\edmins": [
+        "Information Group",
+        "Value"
+    ],
+    "\\embo": [
+        "Character Text",
+        "Toggle"
+    ],
+    "\\emdash": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\emfblip": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\emspace": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\endash": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\enddoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\endnhere": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\endnotes": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\enforceprotN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\enspace": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\expnd": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\expndtw": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\expshrtn": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\f": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\faauto": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\facenter": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\facingp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fahang": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\falt": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\faroman": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\favar": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\fbiasN": [
+        "Font Table",
+        "Value"
+    ],
+    "\\fbidi": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fchars": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\fcharset": [
+        "Font Table",
+        "Value"
+    ],
+    "\\fdecor": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fet": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\fetch": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\ffdefres": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffdeftext": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffentrymcr": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffexitmcr": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffformat": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffhaslistboxN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffhelptext": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffhpsN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffl": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffmaxlen": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffname": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\ffownhelpN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffownstatN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffprotN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffrecalcN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffresN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffsizeN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\ffstattext": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\fftypeN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\fftypetxtN": [
+        "Form Fields",
+        "Value"
+    ],
+    "\\fi": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\fid": [
+        "File Table",
+        "Value"
+    ],
+    "\\field": [
+        "Fields",
+        "Destination"
+    ],
+    "\\file": [
+        "File Table",
+        "Destination"
+    ],
+    "\\filetbl": [
+        "File Table",
+        "Destination"
+    ],
+    "\\fittextN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\fldalt": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fIddirty": [
+        "Fields",
+        "Flag"
+    ],
+    "\\fldedit": [
+        "Fields",
+        "Flag"
+    ],
+    "\\fldinst": [
+        "Fields",
+        "Destination"
+    ],
+    "\\fldlock": [
+        "Fields",
+        "Flag"
+    ],
+    "\\fldpriv": [
+        "Fields",
+        "Flag"
+    ],
+    "\\fldrslt": [
+        "Fields",
+        "Destination"
+    ],
+    "\\fldtype": [
+        "Fields",
+        "Destination"
+    ],
+    "\\fmodern": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fn": [
+        "Style Sheet",
+        "Value"
+    ],
+    "\\fname": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\fnetwork": [
+        "File Table",
+        "Flag"
+    ],
+    "\\fnil": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fnonfilesys": [
+        "File Table",
+        "Flag"
+    ],
+    "\\fontemb": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\fontfile": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\fonttbl": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\footer": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\footerf": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\footerl": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\footery": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\footnote": [
+        "Footnotes",
+        "Destination"
+    ],
+    "\\formdisp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\formfield": [
+        "Form Fields",
+        "Destination"
+    ],
+    "\\formprot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\formshade": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fosnum": [
+        "File Table",
+        "Value"
+    ],
+    "\\fprq": [
+        "Font Table",
+        "Value"
+    ],
+    "\\fracwidth": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\frelative": [
+        "File Table",
+        "Value"
+    ],
+    "\\frmtxbtlr": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\frmtxlrtb": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\frmtxlrtbv": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\frmtxtbrl": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\frmtxtbrlv": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\froman": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fromhtml": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fromtext": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fs": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\fscript": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fswiss": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\ftnalt": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnbj": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftncn": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\ftnil": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\ftnlytwnine": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnalc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnar": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnauc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnchi": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnchosung": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnncnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnndbar": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnndbnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnndbnumd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnndbnumk": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnndbnumt": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnganada": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnngbnum": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnngbnumd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnngbnumk": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnngbnuml": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnrlc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnruc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnzodiac": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnzodiacd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnnzodiacl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnrestart": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnrstcont": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnrstpg": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ftnsep": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\ftnsepc": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\ftnstart": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\ftntj": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\fttruetype": [
+        "Font Table",
+        "Flag"
+    ],
+    "\\fvaliddos": [
+        "File Table",
+        "Flag"
+    ],
+    "\\fvalidhpfs": [
+        "File Table",
+        "Flag"
+    ],
+    "\\fvalidmac": [
+        "File Table",
+        "Flag"
+    ],
+    "\\fvalidntfs": [
+        "File Table",
+        "Flag"
+    ],
+    "\\g": [
+        "Font (Character) Formatting Properties",
+        "Destination"
+    ],
+    "\\gcw": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\generator": [
+        "Generator",
+        "Destination"
+    ],
+    "\\green": [
+        "Color Table",
+        "Value"
+    ],
+    "\\grfdocevents": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\gridtbl": [
+        "Font (Character) Formatting Properties",
+        "Destination"
+    ],
+    "\\gutter": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\gutterprl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\guttersxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\header": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\headerf": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\headerl": [
+        "Headers and Footers",
+        "Destination"
+    ],
+    "\\headery": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\hich": [
+        "Associated Character Properties",
+        "Flag"
+    ],
+    "\\highlight": [
+        "Highlighting",
+        "Value"
+    ],
+    "\\hlfr": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\hlinkbase": [
+        "Information Group",
+        "Value"
+    ],
+    "\\hlloc": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\hlsrc": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\horzdoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\horzsect": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\hr": [
+        "Information Group",
+        "Value"
+    ],
+    "\\htmautsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\htmlbase": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Flag"
+    ],
+    "\\htmlrtf": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Toggle"
+    ],
+    "\\htmltag": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Destination"
+    ],
+    "\\hyphauto": [
+        "Document Formatting Properties",
+        "Toggle"
+    ],
+    "\\hyphcaps": [
+        "Document Formatting Properties",
+        "Toggle"
+    ],
+    "\\hyphconsec": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\hyphhotz": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\hyphpar": [
+        "Paragraph Formatting Properties",
+        "Toggle"
+    ],
+    "\\i": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\id": [
+        "Information Group",
+        "Value"
+    ],
+    "\\ilvl": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\impr": [
+        "Character Text",
+        "Toggle"
+    ],
+    "\\info": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\insrsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\intbl": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\ipgpN": [
+        "Paragraph Group Properties",
+        "Value"
+    ],
+    "\\irowbandN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\irowN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\itapN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\ixe": [
+        "Index Entries",
+        "Flag"
+    ],
+    "\\jcompress": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\jexpand": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "Njpegblip": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\jsksu": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\keep": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\keepn": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\kerning": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\keycode": [
+        "Style Sheet",
+        "Destination"
+    ],
+    "\\keywords": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\ksulangN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\landscape": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\lang": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\langfeN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\langfenpN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\langnpN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\lastrow": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\latentstyles": [
+        "Style and Formatting Restrictions",
+        "Destination"
+    ],
+    "\\lbrN": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\lchars": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\ldblquote": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\level": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\levelfollowN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelindentN": [
+        "List Table",
+        "Value"
+    ],
+    "\\leveljcN": [
+        "List Table",
+        "Value"
+    ],
+    "\\leveljcnN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levellegalN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelnfcN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelnfcnN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelnorestartN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelnumbers": [
+        "List Table",
+        "Destination"
+    ],
+    "\\leveloldN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelpictureN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelprevN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelprevspaceN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelspaceN": [
+        "List Table",
+        "Value"
+    ],
+    "\\levelstartatN": [
+        "List Table",
+        "Value"
+    ],
+    "\\leveltemplateidN": [
+        "List Table",
+        "Value"
+    ],
+    "\\leveltext": [
+        "List Table",
+        "Value"
+    ],
+    "\\li": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\line": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\linebetcol": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\linecont": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\linemod": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\lineppage": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\linerestart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\linestart": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "Vinestarts": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\linex": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\linkself": [
+        "Objects",
+        "Flag"
+    ],
+    "\\linkstyles": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\linkval": [
+        "Information Group",
+        "Value"
+    ],
+    "\\iinN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\lisaN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\lisbN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\listhybrid": [
+        "List Table",
+        "Flag"
+    ],
+    "\\listidN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listname": [
+        "List Table",
+        "Destination"
+    ],
+    "\\listoverridecountN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listoverrideformatN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listoverridestartN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listpictureN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listrestarthdnN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listsimpleN": [
+        "List Table",
+        "Value"
+    ],
+    "\\liststyleidN": [
+        "List Table",
+        "Value"
+    ],
+    "\\liststylename": [
+        "List Table",
+        "Value"
+    ],
+    "\\listtemplateidN": [
+        "List Table",
+        "Value"
+    ],
+    "\\listtext": [
+        "Paragraph Text",
+        "Destination"
+    ],
+    "\\lnbrkrule": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\lndscpsxn": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\lnongrid": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\loch": [
+        "Associated Character Properties",
+        "Flag"
+    ],
+    "\\lquote": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\ls": [
+        "List Table",
+        "Value"
+    ],
+    "\\lsdlockeddefN": [
+        "Style and Formatting Restrictions",
+        "Value"
+    ],
+    "\\lsdlockedexcept": [
+        "Style and Formatting Restrictions",
+        "Destination"
+    ],
+    "\\lsdstimaxN": [
+        "Style and Formatting Restrictions",
+        "Value"
+    ],
+    "\\ltrch": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\ltrdoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\ltrmark": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\ltrpar": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\ltrrow": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\ltrsect": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\lytcalctblwd": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\lytexcttp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\lytprtmet": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\lyttblrtgr": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\mac": [
+        "Character Set",
+        "Flag"
+    ],
+    "\\macpict": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\makebackup": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\manager": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\margb": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\margbsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\margl": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\marglsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\margmirror": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\margr": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\margrsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\margt": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\margtsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\mhtmltag": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Destination"
+    ],
+    "\\min": [
+        "Information Group",
+        "Value"
+    ],
+    "\\mo": [
+        "Information Group",
+        "Value"
+    ],
+    "\\msmcap": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nestcell": [
+        "Table Definitions",
+        "Symbol"
+    ],
+    "\\nestrow": [
+        "Table Definitions",
+        "Symbol"
+    ],
+    "\\nesttableprops": [
+        "Table Definitions",
+        "Destination"
+    ],
+    "\\newtblstyruls": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nextfile": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\nobrkwrptbl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nocolbal": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nocompatoptions": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nocwrap": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\noextrasprl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nofchars": [
+        "Information Group",
+        "Value"
+    ],
+    "\\nofcharsws": [
+        "Information Group",
+        "Value"
+    ],
+    "\\nofpages": [
+        "Information Group",
+        "Value"
+    ],
+    "\\nofwords": [
+        "Information Group",
+        "Value"
+    ],
+    "\\nogrowautofit": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nojkernpunct": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nolead": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\noline": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\nolnhtadjtbl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nonesttables": [
+        "Table Definitions",
+        "Destination"
+    ],
+    "\\nonshppict": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\nooverflow": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\noproof": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\nosectexpand": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\nosnaplinegrid": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\nospaceforul": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nosupersub": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\notabind": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\noultrlspc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\nowidctlpar": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\nowrap": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\nowwrap": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\noxlattoyen": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\objalias": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objalign": [
+        "Objects",
+        "Value"
+    ],
+    "\\objattph": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objautlink": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objclass": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objcropb": [
+        "Objects",
+        "Value"
+    ],
+    "\\objcropl": [
+        "Objects",
+        "Value"
+    ],
+    "\\objcropr": [
+        "Objects",
+        "Value"
+    ],
+    "\\objcropt": [
+        "Objects",
+        "Value"
+    ],
+    "\\objdata": [
+        "Objects",
+        "Destination"
+    ],
+    "\\object": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objemb": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objh": [
+        "Objects",
+        "Value"
+    ],
+    "\\objhtml": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objicemb": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objlink": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objlock": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objname": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objocx": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objpub": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objscalex": [
+        "Objects",
+        "Value"
+    ],
+    "\\objscaley": [
+        "Objects",
+        "Value"
+    ],
+    "\\objsect": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objsetsize": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objsub": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objtime": [
+        "Objects",
+        "Destination"
+    ],
+    "\\objtransy": [
+        "Objects",
+        "Value"
+    ],
+    "\\objupdate": [
+        "Objects",
+        "Flag"
+    ],
+    "\\objw": [
+        "Objects",
+        "Value"
+    ],
+    "\\oldas": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\oldcprops": [
+        "Track Changes (Revision Marks)",
+        "Destination"
+    ],
+    "\\oldlinewrap": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\oldpprops": [
+        "Track Changes (Revision Marks)",
+        "Destination"
+    ],
+    "\\oldsprops": [
+        "Track Changes (Revision Marks)",
+        "Destination"
+    ],
+    "\\oldtprops": [
+        "Track Changes (Revision Marks)",
+        "Destination"
+    ],
+    "\\operator": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\otblrul": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\outl": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\outlinelevelN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\overlay": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\page": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\pagebb": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\panose": [
+        "Font Table",
+        "Destination"
+    ],
+    "\\paperh": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\paperw": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\par": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\pararsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\pard": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\pc": [
+        "Character Set",
+        "Flag"
+    ],
+    "\\pca": [
+        "Character Set",
+        "Flag"
+    ],
+    "\\pgbrdrb": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdrfoot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdrhead": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdrl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdroptN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\pgbrdrr": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdrsnap": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pgbrdrt": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\pghsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgnbidia": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnbidib": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnchosung": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgncnum": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgncont": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgndbnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgndbnumd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgndbnumk": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgndbnumt": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgndec": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgndecd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnganada": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgngbnum": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgngbnumd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgngbnumk": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgngbnuml": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgnhindia": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhindib": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhindic": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhindid": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgnhnsc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhnsh": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhnsm": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhnsn": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnhnsp": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnidN": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgnlcltr": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnlcrm": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnrestart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnstart": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\pgnstarts": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgnthaia": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnthaib": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnthaic": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnucltr": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnucrm": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnvieta": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\pgnx": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgny": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\pgnzodiac": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgnzodiacd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgnzodiacl": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pgp": [
+        "Paragraph Group Properties",
+        "Destination"
+    ],
+    "\\pgptbl": [
+        "Paragraph Group Properties",
+        "Destination"
+    ],
+    "\\pgwsxn": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\phcol": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\phmrg": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\phpg": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\picbmp": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\picbpp": [
+        "Pictures",
+        "Value"
+    ],
+    "\\piccropb": [
+        "Pictures",
+        "Value"
+    ],
+    "\\piccropl": [
+        "Pictures",
+        "Value"
+    ],
+    "\\piccropr": [
+        "Pictures",
+        "Value"
+    ],
+    "\\piccropt": [
+        "Pictures",
+        "Value"
+    ],
+    "\\pich": [
+        "Pictures",
+        "Value"
+    ],
+    "\\pichgoal": [
+        "Pictures",
+        "Value"
+    ],
+    "\\picprop": [
+        "Pictures",
+        "Destination"
+    ],
+    "\\picscaled": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\picscalex": [
+        "Pictures",
+        "Value"
+    ],
+    "\\picscaley": [
+        "Pictures",
+        "Value"
+    ],
+    "\\pict": [
+        "Pictures",
+        "Destination"
+    ],
+    "\\picw": [
+        "Pictures",
+        "Value"
+    ],
+    "\\picwgoal": [
+        "Pictures",
+        "Value"
+    ],
+    "\\plain": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\pmmetafile": [
+        "Pictures",
+        "Value"
+    ],
+    "\\pn": [
+        "Bullets and Numbering",
+        "Destination"
+    ],
+    "\\pnacross": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnaiu": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnaiud": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnaiueo": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnaiueod": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnb": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pnbidia": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnbidib": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pncaps": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pncard": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pncf": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnchosung": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pncnum": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndbnum": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndbnumd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndbnumk": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndbnuml": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndbnumt": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndec": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pndecd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnf": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnfs": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnganada": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pngblip": [
+        "Pictures",
+        "Flag"
+    ],
+    "\\pngbnum": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pngbnumd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pngbnumk": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pngbnuml": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnhang": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pni": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pnindent": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pniroha": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnirohad": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnlcltr": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnlcrm": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnlvl": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnlvlblt": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnlvlbody": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnlvlcont": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnnumonce": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnord": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnordt": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnprev": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnqc": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnql": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnqr": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnrauthN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrdateN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrestart": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnrnfcN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrnot": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\pnrpnbrN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrrgbN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrstartN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrstopN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnrxstN": [
+        "Paragraph Text",
+        "Value"
+    ],
+    "\\pnscaps": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pnseclvl": [
+        "Bullets and Numbering",
+        "Destination"
+    ],
+    "\\pnsp": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnstart": [
+        "Bullets and Numbering",
+        "Value"
+    ],
+    "\\pnstrike": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pntext": [
+        "Bullets and Numbering",
+        "Destination"
+    ],
+    "\\pntxta": [
+        "Bullets and Numbering",
+        "Destination"
+    ],
+    "\\pntxtb": [
+        "Bullets and Numbering",
+        "Destination"
+    ],
+    "\\pnucltr": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnucrm": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnul": [
+        "Bullets and Numbering",
+        "Toggle"
+    ],
+    "\\pnuld": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnuldash": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnuldashd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnuldashdd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnuldb": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnulhair": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnulnone": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnulth": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnulw": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnulwave": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnzodiac": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnzodiacd": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\pnzodiacl": [
+        "Bullets and Numbering",
+        "Flag"
+    ],
+    "\\posnegx": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\posnegy": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\posx": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\posxc": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posxi": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posxl": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posxo": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posxr": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posy": [
+        "Positioned Objects and Frames",
+        "Value"
+    ],
+    "\\posyb": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posyc": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posyil": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\posyin": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\posyout": [
+        "Paragraph Text",
+        "Flag"
+    ],
+    "\\posyt": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\prcolbl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\printdata": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\printim": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\private": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\propname": [
+        "Information Group",
+        "Value"
+    ],
+    "\\proptype": [
+        "Information Group",
+        "Value"
+    ],
+    "\\protend": [
+        "Protection Exceptions",
+        "Destination"
+    ],
+    "\\protlevelN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\protstart": [
+        "Protection Exceptions",
+        "Destination"
+    ],
+    "\\protusertbl": [
+        "User Protection Information",
+        "Destination"
+    ],
+    "\\psover": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\psz": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\pubauto": [
+        "Macintosh Edition Manager Publisher Objects",
+        "Flag"
+    ],
+    "\\pvmrg": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\pvpara": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\pvpg": [
+        "Positioned Objects and Frames",
+        "Flag"
+    ],
+    "\\pwdN": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Destination"
+    ],
+    "\\pxe": [
+        "Index Entries",
+        "Destination"
+    ],
+    "\\qc": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qd": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qj": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qk": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qi": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qmspace": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\qr": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\qt": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\rawbgdkbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdkcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdkdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdkfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdkhor": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgdkvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbghoriz": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rawclbgvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rdblquote": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\readprot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\red": [
+        "Color Table",
+        "Value"
+    ],
+    "\\relyonvmlN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\rempersonalinfo": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\result": [
+        "Objects",
+        "Destination"
+    ],
+    "\\revauth": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\revauthdelN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\revbar": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\revdttm": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\revdttmdelN": [
+        "Character Text",
+        "Value"
+    ],
+    "\\revised": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\revisions": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\revprop": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\revprot": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\revtbl": [
+        "Track Changes",
+        "Destination"
+    ],
+    "\\revtim": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\ri": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\rinN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\row": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\rquote": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\rsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\rsidrootN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\rsidtbl": [
+        "Track Changes (Revision Marks)",
+        "Destination"
+    ],
+    "\\rsltbmp": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rslthtml": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rsltmerge": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rsltpict": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rsltrtf": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rslttxt": [
+        "Objects",
+        "Flag"
+    ],
+    "\\rtf": [
+        "RTF Version",
+        "Destination"
+    ],
+    "\\rtlch": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\rtldoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\rtlgutter": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\rtlmark": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\rtlpar": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\rtlrow": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\rtlsect": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\rxe": [
+        "Index Entries",
+        "Destination"
+    ],
+    "\\s": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\sa": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\saautoN": [
+        "Paragraph Formatting Properties",
+        "Toggle"
+    ],
+    "\\saftnnalc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnar": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnauc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnchi": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnchosung": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnncnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnndbar": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnndbnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnndbnumd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnndbnumk": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnndbnumt": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnganada": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnngbnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnngbnumd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnngbnumk": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnngbnuml": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnrlc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnruc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnzodiac": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnzodiacd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnnzodiacl": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnrestart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnrstcont": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\saftnstart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sautoupd": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\sb": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\sbasedon": [
+        "Style Sheet",
+        "Value"
+    ],
+    "\\sbautoN": [
+        "Paragraph Formatting Properties",
+        "Toggle"
+    ],
+    "\\sbkcol": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sbkeven": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sbknone": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sbkodd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sbkpage": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sbys": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\scaps": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\scompose": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\sec": [
+        "Information Group",
+        "Value"
+    ],
+    "\\sect": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\sectd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sectdefaultcl": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\sectexpandN": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\sectlinegridN": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\sectnum": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\sectrsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\sectspecifycl": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\sectspecifygenN": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sectspecifyl": [
+        "Section Formatting Properties",
+        "Value"
+    ],
+    "\\sectunlocked": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnbj": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnalc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnar": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnauc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnchi": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnchosung": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnncnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnndbar": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnndbnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnndbnumd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnndbnumk": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnndbnumt": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnganada": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnngbnum": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnngbnumd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnngbnumk": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnngbnuml": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnrlc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnruc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnzodiac": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnzodiacd": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnnzodiacl": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnrestart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnrstcont": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnrstpg": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftnstart": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\sftntj": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\shad": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\shading": [
+        "Paragraph Shading",
+        "Value"
+    ],
+    "\\shidden": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\shift": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\shpbottomN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpbxcolumn": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbxignore": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbxmargin": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbxpage": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbyignore": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbymargin": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbypage": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpbypara": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shpfblwtxtN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpfhdrN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpgrp": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpleftN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shplidN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shplockanchor": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Flag"
+    ],
+    "\\shppict": [
+        "Pictures",
+        "Destination"
+    ],
+    "\\shprightN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shprslt": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shptopN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shptxt": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpwrkN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpwrN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\shpzN": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Value"
+    ],
+    "\\sl": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\slinkN": [
+        "Style Sheet",
+        "Value"
+    ],
+    "\\slmult": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\slocked": [
+        "Style Sheet",
+        "Flagged"
+    ],
+    "\\snaptogridincell": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\snext": [
+        "Style Sheet",
+        "Value"
+    ],
+    "\\softcol": [
+        "Special Characters",
+        "Flag"
+    ],
+    "\\softlheight": [
+        "Special Characters",
+        "Value"
+    ],
+    "\\softline": [
+        "Special Characters",
+        "Flag"
+    ],
+    "\\softpage": [
+        "Special Characters",
+        "Flag"
+    ],
+    "\\spersonal": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\splytwnine": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\sprsbsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\sprslnsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\sprsspbf": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\sprstsm": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\sprstsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\spv": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\sreply": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\ssemihidden": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\staticval": [
+        "Information Group",
+        "Value"
+    ],
+    "\\stextflow": [
+        "Section Text",
+        "Value"
+    ],
+    "\\strike": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\strikedl": [
+        "Character Text",
+        "Toggle"
+    ],
+    "\\stshfbiN": [
+        "Default Fonts",
+        "Value"
+    ],
+    "\\stshfdbchN": [
+        "Default Fonts",
+        "Value"
+    ],
+    "\\stshfhichN": [
+        "Default Fonts",
+        "Value"
+    ],
+    "\\stshflochN": [
+        "Default Fonts",
+        "Value"
+    ],
+    "\\stylelock": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\stylelockbackcomp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\stylelockenforced": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\stylesheet": [
+        "Style Sheet",
+        "Destination"
+    ],
+    "\\styrsidN": [
+        "Track Changes (Revision Marks)",
+        "Value"
+    ],
+    "\\sub": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\subdocument": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\subfontbysize": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\subject": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\super": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\svb": [
+        "Word through Word RTF for Drawing Objects (Shades)",
+        "Destination"
+    ],
+    "\\swpbdr": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\tab": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\tabsnoovrlp": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\taprtl": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tb": [
+        "Tabs",
+        "Value"
+    ],
+    "\\tbllkbestfit": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkborder": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkcolor": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkfont": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkhdrcols": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkhdrrows": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllklastcol": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllklastrow": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tbllkshading": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tblrsidN": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tc": [
+        "Table of Contents Entries",
+        "Destination"
+    ],
+    "\\tcelld": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tcf": [
+        "Table of Contents Entries",
+        "Value"
+    ],
+    "\\tcl": [
+        "Table of Contents Entries",
+        "Value"
+    ],
+    "\\tcn": [
+        "Table of Contents Entries",
+        "Flag"
+    ],
+    "\\tdfrmtxtBottomN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tdfrmtxtLeftN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tdfrmtxtRightN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tdfrmtxtTopN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\template": [
+        "Document Formatting Properties",
+        "Destination"
+    ],
+    "\\time": [
+        "Fields",
+        "Flag"
+    ],
+    "\\title": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\titlepg": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\tldot": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tleq": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tlhyph": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tlmdot": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tlth": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tlul": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\toplinepunct": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\tphcol": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tphmrg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tphpg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposnegxN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tposnegyN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tposxc": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposxi": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposxl": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposXN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\tposxo": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposxr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposy": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyb": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyc": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyil": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyin": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyoutv": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tposyt": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tpvmrg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tpvpara": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tpvpg": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\tqc": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tqdec": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\tqr": [
+        "Tabs",
+        "Flag"
+    ],
+    "\\transmf": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\trauthN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trautofitN": [
+        "Table Definitions",
+        "Toggle"
+    ],
+    "\\trbgbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkbdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkdcross": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkhor": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgdkvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgfdiag": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbghoriz": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbgvert": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrb": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrh": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrl": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrt": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trbrdrv": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trcbpatN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trcfpatN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trdateN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trftsWidthAN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trftsWidthBN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trftsWidthN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trgaph": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trhdr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trkeep": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trleft": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trowd": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trpaddbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddfbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddflN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddfrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddftN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddlN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpaddrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trappdtN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trpatN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trqc": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trql": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trqr": [
+        "Table Definitions",
+        "Flag"
+    ],
+    "\\trrh": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trshdngN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdfbN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdflN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdfrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdftN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdlN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdrN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trspdtN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\truncatefontheight": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\trwWidthAN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trwWidthBN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\trwWidthN": [
+        "Table Definitions",
+        "Value"
+    ],
+    "\\ts": [
+        "Style Sheet",
+        "Value"
+    ],
+    "\\tsbgbdiag": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgcross": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdcross": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkbdiag": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkcross": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkdcross": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkfdiag": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkhor": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgdkvert": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgfdiag": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbghoriz": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbgvert": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrb": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrdgl": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrdgr": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrh": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrl": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrr": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrt": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsbrdrv": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandhorzeven": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandhorzodd": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandsh": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandsv": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandverteven": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscbandvertodd": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscellcbpatN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellcfpatN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddbN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddfbN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddflN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddfrN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddftN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddlN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddrN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpaddtN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellpctN": [
+        "Table Styles",
+        "Value"
+    ],
+    "\\tscellwidth": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscellwidthfts": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscfirstcol": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscfirstrow": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsclastcol": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsclastrow": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscnecell": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscnwcell": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscsecell": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tscswcell": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsd": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsnowrap": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsrowd": [
+        "Style Sheet",
+        "Flag"
+    ],
+    "\\tsvertalb": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsvertalc": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\tsvertalt": [
+        "Table Styles",
+        "Flag"
+    ],
+    "\\twoonone": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\tx": [
+        "Tabs",
+        "Value"
+    ],
+    "\\txe": [
+        "Index Entries",
+        "Destination"
+    ],
+    "\\ucN": [
+        "Unicode RTF",
+        "Value"
+    ],
+    "\\ud": [
+        "Unicode RTF",
+        "Destination"
+    ],
+    "\\ul": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulcN": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\uld": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\uldash": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\uldashd": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\uldashdd": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\uldb": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulhair": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulhwave": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulldash": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulnone": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\ulth": [
+        "Character Text",
+        "Toggle"
+    ],
+    "\\ulthd": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulthdash": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulthdashd": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulthdashdd": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulthldash": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ululdbwave": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\ulw": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\ulwave": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\uN": [
+        "Unicode RTF",
+        "Value"
+    ],
+    "\\up": [
+        "Font (Character) Formatting Properties",
+        "Value"
+    ],
+    "\\upr": [
+        "Unicode RTF",
+        "Destination"
+    ],
+    "\\urtfN": [
+        "Control Words Introduced bv Other Microsoft Products",
+        "Destination"
+    ],
+    "\\useltbaln": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\userprops": [
+        "Information Group",
+        "Destination"
+    ],
+    "\\v": [
+        "Font (Character) Formatting Properties",
+        "Toggle"
+    ],
+    "\\vern": [
+        "Information Group",
+        "Value"
+    ],
+    "\\version": [
+        "Information Group",
+        "Value"
+    ],
+    "\\vertalb": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\vertalc": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\vertalj": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\vertalt": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\vertdoc": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\vertsect": [
+        "Section Formatting Properties",
+        "Flag"
+    ],
+    "\\viewbkspN": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\viewkindN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\viewnobound": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\viewscaleN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\viewzkN": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\wbitmap": [
+        "Pictures",
+        "Value"
+    ],
+    "\\wbmbitspixel": [
+        "Pictures",
+        "Value"
+    ],
+    "\\wbmplanes": [
+        "Pictures",
+        "Value"
+    ],
+    "\\wbmwidthbytes": [
+        "Pictures",
+        "Value"
+    ],
+    "\\webhidden": [
+        "Font (Character) Formatting Properties",
+        "Flag"
+    ],
+    "\\widctlpar": [
+        "Paragraph Formatting Properties",
+        "Flag"
+    ],
+    "\\widowctrl": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\windowcaption": [
+        "Document Formatting Properties",
+        "Value"
+    ],
+    "\\wmetafile": [
+        "Pictures",
+        "Value"
+    ],
+    "\\wpeqn": [
+        "Fields",
+        "Flag"
+    ],
+    "\\wpjst": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\wpsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\wraptrsp": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\wrppunct": [
+        "Document Formatting Properties",
+        "Flag"
+    ],
+    "\\xe": [
+        "Index Entries",
+        "Destination"
+    ],
+    "\\xef": [
+        "Index Entries",
+        "Value"
+    ],
+    "\\yr": [
+        "Information Group",
+        "Value"
+    ],
+    "\\ytsN": [
+        "Paragraph Formatting Properties",
+        "Value"
+    ],
+    "\\yxe": [
+        "Index Entries",
+        "Flag"
+    ],
+    "\\zwbo": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\zwj": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\zwnbo": [
+        "Special Characters",
+        "Symbol"
+    ],
+    "\\zwnj": [
+        "Special Characters",
+        "Symbol"
+    ]
+}        "Symbol"
+    ]
+}

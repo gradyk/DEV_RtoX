@@ -15,8 +15,9 @@ def cw_csv_builder():
     cw_func_dict_file = os.path.join(base_script_dir,
                                      "control_word_func_dict.json")
 
-    with open(cw_info_dict_file, "r") as cw_info_dict_pre:
+    with open(cw_info_dict_file, "r+") as cw_info_dict_pre:
         cw_dict = json.load(cw_info_dict_pre)
+
         with open(control_word_csv) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
@@ -29,12 +30,11 @@ def cw_csv_builder():
                     val2 = f'{row[2]}'
                     something = {key: [val1, val2]}
                     cw_dict.update(something)
+                    cw_info_dict_pre.seek(0)
+                    json.dump(cw_dict, cw_info_dict_pre, indent=4)
                     line_count += 1
 
-    with open(cw_info_dict_file, "w") as cw_info_dict_pre:
-        json.dump(cw_dict, cw_info_dict_pre, ensure_ascii=False)
-
-    with open(cw_func_dict_file, "r") as cw_func_dict_pre:
+    with open(cw_func_dict_file, "r+") as cw_func_dict_pre:
         cw_dict = json.load(cw_func_dict_pre)
         with open(control_word_csv) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=",")
@@ -51,10 +51,9 @@ def cw_csv_builder():
                     cw_not_coded = None
                     something = {key: cw_not_coded}
                     cw_dict.update(something)
+                    cw_func_dict_pre.seek(0)
+                    json.dump(cw_dict, cw_func_dict_pre, indent=4)
                     line_count += 1
-
-    with open(cw_func_dict_file, "w") as cw_dict_pre:
-        json.dump(cw_dict, cw_dict_pre, ensure_ascii=False)
 
 
 if __name__ == "__main__":

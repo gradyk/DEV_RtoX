@@ -28,11 +28,10 @@ __date__ = "2019-11-04"
 __name__ = "style_sheet_table"
 
 # From standard libraries
-import json
-import os
 import re
 
 # From local application
+import dict_updater
 from Contents.Library.dicts.style_controlwords import style_controlwords_dict
 
 
@@ -65,42 +64,59 @@ class StyleSheetParse(object):
     def __init__(self, code_strings_to_process: list, debug_dir: str) -> None:
         self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
-        self.code_stack = []
+        self.code_dict = {}
 
-    def process_code_strings(self):
-
-        master_code_stack = []
+    def trim_stylesheet(self):
         for code_string in self.code_strings_to_process:
-
-            # Ignore code strings in the style sheet that start with the \*\cs
-            # control word.
-            test = re.match(r"({)\\\*\\(cs)", code_string)
-            if test is None:
-
-                StyleSheetParse.process_style_codes(
-                    self=StyleSheetParse(
-                        debug_dir=self.debug_dir,
-                        code_strings_to_process=self.code_strings_to_process),
-                    code_string=code_string,
-                    code_stack=self.code_stack)
-
-                master_code_stack.append(self.code_stack)
-
-                self.code_stack = []
-
+            if re.search(r'{\\stylesheet', code_string) is not None:
+                place = self.code_strings_to_process.index(code_string)
+                new_code_string = code_string.replace("{\\stylesheet", "")
+                self.code_strings_to_process[place] = new_code_string
             else:
                 pass
 
-        store_style_contents(debug_dir=self.debug_dir,
-                             master_code_stack=master_code_stack)
+    def remove_code_strings(self):
+        remove_list = []
+        for code_string in self.code_strings_to_process:
+            # Ignore code strings in the style sheet that start with the \*\cs
+            # or \*\ts control word.
+            pattern = re.compile(r"{\\\*\\")
+            place = self.code_strings_to_process.index(code_string)
+            if re.search(pattern, code_string) is not None:
+                remove_list.append(place)
+            else:
+                pass
 
-    def process_style_codes(self, code_string: str, code_stack: list):
+        for ele in sorted(remove_list, reverse = True):
+            del self.code_strings_to_process[ele]
+
+    def process_remaining_code_strings(self):
+        for code_string in self.code_strings_to_process:
+            try:
+                StyleSheetParse.process_style_codes(
+                    self=StyleSheetParse(
+                        debug_dir=self.debug_dir,
+                        code_strings_to_process=
+                        self.code_strings_to_process),
+                    code_string=code_string,
+                    code_dict=self.code_dict)
+            except ValueError:
+                pass
+
+            dict_updater.json_dict_updater(
+                dict_name="style_sheet_table_file.json",
+                dict_update=self.code_dict,
+                debug_dir=self.debug_dir)
+
+            self.code_dict = {}
+
+    def process_style_codes(self, code_string: str, code_dict: dict):
         """ Parse each style code string into its constituent setting and
         store them in a dictionary under the style code number. """
 
         get_style_codes = GetStyleCodes(code_string=code_string,
                                         debug_dir=self.debug_dir,
-                                        code_stack=code_stack)
+                                        code_dict=code_dict)
 
         GetStyleCodes.check_stylecode(self=get_style_codes)
         GetStyleCodes.check_emphasis_controlwords(self=get_style_codes)
@@ -108,19 +124,20 @@ class StyleSheetParse(object):
         GetStyleCodes.check_style_name(self=get_style_codes)
         GetStyleCodes.check_style_next_paragraph(self=get_style_codes)
         GetStyleCodes.check_font_alignment(self=get_style_codes)
-        self.code_stack = GetStyleCodes.stylelist(self=get_style_codes)
 
 
 class GetStyleCodes(object):
 
     def __init__(self, code_string: str, debug_dir: str,
-                 code_stack: list) -> None:
+                 code_dict: dict) -> None:
         self.code_string = code_string
         self.debug_dir = debug_dir
-        self.code_stack = code_stack
+        self.code_dict = code_dict
+        self.current_key = ""
 
     def check_stylecode(self) -> None:
-        """  """
+        """ With the exception of the default style, each style has an
+        identifying number. """
         code_styles = [
             r"{\s",  # Paragraph style code
             r"{\ds",  # Section style code
@@ -129,69 +146,57 @@ class GetStyleCodes(object):
             r"{\tsrowd",  # Table style definitions
         ]
 
-        for item in code_styles:
-            test = re.match(re.escape(item) + r'[0-9]*', self.code_string)
-            if test is not None:
-                self.code_stack.append(
-                    ("stylecode", test[0].replace("{\\", "")))
-            else:
+        for style in code_styles:
+            try:
+                test = re.match(re.escape(style) + r'[0-9]*', self.code_string)
+                self.current_key = test[0].replace("{\\", "")
+                self.code_dict.update({self.current_key: {}})
+            except (ValueError, TypeError):
+                self.current_key = "default"
+                self.code_dict.update({self.current_key: {}})
                 pass
 
     def check_emphasis_controlwords(self) -> None:
-
+        """  """
         for key in style_controlwords_dict:
             pattern = rf"{style_controlwords_dict[key][4]}[0-9]*"
-            test = re.search(re.escape(pattern), self.code_string)
-            if test is None:
-                self.code_stack.append((style_controlwords_dict[key][0], "0"))
-            else:
-                replace_text = style_controlwords_dict[key][5]
-                key_setting = GetStyleCodes.get_controlword_setting(
-                    replace_text, test[0])
-                self.code_stack.append(
-                    (key, GetStyleCodes.evaluate_setting(key_setting)))
-
-    @staticmethod
-    def get_controlword_setting(replace_text: str, test: str) -> str:
-        setting = test.replace(test[0], replace_text)
-        return setting
-
-    @staticmethod
-    def evaluate_setting(setting: str) -> str:
-        if setting is None or setting >= "0":
-            tag_switch = "1"
-        else:
-            tag_switch = "0"
-
-        return tag_switch
+            try:
+                test = re.search(re.escape(pattern), self.code_string)
+                value = test[0].replace(f"{style_controlwords_dict[key][4]}",
+                                        "")
+                something = style_controlwords_dict[key][0]
+                self.code_dict[self.current_key][something] = value
+            except (ValueError, TypeError):
+                pass
 
     def check_additive(self) -> None:
         """  """
         try:
             if re.search(r'\\additive', self.code_string) is not None:
-                self.code_stack.append(("additive", True))
+                self.code_dict[self.current_key]["additive"] = True
             else:
-                self.code_stack.append(("additive", False))
+                self.code_dict[self.current_key]["additive"] = False
         except TypeError:
-            self.code_stack.append(("additive", False))
+            self.code_dict[self.current_key]["additive"] = False
 
     def check_style_name(self) -> None:
         """  """
         pattern = r'\s(\b\w+|\s)+'
         test = re.search(pattern, self.code_string)
         if test:
-            self.code_stack.append(
-                ("style_name", test[0].rstrip().lstrip()))
+            self.code_dict[self.current_key]["style_name"] = \
+                    test[0].rstrip().lstrip()
         else:
-            self.code_stack.append(("style_name", "None"))
+            self.code_dict[self.current_key]["style_name"] = "None"
 
     def check_style_next_paragraph(self) -> None:
         """  """
         test = re.search(r"\\snext[0-9]*", self.code_string)
         if test:
-            self.code_stack.append(("snext", test[0].replace("\\snext", "")))
+            self.code_dict[self.current_key]["snext"] = test[0].replace(
+                "\\snext", "")
         else:
-            self.code_stack.append(("snext", "0"))
+            self.code_dict[self.current_key]["snext"] = "0"
 
     def check_font_alignment(self) -> None:
         """  """
@@ -207,17 +212,7 @@ class GetStyleCodes(object):
         for item in font_align_list:
             test = re.search(r"\\"+item, self.code_string)
             if test:
-                self.code_stack.append(
-                    ("font_align", test[0].replace("\\", "")))
+                self.code_dict[self.current_key][
+                    "font_align"] = test[0].replace("\\", "")
             else:
                 pass
-
-    def stylelist(self):
-        return self.code_stack
-
-
-def store_style_contents(debug_dir: str, master_code_stack: list) -> None:
-
-    style_file = os.path.join(debug_dir, "style_file.json")
-    with open(style_file, "w") as style_file_pre:
-        json.dump(master_code_stack, style_file_pre)

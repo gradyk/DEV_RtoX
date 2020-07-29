@@ -30,13 +30,11 @@ __date__ = "2019-10-26"
 __name__ = "Contents.Library.header_structure"
 
 # Standard library imports
-import json
-import linecache
-import os
+import fileinput
 import re
 
 # From local application
-import file_stats
+import dict_updater
 import group_boundaries_no_contents
 
 
@@ -44,8 +42,6 @@ def build_header_tables_dict(working_input_file: str, debug_dir: str) -> None:
     """ Check header for existence and location of sections: <first line>,
     <font table>, <file table>, <color table>, <stylesheet>, <list table>,
     <rev table>, <rsid table>, <generator>. """
-    header_tables_dict = os.path.join(debug_dir, "header_tables_dict.json")
-
     tables_list = [
         "fonttbl",
         "filetbl",
@@ -58,36 +54,24 @@ def build_header_tables_dict(working_input_file: str, debug_dir: str) -> None:
         "info"
     ]
 
-    file_stats_results = file_stats.file_stats_calculator(
-        working_input_file=working_input_file)
-    length_working_input_file = file_stats_results[0]
+    for table in tables_list:
 
-    with open(header_tables_dict, "r") as header_tables_dict_pre:
-        header_tables = json.load(header_tables_dict_pre)
+        for line in fileinput.input(files=working_input_file):
+            stripped_line = line.strip()
 
-        line_count = 1
-        while line_count < length_working_input_file + 1:
-            for table in tables_list:
-                line_to_read = linecache.getline(working_input_file,
-                                                 line_count)
-                table_search = re.search(r'{\\'+table, line_to_read)
-                if table_search:
-                    table_start_line = line_count
-                    table_start_index = line_to_read.find(table) - 2
-                    table_boundaries_info = group_boundaries_no_contents.\
-                        define_boundaries_without_contents(
-                            table=table,
-                            working_input_file=working_input_file,
-                            table_start_line=table_start_line,
-                            table_start_index=table_start_index)
-                    header_tables.update(table_boundaries_info)
-                else:
-                    pass
-
-            line_count += 1
-
-    with open(header_tables_dict, "w", encoding="utf-8") as \
-            header_tables_dict_pre:
-        json.dump(header_tables, header_tables_dict_pre, ensure_ascii=False)
-
-    linecache.clearcache()
+            table_search = re.search(r'{\\'+table, stripped_line)
+            if table_search:
+                table_start_line = fileinput.filelineno()
+                table_start_index = stripped_line.find(table) - 2
+                table_boundaries_info = group_boundaries_no_contents.\
+                    define_boundaries_without_contents(
+                        table=table,
+                        working_input_file=working_input_file,
+                        table_start_line=table_start_line,
+                        table_start_index=table_start_index)
+                dict_updater.json_dict_updater(
+                    dict_name="header_tables_dict.json",
+                    dict_update=table_boundaries_info,
+                    debug_dir=debug_dir)
+            else:
+                pass

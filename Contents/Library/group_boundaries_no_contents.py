@@ -79,9 +79,9 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
 
     index = 0
     search_line += 1
-    file_metrics = file_stats.file_stats_calculator(
+    file_length = file_stats.file_stats_calculator(
         working_input_file=working_input_file)
-    length_working_input_file = file_metrics[0]
+    length_working_input_file = file_length
 
     while search_line <= length_working_input_file:
         string_to_search = linecache.getline(working_input_file, search_line)
@@ -101,11 +101,11 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
                 if not deck:  # Means if deck becomes empty
                     group_end_line = search_line
                     group_end_index = index
-                    table_boundaries_info.update({table:
+                    table_boundaries_info = {table:
                                                   [group_start_line,
                                                    group_start_index,
                                                    group_end_line,
-                                                   group_end_index]})
+                                                   group_end_index]}
                     return table_boundaries_info
             else:
                 index += 1
@@ -116,10 +116,10 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
 
     group_end_line = search_line
     group_end_index = index
-    table_boundaries_info.update({table:
+    table_boundaries_info = {table:
                                   [group_start_line,
                                    group_start_index,
                                    group_end_line,
-                                   group_end_index]})
+                                   group_end_index]}
 
     return table_boundaries_info

@@ -100,9 +100,9 @@ def define_boundaries_capture_contents(working_input_file: str,
             pass
 
     tracker = line_to_parse + 1
-    file_metrics = file_stats.file_stats_calculator(
+    file_length = file_stats.file_stats_calculator(
         working_input_file=working_input_file)
-    length_working_input_file = file_metrics[0]
+    length_working_input_file = file_length
 
     while tracker <= length_working_input_file:
         parse_index = 0

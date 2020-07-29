@@ -78,7 +78,7 @@ def destination_content_processor(parse_index: int, contents: str,
                     cwf_missing_keys = json.load(
                         control_word_func_missing_keys)
                     cwf_missing_keys.update(cw_update)
-                with open(control_word_func_missing_keys_file, "w",
+                with open(control_word_func_missing_keys_file, "a+",
                           encoding='utf-8') as \
                         control_word_func_missing_keys:
                     json.dump(cwf_missing_keys, control_word_func_missing_keys,

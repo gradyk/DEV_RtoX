@@ -43,6 +43,7 @@ import tag_closer
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
 #  app package. This will permanently suppress __pycache__
+from doc_parser import MainDocDirector
 
 if __name__ == "__main__":
     # Working files are left in debugdir at the end of a run for debugging
@@ -89,13 +90,11 @@ if __name__ == "__main__":
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
-    control_word_info_dict = create_files.initiate_control_word_info_dict()
-
-    control_word_func_dict = create_files.initiate_control_word_func_dict()
-
-    line_to_get = doc_parser.main_doc_parser(
-        working_input_file=working_input_file,
-        debug_dir=debug_dir, control_word_func_dict=control_word_func_dict)
+    doc_parser.MainDocDirector.main_doc_parser(
+        self=MainDocDirector(
+            working_input_file=working_input_file,
+            debug_dir=debug_dir,
+            control_word_func_dict=control_word_func_dict))
     # old: line_to_get = doc_parser.choose_starting_line_number(
     #      debug_dir=debug_dir)
 

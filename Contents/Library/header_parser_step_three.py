@@ -50,7 +50,6 @@ class ProcessTheTables(object):
         self.working_input_file = working_input_file
 
     def analyze_table_code_strings_controller(self):
-
         code_strings_file = os.path.join(self.debug_dir,
                                          "code_strings_file.json")
         with open(code_strings_file, "r") as code_strings_file_pre:
@@ -97,32 +96,40 @@ class ProcessTheTables(object):
     def process_font_table(self, code_strings_to_process: list):
         """ Process the code settings for each font number and store the
         settings in a dictionary. """
-
-        font_table.FonttblParse(debug_dir=self.debug_dir,
-                                code_strings_to_process=code_strings_to_process)
+        font_table.FonttblParse.process_code_strings(
+            self=font_table.FonttblParse(
+                debug_dir=self.debug_dir,
+                code_strings_to_process=code_strings_to_process))
 
     @staticmethod
     def process_file_table(code_strings_to_process: list):
         """ Process the code settings for each file number and store the
         settings in a dictionary. """
-
         file_table.FiletblParse(code_strings_to_process=code_strings_to_process)
 
-    @staticmethod
-    def process_color_table(code_strings_to_process: list):
+    def process_color_table(self, code_strings_to_process: list):
         """ Process the code settings for each color number and store the
         settings in a dictionary. """
-
-        color_table.ColortblParse(
-            code_strings_to_process=code_strings_to_process)
+        color_table.ColortblParse.color_process_controller(
+            self=color_table.ColortblParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
 
     def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
         settings in a dictionary. """
-
-        style_sheet_table.StyleSheetParse(
-            code_strings_to_process=code_strings_to_process,
-            debug_dir=self.debug_dir)
+        style_sheet_table.StyleSheetParse.trim_stylesheet(
+            self=style_sheet_table.StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
+        style_sheet_table.StyleSheetParse.remove_code_strings(
+            self=style_sheet_table.StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
+        style_sheet_table.StyleSheetParse.process_remaining_code_strings(
+            self=style_sheet_table.StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
 
         # TODO sf_restrictions (style and formatting restrictions) is part of
         #  style sheet table

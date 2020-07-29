@@ -20,16 +20,16 @@
 
 """  """
 
-__author__ = "Kenneth A. Grady"
-__version__ = "0.1.0a0"
-__maintainer__ = "Kenneth A. Grady"
-__email__ = "gradyken@msu.edu"
-__date__ = "2020-05-05"
-__name__ = "Contents.Library.file_stats"
+# From standard library
+import json
+import os
 
 
-def file_stats_calculator(working_input_file: str) -> int:
-    with open(working_input_file, "r") as file:
-        for i, l in enumerate(file):
-            pass
-    return i + 1
+def json_dict_updater(dict_name: str, dict_update: dict, debug_dir: str):
+    dict_to_update = os.path.join(debug_dir, dict_name)
+    with open(dict_to_update, "r+") as dict_pre:
+        dict_new = json.load(dict_pre)
+        dict_new.update(dict_update)
+        dict_pre.seek(0)
+        json.dump(dict_new, dict_pre,
+                  indent=4)

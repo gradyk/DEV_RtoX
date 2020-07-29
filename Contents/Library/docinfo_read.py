@@ -88,7 +88,6 @@ class InfoParseController(object):
         """ Extract the contents of the info table. """
         text_to_process = header_parser_step_two.\
             get_table_contents_as_text_string(
-                table=self.table,
                 table_boundaries=info_table_boundaries,
                 working_input_file=working_input_file)
 
@@ -111,7 +110,7 @@ class InfoParseController(object):
 
         info_code_strings_file_updater = {self.table: [info_code_strings_list]}
 
-        with open(info_code_strings_file, "w") as info_code_strings_file_pre:
+        with open(info_code_strings_file, "a+") as info_code_strings_file_pre:
             json.dump(info_code_strings_file_updater,
                       info_code_strings_file_pre)
 

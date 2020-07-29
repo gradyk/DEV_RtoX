@@ -83,7 +83,8 @@ class LineParseController:
                 LineParseController.cs_close_process(
                     self=LineParseController(
                         debug_dir=self.debug_dir,
-                        working_input_file=self.working_input_file,
+                        wor
+                king_input_file=self.working_input_file,
                         keyword_translation_stack=self.keyword_translation_stack,
                         tag_dict=self.tag_dict),
                     tag_bag=tag_bag,

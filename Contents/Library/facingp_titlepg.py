@@ -39,9 +39,9 @@ def search_for_facingp_titlepg(working_input_file: str) -> list:
         "facingp": ["Coded", "", "Flag"],
         "titlepg": ["Coded", "", "Flag"]
     }
-    file_stats_results = file_stats.file_stats_calculator(
+    file_length = file_stats.file_stats_calculator(
         working_input_file=working_input_file)
-    length_working_input_file = file_stats_results[1]
+    length_working_input_file = file_length
     for key in cwd_list_two:
         count = 0
         line = 1

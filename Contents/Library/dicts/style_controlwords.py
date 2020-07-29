@@ -7,6 +7,6 @@ style_controlwords_dict = {
          "Toggle", "\\ul", "\\ul"],
   "strike": ["strikethrough", "Coded", "Font (Character) Formatting Properties",
              "Toggle", "\\strike", "\\strike"],
-  "small_caps": ["small_caps", "Coded", "Font (Character) Formatting Properties",
-                 "Toggle", "\\scaps", "\\scaps"]
+  "scaps": ["small_caps", "Coded", "Font (Character) Formatting Properties",
+            "Toggle", "\\scaps", "\\scaps"]
 }
