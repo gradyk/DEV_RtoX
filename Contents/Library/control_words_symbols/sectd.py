@@ -1,7 +1,27 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
+#  !/usr/bin/env python3
+#   -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
+#
+#  This file is part of RtoX.
+#
+#  RtoX is free software: you can redistribute it and / or modify it under
+#  the terms of the GNU General Public License as published by the Free
+#  Software Foundation, either version 3 of the License, or (at your option)
+#  any later version.
+#
+#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
+#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+#  more details.
+#
+#  You should have received a copy of the GNU General Public License along
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -38,7 +58,7 @@ import os
 # From application library
 import open_tag_check
 import tag_registry_update
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -72,16 +92,16 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
     """ If the tag registry shows a closed section, insert an open
         section tag and an open paragraph tag. If it shows an open section,
         close it and open a new section and a new paragraph. """
-    tag_registry = os.path.join(debug_dir, "tag_registry.json")
+    tag_registry = os.path.join(debug_dir, "../../debugdir/tag_registry.json")
     with open(tag_registry) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
 
     tag_closed = "0"
 
     if tag_registry["section"] == tag_closed:
-        tag_update = tag_dict["section-beg"]
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=tag_update)
+        content_update = tag_dict["section-beg"]
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=content_update)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["section-beg"] + f"{line}")
@@ -91,9 +111,9 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
 
     else:
         # If a section tag is open, close it and open a new section.
-        tag_update = tag_dict["section-end"] + tag_dict["section-beg"]
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=tag_update)
+        content_update = tag_dict["section-end"] + tag_dict["section-beg"]
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=content_update)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["section-end"] +
@@ -104,6 +124,6 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
 
 
 def update_tag_registry(debug_dir: str, tag_open="1"):
-    tag_update_dict = {"section": tag_open}
+    content_update_dict = {"section": tag_open}
     tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+        debug_dir=debug_dir, content_update_dict=content_update_dict)

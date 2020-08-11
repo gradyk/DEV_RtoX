@@ -38,11 +38,11 @@ import re
 import Contents.Library.contents_group
 import Contents.Library.contents_destination
 import Contents.Library.contents_slash_star
-import working_xml_file_update
+import output_file_update
 
 
 def contents_group_processor(group_id: str, group_info: dict,
-                             debug_dir: str, control_word_func_dict: str):
+                             debug_dir: str, control_word_dict: str):
     contents = group_info[group_id][0]
     contents = contents.lstrip("{").rstrip("}")
     parse_index = 0
@@ -76,7 +76,7 @@ def contents_group_processor(group_id: str, group_info: dict,
             parse_index = contents_destination(
                 contents=contents,
                 parse_index=parse_index,
-                control_word_func_dict=control_word_func_dict,
+                control_word_dict=control_word_dict,
                 debug_dir=debug_dir)
             pass
 
@@ -115,8 +115,8 @@ def contents_blank_space(parse_index: int, character_plus_one: str,
                          debug_dir: str) -> int:
     if character_plus_one == " ":
         text = " "
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=text[0])
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=text[0])
         print("    TEXT", text[0])
         parse_index = parse_index + 2
     else:
@@ -146,13 +146,13 @@ def contents_group(parse_index: int, contents: str):
 
 
 def contents_destination(contents: str, parse_index: int,
-                         control_word_func_dict: str,
+                         control_word_dict: str,
                          debug_dir: str) -> int:
     parse_index = \
         Contents.Library.contents_destination.destination_content_processor(
             contents=contents,
             parse_index=parse_index,
-            control_word_func_dict=control_word_func_dict,
+            control_word_dict=control_word_dict,
             debug_dir=debug_dir)
     return parse_index
 
@@ -167,8 +167,8 @@ def contents_to_xml(contents: str, parse_index: int, debug_dir: str):
         regex = r"^((?!\}|\\).)*"
         text = re.search(regex, contents[parse_index:])
         end = text.end()
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=text[0])
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=text[0])
         print("    TEXT", text[0])
         print("      ", contents[parse_index])
     # TODO Replace what happens in error situations.

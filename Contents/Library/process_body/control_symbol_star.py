@@ -27,30 +27,31 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-05-16"
-__name__ = "Contents.Library.slash_star"
+__name__ = "Contents.Library.process_body.control_symbol_star"
 
 # From standard libraries
-import Contents.Library.group_boundaries_capture_contents
+import process_body.group_boundaries_capture_contents
 
 
-def slash_star_processor(working_input_file: str, parse_index: int,
-                         line_to_parse: int,
-                         shift_text: str) -> tuple:
+def processor(working_input_file: str, parse_index: int,
+              line_to_parse: int, debug_dir: str) -> tuple:
     # {group_id:
     #  [group_contents,
     #   group_start_line,
     #   group_start_index,
     #   group_end_line,
     #   group_end_index]}
-    print("SLASH STAR BEGIN:")
+
     group_id, group_info \
-        = Contents.Library.group_boundaries_capture_contents \
+        = process_body.group_boundaries_capture_contents \
         .define_boundaries_capture_contents(
             working_input_file=working_input_file,
             line_to_parse=line_to_parse,
             parse_index=parse_index,
-            shift_text=shift_text)
+            debug_dir=debug_dir)
+
+    # NEED TO REDO NEXT LINES AND CHANGE RETURN
     line_to_parse = group_info[group_id][3]
     parse_index = group_info[group_id][4]
-    print("SLASH STAR END")
+
     return line_to_parse, parse_index

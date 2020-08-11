@@ -35,11 +35,11 @@ import sys
 
 # From local application
 import control_word_functions
-import working_xml_file_update
+import output_file_update
 
 
 def destination_content_processor(parse_index: int, contents: str,
-                                  control_word_func_dict: str,
+                                  control_word_dict: str,
                                   debug_dir: str) -> int:
 
     try:
@@ -50,12 +50,12 @@ def destination_content_processor(parse_index: int, contents: str,
         match = matches.group()
         match_split = re.findall(r"[\\][^\W\d_]+|\d+", match)
 
-        with open(control_word_func_dict, "r") as control_word_func_dict_pre:
-            control_word_func_dict_contents = json.load(
-                control_word_func_dict_pre)
+        with open(control_word_dict, "r") as control_word_dict_pre:
+            control_word_dict_contents = json.load(
+                control_word_dict_pre)
 
             try:
-                cw_base = control_word_func_dict_contents[match_split[0]]
+                cw_base = control_word_dict_contents[match_split[0]]
                 if cw_base is None:
                     pass
                 else:
@@ -63,7 +63,7 @@ def destination_content_processor(parse_index: int, contents: str,
                         match=match_split, cw_base=cw_base)
 
             except KeyError:
-                # If the destination is not in control_word_func_dict,
+                # If the destination is not in control_word_dict,
                 # add it to a storage file of destinations. At the end of RtoX,
                 # those destinations will be added to the dict.
                 key = match_split[0]
@@ -71,17 +71,17 @@ def destination_content_processor(parse_index: int, contents: str,
                 base_script_dir = os.path.dirname(os.path.abspath(
                     sys.argv[0]))
                 dicts_dir = os.path.join(base_script_dir, "Library/dicts")
-                control_word_func_missing_keys_file = os.path.join(
-                    dicts_dir, "control_word_func_missing_keys_file.json")
-                with open(control_word_func_missing_keys_file) as \
-                        control_word_func_missing_keys:
+                control_word_missing_dict = os.path.join(
+                    dicts_dir, "control_word_missing_dict.json")
+                with open(control_word_missing_dict) as \
+                        control_word_missing_keys:
                     cwf_missing_keys = json.load(
-                        control_word_func_missing_keys)
+                        control_word_missing_keys)
                     cwf_missing_keys.update(cw_update)
-                with open(control_word_func_missing_keys_file, "a+",
+                with open(control_word_missing_dict, "a+",
                           encoding='utf-8') as \
-                        control_word_func_missing_keys:
-                    json.dump(cwf_missing_keys, control_word_func_missing_keys,
+                        control_word_missing_keys:
+                    json.dump(cwf_missing_keys, control_word_missing_keys,
                               ensure_ascii=False)
 
             parse_index = parse_index + end
@@ -96,9 +96,9 @@ def destination_content_processor(parse_index: int, contents: str,
             regex, contents[parse_index:], re.VERBOSE)
         content = "<rtfIssue line=" + f"{matches.group()}" + ">" \
                   + matches.group(0) + "</rtfIssue>"
-        working_xml_file_update.tag_append(
+        output_file_update.content_append(
             debug_dir=debug_dir,
-            tag_update=content)
+            content_update=content)
         end = matches.end()
         parse_index = parse_index + end
 

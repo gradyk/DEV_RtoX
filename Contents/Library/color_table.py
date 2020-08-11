@@ -77,7 +77,7 @@ class ColortblParse(object):
         for ele in color_codes:
             try:
                 test = re.search(r'}', ele)
-                color_codes.remove(ele)
+                del color_codes[-1]
             except ValueError:
                 pass
 

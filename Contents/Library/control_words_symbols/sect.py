@@ -16,7 +16,7 @@
 #  more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 """ Sect marks the end of a section. It does not include any other coding. The
     necessary steps are: (1) insert and end of section tag, and (2) insert a
@@ -37,7 +37,7 @@ import os
 # From application library
 import open_tag_check
 import tag_registry_update
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -70,16 +70,16 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
     """ If the tag registry shows a closed section, insert an open
         section tag and an open paragraph tag. If it shows an open section,
         close it and open a new section and a new paragraph. """
-    tag_registry = os.path.join(debug_dir, "tag_registry.json")
+    tag_registry = os.path.join(debug_dir, "../../debugdir/tag_registry.json")
     with open(tag_registry) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
 
     tag_closed = "0"
 
     if tag_registry["section"] == tag_closed:
-        tag_update = tag_dict["section-beg"]
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=tag_update)
+        content_update = tag_dict["section-beg"]
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=content_update)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["section-beg"] + f"{line}")
@@ -88,12 +88,12 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
             logging.exception("Check setLevel for logger_debug.")
 
     else:
-        tag_update = tag_dict["section-end"] + tag_dict["section-beg"]
-        working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                           tag_update=tag_update)
+        content_update = tag_dict["section-end"] + tag_dict["section-beg"]
+        output_file_update.content_append(debug_dir=debug_dir,
+                                      content_update=content_update)
 
 
 def update_tag_registry(debug_dir: str, tag_open="1"):
-    tag_update_dict = {"section": tag_open}
+    content_update_dict = {"section": tag_open}
     tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+        debug_dir=debug_dir, content_update_dict=content_update_dict)

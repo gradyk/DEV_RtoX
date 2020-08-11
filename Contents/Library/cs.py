@@ -36,11 +36,11 @@ import linecache
 import logging
 
 # Local application imports
-import emphasis
+from control_words_symbols import emphasis
 import keyword_end_alt
 import open_tag_check
 import tag_registry_update
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -118,10 +118,10 @@ def insert_opening_cs_tag(cs_line_dict: dict, text: str,
             tag_bag.append(lot_item)
 
             # Update the tag registry.
-            tag_update_dict = {lot_item: tag_open}
+            content_update_dict = {lot_item: tag_open}
             tag_registry_update.tag_registry_update(
                 debug_dir=debug_dir,
-                tag_update_dict=tag_update_dict)
+                content_update_dict=content_update_dict)
             try:
                 if logger_debug.isEnabledFor(logging.DEBUG):
                     logger_debug.error(msg=str(tag_dict[lot_item+"-beg"] +
@@ -131,14 +131,14 @@ def insert_opening_cs_tag(cs_line_dict: dict, text: str,
 
         # To the string of tags, add the cs line text. Write the string to the
         # working_xml_file.
-        tag_update = tag + text
-        working_xml_file_update.tag_append(debug_dir, tag_update)
+        content_update = tag + text
+        output_file_update.content_append(debug_dir, content_update)
 
     else:
         # If no tags need to be added, just write the text to the file.
         tag_bag = []
-        tag_update = text
-        working_xml_file_update.tag_append(debug_dir, tag_update)
+        content_update = text
+        output_file_update.content_append(debug_dir, content_update)
 
     return tag_bag
 
@@ -166,10 +166,10 @@ def insert_closing_cs_tags(debug_dir: str, tag_dict: dict, tag_bag: list,
             tag = tag + tag_dict[tag_item+"-end"]
 
             # Update the tag registry.
-            tag_update_dict = {tag_item: tag_closed}
+            content_update_dict = {tag_item: tag_closed}
             tag_registry_update.tag_registry_update(
                 debug_dir=debug_dir,
-                tag_update_dict=tag_update_dict)
+                content_update_dict=content_update_dict)
             try:
                 if logger_debug.isEnabledFor(logging.DEBUG):
                     msg = str(f"{line} " + tag_dict[tag_item+"-end"])
@@ -178,8 +178,8 @@ def insert_closing_cs_tags(debug_dir: str, tag_dict: dict, tag_bag: list,
                 logging.exception("Check setLevel for logger_debug.")
 
         # Add the closing tags to the working_xml_file.
-        tag_update = tag
-        working_xml_file_update.tag_append(debug_dir, tag_update)
+        content_update = tag
+        output_file_update.content_append(debug_dir, content_update)
 
     # Emptying the tag_bag prevents unwanted closing tags from being
     # added when there are nested tags in the cs text line.

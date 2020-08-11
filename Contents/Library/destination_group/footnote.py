@@ -35,7 +35,7 @@ import logging
 # From local application
 import open_tag_check
 import tag_registry_update
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -89,10 +89,10 @@ def open_emphasis_tag_cleanup_start(debug_dir: str, tag_dict: dict) -> None:
 def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
                                 line_to_read: str) -> None:
     # Add the opening footnote tag.
-    tag_update = tag_dict["footnote-beg"]
+    content_update = tag_dict["footnote-beg"]
 
-    working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                       tag_update=tag_update)
+    output_file_update.content_append(debug_dir=debug_dir,
+                                  content_update=content_update)
     try:
         if logger_debug.isEnabledFor(logging.DEBUG):
             logger_debug.error(msg=str(tag_dict["footnote-beg"] +
@@ -103,9 +103,9 @@ def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
 
 def update_tag_registry_start(debug_dir: str):
     tag_open = "1"
-    tag_update_dict = {"footnote": tag_open}
+    content_update_dict = {"footnote": tag_open}
     tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+        debug_dir=debug_dir, content_update_dict=content_update_dict)
 
 
 def footnote_process_controller_end(debug_dir: str, tag_dict: dict,
@@ -138,10 +138,10 @@ def open_emphasis_tag_cleanup_end(debug_dir: str, tag_dict: dict) -> None:
 def insert_closing_footnote_tag(debug_dir: str, tag_dict: dict,
                                 line: str) -> None:
 
-    tag_update = tag_dict["footnote-end"]
+    content_update = tag_dict["footnote-end"]
 
-    working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                       tag_update=tag_update)
+    output_file_update.content_append(debug_dir=debug_dir,
+                                  content_update=content_update)
     try:
         if logger_debug.isEnabledFor(logging.DEBUG):
             msg = str(f"({line})" + tag_dict["footnote-end"])
@@ -151,6 +151,6 @@ def insert_closing_footnote_tag(debug_dir: str, tag_dict: dict,
 
 
 def update_tag_registry_end(debug_dir: str, tag_closed="0") -> None:
-    tag_update_dict = {"footnote": tag_closed}
+    content_update_dict = {"footnote": tag_closed}
     tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, tag_update_dict=tag_update_dict)
+        debug_dir=debug_dir, content_update_dict=content_update_dict)

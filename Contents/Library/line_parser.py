@@ -30,12 +30,12 @@ __name__ = "line_parser"
 
 # From local application.
 import cs
-import header
-import footnote
-import par
-import pard
-import sect
-import sectd
+from destination_group import header
+from destination_group import footnote
+from control_words_symbols import par
+from control_words_symbols import pard
+from control_words_symbols import sect
+from control_words_symbols import sectd
 
 
 class LineParseController:

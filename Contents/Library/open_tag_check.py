@@ -49,7 +49,7 @@ import os
 
 # From local application
 import tag_registry_update
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -71,10 +71,10 @@ def tag_check(debug_dir: str, tag_dict: dict, status_list: list):
                 pass
             else:
                 # Update the working_xml_file.
-                tag_update = tag_dict[tag_type+"-end"]
-                working_xml_file_update.tag_append(
+                content_update = tag_dict[tag_type+"-end"]
+                output_file_update.content_append(
                     debug_dir=debug_dir,
-                    tag_update=tag_update)
+                    content_update=content_update)
                 try:
                     if logger_debug.isEnabledFor(logging.DEBUG):
                         msg = str(tag_dict[tag_type+"-end"])
@@ -83,7 +83,7 @@ def tag_check(debug_dir: str, tag_dict: dict, status_list: list):
                     logging.exception("Check setLevel for logger_debug.")
 
                 # Update the tag registry.
-                tag_update_dict = {tag_type: "0"}
+                content_update_dict = {tag_type: "0"}
                 tag_registry_update.tag_registry_update(
                     debug_dir=debug_dir,
-                    tag_update_dict=tag_update_dict)
+                    content_update_dict=content_update_dict)

@@ -7,37 +7,15 @@ import sys
 def cw_csv_builder():
     base_script_dir = os.path.dirname(os.path.abspath(
         sys.argv[0]))
-    control_word_csv = os.path.join(base_script_dir,
-                                    "control_words.txt")
+    control_word_csv = os.path.join(base_script_dir, "control_words.txt")
 
-    cw_info_dict_file = os.path.join(base_script_dir,
-                                     "control_word_info_dict.json")
-    cw_func_dict_file = os.path.join(base_script_dir,
-                                     "control_word_func_dict.json")
+    cw_dict_file = os.path.join(base_script_dir, "control_word_dict.json")
 
-    with open(cw_info_dict_file, "r+") as cw_info_dict_pre:
-        cw_dict = json.load(cw_info_dict_pre)
+    with open(cw_dict_file, "r+") as cw_dict_pre:
+        cw_dict = json.load(cw_dict_pre)
 
         with open(control_word_csv) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count == 0:
-                    line_count += 1
-                else:
-                    key = f'{row[0]}'
-                    val1 = f'{row[1]}'
-                    val2 = f'{row[2]}'
-                    something = {key: [val1, val2]}
-                    cw_dict.update(something)
-                    cw_info_dict_pre.seek(0)
-                    json.dump(cw_dict, cw_info_dict_pre, indent=4)
-                    line_count += 1
-
-    with open(cw_func_dict_file, "r+") as cw_func_dict_pre:
-        cw_dict = json.load(cw_func_dict_pre)
-        with open(control_word_csv) as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=",")
             line_count = 0
             for row in csv_reader:
                 if line_count == 0:
@@ -48,11 +26,13 @@ def cw_csv_builder():
                         key = key.rstrip("N")
                     else:
                         pass
-                    cw_not_coded = None
-                    something = {key: cw_not_coded}
+                    val1 = f'{row[1]}'
+                    val2 = f'{row[2]}'
+                    val3 = "null"
+                    something = {key: [val1, val2, val3]}
                     cw_dict.update(something)
-                    cw_func_dict_pre.seek(0)
-                    json.dump(cw_dict, cw_func_dict_pre, indent=4)
+                    cw_dict_pre.seek(0)
+                    json.dump(cw_dict, cw_dict_pre, indent=4)
                     line_count += 1
 
 

@@ -83,8 +83,8 @@ class FonttblParse(object):
                                            debug_dir=self.debug_dir)
             self.code_dict = {}
 
-    def process_font_codes(self, code_string: str, code_dict: dict):
-        """ Parse each font code string into its constituent setting and
+    def process_font_codes(self, code_string: str, code_dict: dict) -> None:
+        """ Parse each font code string into its constituent settings and
         store them in a dictionary under the font code number. """
 
         get_font_codes = GetFontCodes(code_string=code_string,
@@ -104,7 +104,7 @@ class FonttblParse(object):
 
 
 class GetFontCodes:
-    def __init__(self, code_string: str, debug_dir: str,
+    def __init__(self, debug_dir: str, code_string: str,
                  code_dict: dict) -> None:
         self.code_string = code_string
         self.debug_dir = debug_dir

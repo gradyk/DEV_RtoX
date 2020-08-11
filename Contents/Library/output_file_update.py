@@ -16,32 +16,30 @@
 #  more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
-"""
-Updates the working_xml_file by inserting new tags from other modules.
-"""
+""" Updates the output_file by inserting content from other modules. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-07"
-__name__ = "Contents.Library.working_xml_file_update"
+__name__ = "Contents.Library.output_file_update"
 
 # From standard libraries
 import os
+import sys
 
 
-def tag_append(debug_dir: str, tag_update: str):
-    # TODO Change tag_append to content_append (here and wherever this
-    #  function is called.
+def content_append(content_update: str):
+    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    debug_dir = os.path.join(base_script_dir, "debugdir")
+    output_file_base = os.path.join(debug_dir, "output_file.xml")
 
-    working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
+    with open(output_file_base, "r") as output_file_pre:
+        output_file = output_file_pre.read()
+        output_file_updated = output_file + content_update
 
-    with open(working_xml_file, "r") as xml_file_pre:
-        xml_file = xml_file_pre.read()
-        xml_file_update = xml_file + tag_update
-
-    with open(working_xml_file, "w") as xml_file_pre:
-        xml_file_pre.write(xml_file_update)
+    with open(output_file_base, "w") as output_file_pre:
+        output_file_pre.write(output_file_updated)

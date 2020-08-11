@@ -36,6 +36,7 @@ import color_table
 import file_table
 import font_table
 # import generator
+import information_group
 # import para_group_table
 # import rsid_table
 import style_sheet_table
@@ -162,4 +163,7 @@ class ProcessTheTables(object):
         pass
 
     def process_info(self, code_strings_to_process: list):
-        pass
+        information_group.InfoGrpParse.process_code_strings(
+            self=information_group.InfoGrpParse(
+                debug_dir=self.debug_dir,
+                code_strings_to_process=code_strings_to_process))

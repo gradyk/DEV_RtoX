@@ -16,19 +16,10 @@
 #  more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
-"""  """
+# BASED ON USER'S SELECTION, GO TO LATEX OR XML FILE BUILDER AND ADD TEXT
 
-# From standard library
-import json
-import os
-
-
-def json_dict_updater(dict_name: str, dict_update: dict, debug_dir: str):
-    dict_to_update = os.path.join(debug_dir, dict_name)
-    with open(dict_to_update, "r+") as dict_pre:
-        dict_new = json.load(dict_pre)
-        dict_new.update(dict_update)
-        dict_pre.seek(0)
-        json.dump(dict_new, dict_pre, indent=4)
+def output_style_selector(text: str):
+    print(text)
+    pass

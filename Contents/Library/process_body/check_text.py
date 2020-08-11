@@ -1,5 +1,5 @@
-#  !/usr/bin/env python3
-#   -*- coding: utf-8 -*-
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
 #
@@ -16,19 +16,23 @@
 #  more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
-"""  """
+# From standard libraries
+import re
 
-# From standard library
-import json
-import os
+# From local application
+import adjust_process_text
 
 
-def json_dict_updater(dict_name: str, dict_update: dict, debug_dir: str):
-    dict_to_update = os.path.join(debug_dir, dict_name)
-    with open(dict_to_update, "r+") as dict_pre:
-        dict_new = json.load(dict_pre)
-        dict_new.update(dict_update)
-        dict_pre.seek(0)
-        json.dump(dict_new, dict_pre, indent=4)
+def processor(debug_dir: str, parse_index: int, parse_text: str,
+              line_to_parse: int, working_input_file: str) -> None:
+    test = re.search(r" ", parse_text[0])
+    if test is not None:
+        parse_index += 1
+        adjust_process_text.text_metric_reset(
+            parse_index=parse_index,
+            line_to_parse=line_to_parse,
+            working_input_file=working_input_file)
+    else:
+        pass

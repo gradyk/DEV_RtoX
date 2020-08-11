@@ -16,7 +16,7 @@
 #  more details.
 #
 #  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 """ Method to update the tag registry after tag openings or closings. """
 
@@ -33,13 +33,13 @@ import os
 # import sys
 
 
-def tag_registry_update(debug_dir: str, tag_update_dict: dict) -> None:
+def tag_registry_update(debug_dir: str, content_update_dict: dict) -> None:
 
     tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
 
     with open(tag_registry_file) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
-        tag_registry.update(tag_update_dict)
+        tag_registry.update(content_update_dict)
 
     # TODO change the next line into a logger.
     # sys.stdout.write(str(tag_registry))

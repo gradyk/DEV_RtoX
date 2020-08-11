@@ -63,11 +63,11 @@ def input_file_prep(input_file_name: str,
     working_input_file = os.path.join(debug_dir,
                                       "working_input_file.txt")
 
-    # Create the file in which the XML tags and text will be
+    # Create the file in which the appropriate tags and text will be
     # added as the conversion progresses.
-    working_xml_file = open(os.path.join(debug_dir,
-                            "working_xml_file.xml"), "w+")
-
-    working_xml_file.close()
+    # TODO Make this an .xml file or .tex file depending on whether the user
+    #  has chosen to add XML tags or LaTeX tags.
+    output_file = open(os.path.join(debug_dir, "output_file.xml"), "w+")
+    output_file.close()
 
     return working_input_file

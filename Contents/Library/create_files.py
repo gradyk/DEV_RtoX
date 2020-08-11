@@ -30,27 +30,19 @@ import json
 
 # From application library
 import Contents.Library.input_file_prep
-import rtf_codes_file_prep
 
 
-def initiate_working_files(xml_tag_num: str, debug_dir: str,
+def initiate_working_files(debug_dir: str,
                            input_file_name: str, base_script_dir: str) -> str:
 
-    create_working_xml_file(xml_tag_num=xml_tag_num, debug_dir=debug_dir)
-
     create_dict_files(base_script_dir=base_script_dir)
+
+    create_temp_working_inpput_file(debug_dir=debug_dir)
 
     working_input_file = create_working_input_file(
         debug_dir=debug_dir, input_file_name=input_file_name,
         base_script_dir=base_script_dir)
     return working_input_file
-
-
-def create_working_xml_file(xml_tag_num: str, debug_dir: str) -> None:
-    """ XML file to hold tags during processing. """
-    rtf_codes_file_prep.RTFCodesPrep.rtf_codes_to_xml_prep(
-        self=rtf_codes_file_prep.RTFCodesPrep(
-            debug_dir=debug_dir, xml_tag_num=xml_tag_num))
 
 
 def create_dict_files(base_script_dir: str) -> None:
@@ -62,8 +54,11 @@ def create_dict_files(base_script_dir: str) -> None:
         "font_table_file.json",
         "color_table_file.json",
         "style_sheet_table_file.json",
-        "control_word_info_dict.json",
-        "control_word_func_dict.json"
+        "info_group_file.json",
+        "tag_registry.json",
+        "group_data_file.json",
+        "control_word_missing_dict.json",
+        "control_symbol_missing_dict.json"
     )
 
     for file in dict_library:
@@ -71,6 +66,12 @@ def create_dict_files(base_script_dir: str) -> None:
         dict_path = os.path.join(dict_dir, file)
         with open(dict_path, "w+") as open_dict:
             json.dump({}, open_dict)
+
+
+def create_temp_working_inpput_file(debug_dir: str):
+    with open(os.path.join(debug_dir, "temp_working_input_file.txt"), "w") \
+            as twif:
+        twif.write("")
 
 
 def create_working_input_file(input_file_name: str, debug_dir: str,

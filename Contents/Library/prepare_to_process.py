@@ -30,6 +30,11 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
 __name__ = "Contents.Library.prepare_to_process"
 
+# From standard libraries
+import json
+import os
+import sys
+
 # From local application
 import prelim_routine
 
@@ -48,23 +53,21 @@ def extract_config_settings(config_file: str, base_script_dir: str,
 
 def extract_file_info(config_file: str, base_script_dir: str,
                       debug_dir: str) -> tuple:
-
     input_file_name, output_file_name = \
         prelim_routine.Prelim.create_config_dict(
             self=prelim_routine.Prelim(config_file=config_file,
                                        base_script_dir=base_script_dir,
                                        debug_dir=debug_dir))
-
     return input_file_name, output_file_name
 
 
-def extract_users_xml_tag_style() -> str:
+def extract_users_xml_tag_style(debug_dir: str) -> str:
     """ Extract the user's preference for XML tag style. """
-    from config_dict import config_dictionary as rtf_settings_dict
-
-    try:
-        xml_tag_num = rtf_settings_dict.get("tag-style")
-    except TypeError:
-        xml_tag_num = "1"
-
+    config_settings_dict = os.path.join(debug_dir, "config_dict.json")
+    with open(config_settings_dict, "r+") as rtf_settings_dict_pre:
+        rtf_settings_dict = json.load(rtf_settings_dict_pre)
+        try:
+            xml_tag_num = rtf_settings_dict["tag-style"]
+        except TypeError:
+            xml_tag_num = "1"
     return xml_tag_num

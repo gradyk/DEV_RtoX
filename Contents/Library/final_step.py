@@ -59,7 +59,7 @@ from shutil import copy
 import tag_style
 # import post_process
 import xmlformatter
-import working_xml_file_update
+import output_file_update
 from read_log_config import logger_debug
 
 
@@ -97,10 +97,10 @@ def final_step(debug_dir: str,
         working_xml_file_pre.write(updated_xml_file)
 
     # Insert XML closing tags based on user's style preferences.
-    tag_update = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
+    content_update = tag_dict["body-end"] + tag_dict["bodytext-end"] + \
         tag_dict["wrapper-end"]
-    working_xml_file_update.tag_append(debug_dir=debug_dir,
-                                       tag_update=tag_update)
+    output_file_update.content_append(debug_dir=debug_dir,
+                                  content_update=content_update)
     try:
         if logger_debug.isEnabledFor(logging.DEBUG):
             msg = str(tag_dict["body-end"] + tag_dict["bodytext-end"] +

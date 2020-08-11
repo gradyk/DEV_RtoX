@@ -1,0 +1,180 @@
+Afrikaans,0x0436,1078
+Albanian,0x041c,1052
+Arabic,0x0401,1025
+Arabic Algeria,0x1401,5121
+Arabic Bahrain,0x3c01,15361
+Arabic Egypt,0x0c01,3073
+Arabic General,0x0001,1
+Arabic Iraq,0x0801,2049
+Arabic Jordan,0x2c01,11265
+Arabic Kuwait,0x3401,13313
+Arabic Lebanon,0x3001,12289
+Arabic Libya,0x1001,4097
+Arabic Morocco,0x1801,6145
+Arabic Oman,0x2001,8193
+Arabic Qatar,0x4001,16385
+Arabic Syria,0x2801,10241
+Arabic Tunisia,0x1c01,7169
+Arabic U.A.E.,0x3801,14337
+Arabic Yemen,0x2401,9217
+Armenian,0x042b,1067
+Assamese,0x044d,1101
+Azeri Cyrillic,0x082c,2092
+Azeri Latin,0x042c,1068
+Basque,0x042d,1069
+Bengali,0x0445,1093
+Bosnia Herzegovina,0x101a,4122
+Bulgarian,0x0402,1026
+Burmese,0x0455,1109
+Byelorussian,0x0423,1059
+Catalan,0x0403,1027
+Chinese China,0x0804,2052
+Chinese General,0x0004,4
+Chinese Hong Kong,0x0c04,3076
+Chinese Macao,0x0c04,3076
+Chinese Singapore,0x1004,4100
+Chinese Taiwan,0x0404,1028
+Croatian,0x041a,1050
+Czech,0x0405,1029
+Danish,0x0406,1030
+Dutch Belgium,0x0813,2067
+Dutch Standard,0x0413,1043
+English Australia,0x0c09,3081
+English Belize,0x2809,10249
+English British,0x0809,2057
+English Canada,0x1009,4105
+English Caribbean,0x2409,9225
+English General,0x0009,9
+English Ireland,0x1809,6153
+English Jamaica,0x2009,8201
+English New Zealand,0x1409,5129
+English Philippines,0x3409,13321
+English South Africa,0x1c09,7177
+English Trinidad,0x2c09,11273
+English United States,0x0409,1033
+English Zimbabwe,0x0409,1033
+Estonian,0x0425,1061
+Faerose,0x0438,1080
+Farsi,0x0429,1065
+Finnish,0x040b,1035
+French,0x040c,1036
+French Belgium,0x080c,2060
+French Cameroon,0x2c0c,11276
+French Canada,0x0c0c,3084
+French Cote d'Ivoire,0x300c,12300
+French Luxembourg,0x140c,5132
+French Mali,0x340c,13324
+French Monaco,0x180c,6156
+French Reunion,0x200c,8204
+French Senegal,0x280c,10252
+French Swiss,0x100c,4108
+French West Indies,0x1c0c,7180
+French Democratic Republic of the Congo,0x240c,9228
+Frisian,0x0462,1122
+Gaelic,0x043c,1084
+Gaelic Ireland,0x083c,2108
+Galician,0x0456,1110
+Georgian,0x0437,1079
+German,0x0407,1031
+German Austrian,0x0c07,3079
+German Liechtenstein,0x1407,5127
+German Luxembourg,0x1007,4103
+German Switzerland,0x0807,2055
+Greek,0x0408,1032
+Gujarati,0x0447,1095
+Hebrew,0x040d,1037
+Hindi,0x0439,1081
+Hungarian,0x040e,1038
+Icelandic,0x040f,1039
+Indonesian,0x0421,1057
+Italian,0x0410,1040
+Italian Switzerland,0x0810,2064
+Japanese,0x0411,1041
+Kannada,0x044b,1099
+Kashmiri,0x0460,1120
+Kashmiri India,0x0860,2144
+Kazakh,0x043f,1087
+Khmer,0x0453,1107
+Kirghiz,0x0440,1088
+Konkani,0x0457,1111
+Korean,0x0412,1042
+Korean Johab,0x0812,2066
+Lao,0x0454,1108
+Latvian,0x0426,1062
+Lithuanian,0x0427,1063
+Lithuanian Classic,0x0827,2087
+FYRO Macedonian,0x043e,1086
+Malay,0x043e,1086
+Malay Brunei Darussalam,0x083e,2110
+Malayalam,0x044c,1100
+Maltese,0x043a,1082
+Manipuri,0x0458,1112
+Marathi,0x044e,1102
+Mongolian,0x0450,1104
+Nepali,0x0461,1121
+Nepali India,0x0861,2145
+Norwegian Bokmal,0x0414,1044
+Norwegian Nynorsk,0x0814,2068
+Oriya,0x0448,1096
+Polish,0x0415,1045
+Portuguese (Brazil),0x0416,1046
+Portuguese (Portugal),0x0816,2070
+Punjabi,0x0446,1094
+Rhaeto-Romanic,0x0417,1047
+Romanian,0x0418,1048
+Romanian Moldova,0x0818,2072
+Russian,0x0419,1049
+Russian Moldova,0x0819,2073
+Sami Lappish,0x043b,1083
+Sanskrit,0x044f,1103
+Serbian Cyrillic,0x0c1a,3098
+Serbian Latin,0x081a,2074
+Sindhi,0x0459,1113
+Slovak,0x041b,1051
+Slovenian,0x0424,1060
+Sorbian,0x042e,1070
+Spanish Argentina,0x2c0a,11274
+Spanish Bolivia,0x400a,16394
+Spanish Chile,0x340a,13322
+Spanish Colombia,0x240a,9226
+Spanish Costa Rica,0x140a,5130
+Spanish Dominican Republic,0x1c0a,7178
+Spanish Ecuador,0x300a,12298
+Spanish El Salvador,0x440a,17418
+Spanish Guatemala,0x100a,4106
+Spanish Honduras,0x480a,18442
+Spanish Mexico,0x080a,2058
+Spanish Modern,0x0c0a,3082
+Spanish Nicaragua,0x4c0a,19466
+Spanish Panama,0x180a,6154
+Spanish Paraguay,0x3c0a,15370
+Spanish Peru,0x280a,10250
+Spanish Puerto Rico,0x500a,20490
+Spanish Traditional,0x040a,1034
+Spanish Uruguay,0x380a,14346
+Spanish Venezuela,0x200a,8202
+Sutu,0x0430,1072
+Swahili,0x0441,1089
+Swedish,0x041d,1053
+Swedish Finland,0x081d,2077
+Tajik,0x0428,1064
+Tamil,0x0449,1097
+Tatar,0x0444,1092
+Telugu,0x044a,1098
+Thai,0x041e,1054
+Tibetan,0x0451,1105
+Tsonga,0x0431,1073
+Tswana,0x0432,1074
+Turkish,0x041f,1055
+Turkmen,0x0442,1090
+Ukranian,0x0422,1058
+Urdu,0x0420,1056
+Urdu India,0x0820,2080
+Uzbek Cyrillic,0x0843,2115
+Uzbek Latin,0x0443,1091
+Venda,0x0433,1075
+Vietnamese,0x042a,1066
+Welsh,0x0452,1106
+Xhosa,0x0434,1076
+Yiddish,0x043d,1085
+Zulu,0x0435,1077

@@ -27,27 +27,27 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
 
+# From standard libraries
+import os
+
 # From local application
 import create_files
 import debugdir_clean
-import doc_parser
-import docinfo_parser
-import final_step
+from process_body import doc_parser
 import header_parser_step_one
 import header_parser_step_two
 import header_parser_step_three
 import prepare_to_process
-import tag_closer
 # import xml_transition_tags
 
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
 #  app package. This will permanently suppress __pycache__
-from doc_parser import MainDocDirector
+from process_body.doc_parser import MainDocManager
 
 if __name__ == "__main__":
-    # Working files are left in debugdir at the end of a run for debugging
-    # purposes, but cleaned out at the beginning of a run.
+    # TODO Add garbage module as last run module to clean out debugdir and do
+    #  any other necessary cleanup, instead of doing cleanup here.
     debugdir_clean.cleaner()
 
     # Get and store configuration information.
@@ -61,11 +61,12 @@ if __name__ == "__main__":
             config_file=config_file)
 
     # Get the user's preference for XML tag style.
-    xml_tag_num = prepare_to_process.extract_users_xml_tag_style()
+    xml_tag_num = prepare_to_process.extract_users_xml_tag_style(
+        debug_dir=debug_dir)
 
     # Prepare working files.
     working_input_file = create_files.initiate_working_files(
-        xml_tag_num=xml_tag_num, debug_dir=debug_dir,
+        debug_dir=debug_dir,
         input_file_name=input_file_name,
         base_script_dir=base_script_dir)
 
@@ -82,21 +83,18 @@ if __name__ == "__main__":
             self=header_parser_step_three.ProcessTheTables(
                 working_input_file=working_input_file, debug_dir=debug_dir))
 
-    # Process the info portion of the document body.
-    docinfo_parser.process_docinfo(
-        working_input_file=working_input_file, debug_dir=debug_dir)
-
     # Process the main portion of the document body.
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
-    doc_parser.MainDocDirector.main_doc_parser(
-        self=MainDocDirector(
+    control_word_dict = os.path.join(debug_dir,
+                                     "control_word_dict.json")
+
+    doc_parser.MainDocManager.body_parse_manager(
+        self=MainDocManager(
             working_input_file=working_input_file,
             debug_dir=debug_dir,
-            control_word_func_dict=control_word_func_dict))
-    # old: line_to_get = doc_parser.choose_starting_line_number(
-    #      debug_dir=debug_dir)
+            control_word_dict=control_word_dict))
 
     # tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num)
     #
@@ -118,12 +116,15 @@ if __name__ == "__main__":
     #     working_input_file=working_input_file)
 
     # Close open tags where possible and produce list of remaining open tags.
-    tag_closer.tag_closer(debug_dir=debug_dir,
-                          xml_tag_num=xml_tag_num)
+    # tag_closer.tag_closer(debug_dir=debug_dir,
+    #                       xml_tag_num=xml_tag_num)
 
     # Do file clean up, post-processing, and put the renamed file in the
     # output directory.
-    final_step.final_step(debug_dir=debug_dir,
-                          xml_tag_num=xml_tag_num,
-                          output_file_name=output_file_name,
-                          base_script_dir=base_script_dir)
+    # final_step.final_step(debug_dir=debug_dir,
+    #                       xml_tag_num=xml_tag_num,
+    #                       output_file_name=output_file_name,
+    #                       base_script_dir=base_script_dir)
+    # TODO Include in final step: 1) garbage cleanup, 2) copy
+    #  control_word_missing_dict.json contents to XXX and sort
+    #  that file.

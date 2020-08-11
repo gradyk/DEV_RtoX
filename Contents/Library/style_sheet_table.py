@@ -70,7 +70,7 @@ class StyleSheetParse(object):
         for code_string in self.code_strings_to_process:
             if re.search(r'{\\stylesheet', code_string) is not None:
                 place = self.code_strings_to_process.index(code_string)
-                new_code_string = code_string.replace("{\\stylesheet", "")
+                new_code_string = code_string.replace("{\\stylesheet{", "{\\s0")
                 self.code_strings_to_process[place] = new_code_string
             else:
                 pass
@@ -87,7 +87,7 @@ class StyleSheetParse(object):
             else:
                 pass
 
-        for ele in sorted(remove_list, reverse = True):
+        for ele in sorted(remove_list, reverse=True):
             del self.code_strings_to_process[ele]
 
     def process_remaining_code_strings(self):
@@ -113,7 +113,6 @@ class StyleSheetParse(object):
     def process_style_codes(self, code_string: str, code_dict: dict):
         """ Parse each style code string into its constituent setting and
         store them in a dictionary under the style code number. """
-
         get_style_codes = GetStyleCodes(code_string=code_string,
                                         debug_dir=self.debug_dir,
                                         code_dict=code_dict)
@@ -138,12 +137,13 @@ class GetStyleCodes(object):
     def check_stylecode(self) -> None:
         """ With the exception of the default style, each style has an
         identifying number. """
+        # TODO Check and fix code_styles. May need to process \*\cs and \*\ts
         code_styles = [
             r"{\s",  # Paragraph style code
             r"{\ds",  # Section style code
-            r'{\ts',  # Table style code
+            r'{\ts',  # Table style code [ PROBABLY \*\ts ]
             r"{\trowd",  # Table row (tables in RTF are contiguous paragraphs).
-            r"{\tsrowd",  # Table style definitions
+            r"{\tsrowd",  # Table style definitions [ PROBABLY \*\tsrowd ]
         ]
 
         for style in code_styles:
@@ -152,8 +152,6 @@ class GetStyleCodes(object):
                 self.current_key = test[0].replace("{\\", "")
                 self.code_dict.update({self.current_key: {}})
             except (ValueError, TypeError):
-                self.current_key = "default"
-                self.code_dict.update({self.current_key: {}})
                 pass
 
     def check_emphasis_controlwords(self) -> None:
@@ -185,7 +183,7 @@ class GetStyleCodes(object):
         test = re.search(pattern, self.code_string)
         if test:
             self.code_dict[self.current_key]["style_name"] = \
-                    test[0].rstrip().lstrip()
+                    test[0].lstrip()
         else:
             self.code_dict[self.current_key]["style_name"] = "None"
 
