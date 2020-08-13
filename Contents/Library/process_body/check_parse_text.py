@@ -47,7 +47,7 @@ class CheckString(object):
 
         check_group.processor(
             working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
+            line_to_parse=self.line_to_parse,
             parse_index=self.parse_index, parse_text=self.parse_text)
         post1987_destination.processor(
             working_input_file=self.working_input_file,

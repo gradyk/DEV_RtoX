@@ -97,6 +97,14 @@ class ProcessTheTables(object):
     def process_font_table(self, code_strings_to_process: list):
         """ Process the code settings for each font number and store the
         settings in a dictionary. """
+        font_table.FonttblParse.trim_fonttbl(
+            self=font_table.FonttblParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
+        font_table.FonttblParse.remove_code_strings(
+            self=font_table.FonttblParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir))
         font_table.FonttblParse.process_code_strings(
             self=font_table.FonttblParse(
                 debug_dir=self.debug_dir,
@@ -127,7 +135,7 @@ class ProcessTheTables(object):
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))
-        style_sheet_table.StyleSheetParse.process_remaining_code_strings(
+        style_sheet_table.StyleSheetParse.process_code_strings(
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))

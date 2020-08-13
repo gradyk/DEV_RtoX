@@ -54,7 +54,7 @@ class MainDocManager(object):
         self.parse_text = ""
         self.length_parse_text = 0
         self.header_table_file = os.path.join(
-        self.debug_dir, "header_tables_dict.json")
+            self.debug_dir, "header_tables_dict.json")
 
     def body_parse_manager(self) -> None:
         main_doc_dir = MainDocManager(

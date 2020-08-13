@@ -18,67 +18,87 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-8-12"
+__name__ = "Contents.Library.process_body.group_contents"
+
+# From standard libraries
 import re
-import sys
 from collections import deque
 
+# From local application
+import group_parser
 
-def processor_settings(group_info: dict) -> None:
+
+def processor_settings(group_info: dict, group_dict: dict) -> None:
     contents_list = []
     res = next(iter(group_info))
     working_parse_text = group_info[res][0][:-1].lstrip("{")
     parse_index = 0
-    processor(contents_list=contents_list, parse_index=parse_index,
-              working_parse_text=working_parse_text)
+    processor(contents_list=contents_list,
+              parse_index=parse_index,
+              working_parse_text=working_parse_text,
+              group_dict=group_dict)
 
 
 def processor(contents_list: list, parse_index: int,
-              working_parse_text: str):
+              working_parse_text: str, group_dict: dict):
     if working_parse_text == "":
+        group_dict = {"id":       "root",
+                      "type":     "group",
+                      "children": []}
+        print(contents_list)
+        group_parser.processor(contents_list=contents_list,
+                               group_dict=group_dict)
         pass
     else:
-        group_test(parse_index=parse_index,
-                   working_parse_text=working_parse_text,
-                   contents_list=contents_list)
+        group_test(working_parse_text=working_parse_text,
+                   contents_list=contents_list,
+                   group_dict=group_dict)
         destination_test(
             parse_index=parse_index,
             working_parse_text=working_parse_text,
-            contents_list=contents_list)
+            contents_list=contents_list,
+            group_dict=group_dict)
         control_word_test(
             parse_index=parse_index,
             working_parse_text=working_parse_text,
-            contents_list=contents_list)
+            contents_list=contents_list,
+            group_dict=group_dict)
         control_symbol_test(
             parse_index=parse_index,
             working_parse_text=working_parse_text,
-            contents_list=contents_list)
+            contents_list=contents_list,
+            group_dict=group_dict)
         text_test(
             parse_index=parse_index,
             working_parse_text=working_parse_text,
-            contents_list=contents_list)
-
-    print(contents_list)
-    sys.exit()
+            contents_list=contents_list,
+            group_dict=group_dict)
 
 
-def group_test(parse_index: int, working_parse_text: str, contents_list: list):
+def group_test(working_parse_text: str, contents_list: list, group_dict: dict)\
+        -> None:
     # Group
     test = re.search(r"^{", working_parse_text)
     if test is not None:
-        group_contents = group_boundaries(
+        group_contents, parse_index = group_boundaries(
             working_parse_text=working_parse_text, test=test)
         contents_list.append(group_contents)
         working_parse_text = working_parse_text[parse_index:]
-        working_parse_text = working_parse_text[:-1].lstrip("{")
         parse_index = 0
         processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text)
+                  working_parse_text=working_parse_text,
+                  group_dict=group_dict)
     else:
         pass
 
 
 def destination_test(working_parse_text: str, parse_index: int,
-                     contents_list: list):
+                     contents_list: list, group_dict: dict) -> None:
     # Destination
     test = re.search(r"^(\\\*\\)([a-zA-Z]*)(\s|-|[0-9]+)?",
                      working_parse_text)
@@ -90,13 +110,14 @@ def destination_test(working_parse_text: str, parse_index: int,
         working_parse_text = working_parse_text[parse_index:]
         parse_index = 0
         processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text)
+                  working_parse_text=working_parse_text,
+                  group_dict=group_dict)
     else:
         pass
 
 
 def control_word_test(working_parse_text: str, parse_index: int,
-                      contents_list: list):
+                      contents_list: list, group_dict: dict) -> None:
     # Control word
     test = re.search(r"^(\\)([a-zA-Z]*)(\s|-|[0-9]+)?", working_parse_text)
     if test is not None:
@@ -107,13 +128,14 @@ def control_word_test(working_parse_text: str, parse_index: int,
         working_parse_text = working_parse_text[parse_index:]
         parse_index = 0
         processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text)
+                  working_parse_text=working_parse_text,
+                  group_dict=group_dict)
     else:
         pass
 
 
 def control_symbol_test(working_parse_text: str, parse_index: int,
-                        contents_list: list):
+                        contents_list: list, group_dict: dict) -> None:
     # Control symbol
     test = re.search(r"^(\\)[^A-Za-z0-9]?", working_parse_text)
     if test is not None:
@@ -124,12 +146,14 @@ def control_symbol_test(working_parse_text: str, parse_index: int,
         working_parse_text = working_parse_text[parse_index:]
         parse_index = 0
         processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text)
+                  working_parse_text=working_parse_text,
+                  group_dict=group_dict)
     else:
         pass
 
 
-def text_test(working_parse_text: str, parse_index: int, contents_list: list):
+def text_test(working_parse_text: str, parse_index: int,
+              contents_list: list, group_dict: dict) -> None:
     # TODO What if the text is a { or \ or includes one or
     #  both characters?
     # Text
@@ -141,12 +165,13 @@ def text_test(working_parse_text: str, parse_index: int, contents_list: list):
         working_parse_text = working_parse_text[parse_index:]
         parse_index = 0
         processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text)
+                  working_parse_text=working_parse_text,
+                  group_dict=group_dict)
     else:
         pass
 
 
-def group_boundaries(working_parse_text: str, test) -> str:
+def group_boundaries(working_parse_text: str, test) -> tuple:
     deck = deque()
     group_contents = ""
 
@@ -165,7 +190,7 @@ def group_boundaries(working_parse_text: str, test) -> str:
 
             if not deck:  # If deck is empty ...
                 deck.clear()
-                return group_contents
+                return group_contents, working_index + 1
             else:
                 working_index += 1
 

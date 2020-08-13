@@ -23,31 +23,28 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-8-12"
-__name__ = "Contents.Library.process_body.check_group"
+__name__ = "Contents.Library.process_body.group_parser"
 
-# From standard libraries
+import pprint
 import re
-
-# From local application
-import group_boundaries_capture_contents
-import group_contents
+import sys
 
 
-def processor(parse_index: int, parse_text: str,
-              line_to_parse: int, working_input_file: str) -> None:
+def processor(contents_list: list, group_dict: dict):
 
-    test = re.search(r"^{", parse_text)
-    if test is not None:
-        group_info = group_boundaries_capture_contents. \
-            define_boundaries_capture_contents(
-                working_input_file=working_input_file,
-                line_to_parse=line_to_parse,
-                parse_index=parse_index)
-        group_dict = {"id":       "root",
-                      "type":     "group",
-                      "children": []}
+    for ele in contents_list:
+        if re.search(r"^\\", ele) is not None:
+            child = {"id": ele,
+                     "type": "cw"}
 
-        group_contents.processor_settings(group_info=group_info,
-                                          group_dict=group_dict)
-    else:
-        pass
+            group_dict["children"].append(child)
+        elif re.search(r"^{", ele):
+            child = {"id": ele,
+                     "type": "group",
+                     "children": []}
+
+            group_dict["children"].append(child)
+
+    pp = pprint.PrettyPrinter(indent=4, sort_dicts=False)
+    pp.pprint(group_dict)
+    sys.exit()

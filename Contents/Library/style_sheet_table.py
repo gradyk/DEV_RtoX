@@ -90,7 +90,7 @@ class StyleSheetParse(object):
         for ele in sorted(remove_list, reverse=True):
             del self.code_strings_to_process[ele]
 
-    def process_remaining_code_strings(self):
+    def process_code_strings(self):
         for code_string in self.code_strings_to_process:
             try:
                 StyleSheetParse.process_style_codes(

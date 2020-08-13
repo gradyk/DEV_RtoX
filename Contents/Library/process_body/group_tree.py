@@ -51,8 +51,8 @@ def make_tree():
     for pre, _, node in RenderTree(group0):
         print("%s%s" % (pre, node.id))
 
-    # exporter = JsonExporter(indent=2, sort_keys=False)
-    # print(exporter.export(group0))
+    exporter = JsonExporter(indent=2, sort_keys=False)
+    print(exporter.export(group0))
 
     node_list = [node.id for node in LevelOrderIter(group0, maxlevel=2)]
     print(node_list)

@@ -31,4 +31,4 @@ def json_dict_updater(dict_name: str, dict_update: dict, debug_dir: str):
         dict_new = json.load(dict_pre)
         dict_new.update(dict_update)
         dict_pre.seek(0)
-        json.dump(dict_new, dict_pre, indent=4)
+        json.dump(dict_new, dict_pre, indent=4, sort_keys=False)
