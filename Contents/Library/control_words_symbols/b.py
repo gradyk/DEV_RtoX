@@ -1,8 +1,18 @@
-def cw_b(selector: int):
+def cw_b(tag_set: int) -> tuple:
     tag_list = {
-        1: '',
-        2: '<ts:hiText rend="bold">',
-        3: '',
-        4: ''
+        "open":
+            ['',
+             '<ts:hiText rend="bold">',
+             '',
+             ''
+            ],
+        "close":
+            ['',
+             '</ts:hiText>',
+             '',
+             ''
+            ]
     }
-    return tag_list[selector]
+    open_tag = tag_list["open"][tag_set]
+    close_tag = tag_list["close"][tag_set]
+    return open_tag, close_tag

@@ -1,8 +1,9 @@
-# Changelog
+# RtoX Changelog
 
-All notable changes to this project will be documented in this file.
+This file documents all notable changes to this project.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and
+ this project adheres to
  [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
  
 ## Unreleased
@@ -14,3 +15,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 * xxxxxxxxx
 * xxxxxxxxx
 
+### Changed
+
+* xxxxxxxxx
+* xxxxxxxxx
+
+### Deprecated
+
+* xxxxxxxxx
+* xxxxxxxxx
+
+### Removed
+
+* xxxxxxxxx
+* xxxxxxxxx
+
+### Fixed
+
+* xxxxxxxxx
+* xxxxxxxxx
+
+### Security
+
+* xxxxxxxxx
+* xxxxxxxxx

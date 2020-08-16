@@ -157,7 +157,7 @@ def text_test(working_parse_text: str, parse_index: int,
     # TODO What if the text is a { or \ or includes one or
     #  both characters?
     # Text
-    test = re.search(r"^([A-Za-z0-9.?!,;:\-()\[\]'\"/]*)", working_parse_text)
+    test = re.search(r"\b(\w+|\s|([^\\])*)*", working_parse_text)
     if test is not None:
         control_word = test.group()
         parse_index = parse_index + test.end()

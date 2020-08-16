@@ -39,7 +39,14 @@ import dict_updater
 class ColortblParse(object):
     """ An RTF file uses the following structure for a colortbl (if present):
     <colortbl>      '{' \\colortbl <colordef>+ '}'
-    <colordef>      \red ? & \\green ? & \blue ? '}'
+    <colordef>      <themecolor>? & \\ctintN? & \\cshadeN? & \\redN? &
+                    \\greenN? & \\blueN? ';'
+    <themecolor>    \\cmaindarkone | \\cmainlightone | \\cmaindarktwo |
+                    \\cmainlighttwo | \\caccentone | \\caccenttwo |
+                    \\caccentthree | \\caccentfour | \\caccentfive |
+                    \\caccentsix | \\chyperlink | \\cfollowedhyperlink |
+                    \\cbackgroundone | \\ctextone | \\cbackgroundtwo |
+                    \\ctexttwo
     """
     def __init__(self,
                  code_strings_to_process: list,
@@ -47,44 +54,114 @@ class ColortblParse(object):
         self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
 
-    def color_process_controller(self):
-        code_string = ColortblParse.process_code_strings(
-            self=ColortblParse(
-                code_strings_to_process=self.code_strings_to_process,
-                debug_dir=self.debug_dir))
-
-        ColortblParse.process_color_codes(
-            self=ColortblParse(
-                code_strings_to_process=self.code_strings_to_process,
-                debug_dir=self.debug_dir),
-            code_string=code_string)
-
-    def process_code_strings(self):
-        code_string = ""
-        for ele in self.code_strings_to_process:
-            code_string += ele
-        return code_string
-
-    def process_color_codes(self, code_string: str):
-        color_codes = code_string.split(";")
-        for ele in color_codes:
-            try:
-                test = re.search(r'{\\colortbl;', ele)
-                color_codes[0] = "\\red255\\green255\\blue255"
-            except ValueError:
+    def trim_colortbl(self):
+        for code_string in self.code_strings_to_process:
+            item = None
+            test = re.search(r"^{\\colortbl;", code_string)
+            if test is not item:
+                place = self.code_strings_to_process.index(code_string)
+                new_code_string = code_string[:-2].replace("{\\colortbl;", "")
+                self.code_strings_to_process[place] = new_code_string
+            else:
                 pass
 
-        for ele in color_codes:
-            try:
-                test = re.search(r'}', ele)
-                del color_codes[-1]
-            except ValueError:
-                pass
+    def parse_code_strings_to_process(self) -> list:
+        code_string_list = []
+        for string in self.code_strings_to_process:
+            code_string_list = string.split(";")
+        return code_string_list
 
-        i = 0
-        for code in color_codes:
-            color_code_updater = {i: code}
+    def parse_code_strings(self, code_string_list: list):
+        code_dict = {}
+        count = len(code_string_list)
+        keys = [*range(0, count, 1)]
+        place = 0
+        for code_string in code_string_list:
+            code_dict, current_key = ColorParser.assign_key(
+                code_dict=code_dict,
+                keys=keys, place=place)
+            code_dict = ColorParser.parse_control_word(
+                code_string=code_string,
+                current_key=current_key, code_dict=code_dict)
+            code_dict = ColorParser.parse_theme_control_word(
+                code_string=code_string,
+                current_key=current_key, code_dict=code_dict)
+
             dict_updater.json_dict_updater(dict_name="color_table_file.json",
-                                           dict_update=color_code_updater,
+                                           dict_update=code_dict,
                                            debug_dir=self.debug_dir)
-            i += 1
+
+            place += 1
+            code_dict = {}
+
+
+class ColorParser(object):
+    def __init__(self, code_dict: dict) -> None:
+        self.code_dict = code_dict
+
+    @staticmethod
+    def assign_key(code_dict: dict, keys: list, place: int) -> tuple:
+        current_key = keys[place]
+        code_dict.update({current_key: {}})
+        return code_dict, current_key
+
+    @staticmethod
+    def parse_control_word(code_string: str, current_key: int,
+                           code_dict: dict) -> dict:
+        control_word_list = [
+            "red",
+            "green",
+            "blue",
+            "ctint",
+            "cshade"
+        ]
+
+        for cw in control_word_list:
+            item = None
+            try:
+                test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
+                if test is not item:
+                    value = test[0].replace(f"\\{cw}", "")
+                    code_dict[current_key][f"{cw}"] = value
+                    code_string = code_string.replace(test[0], "")
+                else:
+                    pass
+            except ValueError:
+                pass
+        return code_dict
+
+    @staticmethod
+    def parse_theme_control_word(code_string: str, current_key: int,
+                                 code_dict: dict) -> dict:
+        control_word_list = [
+            "cmaindarkone",
+            "cmainlightone",
+            "cmaindarktwo",
+            "cmainlighttwo",
+            "caccentone",
+            "caccenttwo",
+            "caccentthree",
+            "caccentfour",
+            "caccentfive",
+            "caccentsix",
+            "chyperlink",
+            "cfollowedhyperlink",
+            "cbackgroundone",
+            "ctextone",
+            "cbackgroundtwo",
+            "ctexttwo"
+        ]
+
+        for cw in control_word_list:
+            item = None
+            try:
+                test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
+                if test is not item:
+                    value = test[0].replace(f"\\{cw}", "")
+                    code_dict[current_key][f"{cw}"] = value
+                    code_string = code_string.replace(test[0], "")
+                else:
+                    pass
+            except ValueError:
+                pass
+        return code_dict

@@ -29,7 +29,6 @@ __name__ = "Contents.Library.font_table"
 
 # From standard libraries
 import re
-import sys
 from collections import deque
 
 # From local application
@@ -63,7 +62,6 @@ class FonttblParse(object):
     def __init__(self, debug_dir: str, code_strings_to_process: list) -> None:
         self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
-        self.code_dict = {}
 
     def trim_fonttbl(self):
         for code_string in self.code_strings_to_process:
@@ -88,54 +86,40 @@ class FonttblParse(object):
         for ele in sorted(remove_list, reverse=True):
             del self.code_strings_to_process[ele]
 
-    def process_code_strings(self):
-
+    def parse_code_strings(self):
+        code_dict = {}
         for code_string in self.code_strings_to_process:
-            try:
-                FonttblParse.parse_fonts(
-                    self=FonttblParse(
-                        debug_dir=self.debug_dir,
-                        code_strings_to_process=self.code_strings_to_process),
-                    code_string=code_string,
-                    code_dict=self.code_dict)
-            except ValueError:
-                pass
+            get_font_codes = FontParser(debug_dir=self.debug_dir,
+                                        code_dict=code_dict)
+
+            code_string = FontParser.delete_themes(code_string=code_string)
+            code_string = FontParser.check_fontnum(self=get_font_codes,
+                                                   code_string=code_string)
+            code_string = FontParser.check_fontfamily(self=get_font_codes,
+                                                      code_string=code_string)
+            code_string = FontParser.check_fcharset(self=get_font_codes,
+                                                    code_string=code_string)
+            code_string = FontParser.check_fprq(self=get_font_codes,
+                                                code_string=code_string)
+            code_string = FontParser.check_panose(self=get_font_codes,
+                                                  code_string=code_string)
+            code_string = FontParser.check_fname(self=get_font_codes,
+                                                 code_string=code_string)
+            code_string = FontParser.check_altname(self=get_font_codes,
+                                                   code_string=code_string)
+            code_string = FontParser.check_fontemb(self=get_font_codes,
+                                                   code_string=code_string)
+            code_string = FontParser.check_fontname_tagged(
+                self=get_font_codes, code_string=code_string)
+            FontParser.check_cpg(self=get_font_codes,
+                                 code_string=code_string)
 
             dict_updater.json_dict_updater(
                 dict_name="font_table_file.json",
-                dict_update=self.code_dict,
+                dict_update=code_dict,
                 debug_dir=self.debug_dir)
 
-            self.code_dict = {}
-
-    def parse_fonts(self, code_string: str, code_dict: dict) -> None:
-        """ Parse each font code string into its constituent settings and
-        store them in a dictionary under the font code number. """
-
-        get_font_codes = FontParser(debug_dir=self.debug_dir,
-                                    code_dict=code_dict)
-
-        code_string = FontParser.delete_themes(code_string=code_string)
-        code_string = FontParser.check_fontnum(self=get_font_codes,
-                                               code_string=code_string)
-        code_string = FontParser.check_fontfamily(self=get_font_codes,
-                                                  code_string=code_string)
-        code_string = FontParser.check_fcharset(self=get_font_codes,
-                                                code_string=code_string)
-        code_string = FontParser.check_fprq(self=get_font_codes,
-                                            code_string=code_string)
-        code_string = FontParser.check_panose(self=get_font_codes,
-                                              code_string=code_string)
-        code_string = FontParser.check_fname(self=get_font_codes,
-                                             code_string=code_string)
-        code_string = FontParser.check_altname(self=get_font_codes,
-                                               code_string=code_string)
-        code_string = FontParser.check_fontemb(self=get_font_codes,
-                                               code_string=code_string)
-        code_string = FontParser.check_fontname_tagged(
-            self=get_font_codes, code_string=code_string)
-        FontParser.check_cpg(self=get_font_codes,
-                             code_string=code_string)
+            code_dict = {}
 
 
 class FontParser(object):
@@ -280,7 +264,7 @@ class FontParser(object):
                 group_contents = group_boundaries(
                     working_parse_text=code_string,
                     test=test)
-                result = group_contents.replace("{\\*\\falt ", "")
+                result = group_contents[:-1].replace("{\\*\\falt ", "")
                 self.code_dict[self.current_key]["altname"] = result
                 code_string = code_string.replace(group_contents, "")
                 return code_string

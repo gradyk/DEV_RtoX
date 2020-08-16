@@ -105,7 +105,7 @@ class ProcessTheTables(object):
             self=font_table.FonttblParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))
-        font_table.FonttblParse.process_code_strings(
+        font_table.FonttblParse.parse_code_strings(
             self=font_table.FonttblParse(
                 debug_dir=self.debug_dir,
                 code_strings_to_process=code_strings_to_process))
@@ -119,10 +119,19 @@ class ProcessTheTables(object):
     def process_color_table(self, code_strings_to_process: list):
         """ Process the code settings for each color number and store the
         settings in a dictionary. """
-        color_table.ColortblParse.color_process_controller(
+        color_table.ColortblParse.trim_colortbl(
             self=color_table.ColortblParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))
+        code_strings_list = color_table.ColortblParse\
+            .parse_code_strings_to_process(
+                self=color_table.ColortblParse(
+                    code_strings_to_process=code_strings_to_process,
+                    debug_dir=self.debug_dir))
+        color_table.ColortblParse.parse_code_strings(
+            self=color_table.ColortblParse(
+                code_strings_to_process=code_strings_to_process,
+                debug_dir=self.debug_dir), code_string_list=code_strings_list)
 
     def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
@@ -135,7 +144,7 @@ class ProcessTheTables(object):
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))
-        style_sheet_table.StyleSheetParse.process_code_strings(
+        style_sheet_table.StyleSheetParse.parse_code_strings(
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,
                 debug_dir=self.debug_dir))
