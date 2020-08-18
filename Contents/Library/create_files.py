@@ -57,8 +57,7 @@ def create_dict_files(base_script_dir: str) -> None:
         "info_group_file.json",
         "tag_registry.json",
         "group_data_file.json",
-        "control_word_missing_dict.json",
-        "control_symbol_missing_dict.json"
+        "control_word_missing_dict.json"
     )
 
     for file in dict_library:

@@ -83,12 +83,11 @@ if __name__ == "__main__":
             self=header_parser_step_three.ProcessTheTables(
                 working_input_file=working_input_file, debug_dir=debug_dir))
 
-    # Process the main portion of the document body.
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
-    control_word_dict = os.path.join(debug_dir,
-                                     "control_word_dict.json")
+    cw_dirs = [base_script_dir, "/Library/dicts/", "control_word_dict.json"]
+    control_word_dict = ''.join(cw_dirs)
 
     doc_parser.MainDocManager.body_parse_manager(
         self=MainDocManager(

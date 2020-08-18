@@ -33,8 +33,10 @@ import group_boundaries_capture_contents
 import group_contents
 
 
-def processor(parse_index: int, parse_text: str,
-              line_to_parse: int, working_input_file: str) -> None:
+def processor(working_input_file: str, debug_dir: str,
+              control_word_dict: str, parse_text: str,
+              line_to_parse: int, parse_index: int,
+              num_lines: int) -> None:
 
     test = re.search(r"^{", parse_text)
     if test is not None:

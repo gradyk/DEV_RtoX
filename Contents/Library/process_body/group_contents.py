@@ -26,6 +26,7 @@ __date__ = "2020-8-12"
 __name__ = "Contents.Library.process_body.group_contents"
 
 # From standard libraries
+import logging
 import re
 from collections import deque
 
@@ -58,7 +59,7 @@ def processor(contents_list: list, parse_index: int,
         group_test(working_parse_text=working_parse_text,
                    contents_list=contents_list,
                    group_dict=group_dict)
-        destination_test(
+        post1987_destination_test(
             parse_index=parse_index,
             working_parse_text=working_parse_text,
             contents_list=contents_list,
@@ -80,75 +81,91 @@ def processor(contents_list: list, parse_index: int,
             group_dict=group_dict)
 
 
-def group_test(working_parse_text: str, contents_list: list, group_dict: dict)\
-        -> None:
-    # Group
-    test = re.search(r"^{", working_parse_text)
-    if test is not None:
-        group_contents, parse_index = group_boundaries(
-            working_parse_text=working_parse_text, test=test)
-        contents_list.append(group_contents)
-        working_parse_text = working_parse_text[parse_index:]
-        parse_index = 0
-        processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text,
-                  group_dict=group_dict)
-    else:
+def group_test(working_parse_text: str, contents_list: list,
+               group_dict: dict) -> None:
+    item = None
+    try:
+        test = re.search(r"^{", working_parse_text)
+        if test is not item:
+            group_contents, parse_index = group_boundaries(
+                working_parse_text=working_parse_text, test=test)
+            contents_list.append(group_contents)
+            working_parse_text = working_parse_text[parse_index:]
+            parse_index = 0
+            processor(parse_index=parse_index, contents_list=contents_list,
+                      working_parse_text=working_parse_text,
+                      group_dict=group_dict)
+        else:
+            pass
+    except TypeError:
+        logging.exception("_________")
         pass
 
 
-def destination_test(working_parse_text: str, parse_index: int,
-                     contents_list: list, group_dict: dict) -> None:
-    # Destination
-    test = re.search(r"^(\\\*\\)([a-zA-Z]*)(\s|-|[0-9]+)?",
-                     working_parse_text)
-    if test is not None:
-        control_word = test[0]
-        parse_index = parse_index + len(control_word)
-        control_word = control_word.replace("\\*", "").rstrip()
-        contents_list.append(control_word)
-        working_parse_text = working_parse_text[parse_index:]
-        parse_index = 0
-        processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text,
-                  group_dict=group_dict)
-    else:
+def post1987_destination_test(working_parse_text: str, parse_index: int,
+                              contents_list: list, group_dict: dict) -> None:
+    item = None
+    try:
+        test = re.search(r"^(\\\*\\)([a-zA-Z]*)(\s|-|[0-9]+)?",
+                         working_parse_text)
+        if test is not item:
+            control_word = test[0]
+            parse_index = parse_index + len(control_word)
+            control_word = control_word.replace("\\*", "").rstrip()
+            contents_list.append(control_word)
+            working_parse_text = working_parse_text[parse_index:]
+            parse_index = 0
+            processor(parse_index=parse_index, contents_list=contents_list,
+                      working_parse_text=working_parse_text,
+                      group_dict=group_dict)
+        else:
+            pass
+    except TypeError:
+        logging.exception("_________")
         pass
 
 
 def control_word_test(working_parse_text: str, parse_index: int,
                       contents_list: list, group_dict: dict) -> None:
-    # Control word
-    test = re.search(r"^(\\)([a-zA-Z]*)(\s|-|[0-9]+)?", working_parse_text)
-    if test is not None:
-        control_word = test.group()
-        control_word = control_word.rstrip()
-        parse_index = parse_index + test.end()
-        contents_list.append(control_word)
-        working_parse_text = working_parse_text[parse_index:]
-        parse_index = 0
-        processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text,
-                  group_dict=group_dict)
-    else:
+    item = None
+    try:
+        test = re.search(r"^(\\)([a-zA-Z]*)(\s|-|[0-9]+)?", working_parse_text)
+        if test is not item:
+            control_word = test.group()
+            control_word = control_word.rstrip()
+            parse_index = parse_index + test.end()
+            contents_list.append(control_word)
+            working_parse_text = working_parse_text[parse_index:]
+            parse_index = 0
+            processor(parse_index=parse_index, contents_list=contents_list,
+                      working_parse_text=working_parse_text,
+                      group_dict=group_dict)
+        else:
+            pass
+    except TypeError:
+        logging.exception("_________")
         pass
 
 
 def control_symbol_test(working_parse_text: str, parse_index: int,
                         contents_list: list, group_dict: dict) -> None:
-    # Control symbol
-    test = re.search(r"^(\\)[^A-Za-z0-9]?", working_parse_text)
-    if test is not None:
-        control_symbol = test.group()
-        control_symbol = control_symbol.rstrip()
-        parse_index = parse_index + test.end()
-        contents_list.append(control_symbol)
-        working_parse_text = working_parse_text[parse_index:]
-        parse_index = 0
-        processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text,
-                  group_dict=group_dict)
-    else:
+    item = None
+    try:
+        test = re.search(r"^(\\)[^A-Za-z0-9]?", working_parse_text)
+        if test is not item:
+            control_symbol = test.group()
+            control_symbol = control_symbol.rstrip()
+            parse_index = parse_index + test.end()
+            contents_list.append(control_symbol)
+            working_parse_text = working_parse_text[parse_index:]
+            parse_index = 0
+            processor(parse_index=parse_index, contents_list=contents_list,
+                      working_parse_text=working_parse_text,
+                      group_dict=group_dict)
+        else:
+            pass
+    except TypeError:
+        logging.exception("_________")
         pass
 
 
@@ -156,18 +173,22 @@ def text_test(working_parse_text: str, parse_index: int,
               contents_list: list, group_dict: dict) -> None:
     # TODO What if the text is a { or \ or includes one or
     #  both characters?
-    # Text
-    test = re.search(r"\b(\w+|\s|([^\\])*)*", working_parse_text)
-    if test is not None:
-        control_word = test.group()
-        parse_index = parse_index + test.end()
-        contents_list.append(control_word)
-        working_parse_text = working_parse_text[parse_index:]
-        parse_index = 0
-        processor(parse_index=parse_index, contents_list=contents_list,
-                  working_parse_text=working_parse_text,
-                  group_dict=group_dict)
-    else:
+    item = None
+    try:
+        test = re.search(r"\b(\w+|\s|([^\\])*)*", working_parse_text)
+        if test is not item:
+            control_word = test.group()
+            parse_index = parse_index + test.end()
+            contents_list.append(control_word)
+            working_parse_text = working_parse_text[parse_index:]
+            parse_index = 0
+            processor(parse_index=parse_index, contents_list=contents_list,
+                      working_parse_text=working_parse_text,
+                      group_dict=group_dict)
+        else:
+            pass
+    except TypeError:
+        logging.exception("_________")
         pass
 
 

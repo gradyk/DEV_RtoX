@@ -57,11 +57,9 @@ def input_file_prep(input_file_name: str,
     # TODO this should be more flexible allowing for other code pages as
     #  the starting point.
     # Convert from MS1252 code page to unicode.
-    convert_1252_to_unicode.convert_ms1252(
-        debug_dir=debug_dir)
+    convert_1252_to_unicode.convert_ms1252(debug_dir=debug_dir)
 
-    working_input_file = os.path.join(debug_dir,
-                                      "working_input_file.txt")
+    working_input_file = os.path.join(debug_dir, "working_input_file.txt")
 
     # Create the file in which the appropriate tags and text will be
     # added as the conversion progresses.

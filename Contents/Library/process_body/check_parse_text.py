@@ -18,59 +18,47 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-8-17"
+__name__ = "Contents.Library.process_body.check_parse_text"
+
+# From standard libraries
+import sys
+
 # From local application
 import check_group
-import post1987_destination
 import control_word
-import control_symbol
 import backslash_text
 import left_bracket_text
 import check_text
 
 
-class CheckString(object):
-    def __init__(self,
-                 working_input_file: str,
-                 debug_dir: str,
-                 control_word_dict: str,
-                 parse_text: str,
-                 line_to_parse: int,
-                 parse_index: int):
-        self.working_input_file = working_input_file
-        self.debug_dir = debug_dir
-        self.control_word_dict = control_word_dict
-        self.parse_text = parse_text
-        self.line_to_parse = line_to_parse
-        self.parse_index = parse_index
+def check_string_manager(working_input_file: str, debug_dir: str,
+                         control_word_dict: str, parse_text: str,
+                         line_to_parse: int, parse_index: int,
+                         num_lines: int) -> None:
 
-    def check_string_manager(self):
+    csm_dict = {"working_input_file": working_input_file,
+                "debug_dir": debug_dir,
+                "control_word_dict": control_word_dict,
+                "parse_text": parse_text,
+                "line_to_parse": line_to_parse,
+                "parse_index": parse_index,
+                "num_lines": num_lines}
 
-        check_group.processor(
-            working_input_file=self.working_input_file,
-            line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text)
-        post1987_destination.processor(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text,
-            control_word_dict=self.control_word_dict)
-        control_symbol.processor(parse_text=self.parse_text,
-                                 debug_dir=self.debug_dir,
-                                 line_to_parse=self.line_to_parse)
-        backslash_text.processor(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text)
-        left_bracket_text.processor(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text)
-        control_word.processor(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text,
-            control_word_dict=self.control_word_dict)
-        check_text.processor(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir, line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index, parse_text=self.parse_text)
+    if line_to_parse > num_lines:
+        sys.exit()
+    else:
+        # Checks for an RTF group.
+        check_group.processor(**csm_dict)
+        # Checks for a backslash that should be treated as text.
+        backslash_text.processor(**csm_dict)
+        # Checks for a left bracket that should be treated as text.
+        left_bracket_text.processor(**csm_dict)
+        # Checks for a control word or destination.
+        control_word.processor(**csm_dict)
+        # Checks for text.
+        check_text.processor(**csm_dict)

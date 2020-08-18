@@ -27,9 +27,16 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-05-05"
 __name__ = "Contents.Library.file_stats"
 
+# From standard libraries
+import logging
 
-def file_stats_calculator(working_input_file: str) -> int:
-    with open(working_input_file, "r") as file:
-        for i, l in enumerate(file):
-            pass
-    return i + 1
+
+def processor(working_input_file: str) -> int:
+    # https://stackoverflow.com/questions/845058/how-to-get-line-count-of-a-large-file-cheaply-in-python
+    try:
+        with open(working_input_file, "r+") as wif_pre:
+            wif = wif_pre.readlines()
+            num_lines = sum(1 for line in wif)
+            return num_lines
+    except OSError:
+        logging.exception("Working input file cannot be opened.")

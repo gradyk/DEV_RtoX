@@ -24,7 +24,7 @@ import linecache
 def text_metric_reset(working_input_file: str, parse_index: int,
                       line_to_parse: int) -> tuple:
     line = linecache.getline(working_input_file, line_to_parse).rstrip("\n")
-    if parse_index > len(line) + 2:
+    if parse_index > len(line) - 2:
         parse_text = line[parse_index:] + \
                           linecache.getline(working_input_file,
                                             line_to_parse + 1).rstrip("\n")

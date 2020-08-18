@@ -38,6 +38,7 @@ import sys
 
 # From local application
 import adjust_process_text
+import file_stats
 from process_body import check_parse_text
 
 
@@ -66,14 +67,17 @@ class MainDocManager(object):
         self.parse_text, self.line_to_parse, self.parse_index = \
             MainDocManager.parse_starting_point(self=main_doc_dir)
 
-        check_parse_text.CheckString.check_string_manager(
-            self=check_parse_text.CheckString(
-                working_input_file=self.working_input_file,
-                debug_dir=self.debug_dir,
-                control_word_dict=self.control_word_dict,
-                parse_text=self.parse_text,
-                line_to_parse=self.line_to_parse,
-                parse_index=self.parse_index))
+        num_lines = file_stats.processor(
+            working_input_file=self.working_input_file)
+
+        check_parse_text.check_string_manager(
+            working_input_file=self.working_input_file,
+            debug_dir=self.debug_dir,
+            control_word_dict=self.control_word_dict,
+            parse_text=self.parse_text,
+            line_to_parse=self.line_to_parse,
+            parse_index=self.parse_index,
+            num_lines=num_lines)
 
     def load_tag_registry(self) -> None:
         base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))

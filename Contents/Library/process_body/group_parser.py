@@ -27,7 +27,6 @@ __name__ = "Contents.Library.process_body.group_parser"
 
 import pprint
 import re
-import sys
 
 
 def processor(contents_list: list, group_dict: dict):
@@ -47,4 +46,3 @@ def processor(contents_list: list, group_dict: dict):
 
     pp = pprint.PrettyPrinter(indent=4, sort_dicts=False)
     pp.pprint(group_dict)
-    sys.exit()

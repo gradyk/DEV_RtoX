@@ -31,7 +31,6 @@ from collections import deque
 
 # From local application
 import adjust_process_text
-import dict_updater
 
 
 def define_boundaries_capture_contents(working_input_file: str,
@@ -39,7 +38,6 @@ def define_boundaries_capture_contents(working_input_file: str,
                                        parse_index: int) -> dict:
     """ Define the boundaries of an RTF table or group, while capturing
     the contents of the table or group. """
-    group_info = {}
     group_contents = ""
     parse_text = linecache.getline(working_input_file, line_to_parse)
     parse_text = parse_text.rstrip("\n").rstrip(" ")
@@ -112,11 +110,11 @@ def define_boundaries_capture_contents(working_input_file: str,
                     working_index += 1
                 key = str(line_to_parse) + "_" + str(parse_index)
                 group_info = {key:
-                                  [group_contents,
-                                   line_to_parse,
-                                   parse_index,
-                                   group_end_line,
-                                   group_end_index]}
+                              [group_contents,
+                               line_to_parse,
+                               parse_index,
+                               group_end_line,
+                               group_end_index]}
 
                 return group_info
         else:
@@ -132,10 +130,10 @@ def define_boundaries_capture_contents(working_input_file: str,
     key_list = [str(line_to_parse), "_", str(parse_index)]
     key = "".join(key_list)
     group_info = {key:
-                      [group_contents,
-                       line_to_parse,
-                       parse_index,
-                       group_end_line,
-                       group_end_index]}
+                  [group_contents,
+                   line_to_parse,
+                   parse_index,
+                   group_end_line,
+                   group_end_index]}
 
     return group_info

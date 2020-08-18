@@ -79,7 +79,7 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
 
     index = 0
     search_line += 1
-    file_length = file_stats.file_stats_calculator(
+    file_length = file_stats.processor(
         working_input_file=working_input_file)
     length_working_input_file = file_length
 
