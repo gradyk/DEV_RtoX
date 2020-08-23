@@ -22,16 +22,15 @@ import linecache
 
 
 def text_metric_reset(working_input_file: str, parse_index: int,
-                      line_to_parse: int) -> tuple:
-    line = linecache.getline(working_input_file, line_to_parse).rstrip("\n")
-    if parse_index > len(line) - 2:
-        parse_text = line[parse_index:] + \
-                          linecache.getline(working_input_file,
-                                            line_to_parse + 1).rstrip("\n")
+                      line_to_parse: int, parse_text: str) -> tuple:
+    length = len(parse_text)
+    if length <= 2:
         line_to_parse += 1
+        line = linecache.getline(working_input_file, line_to_parse).rstrip("\n")
+        parse_text = parse_text + line
         parse_index = 0
         return parse_text, line_to_parse, parse_index
     else:
-        parse_text = line[parse_index:]
+        # parse_text = parse_text[parse_index:]
+        # parse_index = 0
         return parse_text, line_to_parse, parse_index
-        pass

@@ -18,6 +18,8 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
+""" Build files used during processing. """
+
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
@@ -25,6 +27,7 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2030-03-19"
 __name__ = "Contents.Library.create_files"
 
+# From standard libraries
 import os
 import json
 

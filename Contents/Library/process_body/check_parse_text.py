@@ -36,29 +36,56 @@ import left_bracket_text
 import check_text
 
 
-def check_string_manager(working_input_file: str, debug_dir: str,
-                         control_word_dict: str, parse_text: str,
+def check_string_manager(parse_text: str, num_lines: int,
                          line_to_parse: int, parse_index: int,
-                         num_lines: int) -> None:
-
-    csm_dict = {"working_input_file": working_input_file,
-                "debug_dir": debug_dir,
-                "control_word_dict": control_word_dict,
-                "parse_text": parse_text,
-                "line_to_parse": line_to_parse,
-                "parse_index": parse_index,
-                "num_lines": num_lines}
+                         working_input_file: str, debug_dir: str,
+                         control_word_dict: str, group_dict: dict) -> None:
 
     if line_to_parse > num_lines:
         sys.exit()
     else:
         # Checks for an RTF group.
-        check_group.processor(**csm_dict)
+        check_group.processor(parse_text=parse_text,
+                              line_to_parse=line_to_parse,
+                              parse_index=parse_index,
+                              group_dict=group_dict,
+                              working_input_file=working_input_file,
+                              debug_dir=debug_dir,
+                              control_word_dict=control_word_dict,
+                              num_lines=num_lines)
         # Checks for a backslash that should be treated as text.
-        backslash_text.processor(**csm_dict)
+        backslash_text.processor(parse_text=parse_text,
+                                 line_to_parse=line_to_parse,
+                                 parse_index=parse_index,
+                                 working_input_file=working_input_file,
+                                 debug_dir=debug_dir,
+                                 control_word_dict=control_word_dict,
+                                 num_lines=num_lines,
+                                 group_dict=group_dict)
         # Checks for a left bracket that should be treated as text.
-        left_bracket_text.processor(**csm_dict)
+        left_bracket_text.processor(parse_text=parse_text,
+                                    line_to_parse=line_to_parse,
+                                    parse_index=parse_index,
+                                    working_input_file=working_input_file,
+                                    debug_dir=debug_dir,
+                                    control_word_dict=control_word_dict,
+                                    num_lines=num_lines,
+                                    group_dict=group_dict)
         # Checks for a control word or destination.
-        control_word.processor(**csm_dict)
+        control_word.processor(parse_text=parse_text,
+                               line_to_parse=line_to_parse,
+                               parse_index=parse_index,
+                               working_input_file=working_input_file,
+                               debug_dir=debug_dir,
+                               control_word_dict=control_word_dict,
+                               num_lines=num_lines,
+                               group_dict=group_dict)
         # Checks for text.
-        check_text.processor(**csm_dict)
+        check_text.processor(parse_text=parse_text,
+                             line_to_parse=line_to_parse,
+                             parse_index=parse_index,
+                             working_input_file=working_input_file,
+                             debug_dir=debug_dir,
+                             control_word_dict=control_word_dict,
+                             num_lines=num_lines,
+                             group_dict=group_dict)

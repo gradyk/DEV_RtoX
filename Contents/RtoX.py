@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
 # -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
@@ -26,9 +26,6 @@ __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-10-22"
 __name__ = "__main__"
-
-# From standard libraries
-import os
 
 # From local application
 import create_files

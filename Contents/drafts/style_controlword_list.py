@@ -1,0 +1,63 @@
+# {"controlword": ["ignored/coded", "description", "section", "type"]
+# filters: [see table spec pp.173-207
+
+style_controlword_dict = {
+    "spv": [],
+    "li": [],
+    "ri": [],
+    "ql": [],
+    "rin": [],
+    "lin": [],
+    "itap": [],
+    "nowidctlpar": [],
+    "wrapdefault": [],
+}
+
+"snext": ["snext", "Coded", "Style Sheet", "Value", "\\snext", "\\snext"],
+  "additive": ["additive", "Coded", "Style Sheet", "Flag", "\\additive",
+               "\\additive"]
+
+test = {
+    "\\'": ["Ignored", "Special Characters", "Symbol"],
+    "\\-": ["Ignored", "Special Characters", "Symbol"],
+    "\\*": ["Ignored", "Special Characters", "Symbol"],
+    "\\:": ["Ignored", "Special Characters", "Symbol"],
+    "\\": ["Ignored", "Special Characters", "Symbol"],
+    "\\_": ["Ignored", "Special Characters", "Symbol"],
+    "\\{": ["Ignored", "Special Characters", "Symbol"],
+    "\\|": ["Ignored", "Special Characters", "Symbol"],
+    "\\}": ["Ignored", "Special Characters", "Symbol"],
+    "\\~": ["Ignored", "Special Characters", "Symbol"],
+    "\\ab": ["Ignored", "Associated Character Properties", "Toggle"],
+    "\\absh": ["Ignored", "Positioned Objects and Frames", "Value"],
+    "\\abslock": ["Ignored", "Positioned Objects and Frames", "Flag"],
+    "\\absnoovrlpN": ["Ignored", "Positioned Objects and Frames", "Toggle"],
+    "\\absw": ["Ignored", "Positioned Objects and Frames", "Value"],
+    "\\acaps": ["Ignored", "Associated Character Properties", "Toggle"],
+    "\\acccomma": ["Ignored", "Font (Character^) Formatting Properties", "Toggle"],
+    "\\accdot": ["Ignored", "Font (Character^) Formatting Properties", "Toggle"],
+    "\\accnone": ["Ignored", "Font (Character^) Formatting Properties", "Toggle"],
+    "\\acccircle": ["Ignored", "Font (Character^) Formatting Properties", "Toggle"],
+    "\\accunderdot": ["Ignored", "Font (Character^) Formatting Properties", "Toggle"],
+    "\\acf": ["Ignored", "Associated Character Properties", "Value"],
+    "\\additive": ["Ignored", "Style Sheet", "Flag"],
+    "\\adjustright": ["Ignored", "Section Formatting Properties", "Flag"],
+    "\\adn": ["Ignored", "Associated Character Properties", "Value"],
+    "\\aenddoc": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aendnotes": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aexpnd": ["Ignored", "Associated Character Properties", "Value"],
+    "\\af": ["Ignored", "Associated Character Properties", "Value"],
+    "\\affixed": ["Ignored", "Paragraph Formatting Properties", "Flag"],
+    "\\afs": ["Ignored", "Associated Character Properties", "Value"],
+    "\\aftnbj": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftncn": ["Ignored", "Document Formatting Properties", "Destination"],
+    "\\aftnnalc": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnnar": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnnauc": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnnchi": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnnchosung": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnncnum": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnndbar": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnndbnum": ["Ignored", "Document Formatting Properties", "Flag"],
+    "\\aftnndbnumd": ["Ignored", "Document Formatting Properties", "Flag"]
+}

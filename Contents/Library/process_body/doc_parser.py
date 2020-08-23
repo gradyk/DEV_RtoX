@@ -33,11 +33,11 @@ __name__ = "Contents.Library.doc_parser"
 
 # From standard libraries
 import json
+import linecache
 import os
 import sys
 
 # From local application
-import adjust_process_text
 import file_stats
 from process_body import check_parse_text
 
@@ -50,9 +50,6 @@ class MainDocManager(object):
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
         self.control_word_dict = control_word_dict
-        self.parse_index = 0
-        self.line_to_parse = 0
-        self.parse_text = ""
         self.length_parse_text = 0
         self.header_table_file = os.path.join(
             self.debug_dir, "header_tables_dict.json")
@@ -64,20 +61,31 @@ class MainDocManager(object):
             control_word_dict=self.control_word_dict)
 
         MainDocManager.load_tag_registry(self=main_doc_dir)
-        self.parse_text, self.line_to_parse, self.parse_index = \
+        parse_text, line_to_parse, parse_index = \
             MainDocManager.parse_starting_point(self=main_doc_dir)
 
         num_lines = file_stats.processor(
             working_input_file=self.working_input_file)
 
+        group_data_file = os.path.join(self.debug_dir, "group_data_file.json")
+        with open(group_data_file, "r+") as gdf_pre:
+            group_data = json.load(gdf_pre)
+            group_start = {"id":       "root",
+                           "type":     "group",
+                           "children": []}
+            group_data.update(group_start)
+            gdf_pre.seek(0)
+            json.dump(group_data, gdf_pre)
+
         check_parse_text.check_string_manager(
             working_input_file=self.working_input_file,
             debug_dir=self.debug_dir,
             control_word_dict=self.control_word_dict,
-            parse_text=self.parse_text,
-            line_to_parse=self.line_to_parse,
-            parse_index=self.parse_index,
-            num_lines=num_lines)
+            parse_text=parse_text,
+            line_to_parse=line_to_parse,
+            parse_index=parse_index,
+            num_lines=num_lines,
+            group_dict=group_data)
 
     def load_tag_registry(self) -> None:
         base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
@@ -95,14 +103,35 @@ class MainDocManager(object):
     def parse_starting_point(self) -> tuple:
         with open(self.header_table_file) as htf_pre:
             header_table = json.load(htf_pre)
-        self.line_to_parse = header_table["info"][2]
-        self.parse_index = header_table["info"][3]
-        self.parse_text, self.line_to_parse, self.parse_index = \
-            adjust_process_text.text_metric_reset(
-                working_input_file=self.working_input_file,
-                parse_index=self.parse_index,
-                line_to_parse=self.line_to_parse)
-        return self.parse_text, self.line_to_parse, self.parse_index
+            line_to_parse = header_table["info"][2]
+            parse_index = header_table["info"][3]
+        parse_text, line_to_parse, parse_index = \
+            MainDocManager.set_process_text(
+                self=MainDocManager(
+                    working_input_file=self.working_input_file,
+                    debug_dir=self.debug_dir,
+                    control_word_dict=self.control_word_dict),
+                parse_index=parse_index,
+                line_to_parse=line_to_parse)
+        return parse_text, line_to_parse, parse_index
+
+    def set_process_text(self, parse_index: int, line_to_parse: int) -> tuple:
+        line = linecache.getline(self.working_input_file, line_to_parse).rstrip(
+            "\n")
+        line = line[parse_index:]
+        length = len(line)
+        if parse_index > length - 2:
+            parse_text = line[parse_index:] + \
+                         linecache.getline(self.working_input_file,
+                                           line_to_parse + 1).rstrip("\n")
+            line_to_parse += 1
+            parse_index = 0
+            return parse_text, line_to_parse, parse_index
+        else:
+            parse_text = line
+            parse_index = 0
+            return parse_text, line_to_parse, parse_index
+            pass
 
     def closer(self):
         pass

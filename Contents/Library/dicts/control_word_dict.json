@@ -1,2900 +1,2900 @@
 {
-    "\\ab": [
+    "ab": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\absh": [
+    "absh": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\abslock": [
+    "abslock": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\absnoovrlp": [
+    "absnoovrlp": [
         "Positioned Objects and Frames",
         "Toggle",
         "null"
     ],
-    "\\absw": [
+    "absw": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\acaps": [
+    "acaps": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\acccomma": [
+    "acccomma": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\accdot": [
+    "accdot": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\accnone": [
+    "accnone": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\acccircle": [
+    "acccircle": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\accunderdot": [
+    "accunderdot": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\acf": [
+    "acf": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\additive": [
+    "additive": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\adjustright": [
+    "adjustright": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\adn": [
+    "adn": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\aenddoc": [
+    "aenddoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aendnotes": [
+    "aendnotes": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aexpnd": [
+    "aexpnd": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\af": [
+    "af": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\affixed": [
+    "affixed": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\afs": [
+    "afs": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\aftnbj": [
+    "aftnbj": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftncn": [
+    "aftncn": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\aftnnalc": [
+    "aftnnalc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnar": [
+    "aftnnar": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnauc": [
+    "aftnnauc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnchi": [
+    "aftnnchi": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnchosung": [
+    "aftnnchosung": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnncnum": [
+    "aftnncnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnndbar": [
+    "aftnndbar": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnndbnum": [
+    "aftnndbnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnndbnumd": [
+    "aftnndbnumd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnndbnumk": [
+    "aftnndbnumk": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnndbnumt": [
+    "aftnndbnumt": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnganada": [
+    "aftnnganada": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnngbnum": [
+    "aftnngbnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnngbnumd": [
+    "aftnngbnumd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnngbnumk": [
+    "aftnngbnumk": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnngbnuml": [
+    "aftnngbnuml": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnrlc": [
+    "aftnnrlc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnruc": [
+    "aftnnruc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnzodiac": [
+    "aftnnzodiac": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnzodiacd": [
+    "aftnnzodiacd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnnzodiacl": [
+    "aftnnzodiacl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnrestart": [
+    "aftnrestart": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnrstcont": [
+    "aftnrstcont": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aftnsep": [
+    "aftnsep": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\aftnsepc": [
+    "aftnsepc": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\aftnstart": [
+    "aftnstart": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\aftntj": [
+    "aftntj": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ai": [
+    "ai": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\alang": [
+    "alang": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\allowfieldendsel": [
+    "allowfieldendsel": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\allprot": [
+    "allprot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\alntblind": [
+    "alntblind": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\alt": [
+    "alt": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\animtext": [
+    "animtext": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\annotation": [
+    "annotation": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\annotprot": [
+    "annotprot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ansi": [
+    "ansi": [
         "Character Set",
         "Flag",
         "null"
     ],
-    "\\ansicpg": [
+    "ansicpg": [
         "Unicode RTF",
         "Value",
         "null"
     ],
-    "\\aoutl": [
+    "aoutl": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\ApplyBrkRules": [
+    "ApplyBrkRules": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ascaps": [
+    "ascaps": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\ashad": [
+    "ashad": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\asianbrkrule": [
+    "asianbrkrule": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\aspalpha": [
+    "aspalpha": [
         "Paragraph Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\aspnum": [
+    "aspnum": [
         "Paragraph Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\astrike": [
+    "astrike": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\atnauthor": [
+    "atnauthor": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atndate": [
+    "atndate": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atnicn": [
+    "atnicn": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atnid": [
+    "atnid": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atnparent": [
+    "atnparent": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atnref": [
+    "atnref": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atntime": [
+    "atntime": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atrfend": [
+    "atrfend": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\atrfstart": [
+    "atrfstart": [
         "Comments (Annotations)",
         "Destination",
         "null"
     ],
-    "\\aul": [
+    "aul": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\auld": [
+    "auld": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\auldb": [
+    "auldb": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\aulnone": [
+    "aulnone": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\aulw": [
+    "aulw": [
         "Associated Character Properties",
         "Toggle",
         "null"
     ],
-    "\\aup": [
+    "aup": [
         "Associated Character Properties",
         "Value",
         "null"
     ],
-    "\\author": [
+    "author": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\autofmtoverride": [
+    "autofmtoverride": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\b": [
+    "b": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\background": [
+    "background": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Destination",
         "null"
     ],
-    "\\bdbfhdr": [
+    "bdbfhdr": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\bdrrlswsix": [
+    "bdrrlswsix": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\bgbdiag": [
+    "bgbdiag": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgcross": [
+    "bgcross": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdcross": [
+    "bgdcross": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkbdiag": [
+    "bgdkbdiag": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkcross": [
+    "bgdkcross": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkdcross": [
+    "bgdkdcross": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkfdiag": [
+    "bgdkfdiag": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkhoriz": [
+    "bgdkhoriz": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgdkvert": [
+    "bgdkvert": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgfdiag": [
+    "bgfdiag": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bghoriz": [
+    "bghoriz": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bgvert": [
+    "bgvert": [
         "Paragraph Shading",
         "Flag",
         "null"
     ],
-    "\\bin": [
+    "bin": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\binfsxn": [
+    "binfsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\binsxn": [
+    "binsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\bkmkcolf": [
+    "bkmkcolf": [
         "Bookmarks",
         "Value",
         "null"
     ],
-    "\\bkmkcoll": [
+    "bkmkcoll": [
         "Bookmarks",
         "Value",
         "null"
     ],
-    "\\bkmkend": [
+    "bkmkend": [
         "Bookmarks",
         "Destination",
         "null"
     ],
-    "\\bkmkpub": [
+    "bkmkpub": [
         "Macintosh Edition Manager Publisher Objects",
         "Flag",
         "null"
     ],
-    "\\bkmkstart": [
+    "bkmkstart": [
         "Bookmarks",
         "Destination",
         "null"
     ],
-    "\\bliptag": [
+    "bliptag": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\blipuid": [
+    "blipuid": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\blipupi": [
+    "blipupi": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\blue": [
+    "blue": [
         "Color Table",
         "Value",
         "null"
     ],
-    "\\bookfold": [
+    "bookfold": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\bookfoldrev": [
+    "bookfoldrev": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\bookfoldsheets": [
+    "bookfoldsheets": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\box": [
+    "box": [
         "Paragraph Borders",
         "Flag",
         "null"
     ],
-    "\\brdrart": [
+    "brdrart": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\brdrb": [
+    "brdrb": [
         "Paragraph Borders",
         "Flag",
         "null"
     ],
-    "\\brdrbar": [
+    "brdrbar": [
         "Paragraph Borders",
         "Flag",
         "null"
     ],
-    "\\brdrbtw": [
+    "brdrbtw": [
         "Paragraph Borders",
         "Flag",
         "null"
     ],
-    "\\brdrcf": [
-        "Paragraph Borders",
-        "Value",
-        "null"
-    ],
-    "\\brdrdash": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdashd": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdashdd": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdashdotstr": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdashsm": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdb": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrdot": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdremboss": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrengrave": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrframe": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrhair": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrinset": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrl": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrnil": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdroutset": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrr": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrs": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrsh": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrt": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtbl": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrth": [
-        "Paragraph Borders",
-        "Flag",
-        "null"
-    ],
-    "\\brdrthtnlg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrthtnmg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrthtnsg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthlg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthmg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthsg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthtnlg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthtnmg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtnthtnsg": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrtriple": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\brdrw": [
+    "brdrcf": [
         "Paragraph Borders",
         "Value",
         "null"
     ],
-    "\\brdrwavy": [
+    "brdrdash": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrdashd": [
         "Paragraph Text",
         "Flag",
         "null"
     ],
-    "\\brdrwavydb": [
+    "brdrdashdd": [
         "Paragraph Text",
         "Flag",
         "null"
     ],
-    "\\brkfrm": [
+    "brdrdashdotstr": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrdashsm": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrdb": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrdot": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdremboss": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrengrave": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrframe": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrhair": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrinset": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrl": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrnil": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdroutset": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrr": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrs": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrsh": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrt": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrtbl": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrth": [
+        "Paragraph Borders",
+        "Flag",
+        "null"
+    ],
+    "brdrthtnlg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrthtnmg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrthtnsg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthlg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthmg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthsg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthtnlg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthtnmg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtnthtnsg": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrtriple": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrw": [
+        "Paragraph Borders",
+        "Value",
+        "null"
+    ],
+    "brdrwavy": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brdrwavydb": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "brkfrm": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\brsp": [
+    "brsp": [
         "Paragraph Borders",
         "Value",
         "null"
     ],
-    "\\bullet": [
+    "bullet": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\buptim": [
+    "buptim": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\bxe": [
+    "bxe": [
         "Index Entries",
         "Flag",
         "null"
     ],
-    "\\caps": [
+    "caps": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\category": [
+    "category": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\cb": [
+    "cb": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\cbpat": [
+    "cbpat": [
         "Paragraph Shading",
         "Value",
         "null"
     ],
-    "\\cchs": [
+    "cchs": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\cell": [
+    "cell": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\cellx": [
+    "cellx": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\cf": [
+    "cf": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\cfpat": [
+    "cfpat": [
         "Paragraph Shading",
         "Value",
         "null"
     ],
-    "\\cgrid": [
+    "cgrid": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\charrsid": [
+    "charrsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\charscalex": [
+    "charscalex": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\chatn": [
+    "chatn": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chbgbdiag": [
+    "chbgbdiag": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgcross": [
+    "chbgcross": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdcross": [
+    "chbgdcross": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkbdiag": [
+    "chbgdkbdiag": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkcross": [
+    "chbgdkcross": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkdcross": [
+    "chbgdkdcross": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkfdiag": [
+    "chbgdkfdiag": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkhoriz": [
+    "chbgdkhoriz": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgdkvert": [
+    "chbgdkvert": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgfdiag": [
+    "chbgfdiag": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbghoriz": [
+    "chbghoriz": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbgvert": [
+    "chbgvert": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chbrdr": [
+    "chbrdr": [
         "Character Text",
         "Flag",
         "null"
     ],
-    "\\chcbpat": [
+    "chcbpat": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\chcfpat": [
+    "chcfpat": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\chdate": [
+    "chdate": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chdpa": [
+    "chdpa": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chdpl": [
+    "chdpl": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chftn": [
+    "chftn": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chftnsep": [
+    "chftnsep": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chftnsepc": [
+    "chftnsepc": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chpgn": [
+    "chpgn": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\chshdng": [
+    "chshdng": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\chtime": [
+    "chtime": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\clbgbdiag": [
+    "clbgbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgcross": [
+    "clbgcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdcross": [
+    "clbgdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkbdiag": [
+    "clbgdkbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkcross": [
+    "clbgdkcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkdcross": [
+    "clbgdkdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkfdiag": [
+    "clbgdkfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkhor": [
+    "clbgdkhor": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgdkvert": [
+    "clbgdkvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgfdiag": [
+    "clbgfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbghoriz": [
+    "clbghoriz": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbgvert": [
+    "clbgvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbrdrb": [
+    "clbrdrb": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbrdrl": [
+    "clbrdrl": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbrdrr": [
+    "clbrdrr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clbrdrt": [
+    "clbrdrt": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clcbpat": [
+    "clcbpat": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clcbpatraw": [
+    "clcbpatraw": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clcfpat": [
+    "clcfpat": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clcfpatraw": [
+    "clcfpatraw": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\cldgll": [
+    "cldgll": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cldglu": [
+    "cldglu": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clFitText": [
+    "clFitText": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clftsWidth": [
+    "clftsWidth": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clmgf": [
+    "clmgf": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clmrg": [
+    "clmrg": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clNoWrap": [
+    "clNoWrap": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clpadb": [
+    "clpadb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadfb": [
+    "clpadfb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadfl": [
+    "clpadfl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadfr": [
+    "clpadfr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadft": [
+    "clpadft": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadl": [
+    "clpadl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadr": [
+    "clpadr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clpadt": [
+    "clpadt": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clshdng": [
+    "clshdng": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clshdngraw": [
+    "clshdngraw": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\clshdrawnil": [
+    "clshdrawnil": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cltxbtlr": [
+    "cltxbtlr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cltxlrtb": [
+    "cltxlrtb": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cltxlrtbv": [
+    "cltxlrtbv": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cltxtbrl": [
+    "cltxtbrl": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\cltxtbrlv": [
+    "cltxtbrlv": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clvertalb": [
+    "clvertalb": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clvertalc": [
+    "clvertalc": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clvertalt": [
+    "clvertalt": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clvmgf": [
+    "clvmgf": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clvmrg": [
+    "clvmrg": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\clwWidth": [
+    "clwWidth": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\collapsed": [
+    "collapsed": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\colno": [
+    "colno": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\colortbl": [
+    "colortbl": [
         "Color Table",
         "Destination",
         "null"
     ],
-    "\\cols": [
+    "cols": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\colsr": [
+    "colsr": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\colsx": [
+    "colsx": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\column": [
+    "column": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\colw": [
+    "colw": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\comment": [
+    "comment": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\company": [
+    "company": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\cpg": [
+    "cpg": [
         "Code Page Support",
         "Value",
         "null"
     ],
-    "\\crauth": [
+    "crauth": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\crdate": [
+    "crdate": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\creatim": [
+    "creatim": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\cs": [
+    "cs": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\ctrl": [
+    "ctrl": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\cts": [
+    "cts": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\cufi": [
+    "cufi": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\culi": [
+    "culi": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\curi": [
+    "curi": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\cvmme": [
+    "cvmme": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\datafield": [
+    "datafield": [
         "Fields",
         "Destination",
         "null"
     ],
-    "\\date": [
+    "date": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\dbch": [
+    "dbch": [
         "Associated Character Properties",
         "Flag",
         "null"
     ],
-    "\\deff": [
+    "deff": [
         "Font Table",
         "Value",
         "null"
     ],
-    "\\defformat": [
+    "defformat": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\deflang": [
+    "deflang": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\deflangfe": [
+    "deflangfe": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\defshp": [
+    "defshp": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\deftab": [
+    "deftab": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\deleted": [
+    "deleted": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\delrsid": [
+    "delrsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\dfrauth": [
+    "dfrauth": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\dfrdate": [
+    "dfrdate": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\dfrmtxtx": [
+    "dfrmtxtx": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\dfrmtxty": [
+    "dfrmtxty": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\dfrstart": [
+    "dfrstart": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\dfrstop": [
+    "dfrstop": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\dfrxst": [
+    "dfrxst": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\dghorigin": [
+    "dghorigin": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dghshow": [
+    "dghshow": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dghspace": [
+    "dghspace": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dgmargin": [
+    "dgmargin": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\dgsnap": [
+    "dgsnap": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\dgvorigin": [
+    "dgvorigin": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dgvshow": [
+    "dgvshow": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dgvspace": [
+    "dgvspace": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dibitmap": [
+    "dibitmap": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\dn": [
+    "dn": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dntblnsbdb": [
+    "dntblnsbdb": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\do": [
+    "do": [
         "Drawing Objects",
         "Destination",
         "null"
     ],
-    "\\dobxcolumn": [
+    "dobxcolumn": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dobxmargin": [
+    "dobxmargin": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dobxpage": [
+    "dobxpage": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dobymargin": [
+    "dobymargin": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dobypage": [
+    "dobypage": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dobypara": [
+    "dobypara": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\doccomm": [
+    "doccomm": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\doctemp": [
+    "doctemp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\doctype": [
+    "doctype": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\docvar": [
+    "docvar": [
         "Document Variables",
         "Destination",
         "null"
     ],
-    "\\dodhgt": [
+    "dodhgt": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dolock": [
+    "dolock": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\donotembedlingdata": [
+    "donotembedlingdata": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\donotshowcomments": [
+    "donotshowcomments": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\donotshowinsdel": [
+    "donotshowinsdel": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\donotshowmarkup": [
+    "donotshowmarkup": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\donotshowprops": [
+    "donotshowprops": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\dpaendhol": [
+    "dpaendhol": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpaendl": [
+    "dpaendl": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpaendsol": [
+    "dpaendsol": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpaendw": [
+    "dpaendw": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dparc": [
+    "dparc": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dparcflipx": [
+    "dparcflipx": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dparcflipy": [
+    "dparcflipy": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpastarthol": [
+    "dpastarthol": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpastartl": [
+    "dpastartl": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpastartsol": [
+    "dpastartsol": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpastartw": [
+    "dpastartw": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcallout": [
+    "dpcallout": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcoa": [
+    "dpcoa": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcoaccent": [
+    "dpcoaccent": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcobestfit": [
+    "dpcobestfit": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcoborder": [
+    "dpcoborder": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcodabs": [
+    "dpcodabs": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcodbottom": [
+    "dpcodbottom": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcodcenter": [
+    "dpcodcenter": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcodescent": [
+    "dpcodescent": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcodtop": [
+    "dpcodtop": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcolength": [
+    "dpcolength": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcominusx": [
+    "dpcominusx": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcominusy": [
+    "dpcominusy": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcooffset": [
+    "dpcooffset": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpcosmarta": [
+    "dpcosmarta": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcotdouble": [
+    "dpcotdouble": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcotright": [
+    "dpcotright": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcotsingle": [
+    "dpcotsingle": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcottriple": [
+    "dpcottriple": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpcount": [
+    "dpcount": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpellipse": [
+    "dpellipse": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpendgroup": [
+    "dpendgroup": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpfillbgcb": [
+    "dpfillbgcb": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillbgcg": [
+    "dpfillbgcg": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillbgcr": [
+    "dpfillbgcr": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillbggray": [
+    "dpfillbggray": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillbgpal": [
+    "dpfillbgpal": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpfillfgcb": [
+    "dpfillfgcb": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillfgcg": [
+    "dpfillfgcg": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillfgcr": [
+    "dpfillfgcr": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillfggray": [
+    "dpfillfggray": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpfillfgpal": [
+    "dpfillfgpal": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpfillpat": [
+    "dpfillpat": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpgroup": [
+    "dpgroup": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpline": [
+    "dpline": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinecob": [
+    "dplinecob": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dplinecog": [
+    "dplinecog": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dplinecor": [
+    "dplinecor": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dplinedado": [
+    "dplinedado": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinedadodo": [
+    "dplinedadodo": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinedash": [
+    "dplinedash": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinedot": [
+    "dplinedot": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinegray": [
+    "dplinegray": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dplinehollow": [
+    "dplinehollow": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinepal": [
+    "dplinepal": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinesolid": [
+    "dplinesolid": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dplinew": [
+    "dplinew": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dppolycount": [
+    "dppolycount": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dppolygon": [
+    "dppolygon": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dppolyline": [
+    "dppolyline": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpptx": [
+    "dpptx": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dppty": [
+    "dppty": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dprect": [
+    "dprect": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dproundr": [
+    "dproundr": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpshadow": [
+    "dpshadow": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpshadx": [
+    "dpshadx": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpshady": [
+    "dpshady": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dptxbtlr": [
+    "dptxbtlr": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dptxbx": [
+    "dptxbx": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dptxbxmar": [
+    "dptxbxmar": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dptxbxtext": [
+    "dptxbxtext": [
         "Drawing Objects",
         "Destination",
         "null"
     ],
-    "\\dptxlrtb": [
+    "dptxlrtb": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dptxlrtbv": [
+    "dptxlrtbv": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dptxtbrl": [
+    "dptxtbrl": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dptxtbrlv": [
+    "dptxtbrlv": [
         "Drawing Objects",
         "Flag",
         "null"
     ],
-    "\\dpx": [
+    "dpx": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpxsize": [
+    "dpxsize": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpy": [
+    "dpy": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dpysize": [
+    "dpysize": [
         "Drawing Objects",
         "Value",
         "null"
     ],
-    "\\dropcapli": [
+    "dropcapli": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\dropcapt": [
+    "dropcapt": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\ds": [
+    "ds": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\dxfrtext": [
+    "dxfrtext": [
         "Positioned Objects and Frames",
         "Value",
         "null"
     ],
-    "\\dy": [
+    "dy": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\edmins": [
+    "edmins": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\embo": [
+    "embo": [
         "Character Text",
         "Toggle",
         "null"
     ],
-    "\\emdash": [
+    "emdash": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\emfblip": [
+    "emfblip": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\emspace": [
+    "emspace": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\endash": [
+    "endash": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\enddoc": [
+    "enddoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\endnhere": [
+    "endnhere": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\endnotes": [
+    "endnotes": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\enforceprot": [
+    "enforceprot": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\enspace": [
+    "enspace": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\expnd": [
+    "expnd": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\expndtw": [
+    "expndtw": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\expshrtn": [
+    "expshrtn": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\f": [
+    "f": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\faauto": [
+    "faauto": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\facenter": [
+    "facenter": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\facingp": [
+    "facingp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fahang": [
+    "fahang": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\falt": [
+    "falt": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\faroman": [
+    "faroman": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\favar": [
+    "favar": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fbias": [
+    "fbias": [
         "Font Table",
         "Value",
         "null"
     ],
-    "\\fbidi": [
+    "fbidi": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fchars": [
+    "fchars": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\fcharset": [
+    "fcharset": [
         "Font Table",
         "Value",
         "null"
     ],
-    "\\fdecor": [
+    "fdecor": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fet": [
+    "fet": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\fetch": [
+    "fetch": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\ffdefres": [
+    "ffdefres": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffdeftext": [
+    "ffdeftext": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffentrymcr": [
+    "ffentrymcr": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffexitmcr": [
+    "ffexitmcr": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffformat": [
+    "ffformat": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffhaslistbox": [
+    "ffhaslistbox": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffhelptext": [
+    "ffhelptext": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffhps": [
+    "ffhps": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffl": [
+    "ffl": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffmaxlen": [
+    "ffmaxlen": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffname": [
+    "ffname": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\ffownhelp": [
+    "ffownhelp": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffownstat": [
+    "ffownstat": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffprot": [
+    "ffprot": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffrecalc": [
+    "ffrecalc": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffres": [
+    "ffres": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffsize": [
+    "ffsize": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\ffstattext": [
+    "ffstattext": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\fftype": [
+    "fftype": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\fftypetxt": [
+    "fftypetxt": [
         "Form Fields",
         "Value",
         "null"
     ],
-    "\\fi": [
+    "fi": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\fid": [
+    "fid": [
         "File Table",
         "Value",
         "null"
     ],
-    "\\field": [
+    "field": [
         "Fields",
         "Destination",
         "null"
     ],
-    "\\file": [
+    "file": [
         "File Table",
         "Destination",
         "null"
     ],
-    "\\filetbl": [
+    "filetbl": [
         "File Table",
         "Destination",
         "null"
     ],
-    "\\fittext": [
+    "fittext": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\fldalt": [
+    "fldalt": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fIddirty": [
+    "fIddirty": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\fldedit": [
+    "fldedit": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\fldinst": [
+    "fldinst": [
         "Fields",
         "Destination",
         "null"
     ],
-    "\\fldlock": [
+    "fldlock": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\fldpriv": [
+    "fldpriv": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\fldrslt": [
+    "fldrslt": [
         "Fields",
         "Destination",
         "null"
     ],
-    "\\fldtype": [
+    "fldtype": [
         "Fields",
         "Destination",
         "null"
     ],
-    "\\fmodern": [
+    "fmodern": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fn": [
+    "fn": [
         "Style Sheet",
         "Value",
         "null"
     ],
-    "\\fname": [
+    "fname": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\fnetwork": [
+    "fnetwork": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\fnil": [
+    "fnil": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fnonfilesys": [
+    "fnonfilesys": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\fontemb": [
+    "fontemb": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\fontfile": [
+    "fontfile": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\fonttbl": [
+    "fonttbl": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\footer": [
+    "footer": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\footerf": [
+    "footerf": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\footerl": [
+    "footerl": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\footery": [
+    "footery": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\footnote": [
+    "footnote": [
         "Footnotes",
         "Destination",
         "null"
     ],
-    "\\formdisp": [
+    "formdisp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\formfield": [
+    "formfield": [
         "Form Fields",
         "Destination",
         "null"
     ],
-    "\\formprot": [
+    "formprot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\formshade": [
+    "formshade": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fosnum": [
+    "fosnum": [
         "File Table",
         "Value",
         "null"
     ],
-    "\\fprq": [
+    "fprq": [
         "Font Table",
         "Value",
         "null"
     ],
-    "\\fracwidth": [
+    "fracwidth": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\frelative": [
+    "frelative": [
         "File Table",
         "Value",
         "null"
     ],
-    "\\frmtxbtlr": [
+    "frmtxbtlr": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\frmtxlrtb": [
+    "frmtxlrtb": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\frmtxlrtbv": [
+    "frmtxlrtbv": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\frmtxtbrl": [
+    "frmtxtbrl": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\frmtxtbrlv": [
+    "frmtxtbrlv": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\froman": [
+    "froman": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fromhtml": [
+    "fromhtml": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fromtext": [
+    "fromtext": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fs": [
+    "fs": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\fscript": [
+    "fscript": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fswiss": [
+    "fswiss": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\ftnalt": [
+    "ftnalt": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnbj": [
+    "ftnbj": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftncn": [
+    "ftncn": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\ftnil": [
+    "ftnil": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\ftnlytwnine": [
+    "ftnlytwnine": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnalc": [
+    "ftnnalc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnar": [
+    "ftnnar": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnauc": [
+    "ftnnauc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnchi": [
+    "ftnnchi": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnchosung": [
+    "ftnnchosung": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnncnum": [
+    "ftnncnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnndbar": [
+    "ftnndbar": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnndbnum": [
+    "ftnndbnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnndbnumd": [
+    "ftnndbnumd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnndbnumk": [
+    "ftnndbnumk": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnndbnumt": [
+    "ftnndbnumt": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnganada": [
+    "ftnnganada": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnngbnum": [
+    "ftnngbnum": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnngbnumd": [
+    "ftnngbnumd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnngbnumk": [
+    "ftnngbnumk": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnngbnuml": [
+    "ftnngbnuml": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnrlc": [
+    "ftnnrlc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnruc": [
+    "ftnnruc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnzodiac": [
+    "ftnnzodiac": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnzodiacd": [
+    "ftnnzodiacd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnnzodiacl": [
+    "ftnnzodiacl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnrestart": [
+    "ftnrestart": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnrstcont": [
+    "ftnrstcont": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnrstpg": [
+    "ftnrstpg": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ftnsep": [
+    "ftnsep": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\ftnsepc": [
+    "ftnsepc": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\ftnstart": [
+    "ftnstart": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\ftntj": [
+    "ftntj": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\fttruetype": [
+    "fttruetype": [
         "Font Table",
         "Flag",
         "null"
     ],
-    "\\fvaliddos": [
+    "fvaliddos": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\fvalidhpfs": [
+    "fvalidhpfs": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\fvalidmac": [
+    "fvalidmac": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\fvalidntfs": [
+    "fvalidntfs": [
         "File Table",
         "Flag",
         "null"
     ],
-    "\\g": [
+    "g": [
         "Font (Character) Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\gcw": [
+    "gcw": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\generator": [
+    "generator": [
         "Generator",
         "Destination",
         "null"
     ],
-    "\\green": [
+    "green": [
         "Color Table",
         "Value",
         "null"
     ],
-    "\\grfdocevents": [
+    "grfdocevents": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\gridtbl": [
+    "gridtbl": [
         "Font (Character) Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\gutter": [
+    "gutter": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\gutterprl": [
+    "gutterprl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\guttersxn": [
+    "guttersxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\header": [
+    "header": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\headerf": [
+    "headerf": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\headerl": [
+    "headerl": [
         "Headers and Footers",
         "Destination",
         "null"
     ],
-    "\\headery": [
+    "headery": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\hich": [
+    "hich": [
         "Associated Character Properties",
         "Flag",
         "null"
     ],
-    "\\highlight": [
+    "highlight": [
         "Highlighting",
         "Value",
         "null"
     ],
-    "\\hlfr": [
+    "hlfr": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\hlinkbase": [
+    "hlinkbase": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\hlloc": [
+    "hlloc": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\hlsrc": [
+    "hlsrc": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\horzdoc": [
+    "horzdoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\horzsect": [
+    "horzsect": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\hr": [
+    "hr": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\htmautsp": [
+    "htmautsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\htmlbase": [
+    "htmlbase": [
         "Control Words Introduced bv Other Microsoft Products",
         "Flag",
         "null"
     ],
-    "\\htmlrtf": [
+    "htmlrtf": [
         "Control Words Introduced bv Other Microsoft Products",
         "Toggle",
         "null"
     ],
-    "\\htmltag": [
+    "htmltag": [
         "Control Words Introduced bv Other Microsoft Products",
         "Destination",
         "null"
     ],
-    "\\hyphauto": [
+    "hyphauto": [
         "Document Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\hyphcaps": [
+    "hyphcaps": [
         "Document Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\hyphconsec": [
+    "hyphconsec": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\hyphhotz": [
+    "hyphhotz": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\hyphpar": [
+    "hyphpar": [
         "Paragraph Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\i": [
+    "i": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\id": [
+    "id": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\ilvl": [
+    "ilvl": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\impr": [
+    "impr": [
         "Character Text",
         "Toggle",
         "null"
     ],
-    "\\info": [
+    "info": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\insrsid": [
+    "insrsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\intbl": [
+    "intbl": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ipgp": [
+    "ipgp": [
         "Paragraph Group Properties",
         "Value",
         "null"
     ],
-    "\\irowband": [
+    "irowband": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\irow": [
+    "irow": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\itap": [
+    "itap": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\ixe": [
+    "ixe": [
         "Index Entries",
         "Flag",
         "null"
     ],
-    "\\jcompress": [
+    "jcompress": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\jexpand": [
+    "jexpand": [
         "Document Formatting Properties",
         "Flag",
         "null"
@@ -2904,217 +2904,217 @@
         "Flag",
         "null"
     ],
-    "\\jsksu": [
+    "jsksu": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\keep": [
+    "keep": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\keepn": [
+    "keepn": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\kerning": [
+    "kerning": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\keycode": [
+    "keycode": [
         "Style Sheet",
         "Destination",
         "null"
     ],
-    "\\keywords": [
+    "keywords": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\ksulang": [
+    "ksulang": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\landscape": [
+    "landscape": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lang": [
+    "lang": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\langfe": [
+    "langfe": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\langfenp": [
+    "langfenp": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\langnp": [
+    "langnp": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\lastrow": [
+    "lastrow": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\latentstyles": [
+    "latentstyles": [
         "Style and Formatting Restrictions",
         "Destination",
         "null"
     ],
-    "\\lbr": [
+    "lbr": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\lchars": [
+    "lchars": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\ldblquote": [
+    "ldblquote": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\level": [
+    "level": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\levelfollow": [
+    "levelfollow": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelindent": [
+    "levelindent": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\leveljc": [
+    "leveljc": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\leveljcn": [
+    "leveljcn": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levellegal": [
+    "levellegal": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelnfc": [
+    "levelnfc": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelnfcn": [
+    "levelnfcn": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelnorestart": [
+    "levelnorestart": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelnumbers": [
+    "levelnumbers": [
         "List Table",
         "Destination",
         "null"
     ],
-    "\\levelold": [
+    "levelold": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelpicture": [
+    "levelpicture": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelprev": [
+    "levelprev": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelprevspace": [
+    "levelprevspace": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelspace": [
+    "levelspace": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\levelstartat": [
+    "levelstartat": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\leveltemplateid": [
+    "leveltemplateid": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\leveltext": [
+    "leveltext": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\li": [
+    "li": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\line": [
+    "line": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\linebetcol": [
+    "linebetcol": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\linecont": [
+    "linecont": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\linemod": [
+    "linemod": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\lineppage": [
+    "lineppage": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\linerestart": [
+    "linerestart": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\linestart": [
+    "linestart": [
         "Document Formatting Properties",
         "Value",
         "null"
@@ -3124,3852 +3124,3852 @@
         "Value",
         "null"
     ],
-    "\\linex": [
+    "linex": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\linkself": [
+    "linkself": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\linkstyles": [
+    "linkstyles": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\linkval": [
+    "linkval": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\iin": [
+    "iin": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\lisa": [
+    "lisa": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\lisb": [
+    "lisb": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\listhybrid": [
+    "listhybrid": [
         "List Table",
         "Flag",
         "null"
     ],
-    "\\listid": [
+    "listid": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listname": [
+    "listname": [
         "List Table",
         "Destination",
         "null"
     ],
-    "\\listoverridecount": [
+    "listoverridecount": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listoverrideformat": [
+    "listoverrideformat": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listoverridestart": [
+    "listoverridestart": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listpicture": [
+    "listpicture": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listrestarthdn": [
+    "listrestarthdn": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listsimple": [
+    "listsimple": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\liststyleid": [
+    "liststyleid": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\liststylename": [
+    "liststylename": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listtemplateid": [
+    "listtemplateid": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\listtext": [
+    "listtext": [
         "Paragraph Text",
         "Destination",
         "null"
     ],
-    "\\lnbrkrule": [
+    "lnbrkrule": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lndscpsxn": [
+    "lndscpsxn": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lnongrid": [
+    "lnongrid": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\loch": [
+    "loch": [
         "Associated Character Properties",
         "Flag",
         "null"
     ],
-    "\\lquote": [
+    "lquote": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\ls": [
+    "ls": [
         "List Table",
         "Value",
         "null"
     ],
-    "\\lsdlockeddef": [
+    "lsdlockeddef": [
         "Style and Formatting Restrictions",
         "Value",
         "null"
     ],
-    "\\lsdlockedexcept": [
+    "lsdlockedexcept": [
         "Style and Formatting Restrictions",
         "Destination",
         "null"
     ],
-    "\\lsdstimax": [
+    "lsdstimax": [
         "Style and Formatting Restrictions",
         "Value",
         "null"
     ],
-    "\\ltrch": [
+    "ltrch": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ltrdoc": [
+    "ltrdoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ltrmark": [
+    "ltrmark": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\ltrpar": [
+    "ltrpar": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ltrrow": [
+    "ltrrow": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\ltrsect": [
+    "ltrsect": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lytcalctblwd": [
+    "lytcalctblwd": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lytexcttp": [
+    "lytexcttp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lytprtmet": [
+    "lytprtmet": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\lyttblrtgr": [
+    "lyttblrtgr": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\mac": [
+    "mac": [
         "Character Set",
         "Flag",
         "null"
     ],
-    "\\macpict": [
+    "macpict": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\makebackup": [
+    "makebackup": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\manager": [
+    "manager": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\margb": [
+    "margb": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margbsxn": [
+    "margbsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margl": [
+    "margl": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\marglsxn": [
+    "marglsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margmirror": [
+    "margmirror": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\margr": [
+    "margr": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margrsxn": [
+    "margrsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margt": [
+    "margt": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\margtsxn": [
+    "margtsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\mhtmltag": [
+    "mhtmltag": [
         "Control Words Introduced bv Other Microsoft Products",
         "Destination",
         "null"
     ],
-    "\\min": [
+    "min": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\mo": [
+    "mo": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\msmcap": [
+    "msmcap": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nestcell": [
+    "nestcell": [
         "Table Definitions",
         "Symbol",
         "null"
     ],
-    "\\nestrow": [
+    "nestrow": [
         "Table Definitions",
         "Symbol",
         "null"
     ],
-    "\\nesttableprops": [
+    "nesttableprops": [
         "Table Definitions",
         "Destination",
         "null"
     ],
-    "\\newtblstyruls": [
+    "newtblstyruls": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nextfile": [
+    "nextfile": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\nobrkwrptbl": [
+    "nobrkwrptbl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nocolbal": [
+    "nocolbal": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nocompatoptions": [
+    "nocompatoptions": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nocwrap": [
+    "nocwrap": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\noextrasprl": [
+    "noextrasprl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nofchars": [
+    "nofchars": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\nofcharsws": [
+    "nofcharsws": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\nofpages": [
+    "nofpages": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\nofwords": [
+    "nofwords": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\nogrowautofit": [
+    "nogrowautofit": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nojkernpunct": [
+    "nojkernpunct": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nolead": [
+    "nolead": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\noline": [
+    "noline": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nolnhtadjtbl": [
+    "nolnhtadjtbl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nonesttables": [
+    "nonesttables": [
         "Table Definitions",
         "Destination",
         "null"
     ],
-    "\\nonshppict": [
+    "nonshppict": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\nooverflow": [
+    "nooverflow": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\noproof": [
+    "noproof": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nosectexpand": [
+    "nosectexpand": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nosnaplinegrid": [
+    "nosnaplinegrid": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nospaceforul": [
+    "nospaceforul": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nosupersub": [
+    "nosupersub": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\notabind": [
+    "notabind": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\noultrlspc": [
+    "noultrlspc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nowidctlpar": [
+    "nowidctlpar": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\nowrap": [
+    "nowrap": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\nowwrap": [
+    "nowwrap": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\noxlattoyen": [
+    "noxlattoyen": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\objalias": [
+    "objalias": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objalign": [
+    "objalign": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objattph": [
+    "objattph": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objautlink": [
+    "objautlink": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objclass": [
+    "objclass": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objcropb": [
+    "objcropb": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objcropl": [
+    "objcropl": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objcropr": [
+    "objcropr": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objcropt": [
+    "objcropt": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objdata": [
+    "objdata": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\object": [
+    "object": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objemb": [
+    "objemb": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objh": [
+    "objh": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objhtml": [
+    "objhtml": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objicemb": [
+    "objicemb": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objlink": [
+    "objlink": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objlock": [
+    "objlock": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objname": [
+    "objname": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objocx": [
+    "objocx": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objpub": [
+    "objpub": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objscalex": [
+    "objscalex": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objscaley": [
+    "objscaley": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objsect": [
+    "objsect": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objsetsize": [
+    "objsetsize": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objsub": [
+    "objsub": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objtime": [
+    "objtime": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\objtransy": [
+    "objtransy": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\objupdate": [
+    "objupdate": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\objw": [
+    "objw": [
         "Objects",
         "Value",
         "null"
     ],
-    "\\oldas": [
+    "oldas": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\oldcprops": [
+    "oldcprops": [
         "Track Changes (Revision Marks)",
         "Destination",
         "null"
     ],
-    "\\oldlinewrap": [
+    "oldlinewrap": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\oldpprops": [
+    "oldpprops": [
         "Track Changes (Revision Marks)",
         "Destination",
         "null"
     ],
-    "\\oldsprops": [
+    "oldsprops": [
         "Track Changes (Revision Marks)",
         "Destination",
         "null"
     ],
-    "\\oldtprops": [
+    "oldtprops": [
         "Track Changes (Revision Marks)",
         "Destination",
         "null"
     ],
-    "\\operator": [
+    "operator": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\otblrul": [
+    "otblrul": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\outl": [
+    "outl": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\outlinelevel": [
+    "outlinelevel": [
         "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\overlay": [
+    "overlay": [
         "Paragraph Text",
         "Flag",
         "null"
     ],
-    "\\page": [
+    "page": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\pagebb": [
+    "pagebb": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\panose": [
+    "panose": [
         "Font Table",
         "Destination",
         "null"
     ],
-    "\\paperh": [
+    "paperh": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\paperw": [
+    "paperw": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\par": [
+    "par": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\pararsid": [
+    "pararsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\pard": [
+    "pard": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pc": [
+    "pc": [
         "Character Set",
         "Flag",
         "null"
     ],
-    "\\pca": [
+    "pca": [
         "Character Set",
         "Flag",
         "null"
     ],
-    "\\pgbrdrb": [
+    "pgbrdrb": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgbrdrfoot": [
+    "pgbrdrfoot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgbrdrhead": [
+    "pgbrdrhead": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgbrdrl": [
+    "pgbrdrl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgbrdropt": [
-        "Document Formatting Properties",
-        "Value",
-        "null"
-    ],
-    "\\pgbrdrr": [
-        "Document Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgbrdrsnap": [
-        "Document Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgbrdrt": [
-        "Document Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pghsxn": [
-        "Section Formatting Properties",
-        "Value",
-        "null"
-    ],
-    "\\pgnbidia": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnbidib": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnchosung": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgncnum": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgncont": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgndbnum": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgndbnumd": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgndbnumk": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgndbnumt": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgndec": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgndecd": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnganada": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgngbnum": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgngbnumd": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgngbnumk": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgngbnuml": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhindia": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhindib": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhindic": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhindid": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhn": [
-        "Section Formatting Properties",
-        "Value",
-        "null"
-    ],
-    "\\pgnhnsc": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhnsh": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhnsm": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhnsn": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnhnsp": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnid": [
-        "Section Formatting Properties",
-        "Value",
-        "null"
-    ],
-    "\\pgnlcltr": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnlcrm": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnrestart": [
-        "Section Formatting Properties",
-        "Flag",
-        "null"
-    ],
-    "\\pgnstart": [
+    "pgbrdropt": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\pgnstarts": [
+    "pgbrdrr": [
+        "Document Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgbrdrsnap": [
+        "Document Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgbrdrt": [
+        "Document Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pghsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\pgnthaia": [
+    "pgnbidia": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnthaib": [
+    "pgnbidib": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnthaic": [
+    "pgnchosung": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgncnum": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgncont": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnucltr": [
+    "pgndbnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnucrm": [
+    "pgndbnumd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnvieta": [
+    "pgndbnumk": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgndbnumt": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgndec": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pgnx": [
+    "pgndecd": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnganada": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgngbnum": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgngbnumd": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgngbnumk": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgngbnuml": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pgnhindia": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhindib": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhindic": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhindid": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\pgny": [
+    "pgnhnsc": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhnsh": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhnsm": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhnsn": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnhnsp": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnid": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\pgnzodiac": [
+    "pgnlcltr": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnlcrm": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnrestart": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnstart": [
+        "Document Formatting Properties",
+        "Value",
+        "null"
+    ],
+    "pgnstarts": [
+        "Section Formatting Properties",
+        "Value",
+        "null"
+    ],
+    "pgnthaia": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnthaib": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnthaic": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnucltr": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnucrm": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnvieta": [
+        "Section Formatting Properties",
+        "Flag",
+        "null"
+    ],
+    "pgnx": [
+        "Section Formatting Properties",
+        "Value",
+        "null"
+    ],
+    "pgny": [
+        "Section Formatting Properties",
+        "Value",
+        "null"
+    ],
+    "pgnzodiac": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pgnzodiacd": [
+    "pgnzodiacd": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pgnzodiacl": [
+    "pgnzodiacl": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pgp": [
+    "pgp": [
         "Paragraph Group Properties",
         "Destination",
         "null"
     ],
-    "\\pgptbl": [
+    "pgptbl": [
         "Paragraph Group Properties",
         "Destination",
         "null"
     ],
-    "\\pgwsxn": [
+    "pgwsxn": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\phcol": [
+    "phcol": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\phmrg": [
+    "phmrg": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\phpg": [
+    "phpg": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\picbmp": [
+    "picbmp": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\picbpp": [
+    "picbpp": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\piccropb": [
+    "piccropb": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\piccropl": [
+    "piccropl": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\piccropr": [
+    "piccropr": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\piccropt": [
+    "piccropt": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\pich": [
+    "pich": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\pichgoal": [
+    "pichgoal": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\picprop": [
+    "picprop": [
         "Pictures",
         "Destination",
         "null"
     ],
-    "\\picscaled": [
+    "picscaled": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\picscalex": [
+    "picscalex": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\picscaley": [
+    "picscaley": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\pict": [
+    "pict": [
         "Pictures",
         "Destination",
         "null"
     ],
-    "\\picw": [
+    "picw": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\picwgoal": [
+    "picwgoal": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\plain": [
+    "plain": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\pmmetafile": [
+    "pmmetafile": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\pn": [
+    "pn": [
         "Bullets and Numbering",
         "Destination",
         "null"
     ],
-    "\\pnacross": [
+    "pnacross": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnaiu": [
+    "pnaiu": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnaiud": [
+    "pnaiud": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnaiueo": [
+    "pnaiueo": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnaiueod": [
+    "pnaiueod": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnb": [
+    "pnb": [
         "Bullets and Numbering",
         "Toggle",
         "null"
     ],
-    "\\pnbidia": [
+    "pnbidia": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnbidib": [
+    "pnbidib": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pncaps": [
+    "pncaps": [
         "Bullets and Numbering",
         "Toggle",
         "null"
     ],
-    "\\pncard": [
+    "pncard": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pncf": [
+    "pncf": [
         "Bullets and Numbering",
         "Value",
         "null"
     ],
-    "\\pnchosung": [
+    "pnchosung": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pncnum": [
+    "pncnum": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndbnum": [
+    "pndbnum": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndbnumd": [
+    "pndbnumd": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndbnumk": [
+    "pndbnumk": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndbnuml": [
+    "pndbnuml": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndbnumt": [
+    "pndbnumt": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndec": [
+    "pndec": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pndecd": [
+    "pndecd": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnf": [
+    "pnf": [
         "Bullets and Numbering",
         "Value",
         "null"
     ],
-    "\\pnfs": [
+    "pnfs": [
         "Bullets and Numbering",
         "Value",
         "null"
     ],
-    "\\pnganada": [
+    "pnganada": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pngblip": [
+    "pngblip": [
         "Pictures",
         "Flag",
         "null"
     ],
-    "\\pngbnum": [
+    "pngbnum": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pngbnumd": [
+    "pngbnumd": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pngbnumk": [
+    "pngbnumk": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pngbnuml": [
+    "pngbnuml": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnhang": [
+    "pnhang": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pni": [
-        "Bullets and Numbering",
-        "Toggle",
-        "null"
-    ],
-    "\\pnindent": [
-        "Bullets and Numbering",
-        "Value",
-        "null"
-    ],
-    "\\pniroha": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnirohad": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnlcltr": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnlcrm": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnlvl": [
-        "Bullets and Numbering",
-        "Value",
-        "null"
-    ],
-    "\\pnlvlblt": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnlvlbody": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnlvlcont": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnnumonce": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnord": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnordt": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnprev": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnqc": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnql": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnqr": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnrauth": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrdate": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrestart": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnrnfc": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrnot": [
-        "Paragraph Text",
-        "Flag",
-        "null"
-    ],
-    "\\pnrpnbr": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrrgb": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrstart": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrstop": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnrxst": [
-        "Paragraph Text",
-        "Value",
-        "null"
-    ],
-    "\\pnscaps": [
+    "pni": [
         "Bullets and Numbering",
         "Toggle",
         "null"
     ],
-    "\\pnseclvl": [
-        "Bullets and Numbering",
-        "Destination",
-        "null"
-    ],
-    "\\pnsp": [
+    "pnindent": [
         "Bullets and Numbering",
         "Value",
         "null"
     ],
-    "\\pnstart": [
+    "pniroha": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnirohad": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnlcltr": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnlcrm": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnlvl": [
         "Bullets and Numbering",
         "Value",
         "null"
     ],
-    "\\pnstrike": [
-        "Bullets and Numbering",
-        "Toggle",
-        "null"
-    ],
-    "\\pntext": [
-        "Bullets and Numbering",
-        "Destination",
-        "null"
-    ],
-    "\\pntxta": [
-        "Bullets and Numbering",
-        "Destination",
-        "null"
-    ],
-    "\\pntxtb": [
-        "Bullets and Numbering",
-        "Destination",
-        "null"
-    ],
-    "\\pnucltr": [
+    "pnlvlblt": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnucrm": [
+    "pnlvlbody": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnul": [
-        "Bullets and Numbering",
-        "Toggle",
-        "null"
-    ],
-    "\\pnuld": [
+    "pnlvlcont": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnuldash": [
+    "pnnumonce": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnuldashd": [
+    "pnord": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnuldashdd": [
+    "pnordt": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnuldb": [
+    "pnprev": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnulhair": [
+    "pnqc": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnulnone": [
+    "pnql": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnulth": [
+    "pnqr": [
         "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\pnulw": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnulwave": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnzodiac": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnzodiacd": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\pnzodiacl": [
-        "Bullets and Numbering",
-        "Flag",
-        "null"
-    ],
-    "\\posnegx": [
-        "Positioned Objects and Frames",
+    "pnrauth": [
+        "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\posnegy": [
-        "Positioned Objects and Frames",
+    "pnrdate": [
+        "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\posx": [
-        "Positioned Objects and Frames",
+    "pnrestart": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnrnfc": [
+        "Paragraph Text",
         "Value",
         "null"
     ],
-    "\\posxc": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posxi": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posxl": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posxo": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posxr": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posy": [
-        "Positioned Objects and Frames",
-        "Value",
-        "null"
-    ],
-    "\\posyb": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posyc": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posyil": [
-        "Positioned Objects and Frames",
-        "Flag",
-        "null"
-    ],
-    "\\posyin": [
+    "pnrnot": [
         "Paragraph Text",
         "Flag",
         "null"
     ],
-    "\\posyout": [
+    "pnrpnbr": [
         "Paragraph Text",
+        "Value",
+        "null"
+    ],
+    "pnrrgb": [
+        "Paragraph Text",
+        "Value",
+        "null"
+    ],
+    "pnrstart": [
+        "Paragraph Text",
+        "Value",
+        "null"
+    ],
+    "pnrstop": [
+        "Paragraph Text",
+        "Value",
+        "null"
+    ],
+    "pnrxst": [
+        "Paragraph Text",
+        "Value",
+        "null"
+    ],
+    "pnscaps": [
+        "Bullets and Numbering",
+        "Toggle",
+        "null"
+    ],
+    "pnseclvl": [
+        "Bullets and Numbering",
+        "Destination",
+        "null"
+    ],
+    "pnsp": [
+        "Bullets and Numbering",
+        "Value",
+        "null"
+    ],
+    "pnstart": [
+        "Bullets and Numbering",
+        "Value",
+        "null"
+    ],
+    "pnstrike": [
+        "Bullets and Numbering",
+        "Toggle",
+        "null"
+    ],
+    "pntext": [
+        "Bullets and Numbering",
+        "Destination",
+        "null"
+    ],
+    "pntxta": [
+        "Bullets and Numbering",
+        "Destination",
+        "null"
+    ],
+    "pntxtb": [
+        "Bullets and Numbering",
+        "Destination",
+        "null"
+    ],
+    "pnucltr": [
+        "Bullets and Numbering",
         "Flag",
         "null"
     ],
-    "\\posyt": [
+    "pnucrm": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnul": [
+        "Bullets and Numbering",
+        "Toggle",
+        "null"
+    ],
+    "pnuld": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnuldash": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnuldashd": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnuldashdd": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnuldb": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnulhair": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnulnone": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnulth": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnulw": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnulwave": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnzodiac": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnzodiacd": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "pnzodiacl": [
+        "Bullets and Numbering",
+        "Flag",
+        "null"
+    ],
+    "posnegx": [
+        "Positioned Objects and Frames",
+        "Value",
+        "null"
+    ],
+    "posnegy": [
+        "Positioned Objects and Frames",
+        "Value",
+        "null"
+    ],
+    "posx": [
+        "Positioned Objects and Frames",
+        "Value",
+        "null"
+    ],
+    "posxc": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\prcolbl": [
+    "posxi": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posxl": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posxo": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posxr": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posy": [
+        "Positioned Objects and Frames",
+        "Value",
+        "null"
+    ],
+    "posyb": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posyc": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posyil": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "posyin": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "posyout": [
+        "Paragraph Text",
+        "Flag",
+        "null"
+    ],
+    "posyt": [
+        "Positioned Objects and Frames",
+        "Flag",
+        "null"
+    ],
+    "prcolbl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\printdata": [
+    "printdata": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\printim": [
+    "printim": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\private": [
+    "private": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\propname": [
+    "propname": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\proptype": [
+    "proptype": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\protend": [
+    "protend": [
         "Protection Exceptions",
         "Destination",
         "null"
     ],
-    "\\protlevel": [
+    "protlevel": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\protstart": [
+    "protstart": [
         "Protection Exceptions",
         "Destination",
         "null"
     ],
-    "\\protusertbl": [
+    "protusertbl": [
         "User Protection Information",
         "Destination",
         "null"
     ],
-    "\\psover": [
+    "psover": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\psz": [
+    "psz": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\pubauto": [
+    "pubauto": [
         "Macintosh Edition Manager Publisher Objects",
         "Flag",
         "null"
     ],
-    "\\pvmrg": [
+    "pvmrg": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\pvpara": [
+    "pvpara": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\pvpg": [
+    "pvpg": [
         "Positioned Objects and Frames",
         "Flag",
         "null"
     ],
-    "\\pwd": [
+    "pwd": [
         "Control Words Introduced bv Other Microsoft Products",
         "Destination",
         "null"
     ],
-    "\\pxe": [
+    "pxe": [
         "Index Entries",
         "Destination",
         "null"
     ],
-    "\\qc": [
+    "qc": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qd": [
+    "qd": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qj": [
+    "qj": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qk": [
+    "qk": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qi": [
+    "qi": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qmspace": [
+    "qmspace": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\qr": [
+    "qr": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\qt": [
+    "qt": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rawbgdkbdiag": [
+    "rawbgdkbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgbdiag": [
+    "rawclbgbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgcross": [
+    "rawclbgcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdcross": [
+    "rawclbgdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdkcross": [
+    "rawclbgdkcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdkdcross": [
+    "rawclbgdkdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdkfdiag": [
+    "rawclbgdkfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdkhor": [
+    "rawclbgdkhor": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgdkvert": [
+    "rawclbgdkvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgfdiag": [
+    "rawclbgfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbghoriz": [
+    "rawclbghoriz": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rawclbgvert": [
+    "rawclbgvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rdblquote": [
+    "rdblquote": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\readprot": [
+    "readprot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\red": [
+    "red": [
         "Color Table",
         "Value",
         "null"
     ],
-    "\\relyonvml": [
+    "relyonvml": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\rempersonalinfo": [
+    "rempersonalinfo": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\result": [
+    "result": [
         "Objects",
         "Destination",
         "null"
     ],
-    "\\revauth": [
+    "revauth": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\revauthdel": [
+    "revauthdel": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\revbar": [
+    "revbar": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\revdttm": [
+    "revdttm": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\revdttmdel": [
+    "revdttmdel": [
         "Character Text",
         "Value",
         "null"
     ],
-    "\\revised": [
+    "revised": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\revisions": [
+    "revisions": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\revprop": [
+    "revprop": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\revprot": [
+    "revprot": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\revtbl": [
+    "revtbl": [
         "Track Changes",
         "Destination",
         "null"
     ],
-    "\\revtim": [
+    "revtim": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\ri": [
+    "ri": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\rin": [
+    "rin": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\row": [
+    "row": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\rquote": [
+    "rquote": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\rsid": [
+    "rsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\rsidroot": [
+    "rsidroot": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\rsidtbl": [
+    "rsidtbl": [
         "Track Changes (Revision Marks)",
         "Destination",
         "null"
     ],
-    "\\rsltbmp": [
+    "rsltbmp": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rslthtml": [
+    "rslthtml": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rsltmerge": [
+    "rsltmerge": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rsltpict": [
+    "rsltpict": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rsltrtf": [
+    "rsltrtf": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rslttxt": [
+    "rslttxt": [
         "Objects",
         "Flag",
         "null"
     ],
-    "\\rtf": [
+    "rtf": [
         "RTF Version",
         "Destination",
         "null"
     ],
-    "\\rtlch": [
+    "rtlch": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rtldoc": [
+    "rtldoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rtlgutter": [
+    "rtlgutter": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rtlmark": [
+    "rtlmark": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\rtlpar": [
+    "rtlpar": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rtlrow": [
+    "rtlrow": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\rtlsect": [
+    "rtlsect": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\rxe": [
+    "rxe": [
         "Index Entries",
         "Destination",
         "null"
     ],
-    "\\s": [
+    "s": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sa": [
+    "sa": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\saauto": [
+    "saauto": [
         "Paragraph Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\saftnnalc": [
+    "saftnnalc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnar": [
+    "saftnnar": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnauc": [
+    "saftnnauc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnchi": [
+    "saftnnchi": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnchosung": [
+    "saftnnchosung": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnncnum": [
+    "saftnncnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnndbar": [
+    "saftnndbar": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnndbnum": [
+    "saftnndbnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnndbnumd": [
+    "saftnndbnumd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnndbnumk": [
+    "saftnndbnumk": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnndbnumt": [
+    "saftnndbnumt": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnganada": [
+    "saftnnganada": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnngbnum": [
+    "saftnngbnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnngbnumd": [
+    "saftnngbnumd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnngbnumk": [
+    "saftnngbnumk": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnngbnuml": [
+    "saftnngbnuml": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnrlc": [
+    "saftnnrlc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnruc": [
+    "saftnnruc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnzodiac": [
+    "saftnnzodiac": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnzodiacd": [
+    "saftnnzodiacd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnnzodiacl": [
+    "saftnnzodiacl": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnrestart": [
+    "saftnrestart": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnrstcont": [
+    "saftnrstcont": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\saftnstart": [
+    "saftnstart": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sautoupd": [
+    "sautoupd": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\sb": [
+    "sb": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sbasedon": [
+    "sbasedon": [
         "Style Sheet",
         "Value",
         "null"
     ],
-    "\\sbauto": [
+    "sbauto": [
         "Paragraph Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\sbkcol": [
+    "sbkcol": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sbkeven": [
+    "sbkeven": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sbknone": [
+    "sbknone": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sbkodd": [
+    "sbkodd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sbkpage": [
+    "sbkpage": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sbys": [
+    "sbys": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\scaps": [
+    "scaps": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\scompose": [
+    "scompose": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\sec": [
+    "sec": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\sect": [
+    "sect": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\sectd": [
+    "sectd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sectdefaultcl": [
+    "sectdefaultcl": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sectexpand": [
+    "sectexpand": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sectlinegrid": [
+    "sectlinegrid": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sectnum": [
+    "sectnum": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\sectrsid": [
+    "sectrsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\sectspecifycl": [
+    "sectspecifycl": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sectspecifygen": [
+    "sectspecifygen": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sectspecifyl": [
+    "sectspecifyl": [
         "Section Formatting Properties",
         "Value",
         "null"
     ],
-    "\\sectunlocked": [
+    "sectunlocked": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnbj": [
+    "sftnbj": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnalc": [
+    "sftnnalc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnar": [
+    "sftnnar": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnauc": [
+    "sftnnauc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnchi": [
+    "sftnnchi": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnchosung": [
+    "sftnnchosung": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnncnum": [
+    "sftnncnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnndbar": [
+    "sftnndbar": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnndbnum": [
+    "sftnndbnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnndbnumd": [
+    "sftnndbnumd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnndbnumk": [
+    "sftnndbnumk": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnndbnumt": [
+    "sftnndbnumt": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnganada": [
+    "sftnnganada": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnngbnum": [
+    "sftnngbnum": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnngbnumd": [
+    "sftnngbnumd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnngbnumk": [
+    "sftnngbnumk": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnngbnuml": [
+    "sftnngbnuml": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnrlc": [
+    "sftnnrlc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnruc": [
+    "sftnnruc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnzodiac": [
+    "sftnnzodiac": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnzodiacd": [
+    "sftnnzodiacd": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnnzodiacl": [
+    "sftnnzodiacl": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnrestart": [
+    "sftnrestart": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnrstcont": [
+    "sftnrstcont": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnrstpg": [
+    "sftnrstpg": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftnstart": [
+    "sftnstart": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sftntj": [
+    "sftntj": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\shad": [
+    "shad": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\shading": [
+    "shading": [
         "Paragraph Shading",
         "Value",
         "null"
     ],
-    "\\shidden": [
+    "shidden": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\shift": [
+    "shift": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\shpbottom": [
+    "shpbottom": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpbxcolumn": [
+    "shpbxcolumn": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbxignore": [
+    "shpbxignore": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbxmargin": [
+    "shpbxmargin": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbxpage": [
+    "shpbxpage": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbyignore": [
+    "shpbyignore": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbymargin": [
+    "shpbymargin": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbypage": [
+    "shpbypage": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpbypara": [
+    "shpbypara": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shpfblwtxt": [
+    "shpfblwtxt": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpfhdr": [
+    "shpfhdr": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpgrp": [
+    "shpgrp": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpleft": [
+    "shpleft": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shplid": [
+    "shplid": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shplockanchor": [
+    "shplockanchor": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Flag",
         "null"
     ],
-    "\\shppict": [
+    "shppict": [
         "Pictures",
         "Destination",
         "null"
     ],
-    "\\shpright": [
+    "shpright": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shprslt": [
+    "shprslt": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shptop": [
+    "shptop": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shptxt": [
+    "shptxt": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpwrk": [
+    "shpwrk": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpwr": [
+    "shpwr": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\shpz": [
+    "shpz": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Value",
         "null"
     ],
-    "\\sl": [
+    "sl": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\slink": [
+    "slink": [
         "Style Sheet",
         "Value",
         "null"
     ],
-    "\\slmult": [
+    "slmult": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\slocked": [
+    "slocked": [
         "Style Sheet",
         "Flagged",
         "null"
     ],
-    "\\snaptogridincell": [
+    "snaptogridincell": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\snext": [
+    "snext": [
         "Style Sheet",
         "Value",
         "null"
     ],
-    "\\softcol": [
+    "softcol": [
         "Special Characters",
         "Flag",
         "null"
     ],
-    "\\softlheight": [
+    "softlheight": [
         "Special Characters",
         "Value",
         "null"
     ],
-    "\\softline": [
+    "softline": [
         "Special Characters",
         "Flag",
         "null"
     ],
-    "\\softpage": [
+    "softpage": [
         "Special Characters",
         "Flag",
         "null"
     ],
-    "\\spersonal": [
+    "spersonal": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\splytwnine": [
+    "splytwnine": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sprsbsp": [
+    "sprsbsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sprslnsp": [
+    "sprslnsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sprsspbf": [
+    "sprsspbf": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sprstsm": [
+    "sprstsm": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sprstsp": [
+    "sprstsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\spv": [
+    "spv": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\sreply": [
+    "sreply": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\ssemihidden": [
+    "ssemihidden": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\staticval": [
+    "staticval": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\stextflow": [
+    "stextflow": [
         "Section Text",
         "Value",
         "null"
     ],
-    "\\strike": [
+    "strike": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\strikedl": [
+    "strikedl": [
         "Character Text",
         "Toggle",
         "null"
     ],
-    "\\stshfbi": [
+    "stshfbi": [
         "Default Fonts",
         "Value",
         "null"
     ],
-    "\\stshfdbch": [
+    "stshfdbch": [
         "Default Fonts",
         "Value",
         "null"
     ],
-    "\\stshfhich": [
+    "stshfhich": [
         "Default Fonts",
         "Value",
         "null"
     ],
-    "\\stshfloch": [
+    "stshfloch": [
         "Default Fonts",
         "Value",
         "null"
     ],
-    "\\stylelock": [
+    "stylelock": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\stylelockbackcomp": [
+    "stylelockbackcomp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\stylelockenforced": [
+    "stylelockenforced": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\stylesheet": [
+    "stylesheet": [
         "Style Sheet",
         "Destination",
         "null"
     ],
-    "\\styrsid": [
+    "styrsid": [
         "Track Changes (Revision Marks)",
         "Value",
         "null"
     ],
-    "\\sub": [
+    "sub": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\subdocument": [
+    "subdocument": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\subfontbysize": [
+    "subfontbysize": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\subject": [
+    "subject": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\super": [
+    "super": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\svb": [
+    "svb": [
         "Word through Word RTF for Drawing Objects (Shades)",
         "Destination",
         "null"
     ],
-    "\\swpbdr": [
+    "swpbdr": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\tab": [
+    "tab": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\tabsnoovrlp": [
+    "tabsnoovrlp": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\taprtl": [
+    "taprtl": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tb": [
+    "tb": [
         "Tabs",
         "Value",
         "null"
     ],
-    "\\tbllkbestfit": [
+    "tbllkbestfit": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkborder": [
+    "tbllkborder": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkcolor": [
+    "tbllkcolor": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkfont": [
+    "tbllkfont": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkhdrcols": [
+    "tbllkhdrcols": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkhdrrows": [
+    "tbllkhdrrows": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllklastcol": [
+    "tbllklastcol": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllklastrow": [
+    "tbllklastrow": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tbllkshading": [
+    "tbllkshading": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tblrsid": [
+    "tblrsid": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tc": [
+    "tc": [
         "Table of Contents Entries",
         "Destination",
         "null"
     ],
-    "\\tcelld": [
+    "tcelld": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tcf": [
+    "tcf": [
         "Table of Contents Entries",
         "Value",
         "null"
     ],
-    "\\tcl": [
+    "tcl": [
         "Table of Contents Entries",
         "Value",
         "null"
     ],
-    "\\tcn": [
+    "tcn": [
         "Table of Contents Entries",
         "Flag",
         "null"
     ],
-    "\\tdfrmtxtBottom": [
+    "tdfrmtxtBottom": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\tdfrmtxtLeft": [
+    "tdfrmtxtLeft": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\tdfrmtxtRight": [
+    "tdfrmtxtRight": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\tdfrmtxtTop": [
+    "tdfrmtxtTop": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\template": [
+    "template": [
         "Document Formatting Properties",
         "Destination",
         "null"
     ],
-    "\\time": [
+    "time": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\title": [
+    "title": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\titlepg": [
+    "titlepg": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\tldot": [
+    "tldot": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tleq": [
+    "tleq": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tlhyph": [
+    "tlhyph": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tlmdot": [
+    "tlmdot": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tlth": [
+    "tlth": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tlul": [
+    "tlul": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\toplinepunct": [
+    "toplinepunct": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\tphcol": [
+    "tphcol": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tphmrg": [
+    "tphmrg": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tphpg": [
+    "tphpg": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposnegx": [
-        "Table Definitions",
-        "Value",
-        "null"
-    ],
-    "\\tposnegy": [
+    "tposnegx": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\tposxc": [
-        "Table Definitions",
-        "Flag",
-        "null"
-    ],
-    "\\tposxi": [
-        "Table Definitions",
-        "Flag",
-        "null"
-    ],
-    "\\tposxl": [
-        "Table Definitions",
-        "Flag",
-        "null"
-    ],
-    "\\tposX": [
+    "tposnegy": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\tposxo": [
+    "tposxc": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposxr": [
+    "tposxi": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposy": [
+    "tposxl": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyb": [
+    "tposX": [
+        "Table Definitions",
+        "Value",
+        "null"
+    ],
+    "tposxo": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyc": [
+    "tposxr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyil": [
+    "tposy": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyin": [
+    "tposyb": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyoutv": [
+    "tposyc": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tposyt": [
+    "tposyil": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tpvmrg": [
+    "tposyin": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tpvpara": [
+    "tposyoutv": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tpvpg": [
+    "tposyt": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\tqc": [
+    "tpvmrg": [
+        "Table Definitions",
+        "Flag",
+        "null"
+    ],
+    "tpvpara": [
+        "Table Definitions",
+        "Flag",
+        "null"
+    ],
+    "tpvpg": [
+        "Table Definitions",
+        "Flag",
+        "null"
+    ],
+    "tqc": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tqdec": [
+    "tqdec": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\tqr": [
+    "tqr": [
         "Tabs",
         "Flag",
         "null"
     ],
-    "\\transmf": [
+    "transmf": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\trauth": [
+    "trauth": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trautofit": [
+    "trautofit": [
         "Table Definitions",
         "Toggle",
         "null"
     ],
-    "\\trbgbdiag": [
+    "trbgbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgcross": [
+    "trbgcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdcross": [
+    "trbgdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkbdiag": [
+    "trbgdkbdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkcross": [
+    "trbgdkcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkdcross": [
+    "trbgdkdcross": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkfdiag": [
+    "trbgdkfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkhor": [
+    "trbgdkhor": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgdkvert": [
+    "trbgdkvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgfdiag": [
+    "trbgfdiag": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbghoriz": [
+    "trbghoriz": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbgvert": [
+    "trbgvert": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrb": [
+    "trbrdrb": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrh": [
+    "trbrdrh": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrl": [
+    "trbrdrl": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrr": [
+    "trbrdrr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrt": [
+    "trbrdrt": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trbrdrv": [
+    "trbrdrv": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trcbpat": [
+    "trcbpat": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trcfpat": [
+    "trcfpat": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trdate": [
+    "trdate": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trftsWidthA": [
+    "trftsWidthA": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trftsWidthB": [
+    "trftsWidthB": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trftsWidth": [
+    "trftsWidth": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trgaph": [
+    "trgaph": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trhdr": [
+    "trhdr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trkeep": [
+    "trkeep": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trleft": [
+    "trleft": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trowd": [
+    "trowd": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trpaddb": [
+    "trpaddb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddfb": [
+    "trpaddfb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddfl": [
+    "trpaddfl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddfr": [
+    "trpaddfr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddft": [
+    "trpaddft": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddl": [
+    "trpaddl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpaddr": [
+    "trpaddr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trappdt": [
+    "trappdt": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trpat": [
+    "trpat": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trqc": [
+    "trqc": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trql": [
+    "trql": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trqr": [
+    "trqr": [
         "Table Definitions",
         "Flag",
         "null"
     ],
-    "\\trrh": [
+    "trrh": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trshdng": [
+    "trshdng": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdb": [
+    "trspdb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdfb": [
+    "trspdfb": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdfl": [
+    "trspdfl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdfr": [
+    "trspdfr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdft": [
+    "trspdft": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdl": [
+    "trspdl": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdr": [
+    "trspdr": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trspdt": [
+    "trspdt": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\truncatefontheight": [
+    "truncatefontheight": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\trwWidthA": [
+    "trwWidthA": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trwWidthB": [
+    "trwWidthB": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\trwWidth": [
+    "trwWidth": [
         "Table Definitions",
         "Value",
         "null"
     ],
-    "\\ts": [
+    "ts": [
         "Style Sheet",
         "Value",
         "null"
     ],
-    "\\tsbgbdiag": [
+    "tsbgbdiag": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgcross": [
+    "tsbgcross": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdcross": [
+    "tsbgdcross": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkbdiag": [
+    "tsbgdkbdiag": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkcross": [
+    "tsbgdkcross": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkdcross": [
+    "tsbgdkdcross": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkfdiag": [
+    "tsbgdkfdiag": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkhor": [
+    "tsbgdkhor": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgdkvert": [
+    "tsbgdkvert": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgfdiag": [
+    "tsbgfdiag": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbghoriz": [
+    "tsbghoriz": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbgvert": [
+    "tsbgvert": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrb": [
+    "tsbrdrb": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrdgl": [
+    "tsbrdrdgl": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrdgr": [
+    "tsbrdrdgr": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrh": [
+    "tsbrdrh": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrl": [
+    "tsbrdrl": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrr": [
+    "tsbrdrr": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrt": [
+    "tsbrdrt": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsbrdrv": [
+    "tsbrdrv": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandhorzeven": [
+    "tscbandhorzeven": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandhorzodd": [
+    "tscbandhorzodd": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandsh": [
+    "tscbandsh": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandsv": [
+    "tscbandsv": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandverteven": [
+    "tscbandverteven": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscbandvertodd": [
+    "tscbandvertodd": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscellcbpat": [
+    "tscellcbpat": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellcfpat": [
+    "tscellcfpat": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddb": [
+    "tscellpaddb": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddfb": [
+    "tscellpaddfb": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddfl": [
+    "tscellpaddfl": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddfr": [
+    "tscellpaddfr": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddft": [
+    "tscellpaddft": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddl": [
+    "tscellpaddl": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddr": [
+    "tscellpaddr": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpaddt": [
+    "tscellpaddt": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellpct": [
+    "tscellpct": [
         "Table Styles",
         "Value",
         "null"
     ],
-    "\\tscellwidth": [
+    "tscellwidth": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscellwidthfts": [
+    "tscellwidthfts": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscfirstcol": [
+    "tscfirstcol": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscfirstrow": [
+    "tscfirstrow": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsclastcol": [
+    "tsclastcol": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsclastrow": [
+    "tsclastrow": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscnecell": [
+    "tscnecell": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscnwcell": [
+    "tscnwcell": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscsecell": [
+    "tscsecell": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tscswcell": [
+    "tscswcell": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsd": [
+    "tsd": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsnowrap": [
+    "tsnowrap": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsrowd": [
+    "tsrowd": [
         "Style Sheet",
         "Flag",
         "null"
     ],
-    "\\tsvertalb": [
+    "tsvertalb": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsvertalc": [
+    "tsvertalc": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\tsvertalt": [
+    "tsvertalt": [
         "Table Styles",
         "Flag",
         "null"
     ],
-    "\\twoonone": [
+    "twoonone": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\tx": [
+    "tx": [
         "Tabs",
         "Value",
         "null"
     ],
-    "\\txe": [
+    "txe": [
         "Index Entries",
         "Destination",
         "null"
     ],
-    "\\uc": [
+    "uc": [
         "Unicode RTF",
         "Value",
         "null"
     ],
-    "\\ud": [
+    "ud": [
         "Unicode RTF",
         "Destination",
         "null"
     ],
-    "\\ul": [
+    "ul": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulc": [
+    "ulc": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\uld": [
+    "uld": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\uldash": [
+    "uldash": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\uldashd": [
+    "uldashd": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\uldashdd": [
+    "uldashdd": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\uldb": [
+    "uldb": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulhair": [
+    "ulhair": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulhwave": [
+    "ulhwave": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulldash": [
+    "ulldash": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulnone": [
+    "ulnone": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ulth": [
+    "ulth": [
         "Character Text",
         "Toggle",
         "null"
     ],
-    "\\ulthd": [
+    "ulthd": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulthdash": [
+    "ulthdash": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulthdashd": [
+    "ulthdashd": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulthdashdd": [
+    "ulthdashdd": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulthldash": [
+    "ulthldash": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ululdbwave": [
+    "ululdbwave": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\ulw": [
+    "ulw": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\ulwave": [
+    "ulwave": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\u": [
+    "u": [
         "Unicode RTF",
         "Value",
         "null"
     ],
-    "\\up": [
+    "up": [
         "Font (Character) Formatting Properties",
         "Value",
         "null"
     ],
-    "\\upr": [
+    "upr": [
         "Unicode RTF",
         "Destination",
         "null"
     ],
-    "\\urtf": [
+    "urtf": [
         "Control Words Introduced bv Other Microsoft Products",
         "Destination",
         "null"
     ],
-    "\\useltbaln": [
+    "useltbaln": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\userprops": [
+    "userprops": [
         "Information Group",
         "Destination",
         "null"
     ],
-    "\\v": [
+    "v": [
         "Font (Character) Formatting Properties",
         "Toggle",
         "null"
     ],
-    "\\vern": [
+    "vern": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\version": [
+    "version": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\vertalb": [
+    "vertalb": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\vertalc": [
+    "vertalc": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\vertalj": [
+    "vertalj": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\vertalt": [
+    "vertalt": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\vertdoc": [
+    "vertdoc": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\vertsect": [
+    "vertsect": [
         "Section Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\viewbksp": [
+    "viewbksp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\viewkind": [
+    "viewkind": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\viewnobound": [
+    "viewnobound": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\viewscale": [
+    "viewscale": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\viewzk": [
+    "viewzk": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\wbitmap": [
+    "wbitmap": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\wbmbitspixel": [
+    "wbmbitspixel": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\wbmplanes": [
+    "wbmplanes": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\wbmwidthbytes": [
+    "wbmwidthbytes": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\webhidden": [
+    "webhidden": [
         "Font (Character) Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\widctlpar": [
+    "widctlpar": [
         "Paragraph Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\widowctrl": [
+    "widowctrl": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\windowcaption": [
+    "windowcaption": [
         "Document Formatting Properties",
         "Value",
         "null"
     ],
-    "\\wmetafile": [
+    "wmetafile": [
         "Pictures",
         "Value",
         "null"
     ],
-    "\\wpeqn": [
+    "wpeqn": [
         "Fields",
         "Flag",
         "null"
     ],
-    "\\wpjst": [
+    "wpjst": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\wpsp": [
+    "wpsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\wraptrsp": [
+    "wraptrsp": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\wrppunct": [
+    "wrppunct": [
         "Document Formatting Properties",
         "Flag",
         "null"
     ],
-    "\\xe": [
+    "xe": [
         "Index Entries",
         "Destination",
         "null"
     ],
-    "\\xef": [
+    "xef": [
         "Index Entries",
         "Value",
         "null"
     ],
-    "\\yr": [
+    "yr": [
         "Information Group",
         "Value",
         "null"
     ],
-    "\\yts": [
+    "yts": [
         "Paragraph Formatting Properties",
         "Value",
         "null"
     ],
-    "\\yxe": [
+    "yxe": [
         "Index Entries",
         "Flag",
         "null"
     ],
-    "\\zwbo": [
+    "zwbo": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\zwj": [
+    "zwj": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\zwnbo": [
+    "zwnbo": [
         "Special Characters",
         "Symbol",
         "null"
     ],
-    "\\zwnj": [
+    "zwnj": [
         "Special Characters",
         "Symbol",
         "null"
