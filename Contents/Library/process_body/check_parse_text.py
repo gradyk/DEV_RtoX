@@ -36,56 +36,19 @@ import left_bracket_text
 import check_text
 
 
-def check_string_manager(parse_text: str, num_lines: int,
-                         line_to_parse: int, parse_index: int,
-                         working_input_file: str, debug_dir: str,
-                         control_word_dict: str, group_dict: dict) -> None:
+def check_string_manager(processing_dict: dict) -> None:
 
-    if line_to_parse > num_lines:
+    if processing_dict["line_to_parse"] > processing_dict["num_lines"]:
+        # TODO This will actually go to modules that will close out the program.
         sys.exit()
     else:
         # Checks for an RTF group.
-        check_group.processor(parse_text=parse_text,
-                              line_to_parse=line_to_parse,
-                              parse_index=parse_index,
-                              group_dict=group_dict,
-                              working_input_file=working_input_file,
-                              debug_dir=debug_dir,
-                              control_word_dict=control_word_dict,
-                              num_lines=num_lines)
+        check_group.processor(processing_dict=processing_dict)
         # Checks for a backslash that should be treated as text.
-        backslash_text.processor(parse_text=parse_text,
-                                 line_to_parse=line_to_parse,
-                                 parse_index=parse_index,
-                                 working_input_file=working_input_file,
-                                 debug_dir=debug_dir,
-                                 control_word_dict=control_word_dict,
-                                 num_lines=num_lines,
-                                 group_dict=group_dict)
+        backslash_text.processor(processing_dict=processing_dict)
         # Checks for a left bracket that should be treated as text.
-        left_bracket_text.processor(parse_text=parse_text,
-                                    line_to_parse=line_to_parse,
-                                    parse_index=parse_index,
-                                    working_input_file=working_input_file,
-                                    debug_dir=debug_dir,
-                                    control_word_dict=control_word_dict,
-                                    num_lines=num_lines,
-                                    group_dict=group_dict)
+        left_bracket_text.processor(processing_dict=processing_dict)
         # Checks for a control word or destination.
-        control_word.processor(parse_text=parse_text,
-                               line_to_parse=line_to_parse,
-                               parse_index=parse_index,
-                               working_input_file=working_input_file,
-                               debug_dir=debug_dir,
-                               control_word_dict=control_word_dict,
-                               num_lines=num_lines,
-                               group_dict=group_dict)
+        control_word.processor(processing_dict=processing_dict)
         # Checks for text.
-        check_text.processor(parse_text=parse_text,
-                             line_to_parse=line_to_parse,
-                             parse_index=parse_index,
-                             working_input_file=working_input_file,
-                             debug_dir=debug_dir,
-                             control_word_dict=control_word_dict,
-                             num_lines=num_lines,
-                             group_dict=group_dict)
+        check_text.processor(processing_dict=processing_dict)

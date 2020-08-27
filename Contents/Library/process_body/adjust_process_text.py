@@ -21,16 +21,16 @@
 import linecache
 
 
-def text_metric_reset(working_input_file: str, parse_index: int,
-                      line_to_parse: int, parse_text: str) -> tuple:
-    length = len(parse_text)
+def text_metric_reset(processing_dict: dict) -> dict:
+    length = len(processing_dict["parse_text"])
     if length <= 2:
-        line_to_parse += 1
-        line = linecache.getline(working_input_file, line_to_parse).rstrip("\n")
-        parse_text = parse_text + line
-        parse_index = 0
-        return parse_text, line_to_parse, parse_index
+        line_to_parse_update = processing_dict["line_to_parse"] + 1
+        processing_dict["line_to_parse"] = line_to_parse_update
+        line = linecache.getline(processing_dict["working_input_file"],
+                                 processing_dict["line_to_parse"]).rstrip("\n")
+        parse_text_update = processing_dict["parse_text"] + line
+        processing_dict["parse_text"] = parse_text_update
+        processing_dict["parse_index"] = 0
+        return processing_dict
     else:
-        # parse_text = parse_text[parse_index:]
-        # parse_index = 0
-        return parse_text, line_to_parse, parse_index
+        return processing_dict

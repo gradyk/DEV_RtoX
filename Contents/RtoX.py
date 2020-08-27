@@ -1,4 +1,4 @@
-#!/Library/Frameworks/Python.framework/Versions/3.8/bin/python3
+#!/usr/local/bin
 # -*- coding: utf-8 -*-
 #
 #  Copyright (c) 2020. Kenneth A. Grady
@@ -45,6 +45,7 @@ from process_body.doc_parser import MainDocManager
 if __name__ == "__main__":
     # TODO Add garbage module as last run module to clean out debugdir and do
     #  any other necessary cleanup, instead of doing cleanup here.
+    # TODO Sort control_word_dict as part of end of program cleanup.
     debugdir_clean.cleaner()
 
     # Get and store configuration information.
@@ -58,7 +59,7 @@ if __name__ == "__main__":
             config_file=config_file)
 
     # Get the user's preference for XML tag style.
-    xml_tag_num = prepare_to_process.extract_users_xml_tag_style(
+    tag_style_selector = prepare_to_process.extract_users_xml_tag_style(
         debug_dir=debug_dir)
 
     # Prepare working files.
@@ -92,7 +93,8 @@ if __name__ == "__main__":
             debug_dir=debug_dir,
             control_word_dict=control_word_dict))
 
-    # tag_dict = doc_parser.select_tag_dict(xml_tag_num=xml_tag_num)
+    # tag_dict = doc_parser.select_tag_dict(tag_style_selector=\
+    #   tag_style_selector)
     #
     # keyword_translation_stack, line_to_search = \
     #     doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
@@ -113,12 +115,12 @@ if __name__ == "__main__":
 
     # Close open tags where possible and produce list of remaining open tags.
     # tag_closer.tag_closer(debug_dir=debug_dir,
-    #                       xml_tag_num=xml_tag_num)
+    #                       tag_style_selector=tag_style_selector)
 
     # Do file clean up, post-processing, and put the renamed file in the
     # output directory.
     # final_step.final_step(debug_dir=debug_dir,
-    #                       xml_tag_num=xml_tag_num,
+    #                       tag_style_selector=tag_style_selector,
     #                       output_file_name=output_file_name,
     #                       base_script_dir=base_script_dir)
     # TODO Include in final step: 1) garbage cleanup, 2) copy

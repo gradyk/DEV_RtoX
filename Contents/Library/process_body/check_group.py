@@ -30,51 +30,27 @@ import logging
 import re
 
 # From local application
-import adjust_process_text
-import check_parse_text
+import build_group_contents_list
 import group_boundaries_capture_contents
-import group_contents
 
 
-def processor(parse_text: str, line_to_parse: int, parse_index: int,
-              group_dict: dict,
-              working_input_file: str, debug_dir: str,
-              control_word_dict: str, num_lines: int) -> None:
+def processor(processing_dict: dict) -> None:
     item = None
     try:
-        test = re.search(r"^{", parse_text)
+        test = re.search(r"^{", processing_dict["parse_text"])
         if test is not item:
-            group_info, key = group_boundaries_capture_contents. \
+            group_boundaries_capture_contents. \
                 define_boundaries_capture_contents(
-                    working_input_file=working_input_file,
-                    line_to_parse=line_to_parse,
-                    parse_index=parse_index)
+                    processing_dict=processing_dict)
 
-            group_contents.processor_settings(
-                group_info=group_info,
-                line_to_parse=line_to_parse, group_dict=group_dict,
-                working_input_file=working_input_file,
-                debug_dir=debug_dir, control_word_dict=control_word_dict,
-                num_lines=num_lines)
+            build_group_contents_list.pre_process(
+                processing_dict=processing_dict)
 
-            parse_text = parse_text.replace(group_info[key][0], "")
-            parse_index = 0
-
-            parse_text, line_to_parse, parse_index = \
-                adjust_process_text.text_metric_reset(
-                    working_input_file=working_input_file,
-                    parse_index=parse_index,
-                    line_to_parse=line_to_parse,
-                    parse_text=parse_text)
-            check_parse_text.check_string_manager(
-                parse_text=parse_text,
-                line_to_parse=line_to_parse,
-                parse_index=parse_index, working_input_file=working_input_file,
-                debug_dir=debug_dir, control_word_dict=control_word_dict,
-                num_lines=num_lines, group_dict=group_dict)
         else:
             pass
     except TypeError:
-        logging.exception(f"Check_group: {line_to_parse}:{parse_index}--"
-                          f"{parse_text}")
+        logging.exception(f"Check_group: "
+                          f"{processing_dict['line_to_parse']}:"
+                          f"{processing_dict['parse_index']}--"
+                          f"{processing_dict['parse_text']}")
         pass

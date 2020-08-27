@@ -31,111 +31,83 @@ from collections import deque
 
 # From local application
 import adjust_process_text
+import build_group_contents_list
 
 
-def define_boundaries_capture_contents(working_input_file: str,
-                                       line_to_parse: int,
-                                       parse_index: int) -> tuple:
+def define_boundaries_capture_contents(processing_dict: dict) -> None:
     """ Define the boundaries of an RTF table or group, while capturing
     the contents of the table or group. """
-    group_contents = ""
-    parse_text = linecache.getline(working_input_file, line_to_parse)
-    parse_text = parse_text.rstrip("\n").rstrip(" ")
-    working_index = parse_index
+    processing_dict["group_contents"] = ""
+    deck = deque()
+    working_index = processing_dict["parse_index"]
+    decklength = 1
+    boundary_master(
+        decklength=decklength, deck=deck,
+        processing_dict=processing_dict,
+        working_index=working_index)
 
-    if working_index > (len(parse_text) - 2):
-        parse_text, line_to_parse, working_index = \
-            adjust_process_text.text_metric_reset(
-                working_input_file=working_input_file,
-                line_to_parse=line_to_parse,
-                parse_index=working_index)
+
+def boundary_master(decklength: int, working_index: int,
+                    processing_dict: dict, deck):
+    while decklength != 0:
+
+        processing_dict, decklength = boundary_test(
+            working_index=working_index, deck=deck,
+            processing_dict=processing_dict,
+            decklength=decklength)
+
+        processing_dict["line_to_parse"] = processing_dict["line_to_parse"] + 1
+        processing_dict["parse_index"] = processing_dict["group_end_index"]
+
+    build_group_contents_list.pre_process(
+        processing_dict=processing_dict)
+
+
+def boundary_test(processing_dict: dict, working_index: int, deck,
+                  decklength: int) -> tuple:
+    processing_dict["parse_text"] = linecache.getline(
+        processing_dict["working_input_file"], processing_dict["line_to_parse"])
+    processing_dict["parse_text"] = \
+        processing_dict["parse_text"].rstrip("\n").rstrip(" ")
+    processing_dict["parse_text"] = \
+        processing_dict["parse_text"][working_index:]
+    length = len(processing_dict["parse_text"])
+
+    if working_index > length - 2:
+        processing_dict = adjust_process_text.text_metric_reset(
+            processing_dict=processing_dict)
     else:
         pass
 
-    deck = deque()
+    while working_index < length:
 
-    while working_index < len(parse_text):
-
-        if parse_text[working_index] == "{":
-            deck.append(parse_text[working_index])
-            group_contents = group_contents + parse_text[working_index]
+        if processing_dict["parse_text"][working_index] == "{":
+            deck.append(processing_dict["parse_text"][working_index])
+            processing_dict["group_contents"] = \
+                processing_dict["group_contents"] + \
+                processing_dict["parse_text"][working_index]
             working_index += 1
-        elif parse_text[working_index] == "}":
-            group_contents = group_contents + parse_text[working_index]
+            decklength = len(deck)
+        elif processing_dict["parse_text"][working_index] == "}":
+            processing_dict["group_contents"] = \
+                processing_dict["group_contents"] + \
+                processing_dict["parse_text"][working_index]
             deck.popleft()
 
-            if not deck:  # If deck is empty ...
-                group_end_line = line_to_parse
-                group_end_index = working_index + 1
-                key_list = [str(line_to_parse), "_", str(parse_index)]
-                key = ''.join(key_list)
-                group_info = {key:
-                              [group_contents,
-                               line_to_parse,
-                               parse_index,
-                               group_end_line,
-                               group_end_index]}
-                return group_info, key
+            decklength = len(deck)
+            if decklength == 0:  # If deck is empty ...
+                processing_dict["group_end_line"] = \
+                    processing_dict["line_to_parse"]
+                processing_dict["group_end_index"] = working_index + 1
+                boundary_master(decklength=decklength, deck=deck,
+                                processing_dict=processing_dict,
+                                working_index=working_index)
             else:
                 working_index += 1
         else:
-            group_contents = group_contents + parse_text[working_index]
+            processing_dict["group_contents"] = \
+                processing_dict["group_contents"] + \
+                processing_dict["parse_text"][working_index]
             working_index += 1
             pass
-
-    tracker = line_to_parse + 1
-
-    working_index = 0
-    line_to_parse = tracker
-    parse_text = linecache.getline(working_input_file, line_to_parse)
-    parse_text = parse_text.rstrip("\n").rstrip(" ")
-    parse_text = parse_text[working_index:]
-
-    while working_index < len(parse_text):
-
-        if parse_text[working_index] == "{":
-            deck.append(parse_text[parse_index])
-
-        elif parse_text[working_index] == "}":
-            group_contents = group_contents + parse_text[working_index]
-            deck.popleft()
-
-            if not deck:  # If deck is empty ...
-                group_end_line = line_to_parse
-
-                if parse_text[working_index] == " ":
-                    group_end_index = working_index + 2
-                    working_index += 2
-                else:
-                    group_end_index = working_index + 1
-                    working_index += 1
-                key_list = [str(line_to_parse), "_", str(parse_index)]
-                key = ''.join(key_list)
-                group_info = {key:
-                              [group_contents,
-                               line_to_parse,
-                               parse_index,
-                               group_end_line,
-                               group_end_index]}
-
-                return group_info, key
-        else:
-            pass
-
-        group_contents = group_contents + parse_text[working_index]
-        working_index += 1
-
-    tracker += 1
-
-    group_end_line = line_to_parse
-    group_end_index = working_index + 1
-    key_list = [str(line_to_parse), "_", str(parse_index)]
-    key = "".join(key_list)
-    group_info = {key:
-                  [group_contents,
-                   line_to_parse,
-                   parse_index,
-                   group_end_line,
-                   group_end_index]}
-
-    return group_info, key
+    return processing_dict, decklength

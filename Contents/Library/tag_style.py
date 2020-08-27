@@ -36,7 +36,7 @@ import importlib
 from read_log_config import logger_basic
 
 
-def tag_dict_selection(xml_tag_num: str):
+def tag_dict_selection(tag_style_selector: str):
     """ Import an XML tag dictionary based on user XML tag style preference. """
     # Possible XML tag dictionaries.
     options = {
@@ -46,7 +46,7 @@ def tag_dict_selection(xml_tag_num: str):
     }
 
     try:
-        value = options[xml_tag_num]
+        value = options[tag_style_selector]
         xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
         tag_dict_pre = {value: getattr(xtags, value)}
         tag_dict = tag_dict_pre[value]

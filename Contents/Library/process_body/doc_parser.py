@@ -67,25 +67,27 @@ class MainDocManager(object):
         num_lines = file_stats.processor(
             working_input_file=self.working_input_file)
 
-        group_data_file = os.path.join(self.debug_dir, "group_data_file.json")
-        with open(group_data_file, "r+") as gdf_pre:
-            group_data = json.load(gdf_pre)
-            group_start = {"id":       "root",
-                           "type":     "group",
-                           "children": []}
-            group_data.update(group_start)
-            gdf_pre.seek(0)
-            json.dump(group_data, gdf_pre)
+        base_script_dir = os.path.dirname(os.path.abspath(
+            sys.argv[0]))
+        dicts_dir = os.path.join(base_script_dir, "Library/dicts/")
 
-        check_parse_text.check_string_manager(
-            working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir,
-            control_word_dict=self.control_word_dict,
-            parse_text=parse_text,
-            line_to_parse=line_to_parse,
-            parse_index=parse_index,
-            num_lines=num_lines,
-            group_dict=group_data)
+        processing_dict = {
+            "parse_text":         parse_text,
+            "num_lines":          num_lines,
+            "line_to_parse":      line_to_parse,
+            "parse_index":        parse_index,
+            "working_input_file": self.working_input_file,
+            "debug_dir":          self.debug_dir,
+            "dicts_dir":          dicts_dir,
+            "control_word_dict":  self.control_word_dict,
+            "group_contents":     "",
+            "group_end_line":     0,
+            "group_end_index":    0,
+            "contents_list":      [],
+            "contents_string":    ""
+        }
+
+        check_parse_text.check_string_manager(processing_dict=processing_dict)
 
     def load_tag_registry(self) -> None:
         base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))

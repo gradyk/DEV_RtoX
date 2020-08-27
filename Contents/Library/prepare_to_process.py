@@ -67,7 +67,7 @@ def extract_users_xml_tag_style(debug_dir: str) -> str:
     with open(config_settings_dict, "r+") as rtf_settings_dict_pre:
         rtf_settings_dict = json.load(rtf_settings_dict_pre)
         try:
-            xml_tag_num = rtf_settings_dict["tag-style"]
+            tag_style_selector = rtf_settings_dict["tag-style"]
         except TypeError:
-            xml_tag_num = "1"
-    return xml_tag_num
+            tag_style_selector = "1"
+    return tag_style_selector

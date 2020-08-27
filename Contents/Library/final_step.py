@@ -64,13 +64,13 @@ from read_log_config import logger_debug
 
 
 def final_step(debug_dir: str,
-               xml_tag_num: str,
+               tag_style_selector: str,
                output_file_name: str,
                base_script_dir: str) -> None:
 
     working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
 
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
+    tag_dict = tag_style.tag_dict_selection(tag_style_selector=tag_style_selector)
 
     # Converting to RTF creates instances of empty tags.
     # Run through the file twice looking for empty tags (deleting

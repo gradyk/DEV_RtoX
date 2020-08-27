@@ -39,110 +39,100 @@ import check_text
 import dict_updater
 
 
-def processor(parse_text: str, line_to_parse: int, parse_index: int,
-              group_dict: dict,
-              working_input_file: str, debug_dir: str,
-              control_word_dict: str, num_lines: int) -> None:
+def processor(processing_dict: dict) -> None:
     # Test for control symbol (backslash followed by single, non-alphabetic
     # character other than an asterisk).
     item = None
     null_function = "null"
     try:
         # TODO Amend regex so that this processor does not capture \\*
-        test = re.search(r"^(\\\w+)", parse_text)
+        test = re.search(r"^^(\\[a-zA-Z\-0-9]+)", processing_dict["parse_text"])
         if test is not item:
             control_word = test[0]
             length = test.end() - test.start()
-            parse_index = parse_index + length
-            try:
-                with open(control_word_dict, "r+") as control_word_dict_pre:
-                    ref_dict = json.load(control_word_dict_pre)
-                    control_word_text = "".join([i for i in test[0] if
-                                                 i.isalpha()])
-                    control_word_value = "".join(
-                        [i for i in test[0] if i.isdigit()])
+            parse_index_update = processing_dict["parse_index"] + length
+            processing_dict["parse_index"] = parse_index_update
+
+            with open(processing_dict["control_word_dict"], "r+") as \
+                    control_word_dict_pre:
+                ref_dict = json.load(control_word_dict_pre)
+                control_word_text = "".join([i for i in test[0] if
+                                             i.isalpha()])
+                control_word_value = "".join(
+                    [i for i in test[0] if i.isdigit()])
+
+                try:
                     cw_func = ref_dict[control_word_text][2]
-                    if cw_func != null_function:
-                        importlib.import_module(cw_func)
-                        cw_func.processor(control_word_value)
+                except KeyError:
+                    # Add missing control word to control_word_dict.json
+                    # file.
+                    cw_update = {control_word_text: ["", "", "null"]}
+                    dict_updater.json_dict_updater(
+                        dict_name="control_word_dict.json",
+                        debug_dir=processing_dict["dicts_dir"],
+                        dict_update=cw_update)
+                    # Add control word that cannot be processed to build
+                    # file.
+                    open_tag = f'<ts:rtfIssue line="' \
+                               f'{processing_dict["line_to_parse"]}" ' \
+                               f'key="{control_word}"/>'
+                    text = ""
+                    close_tag = ""
+                    build_final_file.processor(open_tag=open_tag,
+                                               text=text,
+                                               close_tag=close_tag)
 
-                        parse_text = parse_text.replace(control_word, "")
-                        parse_index = 0
+                    parse_text_update = \
+                        processing_dict["parse_text"].replace(control_word, "")
+                    processing_dict["parse_text"] = parse_text_update
+                    processing_dict["parse_index"] = 0
 
-                        parse_text, line_to_parse, parse_index = \
-                            adjust_process_text.text_metric_reset(
-                                working_input_file=working_input_file,
-                                parse_index=parse_index,
-                                line_to_parse=line_to_parse,
-                                parse_text=parse_text)
-                        check_parse_text.check_string_manager(
-                            parse_text=parse_text,
-                            line_to_parse=line_to_parse,
-                            parse_index=parse_index,
-                            working_input_file=working_input_file,
-                            debug_dir=debug_dir,
-                            control_word_dict=control_word_dict,
-                            num_lines=num_lines,
-                            group_dict=group_dict)
-                    else:
-                        print(control_word)
+                    print(control_word_text)
+                    processing_dict = adjust_process_text.text_metric_reset(
+                        processing_dict=processing_dict)
+                    check_parse_text.check_string_manager(
+                        processing_dict=processing_dict)
 
-                        parse_text = parse_text.replace(control_word, "")
-                        parse_index = 0
+                if cw_func != null_function:
+                    print(control_word_text)
+                    control_word_to_tag(cw_func=cw_func,
+                                        control_word_value=control_word_value)
 
-                        parse_text, line_to_parse, parse_index = \
-                            adjust_process_text.text_metric_reset(
-                                working_input_file=working_input_file,
-                                parse_index=parse_index,
-                                line_to_parse=line_to_parse,
-                                parse_text=parse_text)
-                        check_parse_text.check_string_manager(
-                            parse_text=parse_text,
-                            line_to_parse=line_to_parse,
-                            parse_index=parse_index,
-                            working_input_file=working_input_file,
-                            debug_dir=debug_dir,
-                            control_word_dict=control_word_dict,
-                            num_lines=num_lines,
-                            group_dict=group_dict)
-            except KeyError:
-                # Add missing control word to missing control symbol file.
-                cw_update = {control_word: ["", "", "null"]}
-                dict_updater.json_dict_updater(
-                    dict_name="control_word_missing_dict.json",
-                    debug_dir=debug_dir,
-                    dict_update=cw_update)
-                # Add control word that cannot be processed to build file.
-                open_tag = f'<ts:rtfIssue line="{line_to_parse}" ' \
-                           f'key="{control_word}"/>'
-                text = ""
-                close_tag = ""
-                build_final_file.processor(open_tag=open_tag,
-                                           text=text,
-                                           close_tag=close_tag)
-                parse_text, line_to_parse, parse_index = \
-                    adjust_process_text.text_metric_reset(
-                        working_input_file=working_input_file,
-                        parse_index=parse_index,
-                        line_to_parse=line_to_parse,
-                        parse_text=parse_text)
-                check_parse_text.check_string_manager(
-                    parse_text=parse_text,
-                    line_to_parse=line_to_parse,
-                    parse_index=parse_index,
-                    working_input_file=working_input_file,
-                    debug_dir=debug_dir,
-                    control_word_dict=control_word_dict,
-                    num_lines=num_lines,
-                    group_dict=group_dict)
+                    parse_text_update = \
+                        processing_dict["parse_text"].replace(control_word, "")
+                    processing_dict["parse_text"] = parse_text_update
+                    processing_dict["parse_index"] = 0
+
+                    processing_dict = adjust_process_text.text_metric_reset(
+                            processing_dict=processing_dict)
+                    check_parse_text.check_string_manager(
+                        processing_dict=processing_dict)
+                else:
+                    print(control_word_text)
+
+                    parse_text_update = processing_dict[
+                        "parse_text"].replace(control_word, "")
+                    processing_dict["parse_text"] = parse_text_update
+                    processing_dict["parse_index"] = 0
+
+                    processing_dict = \
+                        adjust_process_text.text_metric_reset(
+                            processing_dict=processing_dict)
+                    check_parse_text.check_string_manager(
+                        processing_dict=processing_dict)
+
         else:
-            check_text.processor(
-                parse_text=parse_text,
-                line_to_parse=line_to_parse,
-                parse_index=parse_index, working_input_file=working_input_file,
-                debug_dir=debug_dir, control_word_dict=control_word_dict,
-                num_lines=num_lines,
-                group_dict=group_dict)
+            check_text.processor(processing_dict=processing_dict)
             pass
     except TypeError:
-        logging.exception(f"{line_to_parse}:{parse_index}--{parse_text}")
+        logging.exception(f"{processing_dict['line_to_parse']}:"
+                          f"{processing_dict['parse_index']}--"
+                          f"{processing_dict['parse_text']}")
+
+
+def control_word_to_tag(cw_func, control_word_value: str):
+    # THIS DOESN'T WORK-E.G. I.PY DOESN'T EVAL, ETC.
+    # importlib.import_module(cw_func)
+    # cw_func.processor(control_word_value)
+    # ABOVE TWO LINES DON'T WORK
+    print(cw_func, "--", control_word_value)

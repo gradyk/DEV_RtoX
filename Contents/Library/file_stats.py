@@ -32,6 +32,7 @@ import logging
 
 
 def processor(working_input_file: str) -> int:
+    # TODO Delete ref before releasing code
     # https://stackoverflow.com/questions/845058/how-to-get-line-count-of-a-large-file-cheaply-in-python
     try:
         with open(working_input_file, "r+") as wif_pre:

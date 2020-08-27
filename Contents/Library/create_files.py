@@ -58,9 +58,7 @@ def create_dict_files(base_script_dir: str) -> None:
         "color_table_file.json",
         "style_sheet_table_file.json",
         "info_group_file.json",
-        "tag_registry.json",
-        "group_data_file.json",
-        "control_word_missing_dict.json"
+        "tag_registry.json"
     )
 
     for file in dict_library:

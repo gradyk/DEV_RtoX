@@ -35,7 +35,7 @@ import open_tag_check
 import tag_style
 
 
-def tag_closer(debug_dir: str, xml_tag_num: str):
+def tag_closer(debug_dir: str, tag_style_selector: str):
 
     status_list = [
         "italic",
@@ -47,7 +47,7 @@ def tag_closer(debug_dir: str, xml_tag_num: str):
         "section"
     ]
 
-    tag_dict = tag_style.tag_dict_selection(xml_tag_num=xml_tag_num)
+    tag_dict = tag_style.tag_dict_selection(tag_style_selector=tag_style_selector)
 
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)

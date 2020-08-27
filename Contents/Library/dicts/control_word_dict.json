@@ -1,4 +1,54 @@
 {
+    "\\'": [
+        "Special Characters",
+        "Symbol",
+        "hex_value"
+    ],
+    "\\-": [
+        "Special Characters",
+        "Symbol",
+        "hyphen_optional"
+    ],
+    "\\*": [
+        "Special Characters",
+        "Symbol",
+        "dest_group"
+    ],
+    "\\:": [
+        "Special Characters",
+        "Symbol",
+        "index_subentry"
+    ],
+    "\\\\": [
+        "Special Characters",
+        "Symbol",
+        "backslash"
+    ],
+    "\\_": [
+        "Special Characters",
+        "Symbol",
+        "hypen_nonbreak"
+    ],
+    "\\{": [
+        "Special Characters",
+        "Symbol",
+        "left_bracket"
+    ],
+    "\\|": [
+        "Special Characters",
+        "Symbol",
+        "pipe"
+    ],
+    "\\}": [
+        "Special Characters",
+        "Symbol",
+        "right_bracket"
+    ],
+    "\\~": [
+        "Special Characters",
+        "Symbol",
+        "space_nonbreak"
+    ],
     "ab": [
         "Associated Character Properties",
         "Toggle",
@@ -6972,6 +7022,86 @@
     "zwnj": [
         "Special Characters",
         "Symbol",
+        "null"
+    ],
+    "usenormstyforlist": [
+        "",
+        "",
+        "null"
+    ],
+    "noindnmbrts": [
+        "",
+        "",
+        "null"
+    ],
+    "felnbrelev": [
+        "",
+        "",
+        "null"
+    ],
+    "nocxsptable": [
+        "",
+        "",
+        "null"
+    ],
+    "indrlsweleven": [
+        "",
+        "",
+        "null"
+    ],
+    "noafcnsttbl": [
+        "",
+        "",
+        "null"
+    ],
+    "afelev": [
+        "",
+        "",
+        "null"
+    ],
+    "utinl": [
+        "",
+        "",
+        "null"
+    ],
+    "hwelev": [
+        "",
+        "",
+        "null"
+    ],
+    "spltpgpar": [
+        "",
+        "",
+        "null"
+    ],
+    "notcvasp": [
+        "",
+        "",
+        "null"
+    ],
+    "notvatxbx": [
+        "",
+        "",
+        "null"
+    ],
+    "krnprsnet": [
+        "",
+        "",
+        "null"
+    ],
+    "cachedcolbal": [
+        "",
+        "",
+        "null"
+    ],
+    "notbrkcnstfrctbl": [
+        "",
+        "",
+        "null"
+    ],
+    "wrapdefault": [
+        "",
+        "",
         "null"
     ]
 }
