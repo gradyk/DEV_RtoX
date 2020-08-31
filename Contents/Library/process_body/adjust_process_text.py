@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -24,12 +28,11 @@ import linecache
 def text_metric_reset(processing_dict: dict) -> dict:
     length = len(processing_dict["parse_text"])
     if length <= 2:
-        line_to_parse_update = processing_dict["line_to_parse"] + 1
-        processing_dict["line_to_parse"] = line_to_parse_update
+        processing_dict["line_to_parse"] = processing_dict["line_to_parse"] + 1
         line = linecache.getline(processing_dict["working_input_file"],
                                  processing_dict["line_to_parse"]).rstrip("\n")
-        parse_text_update = processing_dict["parse_text"] + line
-        processing_dict["parse_text"] = parse_text_update
+        processing_dict["parse_text"] = ''.join((processing_dict["parse_text"],
+                                                line))
         processing_dict["parse_index"] = 0
         return processing_dict
     else:

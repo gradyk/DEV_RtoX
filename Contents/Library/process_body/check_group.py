@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -30,8 +34,7 @@ import logging
 import re
 
 # From local application
-import build_group_contents_list
-import group_boundaries_capture_contents
+import group_boundaries
 
 
 def processor(processing_dict: dict) -> None:
@@ -39,18 +42,15 @@ def processor(processing_dict: dict) -> None:
     try:
         test = re.search(r"^{", processing_dict["parse_text"])
         if test is not item:
-            group_boundaries_capture_contents. \
-                define_boundaries_capture_contents(
+            group_boundaries.define_boundaries(
                     processing_dict=processing_dict)
-
-            build_group_contents_list.pre_process(
-                processing_dict=processing_dict)
-
         else:
             pass
-    except TypeError:
-        logging.exception(f"Check_group: "
+    except TypeError as error:
+        logging.exception(error, f"Check_group: "
                           f"{processing_dict['line_to_parse']}:"
                           f"{processing_dict['parse_index']}--"
                           f"{processing_dict['parse_text']}")
+    except Exception as error:
+        logging.exception(error, "Check_group error.")
         pass

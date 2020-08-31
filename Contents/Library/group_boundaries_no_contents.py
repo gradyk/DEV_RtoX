@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -44,7 +48,7 @@ def define_boundaries_without_contents(table: str, working_input_file: str,
     """ Define the boundaries of an RTF table or group, without capturing
     the contents of the table or group. """
     # TODO Review this module and make it parallel to the
-    #  group_boundaries_capture_contents.py module.
+    #  group_boundaries.py module.
     table_boundaries_info = {}
     group_start_line = table_start_line
     search_line = table_start_line

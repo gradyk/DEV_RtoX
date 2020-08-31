@@ -21,7 +21,7 @@
 
 # Utilities #
 #############
-/Utilities/*.*
+/Utilities
 
 # Tests #
 #########
@@ -43,3 +43,4 @@ __pycache__
 /Contents/__pycache__
 /Contents/Library/__pycache__
 /Contents/Library/dicts/__pycache__
+/bin

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -51,8 +55,8 @@ def processor(processing_dict: dict) -> None:
 
             parse_text_string = processing_dict["parse_text"].\
                 replace(test[0], "")
-            processing_dict["parse_text"].update(parse_text_string)
-            processing_dict["parse_index"].update(0)
+            processing_dict["parse_text"] = parse_text_string
+            processing_dict["parse_index"] = 0
 
             processing_dict = adjust_process_text.\
                 text_metric_reset(processing_dict=processing_dict)

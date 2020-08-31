@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -46,7 +50,8 @@ def processor(processing_dict: dict) -> None:
     null_function = "null"
     try:
         # TODO Amend regex so that this processor does not capture \\*
-        test = re.search(r"^^(\\[a-zA-Z\-0-9]+)", processing_dict["parse_text"])
+        test = re.search(r"^(\\[a-zA-Z\-\s0-9]*)", processing_dict[
+            "parse_text"])
         if test is not item:
             control_word = test[0]
             length = test.end() - test.start()
@@ -83,7 +88,8 @@ def processor(processing_dict: dict) -> None:
                                                close_tag=close_tag)
 
                     parse_text_update = \
-                        processing_dict["parse_text"].replace(control_word, "")
+                        processing_dict["parse_text"].\
+                        replace(control_word, "", 1)
                     processing_dict["parse_text"] = parse_text_update
                     processing_dict["parse_index"] = 0
 

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -119,19 +123,19 @@ class MainDocManager(object):
 
     def set_process_text(self, parse_index: int, line_to_parse: int) -> tuple:
         line = linecache.getline(self.working_input_file, line_to_parse).rstrip(
-            "\n")
+            "\n").rstrip()
         line = line[parse_index:]
         length = len(line)
         if parse_index > length - 2:
-            parse_text = line[parse_index:] + \
-                         linecache.getline(self.working_input_file,
-                                           line_to_parse + 1).rstrip("\n")
+            parse_text = line[parse_index:] + linecache.getline(
+                self.working_input_file, line_to_parse + 1).\
+                rstrip("\n").rstrip()
             line_to_parse += 1
-            parse_index = 0
+            parse_index = 1
             return parse_text, line_to_parse, parse_index
         else:
             parse_text = line
-            parse_index = 0
+            parse_index = 1
             return parse_text, line_to_parse, parse_index
             pass
 

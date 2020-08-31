@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -40,7 +44,7 @@ def processor(processing_dict: dict) -> None:
     # Test for left bracket character as part of text.
     item = None
     try:
-        test = re.search(r"^({)", processing_dict["parse_text"])
+        test = re.search(r"^\\{", processing_dict["parse_text"])
         if test is not item:
             open_tag = ""
             text = "{"
@@ -48,10 +52,9 @@ def processor(processing_dict: dict) -> None:
             build_final_file.processor(open_tag=open_tag,
                                        text=text,
                                        close_tag=close_tag)
-            parse_text_update = processing_dict[
-                "parse_text"].replace(test[0], "")
-            processing_dict["parse_text"].update(parse_text_update)
-            processing_dict["parse_index"].update(0)
+            processing_dict["parse_text"] = processing_dict[
+                "parse_text"].replace(test[0], "", 1)
+            processing_dict["parse_index"] = 0
 
             processing_dict = adjust_process_text.text_metric_reset(
                 processing_dict=processing_dict)
