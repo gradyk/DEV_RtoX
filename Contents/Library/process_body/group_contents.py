@@ -20,7 +20,6 @@ def processor(processing_dict: dict):
     item = None
     cw_dict = processing_dict["control_word_dict"]
     value = [ele for ele in processing_dict["contents_list"]]
-    print("cl ", processing_dict["contents_list"])
 
     line = linecache.getline(processing_dict["working_input_file"],
                              processing_dict["line_to_parse"]).rstrip("\n").\

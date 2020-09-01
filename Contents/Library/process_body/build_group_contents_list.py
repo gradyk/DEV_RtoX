@@ -10,7 +10,6 @@ import re
 def pre_process(processing_dict: dict) -> dict:
     contents_string = processing_dict["group_contents"]
     processing_dict["contents_string"] = contents_string
-    print("cs ", contents_string)
     processor(processing_dict=processing_dict)
     return processing_dict
 
@@ -82,7 +81,6 @@ def processor(processing_dict: dict) -> dict:
             test = re.search(r"^(\\['-:_|~])",
                              processing_dict["contents_string"])
             if test is not item:
-                print("control_symbol: ", test[0])
                 results = test[0]
                 processing_dict["contents_list"].append(results)
                 contents_string = processing_dict["contents_string"].\
