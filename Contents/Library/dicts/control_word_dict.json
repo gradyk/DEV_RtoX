@@ -9,40 +9,20 @@
         "Symbol",
         "hyphen_optional"
     ],
-    "\\*": [
-        "Special Characters",
-        "Symbol",
-        "dest_group"
-    ],
     "\\:": [
         "Special Characters",
         "Symbol",
         "index_subentry"
-    ],
-    "\\\\": [
-        "Special Characters",
-        "Symbol",
-        "backslash"
     ],
     "\\_": [
         "Special Characters",
         "Symbol",
         "hypen_nonbreak"
     ],
-    "\\{": [
-        "Special Characters",
-        "Symbol",
-        "left_bracket"
-    ],
     "\\|": [
         "Special Characters",
         "Symbol",
         "pipe"
-    ],
-    "\\}": [
-        "Special Characters",
-        "Symbol",
-        "right_bracket"
     ],
     "\\~": [
         "Special Characters",

@@ -36,45 +36,35 @@ import re
 # From local application
 import adjust_process_text
 import build_final_file
-import check_parse_text
 
 
-def processor(processing_dict: dict) -> None:
+def processor(processing_dict: dict) -> dict:
     # Test for text.
+    text = ""
     item = None
     try:
         test = re.search(r"^([a-zA-Z\-\s0-9]*)", processing_dict["parse_text"])
         if test is not item:
             text = test[0]
-            try:
-                open_tag = ""
-                close_tag = ""
-                build_final_file.processor(open_tag=open_tag,
-                                           text=text,
-                                           close_tag=close_tag)
-
-                parse_text_update = processing_dict[
-                    "parse_text"].replace(test[0], "")
-                processing_dict["parse_text"] = parse_text_update
-                processing_dict["parse_index"] = 0
-
-                processing_dict = \
-                    adjust_process_text.text_metric_reset(
-                        processing_dict=processing_dict)
-                check_parse_text.check_string_manager(
-                    processing_dict=processing_dict)
-
-            except TypeError:
-                logging.exception(f"Check_text: "
-                                  f"{processing_dict['line_to_parse']}:"
-                                  f"{processing_dict['parse_index']}--"
-                                  f"{processing_dict['parse_text']}")
+            open_tag = ""
+            close_tag = ""
+            build_final_file.processor(open_tag=open_tag,
+                                       text=text,
+                                       close_tag=close_tag)
         else:
-            check_parse_text.check_string_manager(
-                processing_dict=processing_dict)
             pass
     except TypeError:
         logging.exception(f"Check_text: "
                           f"{processing_dict['line_to_parse']}:"
                           f"{processing_dict['parse_index']}--"
                           f"{processing_dict['parse_text']}")
+
+    parse_text_update = processing_dict[
+        "parse_text"].replace(text, "", 1)
+    processing_dict["parse_text"] = parse_text_update
+    processing_dict["parse_index"] = 0
+    processing_dict = \
+        adjust_process_text.text_metric_reset(
+            processing_dict=processing_dict)
+
+    return processing_dict

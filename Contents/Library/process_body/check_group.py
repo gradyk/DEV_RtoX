@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -34,18 +14,27 @@ import logging
 import re
 
 # From local application
+import build_group_contents_list
 import group_boundaries
+import group_contents
 
 
-def processor(processing_dict: dict) -> None:
+def processor(processing_dict: dict) -> dict:
     item = None
     try:
         test = re.search(r"^{", processing_dict["parse_text"])
         if test is not item:
-            group_boundaries.define_boundaries(
-                    processing_dict=processing_dict)
+            processing_dict = group_boundaries.\
+                define_boundaries(processing_dict=processing_dict)
+
+            processing_dict = build_group_contents_list.pre_process(
+                processing_dict=processing_dict)
+
+            processing_dict = group_contents.processor(
+                processing_dict=processing_dict)
         else:
             pass
+        return processing_dict
     except TypeError as error:
         logging.exception(error, f"Check_group: "
                           f"{processing_dict['line_to_parse']}:"

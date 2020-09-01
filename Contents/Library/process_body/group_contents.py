@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -56,8 +36,6 @@ def processor(processing_dict: dict):
             rstrip("\n").rstrip()
         processing_dict["contents_string"] = ""
         processing_dict["contents_list"] = []
-        check_parse_text.check_string_manager(
-            processing_dict=processing_dict)
     else:
         processing_dict["parse_text"] = linecache.getline(
             processing_dict["working_input_file"],
@@ -67,5 +45,5 @@ def processor(processing_dict: dict):
         processing_dict["group_contents"] = ""
         processing_dict["contents_string"] = ""
         processing_dict["contents_list"] = []
-        check_parse_text.check_string_manager(
-            processing_dict=processing_dict)
+
+    return processing_dict

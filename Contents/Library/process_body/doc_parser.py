@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 """ The main body of an RTF document has four components assembled in a
 variety of combinations: control symbols, groups containing destinations that
@@ -91,7 +71,8 @@ class MainDocManager(object):
             "contents_string":    ""
         }
 
-        check_parse_text.check_string_manager(processing_dict=processing_dict)
+        check_parse_text.check_string_manager(processing_dict=processing_dict,
+                                              line=line_to_parse)
 
     def load_tag_registry(self) -> None:
         base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))

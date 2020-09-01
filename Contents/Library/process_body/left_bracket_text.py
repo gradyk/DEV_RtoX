@@ -36,11 +36,9 @@ import re
 # From local application
 import adjust_process_text
 import build_final_file
-import check_parse_text
-import control_word
 
 
-def processor(processing_dict: dict) -> None:
+def processor(processing_dict: dict) -> dict:
     # Test for left bracket character as part of text.
     item = None
     try:
@@ -58,12 +56,9 @@ def processor(processing_dict: dict) -> None:
 
             processing_dict = adjust_process_text.text_metric_reset(
                 processing_dict=processing_dict)
-            check_parse_text.check_string_manager(
-                processing_dict=processing_dict)
+            return processing_dict
         else:
-            control_word.processor(
-                processing_dict=processing_dict)
-            pass
+            return processing_dict
     except TypeError:
         logging.exception(f"Left_bracket_test: "
                           f"{processing_dict['line_to_parse']}:"

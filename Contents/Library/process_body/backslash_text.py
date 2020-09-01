@@ -36,11 +36,9 @@ import re
 # From local application
 import adjust_process_text
 import build_final_file
-import check_parse_text
-import left_bracket_text
 
 
-def processor(processing_dict: dict) -> None:
+def processor(processing_dict: dict) -> dict:
     # Test for backslash character as part of text.
     item = None
     try:
@@ -60,11 +58,10 @@ def processor(processing_dict: dict) -> None:
 
             processing_dict = adjust_process_text.\
                 text_metric_reset(processing_dict=processing_dict)
-            check_parse_text.check_string_manager(
-                processing_dict=processing_dict)
+            return processing_dict
         else:
-            left_bracket_text.processor(processing_dict=processing_dict)
-            pass
+            return processing_dict
+
     except TypeError:
         logging.exception(f"{processing_dict['line_to_parse']}:"
                           f"{processing_dict['parse_index']}--"
