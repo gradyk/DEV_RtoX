@@ -13,7 +13,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-21"
-__name__ = "Contents.Library.doc_parser"
+__name__ = "Contents.Library.process_body.doc_parser"
 
 # From standard libraries
 import json
@@ -23,26 +23,29 @@ import sys
 
 # From local application
 import file_stats
-from process_body import check_parse_text
+import check_parse_text
 
 
 class MainDocManager(object):
     def __init__(self,
                  working_input_file: str,
                  debug_dir: str,
-                 control_word_dict: str) -> None:
+                 control_word_dict: str,
+                 tag_set: int) -> None:
         self.working_input_file = working_input_file
         self.debug_dir = debug_dir
         self.control_word_dict = control_word_dict
         self.length_parse_text = 0
         self.header_table_file = os.path.join(
             self.debug_dir, "header_tables_dict.json")
+        self.tag_set = tag_set
 
     def body_parse_manager(self) -> None:
         main_doc_dir = MainDocManager(
             working_input_file=self.working_input_file,
             debug_dir=self.debug_dir,
-            control_word_dict=self.control_word_dict)
+            control_word_dict=self.control_word_dict,
+            tag_set=self.tag_set)
 
         MainDocManager.load_tag_registry(self=main_doc_dir)
         parse_text, line_to_parse, parse_index = \
@@ -68,7 +71,8 @@ class MainDocManager(object):
             "group_end_line":     0,
             "group_end_index":    0,
             "contents_list":      [],
-            "contents_string":    ""
+            "contents_string":    "",
+            "tag_set":            self.tag_set
         }
 
         check_parse_text.check_string_manager(processing_dict=processing_dict,
@@ -97,14 +101,15 @@ class MainDocManager(object):
                 self=MainDocManager(
                     working_input_file=self.working_input_file,
                     debug_dir=self.debug_dir,
-                    control_word_dict=self.control_word_dict),
+                    control_word_dict=self.control_word_dict,
+                    tag_set=self.tag_set),
                 parse_index=parse_index,
                 line_to_parse=line_to_parse)
         return parse_text, line_to_parse, parse_index
 
     def set_process_text(self, parse_index: int, line_to_parse: int) -> tuple:
-        line = linecache.getline(self.working_input_file, line_to_parse).rstrip(
-            "\n").rstrip()
+        line = linecache.getline(self.working_input_file, line_to_parse).\
+            rstrip("\n").rstrip()
         line = line[parse_index:]
         length = len(line)
         if parse_index > length - 2:
@@ -113,12 +118,10 @@ class MainDocManager(object):
                 rstrip("\n").rstrip()
             line_to_parse += 1
             parse_index = 1
-            return parse_text, line_to_parse, parse_index
         else:
             parse_text = line
             parse_index = 1
-            return parse_text, line_to_parse, parse_index
-            pass
+        return parse_text, line_to_parse, parse_index
 
     def closer(self):
         pass

@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -32,10 +36,10 @@ __name__ = "Contents.Library.tag_closer"
 
 # From local application
 import open_tag_check
-import tag_style
+import tag_set_file
 
 
-def tag_closer(debug_dir: str, tag_style_selector: str):
+def tag_closer(debug_dir: str, tag_set: int):
 
     status_list = [
         "italic",
@@ -47,7 +51,7 @@ def tag_closer(debug_dir: str, tag_style_selector: str):
         "section"
     ]
 
-    tag_dict = tag_style.tag_dict_selection(tag_style_selector=tag_style_selector)
+    tag_dict = tag_set_file.tag_dict_selection(tag_set=tag_set)
 
     open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
                              tag_dict=tag_dict)

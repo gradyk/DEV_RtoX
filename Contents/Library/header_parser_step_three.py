@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -136,14 +140,16 @@ class ProcessTheTables(object):
     def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
         settings in a dictionary. """
-        style_sheet_table.StyleSheetParse.trim_stylesheet(
-            self=style_sheet_table.StyleSheetParse(
-                code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
-        style_sheet_table.StyleSheetParse.remove_code_strings(
-            self=style_sheet_table.StyleSheetParse(
-                code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
+        code_strings_to_process = \
+            style_sheet_table.StyleSheetParse.trim_stylesheet(
+                self=style_sheet_table.StyleSheetParse(
+                    code_strings_to_process=code_strings_to_process,
+                    debug_dir=self.debug_dir))
+        code_strings_to_process = \
+            style_sheet_table.StyleSheetParse.update_code_strings(
+                self=style_sheet_table.StyleSheetParse(
+                    code_strings_to_process=code_strings_to_process,
+                    debug_dir=self.debug_dir))
         style_sheet_table.StyleSheetParse.parse_code_strings(
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,

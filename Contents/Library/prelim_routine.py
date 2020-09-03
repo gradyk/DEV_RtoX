@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -171,7 +175,7 @@ class Prelim:
 
         # These settings come from the Config.ini file.
         # TODO Program needs to allow for different responses on these inputs.
-        tag_style = config_settings_dict.get("tag-style")
+        tag_set = config_settings_dict.get("tag-style")
         convert_symbol = config_settings_dict.get("convert-symbol")
         convert_caps = config_settings_dict.get("convert-caps")
         report_level = config_settings_dict.get("problem-report-level")
@@ -179,7 +183,7 @@ class Prelim:
         create_lists = config_settings_dict.get("create-lists")
 
         user_input_choices_dict = {
-            tag_style: f'You chose "{tag_style}" for your XML tags.',
+            tag_set: f'You chose "{tag_set}" for your XML tags.',
             convert_symbol: f"You chose to have all symbols converted "
                             f"to UTF-8 characters.",
             # TODO What is convert_caps supposed to do?

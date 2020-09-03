@@ -2,12 +2,16 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-def tagger(tag_set: int) -> tuple:
-    # \b turns on bold; \b0 (or any other number) turns off bold
+def tagger(processing_dict: dict, cw_value: str) -> tuple:
+    # \caps turns on all capitals; \caps0 (or any other number) turns off
+    # all capitals
+    tag_set = processing_dict["tag_set"]
+    if cw_value ==
+
     tag_list = {
         "open":
             ['',
-             '<ts:hiText rend="bold">',
+             '<ts:hiText rend="caps">',
              '',
              ''
             ],

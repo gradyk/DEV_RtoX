@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -97,18 +101,24 @@ def get_table_contents_as_text_string(table_boundaries: dict,
     string_to_slice = initial_string[table_boundaries[1]:]
     controlword_line += 1
     while controlword_line < table_last_line:
-        string_to_slice = string_to_slice + linecache.getline(
-            working_input_file, controlword_line)
-        string_to_slice = string_to_slice.strip("\n")
+        new_line = linecache.getline(working_input_file,
+                                     controlword_line).strip("\n")
+        string_list = [string_to_slice, new_line, " "]
+        string_to_slice = ''.join(string_list)
         controlword_line += 1
     last_string = linecache.getline(working_input_file, controlword_line)
     last_string = last_string.strip("\n")
     last_string = last_string[:table_boundaries[3]]
-    text_to_process = string_to_slice + last_string
+    text_list = [string_to_slice, last_string]
+    text_to_process = ''.join(text_list)
     return text_to_process
 
 
 def get_code_strings_from_text(text_to_process: str):
+    # These variable assignments cleanup RTF anomalies in space placement.
+    text_to_process = text_to_process.replace("} {", "}{")
+    text_to_process = text_to_process.replace("} }", "}}")
+    text_to_process = text_to_process.replace(" ; \\", ";\\")
     code_strings_list = split_between_characters.split_between(
         text_to_process=text_to_process, split_characters="}{")
     return code_strings_list

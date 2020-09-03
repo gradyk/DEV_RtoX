@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -18,7 +22,7 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
-""" The user can express a preference for XML tag style, which dictates the XML
+""" The user can express a preference for XML tag set, which dictates the XML
 tag dictionary used. Without a preference, the program defaults to XML plain.
 """
 
@@ -27,7 +31,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-16"
-__name__ = "Contents.Library.tag_style"
+__name__ = "Contents.Library.tag_set"
 
 # From standard libraries
 import importlib
@@ -36,17 +40,17 @@ import importlib
 from read_log_config import logger_basic
 
 
-def tag_dict_selection(tag_style_selector: str):
-    """ Import an XML tag dictionary based on user XML tag style preference. """
+def tag_dict_selection(tag_set: int):
+    """ Import an XML tag dictionary based on user XML tag set preference. """
     # Possible XML tag dictionaries.
     options = {
-        "1": "xml_tag_dict",
-        "2": "tei_tag_dict",
-        "3": "tpres_tag_dict",
+         1: "xml_tag_dict",
+         2: "tei_tag_dict",
+         3: "tpres_tag_dict",
     }
 
     try:
-        value = options[tag_style_selector]
+        value = options[tag_set]
         xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
         tag_dict_pre = {value: getattr(xtags, value)}
         tag_dict = tag_dict_pre[value]
@@ -55,7 +59,7 @@ def tag_dict_selection(tag_style_selector: str):
         xtags = importlib.import_module("Contents.Library.dicts.xml_tags")
         tag_dict_pre = {value: getattr(xtags, value)}
         tag_dict = tag_dict_pre[value]
-        logger_basic.debug(msg="You did not express a tag style preference. " \
+        logger_basic.debug(msg="You did not express a tag set preference. " \
                                "Plain XML will be used.")
 
     return tag_dict

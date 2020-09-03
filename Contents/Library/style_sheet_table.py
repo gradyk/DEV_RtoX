@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -25,11 +29,11 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-11-04"
-__name__ = "style_sheet_table"
+__name__ = "Contents.Library.style_sheet_table"
 
 # From standard libraries
+import logging
 import re
-import sys
 
 # From local application
 import dict_updater
@@ -65,7 +69,7 @@ class StyleSheetParse(object):
         self.code_strings_to_process = code_strings_to_process
         self.debug_dir = debug_dir
 
-    def trim_stylesheet(self):
+    def trim_stylesheet(self) -> list:
         for code_string in self.code_strings_to_process:
             if re.search(r'{\\stylesheet', code_string) is not None:
                 place = self.code_strings_to_process.index(code_string)
@@ -73,22 +77,21 @@ class StyleSheetParse(object):
                 self.code_strings_to_process[place] = new_code_string
             else:
                 pass
+        return self.code_strings_to_process
 
-    def remove_code_strings(self):
-        # TODO Change this so that these code strings are parsed.
-        remove_list = []
+    def update_code_strings(self) -> list:
         for code_string in self.code_strings_to_process:
-            # Ignore code strings in the style sheet that start with the \*\cs
-            # or \*\ts control word.
-            pattern = re.compile(r"{\\\*\\")
-            place = self.code_strings_to_process.index(code_string)
-            if re.search(pattern, code_string) is not None:
-                remove_list.append(place)
+            # Change \*\cs to \cs and \*\ts to \ts.
+            item = None
+            test = re.search(r"^{\\\*\\", code_string)
+            if test is not item:
+                new_code_string = code_string.replace("\\*\\", "\\")
+                self.code_strings_to_process[
+                    self.code_strings_to_process.index(code_string)] = \
+                    new_code_string
             else:
                 pass
-
-        for ele in sorted(remove_list, reverse=True):
-            del self.code_strings_to_process[ele]
+        return self.code_strings_to_process
 
     def parse_code_strings(self):
         code_dict = {}
@@ -132,12 +135,12 @@ class StyleParser(object):
     def check_stylecode(self, code_string: str) -> tuple:
         """ With the exception of the default style, each style has an
         identifying number. """
-        # TODO Check and fix code_styles. May need to process \*\cs and \*\ts
         current_key = ""
         code_styles = [
             "s",  # Paragraph style code
+            "cs",  # Character style code
             "ds",  # Section style code
-            'ts',  # Table style code [ PROBABLY \*\ts ]
+            'ts',  # Table style code
             "trowd",  # Table row (tables in RTF are contiguous paragraphs).
             "tsrowd",  # Table style definitions [ PROBABLY \*\tsrowd ]
         ]
@@ -145,42 +148,49 @@ class StyleParser(object):
         for style in code_styles:
             item = None
             try:
-                test = re.search(r"^\\" + f"{style}[0-9]*", code_string)
+                test = re.search(rf"^\\{style}[0-9]*", code_string)
                 if test is not item:
                     current_key = test[0].replace("\\", "")
                     self.code_dict.update({current_key: {}})
                     code_string = code_string.replace(test[0], "")
-                    return code_string, current_key
                 else:
-                    return code_string, current_key
                     pass
-            except (ValueError, TypeError):
+            except (ValueError, TypeError) as error:
+                logging.exception(error, "A style does not have a style code.")
                 pass
+        return code_string, current_key
 
     def check_control_words(self, code_string: str, current_key: str) -> tuple:
         item = None
         try:
-            test = re.search(r"(\\)([a-zA-Z-]*)([0-9]*)", code_string)
+            test = re.search(r"^(\\[a-zA-Z\-0-9]*)", code_string)
             if test is not item:
-                test = test[0].split(" ")[0]
-                control_word = "".join([i for i in test if i.isalpha()])
+                test_clean = test[0].rstrip()
+                control_word = "".join([i for i in test_clean if i.isalpha()])
                 control_word_value = "".join(
-                    [i for i in test if i.isdigit()])
+                    [i for i in test_clean if i.isdigit()])
                 self.code_dict[current_key][control_word] = \
                     control_word_value
-                code_string = code_string.replace(test, "")
-                return code_string, current_key
+                code_string = code_string.replace(test_clean, "", 1)
+                space_test = re.search(r"^ \\", code_string)
+                if space_test is not item:
+                    code_string = code_string.lstrip()
+                else:
+                    pass
             else:
-                return code_string, current_key
-        except (ValueError, TypeError):
+                pass
+        except (ValueError, TypeError) as error:
+            logging.exception(error, "A style code word has created a problem.")
             pass
+        return code_string, current_key
 
     def check_style_name(self, code_string: str, current_key: str) -> None:
         """ Each style has a name, indicating where they style is used. """
         item = None
-        test = re.search(r'\b(\w+|\s|[()]*)*', code_string)
+        test = re.search(r'^([a-zA-Z\-\s()+0-9]*)', code_string)
         if test is not item:
+            result = test[0].rstrip()
             self.code_dict[current_key]["style_name"] = \
-                    test[0].lstrip()
+                result.lstrip()
         else:
             self.code_dict[current_key]["style_name"] = "None"

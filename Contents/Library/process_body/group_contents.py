@@ -12,18 +12,23 @@ __name__ = "Contents.Library.process_body.group_contents"
 # From standard libraries
 import linecache
 
-# From local application
-import check_parse_text
-
 
 def processor(processing_dict: dict):
     item = None
     cw_dict = processing_dict["control_word_dict"]
-    value = [ele for ele in processing_dict["contents_list"]]
+    list_length = len(processing_dict["contents_list"])
 
-    line = linecache.getline(processing_dict["working_input_file"],
-                             processing_dict["line_to_parse"]).rstrip("\n").\
-        rstrip()
+
+
+
+    processing_dict = processing_dict_reset(processing_dict=processing_dict)
+    return processing_dict
+
+
+def processing_dict_reset(processing_dict: dict):
+    line = linecache.getline(
+        processing_dict["working_input_file"],
+        processing_dict["line_to_parse"]).rstrip("\n").rstrip()
     length = len(line)
     if processing_dict["parse_index"] > length:
         processing_dict["line_to_parse"] += 1

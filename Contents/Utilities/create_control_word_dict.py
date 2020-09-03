@@ -9,7 +9,8 @@ def cw_csv_builder():
         sys.argv[0]))
     control_word_csv = os.path.join(base_script_dir, "control_words.txt")
 
-    cw_dict_file = os.path.join(base_script_dir, "control_word_dict.json")
+    cw_dict_file = os.path.join(base_script_dir,
+                                "../Library/dicts/control_word_dict.json")
 
     with open(cw_dict_file, "r+") as cw_dict_pre:
         cw_dict = json.load(cw_dict_pre)

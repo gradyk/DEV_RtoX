@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -61,13 +65,13 @@ def extract_file_info(config_file: str, base_script_dir: str,
     return input_file_name, output_file_name
 
 
-def extract_users_xml_tag_style(debug_dir: str) -> str:
-    """ Extract the user's preference for XML tag style. """
+def extract_users_xml_tag_set(debug_dir: str) -> int:
+    """ Extract the user's preference for XML tag set. """
     config_settings_dict = os.path.join(debug_dir, "config_dict.json")
     with open(config_settings_dict, "r+") as rtf_settings_dict_pre:
         rtf_settings_dict = json.load(rtf_settings_dict_pre)
         try:
-            tag_style_selector = rtf_settings_dict["tag-style"]
+            tag_set = int(rtf_settings_dict["tag-set"])
         except TypeError:
-            tag_style_selector = "1"
-    return tag_style_selector
+            tag_set = 1
+    return tag_set

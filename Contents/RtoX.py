@@ -1,7 +1,11 @@
 #!/usr/local/bin
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -59,7 +63,7 @@ if __name__ == "__main__":
             config_file=config_file)
 
     # Get the user's preference for XML tag style.
-    tag_style_selector = prepare_to_process.extract_users_xml_tag_style(
+    tag_set = prepare_to_process.extract_users_xml_tag_set(
         debug_dir=debug_dir)
 
     # Prepare working files.
@@ -91,10 +95,11 @@ if __name__ == "__main__":
         self=MainDocManager(
             working_input_file=working_input_file,
             debug_dir=debug_dir,
-            control_word_dict=control_word_dict))
+            control_word_dict=control_word_dict,
+            tag_set=tag_set))
 
-    # tag_dict = doc_parser.select_tag_dict(tag_style_selector=\
-    #   tag_style_selector)
+    # tag_dict = doc_parser.select_tag_dict(tag_set=\
+    #   tag_set)
     #
     # keyword_translation_stack, line_to_search = \
     #     doc_parser.GetKeywordsAndLinenumbers.line_keyword_checker_processor(
@@ -115,12 +120,12 @@ if __name__ == "__main__":
 
     # Close open tags where possible and produce list of remaining open tags.
     # tag_closer.tag_closer(debug_dir=debug_dir,
-    #                       tag_style_selector=tag_style_selector)
+    #                       tag_set=tag_set)
 
     # Do file clean up, post-processing, and put the renamed file in the
     # output directory.
     # final_step.final_step(debug_dir=debug_dir,
-    #                       tag_style_selector=tag_style_selector,
+    #                       tag_set=tag_set,
     #                       output_file_name=output_file_name,
     #                       base_script_dir=base_script_dir)
     # TODO Include in final step: 1) garbage cleanup, 2) copy
