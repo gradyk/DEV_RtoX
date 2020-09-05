@@ -35,7 +35,7 @@ import re
 
 # From local application
 import adjust_process_text
-import build_final_file
+import text_to_build
 
 
 def processor(processing_dict: dict) -> dict:
@@ -44,12 +44,8 @@ def processor(processing_dict: dict) -> dict:
     try:
         test = re.search(r"^(\\\\)", processing_dict["parse_text"])
         if test is not item:
-            open_tag = ""
             text = "\\"
-            close_tag = ""
-            build_final_file.processor(open_tag=open_tag,
-                                       text=text,
-                                       close_tag=close_tag)
+            text_to_build.processor(text=text)
 
             parse_text_string = processing_dict["parse_text"].\
                 replace(test[0], "")

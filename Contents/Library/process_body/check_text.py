@@ -15,7 +15,7 @@ import re
 
 # From local application
 import adjust_process_text
-import build_final_file
+import text_to_build
 
 
 def processor(processing_dict: dict) -> dict:
@@ -25,12 +25,7 @@ def processor(processing_dict: dict) -> dict:
     try:
         test = re.search(r"^([a-zA-Z\-\s0-9]*)", processing_dict["parse_text"])
         if test is not item:
-            text = test[0]
-            open_tag = ""
-            close_tag = ""
-            build_final_file.processor(open_tag=open_tag,
-                                       text=text,
-                                       close_tag=close_tag)
+            text_to_build.processor(text=test[0])
         else:
             pass
     except TypeError:

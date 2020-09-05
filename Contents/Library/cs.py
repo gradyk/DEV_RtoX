@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -38,7 +42,7 @@ import logging
 # Local application imports
 from control_words_symbols import emphasis
 import keyword_end_alt
-import open_tag_check
+import tag_check
 import tag_registry_update
 import output_file_update
 from read_log_config import logger_debug
@@ -88,8 +92,8 @@ def open_emphasis_tag_cleanup_start(tag_dict: dict, debug_dir: str) -> None:
         "italic"
     ]
 
-    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
-                             tag_dict=tag_dict)
+    tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                        tag_dict=tag_dict)
 
 
 def insert_opening_cs_tag(cs_line_dict: dict, text: str,

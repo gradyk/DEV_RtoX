@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -35,7 +39,7 @@ import logging
 import os
 
 # From application library
-import open_tag_check
+import tag_check
 import tag_registry_update
 import output_file_update
 from read_log_config import logger_debug
@@ -62,8 +66,8 @@ def open_emphasis_tag_cleanup(debug_dir: str, tag_dict: dict):
         "paragraph"
     ]
 
-    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
-                             tag_dict=tag_dict)
+    tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                        tag_dict=tag_dict)
 
 
 def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):

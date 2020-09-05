@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -18,7 +22,7 @@
 #  You should have received a copy of the GNU General Public License along
 #  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
-""" Method to update the tag registry after tag openings or closings. """
+""" Module to update the tag registry after tag openings or closings. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"

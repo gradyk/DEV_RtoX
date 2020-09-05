@@ -35,7 +35,7 @@ __date__ = "2020-02-07"
 __name__ = "Contents.Library.tag_closer"
 
 # From local application
-import open_tag_check
+import tag_check
 import tag_set_file
 
 
@@ -53,5 +53,5 @@ def tag_closer(debug_dir: str, tag_set: int):
 
     tag_dict = tag_set_file.tag_dict_selection(tag_set=tag_set)
 
-    open_tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
-                             tag_dict=tag_dict)
+    tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+                        tag_dict=tag_dict)

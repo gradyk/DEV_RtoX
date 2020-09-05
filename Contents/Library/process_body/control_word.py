@@ -16,8 +16,9 @@ import re
 
 # From local application
 import adjust_process_text
-import build_final_file
+import control_word_to_build
 import dict_updater
+import tag_to_build
 
 
 def processor(processing_dict: dict) -> dict:
@@ -55,15 +56,15 @@ def cw_evaluation(processing_dict: dict, control_word: str, test) -> dict:
         try:
             cw_func = ref_dict[cw_text][2]
             if cw_func != null_function:
-                control_word_to_tag(cw_func=cw_func,
-                                    cw_value=cw_value,
-                                    processing_dict=processing_dict)
+                control_word_to_build.processor(
+                    cw_func=cw_func,
+                    cw_value=cw_value,
+                    processing_dict=processing_dict)
             else:
                 pass
 
         except KeyError:
-            # Add missing control word to control_word_dict.json
-            # file.
+            # Add missing control word to control_word_dict.json file.
             cw_update = {cw_text: ["", "", "null"]}
             dict_updater.json_dict_updater(
                 dict_name="control_word_dict.json",
@@ -71,14 +72,11 @@ def cw_evaluation(processing_dict: dict, control_word: str, test) -> dict:
                 dict_update=cw_update)
             # Add control word that cannot be processed to build
             # file.
-            open_tag = f'<ts:rtfIssue line="' \
-                       f'{processing_dict["line_to_parse"]}" ' \
-                       f'key="{control_word}"/>'
-            text = ""
-            close_tag = ""
-            build_final_file.processor(open_tag=open_tag,
-                                       text=text,
-                                       close_tag=close_tag)
+            tag_list = [f'<ts:rtfIssue line="',
+                        f'{processing_dict["line_to_parse"]}" ',
+                        f'key="{control_word}"/>']
+            tag = ''.join(tag_list)
+            tag_to_build.processor(tag=tag)
 
         parse_text_update = \
             processing_dict["parse_text"].replace(control_word, "", 1)
@@ -87,11 +85,3 @@ def cw_evaluation(processing_dict: dict, control_word: str, test) -> dict:
         processing_dict = adjust_process_text.text_metric_reset(
             processing_dict=processing_dict)
         return processing_dict
-
-
-def control_word_to_tag(cw_func, cw_value: str, processing_dict: dict):
-    # THIS DOESN'T WORK-E.G. I.PY DOESN'T EVAL, ETC.
-    # importlib.import_module(cw_func)
-    # cw_func.processor(cw_value=cw_value, processing_dict=processing_dict)
-    # ABOVE TWO LINES DON'T WORK
-    print(cw_func, "--", cw_value, f'tag_set: {processing_dict["tag_set"]}')

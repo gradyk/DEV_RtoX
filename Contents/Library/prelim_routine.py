@@ -55,8 +55,8 @@ from read_log_config import logger_basic, logger_debug
 
 class Prelim:
 
-    def __init__(self, config_file: str, base_script_dir: str, debug_dir: str
-                 ) -> None:
+    def __init__(self, config_file: str, base_script_dir: str,
+                 debug_dir: str) -> None:
         self.config_file = config_file
         self.base_script_dir = base_script_dir
         self.debug_dir = debug_dir
@@ -174,26 +174,28 @@ class Prelim:
         # debugdir and base_script_dir.
 
         # These settings come from the Config.ini file.
-        # TODO Program needs to allow for different responses on these inputs.
-        tag_set = config_settings_dict.get("tag-style")
+        tag_set = config_settings_dict.get("tag-set")
+        output_header = config_settings_dict.get("output-file-header")
         convert_symbol = config_settings_dict.get("convert-symbol")
         convert_caps = config_settings_dict.get("convert-caps")
         report_level = config_settings_dict.get("problem-report-level")
         xml_indenting = config_settings_dict.get("xml-indenting")
         create_lists = config_settings_dict.get("create-lists")
 
+        # TODO These need to reflect user input rather than be hard-coded.
         user_input_choices_dict = {
             tag_set: f'You chose "{tag_set}" for your XML tags.',
+            output_header: f'You chose {output_header}for your header setting.',
             convert_symbol: f"You chose to have all symbols converted "
                             f"to UTF-8 characters.",
-            # TODO What is convert_caps supposed to do?
-            convert_caps: "",
+            convert_caps: f'You chose {convert_caps} for your caps setting.',
             report_level: f"You selected a problem report level of "
                           f"{report_level}.",
             xml_indenting: f"You chose to have XML indenting turned on.",
             create_lists: "You chose to have create lists turned on."
             }
 
+        # TODO This code section doesn't make sense.
         for menu_item in user_input_choices_dict:
             if menu_item:
                 try:
@@ -230,9 +232,7 @@ class Prelim:
 
     @staticmethod
     def print_output_error_message():
-        """
-        Log a message if no file_to_produce is specified.
-        """
+        """ Log a message if no file_to_produce is specified. """
         # TODO Check that program can handle no name provided properly.
         try:
             logger_basic.isEnabledFor(level=10)
@@ -242,4 +242,4 @@ class Prelim:
                                   "name of the file to convert and change "
                                   "the extension to .xml")
         except TypeError:
-            logging.exception("")
+            logging.exception("______________")

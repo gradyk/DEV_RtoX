@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -38,7 +42,6 @@ import sys
 
 def get_system_arguments():
     """ Read the arguments from the command line. """
-
     parser = argparse.ArgumentParser(description="Process command line "
                                                  "arguments for RtoX.py.")
     parser.add_argument("--input", required=True, help="RTF file to "
@@ -56,11 +59,10 @@ def get_configuration(config_file: str, config_file_dict_args: dict,
     2. Put key:value pairs in from command line and Config.ini into
     config_setting_dict dictionary.
     """
-    base_script_dir = os.path.dirname(os.path.abspath(
-        sys.argv[0]))
-    dict_dir = os.path.join(base_script_dir, "debugdir")
-    dict_path = os.path.join(dict_dir, "config_dict.json")
-    with open(dict_path, "w+") as open_dict:
+    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    config_file_dir = os.path.join(base_script_dir, "debugdir")
+    config_file_path = os.path.join(config_file_dir, "config_dict.json")
+    with open(config_file_path, "w+") as open_dict:
         json.dump({}, open_dict)
 
     config = configparser.ConfigParser()

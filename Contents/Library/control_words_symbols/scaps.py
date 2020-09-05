@@ -2,27 +2,24 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-def tagger(processing_dict: dict, cw_value: str) -> tuple:
+def tagger(processing_dict: dict, cw_value: str) -> list:
     # \scaps turns on small capitals; \scaps0 (or any other number) turns off
-    # small capitals
-    tag_set = processing_dict["tag_set"]
-    if cw_value ==
-
-    tag_list = {
-        "open":
-            ['',
-             '<ts:hiText rend="smallcaps">',
-             '',
-             ''
-            ],
-        "close":
-            ['',
-             '</ts:hiText>',
-             '',
-             ''
-            ]
-    }
-    open_tag = tag_list["open"][tag_set]
-    close_tag = tag_list["close"][tag_set]
-    return open_tag, close_tag
-
+    # small capitals.
+    # See Word2007RTFSpec9 Font (Character) Formatting Properties, p.130.
+    item = ""
+    tag_num = processing_dict["tag_set"]
+    if cw_value == item:
+        tag_options = {
+            1: "",
+            2: "",
+            3: ["tagon", '<ts:hiText rend="smallcaps">']
+        }
+        tag = tag_options[tag_num]
+    else:
+        tag_options = {
+            1: "",
+            2: "",
+            3: ["tagoff", '</ts:hiText>']
+        }
+        tag = tag_options[tag_num]
+    return tag
