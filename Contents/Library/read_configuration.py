@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 """ Converts the configuration file (Config.ini) into a
 Python dictionary and adds command line options to the dictionary. """
@@ -37,32 +17,27 @@ import argparse
 import configparser
 import json
 import os
-import sys
+from pathlib import Path
 
 
-def get_system_arguments():
+def get_system_arguments() -> dict:
     """ Read the arguments from the command line. """
     parser = argparse.ArgumentParser(description="Process command line "
-                                                 "arguments for RtoX.py.")
-    parser.add_argument("--input", required=True, help="RTF file to "
-                                                       "convert.")
-    parser.add_argument("--output", required=True, help="XML file to "
-                                                        "produce.")
+                                                 "arguments.")
+    parser.add_argument("--input", required=True, help="Input RTF file.")
+    parser.add_argument("--output", required=True, help="Output XML file.")
     config_args = vars(parser.parse_args())
     return config_args
 
 
-def get_configuration(config_file: str, config_file_dict_args: dict,
-                      debug_dir: str):
-    """
-    1. Pull user configuration settings from Config.ini.
-    2. Put key:value pairs in from command line and Config.ini into
-    config_setting_dict dictionary.
-    """
-    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    config_file_dir = os.path.join(base_script_dir, "debugdir")
-    config_file_path = os.path.join(config_file_dir, "config_dict.json")
-    with open(config_file_path, "w+") as open_dict:
+def get_configuration(config_file: str, config_file_dict_args: dict) -> dict:
+    """ 1. Pull user configuration settings from Config.ini. 2. Put key:value
+    pairs in from command line and Config.ini into config_setting_dict
+    dictionary. """
+    base_dir = Path.cwd()
+    debug_dir = os.path.join(base_dir, "debugdir")
+    config_dict_path = os.path.join(debug_dir, "config_dict.json")
+    with open(config_dict_path, "w+") as open_dict:
         json.dump({}, open_dict)
 
     config = configparser.ConfigParser()

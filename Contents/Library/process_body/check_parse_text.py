@@ -10,6 +10,7 @@ __date__ = "2020-8-17"
 __name__ = "Contents.Library.process_body.check_parse_text"
 
 # From standard libraries
+import re
 import sys
 
 # From local application
@@ -18,9 +19,12 @@ import control_word
 import backslash_text
 import left_bracket_text
 import check_text
+import script_timer
 
 
 def check_string_manager(processing_dict: dict, line: int) -> None:
+    control_word_regex = re.compile(r"^(\\[a-zA-Z\-\s0-9]*)")
+    processing_dict.update({"cw_regex": control_word_regex})
 
     while line < processing_dict["num_lines"] + 1:
         # Checks for an RTF group.
@@ -41,4 +45,4 @@ def check_string_manager(processing_dict: dict, line: int) -> None:
         line = processing_dict["line_to_parse"]
 
     # TODO This will actually go to modules that will close out the program.
-    sys.exit()
+    script_timer.close_processor()

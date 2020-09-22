@@ -30,44 +30,43 @@ __name__ = "Contents.Library.open_tag_check"
 import json
 import logging
 import os
+import sys
 
 # From local application
 import tag_registry_update
-import output_file_update
+import build_output_file
 from read_log_config import logger_debug
 
 
 def tag_check(debug_dir: str, tag_dict: dict, status_list: list):
-    """
-    Check for and, if necessary, close open tags. The status_list provides
-    the tags to check.
-    """
-
+    """ Check for and, if necessary, close open tags. The status_list provides
+    the tags to check. """
     tag_registry = os.path.join(debug_dir, "tag_registry.json")
-
+    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    tag_dict_file = os.path.join(base_dir, "xml_tags.json")
     with open(tag_registry) as tag_registry_data_pre:
         tag_registry_data = json.load(tag_registry_data_pre)
+    with open(tag_dict_file, "r+") as tag_dict_file_pre:
+        tag_dict_options = json.load(tag_dict_file_pre)
+
+        tag_set = tag_dict_options[________[______]]
 
         for tag_type in status_list:
-            tag_closed = "0"
-
+            tag_closed = "close"
             if tag_registry_data[tag_type] == tag_closed:
                 pass
             else:
-                # Update the working_xml_file.
-                content_update = tag_dict[tag_type+"-end"]
-                output_file_update.content_append(
-                    debug_dir=debug_dir,
-                    content_update=content_update)
+                # Update the build_output_file.
+                content_update = tag_dict[tag_type]
+                build_output_file.processor(update_output=content_update)
                 try:
                     if logger_debug.isEnabledFor(logging.DEBUG):
-                        msg = str(tag_dict[tag_type+"-end"])
+                        msg = "______________"
                         logger_debug.error(msg)
                 except AttributeError:
                     logging.exception("Check setLevel for logger_debug.")
 
                 # Update the tag registry.
-                content_update_dict = {tag_type: "0"}
-                tag_registry_update.tag_registry_update(
-                    debug_dir=debug_dir,
-                    content_update_dict=content_update_dict)
+                content_update_dict = {tag_type: "close"}
+                tag_registry_update.processor(debug_dir=debug_dir,
+                                              tag_update_dict=content_update_dict)

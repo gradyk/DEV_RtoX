@@ -33,36 +33,36 @@ import tag_registry_update
 def processor():
     """ Insert the XML tags to start the document portion of the XML file
     (after the header). """
-    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    debug_dir = os.path.join(base_script_dir, "debugdir")
+    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    debug_dir = os.path.join(base_dir, "debugdir")
     config_file = os.path.join(debug_dir, "config_dict.json")
-    dicts_dir = os.path.join(base_script_dir, "Library/dicts")
+    dicts_dir = os.path.join(base_dir, "Library/dicts")
     start_tags = os.path.join(dicts_dir, "start_tags.json")
+    transition_tags = ""
     try:
         with open(config_file, "r+") as config_dict_pre:
             config_dict = json.load(config_dict_pre)
         with open(start_tags, "r+") as start_tags_pre:
             start_tag_dict = json.load(start_tags_pre)
-        if config_dict["tag-set"] == 1:
-            start_tags = start_tag_dict["1"]
-        elif config_dict["tag-set"] == 2:
-            start_tags = start_tag_dict["2"]
-        elif config_dict["tag-set"] == 3:
-            start_tags = start_tag_dict["3"]
-
+        if config_dict["tag-set"] == "1":
+            transition_tags = start_tag_dict["1"]
+        elif config_dict["tag-set"] == "2":
+            transition_tags = start_tag_dict["2"]
+        elif config_dict["tag-set"] == "3":
+            transition_tags = start_tag_dict["3"]
     except KeyError as error:
         logging.exception(error, "The tag-set number does not match an "
                                  "entry for transition tags.")
-        start_tags = start_tag_dict["1"]
+        transition_tags = start_tag_dict["1"]
     except FileNotFoundError as error:
         logging.exception(error, "The config_dict.json file is missing.")
 
-    build_output_file.processor(update_output=start_tags)
+    build_output_file.processor(update_output=transition_tags)
 
     # Update the tag registry.
-    content_update_dict = {"bodytext":  "1",
-                           "section":   "1",
-                           "paragraph": "1",
-                           "body":      "1"}
-    tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, content_update_dict=content_update_dict)
+    tag_update = {"bodytext":  "open",
+                  "section":   "open",
+                  "paragraph": "open",
+                  "body":      "open"}
+    tag_registry_update.processor(debug_dir=debug_dir,
+                                  tag_update=tag_update)

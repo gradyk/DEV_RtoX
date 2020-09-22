@@ -12,13 +12,16 @@ __name__ = "Contents.Library.process_body.control_word"
 # From standard libraries
 import json
 import logging
+import os
 import re
+import sys
 
 # From local application
 import adjust_process_text
+import build_output_file
+import control_word_collections
 import control_word_to_build
 import dict_updater
-import tag_to_build
 
 
 def processor(processing_dict: dict) -> dict:
@@ -26,11 +29,11 @@ def processor(processing_dict: dict) -> dict:
     # character (optional), and numbers (optional).
     item = None
     try:
-        test = re.search(r"^(\\[a-zA-Z\-\s0-9]*)", processing_dict[
+        test = re.search(processing_dict["cw_regex"], processing_dict[
             "parse_text"])
         if test is not item:
-            control_word = test[0]
             length = test.end() - test.start()
+            control_word = test[0]
             parse_index_update = processing_dict["parse_index"] + length
             processing_dict["parse_index"] = parse_index_update
             processing_dict = cw_evaluation(processing_dict=processing_dict,
@@ -46,42 +49,56 @@ def processor(processing_dict: dict) -> dict:
 
 
 def cw_evaluation(processing_dict: dict, control_word: str, test) -> dict:
-    with open(processing_dict["control_word_dict"], "r+") as \
-            control_word_dict_pre:
-        ref_dict = json.load(control_word_dict_pre)
-        cw_text = "".join([i for i in test[0] if i.isalpha()])
-        cw_value = "".join([i for i in test[0] if i.isdigit()])
+    control_word_collections.cw_dict()
 
-        null_function = "null"
-        try:
-            cw_func = ref_dict[cw_text][2]
-            if cw_func != null_function:
-                control_word_to_build.processor(
-                    cw_func=cw_func,
-                    cw_value=cw_value,
-                    processing_dict=processing_dict)
-            else:
-                pass
 
-        except KeyError:
-            # Add missing control word to control_word_dict.json file.
-            cw_update = {cw_text: ["", "", "null"]}
-            dict_updater.json_dict_updater(
-                dict_name="control_word_dict.json",
-                debug_dir=processing_dict["dicts_dir"],
-                dict_update=cw_update)
-            # Add control word that cannot be processed to build
-            # file.
-            tag_list = [f'<ts:rtfIssue line="',
-                        f'{processing_dict["line_to_parse"]}" ',
-                        f'key="{control_word}"/>']
-            tag = ''.join(tag_list)
-            tag_to_build.processor(tag=tag)
+    cw_text = "".join([i for i in test[0] if i.isalpha()])
+    cw_value = "".join([i for i in test[0] if i.isdigit()])
+    null_function = "null"
+    try:
 
-        parse_text_update = \
-            processing_dict["parse_text"].replace(control_word, "", 1)
-        processing_dict["parse_text"] = parse_text_update
-        processing_dict["parse_index"] = 0
-        processing_dict = adjust_process_text.text_metric_reset(
-            processing_dict=processing_dict)
-        return processing_dict
+        cw_func = cw_dict[cw_text][2]
+
+        if cw_func != null_function:
+            name = cw_dict[cw_text][3]
+            tag_set = processing_dict["tag_set"]
+            tag_info = {
+                "func":      cw_func,
+                "cw_text":   cw_text,
+                "cw_value":  cw_value,
+                "name":      name,
+                "tag_open":  "",
+                "tag_close": "",
+                "tag_set":   tag_set
+            }
+            control_word_to_build.processor(tag_info=tag_info)
+        else:
+            pass
+    except KeyError:
+        # Add missing control word to control_word_dict.json file.
+        cw_update = {cw_text: ["", "", "null", name]}
+        dict_updater.json_dict_updater(
+            dict_name="control_word_dict.json",
+            debug_dir=processing_dict["dicts_dir"],
+            dict_update=cw_update)
+        # Add control word that cannot be processed to build
+        # file.
+        base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        dicts_dir = os.path.join(base_dir, "Library/dicts")
+        tag_dict_file = os.path.join(dicts_dir, "xml_tags.json")
+        with open(tag_dict_file, "r+") as tag_dict_file_pre:
+            tag_dict_options = json.load(tag_dict_file_pre)
+        tag_set = str(tag_info["tag_set"])
+        tag_dict = tag_dict_options[tag_set]
+        tag_empty = tag_dict["missing"][0]
+        tag = tag_empty.replace("zzz", str(processing_dict[
+                                               "line_to_parse"]))
+        tag = tag.replace("aaa", cw_text)
+        build_output_file.processor(update_output=tag)
+    parse_text_update = \
+        processing_dict["parse_text"].replace(control_word, "", 1)
+    processing_dict["parse_text"] = parse_text_update
+    processing_dict["parse_index"] = 0
+    processing_dict = adjust_process_text.text_metric_reset(
+        processing_dict=processing_dict)
+    return processing_dict

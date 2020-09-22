@@ -29,34 +29,32 @@ import check_parse_text
 class MainDocManager(object):
     def __init__(self,
                  working_input_file: str,
-                 debug_dir: str,
                  control_word_dict: str,
                  tag_set: int) -> None:
         self.working_input_file = working_input_file
-        self.debug_dir = debug_dir
         self.control_word_dict = control_word_dict
-        self.length_parse_text = 0
-        self.header_table_file = os.path.join(
-            self.debug_dir, "header_tables_dict.json")
         self.tag_set = tag_set
+        self.length_parse_text = 0
 
     def body_parse_manager(self) -> None:
+        base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        debug_dir = os.path.join(base_dir, "debugdir")
+        dicts_dir = os.path.join(base_dir, "Library/dicts/")
+        header_table_file = os.path.join(debug_dir, "header_tables_dict.json")
+
         main_doc_dir = MainDocManager(
             working_input_file=self.working_input_file,
-            debug_dir=self.debug_dir,
             control_word_dict=self.control_word_dict,
             tag_set=self.tag_set)
 
-        MainDocManager.load_tag_registry(self=main_doc_dir)
+        MainDocManager.load_tag_registry(debug_dir=debug_dir)
         parse_text, line_to_parse, parse_index = \
-            MainDocManager.parse_starting_point(self=main_doc_dir)
+            MainDocManager.parse_starting_point(
+                self=main_doc_dir,
+                header_table_file=header_table_file)
 
         num_lines = file_stats.processor(
             working_input_file=self.working_input_file)
-
-        base_script_dir = os.path.dirname(os.path.abspath(
-            sys.argv[0]))
-        dicts_dir = os.path.join(base_script_dir, "Library/dicts/")
 
         processing_dict = {
             "parse_text":         parse_text,
@@ -64,7 +62,7 @@ class MainDocManager(object):
             "line_to_parse":      line_to_parse,
             "parse_index":        parse_index,
             "working_input_file": self.working_input_file,
-            "debug_dir":          self.debug_dir,
+            "debug_dir":          debug_dir,
             "dicts_dir":          dicts_dir,
             "control_word_dict":  self.control_word_dict,
             "group_contents":     "",
@@ -78,21 +76,21 @@ class MainDocManager(object):
         check_parse_text.check_string_manager(processing_dict=processing_dict,
                                               line=line_to_parse)
 
-    def load_tag_registry(self) -> None:
-        base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-        dicts_dir = os.path.join(base_script_dir, "Library/dicts")
+    @staticmethod
+    def load_tag_registry(debug_dir: str) -> None:
+        base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+        dicts_dir = os.path.join(base_dir, "Library/dicts")
         opening_registry_file = os.path.join(
             dicts_dir, "opening_tag_registry_dict.json")
-        tag_registry_file = os.path.join(
-            self.debug_dir, "tag_registry.json")
+        tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
         with open(tag_registry_file, "w+") as trf:
             with open(opening_registry_file) as orf_pre:
                 orf = json.load(orf_pre)
                 tag_registry = orf.copy()
                 json.dump(tag_registry, trf, indent=4)
 
-    def parse_starting_point(self) -> tuple:
-        with open(self.header_table_file) as htf_pre:
+    def parse_starting_point(self, header_table_file: str) -> tuple:
+        with open(header_table_file) as htf_pre:
             header_table = json.load(htf_pre)
             line_to_parse = header_table["info"][2]
             parse_index = header_table["info"][3]
@@ -100,7 +98,6 @@ class MainDocManager(object):
             MainDocManager.set_process_text(
                 self=MainDocManager(
                     working_input_file=self.working_input_file,
-                    debug_dir=self.debug_dir,
                     control_word_dict=self.control_word_dict,
                     tag_set=self.tag_set),
                 parse_index=parse_index,

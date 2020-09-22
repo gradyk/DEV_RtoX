@@ -1,5 +1,22 @@
 {
-    "italic": "0", "bold": "0", "underline": "0",  "strikethrough": "0",
-    "small_caps": "0", "footnote": "0", "header": "0", "section": "0",
-    "paragraph": "0", "body": "0", "bodytext": "0"
+    "italic": "close",
+    "bold": "close",
+    "underline": "close",
+    "strikethrough": "close",
+    "small_caps": "close",
+    "footnote": "close",
+    "header": "close",
+    "section": "close",
+    "paragraph": "close",
+    "body": "close",
+    "bodytext": "close",
+    "par": "close",
+    "pard": "close",
+    "intbl": "close",
+    "itap": "close",
+    "level": "close",
+    "noline": "close",
+    "outlinelevel": "close",
+    "sbys": "close",
+    "s": "close"
 }

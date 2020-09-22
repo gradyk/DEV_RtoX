@@ -2,6 +2,8 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
+"""  """
+
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
@@ -15,7 +17,7 @@ import re
 
 # From local application
 import adjust_process_text
-import text_to_build
+import build_output_file
 
 
 def processor(processing_dict: dict) -> dict:
@@ -25,7 +27,8 @@ def processor(processing_dict: dict) -> dict:
     try:
         test = re.search(r"^([a-zA-Z\-\s0-9]*)", processing_dict["parse_text"])
         if test is not item:
-            text_to_build.processor(text=test[0])
+            text = test[0]
+            build_output_file.processor(update_output=test[0])
         else:
             pass
     except TypeError:
@@ -34,9 +37,8 @@ def processor(processing_dict: dict) -> dict:
                           f"{processing_dict['parse_index']}--"
                           f"{processing_dict['parse_text']}")
 
-    parse_text_update = processing_dict[
-        "parse_text"].replace(text, "", 1)
-    processing_dict["parse_text"] = parse_text_update
+    processing_dict["parse_text"] = processing_dict["parse_text"].\
+        replace(text, "", 1)
     processing_dict["parse_index"] = 0
     processing_dict = \
         adjust_process_text.text_metric_reset(

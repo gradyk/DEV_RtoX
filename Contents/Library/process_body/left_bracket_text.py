@@ -15,23 +15,18 @@ import re
 
 # From local application
 import adjust_process_text
-import text_to_build
+import build_output_file
 
 
 def processor(processing_dict: dict) -> dict:
     # Test for left bracket character as part of text.
+    text = ""
     item = None
     try:
         test = re.search(r"^\\{", processing_dict["parse_text"])
         if test is not item:
             text = "{"
-            text_to_build.processor(text=text)
-            processing_dict["parse_text"] = processing_dict[
-                "parse_text"].replace(test[0], "", 1)
-            processing_dict["parse_index"] = 0
-
-            processing_dict = adjust_process_text.text_metric_reset(
-                processing_dict=processing_dict)
+            build_output_file.processor(update_output=text)
         else:
             pass
     except TypeError:
@@ -39,4 +34,10 @@ def processor(processing_dict: dict) -> dict:
                           f"{processing_dict['line_to_parse']}:"
                           f"{processing_dict['parse_index']}--"
                           f"{processing_dict['parse_text']}")
+
+    processing_dict["parse_text"] = processing_dict["parse_text"].\
+        replace(text, "", 1)
+    processing_dict["parse_index"] = 0
+    processing_dict = adjust_process_text.text_metric_reset(
+        processing_dict=processing_dict)
     return processing_dict

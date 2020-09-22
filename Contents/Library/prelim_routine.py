@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """
 First processing step for RTF file.
@@ -47,27 +27,22 @@ __name__ = "Contents.Library.extract_config_settings"
 import logging
 import os
 import sys
+from pathlib import Path
 
 # From local application
 import read_configuration
 from read_log_config import logger_basic, logger_debug
 
 
-class Prelim:
+class Prelim(object):
+    def __init__(self) -> None:
+        self.config_info = "Config.ini"
+        self.base_dir = Path.cwd()
+        self.debug_dir = os.path.join(self.base_dir, "debugdir")
 
-    def __init__(self, config_file: str, base_script_dir: str,
-                 debug_dir: str) -> None:
-        self.config_file = config_file
-        self.base_script_dir = base_script_dir
-        self.debug_dir = debug_dir
-
-    def prelim_settings(self):
-
-        self.base_script_dir = os.path.dirname(os.path.abspath(
-            sys.argv[0]))
-
-        # Set the path for the main script and confirm it exists.
-        main_script = os.path.join(self.base_script_dir, "RtoX.py")
+    def prelim_settings(self) -> str:
+        # Test the path for the main script.
+        main_script = os.path.join(self.base_dir, "RtoX.py")
 
         if main_script and not os.path.isfile(main_script):
             try:
@@ -83,14 +58,10 @@ class Prelim:
                 sys.exit(1)
 
         # Set the path for the Config.ini file.
-        self.config_file = os.path.join(self.base_script_dir, "Config.ini")
-
-        # Set the debug_dir directory to store working files created by the
-        # program.
-        self.debug_dir = os.path.join(self.base_script_dir, "debugdir")
+        config_file = os.path.join(self.base_dir, "Config.ini")
 
         # Determine if the base directory is in sys.path; if not, add it.
-        if self.base_script_dir in sys.path:
+        if self.base_dir in sys.path:
             current_in_path = 1
             temp = []
         else:
@@ -109,20 +80,21 @@ class Prelim:
             sys.path.append(path)
 
         if current_in_path:
-            sys.path.append(self.base_script_dir)
+            sys.path.append(self.base_dir)
         else:
             pass
 
-        return self.base_script_dir, self.debug_dir, self.config_file
+        return config_file
 
-    def create_config_dict(self):
+    @staticmethod
+    def create_config_dict(config_file: str):
         """ Depending on the user's preference (problem-report-level),
         report the settings before running the remainder of the program. """
 
         config_file_dict_args = read_configuration.get_system_arguments()
 
         config_settings_dict = read_configuration.get_configuration(
-            config_file=self.config_file, debug_dir=self.debug_dir,
+            config_file=config_file,
             config_file_dict_args=config_file_dict_args)
 
         # Get the input file from the command line.
@@ -171,7 +143,7 @@ class Prelim:
             output_file = os.path.splitext(input_file)[0]+'.xml'
 
         # Settings for the following variables are supplied by the program:
-        # debugdir and base_script_dir.
+        # debugdir and base_dir.
 
         # These settings come from the Config.ini file.
         tag_set = config_settings_dict.get("tag-set")
@@ -228,7 +200,8 @@ class Prelim:
                                       "now quit.")
             sys.exit(1)
         except TypeError:
-            logging.exception("")
+            # TODO Complete logging exception.
+            logging.exception("_______________")
 
     @staticmethod
     def print_output_error_message():
@@ -242,4 +215,5 @@ class Prelim:
                                   "name of the file to convert and change "
                                   "the extension to .xml")
         except TypeError:
+            # TODO Complete logging exception.
             logging.exception("______________")

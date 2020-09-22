@@ -123,9 +123,8 @@ def insert_opening_cs_tag(cs_line_dict: dict, text: str,
 
             # Update the tag registry.
             content_update_dict = {lot_item: tag_open}
-            tag_registry_update.tag_registry_update(
-                debug_dir=debug_dir,
-                content_update_dict=content_update_dict)
+            tag_registry_update.processor(debug_dir=debug_dir,
+                                          tag_update_dict=content_update_dict)
             try:
                 if logger_debug.isEnabledFor(logging.DEBUG):
                     logger_debug.error(msg=str(tag_dict[lot_item+"-beg"] +
@@ -171,9 +170,8 @@ def insert_closing_cs_tags(debug_dir: str, tag_dict: dict, tag_bag: list,
 
             # Update the tag registry.
             content_update_dict = {tag_item: tag_closed}
-            tag_registry_update.tag_registry_update(
-                debug_dir=debug_dir,
-                content_update_dict=content_update_dict)
+            tag_registry_update.processor(debug_dir=debug_dir,
+                                          tag_update_dict=content_update_dict)
             try:
                 if logger_debug.isEnabledFor(logging.DEBUG):
                     msg = str(f"{line} " + tag_dict[tag_item+"-end"])

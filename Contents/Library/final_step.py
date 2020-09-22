@@ -40,7 +40,7 @@ from read_log_config import logger_debug
 def final_step(debug_dir: str,
                tag_set: int,
                output_file_name: str,
-               base_script_dir: str) -> None:
+               base_dir: str) -> None:
 
     working_xml_file = os.path.join(debug_dir, "working_xml_file.xml")
 
@@ -90,7 +90,7 @@ def final_step(debug_dir: str,
     # Insert the appropriate header based on the user's preference.
     # TODO There should be a default header file for each tag style.
     try:
-        insert = open(os.path.join(base_script_dir+"/input", tag_dict[
+        insert = open(os.path.join(base_dir+"/input", tag_dict[
             "xmlheader"]), "r")
         insert_tags = insert.read()
         with open(working_xml_file, "r") as final_xml_file_pre:
@@ -114,7 +114,7 @@ def final_step(debug_dir: str,
 
     # Put the final XML file in the output directory and rename it per
     # the user's preference.
-    output_dir = base_script_dir + "/output"
+    output_dir = base_dir + "/output"
     copy(working_xml_file, output_dir)
     os.rename(output_dir + "/working_xml_file.xml",
               output_dir + f'/{output_file_name}')

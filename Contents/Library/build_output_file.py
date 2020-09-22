@@ -2,7 +2,7 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-""" This module adds tags and/or text to the output file RtoX builds. """
+""" Module adds tags and/or text to the output file RtoX builds. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -18,8 +18,8 @@ import sys
 
 
 def processor(update_output: str) -> None:
-    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    file_dir = os.path.join(base_script_dir, "debugdir")
+    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    file_dir = os.path.join(base_dir, "debugdir")
     output_file = os.path.join(file_dir, "output_file.xml")
     with open(output_file, "r+") as output_file_pre:
         output_file_text = output_file_pre.read()

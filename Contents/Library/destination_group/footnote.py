@@ -108,8 +108,8 @@ def insert_opening_footnote_tag(debug_dir: str, tag_dict: dict,
 def update_tag_registry_start(debug_dir: str):
     tag_open = "1"
     content_update_dict = {"footnote": tag_open}
-    tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, content_update_dict=content_update_dict)
+    tag_registry_update.processor(debug_dir=debug_dir,
+                                  tag_update_dict=content_update_dict)
 
 
 def footnote_process_controller_end(debug_dir: str, tag_dict: dict,
@@ -156,5 +156,5 @@ def insert_closing_footnote_tag(debug_dir: str, tag_dict: dict,
 
 def update_tag_registry_end(debug_dir: str, tag_closed="0") -> None:
     content_update_dict = {"footnote": tag_closed}
-    tag_registry_update.tag_registry_update(
-        debug_dir=debug_dir, content_update_dict=content_update_dict)
+    tag_registry_update.processor(debug_dir=debug_dir,
+                                  tag_update_dict=content_update_dict)

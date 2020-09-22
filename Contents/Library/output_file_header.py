@@ -24,8 +24,8 @@ import build_output_file
 
 
 def processor():
-    base_script_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    file_dir = os.path.join(base_script_dir, "debugdir")
+    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    file_dir = os.path.join(base_dir, "debugdir")
     config_file = os.path.join(file_dir, "config_dict.json")
 
     try:
@@ -33,12 +33,12 @@ def processor():
             config_dict = json.load(config_dict_pre)
 
         if config_dict["output-file-header"] == 0:
-            header_file_dir = os.path.join(base_script_dir, "input")
+            header_file_dir = os.path.join(base_dir, "input")
             header_file = os.path.join(header_file_dir, "defaultheader.xml")
             with open(header_file, "r+") as header_file_pre:
                 header_file_text = header_file_pre.read()
         else:
-            header_file_dir = os.path.join(base_script_dir, "input")
+            header_file_dir = os.path.join(base_dir, "input")
             header_file = os.path.join(header_file_dir, "tpresheader.xml")
             with open(header_file, "r+") as header_file_pre:
                 header_file_text = header_file_pre.read()
