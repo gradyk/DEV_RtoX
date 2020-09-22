@@ -42,7 +42,7 @@ jobs:
     # ℹ️ Command-line programs to run using the OS shell.
     # 📚 https://git.io/JvXDl
     - name: Run RtoX
-      run: RtoX.py --input-Artis.rtf --output-Artis.xml
+      run: RtoX --input-Artis.rtf --output-Artis.xml
       working-directory: /Contents
       shell: bash 
 
