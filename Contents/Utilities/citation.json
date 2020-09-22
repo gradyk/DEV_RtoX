@@ -1,0 +1,70 @@
+{
+  "__common_package_options__": {
+    "style": {
+      "type":         "style",
+      "description":  "style of bibliography and citations"
+    },
+    "bibstyle": {
+      "type":         "style",
+      "description":  "bibliography style"
+    },
+    "citestyle": {
+      "type":         "style",
+      "description":  "citation style"
+    },
+    "refsection": {
+      "type":         "division",
+      "description":  "new refsection at document division"
+    },
+    "refsegment": {
+      "type":         "division",
+      "description":  "new refsegment at document division"
+    },
+    "autocite": {
+      "type":         "style",
+      "description":  "behavior of \\autocite etc."
+    },
+    "sortcite": {
+      "type":         "boolean",
+      "description":  "whether to sort multiple citations"
+    },
+    "maxnames": {
+      "type":         "integer",
+      "description":  "truncate longer name lists"
+    },
+    "minnames": {
+      "type":         "integer",
+      "description":  "no. of names in truncated name lists"
+    },
+    "backref": {
+      "type":         "boolean",
+      "description":  "whether to printe 'back references'"
+    },
+    "mincrossrefs": {
+      "type":         "integer",
+      "description":  "minimum number of cross references"
+    },
+    "sorting": {
+      "type":         "sort order",
+      "description":  "bibliography sort order"
+    },
+    "indexing": {
+      "type":         "boolean",
+      "description":  "whether to enable indexing support"
+    }
+  },
+  "__citations__|__standard_commands__": {
+    "\\cite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "bare",
+    "\\parencite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "parenthetical",
+    "\\footcite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "footnote (\\fpptnpte)",
+    "\\footcitetext[⟨pre⟩][⟨post⟩]{⟨key⟩}": "footnote (\\footnotetext)"
+  },
+  "__citations__|__common_commands__": {
+    "\\textcite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "textual",
+    "\\smartcite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "context-dependant",
+    "\\cite*[⟨pre⟩][⟨post⟩]{⟨key⟩}": "year/title only",
+    "\\parencite*[⟨pre⟩][⟨post⟩]{⟨key⟩}": "year/title only",
+    "\\supercite[⟨pre⟩][⟨post⟩]{⟨key⟩}": "superscript"
+  },
+  "__citations__|__style-independent_commands__"
+}

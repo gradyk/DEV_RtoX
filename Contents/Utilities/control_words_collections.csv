@@ -1,0 +1,1448 @@
+﻿Control_Word,Category,Action,Function
+_,Special Characters,Symbol,null
+-,Special Characters,Symbol,null
+:,Special Characters,Symbol,null
+',Special Characters,Symbol,null
+{,Special Characters,Symbol,null
+},Special Characters,Symbol,null
+*,Special Characters,Symbol,null
+\,Special Characters,Symbol,null
+|,Special Characters,Symbol,null
+~,Special Characters,Symbol,null
+ab,Associated Character Properties,Toggle,toggle
+absh,Positioned Objects and Frames,Value,null
+abslock,Positioned Objects and Frames,Flag,null
+absnoovrlp,Positioned Objects and Frames,Toggle,toggle
+absw,Positioned Objects and Frames,Value,null
+acaps,Associated Character Properties,Toggle,toggle
+acccircle,Font (Character) Formatting Properties,Toggle,toggle
+acccomma,Font (Character) Formatting Properties,Toggle,toggle
+accdot,Font (Character) Formatting Properties,Toggle,toggle
+accnone,Font (Character) Formatting Properties,Toggle,toggle
+accunderdot,Font (Character) Formatting Properties,Toggle,toggle
+acf,Associated Character Properties,Value,null
+additive,Style Sheet,Flag,null
+adjustright,Section Formatting Properties,Flag,null
+adn,Associated Character Properties,Value,null
+aenddoc,Document Formatting Properties,Flag,null
+aendnotes,Document Formatting Properties,Flag,null
+aexpnd,Associated Character Properties,Value,null
+af,Associated Character Properties,Value,null
+afelev,Document Formatting Properties,Flag,null
+affixed,Paragraph Formatting Properties,Flag,null
+afs,Associated Character Properties,Value,null
+aftnbj,Document Formatting Properties,Flag,null
+aftncn,Document Formatting Properties,Destination,null
+aftnnalc,Document Formatting Properties,Flag,null
+aftnnar,Document Formatting Properties,Flag,null
+aftnnauc,Document Formatting Properties,Flag,null
+aftnnchi,Document Formatting Properties,Flag,null
+aftnnchosung,Document Formatting Properties,Flag,null
+aftnncnum,Document Formatting Properties,Flag,null
+aftnndbar,Document Formatting Properties,Flag,null
+aftnndbnum,Document Formatting Properties,Flag,null
+aftnndbnumd,Document Formatting Properties,Flag,null
+aftnndbnumk,Document Formatting Properties,Flag,null
+aftnndbnumt,Document Formatting Properties,Flag,null
+aftnnganada,Document Formatting Properties,Flag,null
+aftnngbnum,Document Formatting Properties,Flag,null
+aftnngbnumd,Document Formatting Properties,Flag,null
+aftnngbnumk,Document Formatting Properties,Flag,null
+aftnngbnuml,Document Formatting Properties,Flag,null
+aftnnrlc,Document Formatting Properties,Flag,null
+aftnnruc,Document Formatting Properties,Flag,null
+aftnnzodiac,Document Formatting Properties,Flag,null
+aftnnzodiacd,Document Formatting Properties,Flag,null
+aftnnzodiacl,Document Formatting Properties,Flag,null
+aftnrestart,Document Formatting Properties,Flag,null
+aftnrstcont,Document Formatting Properties,Flag,null
+aftnsep,Document Formatting Properties,Destination,null
+aftnsepc,Document Formatting Properties,Destination,null
+aftnstart,Document Formatting Properties,Value,null
+aftntj,Document Formatting Properties,Flag,null
+ai,Associated Character Properties,Toggle,toggle
+alang,Associated Character Properties,Value,null
+allowfieldendsel,Document Formatting Properties,Flag,null
+allprot,Document Formatting Properties,Flag,null
+alntblind,Document Formatting Properties,Flag,null
+alt,Style Sheet,Flag,null
+animtext,Font (Character) Formatting Properties,Value,null
+annotation,Comments (Annotations),Destination,null
+annotprot,Document Formatting Properties,Flag,null
+ansi,Character Set,Flag,null
+ansicpg,Unicode RTF,Value,null
+aoutl,Associated Character Properties,Toggle,toggle
+ApplyBrkRules,Document Formatting Properties,Flag,null
+ascaps,Associated Character Properties,Toggle,toggle
+ashad,Associated Character Properties,Toggle,toggle
+asianbrkrule,Document Formatting Properties,Flag,null
+aspalpha,Paragraph Formatting Properties,Toggle,toggle
+aspnum,Paragraph Formatting Properties,Toggle,toggle
+astrike,Associated Character Properties,Toggle,toggle
+atnauthor,Comments (Annotations),Destination,null
+atndate,Comments (Annotations),Destination,null
+atnicn,Comments (Annotations),Destination,null
+atnid,Comments (Annotations),Destination,null
+atnparent,Comments (Annotations),Destination,null
+atnref,Comments (Annotations),Destination,null
+atntime,Comments (Annotations),Destination,null
+atrfend,Comments (Annotations),Destination,null
+atrfstart,Comments (Annotations),Destination,null
+aul,Associated Character Properties,Toggle,toggle
+auld,Associated Character Properties,Toggle,toggle
+auldb,Associated Character Properties,Toggle,toggle
+aulnone,Associated Character Properties,Toggle,toggle
+aulw,Associated Character Properties,Toggle,toggle
+aup,Associated Character Properties,Value,null
+author,Information Group,Destination,null
+autofmtoverride,Document Formatting Properties,Flag,null
+b,Font (Character) Formatting Properties,Toggle,toggle
+background,Word through Word RTF for Drawing Objects (Shades),Destination,null
+bdbfhdr,Document Formatting Properties,Flag,null
+bdrrlswsix,Document Formatting Properties,Flag,null
+bgbdiag,Paragraph Shading,Flag,null
+bgcross,Paragraph Shading,Flag,null
+bgdcross,Paragraph Shading,Flag,null
+bgdkbdiag,Paragraph Shading,Flag,null
+bgdkcross,Paragraph Shading,Flag,null
+bgdkdcross,Paragraph Shading,Flag,null
+bgdkfdiag,Paragraph Shading,Flag,null
+bgdkhoriz,Paragraph Shading,Flag,null
+bgdkvert,Paragraph Shading,Flag,null
+bgfdiag,Paragraph Shading,Flag,null
+bghoriz,Paragraph Shading,Flag,null
+bgvert,Paragraph Shading,Flag,null
+bin,Pictures,Value,null
+binfsxn,Section Formatting Properties,Value,null
+binsxn,Section Formatting Properties,Value,null
+bkmkcolf,Bookmarks,Value,null
+bkmkcoll,Bookmarks,Value,null
+bkmkend,Bookmarks,Destination,null
+bkmkpub,Macintosh Edition Manager Publisher Objects,Flag,null
+bkmkstart,Bookmarks,Destination,null
+bliptag,Pictures,Value,null
+blipuid,Pictures,Value,null
+blipupi,Pictures,Value,null
+blue,Color Table,Value,null
+bookfold,Document Formatting Properties,Flag,null
+bookfoldrev,Document Formatting Properties,Flag,null
+bookfoldsheets,Document Formatting Properties,Value,null
+box,Paragraph Borders,Flag,null
+brdrart,Document Formatting Properties,Value,null
+brdrb,Paragraph Borders,Flag,null
+brdrbar,Paragraph Borders,Flag,null
+brdrbtw,Paragraph Borders,Flag,null
+brdrcf,Paragraph Borders,Value,null
+brdrdash,Paragraph Borders,Flag,null
+brdrdashd,Paragraph Text,Flag,null
+brdrdashdd,Paragraph Text,Flag,null
+brdrdashdotstr,Paragraph Text,Flag,null
+brdrdashsm,Paragraph Text,Flag,null
+brdrdb,Paragraph Borders,Flag,null
+brdrdot,Paragraph Borders,Flag,null
+brdremboss,Paragraph Text,Flag,null
+brdrengrave,Paragraph Text,Flag,null
+brdrframe,Paragraph Borders,Flag,null
+brdrhair,Paragraph Borders,Flag,null
+brdrinset,Paragraph Text,Flag,null
+brdrl,Paragraph Borders,Flag,null
+brdrnil,Paragraph Borders,Flag,null
+brdroutset,Paragraph Text,Flag,null
+brdrr,Paragraph Borders,Flag,null
+brdrs,Paragraph Borders,Flag,null
+brdrsh,Paragraph Borders,Flag,null
+brdrt,Paragraph Borders,Flag,null
+brdrtbl,Paragraph Borders,Flag,null
+brdrth,Paragraph Borders,Flag,null
+brdrthtnlg,Paragraph Text,Flag,null
+brdrthtnmg,Paragraph Text,Flag,null
+brdrthtnsg,Paragraph Text,Flag,null
+brdrtnthlg,Paragraph Text,Flag,null
+brdrtnthmg,Paragraph Text,Flag,null
+brdrtnthsg,Paragraph Text,Flag,null
+brdrtnthtnlg,Paragraph Text,Flag,null
+brdrtnthtnmg,Paragraph Text,Flag,null
+brdrtnthtnsg,Paragraph Text,Flag,null
+brdrtriple,Paragraph Text,Flag,null
+brdrw,Paragraph Borders,Value,null
+brdrwavy,Paragraph Text,Flag,null
+brdrwavydb,Paragraph Text,Flag,null
+brkfrm,Document Formatting Properties,Flag,null
+brsp,Paragraph Borders,Value,null
+bullet,Special Characters,Symbol,null
+buptim,Information Group,Destination,null
+bxe,Index Entries,Flag,null
+cachedcolbal,Document Formatting Properties,Flag,null
+caps,Font (Character) Formatting Properties,Toggle,toggle
+category,Information Group,Destination,null
+cb,Font (Character) Formatting Properties,Value,null
+cbpat,Paragraph Shading,Value,null
+cchs,Font (Character) Formatting Properties,Value,null
+cell,Special Characters,Symbol,null
+cellx,Table Definitions,Value,null
+cf,Font (Character) Formatting Properties,Value,null
+cfpat,Paragraph Shading,Value,null
+cgrid,Font (Character) Formatting Properties,Value,null
+charrsid,Track Changes (Revision Marks),Value,null
+charscalex,Font (Character) Formatting Properties,Value,null
+charscalex,Character Text,Value,null
+chatn,Special Characters,Symbol,null
+chbgbdiag,Character Text,Flag,null
+chbgcross,Character Text,Flag,null
+chbgdcross,Character Text,Flag,null
+chbgdkbdiag,Character Text,Flag,null
+chbgdkcross,Character Text,Flag,null
+chbgdkdcross,Character Text,Flag,null
+chbgdkfdiag,Character Text,Flag,null
+chbgdkhoriz,Character Text,Flag,null
+chbgdkvert,Character Text,Flag,null
+chbgfdiag,Character Text,Flag,null
+chbghoriz,Character Text,Flag,null
+chbgvert,Character Text,Flag,null
+chbrdr,Character Text,Flag,null
+chcbpat,Character Text,Value,null
+chcfpat,Character Text,Value,null
+chdate,Special Characters,Symbol,null
+chdpa,Special Characters,Symbol,null
+chdpl,Special Characters,Symbol,null
+chftn,Special Characters,Symbol,null
+chftnsep,Special Characters,Symbol,null
+chftnsepc,Special Characters,Symbol,null
+chpgn,Special Characters,Symbol,null
+chshdng,Character Text,Value,null
+chtime,Special Characters,Symbol,null
+clbgbdiag,Table Definitions,Flag,null
+clbgcross,Table Definitions,Flag,null
+clbgdcross,Table Definitions,Flag,null
+clbgdkbdiag,Table Definitions,Flag,null
+clbgdkcross,Table Definitions,Flag,null
+clbgdkdcross,Table Definitions,Flag,null
+clbgdkfdiag,Table Definitions,Flag,null
+clbgdkhor,Table Definitions,Flag,null
+clbgdkvert,Table Definitions,Flag,null
+clbgfdiag,Table Definitions,Flag,null
+clbghoriz,Table Definitions,Flag,null
+clbgvert,Table Definitions,Flag,null
+clbrdrb,Table Definitions,Flag,null
+clbrdrl,Table Definitions,Flag,null
+clbrdrr,Table Definitions,Flag,null
+clbrdrt,Table Definitions,Flag,null
+clcbpat,Table Definitions,Value,null
+clcbpatraw,Table Definitions,Value,null
+clcfpat,Table Definitions,Value,null
+clcfpatraw,Table Definitions,Value,null
+cldgll,Table Definitions,Flag,null
+cldglu,Table Definitions,Flag,null
+clFitText,Table Definitions,Flag,null
+clftsWidth,Table Definitions,Value,null
+clmgf,Table Definitions,Flag,null
+clmrg,Table Definitions,Flag,null
+clNoWrap,Table Definitions,Flag,null
+clpadb,Table Definitions,Value,null
+clpadfb,Table Definitions,Value,null
+clpadfl,Table Definitions,Value,null
+clpadfr,Table Definitions,Value,null
+clpadft,Table Definitions,Value,null
+clpadl,Table Definitions,Value,null
+clpadr,Table Definitions,Value,null
+clpadt,Table Definitions,Value,null
+clshdng,Table Definitions,Value,null
+clshdngraw,Table Definitions,Value,null
+clshdrawnil,Table Definitions,Flag,null
+cltxbtlr,Table Definitions,Flag,null
+cltxlrtb,Table Definitions,Flag,null
+cltxlrtb,Table Definitions,Flag,null
+cltxlrtbv,Table Definitions,Flag,null
+cltxtbrl,Table Definitions,Flag,null
+cltxtbrl,Table Definitions,Flag,null
+cltxtbrlv,Table Definitions,Flag,null
+clvertalb,Table Definitions,Flag,null
+clvertalc,Table Definitions,Flag,null
+clvertalt,Table Definitions,Flag,null
+clvmgf,Table Definitions,Flag,null
+clvmrg,Table Definitions,Flag,null
+clwWidth,Table Definitions,Value,null
+collapsed,Paragraph Formatting Properties,Flag,null
+colno,Section Formatting Properties,Value,null
+colortbl,Color Table,Destination,null
+cols,Section Formatting Properties,Value,null
+colsr,Section Formatting Properties,Value,null
+colsx,Section Formatting Properties,Value,null
+column,Special Characters,Symbol,null
+colw,Section Formatting Properties,Value,null
+comment,Information Group,Destination,null
+company,Information Group,Destination,null
+cpg,Code Page Support,Value,null
+crauth,Character Text,Value,null
+crdate,Character Text,Value,null
+creatim,Information Group,Destination,null
+cs,Font (Character) Formatting Properties,Value,null
+ctrl,Style Sheet,Flag,null
+cts,Document Formatting Properties,Value,null
+cufi,Paragraph Formatting Properties,Value,null
+culi,Paragraph Formatting Properties,Value,null
+curi,Paragraph Formatting Properties,Value,null
+cvmme,Document Formatting Properties,Flag,null
+datafield,Fields,Destination,null
+date,Fields,Flag,null
+dbch,Associated Character Properties,Flag,null
+deff,Font Table,Value,null
+defformat,Document Formatting Properties,Flag,null
+deflang,Document Formatting Properties,Value,null
+deflangfe,Document Formatting Properties,Value,null
+defshp,Pictures,Flag,null
+deftab,Document Formatting Properties,Value,null
+deleted,Font (Character) Formatting Properties,Toggle,toggle
+delrsid,Track Changes (Revision Marks),Value,null
+dfrauth,Paragraph Text,Value,null
+dfrdate,Paragraph Text,Value,null
+dfrmtxtx,Positioned Objects and Frames,Value,null
+dfrmtxty,Positioned Objects and Frames,Value,null
+dfrstart,Paragraph Text,Value,null
+dfrstop,Paragraph Text,Value,null
+dfrxst,Paragraph Text,Value,null
+dghorigin,Document Formatting Properties,Value,null
+dghshow,Document Formatting Properties,Value,null
+dghspace,Document Formatting Properties,Value,null
+dgmargin,Document Formatting Properties,Flag,null
+dgsnap,Document Formatting Properties,Flag,null
+dgvorigin,Document Formatting Properties,Value,null
+dgvshow,Document Formatting Properties,Value,null
+dgvspace,Document Formatting Properties,Value,null
+dibitmap,Pictures,Value,null
+dn,Font (Character) Formatting Properties,Value,null
+dntblnsbdb,Document Formatting Properties,Flag,null
+do,Drawing Objects,Destination,null
+dobxcolumn,Drawing Objects,Flag,null
+dobxmargin,Drawing Objects,Flag,null
+dobxpage,Drawing Objects,Flag,null
+dobymargin,Drawing Objects,Flag,null
+dobypage,Drawing Objects,Flag,null
+dobypara,Drawing Objects,Flag,null
+doccomm,Information Group,Destination,null
+doctemp,Document Formatting Properties,Flag,null
+doctype,Document Formatting Properties,Value,null
+docvar,Document Variables,Destination,null
+dodhgt,Drawing Objects,Value,null
+dolock,Drawing Objects,Flag,null
+donotembedlingdata,Document Formatting Properties,Value,null
+donotembedsysfont,Document Formatting Properties,Value,null
+donotshowcomments,Document Formatting Properties,Flag,null
+donotshowinsdel,Document Formatting Properties,Flag,null
+donotshowmarkup,Document Formatting Properties,Flag,null
+donotshowprops,Document Formatting Properties,Flag,null
+dpaendhol,Drawing Objects,Flag,null
+dpaendl,Drawing Objects,Value,null
+dpaendsol,Drawing Objects,Flag,null
+dpaendw,Drawing Objects,Value,null
+dparc,Drawing Objects,Flag,null
+dparcflipx,Drawing Objects,Flag,null
+dparcflipy,Drawing Objects,Flag,null
+dpastarthol,Drawing Objects,Flag,null
+dpastartl,Drawing Objects,Value,null
+dpastartsol,Drawing Objects,Flag,null
+dpastartw,Drawing Objects,Value,null
+dpcallout,Drawing Objects,Flag,null
+dpcoa,Drawing Objects,Value,null
+dpcoaccent,Drawing Objects,Flag,null
+dpcobestfit,Drawing Objects,Flag,null
+dpcoborder,Drawing Objects,Flag,null
+dpcodabs,Drawing Objects,Value,null
+dpcodbottom,Drawing Objects,Flag,null
+dpcodcenter,Drawing Objects,Flag,null
+dpcodescent,Drawing Objects,Value,null
+dpcodtop,Drawing Objects,Flag,null
+dpcolength,Drawing Objects,Value,null
+dpcominusx,Drawing Objects,Flag,null
+dpcominusy,Drawing Objects,Flag,null
+dpcooffset,Drawing Objects,Value,null
+dpcosmarta,Drawing Objects,Flag,null
+dpcotdouble,Drawing Objects,Flag,null
+dpcotright,Drawing Objects,Flag,null
+dpcotsingle,Drawing Objects,Flag,null
+dpcottriple,Drawing Objects,Flag,null
+dpcount,Drawing Objects,Value,null
+dpellipse,Drawing Objects,Flag,null
+dpendgroup,Drawing Objects,Flag,null
+dpfillbgcb,Drawing Objects,Value,null
+dpfillbgcg,Drawing Objects,Value,null
+dpfillbgcr,Drawing Objects,Value,null
+dpfillbggray,Drawing Objects,Value,null
+dpfillbgpal,Drawing Objects,Flag,null
+dpfillfgcb,Drawing Objects,Value,null
+dpfillfgcg,Drawing Objects,Value,null
+dpfillfgcr,Drawing Objects,Value,null
+dpfillfggray,Drawing Objects,Value,null
+dpfillfgpal,Drawing Objects,Flag,null
+dpfillpat,Drawing Objects,Value,null
+dpgroup,Drawing Objects,Flag,null
+dpline,Drawing Objects,Flag,null
+dplinecob,Drawing Objects,Value,null
+dplinecog,Drawing Objects,Value,null
+dplinecor,Drawing Objects,Value,null
+dplinedado,Drawing Objects,Flag,null
+dplinedadodo,Drawing Objects,Flag,null
+dplinedash,Drawing Objects,Flag,null
+dplinedot,Drawing Objects,Flag,null
+dplinegray,Drawing Objects,Value,null
+dplinehollow,Drawing Objects,Flag,null
+dplinepal,Drawing Objects,Flag,null
+dplinesolid,Drawing Objects,Flag,null
+dplinew,Drawing Objects,Value,null
+dppolycount,Drawing Objects,Value,null
+dppolygon,Drawing Objects,Flag,null
+dppolyline,Drawing Objects,Flag,null
+dpptx,Drawing Objects,Value,null
+dppty,Drawing Objects,Value,null
+dprect,Drawing Objects,Flag,null
+dproundr,Drawing Objects,Flag,null
+dpshadow,Drawing Objects,Flag,null
+dpshadx,Drawing Objects,Value,null
+dpshady,Drawing Objects,Value,null
+dptxbtlr,Drawing Objects,Flag,null
+dptxbx,Drawing Objects,Flag,null
+dptxbxmar,Drawing Objects,Value,null
+dptxbxtext,Drawing Objects,Destination,null
+dptxlrtb,Drawing Objects,Flag,null
+dptxlrtbv,Drawing Objects,Flag,null
+dptxtbrl,Drawing Objects,Flag,null
+dptxtbrlv,Drawing Objects,Flag,null
+dpx,Drawing Objects,Value,null
+dpxsize,Drawing Objects,Value,null
+dpy,Drawing Objects,Value,null
+dpysize,Drawing Objects,Value,null
+dropcapli,Positioned Objects and Frames,Value,null
+dropcapt,Positioned Objects and Frames,Value,null
+ds,Section Formatting Properties,Value,null
+dxfrtext,Positioned Objects and Frames,Value,null
+dy,Information Group,Value,null
+edmins,Information Group,Value,null
+embo,Character Text,Toggle,toggle
+emdash,Special Characters,Symbol,null
+emfblip,Pictures,Flag,null
+emspace,Special Characters,Symbol,null
+endash,Special Characters,Symbol,null
+enddoc,Document Formatting Properties,Flag,null
+endnhere,Section Formatting Properties,Flag,null
+endnotes,Document Formatting Properties,Flag,null
+enforceprot,Document Formatting Properties,Value,null
+enspace,Special Characters,Symbol,null
+expnd,Font (Character) Formatting Properties,Value,null
+expndtw,Font (Character) Formatting Properties,Value,null
+expshrtn,Document Formatting Properties,Flag,null
+f,Font (Character) Formatting Properties,Value,null
+faauto,Paragraph Formatting Properties,Value,null
+facenter,Paragraph Formatting Properties,Flag,null
+facingp,Document Formatting Properties,Flag,null
+fahang,Paragraph Formatting Properties,Flag,null
+falt,Font Table,Destination,null
+faroman,Paragraph Formatting Properties,Flag,null
+favar,Paragraph Formatting Properties,Flag,null
+fbias,Font Table,Value,null
+fbidi,Font Table,Flag,null
+fchars,Document Formatting Properties,Destination,null
+fcharset,Font Table,Value,null
+fdecor,Font Table,Flag,null
+felnbrelev,Document Formatting Properties,Flag,null
+felnbrelev,Document Formatting Properties,Flag,null
+fet,Document Formatting Properties,Value,null
+fetch,Font Table,Flag,null
+ffdefres,Form Fields,Value,null
+ffdeftext,Form Fields,Destination,null
+ffentrymcr,Form Fields,Destination,null
+ffexitmcr,Form Fields,Destination,null
+ffformat,Form Fields,Destination,null
+ffhaslistbox,Form Fields,Value,null
+ffhelptext,Form Fields,Destination,null
+ffhps,Form Fields,Value,null
+ffl,Form Fields,Destination,null
+ffmaxlen,Form Fields,Value,null
+ffname,Form Fields,Destination,null
+ffownhelp,Form Fields,Value,null
+ffownstat,Form Fields,Value,null
+ffprot,Form Fields,Value,null
+ffrecalc,Form Fields,Value,null
+ffres,Form Fields,Value,null
+ffsize,Form Fields,Value,null
+ffstattext,Form Fields,Destination,null
+fftype,Form Fields,Value,null
+fftypetxt,Form Fields,Value,null
+fi,Paragraph Formatting Properties,Value,null
+fid,File Table,Value,null
+fIddirty,Fields,Flag,null
+field,Fields,Destination,null
+file,File Table,Destination,null
+filetbl,File Table,Destination,null
+fittext,Font (Character) Formatting Properties,Value,null
+fldalt,Document Formatting Properties,Flag,null
+fldedit,Fields,Flag,null
+fldinst,Fields,Destination,null
+fldlock,Fields,Flag,null
+fldpriv,Fields,Flag,null
+fldrslt,Fields,Destination,null
+fldtype,Fields,Destination,null
+fmodern,Font Table,Flag,null
+fn,Style Sheet,Value,null
+fname,Font Table,Destination,null
+fnetwork,File Table,Flag,null
+fnil,Font Table,Flag,null
+fnonfilesys,File Table,Flag,null
+fontemb,Font Table,Destination,null
+fontfile,Font Table,Destination,null
+fonttbl,Font Table,Destination,null
+footer,Headers and Footers,Destination,null
+footer,Headers and Footers,Destination,null
+footerf,Headers and Footers,Destination,null
+footerl,Headers and Footers,Destination,null
+footery,Section Formatting Properties,Value,null
+footnote,Footnotes,Destination,null
+formdisp,Document Formatting Properties,Flag,null
+formfield,Form Fields,Destination,null
+formprot,Document Formatting Properties,Flag,null
+formshade,Document Formatting Properties,Flag,null
+fosnum,File Table,Value,null
+fprq,Font Table,Value,null
+fracwidth,Document Formatting Properties,Flag,null
+frelative,File Table,Value,null
+frmtxbtlr,Positioned Objects and Frames,Flag,null
+frmtxlrtb,Positioned Objects and Frames,Flag,null
+frmtxlrtbv,Positioned Objects and Frames,Flag,null
+frmtxtbrl,Positioned Objects and Frames,Flag,null
+frmtxtbrlv,Positioned Objects and Frames,Flag,null
+froman,Font Table,Flag,null
+fromhtml,Document Formatting Properties,Flag,null
+fromtext,Document Formatting Properties,Flag,null
+fs,Font (Character) Formatting Properties,Value,null
+fscript,Font Table,Flag,null
+fswiss,Font Table,Flag,null
+ftnalt,Document Formatting Properties,Flag,null
+ftnbj,Document Formatting Properties,Flag,null
+ftncn,Document Formatting Properties,Destination,null
+ftnil,Font Table,Flag,null
+ftnlytwnine,Document Formatting Properties,Flag,null
+ftnnalc,Document Formatting Properties,Flag,null
+ftnnar,Document Formatting Properties,Flag,null
+ftnnauc,Document Formatting Properties,Flag,null
+ftnnchi,Document Formatting Properties,Flag,null
+ftnnchosung,Document Formatting Properties,Flag,null
+ftnncnum,Document Formatting Properties,Flag,null
+ftnndbar,Document Formatting Properties,Flag,null
+ftnndbnum,Document Formatting Properties,Flag,null
+ftnndbnumd,Document Formatting Properties,Flag,null
+ftnndbnumk,Document Formatting Properties,Flag,null
+ftnndbnumt,Document Formatting Properties,Flag,null
+ftnnganada,Document Formatting Properties,Flag,null
+ftnngbnum,Document Formatting Properties,Flag,null
+ftnngbnumd,Document Formatting Properties,Flag,null
+ftnngbnumk,Document Formatting Properties,Flag,null
+ftnngbnuml,Document Formatting Properties,Flag,null
+ftnnrlc,Document Formatting Properties,Flag,null
+ftnnruc,Document Formatting Properties,Flag,null
+ftnnzodiac,Document Formatting Properties,Flag,null
+ftnnzodiacd,Document Formatting Properties,Flag,null
+ftnnzodiacl,Document Formatting Properties,Flag,null
+ftnrestart,Document Formatting Properties,Flag,null
+ftnrstcont,Document Formatting Properties,Flag,null
+ftnrstpg,Document Formatting Properties,Flag,null
+ftnsep,Document Formatting Properties,Destination,null
+ftnsepc,Document Formatting Properties,Destination,null
+ftnstart,Document Formatting Properties,Value,null
+ftntj,Document Formatting Properties,Flag,null
+fttruetype,Font Table,Flag,null
+fvaliddos,File Table,Flag,null
+fvalidhpfs,File Table,Flag,null
+fvalidmac,File Table,Flag,null
+fvalidntfs,File Table,Flag,null
+g,Font (Character) Formatting Properties,Destination,null
+gcw,Font (Character) Formatting Properties,Value,null
+generator,Generator,Destination,null
+green,Color Table,Value,null
+grfdocevents,Document Formatting Properties,Value,null
+gridtbl,Font (Character) Formatting Properties,Destination,null
+gutter,Document Formatting Properties,Value,null
+gutterprl,Document Formatting Properties,Flag,null
+guttersxn,Section Formatting Properties,Value,null
+header,Headers and Footers,Destination,null
+header,Headers and Footers,Destination,null
+headerf,Headers and Footers,Destination,null
+headerl,Headers and Footers,Destination,null
+headery,Section Formatting Properties,Value,null
+hich,Associated Character Properties,Flag,null
+highlight,Highlighting,Value,null
+hlfr,Word through Word RTF for Drawing Objects (Shades),Value,null
+hlinkbase,Information Group,Value,null
+hlloc,Word through Word RTF for Drawing Objects (Shades),Value,null
+hlsrc,Word through Word RTF for Drawing Objects (Shades),Value,null
+horzdoc,Document Formatting Properties,Flag,null
+horzsect,Section Formatting Properties,Flag,null
+hr,Information Group,Value,null
+htmautsp,Document Formatting Properties,Flag,null
+htmlbase,Control Words Introduced bv Other Microsoft Products,Flag,null
+htmlrtf,Control Words Introduced bv Other Microsoft Products,Toggle,toggle
+htmltag,Control Words Introduced bv Other Microsoft Products,Destination,null
+hwelev,Document Formatting Properties,Flag,null
+hyphauto,Document Formatting Properties,Toggle,toggle
+hyphcaps,Document Formatting Properties,Toggle,toggle
+hyphconsec,Document Formatting Properties,Value,null
+hyphhotz,Document Formatting Properties,Value,null
+hyphpar,Paragraph Formatting Properties,Toggle,toggle
+i,Font (Character) Formatting Properties,Toggle,toggle
+id,Information Group,Value,null
+ignoremixedcontent,Document Formatting Properties,Value,null
+iin,Paragraph Formatting Properties,Value,null
+ilvl,Paragraph Text,Value,null
+impr,Character Text,Toggle,toggle
+indrlsweleven,Document Formatting Properties,Flag,null
+indrlsweleven,Document Formatting Properties,Flag,null
+info,Information Group,Destination,null
+insrsid,Track Changes (Revision Marks),Value,null
+intbl,Paragraph Formatting Properties,Flag,null
+ipgp,Paragraph Group Properties,Value,null
+irow,Table Definitions,Value,null
+irowband,Table Definitions,Value,null
+itap,Paragraph Formatting Properties,Value,null
+ixe,Index Entries,Flag,null
+jcompress,Document Formatting Properties,Flag,null
+jexpand,Document Formatting Properties,Flag,null
+jsksu,Document Formatting Properties,Flag,null
+keep,Paragraph Formatting Properties,Flag,null
+keepn,Paragraph Formatting Properties,Flag,null
+kerning,Font (Character) Formatting Properties,Value,null
+keycode,Style Sheet,Destination,null
+keywords,Information Group,Destination,null
+krnprsnet,Document Formatting Properties,Flag,null
+ksulang,Document Formatting Properties,Value,null
+landscape,Document Formatting Properties,Flag,null
+lang,Font (Character) Formatting Properties,Value,null
+langfe,Font (Character) Formatting Properties,Value,null
+langfenp,Font (Character) Formatting Properties,Value,null
+langnp,Font (Character) Formatting Properties,Value,null
+lastrow,Table Definitions,Flag,null
+latentstyles,Style and Formatting Restrictions,Destination,null
+lbr,Special Characters,Symbol,null
+lchars,Document Formatting Properties,Destination,null
+ldblquote,Special Characters,Symbol,null
+level,Paragraph Formatting Properties,Value,null
+levelfollow,List Table,Value,null
+levelindent,List Table,Value,null
+leveljc,List Table,Value,null
+leveljcn,List Table,Value,null
+levellegal,List Table,Value,null
+levelnfc,List Table,Value,null
+levelnfcn,List Table,Value,null
+levelnorestart,List Table,Value,null
+levelnumbers,List Table,Destination,null
+levelold,List Table,Value,null
+levelpicture,List Table,Value,null
+levelprev,List Table,Value,null
+levelprevspace,List Table,Value,null
+levelspace,List Table,Value,null
+levelstartat,List Table,Value,null
+leveltemplateid,List Table,Value,null
+leveltext,List Table,Value,null
+li,Paragraph Formatting Properties,Value,null
+line,Special Characters,Symbol,null
+linebetcol,Section Formatting Properties,Flag,null
+linecont,Section Formatting Properties,Flag,null
+linemod,Section Formatting Properties,Value,null
+lineppage,Section Formatting Properties,Flag,null
+linerestart,Section Formatting Properties,Flag,null
+linestart,Document Formatting Properties,Value,null
+linex,Section Formatting Properties,Value,null
+linkself,Objects,Flag,null
+linkstyles,Document Formatting Properties,Flag,null
+linkval,Information Group,Value,null
+lisa,Paragraph Formatting Properties,Value,null
+lisb,Paragraph Formatting Properties,Value,null
+listhybrid,List Table,Flag,null
+listid,List Table,Value,null
+listname,List Table,Destination,null
+listoverridecount,List Table,Value,null
+listoverrideformat,List Table,Value,null
+listoverridestart,List Table,Value,null
+listpicture,List Table,Value,null
+listrestarthdn,List Table,Value,null
+listsimple,List Table,Value,null
+liststyleid,List Table,Value,null
+liststylename,List Table,Value,null
+listtemplateid,List Table,Value,null
+listtext,Paragraph Text,Destination,null
+lnbrkrule,Document Formatting Properties,Flag,null
+lndscpsxn,Section Formatting Properties,Flag,null
+lnongrid,Document Formatting Properties,Flag,null
+loch,Associated Character Properties,Flag,null
+lquote,Special Characters,Symbol,null
+ls,List Table,Value,null
+lsdlockeddef,Style and Formatting Restrictions,Value,null
+lsdlockedexcept,Style and Formatting Restrictions,Destination,null
+lsdstimax,Style and Formatting Restrictions,Value,null
+ltrch,Font (Character) Formatting Properties,Flag,null
+ltrdoc,Document Formatting Properties,Flag,null
+ltrmark,Special Characters,Symbol,null
+ltrpar,Paragraph Formatting Properties,Flag,null
+ltrrow,Table Definitions,Flag,null
+ltrsect,Section Formatting Properties,Flag,null
+lytcalctblwd,Document Formatting Properties,Flag,null
+lytexcttp,Document Formatting Properties,Flag,null
+lytprtmet,Document Formatting Properties,Flag,null
+lyttblrtgr,Document Formatting Properties,Flag,null
+mac,Character Set,Flag,null
+macpict,Pictures,Flag,null
+makebackup,Document Formatting Properties,Flag,null
+manager,Information Group,Destination,null
+margb,Document Formatting Properties,Value,null
+margbsxn,Section Formatting Properties,Value,null
+margl,Document Formatting Properties,Value,null
+marglsxn,Section Formatting Properties,Value,null
+margmirror,Document Formatting Properties,Flag,null
+margr,Document Formatting Properties,Value,null
+margrsxn,Section Formatting Properties,Value,null
+margt,Document Formatting Properties,Value,null
+margtsxn,Section Formatting Properties,Value,null
+mhtmltag,Control Words Introduced bv Other Microsoft Products,Destination,null
+min,Information Group,Value,null
+mo,Information Group,Value,null
+msmcap,Document Formatting Properties,Flag,null
+nestcell,Table Definitions,Symbol,null
+nestrow,Table Definitions,Symbol,null
+nesttableprops,Table Definitions,Destination,null
+newtblstyruls,Document Formatting Properties,Flag,null
+nextfile,Document Formatting Properties,Destination,null
+Njpegblip,Pictures,Flag,null
+noafcnsttbl,Document Formatting Properties,Flag,null
+nobrkwrptbl,Document Formatting Properties,Flag,null
+nocolbal,Document Formatting Properties,Flag,null
+nocompatoptions,Document Formatting Properties,Flag,null
+nocwrap,Paragraph Formatting Properties,Flag,null
+nocxsptable,Document Formatting Properties,Flag,null
+nocxsptable,Document Formatting Properties,Flag,null
+noextrasprl,Document Formatting Properties,Flag,null
+nofchars,Information Group,Value,null
+nofcharsws,Information Group,Value,null
+nofpages,Information Group,Value,null
+nofwords,Information Group,Value,null
+nogrowautofit,Document Formatting Properties,Flag,null
+noindnmbrts,Document Formatting Properties,Flag,null
+noindnmbrts,Document Formatting Properties,Flag,null
+nojkernpunct,Document Formatting Properties,Flag,null
+nolead,Document Formatting Properties,Flag,null
+noline,Paragraph Formatting Properties,Flag,null
+nolnhtadjtbl,Document Formatting Properties,Flag,null
+nonesttables,Table Definitions,Destination,null
+nonshppict,Pictures,Flag,null
+nooverflow,Paragraph Formatting Properties,Flag,null
+noproof,Font (Character) Formatting Properties,Flag,null
+nosectexpand,Font (Character) Formatting Properties,Flag,null
+nosnaplinegrid,Paragraph Formatting Properties,Flag,null
+nospaceforul,Document Formatting Properties,Flag,null
+nosupersub,Font (Character) Formatting Properties,Flag,null
+notabind,Document Formatting Properties,Flag,null
+notbrkcnstfrctbl,Document Formatting Properties,Flag,null
+notcvasp,Document Formatting Properties,Flag,null
+notvatxbx,Document Formatting Properties,Flag,null
+noultrlspc,Document Formatting Properties,Flag,null
+nowidctlpar,Paragraph Formatting Properties,Flag,null
+nowrap,Positioned Objects and Frames,Flag,null
+nowwrap,Paragraph Formatting Properties,Flag,null
+noxlattoyen,Document Formatting Properties,Flag,null
+objalias,Objects,Destination,null
+objalign,Objects,Value,null
+objattph,Objects,Flag,null
+objautlink,Objects,Flag,null
+objclass,Objects,Destination,null
+objcropb,Objects,Value,null
+objcropl,Objects,Value,null
+objcropr,Objects,Value,null
+objcropt,Objects,Value,null
+objdata,Objects,Destination,null
+object,Objects,Destination,null
+objemb,Objects,Flag,null
+objh,Objects,Value,null
+objhtml,Objects,Flag,null
+objicemb,Objects,Flag,null
+objlink,Objects,Flag,null
+objlock,Objects,Flag,null
+objname,Objects,Destination,null
+objocx,Objects,Flag,null
+objpub,Objects,Flag,null
+objscalex,Objects,Value,null
+objscaley,Objects,Value,null
+objsect,Objects,Destination,null
+objsetsize,Objects,Flag,null
+objsub,Objects,Flag,null
+objtime,Objects,Destination,null
+objtransy,Objects,Value,null
+objupdate,Objects,Flag,null
+objw,Objects,Value,null
+oldas,Document Formatting Properties,Flag,null
+oldcprops,Track Changes (Revision Marks),Destination,null
+oldlinewrap,Document Formatting Properties,Flag,null
+oldpprops,Track Changes (Revision Marks),Destination,null
+oldsprops,Track Changes (Revision Marks),Destination,null
+oldtprops,Track Changes (Revision Marks),Destination,null
+operator,Information Group,Destination,null
+otblrul,Document Formatting Properties,Flag,null
+outl,Font (Character) Formatting Properties,Toggle,toggle
+outlinelevel,Paragraph Text,Value,null
+overlay,Paragraph Text,Flag,null
+page,Special Characters,Symbol,null
+pagebb,Paragraph Formatting Properties,Flag,null
+panose,Font Table,Destination,null
+paperh,Document Formatting Properties,Value,null
+paperw,Document Formatting Properties,Value,null
+par,Special Characters,Symbol,null
+pararsid,Track Changes (Revision Marks),Value,null
+pard,Paragraph Formatting Properties,Flag,null
+pc,Character Set,Flag,null
+pca,Character Set,Flag,null
+pgbrdrb,Document Formatting Properties,Flag,null
+pgbrdrfoot,Document Formatting Properties,Flag,null
+pgbrdrhead,Document Formatting Properties,Flag,null
+pgbrdrl,Document Formatting Properties,Flag,null
+pgbrdropt,Document Formatting Properties,Value,null
+pgbrdrr,Document Formatting Properties,Flag,null
+pgbrdrsnap,Document Formatting Properties,Flag,null
+pgbrdrt,Document Formatting Properties,Flag,null
+pghsxn,Section Formatting Properties,Value,null
+pgnbidia,Section Formatting Properties,Flag,null
+pgnbidib,Section Formatting Properties,Flag,null
+pgnchosung,Bullets and Numbering,Flag,null
+pgncnum,Bullets and Numbering,Flag,null
+pgncont,Section Formatting Properties,Flag,null
+pgndbnum,Section Formatting Properties,Flag,null
+pgndbnumd,Section Formatting Properties,Flag,null
+pgndbnumk,Bullets and Numbering,Flag,null
+pgndbnumt,Bullets and Numbering,Flag,null
+pgndec,Section Formatting Properties,Flag,null
+pgndecd,Section Formatting Properties,Flag,null
+pgnganada,Bullets and Numbering,Flag,null
+pgngbnum,Bullets and Numbering,Flag,null
+pgngbnumd,Bullets and Numbering,Flag,null
+pgngbnumk,Bullets and Numbering,Flag,null
+pgngbnuml,Bullets and Numbering,Flag,null
+pgnhindia,Section Formatting Properties,Flag,null
+pgnhindib,Section Formatting Properties,Flag,null
+pgnhindic,Section Formatting Properties,Flag,null
+pgnhindid,Section Formatting Properties,Flag,null
+pgnhn,Section Formatting Properties,Value,null
+pgnhnsc,Section Formatting Properties,Flag,null
+pgnhnsh,Section Formatting Properties,Flag,null
+pgnhnsm,Section Formatting Properties,Flag,null
+pgnhnsn,Section Formatting Properties,Flag,null
+pgnhnsp,Section Formatting Properties,Flag,null
+pgnid,Section Formatting Properties,Value,null
+pgnlcltr,Section Formatting Properties,Flag,null
+pgnlcrm,Section Formatting Properties,Flag,null
+pgnrestart,Section Formatting Properties,Flag,null
+pgnstart,Document Formatting Properties,Value,null
+pgnstarts,Section Formatting Properties,Value,null
+pgnthaia,Section Formatting Properties,Flag,null
+pgnthaib,Section Formatting Properties,Flag,null
+pgnthaic,Section Formatting Properties,Flag,null
+pgnucltr,Section Formatting Properties,Flag,null
+pgnucrm,Section Formatting Properties,Flag,null
+pgnvieta,Section Formatting Properties,Flag,null
+pgnx,Section Formatting Properties,Value,null
+pgny,Section Formatting Properties,Value,null
+pgnzodiac,Bullets and Numbering,Flag,null
+pgnzodiacd,Bullets and Numbering,Flag,null
+pgnzodiacl,Bullets and Numbering,Flag,null
+pgp,Paragraph Group Properties,Destination,null
+pgptbl,Paragraph Group Properties,Destination,null
+pgwsxn,Section Formatting Properties,Value,null
+phcol,Positioned Objects and Frames,Flag,null
+phmrg,Positioned Objects and Frames,Flag,null
+phpg,Positioned Objects and Frames,Flag,null
+picbmp,Pictures,Flag,null
+picbpp,Pictures,Value,null
+piccropb,Pictures,Value,null
+piccropl,Pictures,Value,null
+piccropr,Pictures,Value,null
+piccropt,Pictures,Value,null
+pich,Pictures,Value,null
+pichgoal,Pictures,Value,null
+picprop,Pictures,Destination,null
+picscaled,Pictures,Flag,null
+picscalex,Pictures,Value,null
+picscaley,Pictures,Value,null
+pict,Pictures,Destination,null
+picw,Pictures,Value,null
+picwgoal,Pictures,Value,null
+plain,Font (Character) Formatting Properties,Flag,null
+pmmetafile,Pictures,Value,null
+pn,Bullets and Numbering,Destination,null
+pnacross,Bullets and Numbering,Flag,null
+pnaiu,Bullets and Numbering,Flag,null
+pnaiud,Bullets and Numbering,Flag,null
+pnaiueo,Bullets and Numbering,Flag,null
+pnaiueod,Bullets and Numbering,Flag,null
+pnb,Bullets and Numbering,Toggle,toggle
+pnbidia,Bullets and Numbering,Flag,null
+pnbidib,Bullets and Numbering,Flag,null
+pncaps,Bullets and Numbering,Toggle,toggle
+pncard,Bullets and Numbering,Flag,null
+pncf,Bullets and Numbering,Value,null
+pnchosung,Bullets and Numbering,Flag,null
+pncnum,Bullets and Numbering,Flag,null
+pndbnum,Bullets and Numbering,Flag,null
+pndbnumd,Bullets and Numbering,Flag,null
+pndbnumk,Bullets and Numbering,Flag,null
+pndbnuml,Bullets and Numbering,Flag,null
+pndbnumt,Bullets and Numbering,Flag,null
+pndec,Bullets and Numbering,Flag,null
+pndecd,Bullets and Numbering,Flag,null
+pnf,Bullets and Numbering,Value,null
+pnfs,Bullets and Numbering,Value,null
+pnganada,Bullets and Numbering,Flag,null
+pnganada,Bullets and Numbering,Flag,null
+pngblip,Pictures,Flag,null
+pngbnum,Bullets and Numbering,Flag,null
+pngbnumd,Bullets and Numbering,Flag,null
+pngbnumk,Bullets and Numbering,Flag,null
+pngbnuml,Bullets and Numbering,Flag,null
+pnhang,Bullets and Numbering,Flag,null
+pni,Bullets and Numbering,Toggle,toggle
+pnindent,Bullets and Numbering,Value,null
+pniroha,Bullets and Numbering,Flag,null
+pnirohad,Bullets and Numbering,Flag,null
+pnlcltr,Bullets and Numbering,Flag,null
+pnlcrm,Bullets and Numbering,Flag,null
+pnlvl,Bullets and Numbering,Value,null
+pnlvlblt,Bullets and Numbering,Flag,null
+pnlvlbody,Bullets and Numbering,Flag,null
+pnlvlcont,Bullets and Numbering,Flag,null
+pnnumonce,Bullets and Numbering,Flag,null
+pnord,Bullets and Numbering,Flag,null
+pnordt,Bullets and Numbering,Flag,null
+pnprev,Bullets and Numbering,Flag,null
+pnqc,Bullets and Numbering,Flag,null
+pnql,Bullets and Numbering,Flag,null
+pnqr,Bullets and Numbering,Flag,null
+pnrauth,Paragraph Text,Value,null
+pnrdate,Paragraph Text,Value,null
+pnrestart,Bullets and Numbering,Flag,null
+pnrnfc,Paragraph Text,Value,null
+pnrnot,Paragraph Text,Flag,null
+pnrpnbr,Paragraph Text,Value,null
+pnrrgb,Paragraph Text,Value,null
+pnrstart,Paragraph Text,Value,null
+pnrstop,Paragraph Text,Value,null
+pnrxst,Paragraph Text,Value,null
+pnscaps,Bullets and Numbering,Toggle,toggle
+pnseclvl,Bullets and Numbering,Destination,null
+pnsp,Bullets and Numbering,Value,null
+pnstart,Bullets and Numbering,Value,null
+pnstrike,Bullets and Numbering,Toggle,toggle
+pntext,Bullets and Numbering,Destination,null
+pntxta,Bullets and Numbering,Destination,null
+pntxtb,Bullets and Numbering,Destination,null
+pnucltr,Bullets and Numbering,Flag,null
+pnucrm,Bullets and Numbering,Flag,null
+pnul,Bullets and Numbering,Toggle,toggle
+pnuld,Bullets and Numbering,Flag,null
+pnuldash,Bullets and Numbering,Flag,null
+pnuldashd,Bullets and Numbering,Flag,null
+pnuldashdd,Bullets and Numbering,Flag,null
+pnuldb,Bullets and Numbering,Flag,null
+pnulhair,Bullets and Numbering,Flag,null
+pnulnone,Bullets and Numbering,Flag,null
+pnulth,Bullets and Numbering,Flag,null
+pnulw,Bullets and Numbering,Flag,null
+pnulwave,Bullets and Numbering,Flag,null
+pnzodiac,Bullets and Numbering,Flag,null
+pnzodiacd,Bullets and Numbering,Flag,null
+pnzodiacl,Bullets and Numbering,Flag,null
+posnegx,Positioned Objects and Frames,Value,null
+posnegy,Positioned Objects and Frames,Value,null
+posx,Positioned Objects and Frames,Value,null
+posxc,Positioned Objects and Frames,Flag,null
+posxi,Positioned Objects and Frames,Flag,null
+posxl,Positioned Objects and Frames,Flag,null
+posxo,Positioned Objects and Frames,Flag,null
+posxr,Positioned Objects and Frames,Flag,null
+posy,Positioned Objects and Frames,Value,null
+posyb,Positioned Objects and Frames,Flag,null
+posyc,Positioned Objects and Frames,Flag,null
+posyil,Positioned Objects and Frames,Flag,null
+posyin,Paragraph Text,Flag,null
+posyout,Paragraph Text,Flag,null
+posyt,Positioned Objects and Frames,Flag,null
+prcolbl,Document Formatting Properties,Flag,null
+printdata,Document Formatting Properties,Flag,null
+printim,Information Group,Destination,null
+private,Document Formatting Properties,Destination,null
+propname,Information Group,Value,null
+proptype,Information Group,Value,null
+protend,Protection Exceptions,Destination,null
+protlevel,Document Formatting Properties,Value,null
+protstart,Protection Exceptions,Destination,null
+protusertbl,User Protection Information,Destination,null
+psover,Document Formatting Properties,Flag,null
+psz,Document Formatting Properties,Value,null
+pubauto,Macintosh Edition Manager Publisher Objects,Flag,null
+pvmrg,Positioned Objects and Frames,Flag,null
+pvpara,Positioned Objects and Frames,Flag,null
+pvpg,Positioned Objects and Frames,Flag,null
+pwd,Control Words Introduced bv Other Microsoft Products,Destination,null
+pxe,Index Entries,Destination,null
+qc,Paragraph Formatting Properties,Flag,null
+qd,Paragraph Formatting Properties,Flag,null
+qi,Paragraph Formatting Properties,Flag,null
+qj,Paragraph Formatting Properties,Flag,null
+qk,Paragraph Formatting Properties,Flag,null
+qmspace,Special Characters,Symbol,null
+qr,Paragraph Formatting Properties,Flag,null
+qt,Paragraph Formatting Properties,Flag,null
+rawbgdkbdiag,Table Definitions,Flag,null
+rawclbgbdiag,Table Definitions,Flag,null
+rawclbgcross,Table Definitions,Flag,null
+rawclbgdcross,Table Definitions,Flag,null
+rawclbgdkcross,Table Definitions,Flag,null
+rawclbgdkdcross,Table Definitions,Flag,null
+rawclbgdkfdiag,Table Definitions,Flag,null
+rawclbgdkhor,Table Definitions,Flag,null
+rawclbgdkvert,Table Definitions,Flag,null
+rawclbgfdiag,Table Definitions,Flag,null
+rawclbghoriz,Table Definitions,Flag,null
+rawclbgvert,Table Definitions,Flag,null
+rdblquote,Special Characters,Symbol,null
+readprot,Document Formatting Properties,Flag,null
+red,Color Table,Value,null
+relyonvml,Document Formatting Properties,Value,null
+rempersonalinfo,Document Formatting Properties,Flag,null
+result,Objects,Destination,null
+revauth,Font (Character) Formatting Properties,Value,null
+revauthdel,Character Text,Value,null
+revbar,Document Formatting Properties,Value,null
+revdttm,Font (Character) Formatting Properties,Value,null
+revdttmdel,Character Text,Value,null
+revised,Font (Character) Formatting Properties,Toggle,toggle
+revisions,Document Formatting Properties,Flag,null
+revprop,Document Formatting Properties,Value,null
+revprot,Document Formatting Properties,Flag,null
+revtbl,Track Changes,Destination,null
+revtim,Information Group,Destination,null
+ri,Paragraph Formatting Properties,Value,null
+rin,Paragraph Formatting Properties,Value,null
+row,Special Characters,Symbol,null
+rquote,Special Characters,Symbol,null
+rsid,Track Changes (Revision Marks),Value,null
+rsidroot,Track Changes (Revision Marks),Value,null
+rsidtbl,Track Changes (Revision Marks),Destination,null
+rsltbmp,Objects,Flag,null
+rslthtml,Objects,Flag,null
+rsltmerge,Objects,Flag,null
+rsltpict,Objects,Flag,null
+rsltrtf,Objects,Flag,null
+rslttxt,Objects,Flag,null
+rtf,RTF Version,Destination,null
+rtlch,Font (Character) Formatting Properties,Flag,null
+rtldoc,Document Formatting Properties,Flag,null
+rtlgutter,Document Formatting Properties,Flag,null
+rtlmark,Special Characters,Symbol,null
+rtlpar,Paragraph Formatting Properties,Flag,null
+rtlrow,Table Definitions,Flag,null
+rtlsect,Section Formatting Properties,Flag,null
+rxe,Index Entries,Destination,null
+s,Paragraph Formatting Properties,Value,null
+sa,Paragraph Formatting Properties,Value,null
+saauto,Paragraph Formatting Properties,Toggle,toggle
+saftnnalc,Section Formatting Properties,Flag,null
+saftnnar,Section Formatting Properties,Flag,null
+saftnnauc,Section Formatting Properties,Flag,null
+saftnnchi,Section Formatting Properties,Flag,null
+saftnnchosung,Section Formatting Properties,Flag,null
+saftnncnum,Section Formatting Properties,Flag,null
+saftnndbar,Section Formatting Properties,Flag,null
+saftnndbnum,Section Formatting Properties,Flag,null
+saftnndbnumd,Section Formatting Properties,Flag,null
+saftnndbnumk,Section Formatting Properties,Flag,null
+saftnndbnumt,Section Formatting Properties,Flag,null
+saftnnganada,Section Formatting Properties,Flag,null
+saftnngbnum,Section Formatting Properties,Flag,null
+saftnngbnumd,Section Formatting Properties,Flag,null
+saftnngbnumk,Section Formatting Properties,Flag,null
+saftnngbnuml,Section Formatting Properties,Flag,null
+saftnnrlc,Section Formatting Properties,Flag,null
+saftnnruc,Section Formatting Properties,Flag,null
+saftnnzodiac,Section Formatting Properties,Flag,null
+saftnnzodiacd,Section Formatting Properties,Flag,null
+saftnnzodiacl,Section Formatting Properties,Flag,null
+saftnrestart,Section Formatting Properties,Flag,null
+saftnrstcont,Section Formatting Properties,Flag,null
+saftnstart,Section Formatting Properties,Flag,null
+sautoupd,Style Sheet,Flag,null
+saveinvalidxml,Document Formatting Properties,,null
+sb,Paragraph Formatting Properties,Value,null
+sbasedon,Style Sheet,Value,null
+sbauto,Paragraph Formatting Properties,Toggle,toggle
+sbkcol,Section Formatting Properties,Flag,null
+sbkeven,Section Formatting Properties,Flag,null
+sbknone,Section Formatting Properties,Flag,null
+sbkodd,Section Formatting Properties,Flag,null
+sbkpage,Section Formatting Properties,Flag,null
+sbys,Paragraph Formatting Properties,Flag,null
+scaps,Font (Character) Formatting Properties,Toggle,toggle
+scompose,Style Sheet,Flag,null
+sec,Information Group,Value,null
+sect,Special Characters,Symbol,null
+sectd,Section Formatting Properties,Flag,null
+sectdefaultcl,Section Formatting Properties,Value,null
+sectexpand,Section Formatting Properties,Value,null
+sectlinegrid,Section Formatting Properties,Value,null
+sectnum,Special Characters,Symbol,null
+sectrsid,Track Changes (Revision Marks),Value,null
+sectspecifycl,Section Formatting Properties,Value,null
+sectspecifygen,Section Formatting Properties,Flag,null
+sectspecifyl,Section Formatting Properties,Value,null
+sectunlocked,Section Formatting Properties,Flag,null
+sftnbj,Section Formatting Properties,Flag,null
+sftnnalc,Section Formatting Properties,Flag,null
+sftnnar,Section Formatting Properties,Flag,null
+sftnnauc,Section Formatting Properties,Flag,null
+sftnnchi,Section Formatting Properties,Flag,null
+sftnnchosung,Section Formatting Properties,Flag,null
+sftnncnum,Section Formatting Properties,Flag,null
+sftnndbar,Section Formatting Properties,Flag,null
+sftnndbnum,Section Formatting Properties,Flag,null
+sftnndbnumd,Section Formatting Properties,Flag,null
+sftnndbnumk,Section Formatting Properties,Flag,null
+sftnndbnumt,Section Formatting Properties,Flag,null
+sftnnganada,Section Formatting Properties,Flag,null
+sftnngbnum,Section Formatting Properties,Flag,null
+sftnngbnumd,Section Formatting Properties,Flag,null
+sftnngbnumk,Section Formatting Properties,Flag,null
+sftnngbnuml,Section Formatting Properties,Flag,null
+sftnnrlc,Section Formatting Properties,Flag,null
+sftnnruc,Section Formatting Properties,Flag,null
+sftnnzodiac,Section Formatting Properties,Flag,null
+sftnnzodiacd,Section Formatting Properties,Flag,null
+sftnnzodiacl,Section Formatting Properties,Flag,null
+sftnrestart,Section Formatting Properties,Flag,null
+sftnrstcont,Section Formatting Properties,Flag,null
+sftnrstpg,Section Formatting Properties,Flag,null
+sftnstart,Section Formatting Properties,Flag,null
+sftntj,Section Formatting Properties,Flag,null
+shad,Font (Character) Formatting Properties,Toggle,toggle
+shading,Paragraph Shading,Value,null
+shidden,Style Sheet,Flag,null
+shift,Style Sheet,Flag,null
+showplaceholdtext,Default Fonts,Value,null
+showxmlerrors,Document Formatting Properties,Value,null
+shp,Word through Word RTF for Drawing Objects (Shades),Destination,null
+shpbottom,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpbxcolumn,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbxignore,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbxmargin,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbxpage,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbyignore,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbymargin,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbypage,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpbypara,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shpfblwtxt,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpfhdr,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpgrp,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpinst,Word through Word RTF for Drawing Objects (Shades),Destination,null
+shpleft,Word through Word RTF for Drawing Objects (Shades),Value,null
+shplid,Word through Word RTF for Drawing Objects (Shades),Value,null
+shplockanchor,Word through Word RTF for Drawing Objects (Shades),Flag,null
+shppict,Pictures,Destination,null
+shpright,Word through Word RTF for Drawing Objects (Shades),Value,null
+shprslt,Word through Word RTF for Drawing Objects (Shades),Value,null
+shptop,Word through Word RTF for Drawing Objects (Shades),Value,null
+shptxt,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpwr,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpwrk,Word through Word RTF for Drawing Objects (Shades),Value,null
+shpz,Word through Word RTF for Drawing Objects (Shades),Value,null
+sl,Paragraph Formatting Properties,Value,null
+slink,Style Sheet,Value,null
+slmult,Paragraph Formatting Properties,Value,null
+slocked,Style Sheet,Flagged,null
+sn,Word through Word RTF for Drawing Objects (Shades),Destination,null
+snaptogridincell,Document Formatting Properties,Flag,null
+snext,Style Sheet,Value,null
+softcol,Special Characters,Flag,null
+softlheight,Special Characters,Value,null
+softline,Special Characters,Flag,null
+softpage,Special Characters,Flag,null
+sp,Word through Word RTF for Drawing Objects (Shades),Destination,null
+spersonal,Style Sheet,Flag,null
+spltpgpar,Document Formatting Properties,Flag,null
+splytwnine,Document Formatting Properties,Flag,null
+sprsbsp,Document Formatting Properties,Flag,null
+sprslnsp,Document Formatting Properties,Flag,null
+sprsspbf,Document Formatting Properties,Flag,null
+sprstsm,Document Formatting Properties,Flag,null
+sprstsp,Document Formatting Properties,Flag,null
+spv,Paragraph Formatting Properties,Flag,null
+sreply,Style Sheet,Flag,null
+ssemihidden,Style Sheet,Flag,null
+staticval,Information Group,Value,null
+stextflow,Section Text,Value,null
+strike,Font (Character) Formatting Properties,Toggle,toggle
+strikedl,Character Text,Toggle,toggle
+stshfbi,Default Fonts,Value,null
+stshfdbch,Default Fonts,Value,null
+stshfhich,Default Fonts,Value,null
+stshfloch,Default Fonts,Value,null
+stylelock,Document Formatting Properties,Flag,null
+stylelockbackcomp,Document Formatting Properties,Flag,null
+stylelockenforced,Document Formatting Properties,Flag,null
+stylesheet,Style Sheet,Destination,null
+styrsid,Track Changes (Revision Marks),Value,null
+sub,Font (Character) Formatting Properties,Flag,null
+subdocument,Paragraph Formatting Properties,Value,null
+subfontbysize,Document Formatting Properties,Flag,null
+subject,Information Group,Destination,null
+super,Font (Character) Formatting Properties,Flag,null
+sv,Word through Word RTF for Drawing Objects (Shades),Destination,null
+svb,Word through Word RTF for Drawing Objects (Shades),Destination,null
+swpbdr,Document Formatting Properties,Flag,null
+tab,Special Characters,Symbol,null
+tabsnoovrlp,Table Definitions,Flag,null
+taprtl,Table Definitions,Flag,null
+tb,Tabs,Value,null
+tbllkbestfit,Table Definitions,Flag,null
+tbllkborder,Table Definitions,Flag,null
+tbllkcolor,Table Definitions,Flag,null
+tbllkfont,Table Definitions,Flag,null
+tbllkhdrcols,Table Definitions,Flag,null
+tbllkhdrrows,Table Definitions,Flag,null
+tbllklastcol,Table Definitions,Flag,null
+tbllklastrow,Table Definitions,Flag,null
+tbllkshading,Table Definitions,Flag,null
+tblrsid,Table Definitions,Flag,null
+tc,Table of Contents Entries,Destination,null
+tcelld,Table Definitions,Flag,null
+tcf,Table of Contents Entries,Value,null
+tcl,Table of Contents Entries,Value,null
+tcn,Table of Contents Entries,Flag,null
+tdfrmtxtBottom,Table Definitions,Value,null
+tdfrmtxtLeft,Table Definitions,Value,null
+tdfrmtxtRight,Table Definitions,Value,null
+tdfrmtxtTop,Table Definitions,Value,null
+template,Document Formatting Properties,Destination,null
+time,Fields,Flag,null
+title,Information Group,Destination,null
+titlepg,Section Formatting Properties,Flag,null
+tldot,Tabs,Flag,null
+tleq,Tabs,Flag,null
+tlhyph,Tabs,Flag,null
+tlmdot,Tabs,Flag,null
+tlth,Tabs,Flag,null
+tlul,Tabs,Flag,null
+toplinepunct,Document Formatting Properties,Flag,null
+tphcol,Table Definitions,Flag,null
+tphmrg,Table Definitions,Flag,null
+tphpg,Table Definitions,Flag,null
+tposnegx,Table Definitions,Value,null
+tposnegy,Table Definitions,Value,null
+tposX,Table Definitions,Value,null
+tposxc,Table Definitions,Flag,null
+tposxi,Table Definitions,Flag,null
+tposxl,Table Definitions,Flag,null
+tposxo,Table Definitions,Flag,null
+tposxr,Table Definitions,Flag,null
+tposy,Table Definitions,Flag,null
+tposyb,Table Definitions,Flag,null
+tposyc,Table Definitions,Flag,null
+tposyil,Table Definitions,Flag,null
+tposyin,Table Definitions,Flag,null
+tposyoutv,Table Definitions,Flag,null
+tposyt,Table Definitions,Flag,null
+tpvmrg,Table Definitions,Flag,null
+tpvpara,Table Definitions,Flag,null
+tpvpg,Table Definitions,Flag,null
+tqc,Tabs,Flag,null
+tqdec,Tabs,Flag,null
+tqr,Tabs,Flag,null
+trackformatting,Document Formatting Properties,Value,null
+trackmoves,Document Formatting Properties,Value,null
+transmf,Document Formatting Properties,Flag,null
+trappdt,Table Definitions,Value,null
+trauth,Table Definitions,Value,null
+trautofit,Table Definitions,Toggle,toggle
+trbgbdiag,Table Definitions,Flag,null
+trbgcross,Table Definitions,Flag,null
+trbgdcross,Table Definitions,Flag,null
+trbgdkbdiag,Table Definitions,Flag,null
+trbgdkcross,Table Definitions,Flag,null
+trbgdkdcross,Table Definitions,Flag,null
+trbgdkfdiag,Table Definitions,Flag,null
+trbgdkhor,Table Definitions,Flag,null
+trbgdkvert,Table Definitions,Flag,null
+trbgfdiag,Table Definitions,Flag,null
+trbghoriz,Table Definitions,Flag,null
+trbgvert,Table Definitions,Flag,null
+trbrdrb,Table Definitions,Flag,null
+trbrdrh,Table Definitions,Flag,null
+trbrdrl,Table Definitions,Flag,null
+trbrdrr,Table Definitions,Flag,null
+trbrdrt,Table Definitions,Flag,null
+trbrdrv,Table Definitions,Flag,null
+trcbpat,Table Definitions,Value,null
+trcfpat,Table Definitions,Value,null
+trdate,Table Definitions,Value,null
+trftsWidth,Table Definitions,Value,null
+trftsWidthA,Table Definitions,Value,null
+trftsWidthB,Table Definitions,Value,null
+trgaph,Table Definitions,Value,null
+trhdr,Table Definitions,Flag,null
+trkeep,Table Definitions,Flag,null
+trleft,Table Definitions,Value,null
+trowd,Table Definitions,Flag,null
+trpaddb,Table Definitions,Value,null
+trpaddfb,Table Definitions,Value,null
+trpaddfl,Table Definitions,Value,null
+trpaddfr,Table Definitions,Value,null
+trpaddft,Table Definitions,Value,null
+trpaddl,Table Definitions,Value,null
+trpaddr,Table Definitions,Value,null
+trpat,Table Definitions,Value,null
+trqc,Table Definitions,Flag,null
+trql,Table Definitions,Flag,null
+trqr,Table Definitions,Flag,null
+trrh,Table Definitions,Value,null
+trshdng,Table Definitions,Value,null
+trspdb,Table Definitions,Value,null
+trspdfb,Table Definitions,Value,null
+trspdfl,Table Definitions,Value,null
+trspdfr,Table Definitions,Value,null
+trspdft,Table Definitions,Value,null
+trspdl,Table Definitions,Value,null
+trspdr,Table Definitions,Value,null
+trspdt,Table Definitions,Value,null
+truncatefontheight,Document Formatting Properties,Flag,null
+trwWidth,Table Definitions,Value,null
+trwWidthA,Table Definitions,Value,null
+trwWidthB,Table Definitions,Value,null
+ts,Style Sheet,Value,null
+tsbgbdiag,Table Styles,Flag,null
+tsbgcross,Table Styles,Flag,null
+tsbgdcross,Table Styles,Flag,null
+tsbgdkbdiag,Table Styles,Flag,null
+tsbgdkcross,Table Styles,Flag,null
+tsbgdkdcross,Table Styles,Flag,null
+tsbgdkfdiag,Table Styles,Flag,null
+tsbgdkhor,Table Styles,Flag,null
+tsbgdkvert,Table Styles,Flag,null
+tsbgfdiag,Table Styles,Flag,null
+tsbghoriz,Table Styles,Flag,null
+tsbgvert,Table Styles,Flag,null
+tsbrdrb,Table Styles,Flag,null
+tsbrdrdgl,Table Styles,Flag,null
+tsbrdrdgr,Table Styles,Flag,null
+tsbrdrh,Table Styles,Flag,null
+tsbrdrl,Table Styles,Flag,null
+tsbrdrr,Table Styles,Flag,null
+tsbrdrr,Table Styles,Flag,null
+tsbrdrt,Table Styles,Flag,null
+tsbrdrv,Table Styles,Flag,null
+tscbandhorzeven,Table Styles,Flag,null
+tscbandhorzodd,Table Styles,Flag,null
+tscbandsh,Table Styles,Flag,null
+tscbandsv,Table Styles,Flag,null
+tscbandverteven,Table Styles,Flag,null
+tscbandvertodd,Table Styles,Flag,null
+tscellcbpat,Table Styles,Value,null
+tscellcfpat,Table Styles,Value,null
+tscellpaddb,Table Styles,Value,null
+tscellpaddfb,Table Styles,Value,null
+tscellpaddfl,Table Styles,Value,null
+tscellpaddfr,Table Styles,Value,null
+tscellpaddft,Table Styles,Value,null
+tscellpaddl,Table Styles,Value,null
+tscellpaddr,Table Styles,Value,null
+tscellpaddt,Table Styles,Value,null
+tscellpct,Table Styles,Value,null
+tscellwidth,Table Styles,Flag,null
+tscellwidthfts,Table Styles,Flag,null
+tscfirstcol,Table Styles,Flag,null
+tscfirstrow,Table Styles,Flag,null
+tsclastcol,Table Styles,Flag,null
+tsclastrow,Table Styles,Flag,null
+tscnecell,Table Styles,Flag,null
+tscnwcell,Table Styles,Flag,null
+tscsecell,Table Styles,Flag,null
+tscswcell,Table Styles,Flag,null
+tsd,Table Styles,Flag,null
+tsnowrap,Table Styles,Flag,null
+tsrowd,Style Sheet,Flag,null
+tsvertalb,Table Styles,Flag,null
+tsvertalc,Table Styles,Flag,null
+tsvertalt,Table Styles,Flag,null
+twoonone,Document Formatting Properties,Flag,null
+tx,Tabs,Value,null
+txe,Index Entries,Destination,null
+u,Unicode RTF,Value,null
+uc,Unicode RTF,Value,null
+ud,Unicode RTF,Destination,null
+ul,Font (Character) Formatting Properties,Toggle,toggle
+ulc,Font (Character) Formatting Properties,Value,null
+uld,Font (Character) Formatting Properties,Flag,null
+uldash,Font (Character) Formatting Properties,Toggle,toggle
+uldashd,Font (Character) Formatting Properties,Toggle,toggle
+uldashdd,Font (Character) Formatting Properties,Toggle,toggle
+uldb,Font (Character) Formatting Properties,Toggle,toggle
+ulhair,Font (Character) Formatting Properties,Toggle,toggle
+ulhwave,Font (Character) Formatting Properties,Toggle,toggle
+ulldash,Font (Character) Formatting Properties,Toggle,toggle
+ulnone,Font (Character) Formatting Properties,Flag,null
+ulth,Font (Character) Formatting Properties,Toggle,toggle
+ulth,Character Text,Toggle,toggle
+ulthd,Font (Character) Formatting Properties,Toggle,toggle
+ulthdash,Font (Character) Formatting Properties,Toggle,toggle
+ulthdashd,Font (Character) Formatting Properties,Toggle,toggle
+ulthdashdd,Font (Character) Formatting Properties,Toggle,toggle
+ulthldash,Font (Character) Formatting Properties,Toggle,toggle
+ululdbwave,Font (Character) Formatting Properties,Toggle,toggle
+ulw,Font (Character) Formatting Properties,Flag,null
+ulwave,Font (Character) Formatting Properties,Toggle,toggle
+up,Font (Character) Formatting Properties,Value,null
+upr,Unicode RTF,Destination,null
+urtf,Control Words Introduced bv Other Microsoft Products,Destination,null
+useltbaln,Document Formatting Properties,Flag,null
+usenormstyforlist,Document Formatting Properties,Flag,null
+usenormstyforlist,Document Formatting Properties,Flag,null
+userprops,Information Group,Destination,null
+utinl,Document Formatting Properties,Flag,null
+v,Font (Character) Formatting Properties,Toggle,toggle
+validatexml,,,
+vern,Information Group,Value,null
+version,Information Group,Value,null
+vertalb,Section Formatting Properties,Flag,null
+vertalc,Section Formatting Properties,Flag,null
+vertalj,Section Formatting Properties,Flag,null
+vertalt,Section Formatting Properties,Flag,null
+vertdoc,Document Formatting Properties,Flag,null
+vertsect,Section Formatting Properties,Flag,null
+viewbksp,Document Formatting Properties,Flag,null
+viewkind,Document Formatting Properties,Value,null
+viewnobound,Document Formatting Properties,Flag,null
+viewscale,Document Formatting Properties,Value,null
+viewzk,Document Formatting Properties,Value,null
+Vinestarts,Section Formatting Properties,Value,null
+wbitmap,Pictures,Value,null
+wbmbitspixel,Pictures,Value,null
+wbmplanes,Pictures,Value,null
+wbmwidthbytes,Pictures,Value,null
+webhidden,Font (Character) Formatting Properties,Flag,null
+widctlpar,Paragraph Formatting Properties,Flag,null
+widowctrl,Document Formatting Properties,Flag,null
+windowcaption,Document Formatting Properties,Value,null
+wmetafile,Pictures,Value,null
+wpeqn,Fields,Flag,null
+wpjst,Document Formatting Properties,Flag,null
+wpsp,Document Formatting Properties,Flag,null
+wrapdefault,Positioned Objects and Frames,Flag,null
+wraptrsp,Document Formatting Properties,Flag,null
+wrppunct,Document Formatting Properties,Flag,null
+xe,Index Entries,Destination,null
+xef,Index Entries,Value,null
+yr,Information Group,Value,null
+yts,Paragraph Formatting Properties,Value,null
+yxe,Index Entries,Flag,null
+zwbo,Special Characters,Symbol,null
+zwj,Special Characters,Symbol,null
+zwnbo,Special Characters,Symbol,null
+zwnj,Special Characters,Symbol,null
