@@ -60,30 +60,6 @@ class Prelim(object):
         # Set the path for the Config.ini file.
         config_file = os.path.join(self.base_dir, "Config.ini")
 
-        # Determine if the base directory is in sys.path; if not, add it.
-        if self.base_dir in sys.path:
-            current_in_path = 1
-            temp = []
-        else:
-            logger_debug.debug(msg="The base directory is not in sys.path.")
-            sys.exit(1)
-
-        # Copy all of sys.path to temp and list the base directory last.
-        for path in sys.path:
-            if path != sys.path:
-                temp.append(path)
-            else:
-                pass
-
-        sys.path = []
-        for path in temp:
-            sys.path.append(path)
-
-        if current_in_path:
-            sys.path.append(self.base_dir)
-        else:
-            pass
-
         return config_file
 
     @staticmethod

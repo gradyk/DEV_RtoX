@@ -10,14 +10,15 @@ __date__ = "2020-8-12"
 __name__ = "Contents.Library.process_body.group_contents"
 
 # From standard libraries
-import json
 import linecache
+import os
 import re
+from pathlib import Path
 
 # From local applications
 import build_output_file
+import control_word_collections
 import control_word_to_build
-import dict_updater
 
 
 def processor(processing_dict: dict):
@@ -28,36 +29,35 @@ def processor(processing_dict: dict):
         elif ele == "}":
             pass
         elif re.search(processing_dict["cw_regex"], ele):
-            with open(processing_dict["control_word_dict"], "r+") as \
-                    control_word_dict_pre:
-                cw_dict = json.load(control_word_dict_pre)
-                cw_text = "".join([i for i in ele if i.isalpha()])
-                cw_value = "".join([i for i in ele if i.isdigit()])
-                null_function = "null"
-                try:
-                    cw_func = cw_dict[cw_text][2]
-                    if cw_func != null_function:
-                        name = cw_dict[cw_text][3]
-                        tag_set = processing_dict["tag_set"]
-                        tag_info = {
-                            "func":      cw_func,
-                            "cw_text":   cw_text,
-                            "cw_value":  cw_value,
-                            "name":      name,
-                            "tag_open":  "",
-                            "tag_close": "",
-                            "tag_set":   tag_set
-                        }
-                        control_word_to_build.processor(tag_info=tag_info)
-                    else:
-                        pass
-                except KeyError:
-                    # Add missing control word to control_word_dict.json file.
-                    cw_update = {cw_text: ["", "", "null", cw_text]}
-                    dict_updater.json_dict_updater(
-                        dict_name="control_word_dict.json",
-                        debug_dir=processing_dict["dicts_dir"],
-                        dict_update=cw_update)
+            cw_text = "".join([i for i in ele if i.isalpha()])
+            cw_value = "".join([i for i in ele if i.isdigit()])
+            null_function = "null"
+            try:
+                cw_func = \
+                    control_word_collections.processor(ele=cw_text)
+                if cw_func != null_function:
+                    tag_set = processing_dict["tag_set"]
+                    tag_info = {
+                        "func":      cw_func,
+                        "cw_text":   cw_text,
+                        "cw_value":  cw_value,
+                        "name":      cw_text,
+                        "tag_open":  "",
+                        "tag_close": "",
+                        "tag_set":   tag_set
+                    }
+                    control_word_to_build.processor(tag_info=tag_info)
+                else:
+                    pass
+            except KeyError:
+                # Add missing control word to
+                # control_word_collections.csv file.
+                cw_update = f'{cw_text}, Unknown, Unknown, null'
+                util_dir = Path.cwd()
+                csv_file = os.path.join(util_dir,
+                                        "control_words_collections.csv")
+                with open(csv_file, "a+") as csv_file_pre:
+                    csv_file_pre.write(cw_update)
         else:
             build_output_file.processor(update_output=ele)
 

@@ -1,72 +1,69 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-#
-#
-#  Redistribution and use in source and binary forms, with or without
-#  modification, are permitted provided that the following conditions are met:
-#
-#
-#
-#
-"""
-The tag registry maintains the status of open and closed tags. Check for an
-open tag of the type specified and, if open, close and update
-the tag registry.
-"""
+""" The tag registry maintains the status of tags. Check the status and
+perform the appropriate operation based on the status. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-01-22"
-__name__ = "Contents.Library.open_tag_check"
+__name__ = "Contents.Library.tag_check"
 
 # Standard library imports
 import json
-import logging
 import os
 import sys
 
 # From local application
 import tag_registry_update
-import build_output_file
-from read_log_config import logger_debug
 
 
-def tag_check(debug_dir: str, tag_dict: dict, status_list: list):
-    """ Check for and, if necessary, close open tags. The status_list provides
-    the tags to check. """
-    tag_registry = os.path.join(debug_dir, "tag_registry.json")
+def processor(tag_info: dict):
+    """ Evaluate whether the tag is open. closed, or not in the registry.
+    Options:
+    open    and tag_action is open: do nothing
+    open    and tag_action is close: close tag
+    close   and tag_action is open: open tag
+    close   and tag_action is close: do nothing
+    absent  and tag_action is open: open tag
+    absent  and tag_action is close: do nothing
+    Finally, update the registry. """
     base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    tag_dict_file = os.path.join(base_dir, "xml_tags.json")
-    with open(tag_registry) as tag_registry_data_pre:
-        tag_registry_data = json.load(tag_registry_data_pre)
-    with open(tag_dict_file, "r+") as tag_dict_file_pre:
-        tag_dict_options = json.load(tag_dict_file_pre)
-
-        tag_set = tag_dict_options[________[______]]
-
-        for tag_type in status_list:
-            tag_closed = "close"
-            if tag_registry_data[tag_type] == tag_closed:
-                pass
-            else:
-                # Update the build_output_file.
-                content_update = tag_dict[tag_type]
-                build_output_file.processor(update_output=content_update)
-                try:
-                    if logger_debug.isEnabledFor(logging.DEBUG):
-                        msg = "______________"
-                        logger_debug.error(msg)
-                except AttributeError:
-                    logging.exception("Check setLevel for logger_debug.")
-
-                # Update the tag registry.
-                content_update_dict = {tag_type: "close"}
-                tag_registry_update.processor(debug_dir=debug_dir,
-                                              tag_update_dict=content_update_dict)
+    debug_dir = os.path.join(base_dir, "debugdir")
+    tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
+    update_output = ""
+    with open(tag_registry_file, "r+") as tag_registry_file_pre:
+        tag_registry = json.load(tag_registry_file_pre)
+        name = tag_info["name"]
+        try:  # is tag open or closed
+            if tag_registry[name] == "open" and tag_info["tag_setting"] == \
+                    "close":
+                update_output = tag_info["tag_close_str"]
+            elif tag_registry[name] == "close" and tag_info["tag_setting"] == \
+                    "open":
+                update_output = tag_info["tag_open_str"]
+            elif tag_registry[name] == "close" and tag_info["tag_setting"] == \
+                    "close":
+                update_output = ""
+            elif tag_registry[name] == "open" and tag_info["tag_setting"] == \
+                    "open":
+                update_output = ""
+            tag_update = {tag_info["name"]: tag_info["tag_setting"]}
+        except KeyError:  # control word not in the tag registry
+            # Add the tag to the tag registry and update its status.
+            # TODO For at least some toggles (aspalpha, aspanum) there isn't
+            #  a close tag. Need to identify these situations and mark the
+            #  status in the tag registry appropriately.
+            if tag_info["tag_setting"] == "open":
+                update_output = tag_info["tag_open_str"]
+            elif tag_info["tag_setting"] == "close":
+                update_output = tag_info["tag_close_str"]
+            tag_update = {tag_info["name"]: tag_info["tag_setting"]}
+        if tag_info["tag_setting"] == "":
+            pass
+        else:
+            tag_registry_update.processor(tag_update=tag_update)
+        return tag_info, update_output

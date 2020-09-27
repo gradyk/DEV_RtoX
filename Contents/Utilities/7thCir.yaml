@@ -1,0 +1,26 @@
+# U.S. Court of Appeals for the Seventh Circuit Formatting Rules and Tips
+court: 'U.S. Court of Appeals for the Seventh Circuit'
+
+governing_rule: "FRAP 32"
+
+additional_rules:
+
+rule:
+  rule_date: '2020-08-10'
+  rule_url: 'http://_____'
+
+specifications:
+  # Printer output.
+  clarity:
+    rule: "FRAP 32(a)(1)(B)"
+    # Expressed as minimum dpi or dots per inch.
+    measure: "300"
+    required: "yes"
+
+  typeface:
+    rule:
+    measure:
+    required:
+
+
+

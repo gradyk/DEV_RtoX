@@ -73,11 +73,11 @@ ansi,Character Set,Flag,null
 ansicpg,Unicode RTF,Value,null
 aoutl,Associated Character Properties,Toggle,toggle
 ApplyBrkRules,Document Formatting Properties,Flag,null
-ascaps,Associated Character Properties,Toggle,toggle
+ascaps,Associated Character Properties,Toggle,toggle_emph
 ashad,Associated Character Properties,Toggle,toggle
 asianbrkrule,Document Formatting Properties,Flag,null
-aspalpha,Paragraph Formatting Properties,Toggle,toggle
-aspnum,Paragraph Formatting Properties,Toggle,toggle
+aspalpha,Paragraph Formatting Properties,Toggle,null
+aspnum,Paragraph Formatting Properties,Toggle,null
 astrike,Associated Character Properties,Toggle,toggle
 atnauthor,Comments (Annotations),Destination,null
 atndate,Comments (Annotations),Destination,null
@@ -96,7 +96,7 @@ aulw,Associated Character Properties,Toggle,toggle
 aup,Associated Character Properties,Value,null
 author,Information Group,Destination,null
 autofmtoverride,Document Formatting Properties,Flag,null
-b,Font (Character) Formatting Properties,Toggle,toggle
+b,Font (Character) Formatting Properties,Toggle,toggle_emph
 background,Word through Word RTF for Drawing Objects (Shades),Destination,null
 bdbfhdr,Document Formatting Properties,Flag,null
 bdrrlswsix,Document Formatting Properties,Flag,null
@@ -173,7 +173,7 @@ bullet,Special Characters,Symbol,null
 buptim,Information Group,Destination,null
 bxe,Index Entries,Flag,null
 cachedcolbal,Document Formatting Properties,Flag,null
-caps,Font (Character) Formatting Properties,Toggle,toggle
+caps,Font (Character) Formatting Properties,Toggle,toggle_emph
 category,Information Group,Destination,null
 cb,Font (Character) Formatting Properties,Value,null
 cbpat,Paragraph Shading,Value,null
@@ -586,7 +586,7 @@ hyphcaps,Document Formatting Properties,Toggle,toggle
 hyphconsec,Document Formatting Properties,Value,null
 hyphhotz,Document Formatting Properties,Value,null
 hyphpar,Paragraph Formatting Properties,Toggle,toggle
-i,Font (Character) Formatting Properties,Toggle,toggle
+i,Font (Character) Formatting Properties,Toggle,toggle_emph
 id,Information Group,Value,null
 ignoremixedcontent,Document Formatting Properties,Value,null
 iin,Paragraph Formatting Properties,Value,null
@@ -1082,7 +1082,7 @@ sbknone,Section Formatting Properties,Flag,null
 sbkodd,Section Formatting Properties,Flag,null
 sbkpage,Section Formatting Properties,Flag,null
 sbys,Paragraph Formatting Properties,Flag,null
-scaps,Font (Character) Formatting Properties,Toggle,toggle
+scaps,Font (Character) Formatting Properties,Toggle,toggle_emph
 scompose,Style Sheet,Flag,null
 sec,Information Group,Value,null
 sect,Special Characters,Symbol,null
@@ -1179,7 +1179,7 @@ sreply,Style Sheet,Flag,null
 ssemihidden,Style Sheet,Flag,null
 staticval,Information Group,Value,null
 stextflow,Section Text,Value,null
-strike,Font (Character) Formatting Properties,Toggle,toggle
+strike,Font (Character) Formatting Properties,Toggle,toggle_emph
 strikedl,Character Text,Toggle,toggle
 stshfbi,Default Fonts,Value,null
 stshfdbch,Default Fonts,Value,null
@@ -1377,27 +1377,27 @@ txe,Index Entries,Destination,null
 u,Unicode RTF,Value,null
 uc,Unicode RTF,Value,null
 ud,Unicode RTF,Destination,null
-ul,Font (Character) Formatting Properties,Toggle,toggle
+ul,Font (Character) Formatting Properties,Toggle,toggle_emph
 ulc,Font (Character) Formatting Properties,Value,null
 uld,Font (Character) Formatting Properties,Flag,null
-uldash,Font (Character) Formatting Properties,Toggle,toggle
-uldashd,Font (Character) Formatting Properties,Toggle,toggle
-uldashdd,Font (Character) Formatting Properties,Toggle,toggle
-uldb,Font (Character) Formatting Properties,Toggle,toggle
-ulhair,Font (Character) Formatting Properties,Toggle,toggle
-ulhwave,Font (Character) Formatting Properties,Toggle,toggle
-ulldash,Font (Character) Formatting Properties,Toggle,toggle
+uldash,Font (Character) Formatting Properties,Toggle,toggle_emph
+uldashd,Font (Character) Formatting Properties,Toggle,toggle_emph
+uldashdd,Font (Character) Formatting Properties,Toggle,toggle_emph
+uldb,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulhair,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulhwave,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulldash,Font (Character) Formatting Properties,Toggle,toggle_emph
 ulnone,Font (Character) Formatting Properties,Flag,null
-ulth,Font (Character) Formatting Properties,Toggle,toggle
-ulth,Character Text,Toggle,toggle
-ulthd,Font (Character) Formatting Properties,Toggle,toggle
-ulthdash,Font (Character) Formatting Properties,Toggle,toggle
-ulthdashd,Font (Character) Formatting Properties,Toggle,toggle
-ulthdashdd,Font (Character) Formatting Properties,Toggle,toggle
-ulthldash,Font (Character) Formatting Properties,Toggle,toggle
-ululdbwave,Font (Character) Formatting Properties,Toggle,toggle
+ulth,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulth,Character Text,Toggle,toggle_emph
+ulthd,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulthdash,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulthdashd,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulthdashdd,Font (Character) Formatting Properties,Toggle,toggle_emph
+ulthldash,Font (Character) Formatting Properties,Toggle,toggle_emph
+ululdbwave,Font (Character) Formatting Properties,Toggle,toggle_emph
 ulw,Font (Character) Formatting Properties,Flag,null
-ulwave,Font (Character) Formatting Properties,Toggle,toggle
+ulwave,Font (Character) Formatting Properties,Toggle,toggle_emph
 up,Font (Character) Formatting Properties,Value,null
 upr,Unicode RTF,Destination,null
 urtf,Control Words Introduced bv Other Microsoft Products,Destination,null

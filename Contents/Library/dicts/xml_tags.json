@@ -71,7 +71,8 @@
                                  "</ts:footNote>"],
         "footnote-begf":        ["<ts:footNote place='bottom right first'>",
                                  "</ts:footNote>"],
-        "toggle":               ["<ts:hiText rend='zzz'>", "</ts:hiText>"],
+        "toggle":               ["<ts:NEEDPROPERTAG rend='zzz'/>", ""],
+        "toggle_emph":          ["<ts:hiText rend='zzz'>", "</ts:hiText>"],
         "list":                 ["<ts:listGenl>", "</ts:listGenl>"],
         "rendition":            ["<ts:rendFormat>", "</ts:rendFormat>"],
         "missing":              ["<ts:rtfIssue line='zzz' key='aaa'>", "</ts:rtfIssue>"]

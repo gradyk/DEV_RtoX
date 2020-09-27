@@ -5,7 +5,7 @@
 import linecache
 
 
-def text_metric_reset(processing_dict: dict) -> dict:
+def processor(processing_dict: dict) -> dict:
     length = len(processing_dict["parse_text"])
     if length <= 2:
         processing_dict["line_to_parse"] = processing_dict["line_to_parse"] + 1

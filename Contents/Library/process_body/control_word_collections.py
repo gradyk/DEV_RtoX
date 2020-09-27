@@ -14,27 +14,13 @@ __name__ = "Contents.Library.process_body.control_word_collections"
 import csv
 import os
 from pathlib import Path
-from collections import defaultdict
 
 
-def cw_dict(func):
-    cache = dict()
-
-    def memoized_func(*args):
-        if args in cache:
-            return cache[args]
-        result = func(*args)
-        cache[args] = result
-        return result
-
-    return memoized_func
-
-
-def processor():
+def processor(ele):
+    collection_dict = dict()
     util_dir = Path.cwd()
     control_word_csv = os.path.join(util_dir,
-                                    "control_words_collections.csv")
-    collectionlist = []
+                                    "Utilities/control_words_collections.csv")
     with open(control_word_csv) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         line_count = 0
@@ -43,22 +29,10 @@ def processor():
                 line_count += 1
             else:
                 # ctw=row[0], typ=row[1], cat=row[2], fnc=row[3]
-                entry = (f'{row[0]}', f'{row[1]}', f'{row[2]}', f'{row[3]}')
-                if entry == ():
+                entry = {f'{row[0]}': f'{row[3]}'}
+                if entry == {}:
                     pass
                 else:
-                    collectionlist.append(entry)
+                    collection_dict.update(entry)
 
-    collection_dict = defaultdict()
-    for idx, (ctw, typ, cat, fnc) in enumerate(collectionlist):
-        val = ctw, typ, cat, fnc
-        collection_dict[(idx, ctw)] = val
-        collection_dict[(idx, typ)] = val
-        collection_dict[(idx, cat)] = val
-        collection_dict[(idx, fnc)] = val
-
-    return collection_dict
-
-
-if __name__ == "Contents.Library.process_body.control_word_collections":
-    cw_dict()
+    return collection_dict[ele]

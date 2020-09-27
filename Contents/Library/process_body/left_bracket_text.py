@@ -38,6 +38,6 @@ def processor(processing_dict: dict) -> dict:
     processing_dict["parse_text"] = processing_dict["parse_text"].\
         replace(text, "", 1)
     processing_dict["parse_index"] = 0
-    processing_dict = adjust_process_text.text_metric_reset(
+    processing_dict = adjust_process_text.processor(
         processing_dict=processing_dict)
     return processing_dict

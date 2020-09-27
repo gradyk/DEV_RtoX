@@ -13,7 +13,7 @@ __name__ = "__RtoX__"
 
 # From standard libraries
 import os
-from pathlib import Path
+import sys
 
 # From local application
 import create_files
@@ -39,7 +39,7 @@ if __name__ == "__RtoX__":
     #  any other necessary cleanup, instead of doing cleanup here.
     # TODO Sort control_word_dict as part of end of program cleanup.
     debugdir_clean.cleaner()
-    base_dir = Path.cwd()
+    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
     debug_dir = os.path.join(base_dir, "debugdir")
 
     # Get and store configuration information.

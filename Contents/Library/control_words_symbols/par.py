@@ -85,7 +85,7 @@ def open_emphasis_tag_cleanup(debug_dir: str, tag_dict: dict):
         "italic"
     ]
 
-    tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
+    tag_check.processor(debug_dir=debug_dir, status_list=status_list,
                         tag_dict=tag_dict)
 
 
@@ -103,7 +103,7 @@ def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
     if tag_registry["paragraph"] == tag_closed:
         content_update = tag_dict["paragraph-beg"]
         output_file_update.content_append(debug_dir=debug_dir,
-                                      content_update=content_update)
+                                          content_update=content_update)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["paragraph-beg"] + f"{line}")
@@ -114,7 +114,7 @@ def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
     else:
         content_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
         output_file_update.content_append(debug_dir=debug_dir,
-                                      content_update=content_update)
+                                          content_update=content_update)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["paragraph-end"] + tag_dict[
@@ -124,7 +124,6 @@ def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
             logging.exception("Check setLevel for logger_debug.")
 
 
-def update_tag_registry(debug_dir: str, tag_open="1"):
+def update_tag_registry(tag_open="1"):
     content_update_dict = {"paragraph": tag_open}
-    tag_registry_update.processor(debug_dir=debug_dir,
-                                  tag_update_dict=content_update_dict)
+    tag_registry_update.processor(tag_update=content_update_dict)

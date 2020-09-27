@@ -64,5 +64,4 @@ def processor():
                   "section":   "open",
                   "paragraph": "open",
                   "body":      "open"}
-    tag_registry_update.processor(debug_dir=debug_dir,
-                                  tag_update=tag_update)
+    tag_registry_update.processor(tag_update=tag_update)

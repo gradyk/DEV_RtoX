@@ -13,10 +13,14 @@ __name__ = "Contents.Library.tag_registry_update"
 
 # From standard libraries
 import json
+import logging
 import os
+from pathlib import Path
 
 
-def processor(debug_dir: str, tag_update: dict) -> None:
+def processor(tag_update: dict) -> None:
+    base_dir = Path.cwd()
+    debug_dir = os.path.join(base_dir, "debugdir")
     tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
     with open(tag_registry_file) as tag_registry_pre:
         tag_registry = json.load(tag_registry_pre)
@@ -26,4 +30,5 @@ def processor(debug_dir: str, tag_update: dict) -> None:
                 json.dump(tag_registry, tag_registry_prewrite, indent=4,
                           sort_keys=False, ensure_ascii=False)
         except KeyError:
+            logging.exception("KeyError in tag registry update: ", tag_update)
             pass

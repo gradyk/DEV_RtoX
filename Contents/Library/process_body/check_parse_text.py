@@ -41,7 +41,6 @@ def check_string_manager(processing_dict: dict, line: int) -> None:
         # Checks for text.
         check_text.processor(
             processing_dict=processing_dict)
-
         line = processing_dict["line_to_parse"]
 
     # TODO This will actually go to modules that will close out the program.
