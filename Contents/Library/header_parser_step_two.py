@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
 
 """  """
 
@@ -33,7 +13,6 @@ __name__ = "Contents.Library.header_parser_step_two"
 
 # From standard libraries
 import json
-import linecache
 import os
 import re
 
@@ -42,37 +21,42 @@ import dict_updater
 import split_between_characters
 
 
-def process_the_tables(debug_dir: str, working_input_file: str):
-    header_tables_file = os.path.join(debug_dir, "header_tables_dict.json")
+def process_the_tables(main_dict: dict) -> None:
+    header_tables_file = os.path.join(main_dict["control_info"]["debug_dir"],
+                                      "header_tables_dict.json")
 
     with open(header_tables_file) as header_tables_dict_pre:
         header_tables_dict = json.load(header_tables_dict_pre)
         for header_table in header_tables_dict:
             table, table_start_line, table_empty = check_for_empty_table(
                     header_tables_dict=header_tables_dict,
-                    table=header_table, working_input_file=working_input_file)
+                    table=header_table,
+                    working_input_file=main_dict["control_info"]
+                    ["working_input_file"])
             table_updater = table_emptyorfull_file_update(
                     table=table, table_start_line=table_start_line,
-                    table_empty=table_empty, debug_dir=debug_dir)
+                    table_empty=table_empty,
+                    debug_dir=main_dict["control_info"]["debug_dir"])
 
             if table_updater[table][1] is not True:
                 table_boundaries = header_tables_dict[header_table]
                 text_to_process = get_table_contents_as_text_string(
-                    working_input_file=working_input_file,
+                    working_input_file=main_dict["control_info"]
+                    ["working_input_file"],
                     table_boundaries=table_boundaries)
                 code_strings_list = get_code_strings_from_text(
                     text_to_process=text_to_process)
                 code_strings_file_update(
                     table=table, code_strings_list=code_strings_list,
-                    debug_dir=debug_dir)
+                    debug_dir=main_dict["control_info"]["debug_dir"])
             else:
                 pass
 
 
 def check_for_empty_table(table: str, header_tables_dict: dict,
-                          working_input_file: str) -> tuple:
+                          working_input_file: list) -> tuple:
     table_start_line = header_tables_dict[table][0]
-    line_to_search = linecache.getline(working_input_file, table_start_line)
+    line_to_search = working_input_file[table_start_line]
     if re.search(r"{\\" + table + r"}", line_to_search) is True or \
             re.search(r"{\\" + table + r" }", line_to_search) is True:
         table_empty = True
@@ -92,22 +76,19 @@ def table_emptyorfull_file_update(table: str, table_start_line: str,
 
 
 def get_table_contents_as_text_string(table_boundaries: dict,
-                                      working_input_file: str):
+                                      working_input_file: list):
     table_start_line = table_boundaries[0]
     table_last_line = table_boundaries[2]
     controlword_line = table_start_line
-    initial_string = linecache.getline(working_input_file, controlword_line)
-    initial_string = initial_string.strip("\n")
+    initial_string = working_input_file[controlword_line].strip("\n")
     string_to_slice = initial_string[table_boundaries[1]:]
     controlword_line += 1
     while controlword_line < table_last_line:
-        new_line = linecache.getline(working_input_file,
-                                     controlword_line).strip("\n")
-        string_list = [string_to_slice, new_line, " "]
+        new_line = working_input_file[controlword_line].strip("\n")
+        string_list = [string_to_slice, new_line]
         string_to_slice = ''.join(string_list)
         controlword_line += 1
-    last_string = linecache.getline(working_input_file, controlword_line)
-    last_string = last_string.strip("\n")
+    last_string = working_input_file[controlword_line].strip("\n")
     last_string = last_string[:table_boundaries[3]]
     text_list = [string_to_slice, last_string]
     text_to_process = ''.join(text_list)

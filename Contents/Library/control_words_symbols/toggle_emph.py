@@ -16,11 +16,8 @@ import json
 import os
 import sys
 
-# From local application
-import tag_check
 
-
-def processor(tag_info: dict) -> dict:
+def cw_func_processor(tag_info: dict) -> dict:
     # For a toggle control word, \<control_word> turns on the feature and
     # \<control_word>N turns off the feature.
     # See Word2007RTFSpec9 Font (Character) Formatting Properties, p.130.

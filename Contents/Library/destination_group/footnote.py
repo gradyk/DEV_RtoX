@@ -43,7 +43,7 @@ import output_file_update
 from read_log_config import logger_debug
 
 
-def determine_footnote_bounds(working_input_file: str,
+def determine_footnote_bounds(working_input_file: list,
                               line_to_search: int) -> str:
     """ A footnote is bounded by an opening brace and keyword ({\\footnote)
         and a closing brace (}). The opening is easy to identify. The closing

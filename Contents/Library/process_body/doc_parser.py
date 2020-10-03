@@ -19,52 +19,41 @@ __name__ = "Contents.Library.process_body.doc_parser"
 import json
 import linecache
 import os
-import sys
 
 # From local application
-import file_stats
+import control_word_collections
 import check_parse_text
+from typing import Any
 
 
 class MainDocManager(object):
-    def __init__(self,
-                 working_input_file: str,
-                 control_word_dict: str,
-                 tag_set: int) -> None:
-        self.working_input_file = working_input_file
-        self.control_word_dict = control_word_dict
-        self.tag_set = tag_set
+    def __init__(self, main_dict: dict) -> None:
+        self.main_dict = main_dict
+        self.processing_dict = self.main_dict["processing_dict"]
+        self.control_info = self.main_dict["control_info"]
+        self.working_input_file = self.control_info["working_file_name"]
+        self.tag_set = self.processing_dict["tag_set"]
         self.length_parse_text = 0
+        self.tag_registry = self.main_dict["tag_registry"]
 
-    def body_parse_manager(self) -> None:
-        base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-        debug_dir = os.path.join(base_dir, "debugdir")
-        dicts_dir = os.path.join(base_dir, "Library/dicts/")
-        header_table_file = os.path.join(debug_dir, "header_tables_dict.json")
+    def body_parse_manager(self) -> dict:
 
-        main_doc_dir = MainDocManager(
-            working_input_file=self.working_input_file,
-            control_word_dict=self.control_word_dict,
-            tag_set=self.tag_set)
-
-        MainDocManager.load_tag_registry(debug_dir=debug_dir)
+        header_table_file = os.path.join(self.control_info["debug_dir"],
+                                         "header_tables_dict.json")
+        main_doc_dir = MainDocManager(main_dict=self.main_dict)
         parse_text, line_to_parse, parse_index = \
             MainDocManager.parse_starting_point(
-                self=main_doc_dir,
-                header_table_file=header_table_file)
-
-        num_lines = file_stats.processor(
-            working_input_file=self.working_input_file)
+                self=main_doc_dir, header_table_file=header_table_file)
+        list_size = len(self.control_info["working_input_file"])
 
         processing_dict = {
             "parse_text":         parse_text,
-            "num_lines":          num_lines,
+            "list_size":          list_size,
             "line_to_parse":      line_to_parse,
             "parse_index":        parse_index,
             "working_input_file": self.working_input_file,
-            "debug_dir":          debug_dir,
-            "dicts_dir":          dicts_dir,
-            "control_word_dict":  self.control_word_dict,
+            "debug_dir":          self.control_info["debug_dir"],
+            "dicts_dir":          self.control_info["dicts_dir"],
             "group_contents":     "",
             "group_end_line":     0,
             "group_end_index":    0,
@@ -72,39 +61,28 @@ class MainDocManager(object):
             "contents_string":    "",
             "tag_set":            self.tag_set
         }
+        self.main_dict["processing_dict"] = processing_dict
+        collections_dict = control_word_collections.cwc_processor()
 
-        check_parse_text.check_string_manager(processing_dict=processing_dict,
-                                              line=line_to_parse)
+        self.main_dict = check_parse_text.cpt_processor(
+            main_dict=self.main_dict, collections_dict=collections_dict)
 
-    @staticmethod
-    def load_tag_registry(debug_dir: str) -> None:
-        base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-        dicts_dir = os.path.join(base_dir, "Library/dicts")
-        opening_registry_file = os.path.join(
-            dicts_dir, "opening_tag_registry_dict.json")
-        tag_registry_file = os.path.join(debug_dir, "tag_registry.json")
-        with open(tag_registry_file, "w+") as trf:
-            with open(opening_registry_file) as orf_pre:
-                orf = json.load(orf_pre)
-                tag_registry = orf.copy()
-                json.dump(tag_registry, trf, indent=4)
+        self.main_dict["processing_dict"] = processing_dict
+        return self.main_dict
 
-    def parse_starting_point(self, header_table_file: str) -> tuple:
+    def parse_starting_point(self, header_table_file: str) -> Any:
         with open(header_table_file) as htf_pre:
             header_table = json.load(htf_pre)
             line_to_parse = header_table["info"][2]
             parse_index = header_table["info"][3]
         parse_text, line_to_parse, parse_index = \
             MainDocManager.set_process_text(
-                self=MainDocManager(
-                    working_input_file=self.working_input_file,
-                    control_word_dict=self.control_word_dict,
-                    tag_set=self.tag_set),
+                self=MainDocManager(main_dict=self.main_dict),
                 parse_index=parse_index,
                 line_to_parse=line_to_parse)
         return parse_text, line_to_parse, parse_index
 
-    def set_process_text(self, parse_index: int, line_to_parse: int) -> tuple:
+    def set_process_text(self, parse_index: int, line_to_parse: int) -> Any:
         line = linecache.getline(self.working_input_file, line_to_parse).\
             rstrip("\n").rstrip()
         line = line[parse_index:]
@@ -119,9 +97,3 @@ class MainDocManager(object):
             parse_text = line
             parse_index = 1
         return parse_text, line_to_parse, parse_index
-
-    def closer(self):
-        pass
-
-    def blank_space(self):
-        pass

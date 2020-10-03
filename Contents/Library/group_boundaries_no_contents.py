@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """
 Module that identifies and returns the start line and index, and end line and
@@ -35,95 +15,81 @@ __date__ = "2019-12-16"
 __name__ = "Contents.Library.group_boundaries_no_contents"
 
 # From standard libraries
-import linecache
+import logging
+import sys
 from collections import deque
 
-# From application libraries
-import file_stats
 
-
-def define_boundaries_without_contents(table: str, working_input_file: str,
-                                       table_start_line: int,
-                                       table_start_index: int) -> dict:
+def define_boundaries(main_dict: dict) -> dict:
     """ Define the boundaries of an RTF table or group, without capturing
     the contents of the table or group. """
-    # TODO Review this module and make it parallel to the
-    #  group_boundaries.py module.
-    table_boundaries_info = {}
-    group_start_line = table_start_line
-    search_line = table_start_line
-    string_to_search = linecache.getline(working_input_file, search_line)
-    string_to_search = string_to_search.replace("\n", "")
-
+    main_dict["processing_dict"]["group_contents"] = ""
     deck = deque()
-    length_string_to_search = len(string_to_search)
-    index = table_start_index
-    group_start_index = table_start_index
+    working_index = main_dict["processing_dict"]["parse_index"]
+    end_line = main_dict["processing_dict"]["line_to_parse"]
+    boundary_test(deck=deck, main_dict=main_dict,
+                  working_index=working_index, end_line=end_line)
+    return main_dict
 
-    while index < length_string_to_search:
 
-        if string_to_search[index] == "{":
-            deck.append(string_to_search[index])
-            index += 1
-        elif string_to_search[index] == "}":
-            deck.popleft()
-            index += 1
+def boundary_test(main_dict: dict, working_index: int, deck,
+                  end_line: int) -> dict:
+    ptext = main_dict["control_info"]["working_input_file"][end_line].\
+        rstrip("\n").rstrip(" ")
+    ptext = ptext[working_index:]
+    group_contents = ""
+    length = len(ptext)
+    main_dict = boundary_loop(
+        main_dict=main_dict,
+        length=length,
+        deck=deck, working_index=working_index,
+        ptext=ptext, end_line=end_line,
+        group_contents=group_contents)
+    return main_dict
 
-            if not deck:  # mMeans if deck becomes empty
-                group_end_line = search_line
-                group_end_index = index
-                table_boundaries_info.update({table: [group_start_line,
-                                                      group_start_index,
-                                                      group_end_line,
-                                                      group_end_index]})
-                return table_boundaries_info
-        else:
-            index += 1
-            pass
 
-    index = 0
-    search_line += 1
-    file_length = file_stats.processor(
-        working_input_file=working_input_file)
-    length_working_input_file = file_length
-
-    while search_line <= length_working_input_file:
-        string_to_search = linecache.getline(working_input_file, search_line)
-        string_to_search = string_to_search.replace("\n", "")
-        length_string_to_search = len(string_to_search)
-        string_to_search = string_to_search[index:length_string_to_search]
-
-        while index < length_string_to_search:
-
-            if string_to_search[index] == "{":
-                deck.append(string_to_search[index])
-                index += 1
-            elif string_to_search[index] == "}":
+def boundary_loop(main_dict: dict, length: int, deck,
+                  working_index: int, ptext: str, end_line: int,
+                  group_contents: str) -> dict:
+    while working_index <= length - 1:
+        try:
+            if ptext[working_index] == "{":
+                deck.append("{")
+            elif ptext[working_index] == "}":
                 deck.popleft()
-                index += 1
-
-                if not deck:  # Means if deck becomes empty
-                    group_end_line = search_line
-                    group_end_index = index
-                    table_boundaries_info = {table:
-                                                  [group_start_line,
-                                                   group_start_index,
-                                                   group_end_line,
-                                                   group_end_index]}
-                    return table_boundaries_info
             else:
-                index += 1
+                pass
+        except IndexError as error:
+            logging.exception(error, f"Working_index= {working_index}, "
+                                     f"length= {length}.")
+            sys.exit()
+        group_contents = group_contents + ptext[working_index]
+        working_index += 1
+
+        decklength = len(deck)
+        if decklength == 0:
+            main_dict["processing_dict"]["group_end_line"] = end_line
+            main_dict["processing_dict"]["group_end_index"] = working_index
+            main_dict["processing_dict"]["group_contents"] = group_contents
+            main_dict["processing_dict"]["line_to_parse"] = end_line
+            main_dict["processing_dict"]["parse_index"] = working_index + 1
+
+            return main_dict
+
+        else:
+            if working_index > length - 1:
+                ptext, working_index, end_line, length, deck, group_contents = \
+                    test_ptext(main_dict=main_dict, end_line=end_line,
+                               group_contents=group_contents, deck=deck)
+            else:
                 pass
 
-        search_line += 1
-        index = 0
 
-    group_end_line = search_line
-    group_end_index = index
-    table_boundaries_info = {table:
-                                  [group_start_line,
-                                   group_start_index,
-                                   group_end_line,
-                                   group_end_index]}
-
-    return table_boundaries_info
+def test_ptext(main_dict: dict, end_line: int, deck,
+               group_contents: str):
+    end_line += 1
+    ptext = main_dict["control_info"]["working_input_file"][end_line].\
+        rstrip("\n").rstrip()
+    length = len(ptext)
+    working_index = 0
+    return ptext, working_index, end_line, length, deck, group_contents

@@ -1,22 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
 #  Copyright (c) 2020. Kenneth A. Grady
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see <https://www.gnu.org/licenses/>.
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
 
 """ Parse the font table and pass the values to a dictionary. """
 
@@ -59,9 +43,10 @@ class FonttblParse(object):
     <codepage>      \\cpg
     """
 
-    def __init__(self, debug_dir: str, code_strings_to_process: list) -> None:
+    def __init__(self, main_dict: dict, code_strings_to_process: list) -> None:
         self.code_strings_to_process = code_strings_to_process
-        self.debug_dir = debug_dir
+        self.main_dict = main_dict
+        self.debug_dir = main_dict["control_info"]["debug_dir"]
 
     def trim_fonttbl(self):
         for code_string in self.code_strings_to_process:
@@ -89,8 +74,7 @@ class FonttblParse(object):
     def parse_code_strings(self):
         code_dict = {}
         for code_string in self.code_strings_to_process:
-            get_font_codes = FontParser(debug_dir=self.debug_dir,
-                                        code_dict=code_dict)
+            get_font_codes = FontParser(code_dict=code_dict)
 
             code_string = FontParser.delete_themes(code_string=code_string)
             code_string = FontParser.check_fontnum(self=get_font_codes,
@@ -123,8 +107,7 @@ class FonttblParse(object):
 
 
 class FontParser(object):
-    def __init__(self, debug_dir: str, code_dict: dict) -> None:
-        self.debug_dir = debug_dir
+    def __init__(self, code_dict: dict) -> None:
         self.code_dict = code_dict
         self.current_key = ""
 
@@ -320,13 +303,13 @@ class FontParser(object):
         try:
             test = re.search(r'{\\cpg([0-9])+', code_string)
             if test is not item:
-                value = test[0].replace("\\cpg", "")
+                value = "".join([i for i in test[0] if i.isdigit()])
                 self.code_dict[self.current_key]["cpg"] = value
                 code_string = code_string.replace(test[0], "")
                 return code_string
             else:
                 return code_string
-        except TypeError:
+        except (KeyError, TypeError):
             self.code_dict[self.current_key]["cpg"] = "0"
 
 

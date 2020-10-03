@@ -7,26 +7,30 @@ import logging
 import re
 
 
-def pre_process(processing_dict: dict) -> dict:
-    contents_string = processing_dict["group_contents"]
-    processing_dict["contents_string"] = contents_string
-    processor(processing_dict=processing_dict)
-    return processing_dict
+def pre_process(main_dict: dict) -> dict:
+    contents_string = main_dict["processing_dict"]["group_contents"]
+    main_dict["processing_dict"]["contents_string"] = contents_string
+    main_dict = processor(main_dict=main_dict)
+    return main_dict
 
 
-def processor(processing_dict: dict) -> dict:
+def processor(main_dict: dict) -> dict:
+    # TODO Complete text for logging.exceptions.
     item = None
-    while processing_dict["contents_string"] != "":
+    while main_dict["processing_dict"]["contents_string"] != "":
 
         try:
             # Left bracket
-            test = re.search(r"^{", processing_dict["contents_string"])
+            test = re.search(r"^{",
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 results = test[0]
-                processing_dict["contents_list"].append(results)
-                contents_string = processing_dict["contents_string"][1:]
+                main_dict["processing_dict"]["contents_list"].append(results)
+                contents_string = \
+                    main_dict["processing_dict"]["contents_string"][1:]
                 contents_string = contents_string.lstrip()
-                processing_dict["contents_string"] = contents_string
+                main_dict["processing_dict"]["contents_string"] = \
+                    contents_string
             else:
                 pass
         except ValueError as error:
@@ -39,14 +43,16 @@ def processor(processing_dict: dict) -> dict:
         try:
             # Destination (\*\...)
             test = re.search(r"^(\\\*\\[a-zA-Z\-0-9]*)",
-                             processing_dict["contents_string"])
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 results = test[0]
-                processing_dict["contents_list"].append(results)
-                contents_string = processing_dict["contents_string"].\
+                main_dict["processing_dict"]["contents_list"].append(results)
+                contents_string = \
+                    main_dict["processing_dict"]["contents_string"].\
                     replace(test[0], "", 1)
                 contents_string = contents_string.lstrip()
-                processing_dict["contents_string"] = contents_string
+                main_dict["processing_dict"]["contents_string"] = \
+                    contents_string
             else:
                 pass
         except ValueError as error:
@@ -58,15 +64,17 @@ def processor(processing_dict: dict) -> dict:
 
         try:
             # Control word
-            test = re.search(r"^(\\[a-zA-Z\-0-9]*)", processing_dict[
-                "contents_string"])
+            test = re.search(r"^(\\[a-zA-Z\-0-9]*)",
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 results = test[0]
-                processing_dict["contents_list"].append(results)
-                contents_string = processing_dict["contents_string"].\
+                main_dict["processing_dict"]["contents_list"].append(results)
+                contents_string = \
+                    main_dict["processing_dict"]["contents_string"].\
                     replace(test[0], "", 1)
                 contents_string = contents_string.lstrip()
-                processing_dict["contents_string"] = contents_string
+                main_dict["processing_dict"]["contents_string"] = \
+                    contents_string
             else:
                 pass
         except ValueError as error:
@@ -79,14 +87,16 @@ def processor(processing_dict: dict) -> dict:
         try:
             # Control symbol \x where x is ', -, :, _, |, or ~.
             test = re.search(r"^(\\['-:_|~])",
-                             processing_dict["contents_string"])
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 results = test[0]
-                processing_dict["contents_list"].append(results)
-                contents_string = processing_dict["contents_string"].\
+                main_dict["processing_dict"]["contents_list"].append(results)
+                contents_string = \
+                    main_dict["processing_dict"]["contents_string"].\
                     replace(test[0], "", 1)
                 contents_string = contents_string.lstrip()
-                processing_dict["contents_string"] = contents_string
+                main_dict["processing_dict"]["contents_string"] = \
+                    contents_string
             else:
                 pass
         except ValueError as error:
@@ -98,13 +108,16 @@ def processor(processing_dict: dict) -> dict:
 
         try:
             # Right bracket
-            test = re.search(r"^}", processing_dict["contents_string"])
+            test = re.search(r"^}",
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 results = test.group()
-                processing_dict["contents_list"].append(results)
-                contents_string = processing_dict["contents_string"][1:].\
+                main_dict["processing_dict"]["contents_list"].append(results)
+                contents_string = \
+                    main_dict["processing_dict"]["contents_string"][1:].\
                     lstrip()
-                processing_dict["contents_string"] = contents_string
+                main_dict["processing_dict"]["contents_string"] = \
+                    contents_string
             else:
                 pass
         except ValueError as error:
@@ -116,19 +129,24 @@ def processor(processing_dict: dict) -> dict:
 
         try:
             # Text
-            test = re.search(r"^[{\\]", processing_dict["contents_string"])
+            test = re.search(r"^[{\\]",
+                             main_dict["processing_dict"]["contents_string"])
             if test is not item:
                 pass
             else:
-                test = re.search(r"^([^}]*)",
-                                 processing_dict["contents_string"])
+                test = \
+                    re.search(r"^([^}]*)",
+                              main_dict["processing_dict"]["contents_string"])
                 if test is not item and test[0] != '':
                     results = test.group()
-                    processing_dict["contents_list"].append(results)
+                    main_dict["processing_dict"]["contents_list"].\
+                        append(results)
                     contents_string = \
-                        processing_dict["contents_string"].lstrip(test.group())
+                        main_dict["processing_dict"]["contents_string"].\
+                        lstrip(test.group())
                     contents_string = contents_string.lstrip()
-                    processing_dict["contents_string"] = contents_string
+                    main_dict["processing_dict"]["contents_string"] = \
+                        contents_string
                 else:
                     pass
         except ValueError as error:
@@ -138,4 +156,4 @@ def processor(processing_dict: dict) -> dict:
         except Exception as error:
             logging.exception(error, "_____________")
 
-    return processing_dict
+    return main_dict

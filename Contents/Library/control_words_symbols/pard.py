@@ -101,7 +101,8 @@ def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
     if tag_registry["paragraph"] == tag_closed:
         content_update = tag_dict["paragraph-beg"]
 
-        build_output_file.processor(update_output=content_update)
+        build_output_file.bof_processor(update_output=content_update,
+                                        main_dict=main_dict)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["paragraph-beg"] + f"{line}")
@@ -111,7 +112,8 @@ def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
 
     else:
         content_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
-        build_output_file.processor(update_output=content_update)
+        build_output_file.bof_processor(update_output=content_update,
+                                        main_dict=main_dict)
         try:
             if logger_debug.isEnabledFor(logging.DEBUG):
                 msg = str(tag_dict["paragraph-end"] + tag_dict[

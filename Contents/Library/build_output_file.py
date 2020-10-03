@@ -12,18 +12,7 @@ __date__ = "2020-8-17"
 __name__ = "Contents.Library.build_output_file"
 
 
-# From standard libraries
-import os
-from pathlib import Path
-
-
-def processor(update_output: str) -> None:
-    base_dir = Path.cwd()
-    debug_dir = os.path.join(base_dir, "debugdir")
-    output_file = os.path.join(debug_dir, "output_file.xml")
-    with open(output_file, "r+") as output_file_pre:
-        output_file_text = output_file_pre.read()
-    output_file_list = [output_file_text, update_output]
-    update_output_file = ''.join(output_file_list)
-    with open(output_file, "w+") as output_file_pre:
-        output_file_pre.write(update_output_file)
+def bof_processor(main_dict: dict, update_output: str) -> dict:
+    append_list = [main_dict["control_info"]["output_text"], update_output]
+    main_dict["control_info"]["output_text"] = ''.join(append_list)
+    return main_dict

@@ -43,7 +43,7 @@ import output_file_update
 from read_log_config import logger_debug
 
 
-def find_header_close_boundary(working_input_file: str,
+def find_header_close_boundary(working_input_file: list,
                                line_to_search: int) -> str:
     """ A header is bounded by an opening brace and keyword ({\\header)
         and a closing brace (}). The opening is easy to identify. The closing

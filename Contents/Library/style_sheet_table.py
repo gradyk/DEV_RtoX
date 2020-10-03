@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """ Parse the style sheet table and pass the values to a dictionary. """
 
@@ -65,9 +45,9 @@ class StyleSheetParse(object):
     <semihidden>        \\ssemihidden
     <stylename>         #PCDATA
     """
-    def __init__(self, code_strings_to_process: list, debug_dir: str) -> None:
+    def __init__(self, code_strings_to_process: list, main_dict: dict) -> None:
         self.code_strings_to_process = code_strings_to_process
-        self.debug_dir = debug_dir
+        self.debug_dir = main_dict["debug_dir"]
 
     def trim_stylesheet(self) -> list:
         for code_string in self.code_strings_to_process:

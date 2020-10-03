@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """ This module checks for open tags using a list (status_list). If any tags on
 the list are open, they are closed by inserting closing tags into the
@@ -34,24 +14,39 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-02-07"
 __name__ = "Contents.Library.tag_closer"
 
+# From standard libraries
+import json
+import os
+
 # From local application
+import build_output_file
 import tag_check
-import tag_set_file
 
 
-def tag_closer(debug_dir: str, tag_set: int):
-
+def tc_processor(main_dict: dict) -> dict:
+    xml_tags_file = os.path.join(main_dict["control_info"]["dicts_dir"],
+                                 "xml_tags.json")
+    with open(xml_tags_file, "r+") as xml_tags_pre:
+        xml_tags_dicts = json.load(xml_tags_pre)
+    xml_tags = xml_tags_dicts[str(main_dict["processing_dict"]["tag_set"])]
     status_list = [
-        "italic",
-        "bold",
-        "underline",
-        "strikethrough",
-        "small_caps",
-        "paragraph",
-        "section"
+        "par",
+        "section",
+        "body",
+        "bodytext",
+        "wrapper"
     ]
 
-    tag_dict = tag_set_file.tag_dict_selection(tag_set=tag_set)
-
-    tag_check.tag_check(debug_dir=debug_dir, status_list=status_list,
-                        tag_dict=tag_dict)
+    for tag in status_list:
+        tag_info = {
+            "name":          tag,
+            "tag_open_str":  xml_tags[tag][0],
+            "tag_close_str": xml_tags[tag][1],
+            "tag_setting":   "close",
+            "tag_set":       main_dict["processing_dict"]["tag_set"]
+        }
+        main_dict, update_output = tag_check.tc_processor(
+            tag_info=tag_info, main_dict=main_dict)
+        build_output_file.bof_processor(
+            update_output=update_output, main_dict=main_dict)
+    return main_dict

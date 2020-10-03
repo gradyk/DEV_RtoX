@@ -18,26 +18,25 @@ import adjust_process_text
 import build_output_file
 
 
-def processor(processing_dict: dict) -> dict:
+def bt_processor(main_dict: dict) -> dict:
     # Test for backslash character as part of text.
     text = ""
     item = None
     try:
-        test = re.search(r"^(\\\\)", processing_dict["parse_text"])
+        test = re.search(r"^(\\\\)", main_dict["processing-dict"]["parse_text"])
         if test is not item:
             text = "\\"
-            build_output_file.processor(update_output=text)
+            build_output_file.bof_processor(update_output=text,
+                                            main_dict=main_dict)
         else:
             pass
     except TypeError:
-        logging.exception(f"{processing_dict['line_to_parse']}:"
-                          f"{processing_dict['parse_index']}--"
-                          f"{processing_dict['parse_text']}")
+        logging.exception(f"{main_dict['processing-dict']['line_to_parse']}:"
+                          f"{main_dict['processing-dict']['parse_index']}--"
+                          f"{main_dict['processing-dict']['parse_text']}")
 
-    processing_dict["parse_text"] = processing_dict["parse_text"].\
-        replace(text, "")
-    processing_dict["parse_index"] = 0
-    processing_dict = adjust_process_text. \
-        processor(processing_dict=processing_dict)
-
-    return processing_dict
+    main_dict["processing-dict"]["parse_text"] = \
+        main_dict["processing-dict"]["parse_text"].replace(text, "")
+    main_dict["processing-dict"]["parse_index"] = 0
+    main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
+    return main_dict

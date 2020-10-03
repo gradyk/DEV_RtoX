@@ -50,7 +50,7 @@ from read_log_config import logger_debug
 
 # TODO Extend the parsing of cs styles to cover font character formatting as
 #  described in spec beginning at p.78.
-def determine_cs_bounds(working_input_file: str, line_to_search: int) -> str:
+def determine_cs_bounds(working_input_file: list, line_to_search: int) -> str:
     """ Find the boundaries of the keyword. """
 
     cs_end_line = keyword_end_alt.keyword_end_alt(
@@ -60,7 +60,7 @@ def determine_cs_bounds(working_input_file: str, line_to_search: int) -> str:
     return cs_end_line
 
 
-def cs_line_parse(line_to_read: str, working_input_file: str) -> tuple:
+def cs_line_parse(line_to_read: str, working_input_file: list) -> tuple:
     """ Find the settings for each relevant variable in the keyword and
         capture the text to which those settings apply. """
     area_search = linecache.getline(working_input_file, line_to_read)

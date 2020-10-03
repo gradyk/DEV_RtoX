@@ -19,27 +19,26 @@ import group_boundaries
 import group_contents
 
 
-def processor(processing_dict: dict) -> dict:
+def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
     item = None
     try:
-        test = re.search(r"^{", processing_dict["parse_text"])
+        test = re.search(r"^{", main_dict["processing_dict"]["parse_text"])
         if test is not item:
-            processing_dict = group_boundaries.\
-                define_boundaries(processing_dict=processing_dict)
+            main_dict = group_boundaries.define_boundaries(main_dict=main_dict)
 
-            processing_dict = build_group_contents_list.pre_process(
-                processing_dict=processing_dict)
+            main_dict = build_group_contents_list.pre_process(
+                main_dict=main_dict)
 
-            processing_dict = group_contents.processor(
-                processing_dict=processing_dict)
+            main_dict = group_contents.gc_processor(
+                main_dict=main_dict, collections_dict=collections_dict)
         else:
             pass
-        return processing_dict
+        return main_dict
     except TypeError as error:
         logging.exception(error, f"Check_group: "
-                          f"{processing_dict['line_to_parse']}:"
-                          f"{processing_dict['parse_index']}--"
-                          f"{processing_dict['parse_text']}")
+                          f"{main_dict['processing_dict']['line_to_parse']}:"
+                          f"{main_dict['processing_dict']['parse_index']}--"
+                          f"{main_dict['processing_dict']['parse_text']}")
     except Exception as error:
         logging.exception(error, "Check_group error.")
         pass

@@ -1,26 +1,8 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
 #  Copyright (c) 2020. Kenneth A. Grady
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
 
-"""
-This module determines which controlword tables exist in the RTF document.
-"""
+""" Determine which controlword tables exist in the RTF document. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -30,7 +12,6 @@ __date__ = "2019-10-26"
 __name__ = "Contents.Library.header_structure"
 
 # Standard library imports
-import fileinput
 import re
 
 # From local application
@@ -38,7 +19,7 @@ import dict_updater
 import group_boundaries_no_contents
 
 
-def build_header_tables_dict(working_input_file: str, debug_dir: str) -> None:
+def build_header_tables_dict(main_dict: dict) -> None:
     """ Check header for existence and location of sections: <first line>,
     <font table>, <file table>, <color table>, <stylesheet>, <list table>,
     <rev table>, <rsid table>, <generator>. """
@@ -53,25 +34,38 @@ def build_header_tables_dict(working_input_file: str, debug_dir: str) -> None:
         "generator",
         "info"
     ]
-
+    working_input_file = main_dict["control_info"]["working_input_file"]
     for table in tables_list:
-
-        for line in fileinput.input(files=working_input_file):
+        pattern = re.compile(r"{\\" + table)
+        for line in working_input_file:
+            if working_input_file.index(line) >= 3715:
+                print("end")
+            else:
+                pass
             stripped_line = line.strip()
-
-            table_search = re.search(r'{\\'+table, stripped_line)
-            if table_search:
-                table_start_line = fileinput.filelineno()
+            item = None
+            table_search = re.search(pattern, stripped_line)
+            if table_search is not item:
+                table_start_line = working_input_file.index(line)
                 table_start_index = stripped_line.find(table) - 2
-                table_boundaries_info = group_boundaries_no_contents.\
-                    define_boundaries_without_contents(
-                        table=table,
-                        working_input_file=working_input_file,
-                        table_start_line=table_start_line,
-                        table_start_index=table_start_index)
+                main_dict["processing_dict"]["table_start_line"] = table_start_line
+                main_dict["processing_dict"]["table_start_index"] = table_start_index
+                main_dict["processing_dict"]["parse_index"] = \
+                    main_dict["processing_dict"]["table_start_index"]
+                main_dict["processing_dict"]["line_to_parse"] = \
+                    main_dict["processing_dict"]["table_start_line"]
+                main_dict = \
+                    group_boundaries_no_contents.define_boundaries(
+                        main_dict=main_dict)
+                table_boundaries_info = {table: [
+                        main_dict["processing_dict"]["table_start_line"],
+                        main_dict["processing_dict"]["table_start_index"],
+                        main_dict["processing_dict"]["group_end_line"],
+                        main_dict["processing_dict"]["group_end_index"]]
+                }
                 dict_updater.json_dict_updater(
                     dict_name="header_tables_dict.json",
                     dict_update=table_boundaries_info,
-                    debug_dir=debug_dir)
+                    debug_dir=main_dict["control_info"]["debug_dir"])
             else:
                 pass

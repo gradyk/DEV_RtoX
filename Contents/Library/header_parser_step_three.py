@@ -1,26 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 #  Copyright (c) 2020. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
-
-#
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#   RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
 
 """  """
 
@@ -50,9 +30,10 @@ import style_sheet_table
 
 class ProcessTheTables(object):
 
-    def __init__(self, debug_dir: str, working_input_file: str) -> None:
-        self.debug_dir = debug_dir
-        self.working_input_file = working_input_file
+    def __init__(self, main_dict: dict) -> None:
+        self.main_dict = main_dict
+        self.debug_dir = main_dict["control_info"]["debug_dir"]
+        self.working_input_file = main_dict["control_info"]["working_file_name"]
 
     def analyze_table_code_strings_controller(self):
         code_strings_file = os.path.join(self.debug_dir,
@@ -93,9 +74,7 @@ class ProcessTheTables(object):
             else:
                 pass
 
-            code_function(self=ProcessTheTables(
-                          debug_dir=self.debug_dir,
-                          working_input_file=self.working_input_file),
+            code_function(self=ProcessTheTables(main_dict=self.main_dict),
                           code_strings_to_process=code_strings_to_process)
 
     def process_font_table(self, code_strings_to_process: list):
@@ -126,16 +105,16 @@ class ProcessTheTables(object):
         color_table.ColortblParse.trim_colortbl(
             self=color_table.ColortblParse(
                 code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
+                main_dict=self.main_dict))
         code_strings_list = color_table.ColortblParse\
             .parse_code_strings_to_process(
                 self=color_table.ColortblParse(
                     code_strings_to_process=code_strings_to_process,
-                    debug_dir=self.debug_dir))
+                    main_dict=self.main_dict))
         color_table.ColortblParse.parse_code_strings(
             self=color_table.ColortblParse(
                 code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir), code_string_list=code_strings_list)
+                main_dict=self.main_dict), code_string_list=code_strings_list)
 
     def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
@@ -144,16 +123,16 @@ class ProcessTheTables(object):
             style_sheet_table.StyleSheetParse.trim_stylesheet(
                 self=style_sheet_table.StyleSheetParse(
                     code_strings_to_process=code_strings_to_process,
-                    debug_dir=self.debug_dir))
+                    main_dict=self.main_dict))
         code_strings_to_process = \
             style_sheet_table.StyleSheetParse.update_code_strings(
                 self=style_sheet_table.StyleSheetParse(
                     code_strings_to_process=code_strings_to_process,
-                    debug_dir=self.debug_dir))
+                    main_dict=self.main_dict))
         style_sheet_table.StyleSheetParse.parse_code_strings(
             self=style_sheet_table.StyleSheetParse(
                 code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
+                main_dict=self.main_dict))
 
         # TODO sf_restrictions (style and formatting restrictions) is part of
         #  style sheet table
@@ -188,5 +167,5 @@ class ProcessTheTables(object):
     def process_info(self, code_strings_to_process: list):
         information_group.InfoGrpParse.process_code_strings(
             self=information_group.InfoGrpParse(
-                debug_dir=self.debug_dir,
+                main_dict=self.main_dict,
                 code_strings_to_process=code_strings_to_process))

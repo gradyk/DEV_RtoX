@@ -54,7 +54,7 @@
         "body":                 ["<ts:matterBody>", "</ts:matterBody>"],
         "bodytext":             ["<ts:matterText>", "</ts:matterText>"],
         "section":              ["<ts:matterDiv>", "</ts:matterDiv>"],
-        "paragraph":            ["<ts:pBody>", "</ts:pBody>"],
+        "par":                  ["<ts:pBody>", "</ts:pBody>"],
         "title":                ["<ts:generalTitle>", "</ts:generalTitle>"],
         "header":               ["<ts:formeWork><ts:headerText>",
                                  "<ts:formeWork place='top right'><ts:headerText>"],
@@ -75,6 +75,12 @@
         "toggle_emph":          ["<ts:hiText rend='zzz'>", "</ts:hiText>"],
         "list":                 ["<ts:listGenl>", "</ts:listGenl>"],
         "rendition":            ["<ts:rendFormat>", "</ts:rendFormat>"],
-        "missing":              ["<ts:rtfIssue line='zzz' key='aaa'>", "</ts:rtfIssue>"]
+        "missing":              ["<ts:rtfIssue line='zzz' key='aaa'>", "</ts:rtfIssue>"],
+        "tag_pairs":            ["<ts:hiText rend='i'></ts:hiText>",
+                                "<ts:hiText rend='b'></ts:hiText>",
+                                "<ts:hiText rend='ul'></ts:hiText>",
+                                "<ts:hiText rend='scaps'></ts:hiText>",
+                                "<ts:hiText rend='pBody'></ts:hiText>",
+                                "  "]
 }
 }

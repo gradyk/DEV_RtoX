@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-#
+
 #  Copyright (c) 2020. Kenneth A. Grady
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
+
+#
 #
 #  This file is part of RtoX.
 #
@@ -45,7 +49,7 @@ header_cwd_list = {  # Spec Page 45
     "\\headerf": ["Coded", "Header on first page only.", "Destination"],
 }
 
-def header_control(working_input_file: str):
+def header_control(working_input_file: list):
     face_title = facingp_titlepg.search_for_facingp_titlepg(
         working_input_file=working_input_file)
 

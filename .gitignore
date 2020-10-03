@@ -2,7 +2,6 @@
 ###################
 .DS_Store
 /.idea
-/.vscode
 
 # Files to Process #
 ####################
@@ -32,10 +31,11 @@
 #############
 *.log
 
-# IDE Files #
-#############
-
-
+# venv #
+########
+venv/bin/
+venv/include/
+venv/pyvenv.cfg
 
 # Other #
 #########
@@ -44,3 +44,8 @@ __pycache__
 /Contents/Library/__pycache__
 /Contents/Library/dicts/__pycache__
 /bin
+Contents/MacOS/
+Contents/Plugins/
+Contents/Utilities/test.csv
+Contents/help/
+include/

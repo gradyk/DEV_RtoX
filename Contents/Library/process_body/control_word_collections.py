@@ -16,7 +16,7 @@ import os
 from pathlib import Path
 
 
-def processor(ele):
+def cwc_processor():
     collection_dict = dict()
     util_dir = Path.cwd()
     control_word_csv = os.path.join(util_dir,
@@ -35,4 +35,4 @@ def processor(ele):
                 else:
                     collection_dict.update(entry)
 
-    return collection_dict[ele]
+    return collection_dict

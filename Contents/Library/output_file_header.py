@@ -14,35 +14,26 @@ __date__ = "2020-8-17"
 __name__ = "Contents.Library.output_file_header"
 
 # From standard libraries
-import json
 import logging
 import os
-import sys
 
 # From local application
 import build_output_file
 
 
-def processor():
-    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    file_dir = os.path.join(base_dir, "debugdir")
-    config_file = os.path.join(file_dir, "config_dict.json")
-
+def ofh_processor(main_dict: dict, config_settings_dict: dict) -> dict:
+    header_file_dir = os.path.join(main_dict["base_dir"], "input")
     try:
-        with open(config_file, "r+") as config_dict_pre:
-            config_dict = json.load(config_dict_pre)
-
-        if config_dict["output-file-header"] == 0:
-            header_file_dir = os.path.join(base_dir, "input")
-            header_file = os.path.join(header_file_dir, "defaultheader.xml")
-            with open(header_file, "r+") as header_file_pre:
-                header_file_text = header_file_pre.read()
+        if config_settings_dict["output-file-header"] == 0:
+            header_file_name = "defaultheader.xml"
         else:
-            header_file_dir = os.path.join(base_dir, "input")
-            header_file = os.path.join(header_file_dir, "tpresheader.xml")
-            with open(header_file, "r+") as header_file_pre:
-                header_file_text = header_file_pre.read()
-        build_output_file.processor(update_output=header_file_text)
+            header_file_name = "tpresheader.xml"
+        header_file = os.path.join(header_file_dir, header_file_name)
+        with open(header_file, "r+") as header_file_pre:
+            header_file_text = header_file_pre.read()
+        main_dict = build_output_file.bof_processor(
+            main_dict=main_dict, update_output=header_file_text)
     except FileNotFoundError as error:
         logging.exception(error, "An XML header file cannot be found or "
                                  "opened.")
+    return main_dict

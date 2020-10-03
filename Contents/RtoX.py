@@ -13,19 +13,22 @@ __name__ = "__RtoX__"
 
 # From standard libraries
 import os
-import sys
+from pathlib import Path
 
 # From local application
+import character_cleanup
 import create_files
 import debugdir_clean
 import doc_parser
+import final_step
 import header_parser_step_one
 import header_parser_step_two
 import header_parser_step_three
+import main_dict_creator
 import output_file_header
 import output_file_transition
 import prepare_to_process
-import script_timer
+import tag_closer
 from process_body.doc_parser import MainDocManager
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
@@ -33,67 +36,64 @@ from process_body.doc_parser import MainDocManager
 
 
 if __name__ == "__RtoX__":
-
-    script_timer.open_processor()
-    # TODO Add garbage module as last run module to clean out debugdir and do
-    #  any other necessary cleanup, instead of doing cleanup here.
-    # TODO Sort control_word_dict as part of end of program cleanup.
+    # TODO Add garbage module as last run module to clean out debugdir
+    #  and do any other necessary cleanup, instead of doing cleanup here.
     debugdir_clean.cleaner()
-    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
+    base_dir = Path.cwd()
     debug_dir = os.path.join(base_dir, "debugdir")
+    dicts_dir = os.path.join(base_dir, "Library/dicts")
+    main_script = os.path.join(base_dir, "RtoX.py")
+    config_ini = os.path.join(base_dir, "Config.ini")
+
+    # Create the main dictionary used throughout processing.
+    main_dict = main_dict_creator.mdc_processor(
+        base_dir=base_dir, debug_dir=debug_dir, dicts_dir=dicts_dir,
+        main_script=main_script, config_ini=config_ini)
 
     # Get and store configuration information.
-    config_file = \
-        prepare_to_process.extract_config_settings()
+    prepare_to_process.get_config_settings(main_dict=main_dict)
 
-    input_file, output_file_name = \
-        prepare_to_process.extract_file_info(config_file=config_file)
+    # Add settings to rtox_basic.log and update main_dict.
+    main_dict, config_settings_dict = \
+        prepare_to_process.extract_file_info(main_dict=main_dict)
 
     # Get the user's preference for XML tag set.
-    tag_set = \
-        prepare_to_process.extract_users_xml_tag_set(debug_dir=debug_dir)
+    main_dict = prepare_to_process.xml_tag_set_pref(
+        config_settings_dict=config_settings_dict, main_dict=main_dict)
 
     # Prepare working files.
-    working_input_file = \
-        create_files.CreateFile.initiate_working_files(input_file=input_file)
+    create_files.create_dict_files(main_dict=main_dict)
+    main_dict = character_cleanup.cc_processor(main_dict=main_dict)
+
+    # Start the output file and put the header (based on the user's
+    # preference) in the file.
+    main_dict = output_file_header.ofh_processor(
+        main_dict=main_dict,
+        config_settings_dict=config_settings_dict)
+
+    # Place the initial tags in the file and created the starting tag registry.
+    main_dict = output_file_transition.oft_processor(
+        main_dict=main_dict, config_settings_dict=config_settings_dict)
 
     # Process the pre-table portion of the header.
-    header_parser_step_one.PretableController(
-        working_input_file=working_input_file, debug_dir=debug_dir)
+    header_parser_step_one.determine_header_structure(main_dict=main_dict)
+    main_dict = header_parser_step_one.process_pretable_controlwords(
+        main_dict=main_dict)
 
     # Process the table portion of the header.
-    header_parser_step_two.process_the_tables(
-        working_input_file=working_input_file, debug_dir=debug_dir)
+    header_parser_step_two.process_the_tables(main_dict=main_dict)
 
     header_parser_step_three.ProcessTheTables.\
         analyze_table_code_strings_controller(
-            self=header_parser_step_three.ProcessTheTables(
-                working_input_file=working_input_file, debug_dir=debug_dir))
+            self=header_parser_step_three.ProcessTheTables(main_dict=main_dict))
 
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
-    # Prepare to parse the main portion of the document.
-    cw_dirs = [base_dir, "/Library/dicts/", "control_word_dict.json"]
-    control_word_dict = ''.join(cw_dirs)
+    main_dict = doc_parser.MainDocManager.body_parse_manager(
+            self=MainDocManager(main_dict=main_dict))
+    main_dict = tag_closer.tc_processor(main_dict=main_dict)
 
-    output_file_header.processor()
-    output_file_transition.processor()
-
-    doc_parser.MainDocManager.body_parse_manager(
-        self=MainDocManager(
-            working_input_file=working_input_file,
-            control_word_dict=control_word_dict,
-            tag_set=tag_set))
-
-    # Close open tags where possible and produce list of remaining open tags.
-    # tag_closer.tag_closer(debug_dir=debug_dir,
-    #                       tag_set=tag_set)
-
-    # TODO Include in final step: 1) garbage cleanup, 2) any needed/wanted
-    #  post-processing, 3) sort control_word_symbol file, 3) rename
-    #  output_file and put it in the output directory.
-    # final_step.final_step(debug_dir=debug_dir,
-    #                       tag_set=tag_set,
-    #                       output_file_name=output_file_name,
-    #                       base_dir=base_dir)
+    # TODO Add to final_step: 1) garbage cleanup, 2) any needed/wanted
+    #  post-processing.
+    final_step.fs_processor(main_dict=main_dict)
