@@ -33,7 +33,7 @@ import build_output_file
 def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
     """ Insert the XML tags to start the document portion of the XML file
     (after the header). """
-    start_tags = os.path.join(main_dict["control_info"]["dicts_dir"],
+    start_tags = os.path.join(main_dict["dicts_dir"],
                               "start_tags.json")
     transition_tags = ""
     try:

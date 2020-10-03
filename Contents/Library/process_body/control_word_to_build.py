@@ -24,7 +24,7 @@ import tag_check
 
 
 def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
-    base_dir = main_dict["control_info"]["base_dir"]
+    base_dir = main_dict["base_dir"]
     cws_dir = os.path.join(base_dir, "Library/control_words_symbols/")
     tagging_mod = importlib.import_module(tag_info["func"], package=cws_dir)
     tag_info = tagging_mod.cw_func_processor(tag_info=tag_info)

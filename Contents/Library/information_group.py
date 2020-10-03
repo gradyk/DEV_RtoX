@@ -1,22 +1,6 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-#
 #  Copyright (c) 2020. Kenneth A. Grady
-#
-#  This file is part of RtoX.
-#
-#  RtoX is free software: you can redistribute it and / or modify it under
-#  the terms of the GNU General Public License as published by the Free
-#  Software Foundation, either version 3 of the License, or (at your option)
-#  any later version.
-#
-#  RtoX is distributed in the hope that it will be useful, but WITHOUT ANY
-#  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-#  FOR A PARTICULAR PURPOSE. See the GNU General Public License for
-#  more details.
-#
-#  You should have received a copy of the GNU General Public License along
-#  with RtoX. If not, see < https://www.gnu.org / licenses / >.
+#  See BSD-2-Clause-Patent license in LICENSE.txt
+#  Additional licenses are in the license folder.
 
 """
 Each RTF file, after the header section, may have an "info" section that
@@ -65,9 +49,9 @@ class InfoGrpParse(object):
     """
 
     # TODO Add \\userprops parsing (see p. 30 RTF Spec 2003).
-    def __init__(self, debug_dir: str, code_strings_to_process: list) -> None:
+    def __init__(self, main_dict: dict, code_strings_to_process: list) -> None:
         self.code_strings_to_process = code_strings_to_process
-        self.debug_dir = debug_dir
+        self.main_dict = main_dict
         self.code_dict = {}
 
     def process_code_strings(self) -> None:
@@ -75,27 +59,27 @@ class InfoGrpParse(object):
         for code_string in self.code_strings_to_process:
 
             GetInfoCodes.check_info_code(
-                self=GetInfoCodes(debug_dir=self.debug_dir,
+                self=GetInfoCodes(main_dict=self.main_dict,
                                   code_string=code_string))
 
             GetInfoCodes.check_nofchars(
-                self=GetInfoCodes(debug_dir=self.debug_dir,
+                self=GetInfoCodes(main_dict=self.main_dict,
                                   code_string=code_string))
 
             GetInfoCodes.check_stat_code(
-                self=GetInfoCodes(debug_dir=self.debug_dir,
+                self=GetInfoCodes(main_dict=self.main_dict,
                                   code_string=code_string))
 
             GetInfoCodes.check_time_components(
-                self=GetInfoCodes(debug_dir=self.debug_dir,
+                self=GetInfoCodes(main_dict=self.main_dict,
                                   code_string=code_string))
 
 
 class GetInfoCodes(object):
 
-    def __init__(self, debug_dir: str, code_string: str) -> None:
+    def __init__(self, main_dict: dict, code_string: str) -> None:
         self.code_string = code_string
-        self.debug_dir = debug_dir
+        self.main_dict = main_dict
         self.code_dict = {}
         self.current_key = ""
         self.beg_index = 0
@@ -133,7 +117,7 @@ class GetInfoCodes(object):
 
         dict_updater.json_dict_updater(dict_name="info_group_file.json",
                                        dict_update=self.code_dict,
-                                       debug_dir=self.debug_dir)
+                                       main_dict=self.main_dict)
         self.code_dict = {}
 
     def check_nofchars(self):
@@ -143,7 +127,7 @@ class GetInfoCodes(object):
             self.code_dict.update({"nofchars": value})
             dict_updater.json_dict_updater(dict_name="info_group_file.json",
                                            dict_update=self.code_dict,
-                                           debug_dir=self.debug_dir)
+                                           main_dict=self.main_dict)
         else:
             pass
 
@@ -166,7 +150,7 @@ class GetInfoCodes(object):
                 self.code_dict.update({stat: value})
                 dict_updater.json_dict_updater(dict_name="info_group_file.json",
                                                dict_update=self.code_dict,
-                                               debug_dir=self.debug_dir)
+                                               main_dict=self.main_dict)
             else:
                 pass
 
@@ -196,7 +180,7 @@ class GetInfoCodes(object):
                         dict_updater.json_dict_updater(
                             dict_name="info_group_file.json",
                             dict_update=self.code_dict,
-                            debug_dir=self.debug_dir)
+                            main_dict=self.main_dict)
                     else:
                         pass
             else:

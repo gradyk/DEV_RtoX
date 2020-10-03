@@ -23,7 +23,7 @@ def bt_processor(main_dict: dict) -> dict:
     text = ""
     item = None
     try:
-        test = re.search(r"^(\\\\)", main_dict["processing-dict"]["parse_text"])
+        test = re.search(r"^(\\\\)", main_dict["parse_text"])
         if test is not item:
             text = "\\"
             build_output_file.bof_processor(update_output=text,
@@ -31,12 +31,12 @@ def bt_processor(main_dict: dict) -> dict:
         else:
             pass
     except TypeError:
-        logging.exception(f"{main_dict['processing-dict']['line_to_parse']}:"
-                          f"{main_dict['processing-dict']['parse_index']}--"
-                          f"{main_dict['processing-dict']['parse_text']}")
+        logging.exception(f"{main_dict['line_to_parse']}:"
+                          f"{main_dict['parse_index']}--"
+                          f"{main_dict['parse_text']}")
 
-    main_dict["processing-dict"]["parse_text"] = \
-        main_dict["processing-dict"]["parse_text"].replace(text, "")
-    main_dict["processing-dict"]["parse_index"] = 0
+    main_dict["parse_text"] = \
+        main_dict["parse_text"].replace(text, "")
+    main_dict["parse_index"] = 0
     main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict

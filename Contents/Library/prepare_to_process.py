@@ -26,8 +26,8 @@ from read_log_config import logger_basic
 def get_config_settings(main_dict: dict) -> None:
     """ Extract command line and Config.ini settings to run RtoX. Store
     the settings in the config_dict.py (config_dictionary). """
-    if main_dict["control_info"]["main_script"] and not os.path.isfile(
-            main_dict["control_info"]["main_script"]):
+    if main_dict["main_script"] and not os.path.isfile(
+            main_dict["main_script"]):
         try:
             logger_basic.critical(msg="What script are you using? The "
                                       "program uses RtoX.py as the "
@@ -50,19 +50,19 @@ def extract_file_info(main_dict: dict) -> Any:
     # Get the input file from the command line and store as
     # working_input_file in the main_dict.
     if config_settings_dict.get("input") is not item:
-        main_dict["control_info"]["input_file"] = \
+        main_dict["input_file"] = \
             config_settings_dict.get("input")
         try:
-            input_file = posixpath.join(main_dict["control_info"]["base_dir"],
+            input_file = posixpath.join(main_dict["base_dir"],
                                         "input",
-                                        main_dict["control_info"]["input_file"])
-            main_dict["control_info"]["working_input_file"] = \
+                                        main_dict["input_file"])
+            main_dict["working_input_file"] = \
                 [line.rstrip('\n') for line in open(input_file)]
-            main_dict["control_info"]["working_input_file_bak"] = \
-                main_dict["control_info"]["working_input_file"]
+            main_dict["working_input_file_bak"] = \
+                main_dict["working_input_file"]
             logger_basic.isEnabledFor(level=10)
             logger_basic.info(msg=f"The file you want to convert is "
-                                  f"{main_dict['control_info']['input_file']}.")
+                                  f"{main_dict['input_file']}.")
         except TypeError:
             logging.exception("There is a logging problem: user input "
                               "file.")
@@ -79,28 +79,28 @@ def extract_file_info(main_dict: dict) -> Any:
 
     # Get the name of the output file from the command line.
     if config_settings_dict.get("output") is not None:
-        main_dict["control_info"]["output_file_name"] = \
+        main_dict["output_file_name"] = \
             config_settings_dict.get("output")
         try:
             logger_basic.isEnabledFor(level=10)
             logger_basic.info(
                 msg=f"The RtoX will produce this XML file: "
-                f"{main_dict['control_info']['output_file_name']}.")
+                f"{main_dict['output_file_name']}.")
         except TypeError:
             logging.exception("There is a logging problem: user output "
                               "file.")
     else:
         try:
             final_output_file = \
-                os.path.splitext(main_dict["control_info"]["input_file"])[0] +\
+                os.path.splitext(main_dict["input_file"])[0] +\
                 '.xml'
-            main_dict["control_info"]["output_file_name"] = \
-                posixpath.join(main_dict["control_info"]["base_dir"], "output",
+            main_dict["output_file_name"] = \
+                posixpath.join(main_dict["base_dir"], "output",
                                final_output_file)
             logger_basic.isEnabledFor(level=10)
             logger_basic.info(
                 msg="RtoX will produce this XML file: "
-                f"{main_dict['control_info']['output_file_name']}.")
+                f"{main_dict['output_file_name']}.")
         except TypeError:
             logging.exception("There is a logging problem: default output "
                               "file.")
@@ -154,7 +154,7 @@ def xml_tag_set_pref(config_settings_dict: dict, main_dict: dict) -> dict:
         tag_set = int(config_settings_dict["tag-set"])
     except TypeError:
         tag_set = 1
-    main_dict["processing_dict"]["tag_set"] = tag_set
+    main_dict["tag_set"] = tag_set
     return main_dict
 
 

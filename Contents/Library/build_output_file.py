@@ -13,6 +13,6 @@ __name__ = "Contents.Library.build_output_file"
 
 
 def bof_processor(main_dict: dict, update_output: str) -> dict:
-    append_list = [main_dict["control_info"]["output_text"], update_output]
-    main_dict["control_info"]["output_text"] = ''.join(append_list)
+    append_list = [main_dict["output_text"], update_output]
+    main_dict["output_text"] = ''.join(append_list)
     return main_dict

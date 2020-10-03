@@ -26,7 +26,7 @@ def cc_processor(main_dict: dict) -> dict:
     # TODO this setup only works for cpg1252, figure out how to make it flex
     #  depending on cpg
     """ Convert miscellaneous characters to unicode. """
-    source_file = main_dict["control_info"]["working_input_file"]
+    source_file = main_dict["working_input_file"]
 
     pattern_list = [
         r"&",
@@ -44,8 +44,8 @@ def cc_processor(main_dict: dict) -> dict:
             else:
                 pass
 
-    main_dict["control_info"]["working_input_file"] = source_file
-    main_dict["control_info"]["working_input_file_bak"] = source_file
+    main_dict["working_input_file"] = source_file
+    main_dict["working_input_file_bak"] = source_file
     return main_dict
 
 

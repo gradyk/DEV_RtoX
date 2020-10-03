@@ -47,7 +47,7 @@ class StyleSheetParse(object):
     """
     def __init__(self, code_strings_to_process: list, main_dict: dict) -> None:
         self.code_strings_to_process = code_strings_to_process
-        self.debug_dir = main_dict["debug_dir"]
+        self.main_dict = main_dict
 
     def trim_stylesheet(self) -> list:
         for code_string in self.code_strings_to_process:
@@ -101,7 +101,7 @@ class StyleSheetParse(object):
             dict_updater.json_dict_updater(
                 dict_name="style_sheet_table_file.json",
                 dict_update=code_dict,
-                debug_dir=self.debug_dir)
+                main_dict=self.main_dict)
 
             code_dict = {}
 

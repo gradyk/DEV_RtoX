@@ -26,7 +26,7 @@ from read_log_config import logger_debug
 
 def check_for_opening_brace(main_dict: dict) -> dict:
     """ Check the working_input_file for an opening brace. """
-    working_input_file = main_dict["control_info"]["working_input_file"]
+    working_input_file = main_dict["working_input_file"]
     if working_input_file[0][1] == "{":
         pass
     else:
@@ -36,11 +36,11 @@ def check_for_opening_brace(main_dict: dict) -> dict:
 
 def insert_opening_brace(main_dict: dict) -> dict:
     """ If the file does not have an opening brace, insert one. """
-    working_input_file = main_dict["control_info"]["working_input_file"]
+    working_input_file = main_dict["working_input_file"]
     first_line_list = ["{", working_input_file[0]]
     new_first_line = ''.join(first_line_list)
     working_input_file[0] = new_first_line
-    main_dict["control_info"]["working_input_file"] = working_input_file
+    main_dict["working_input_file"] = working_input_file
     return main_dict
 
 
@@ -67,7 +67,7 @@ def code_process(main_dict: dict) -> Any:
         ("themelangcs[0-9]+", "themelangcs")
     ]
     rtf_file_codes_update = []
-    working_input_file = main_dict["control_info"]["working_input_file"]
+    working_input_file = main_dict["working_input_file"]
 
     line_to_search = working_input_file[1]
 
@@ -88,7 +88,7 @@ def update_rtf_file_codes_list(rtf_file_codes_update: list,
                                main_dict: dict) -> None:
     """ Update the rtf_file_codes dictionary with codes extracted from
     pretable control words. """
-    rtf_file_codes_file = os.path.join(main_dict["control_info"]["debug_dir"],
+    rtf_file_codes_file = os.path.join(main_dict["debug_dir"],
                                        "rtf_file_codes.json")
     with open(rtf_file_codes_file, "r+") as rtf_file_codes_file_pre:
         rtf_file_codes = json.load(rtf_file_codes_file_pre)

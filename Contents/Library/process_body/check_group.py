@@ -22,7 +22,7 @@ import group_contents
 def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
     item = None
     try:
-        test = re.search(r"^{", main_dict["processing_dict"]["parse_text"])
+        test = re.search(r"^{", main_dict["parse_text"])
         if test is not item:
             main_dict = group_boundaries.define_boundaries(main_dict=main_dict)
 

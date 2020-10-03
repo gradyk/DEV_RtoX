@@ -28,6 +28,6 @@ def create_dict_files(main_dict: dict) -> None:
         "info_group_file.json"
     )
     for file in dict_library:
-        dict_path = os.path.join(main_dict["control_info"]["debug_dir"], file)
+        dict_path = os.path.join(main_dict["debug_dir"], file)
         with open(dict_path, "w+") as open_dict:
             json.dump({}, open_dict)

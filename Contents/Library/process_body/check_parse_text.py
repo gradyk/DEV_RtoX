@@ -22,11 +22,11 @@ from tqdm import tqdm
 
 
 def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
-    main_dict["processing_dict"]["cw_regex"] = \
+    main_dict["cw_regex"] = \
         re.compile(r"^(\\[a-zA-Z\-\s0-9]*)")
-    line = main_dict["processing_dict"]["line_to_parse"]
+    line = main_dict["line_to_parse"]
     for i in tqdm(range(100)):
-        while line < main_dict["processing_dict"]["list_size"] + 1:
+        while line < main_dict["list_size"] + 1:
             # Checks for an RTF group.
             main_dict = check_group.cg_processor(
                 main_dict=main_dict, collections_dict=collections_dict)
@@ -39,5 +39,5 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
                 main_dict=main_dict, collections_dict=collections_dict)
             # Checks for text.
             main_dict = check_text.ct_processor(main_dict=main_dict)
-            line = main_dict["processing_dict"]["line_to_parse"]
+            line = main_dict["line_to_parse"]
     return main_dict

@@ -34,7 +34,7 @@ def get_configuration(main_dict: dict, config_settings_dict: dict) -> dict:
     pairs in from command line and Config.ini into config_setting_dict
     dictionary. """
     config = configparser.ConfigParser()
-    config.read(main_dict["control_info"]["config_ini"])
+    config.read(main_dict["config_ini"])
     for section in config.sections():
         for key, value in config.items(section):
             config_settings_dict.update({key: value})

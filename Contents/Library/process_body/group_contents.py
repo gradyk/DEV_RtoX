@@ -22,19 +22,19 @@ import control_word_to_build
 
 def gc_processor(main_dict: dict, collections_dict: dict) -> Any:
     # Temp setup for testing
-    for ele in main_dict["processing-dict"]["contents_list"]:
+    for ele in main_dict["contents_list"]:
         if ele == "{":
             pass
         elif ele == "}":
             pass
-        elif re.search(main_dict["processing-dict"]["cw_regex"], ele):
+        elif re.search(main_dict["cw_regex"], ele):
             cw_text = "".join([i for i in ele if i.isalpha()])
             cw_value = "".join([i for i in ele if i.isdigit()])
             null_function = "null"
             try:
                 cw_func = collections_dict[cw_text]
                 if cw_func != null_function:
-                    tag_set = main_dict["processing-dict"]["tag_set"]
+                    tag_set = main_dict["tag_set"]
                     tag_info = {
                         "func":      cw_func,
                         "cw_text":   cw_text,
@@ -65,24 +65,24 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> Any:
 
 
 def processing_dict_reset(main_dict: dict) -> dict:
-    working_input_file = main_dict["control_info"]["working_input_file"]
-    line = working_input_file[main_dict["processing_dict"]["line_to_parse"]].\
+    working_input_file = main_dict["working_input_file"]
+    line = working_input_file[main_dict["line_to_parse"]].\
         rstrip()
     length = len(line)
-    if main_dict["processing_dict"]["parse_index"] > length:
-        main_dict["processing_dict"]["line_to_parse"] += 1
-        main_dict["processing_dict"]["parse_index"] = 0
-        main_dict["processing_dict"]["parse_text"] = \
-            working_input_file[main_dict["processing_dict"]["line_to_parse"]].\
+    if main_dict["parse_index"] > length:
+        main_dict["line_to_parse"] += 1
+        main_dict["parse_index"] = 0
+        main_dict["parse_text"] = \
+            working_input_file[main_dict["line_to_parse"]].\
             rstrip()
-        main_dict["processing_dict"]["contents_string"] = ""
-        main_dict["processing_dict"]["contents_list"] = []
+        main_dict["contents_string"] = ""
+        main_dict["contents_list"] = []
     else:
-        main_dict["processing_dict"]["parse_text"] = working_input_file[
-            main_dict["processing_dict"]["line_to_parse"]]
-        main_dict["processing_dict"]["parse_text"] = \
-            main_dict["processing_dict"]["parse_text"].rstrip(" ")
-        main_dict["processing_dict"]["group_contents"] = ""
-        main_dict["processing_dict"]["contents_string"] = ""
-        main_dict["processing_dict"]["contents_list"] = []
+        main_dict["parse_text"] = working_input_file[
+            main_dict["line_to_parse"]]
+        main_dict["parse_text"] = \
+            main_dict["parse_text"].rstrip(" ")
+        main_dict["group_contents"] = ""
+        main_dict["contents_string"] = ""
+        main_dict["contents_list"] = []
     return main_dict

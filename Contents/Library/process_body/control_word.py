@@ -25,16 +25,16 @@ import control_word_to_build
 def cw_processor(main_dict: dict, collections_dict: dict) -> dict:
     # Test for control word (backslash followed by a combination of text,
     # character (optional), and numbers (optional).
-    cw_regex = main_dict["processing_dict"]["cw_regex"]
-    parse_index = main_dict["processing_dict"]["parse_index"]
+    cw_regex = main_dict["cw_regex"]
+    parse_index = main_dict["parse_index"]
     item = None
     try:
-        test = re.search(cw_regex, main_dict["processing_dict"]["parse_text"])
+        test = re.search(cw_regex, main_dict["parse_text"])
         if test is not item:
             length = test.end() - test.start()
             control_word = test[0]
             parse_index = parse_index + length
-            main_dict["processing_dict"]["parse_index"] = parse_index
+            main_dict["parse_index"] = parse_index
             main_dict = cw_evaluation(
                 main_dict=main_dict, control_word=control_word,
                 test=test, collections_dict=collections_dict)
@@ -55,7 +55,7 @@ def cw_evaluation(main_dict: dict, control_word: str, test,
     try:
         cw_func = collections_dict[cw_text]
         if cw_func != null_function:
-            tag_set = main_dict["processing_dict"]["tag_set"]
+            tag_set = main_dict["tag_set"]
             tag_info = {
                 "func":             cw_func,
                 "name":             cw_text,
@@ -77,21 +77,21 @@ def cw_evaluation(main_dict: dict, control_word: str, test,
         with open(csv_file, "a+") as csv_file_pre:
             csv_file_pre.write(cw_update)
         # Add control word that cannot be processed to XML build file.
-        tag_dict_file = os.path.join(main_dict["control_info"]["dicts_dir"],
+        tag_dict_file = os.path.join(main_dict["dicts_dir"],
                                      "xml_tags.json")
         with open(tag_dict_file, "r+") as tag_dict_file_pre:
             tag_dict_options = json.load(tag_dict_file_pre)
-        tag_set = main_dict["processing_dict"]["tag_set"]
+        tag_set = main_dict["tag_set"]
         tag_dict = tag_dict_options[tag_set]
         tag_empty = tag_dict["missing"][0]
-        tag = tag_empty.replace("zzz", str(main_dict["processing_dict"][
+        tag = tag_empty.replace("zzz", str(main_dict[
                                                "line_to_parse"]))
         tag = tag.replace("aaa", cw_text)
         build_output_file.bof_processor(update_output=tag,
                                         main_dict=main_dict)
     parse_text_update = \
-        main_dict["processing_dict"]["parse_text"].replace(control_word, "", 1)
-    main_dict["processing_dict"]["parse_text"] = parse_text_update
-    main_dict["processing_dict"]["parse_index"] = 0
+        main_dict["parse_text"].replace(control_word, "", 1)
+    main_dict["parse_text"] = parse_text_update
+    main_dict["parse_index"] = 0
     main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict

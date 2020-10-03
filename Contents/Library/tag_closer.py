@@ -24,11 +24,11 @@ import tag_check
 
 
 def tc_processor(main_dict: dict) -> dict:
-    xml_tags_file = os.path.join(main_dict["control_info"]["dicts_dir"],
+    xml_tags_file = os.path.join(main_dict["dicts_dir"],
                                  "xml_tags.json")
     with open(xml_tags_file, "r+") as xml_tags_pre:
         xml_tags_dicts = json.load(xml_tags_pre)
-    xml_tags = xml_tags_dicts[str(main_dict["processing_dict"]["tag_set"])]
+    xml_tags = xml_tags_dicts[str(main_dict["tag_set"])]
     status_list = [
         "par",
         "section",
@@ -43,7 +43,7 @@ def tc_processor(main_dict: dict) -> dict:
             "tag_open_str":  xml_tags[tag][0],
             "tag_close_str": xml_tags[tag][1],
             "tag_setting":   "close",
-            "tag_set":       main_dict["processing_dict"]["tag_set"]
+            "tag_set":       main_dict["tag_set"]
         }
         main_dict, update_output = tag_check.tc_processor(
             tag_info=tag_info, main_dict=main_dict)

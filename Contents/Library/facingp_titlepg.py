@@ -23,7 +23,7 @@ def search_for_facingp_titlepg(main_dict: dict) -> list:
     for key in cwd_list_two:
         item = None
         count = 0
-        for line in main_dict["control_info"]["working_input_file"]:
+        for line in main_dict["working_input_file"]:
             match = re.search(r"\\"+f"{key}", line)
             if match is not item:
                 face_title.append((key, line))

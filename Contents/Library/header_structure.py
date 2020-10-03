@@ -34,7 +34,7 @@ def build_header_tables_dict(main_dict: dict) -> None:
         "generator",
         "info"
     ]
-    working_input_file = main_dict["control_info"]["working_input_file"]
+    working_input_file = main_dict["working_input_file"]
     for table in tables_list:
         pattern = re.compile(r"{\\" + table)
         for line in working_input_file:
@@ -48,24 +48,24 @@ def build_header_tables_dict(main_dict: dict) -> None:
             if table_search is not item:
                 table_start_line = working_input_file.index(line)
                 table_start_index = stripped_line.find(table) - 2
-                main_dict["processing_dict"]["table_start_line"] = table_start_line
-                main_dict["processing_dict"]["table_start_index"] = table_start_index
-                main_dict["processing_dict"]["parse_index"] = \
-                    main_dict["processing_dict"]["table_start_index"]
-                main_dict["processing_dict"]["line_to_parse"] = \
-                    main_dict["processing_dict"]["table_start_line"]
+                main_dict["table_start_line"] = table_start_line
+                main_dict["table_start_index"] = table_start_index
+                main_dict["parse_index"] = \
+                    main_dict["table_start_index"]
+                main_dict["line_to_parse"] = \
+                    main_dict["table_start_line"]
                 main_dict = \
                     group_boundaries_no_contents.define_boundaries(
                         main_dict=main_dict)
                 table_boundaries_info = {table: [
-                        main_dict["processing_dict"]["table_start_line"],
-                        main_dict["processing_dict"]["table_start_index"],
-                        main_dict["processing_dict"]["group_end_line"],
-                        main_dict["processing_dict"]["group_end_index"]]
+                        main_dict["table_start_line"],
+                        main_dict["table_start_index"],
+                        main_dict["group_end_line"],
+                        main_dict["group_end_index"]]
                 }
                 dict_updater.json_dict_updater(
                     dict_name="header_tables_dict.json",
                     dict_update=table_boundaries_info,
-                    debug_dir=main_dict["control_info"]["debug_dir"])
+                    main_dict=main_dict)
             else:
                 pass

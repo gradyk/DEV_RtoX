@@ -46,7 +46,7 @@ class FonttblParse(object):
     def __init__(self, main_dict: dict, code_strings_to_process: list) -> None:
         self.code_strings_to_process = code_strings_to_process
         self.main_dict = main_dict
-        self.debug_dir = main_dict["control_info"]["debug_dir"]
+        self.debug_dir = main_dict["debug_dir"]
 
     def trim_fonttbl(self):
         for code_string in self.code_strings_to_process:
@@ -101,7 +101,7 @@ class FonttblParse(object):
             dict_updater.json_dict_updater(
                 dict_name="font_table_file.json",
                 dict_update=code_dict,
-                debug_dir=self.debug_dir)
+                main_dict=self.main_dict)
 
             code_dict = {}
 

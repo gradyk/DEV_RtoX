@@ -32,8 +32,8 @@ class ProcessTheTables(object):
 
     def __init__(self, main_dict: dict) -> None:
         self.main_dict = main_dict
-        self.debug_dir = main_dict["control_info"]["debug_dir"]
-        self.working_input_file = main_dict["control_info"]["working_file_name"]
+        self.debug_dir = main_dict["debug_dir"]
+        self.working_input_file = main_dict["working_file_name"]
 
     def analyze_table_code_strings_controller(self):
         code_strings_file = os.path.join(self.debug_dir,
@@ -83,14 +83,14 @@ class ProcessTheTables(object):
         font_table.FonttblParse.trim_fonttbl(
             self=font_table.FonttblParse(
                 code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
+                main_dict=self.main_dict))
         font_table.FonttblParse.remove_code_strings(
             self=font_table.FonttblParse(
                 code_strings_to_process=code_strings_to_process,
-                debug_dir=self.debug_dir))
+                main_dict=self.main_dict))
         font_table.FonttblParse.parse_code_strings(
             self=font_table.FonttblParse(
-                debug_dir=self.debug_dir,
+                main_dict=self.main_dict,
                 code_strings_to_process=code_strings_to_process))
 
     @staticmethod

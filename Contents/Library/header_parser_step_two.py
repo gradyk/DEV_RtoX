@@ -22,7 +22,7 @@ import split_between_characters
 
 
 def process_the_tables(main_dict: dict) -> None:
-    header_tables_file = os.path.join(main_dict["control_info"]["debug_dir"],
+    header_tables_file = os.path.join(main_dict["debug_dir"],
                                       "header_tables_dict.json")
 
     with open(header_tables_file) as header_tables_dict_pre:
@@ -31,24 +31,24 @@ def process_the_tables(main_dict: dict) -> None:
             table, table_start_line, table_empty = check_for_empty_table(
                     header_tables_dict=header_tables_dict,
                     table=header_table,
-                    working_input_file=main_dict["control_info"]
+                    working_input_file=main_dict
                     ["working_input_file"])
             table_updater = table_emptyorfull_file_update(
                     table=table, table_start_line=table_start_line,
                     table_empty=table_empty,
-                    debug_dir=main_dict["control_info"]["debug_dir"])
+                    main_dict=main_dict)
 
             if table_updater[table][1] is not True:
                 table_boundaries = header_tables_dict[header_table]
                 text_to_process = get_table_contents_as_text_string(
-                    working_input_file=main_dict["control_info"]
+                    working_input_file=main_dict
                     ["working_input_file"],
                     table_boundaries=table_boundaries)
                 code_strings_list = get_code_strings_from_text(
                     text_to_process=text_to_process)
                 code_strings_file_update(
                     table=table, code_strings_list=code_strings_list,
-                    debug_dir=main_dict["control_info"]["debug_dir"])
+                    main_dict=main_dict)
             else:
                 pass
 
@@ -66,10 +66,10 @@ def check_for_empty_table(table: str, header_tables_dict: dict,
 
 
 def table_emptyorfull_file_update(table: str, table_start_line: str,
-                                  table_empty: bool, debug_dir: str,):
+                                  table_empty: bool, main_dict: dict) -> dict:
     table_updater = {}
     table_updater.update({table: [table_start_line, table_empty]})
-    dict_updater.json_dict_updater(debug_dir=debug_dir,
+    dict_updater.json_dict_updater(main_dict=main_dict,
                                    dict_name="table_emptyorfull_dict.json",
                                    dict_update=table_updater)
     return table_updater
@@ -105,10 +105,10 @@ def get_code_strings_from_text(text_to_process: str):
     return code_strings_list
 
 
-def code_strings_file_update(table: str, debug_dir: str,
+def code_strings_file_update(table: str, main_dict: dict,
                              code_strings_list: list):
     code_strings_file_updater = {table: [code_strings_list]}
     dict_updater.json_dict_updater(
         dict_name="code_strings_file.json",
-        debug_dir=debug_dir,
+        main_dict=main_dict,
         dict_update=code_strings_file_updater)

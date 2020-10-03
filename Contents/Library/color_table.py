@@ -32,11 +32,9 @@ class ColortblParse(object):
                     \\cbackgroundone | \\ctextone | \\cbackgroundtwo |
                     \\ctexttwo
     """
-    def __init__(self,
-                 code_strings_to_process: list,
-                 debug_dir: str) -> None:
+    def __init__(self, code_strings_to_process: list, main_dict: dict) -> None:
         self.code_strings_to_process = code_strings_to_process
-        self.debug_dir = debug_dir
+        self.main_dict = main_dict
 
     def trim_colortbl(self):
         for code_string in self.code_strings_to_process:
@@ -73,7 +71,7 @@ class ColortblParse(object):
 
             dict_updater.json_dict_updater(dict_name="color_table_file.json",
                                            dict_update=code_dict,
-                                           debug_dir=self.debug_dir)
+                                           main_dict=self.main_dict)
 
             place += 1
             code_dict = {}

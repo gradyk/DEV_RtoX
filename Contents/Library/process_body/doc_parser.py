@@ -29,22 +29,22 @@ from typing import Any
 class MainDocManager(object):
     def __init__(self, main_dict: dict) -> None:
         self.main_dict = main_dict
-        self.processing_dict = self.main_dict["processing_dict"]
-        self.control_info = self.main_dict["control_info"]
-        self.working_input_file = self.control_info["working_file_name"]
+        self.processing_dict = self.main_dict
+        self.main_dict = self.main_dict
+        self.working_input_file = self.main_dict["working_file_name"]
         self.tag_set = self.processing_dict["tag_set"]
         self.length_parse_text = 0
         self.tag_registry = self.main_dict["tag_registry"]
 
     def body_parse_manager(self) -> dict:
 
-        header_table_file = os.path.join(self.control_info["debug_dir"],
+        header_table_file = os.path.join(self.main_dict["debug_dir"],
                                          "header_tables_dict.json")
         main_doc_dir = MainDocManager(main_dict=self.main_dict)
         parse_text, line_to_parse, parse_index = \
             MainDocManager.parse_starting_point(
                 self=main_doc_dir, header_table_file=header_table_file)
-        list_size = len(self.control_info["working_input_file"])
+        list_size = len(self.main_dict["working_input_file"])
 
         processing_dict = {
             "parse_text":         parse_text,
@@ -52,8 +52,8 @@ class MainDocManager(object):
             "line_to_parse":      line_to_parse,
             "parse_index":        parse_index,
             "working_input_file": self.working_input_file,
-            "debug_dir":          self.control_info["debug_dir"],
-            "dicts_dir":          self.control_info["dicts_dir"],
+            "debug_dir":          self.main_dict["debug_dir"],
+            "dicts_dir":          self.main_dict["dicts_dir"],
             "group_contents":     "",
             "group_end_line":     0,
             "group_end_index":    0,
@@ -61,13 +61,13 @@ class MainDocManager(object):
             "contents_string":    "",
             "tag_set":            self.tag_set
         }
-        self.main_dict["processing_dict"] = processing_dict
+        self.main_dict = processing_dict
         collections_dict = control_word_collections.cwc_processor()
 
         self.main_dict = check_parse_text.cpt_processor(
             main_dict=self.main_dict, collections_dict=collections_dict)
 
-        self.main_dict["processing_dict"] = processing_dict
+        self.main_dict = processing_dict
         return self.main_dict
 
     def parse_starting_point(self, header_table_file: str) -> Any:
