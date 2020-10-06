@@ -47,14 +47,13 @@ def fs_processor(main_dict: dict) -> None:
         i += 1
 
     # Create a backup of the output_file.xml.
-    main_dict["output_text_bak"] = \
-        main_dict["output_text"]
-    output_file = os.path.join(main_dict["debug_dir"],
-                               "output_file.xml")
-    with open(output_file, "r+") as output_file_pre:
+    main_dict["output_text_bak"] = main_dict["output_text"]
+    output_file = os.path.join(main_dict["debug_dir"], "output_file.xml")
+    with open(output_file, "w+") as output_file_pre:
         output_file_pre.write(main_dict["output_text"])
     with open(output_file, "r+") as output_file_byte:
         output_file_str = output_file_byte.read()
+
     xml_formatted_text = xmlformatter.xmlformatter_start(
         infile=output_file_str,
         outfile=main_dict["output_file_name"])
@@ -63,9 +62,8 @@ def fs_processor(main_dict: dict) -> None:
         print("Tuple")
         sys.exit(0)
     else:
-        with open(main_dict["output_file_name"], "w+") \
-                as output_xml_file_pre:
-            output_xml_file_pre.write(xml_formatted_text)
+        with open(output_file, "w+") as output_xml_file_pre:
+            output_xml_file_pre.write(xml_formatted_text[0])
 
     # Put the final XML file in the output directory and rename it per
     # the user's preference.

@@ -38,8 +38,10 @@ def build_header_tables_dict(main_dict: dict) -> None:
     for table in tables_list:
         pattern = re.compile(r"{\\" + table)
         for line in working_input_file:
-            if working_input_file.index(line) >= 3715:
-                print("end")
+            list_length = main_dict["list_size"]
+            if working_input_file.index(line) >= list_length:
+                print(f"Line: {working_input_file[line]} == List size: "
+                      f"{main_dict['list_size']}")
             else:
                 pass
             stripped_line = line.strip()

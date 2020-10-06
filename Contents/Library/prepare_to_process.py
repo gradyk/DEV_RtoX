@@ -92,8 +92,7 @@ def extract_file_info(main_dict: dict) -> Any:
     else:
         try:
             final_output_file = \
-                os.path.splitext(main_dict["input_file"])[0] +\
-                '.xml'
+                os.path.splitext(main_dict["input_file"])[0] + '.xml'
             main_dict["output_file_name"] = \
                 posixpath.join(main_dict["base_dir"], "output",
                                final_output_file)
@@ -160,10 +159,8 @@ def xml_tag_set_pref(config_settings_dict: dict, main_dict: dict) -> dict:
 
 # TODO This is not called by anything.
 def print_input_error_message():
-    """
-    Log an error message if the configuration (as recorded in the
-    config_file_dict) is not valid.
-    """
+    """ Log an error message if the configuration (as recorded in the
+    config_file_dict) is not valid. """
     try:
         logger_basic.isEnabledFor(level=10)
 

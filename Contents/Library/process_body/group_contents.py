@@ -49,8 +49,7 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> Any:
                 else:
                     pass
             except KeyError:
-                # Add missing control word to
-                # control_word_collections.csv file.
+                # Add missing control word to control_word_collections.csv file.
                 cw_update = f'{cw_text}, Unknown, Unknown, null'
                 util_dir = Path.cwd()
                 csv_file = os.path.join(util_dir,
@@ -66,22 +65,18 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> Any:
 
 def processing_dict_reset(main_dict: dict) -> dict:
     working_input_file = main_dict["working_input_file"]
-    line = working_input_file[main_dict["line_to_parse"]].\
-        rstrip()
+    line = working_input_file[main_dict["line_to_parse"]].rstrip()
     length = len(line)
     if main_dict["parse_index"] > length:
         main_dict["line_to_parse"] += 1
         main_dict["parse_index"] = 0
         main_dict["parse_text"] = \
-            working_input_file[main_dict["line_to_parse"]].\
-            rstrip()
+            working_input_file[main_dict["line_to_parse"]].rstrip()
         main_dict["contents_string"] = ""
         main_dict["contents_list"] = []
     else:
-        main_dict["parse_text"] = working_input_file[
-            main_dict["line_to_parse"]]
-        main_dict["parse_text"] = \
-            main_dict["parse_text"].rstrip(" ")
+        main_dict["parse_text"] = working_input_file[main_dict["line_to_parse"]]
+        main_dict["parse_text"] = main_dict["parse_text"].rstrip(" ")
         main_dict["group_contents"] = ""
         main_dict["contents_string"] = ""
         main_dict["contents_list"] = []

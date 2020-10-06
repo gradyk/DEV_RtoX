@@ -22,30 +22,11 @@ def define_boundaries(main_dict: dict) -> dict:
     deck = deque()
     working_index = main_dict["parse_index"]
     end_line = main_dict["line_to_parse"]
-    main_dict = boundary_test(deck=deck, main_dict=main_dict,
-                              working_index=working_index, end_line=end_line)
-    return main_dict
 
-
-def boundary_test(main_dict: dict, working_index: int, deck,
-                  end_line: int) -> dict:
-    ptext = \
-        main_dict["working_input_file"][end_line].rstrip(" ")
+    ptext = main_dict["working_input_file"][end_line].rstrip(" ")
     ptext = ptext[working_index:]
-    group_contents = ""
     length = len(ptext)
-    main_dict = boundary_loop(
-        main_dict=main_dict,
-        length=length,
-        deck=deck, working_index=working_index,
-        ptext=ptext, end_line=end_line,
-        group_contents=group_contents)
-    return main_dict
 
-
-def boundary_loop(main_dict: dict, length: int, deck,
-                  working_index: int, ptext: str, end_line: int,
-                  group_contents: str) -> dict:
     while working_index <= length - 1:
         try:
             if ptext[working_index] == "{":
@@ -58,34 +39,23 @@ def boundary_loop(main_dict: dict, length: int, deck,
             logging.exception(error, f"Working_index= {working_index}, "
                                      f"length= {length}.")
             sys.exit()
-        group_contents = group_contents + ptext[working_index]
+        main_dict["group_contents"] = ''.join([main_dict["group_contents"] +\
+                                              ptext[working_index]])
         working_index += 1
 
         decklength = len(deck)
         if decklength == 0:
             main_dict["group_end_line"] = end_line
             main_dict["group_end_index"] = working_index
-            main_dict["group_contents"] = group_contents
             main_dict["line_to_parse"] = end_line
             main_dict["parse_index"] = working_index + 1
-
             return main_dict
-
         else:
             if working_index > length - 1:
-                ptext, working_index, end_line, length, deck, group_contents = \
-                    test_ptext(main_dict=main_dict,
-                               end_line=end_line, group_contents=group_contents,
-                               deck=deck)
+                end_line += 1
+                ptext = main_dict["working_input_file"][end_line].rstrip()
+                length = len(ptext)
+                working_index = 0
             else:
                 pass
-
-
-def test_ptext(main_dict: dict, end_line: int, deck,
-               group_contents: str):
-    end_line += 1
-    ptext = \
-        main_dict["working_input_file"][end_line].rstrip()
-    length = len(ptext)
-    working_index = 0
-    return ptext, working_index, end_line, length, deck, group_contents
+    return main_dict

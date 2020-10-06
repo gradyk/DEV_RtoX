@@ -27,12 +27,13 @@ def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
     base_dir = main_dict["base_dir"]
     cws_dir = os.path.join(base_dir, "Library/control_words_symbols/")
     tagging_mod = importlib.import_module(tag_info["func"], package=cws_dir)
-    tag_info = tagging_mod.cw_func_processor(tag_info=tag_info)
+    tag_info = tagging_mod.cw_func_processor(
+        tag_info=tag_info, main_dict=main_dict)
     # Check whether tag is already open or closed.
     results = tag_check.tc_processor(tag_info=tag_info,
                                      main_dict=main_dict)
-    main_dict["tag_registry"] = results[1]
-    update_output = results[2]
+    main_dict = results[0]
+    update_output = results[1]
     if update_output == "":
         pass
     else:

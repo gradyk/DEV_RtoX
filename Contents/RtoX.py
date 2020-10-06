@@ -29,7 +29,6 @@ import output_file_header
 import output_file_transition
 import prepare_to_process
 import tag_closer
-from process_body.doc_parser import MainDocManager
 
 # TODO Add PYTHONDONTWRITEBYTECODE=1 to environment variables before making
 #  app package. This will permanently suppress __pycache__
@@ -90,8 +89,7 @@ if __name__ == "__RtoX__":
     # TODO Add capability to handle numbered paragraphs: spec p.48.
     # TODO Add capability to handle tables: spec p.59.
 
-    main_dict = doc_parser.MainDocManager.body_parse_manager(
-            self=MainDocManager(main_dict=main_dict))
+    main_dict = doc_parser.body_parse_manager(main_dict=main_dict)
     main_dict = tag_closer.tc_processor(main_dict=main_dict)
 
     # TODO Add to final_step: 1) garbage cleanup, 2) any needed/wanted

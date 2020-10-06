@@ -18,26 +18,23 @@ import control_word
 import backslash_text
 import left_bracket_text
 import check_text
-from tqdm import tqdm
 
 
 def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
-    main_dict["cw_regex"] = \
-        re.compile(r"^(\\[a-zA-Z\-\s0-9]*)")
+    main_dict["cw_regex"] = re.compile(r"^(\\[a-zA-Z\-\s0-9]*)")
     line = main_dict["line_to_parse"]
-    for i in tqdm(range(100)):
-        while line < main_dict["list_size"] + 1:
-            # Checks for an RTF group.
-            main_dict = check_group.cg_processor(
-                main_dict=main_dict, collections_dict=collections_dict)
-            # Checks for a backslash that should be treated as text.
-            main_dict = backslash_text.bt_processor(main_dict=main_dict)
-            # Checks for a left bracket that should be treated as text.
-            main_dict = left_bracket_text.lbt_processor(main_dict=main_dict)
-            # Checks for a control word or destination.
-            main_dict = control_word.cw_processor(
-                main_dict=main_dict, collections_dict=collections_dict)
-            # Checks for text.
-            main_dict = check_text.ct_processor(main_dict=main_dict)
-            line = main_dict["line_to_parse"]
+    while line < main_dict["list_size"] + 1:
+        # Checks for an RTF group.
+        main_dict = check_group.cg_processor(
+            main_dict=main_dict, collections_dict=collections_dict)
+        # Checks for a backslash that should be treated as text.
+        main_dict = backslash_text.bt_processor(main_dict=main_dict)
+        # Checks for a left bracket that should be treated as text.
+        main_dict = left_bracket_text.lbt_processor(main_dict=main_dict)
+        # Checks for a control word or destination.
+        main_dict = control_word.cw_processor(
+            main_dict=main_dict, collections_dict=collections_dict)
+        # Checks for text.
+        main_dict = check_text.ct_processor(main_dict=main_dict)
+        line = main_dict["line_to_parse"]
     return main_dict

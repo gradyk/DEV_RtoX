@@ -6,8 +6,8 @@
 # Files to Process #
 ####################
 /Contents/Artis (from Word).rtf
-/Contents/IHLOChapter.rtf
-/Contents/SeytLinesPost.rtf
+/Contents/input/IHLOChapter.rtf
+/Contents/input/SeytLinesPost.rtf
 /Contents/test.rtf
 
 # Processed Files #

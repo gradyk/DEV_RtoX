@@ -35,8 +35,7 @@ def bt_processor(main_dict: dict) -> dict:
                           f"{main_dict['parse_index']}--"
                           f"{main_dict['parse_text']}")
 
-    main_dict["parse_text"] = \
-        main_dict["parse_text"].replace(text, "")
+    main_dict["parse_text"] = main_dict["parse_text"].replace(text, "")
     main_dict["parse_index"] = 0
     main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict

@@ -73,12 +73,10 @@ class StyleSheetParse(object):
                 pass
         return self.code_strings_to_process
 
-    def parse_code_strings(self):
+    def parse_code_strings(self) -> None:
         code_dict = {}
         for code_string in self.code_strings_to_process:
-            get_style_codes = StyleParser(
-                debug_dir=self.debug_dir,
-                code_dict=code_dict)
+            get_style_codes = StyleParser(code_dict=code_dict)
 
             code_string = code_string[1:-1]
             code_string, current_key = StyleParser.check_stylecode(
@@ -89,8 +87,7 @@ class StyleSheetParse(object):
             test = re.search(r"\\", code_string)
             while test is not item:
                 code_string, current_key = StyleParser.check_control_words(
-                    self=StyleParser(debug_dir=self.debug_dir,
-                                     code_dict=code_dict),
+                    self=StyleParser(code_dict=code_dict),
                     code_string=code_string, current_key=current_key)
                 test = re.search(r"\\", code_string)
 
@@ -108,8 +105,7 @@ class StyleSheetParse(object):
 
 class StyleParser(object):
 
-    def __init__(self, debug_dir: str, code_dict: dict) -> None:
-        self.debug_dir = debug_dir
+    def __init__(self, code_dict: dict) -> None:
         self.code_dict = code_dict
 
     def check_stylecode(self, code_string: str) -> tuple:

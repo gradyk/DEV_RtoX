@@ -63,6 +63,7 @@ def mdc_processor(base_dir, debug_dir: str, dicts_dir: str,
         "noline":                   "close",
         "outlinelevel":             "close",
         "sbys":                     "close",
-        "s":                        "close"
+        "s":                        "close",
+        "cum_time" :                0.0
         }
     return main_dict

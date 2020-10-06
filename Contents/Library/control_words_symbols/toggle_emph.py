@@ -14,16 +14,13 @@ __name__ = "Contents.Library.control_words_symbols.toggle_emph"
 # From standard libraries
 import json
 import os
-import sys
 
 
-def cw_func_processor(tag_info: dict) -> dict:
+def cw_func_processor(tag_info: dict, main_dict: dict) -> dict:
     # For a toggle control word, \<control_word> turns on the feature and
     # \<control_word>N turns off the feature.
     # See Word2007RTFSpec9 Font (Character) Formatting Properties, p.130.
-    base_dir = os.path.dirname(os.path.abspath(sys.argv[0]))
-    dicts_dir = os.path.join(base_dir, "Library/dicts")
-    tag_dict_file = os.path.join(dicts_dir, "xml_tags.json")
+    tag_dict_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
     with open(tag_dict_file, "r+") as tag_dict_file_pre:
         tag_dict_options = json.load(tag_dict_file_pre)
     tag_set = str(tag_info["tag_set"])
