@@ -105,13 +105,12 @@ def pre_process(main_dict: dict) -> dict:
             if test is not item:
                 pass
             else:
-                test = \
-                    re.search(r"^([^}]*)", main_dict["contents_string"])
+                test = re.search(r"^([^}]*)", main_dict["contents_string"])
                 if test is not item and test[0] != '':
                     main_dict["contents_list"].append(test.group())
                     main_dict["contents_string"] = \
-                        main_dict["contents_string"].\
-                        lstrip(test.group()).lstrip()
+                        main_dict["contents_string"].lstrip(test.group()).\
+                            lstrip()
                 else:
                     pass
         except ValueError as error:

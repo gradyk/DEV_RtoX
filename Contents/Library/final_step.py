@@ -18,10 +18,7 @@ __name__ = "Contents.Library.final_step"
 
 # From standard libraries
 import json
-import ntpath
 import os
-import sys
-from shutil import copy
 
 # From local application
 import xmlformatter
@@ -41,39 +38,20 @@ def fs_processor(main_dict: dict) -> None:
     i = 1
     while i < 3:
         for item in tag_pairs:
-            main_dict["output_text"] = \
-                        main_dict["output_text"].\
-                        replace(item, "")
+            main_dict["output_text"] = main_dict["output_text"].\
+                replace(item, "")
         i += 1
 
     # Create a backup of the output_file.xml.
     main_dict["output_text_bak"] = main_dict["output_text"]
-    output_file = os.path.join(main_dict["debug_dir"], "output_file.xml")
-    with open(output_file, "w+") as output_file_pre:
-        output_file_pre.write(main_dict["output_text"])
-    with open(output_file, "r+") as output_file_byte:
-        output_file_str = output_file_byte.read()
-
+    pre_format_file = os.path.join(main_dict["debug_dir"], "output.xml")
+    with open(pre_format_file, "w+") as output_pre:
+        output_pre.write(main_dict["output_text_bak"])
     xml_formatted_text = xmlformatter.xmlformatter_start(
-        infile=output_file_str,
+        infile=pre_format_file,
         outfile=main_dict["output_file_name"])
-
-    if xml_formatted_text is tuple:
-        print("Tuple")
-        sys.exit(0)
-    else:
-        with open(output_file, "w+") as output_xml_file_pre:
-            output_xml_file_pre.write(xml_formatted_text[0])
-
-    # Put the final XML file in the output directory and rename it per
-    # the user's preference.
-    final_file = ntpath.basename(main_dict["output_file_name"])
     output_dir = os.path.join(main_dict["base_dir"], "output")
-
-    copy(main_dict["output_file_name"], output_dir)
-
-    orig_output_list = [output_dir, "/output_file.xml"]
-    final_output_list = [output_dir, f'/{final_file}']
-    orig_output = ''.join(orig_output_list)
+    final_output_list = [output_dir, f'/{main_dict["output_file"]}']
     final_output = ''.join(final_output_list)
-    os.rename(orig_output, final_output)
+    with open(final_output, "w+") as final_output_file:
+        final_output_file.write(xml_formatted_text)

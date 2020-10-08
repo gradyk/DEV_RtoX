@@ -30,10 +30,8 @@ def body_parse_manager(main_dict: dict) -> dict:
                                      "header_tables_dict.json")
     parse_text, line_to_parse, parse_index = parse_starting_point(
         header_table_file=header_table_file, main_dict=main_dict)
-    list_size = len(main_dict["working_input_file"])
 
     main_dict["parse_text"] = parse_text
-    main_dict["list_size"] = list_size
     main_dict["line_to_parse"] = line_to_parse
     main_dict["parse_index"] = parse_index
 

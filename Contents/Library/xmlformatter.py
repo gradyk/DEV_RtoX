@@ -726,7 +726,7 @@ def xmlformatter_start(infile, outfile):
     """ xmlformatter is run as the last step before returning the XML named
     according to the user's preference. The goal is to have a properly
     indented XML file. """
-
+    print(f"Infile: {infile}\nOutfile: {outfile}")
     res = ()
     formatter = ()
     indent = DEFAULT_INDENT

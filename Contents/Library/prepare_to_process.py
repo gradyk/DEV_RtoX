@@ -50,16 +50,16 @@ def extract_file_info(main_dict: dict) -> Any:
     # Get the input file from the command line and store as
     # working_input_file in the main_dict.
     if config_settings_dict.get("input") is not item:
-        main_dict["input_file"] = \
-            config_settings_dict.get("input")
+        main_dict["input_file"] = config_settings_dict.get("input")
         try:
-            input_file = posixpath.join(main_dict["base_dir"],
-                                        "input",
+            input_file = posixpath.join(main_dict["base_dir"], "input",
                                         main_dict["input_file"])
-            main_dict["working_input_file"] = \
-                [line.rstrip('\n') for line in open(input_file)]
+            pre_file = [line.rstrip('\n') for line in open(input_file)]
+            pre_file = [line.rstrip("\\") for line in pre_file]
+            main_dict["working_input_file"] = pre_file
             main_dict["working_input_file_bak"] = \
                 main_dict["working_input_file"]
+            main_dict["list_size"] = len(main_dict["working_input_file"])
             logger_basic.isEnabledFor(level=10)
             logger_basic.info(msg=f"The file you want to convert is "
                                   f"{main_dict['input_file']}.")
@@ -79,8 +79,10 @@ def extract_file_info(main_dict: dict) -> Any:
 
     # Get the name of the output file from the command line.
     if config_settings_dict.get("output") is not None:
-        main_dict["output_file_name"] = \
-            config_settings_dict.get("output")
+        file = config_settings_dict.get("output")
+        main_dict["output_file_name"] = posixpath.join(main_dict["base_dir"],
+                                                       "output", file)
+        main_dict["output_file"] = file
         try:
             logger_basic.isEnabledFor(level=10)
             logger_basic.info(

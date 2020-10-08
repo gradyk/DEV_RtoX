@@ -59,91 +59,84 @@ class ColortblParse(object):
         keys = [*range(0, count, 1)]
         place = 0
         for code_string in code_string_list:
-            code_dict, current_key = ColorParser.assign_key(
-                code_dict=code_dict,
-                keys=keys, place=place)
-            code_dict = ColorParser.parse_control_word(
+            code_dict, current_key = assign_key(
+                code_dict=code_dict, keys=keys, place=place)
+            code_dict = parse_control_word(
                 code_string=code_string,
                 current_key=current_key, code_dict=code_dict)
-            code_dict = ColorParser.parse_theme_control_word(
+            code_dict = parse_theme_control_word(
                 code_string=code_string,
                 current_key=current_key, code_dict=code_dict)
 
             dict_updater.json_dict_updater(dict_name="color_table_file.json",
                                            dict_update=code_dict,
                                            main_dict=self.main_dict)
-
             place += 1
             code_dict = {}
 
 
-class ColorParser(object):
-    def __init__(self, code_dict: dict) -> None:
-        self.code_dict = code_dict
+def assign_key(code_dict: dict, keys: list, place: int) -> tuple:
+    current_key = keys[place]
+    code_dict.update({current_key: {}})
+    return code_dict, current_key
 
-    @staticmethod
-    def assign_key(code_dict: dict, keys: list, place: int) -> tuple:
-        current_key = keys[place]
-        code_dict.update({current_key: {}})
-        return code_dict, current_key
 
-    @staticmethod
-    def parse_control_word(code_string: str, current_key: int,
-                           code_dict: dict) -> dict:
-        control_word_list = [
-            "red",
-            "green",
-            "blue",
-            "ctint",
-            "cshade"
-        ]
+def parse_control_word(code_string: str, current_key: int,
+                       code_dict: dict) -> dict:
+    control_word_list = [
+        "red",
+        "green",
+        "blue",
+        "ctint",
+        "cshade"
+    ]
 
-        for cw in control_word_list:
-            item = None
-            try:
-                test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
-                if test is not item:
-                    value = test[0].replace(f"\\{cw}", "")
-                    code_dict[current_key][f"{cw}"] = value
-                    code_string = code_string.replace(test[0], "")
-                else:
-                    pass
-            except ValueError:
+    for cw in control_word_list:
+        item = None
+        try:
+            test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
+            if test is not item:
+                value = test[0].replace(f"\\{cw}", "")
+                code_dict[current_key][f"{cw}"] = value
+                code_string = code_string.replace(test[0], "")
+            else:
                 pass
-        return code_dict
+        except ValueError:
+            pass
+    return code_dict
 
-    @staticmethod
-    def parse_theme_control_word(code_string: str, current_key: int,
-                                 code_dict: dict) -> dict:
-        control_word_list = [
-            "cmaindarkone",
-            "cmainlightone",
-            "cmaindarktwo",
-            "cmainlighttwo",
-            "caccentone",
-            "caccenttwo",
-            "caccentthree",
-            "caccentfour",
-            "caccentfive",
-            "caccentsix",
-            "chyperlink",
-            "cfollowedhyperlink",
-            "cbackgroundone",
-            "ctextone",
-            "cbackgroundtwo",
-            "ctexttwo"
-        ]
 
-        for cw in control_word_list:
-            item = None
-            try:
-                test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
-                if test is not item:
-                    value = test[0].replace(f"\\{cw}", "")
-                    code_dict[current_key][f"{cw}"] = value
-                    code_string = code_string.replace(test[0], "")
-                else:
-                    pass
-            except ValueError:
+def parse_theme_control_word(code_string: str, current_key: int,
+                             code_dict: dict) -> dict:
+    control_word_list = [
+        "cmaindarkone",
+        "cmainlightone",
+        "cmaindarktwo",
+        "cmainlighttwo",
+        "caccentone",
+        "caccenttwo",
+        "caccentthree",
+        "caccentfour",
+        "caccentfive",
+        "caccentsix",
+        "chyperlink",
+        "cfollowedhyperlink",
+        "cbackgroundone",
+        "ctextone",
+        "cbackgroundtwo",
+        "ctexttwo"
+    ]
+
+    for cw in control_word_list:
+        item = None
+        try:
+            test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
+            if test is not item:
+                value = test[0].replace(f"\\{cw}", "")
+                code_dict[current_key][f"{cw}"] = value
+                code_string = code_string.replace(test[0], "")
+            else:
                 pass
-        return code_dict
+        except ValueError:
+            pass
+    return code_dict

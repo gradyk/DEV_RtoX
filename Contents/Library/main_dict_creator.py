@@ -39,6 +39,7 @@ def mdc_processor(base_dir, debug_dir: str, dicts_dir: str,
         "working_input_file":       "",  # Text of input file line by line
                                          # accessible
         "working_input_file_bak":   "",  # Backup for working_input_file
+        "output_file":              "",  # Name of output file
         "output_file_name":         "",  # Path + name of the final XML file
         "output_text":              "",  # Location where new XML text is
                                          # stored during processing

@@ -59,6 +59,6 @@ def code_value(matchobj):
     with open(supp_array, "r+") as supp_dict_pre:
         supp_dict = json.load(supp_dict_pre)
     merged_dict = {**code_dict, **supp_dict}
-    match_text = matchobj.group(0).replace("\\'", "")
-    value = merged_dict[match_text]
+    clean = matchobj.group(0).replace("\\", "").replace("'", "")
+    value = merged_dict[clean]
     return value

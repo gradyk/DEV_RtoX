@@ -14,7 +14,6 @@ import json
 import logging
 import os
 import re
-from pathlib import Path
 
 # From local application
 import adjust_process_text
@@ -71,27 +70,23 @@ def cw_evaluation(main_dict: dict, control_word: str, test,
             pass
     except KeyError:
         # Add missing control word to control_word_collections.csv file.
-        cw_update = f'{cw_text}, Unknown, Unknown, null'
-        util_dir = Path.cwd()
+        cw_update = f'\n{cw_text},Unknown,Unknown,null'
+        util_dir = os.path.join(main_dict["base_dir"], "Utilities")
         csv_file = os.path.join(util_dir, "control_words_collections.csv")
         with open(csv_file, "a+") as csv_file_pre:
             csv_file_pre.write(cw_update)
         # Add control word that cannot be processed to XML build file.
-        tag_dict_file = os.path.join(main_dict["dicts_dir"],
-                                     "xml_tags.json")
+        tag_dict_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
         with open(tag_dict_file, "r+") as tag_dict_file_pre:
             tag_dict_options = json.load(tag_dict_file_pre)
-        tag_set = main_dict["tag_set"]
+        tag_set = str(main_dict["tag_set"])
         tag_dict = tag_dict_options[tag_set]
         tag_empty = tag_dict["missing"][0]
-        tag = tag_empty.replace("zzz", str(main_dict[
-                                               "line_to_parse"]))
+        tag = tag_empty.replace("zzz", str(main_dict["line_to_parse"]))
         tag = tag.replace("aaa", cw_text)
-        build_output_file.bof_processor(update_output=tag,
-                                        main_dict=main_dict)
-    parse_text_update = \
+        build_output_file.bof_processor(update_output=tag, main_dict=main_dict)
+    main_dict["parse_text"] = \
         main_dict["parse_text"].replace(control_word, "", 1)
-    main_dict["parse_text"] = parse_text_update
     main_dict["parse_index"] = 0
     main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict
