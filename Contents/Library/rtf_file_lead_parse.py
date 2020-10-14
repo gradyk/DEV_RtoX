@@ -17,7 +17,6 @@ import json
 import logging
 import os
 import re
-from typing import Any
 
 # From local application
 from read_log_config import logger_basic
@@ -30,21 +29,15 @@ def check_for_opening_brace(main_dict: dict) -> dict:
     if working_input_file[0][1] == "{":
         pass
     else:
-        main_dict = insert_opening_brace(main_dict=main_dict)
+        working_input_file = main_dict["working_input_file"]
+        first_line_list = ["{", working_input_file[0]]
+        new_first_line = ''.join(first_line_list)
+        working_input_file[0] = new_first_line
+        main_dict["working_input_file"] = working_input_file
     return main_dict
 
 
-def insert_opening_brace(main_dict: dict) -> dict:
-    """ If the file does not have an opening brace, insert one. """
-    working_input_file = main_dict["working_input_file"]
-    first_line_list = ["{", working_input_file[0]]
-    new_first_line = ''.join(first_line_list)
-    working_input_file[0] = new_first_line
-    main_dict["working_input_file"] = working_input_file
-    return main_dict
-
-
-def code_process(main_dict: dict) -> Any:
+def code_process(main_dict: dict) -> list:
     """ Test for the existence of each pretable controlword and,
     if present, capture the code. """
     pretable_controlword_replacementtext_list = [
@@ -68,13 +61,10 @@ def code_process(main_dict: dict) -> Any:
     ]
     rtf_file_codes_update = []
     working_input_file = main_dict["working_input_file"]
-
     line_to_search = working_input_file[1]
-
     for item in pretable_controlword_replacementtext_list:
         try:
-            code_match = re.search(r'\\%s' % item[0],
-                                   line_to_search)
+            code_match = re.search(rf'\\{item[0]}', line_to_search)
             code = code_match[0].replace(f'\\{item[1]}', "")
             rtf_file_codes_update.append((item[1], code))
         except TypeError:

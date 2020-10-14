@@ -110,7 +110,7 @@ def pre_process(main_dict: dict) -> dict:
                     main_dict["contents_list"].append(test.group())
                     main_dict["contents_string"] = \
                         main_dict["contents_string"].lstrip(test.group()).\
-                            lstrip()
+                        lstrip()
                 else:
                     pass
         except ValueError as error:

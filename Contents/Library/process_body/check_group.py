@@ -12,7 +12,6 @@ __name__ = "Contents.Library.process_body.check_group"
 # From standard libraries
 import logging
 import re
-import time
 
 # From local application
 import build_group_contents_list
@@ -25,20 +24,14 @@ def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
     try:
         test = re.search(r"^{", main_dict["parse_text"])
         if test is not item:
-            main_dict = group_boundaries.define_boundaries(main_dict=main_dict)
+            main_dict = group_boundaries.define_boundaries(
+                main_dict=main_dict)
             main_dict = \
                 build_group_contents_list.pre_process(main_dict=main_dict)
-            start_time = time.time()
             main_dict = group_contents.gc_processor(
                 main_dict=main_dict, collections_dict=collections_dict)
-            func_time = time.time() - start_time
-            main_dict["cum_time"] = main_dict["cum_time"] + func_time
-            line = main_dict["line_to_parse"]
-            print(f"Line: {line} -- Cum: {main_dict['cum_time']} -- Func:"
-                  f" {func_time}")
         else:
             pass
-        return main_dict
     except TypeError as error:
         logging.exception(error, f"Check_group: "
                           f"{main_dict['processing_dict']['line_to_parse']}:"
@@ -47,3 +40,4 @@ def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
     except Exception as error:
         logging.exception(error, "Check_group error.")
         pass
+    return main_dict

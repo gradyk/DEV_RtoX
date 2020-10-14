@@ -16,13 +16,13 @@ import re
 
 # From local application
 import dict_updater
-import group_boundaries_no_contents
+import group_boundaries
 
 
 def build_header_tables_dict(main_dict: dict) -> None:
     """ Check header for existence and location of sections: <first line>,
     <font table>, <file table>, <color table>, <stylesheet>, <list table>,
-    <rev table>, <rsid table>, <generator>. """
+    <rev table>, <rsid table>, <generator>, <info>, <xmlnstbl>. """
     tables_list = [
         "fonttbl",
         "filetbl",
@@ -32,32 +32,28 @@ def build_header_tables_dict(main_dict: dict) -> None:
         "revtbl",
         "rsidtable",
         "generator",
-        "info"
+        "info",
+        "xmlnstbl"
     ]
     working_input_file = main_dict["working_input_file"]
     for table in tables_list:
-        pattern = re.compile(r"{\\" + table)
         for line in working_input_file:
-            list_length = main_dict["list_size"]
-            if working_input_file.index(line) >= list_length:
-                print(f"Line: {working_input_file[line]} == List size: "
-                      f"{main_dict['list_size']}")
-            else:
-                pass
             stripped_line = line.strip()
             item = None
-            table_search = re.search(pattern, stripped_line)
+            if table != "xmlnstbl":
+                table_search = re.search(r"{\\" + table, stripped_line)
+                factor = 2
+            else:
+                table_search = re.search(r"{\\\*\\" + table, stripped_line)
+                factor = 4
             if table_search is not item:
                 table_start_line = working_input_file.index(line)
-                table_start_index = stripped_line.find(table) - 2
+                table_start_index = stripped_line.find(table) - factor
                 main_dict["table_start_line"] = table_start_line
                 main_dict["table_start_index"] = table_start_index
-                main_dict["parse_index"] = \
-                    main_dict["table_start_index"]
-                main_dict["line_to_parse"] = \
-                    main_dict["table_start_line"]
-                main_dict = \
-                    group_boundaries_no_contents.define_boundaries(
+                main_dict["parse_index"] = main_dict["table_start_index"]
+                main_dict["line_to_parse"] = main_dict["table_start_line"]
+                main_dict = group_boundaries.define_boundaries(
                         main_dict=main_dict)
                 table_boundaries_info = {table: [
                         main_dict["table_start_line"],

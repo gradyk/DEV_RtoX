@@ -26,6 +26,7 @@ import information_group
 import style_sheet_table
 # import track_changes_table
 # import upi_group_table
+import xml_namespace_table
 
 
 class ProcessTheTables(object):
@@ -66,7 +67,8 @@ class ProcessTheTables(object):
                     "rsid": ProcessTheTables.process_rsid_table,
                     "upi_group": ProcessTheTables.process_upi_group,
                     "generator": ProcessTheTables.process_generator,
-                    "info": ProcessTheTables.process_info
+                    "info": ProcessTheTables.process_info,
+                    "xmlnstbl": ProcessTheTables.process_xmlns
                     }
 
                 code_function = table_parser_function_list[table]
@@ -102,19 +104,12 @@ class ProcessTheTables(object):
     def process_color_table(self, code_strings_to_process: list):
         """ Process the code settings for each color number and store the
         settings in a dictionary. """
-        color_table.ColortblParse.trim_colortbl(
-            self=color_table.ColortblParse(
-                code_strings_to_process=code_strings_to_process,
-                main_dict=self.main_dict))
-        code_strings_list = color_table.ColortblParse\
-            .parse_code_strings_to_process(
-                self=color_table.ColortblParse(
-                    code_strings_to_process=code_strings_to_process,
-                    main_dict=self.main_dict))
-        color_table.ColortblParse.parse_code_strings(
-            self=color_table.ColortblParse(
-                code_strings_to_process=code_strings_to_process,
-                main_dict=self.main_dict), code_string_list=code_strings_list)
+        code_strings_list = color_table.trim_colortbl(
+            code_strings=code_strings_to_process)
+        code_strings_list = color_table.split_code_strings(
+            code_strings_list=code_strings_list)
+        color_table.parse_code_strings(
+            code_strings_list=code_strings_list, main_dict=self.main_dict)
 
     def process_style_sheet_table(self, code_strings_to_process: list):
         """ Process the code settings for each style number and store the
@@ -169,3 +164,10 @@ class ProcessTheTables(object):
             self=information_group.InfoGrpParse(
                 main_dict=self.main_dict,
                 code_strings_to_process=code_strings_to_process))
+
+    def process_xmlns(self, code_strings_to_process: list):
+        xml_namespace_table.trim_xmlnstbl(
+            code_strings_to_process=code_strings_to_process)
+        xml_namespace_table.parse_namespace(
+            main_dict=self.main_dict,
+            code_strings_to_process=code_strings_to_process)

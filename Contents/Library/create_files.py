@@ -25,7 +25,8 @@ def create_dict_files(main_dict: dict) -> None:
         "font_table_file.json",
         "color_table_file.json",
         "style_sheet_table_file.json",
-        "info_group_file.json"
+        "info_group_file.json",
+        "xml_namespace_table_file.json"
     )
     for file in dict_library:
         dict_path = os.path.join(main_dict["debug_dir"], file)

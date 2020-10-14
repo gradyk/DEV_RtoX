@@ -19,96 +19,71 @@ import re
 # From local application
 import dict_updater
 
+""" An RTF file uses the following structure for a colortbl (if present):
+<colortbl>      '{' \\colortbl <colordef>+ '}'
+<colordef>      <themecolor>? & \\ctintN? & \\cshadeN? & \\redN? &
+                \\greenN? & \\blueN? ';'
+<themecolor>    \\cmaindarkone | \\cmainlightone | \\cmaindarktwo |
+                \\cmainlighttwo | \\caccentone | \\caccenttwo |
+                \\caccentthree | \\caccentfour | \\caccentfive |
+                \\caccentsix | \\chyperlink | \\cfollowedhyperlink |
+                \\cbackgroundone | \\ctextone | \\cbackgroundtwo |
+                \\ctexttwo
+"""
 
-class ColortblParse(object):
-    """ An RTF file uses the following structure for a colortbl (if present):
-    <colortbl>      '{' \\colortbl <colordef>+ '}'
-    <colordef>      <themecolor>? & \\ctintN? & \\cshadeN? & \\redN? &
-                    \\greenN? & \\blueN? ';'
-    <themecolor>    \\cmaindarkone | \\cmainlightone | \\cmaindarktwo |
-                    \\cmainlighttwo | \\caccentone | \\caccenttwo |
-                    \\caccentthree | \\caccentfour | \\caccentfive |
-                    \\caccentsix | \\chyperlink | \\cfollowedhyperlink |
-                    \\cbackgroundone | \\ctextone | \\cbackgroundtwo |
-                    \\ctexttwo
-    """
-    def __init__(self, code_strings_to_process: list, main_dict: dict) -> None:
-        self.code_strings_to_process = code_strings_to_process
-        self.main_dict = main_dict
 
-    def trim_colortbl(self):
-        for code_string in self.code_strings_to_process:
-            item = None
-            test = re.search(r"^{\\colortbl;", code_string)
-            if test is not item:
-                place = self.code_strings_to_process.index(code_string)
-                new_code_string = code_string[:-2].replace("{\\colortbl;", "")
-                self.code_strings_to_process[place] = new_code_string
-            else:
-                pass
+def trim_colortbl(code_strings) -> iter:
 
-    def parse_code_strings_to_process(self) -> list:
-        code_string_list = []
-        for string in self.code_strings_to_process:
-            code_string_list = string.split(";")
-        return code_string_list
+    def _replace_tbl(rbg_string):
+        return rbg_string.replace("{\\colortbl;", "") or rbg_string
+    return map(_replace_tbl, code_strings)
 
-    def parse_code_strings(self, code_string_list: list):
+
+def split_code_strings(code_strings_list: iter) -> iter:
+    code_strings_list = [string.split(";") for string in code_strings_list]
+
+    def _remove_bracket(working_list):
+        return working_list.remove("}") or working_list
+    return map(_remove_bracket, code_strings_list)
+
+
+def parse_code_strings(code_strings_list: iter, main_dict: dict) -> None:
+    code_dict = {}
+    cs_list = list(code_strings_list)[0]
+
+    for code_string in cs_list:
+        key = cs_list.index(code_string)
+        code_dict.update({key: {}})
+        code_dict = parse_control_word(
+            code_string=code_string, code_dict=code_dict, key=key)
+        code_dict = parse_theme_control_word(
+            code_string=code_string, code_dict=code_dict, key=key)
+
+        dict_updater.json_dict_updater(dict_name="color_table_file.json",
+                                       dict_update=code_dict,
+                                       main_dict=main_dict)
+
         code_dict = {}
-        count = len(code_string_list)
-        keys = [*range(0, count, 1)]
-        place = 0
-        for code_string in code_string_list:
-            code_dict, current_key = assign_key(
-                code_dict=code_dict, keys=keys, place=place)
-            code_dict = parse_control_word(
-                code_string=code_string,
-                current_key=current_key, code_dict=code_dict)
-            code_dict = parse_theme_control_word(
-                code_string=code_string,
-                current_key=current_key, code_dict=code_dict)
-
-            dict_updater.json_dict_updater(dict_name="color_table_file.json",
-                                           dict_update=code_dict,
-                                           main_dict=self.main_dict)
-            place += 1
-            code_dict = {}
 
 
-def assign_key(code_dict: dict, keys: list, place: int) -> tuple:
-    current_key = keys[place]
-    code_dict.update({current_key: {}})
-    return code_dict, current_key
-
-
-def parse_control_word(code_string: str, current_key: int,
-                       code_dict: dict) -> dict:
-    control_word_list = [
-        "red",
-        "green",
-        "blue",
-        "ctint",
-        "cshade"
-    ]
-
-    for cw in control_word_list:
-        item = None
-        try:
-            test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
-            if test is not item:
-                value = test[0].replace(f"\\{cw}", "")
-                code_dict[current_key][f"{cw}"] = value
-                code_string = code_string.replace(test[0], "")
-            else:
-                pass
-        except ValueError:
-            pass
+def parse_control_word(code_string: str, code_dict: dict, key: str) -> dict:
+    rgb_list = ["red", "green", "blue", "ctint", "cshade"]
+    rgb_dict = {k: _color_vals(code_string, k) for k in rgb_list}
+    code_dict[key].update(rgb_dict)
     return code_dict
 
 
-def parse_theme_control_word(code_string: str, current_key: int,
-                             code_dict: dict) -> dict:
-    control_word_list = [
+def _color_vals(code_string, k) -> str:
+    color = re.search(rf"\\{k}", code_string) or None
+    if color is None:
+        return "None"
+    else:
+        return color[0].replace(f"\\{k}", "")
+
+
+def parse_theme_control_word(code_string: str, code_dict: dict, key: str) \
+        -> dict:
+    theme_list = [
         "cmaindarkone",
         "cmainlightone",
         "cmaindarktwo",
@@ -126,17 +101,10 @@ def parse_theme_control_word(code_string: str, current_key: int,
         "cbackgroundtwo",
         "ctexttwo"
     ]
-
-    for cw in control_word_list:
-        item = None
-        try:
-            test = re.search(r"(\\)" + f"{cw}" + r"[0-9]*", code_string)
-            if test is not item:
-                value = test[0].replace(f"\\{cw}", "")
-                code_dict[current_key][f"{cw}"] = value
-                code_string = code_string.replace(test[0], "")
-            else:
-                pass
-        except ValueError:
-            pass
+    for theme in theme_list:
+        result = re.search(rf"\\{theme}", code_string)
+        if result is not None:
+            code_dict[key][theme] = "True"
+        else:
+            code_dict[key][theme] = "False"
     return code_dict

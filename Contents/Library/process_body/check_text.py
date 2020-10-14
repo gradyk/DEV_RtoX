@@ -24,7 +24,7 @@ def ct_processor(main_dict: dict) -> dict:
     # Test for text.
     item = None
     try:
-        test = re.search(r"^([a-zA-Z0-9\s?.!,;:_\-\[\]–/()\'\"“”‘’]*)",
+        test = re.search(r"^([a-zA-Z0-9\s?.!,;:_%<>=@\-\[\]–/()\'\"“”‘’]*)",
                          main_dict["parse_text"])
         if test is not item and test[0] != "":
             text = test[0]

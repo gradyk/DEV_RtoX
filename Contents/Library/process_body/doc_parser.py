@@ -20,7 +20,7 @@ import json
 import os
 
 # From local application
-import control_word_collections
+import control_words_collections
 import check_parse_text
 from typing import Any
 
@@ -35,7 +35,7 @@ def body_parse_manager(main_dict: dict) -> dict:
     main_dict["line_to_parse"] = line_to_parse
     main_dict["parse_index"] = parse_index
 
-    collections_dict = control_word_collections.cwc_processor()
+    collections_dict = control_words_collections.cwc_processor()
     main_dict = check_parse_text.cpt_processor(
         main_dict=main_dict, collections_dict=collections_dict)
     return main_dict

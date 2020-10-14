@@ -9,8 +9,7 @@ import json
 import os
 
 
-def json_dict_updater(dict_name: str, dict_update: dict, main_dict:
-dict):
+def json_dict_updater(dict_name: str, dict_update: dict, main_dict: dict):
     dict_to_update = os.path.join(main_dict["debug_dir"], dict_name)
     with open(dict_to_update, "r+") as dict_pre:
         dict_new = json.load(dict_pre)

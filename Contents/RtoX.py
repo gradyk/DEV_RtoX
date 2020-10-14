@@ -67,8 +67,7 @@ if __name__ == "__RtoX__":
     # Start the output file and put the header (based on the user's
     # preference) in the file.
     main_dict = output_file_header.ofh_processor(
-        main_dict=main_dict,
-        config_settings_dict=config_settings_dict)
+        main_dict=main_dict, config_settings_dict=config_settings_dict)
 
     # Place the initial tags in the file and created the starting tag registry.
     main_dict = output_file_transition.oft_processor(

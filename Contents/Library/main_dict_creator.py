@@ -2,7 +2,8 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-"""  """
+""" RtoX uses the main dict to pass variables among modules when parsing the
+body of the RTF document. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -64,7 +65,6 @@ def mdc_processor(base_dir, debug_dir: str, dicts_dir: str,
         "noline":                   "close",
         "outlinelevel":             "close",
         "sbys":                     "close",
-        "s":                        "close",
-        "cum_time" :                0.0
+        "s":                        "close"
         }
     return main_dict

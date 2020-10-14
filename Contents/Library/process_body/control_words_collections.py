@@ -7,7 +7,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-9-22"
-__name__ = "Contents.Library.process_body.control_word_collections"
+__name__ = "Contents.Library.process_body.control_words_collections"
 
 
 # From standard libraries
@@ -17,6 +17,9 @@ from pathlib import Path
 
 
 def cwc_processor():
+    # TODO Need a func to check csv for duplicates and remove them. Also,
+    #  should check for and remove incomplete entries (e.g., name,,,) which
+    #  would cause problems.
     collection_dict = dict()
     util_dir = Path.cwd()
     control_word_csv = os.path.join(util_dir,

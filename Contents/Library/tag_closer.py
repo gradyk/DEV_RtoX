@@ -24,19 +24,12 @@ import tag_check
 
 
 def tc_processor(main_dict: dict) -> dict:
-    xml_tags_file = os.path.join(main_dict["dicts_dir"],
-                                 "xml_tags.json")
+    xml_tags_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
     with open(xml_tags_file, "r+") as xml_tags_pre:
         xml_tags_dicts = json.load(xml_tags_pre)
     xml_tags = xml_tags_dicts[str(main_dict["tag_set"])]
-    status_list = [
-        "par",
-        "section",
-        "body",
-        "bodytext",
-        "wrapper"
-    ]
 
+    status_list = ["par", "section", "body", "bodytext", "wrapper"]
     for tag in status_list:
         tag_info = {
             "name":          tag,

@@ -77,12 +77,9 @@ class StyleSheetParse(object):
         code_dict = {}
         for code_string in self.code_strings_to_process:
             get_style_codes = StyleParser(code_dict=code_dict)
-
             code_string = code_string[1:-1]
             code_string, current_key = StyleParser.check_stylecode(
-                self=get_style_codes,
-                code_string=code_string)
-
+                self=get_style_codes, code_string=code_string)
             item = None
             test = re.search(r"\\", code_string)
             while test is not item:
@@ -90,10 +87,9 @@ class StyleSheetParse(object):
                     self=StyleParser(code_dict=code_dict),
                     code_string=code_string, current_key=current_key)
                 test = re.search(r"\\", code_string)
-
-            StyleParser.check_style_name(self=get_style_codes,
-                                         code_string=code_string,
-                                         current_key=current_key)
+            StyleParser.check_style_name(
+                self=get_style_codes, code_string=code_string,
+                current_key=current_key)
 
             dict_updater.json_dict_updater(
                 dict_name="style_sheet_table_file.json",
@@ -104,7 +100,6 @@ class StyleSheetParse(object):
 
 
 class StyleParser(object):
-
     def __init__(self, code_dict: dict) -> None:
         self.code_dict = code_dict
 
@@ -118,11 +113,11 @@ class StyleParser(object):
             "ds",  # Section style code
             'ts',  # Table style code
             "trowd",  # Table row (tables in RTF are contiguous paragraphs).
-            "tsrowd",  # Table style definitions [ PROBABLY \*\tsrowd ]
         ]
 
         for style in code_styles:
             item = None
+            code_string = code_string.lstrip()
             try:
                 test = re.search(rf"^\\{style}[0-9]*", code_string)
                 if test is not item:
@@ -139,6 +134,7 @@ class StyleParser(object):
     def check_control_words(self, code_string: str, current_key: str) -> tuple:
         item = None
         try:
+            code_string = code_string.lstrip()
             test = re.search(r"^(\\[a-zA-Z\-0-9]*)", code_string)
             if test is not item:
                 test_clean = test[0].rstrip()
@@ -163,10 +159,10 @@ class StyleParser(object):
     def check_style_name(self, code_string: str, current_key: str) -> None:
         """ Each style has a name, indicating where they style is used. """
         item = None
+        code_string = code_string.lstrip()
         test = re.search(r'^([a-zA-Z\-\s()+0-9]*)', code_string)
         if test is not item:
             result = test[0].rstrip()
-            self.code_dict[current_key]["style_name"] = \
-                result.lstrip()
+            self.code_dict[current_key]["style_name"] = result.lstrip()
         else:
             self.code_dict[current_key]["style_name"] = "None"

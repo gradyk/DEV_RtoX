@@ -25,7 +25,7 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
     main_dict["cw_regex"] = re.compile(r"^(\\[a-zA-Z\-0-9]*)")
     line = main_dict["line_to_parse"]
     while line < main_dict["list_size"] + 1:
-        print(f"line: {line} -- text: {main_dict['parse_text']}")
+        print(line)
         # Checks for a group.
         main_dict = check_group.cg_processor(
             main_dict=main_dict, collections_dict=collections_dict)
@@ -35,7 +35,7 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
         # TODO Should there be a right bracket as text test?
         main_dict = left_bracket_text.lbt_processor(main_dict=main_dict)
         # Checks for a control word or destination.
-        main_dict = control_word.cw_processor(
+        main_dict, collections_dict = control_word.cw_processor(
             main_dict=main_dict, collections_dict=collections_dict)
         # Checks for a space between control words.
         main_dict = errant_space.es_processor(main_dict=main_dict)

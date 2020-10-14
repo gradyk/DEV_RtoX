@@ -45,8 +45,8 @@ def process_the_tables(main_dict: dict) -> None:
                 code_strings_list = split_between_characters.split_between(
                     text_to_process=text_to_process, split_characters="}{")
                 code_strings_file_update(
-                    table=table, code_strings_list=code_strings_list,
-                    main_dict=main_dict)
+                    main_dict=main_dict, code_strings_list=code_strings_list,
+                    table=table)
             else:
                 pass
 

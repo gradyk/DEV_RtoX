@@ -1407,7 +1407,6 @@ usenormstyforlist,Document Formatting Properties,Flag,null
 userprops,Information Group,Destination,null
 utinl,Document Formatting Properties,Flag,null
 v,Font (Character) Formatting Properties,Toggle,toggle
-validatexml,,,
 vern,Information Group,Value,null
 version,Information Group,Value,null
 vertalb,Section Formatting Properties,Flag,null
@@ -1450,18 +1449,8 @@ vieww,Unknown,Unknown,null
 viewh,Unknown,Unknown,null
 pardeftab,Unknown,Unknown,null
 partightenfactor,Unknown,Unknown,null
-cfAreLawyersandDoctorsReallyDifferent,Unknown,Unknown,null
-cfIfyouhavebeenaroundprojectmanagement,Unknown,Unknown,null
-,Unknown,Unknown,null
-,Unknown,Unknown,null
-,Unknown,Unknown,null
-mbrkBin,Unknown,Unknown,null
-mbrkBinSub,Unknown,Unknown,null
-msmallFrac,Unknown,Unknown,null
-mdispDef,Unknown,Unknown,null
-mlMargin,Unknown,Unknown,null
-mrMargin,Unknown,Unknown,null
-mdefJc,Unknown,Unknown,null
-mwrapIndent,Unknown,Unknown,null
-mintLim,Unknown,Unknown,null
-mnaryLim,Unknown,Unknown,null
+pardeftab,Unknown,Unknown,null
+validatexml,Unknown,Unknown,null
+validatexml,Unknown,Unknown,null
+nouicompat,Unknown,Unknown,null
+wgrffmtfilter,Unknown,Unknown,null
