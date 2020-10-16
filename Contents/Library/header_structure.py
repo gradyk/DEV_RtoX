@@ -38,19 +38,20 @@ def build_header_tables_dict(main_dict: dict) -> None:
     working_input_file = main_dict["working_input_file"]
     for table in tables_list:
         for line in working_input_file:
-            stripped_line = line.strip()
+            line = line.strip()
             item = None
             if table != "xmlnstbl":
-                table_search = re.search(r"{\\" + table, stripped_line)
+                table_search = re.search(r"{\\" + table, line)
                 factor = 2
             else:
-                table_search = re.search(r"{\\\*\\" + table, stripped_line)
+                table_search = re.search(r"{\\\*\\" + table, line)
                 factor = 4
             if table_search is not item:
                 table_start_line = working_input_file.index(line)
-                table_start_index = stripped_line.find(table) - factor
+                table_start_index = line.find(table) - factor
                 main_dict["table_start_line"] = table_start_line
                 main_dict["table_start_index"] = table_start_index
+                main_dict["parse_text"] = line[main_dict["table_start_index"]:]
                 main_dict["parse_index"] = main_dict["table_start_index"]
                 main_dict["line_to_parse"] = main_dict["table_start_line"]
                 main_dict = group_boundaries.define_boundaries(

@@ -2,6 +2,8 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
+"""  """
+
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
@@ -18,6 +20,7 @@ import adjust_process_text
 import control_word_to_build
 import csv_modifier
 import tag_insert_missing_cw
+from typing import Any
 
 
 def cw_processor(main_dict: dict, collections_dict: dict) -> tuple:
@@ -34,21 +37,24 @@ def cw_processor(main_dict: dict, collections_dict: dict) -> tuple:
             parse_index = parse_index + length
             main_dict["parse_index"] = parse_index
             main_dict, collections_dict = cw_evaluation(
-                main_dict=main_dict, control_word=control_word,
-                test=test, collections_dict=collections_dict)
+                main_dict=main_dict,
+                test=test[0], collections_dict=collections_dict)
+            main_dict["parse_text"] = \
+                main_dict["parse_text"].replace(control_word, "", 1).lstrip()
+            main_dict["parse_index"] = 0
+            main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
             pass
     except TypeError:
-        logging.exception(f"{main_dict['processing_dict']['line_to_parse']}:"
-                          f"{main_dict['processing_dict']['parse_index']}--"
-                          f"{main_dict['processing_dict']['parse_text']}")
+        logging.exception(f"{main_dict['line_to_parse']}:"
+                          f"{main_dict['parse_index']}--"
+                          f"{main_dict['parse_text']}")
     return main_dict, collections_dict
 
 
-def cw_evaluation(main_dict: dict, control_word: str, test,
-                  collections_dict: dict) -> tuple:
-    cw_text = "".join([i for i in test[0] if i.isalpha()])
-    cw_value = "".join([i for i in test[0] if i.isdigit()])
+def cw_evaluation(main_dict: dict, test: Any, collections_dict: dict) -> tuple:
+    cw_text = "".join([i for i in test if i.isalpha()])
+    cw_value = "".join([i for i in test if i.isdigit()])
     null_function = "null"
     try:
         cw_func = collections_dict[cw_text]
@@ -74,8 +80,4 @@ def cw_evaluation(main_dict: dict, control_word: str, test,
             collections_dict=collections_dict)
         # Add control word that cannot be processed to XML build file.
         tag_insert_missing_cw.ti_processor(main_dict=main_dict, cw_text=cw_text)
-    main_dict["parse_text"] = \
-        main_dict["parse_text"].replace(control_word, "", 1)
-    main_dict["parse_index"] = 0
-    main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict, collections_dict

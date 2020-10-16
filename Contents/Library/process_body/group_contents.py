@@ -62,25 +62,4 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> dict:
         else:
             build_output_file.bof_processor(update_output=ele,
                                             main_dict=main_dict)
-    main_dict = processing_dict_reset(main_dict=main_dict)
-    return main_dict
-
-
-def processing_dict_reset(main_dict: dict) -> dict:
-    working_input_file = main_dict["working_input_file"]
-    line = working_input_file[main_dict["line_to_parse"]].rstrip()
-    length = len(line)
-    if main_dict["parse_index"] > length:
-        main_dict["line_to_parse"] += 1
-        main_dict["parse_index"] = 0
-        main_dict["parse_text"] = \
-            working_input_file[main_dict["line_to_parse"]].rstrip()
-        main_dict["contents_string"] = ""
-        main_dict["contents_list"] = []
-    else:
-        main_dict["parse_text"] = working_input_file[main_dict["line_to_parse"]]
-        main_dict["parse_text"] = main_dict["parse_text"].rstrip(" ")
-        main_dict["group_contents"] = ""
-        main_dict["contents_string"] = ""
-        main_dict["contents_list"] = []
     return main_dict

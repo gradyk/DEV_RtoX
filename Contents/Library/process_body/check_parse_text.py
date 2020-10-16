@@ -25,7 +25,6 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
     main_dict["cw_regex"] = re.compile(r"^(\\[a-zA-Z\-0-9]*)")
     line = main_dict["line_to_parse"]
     while line < main_dict["list_size"] + 1:
-        print(line)
         # Checks for a group.
         main_dict = check_group.cg_processor(
             main_dict=main_dict, collections_dict=collections_dict)

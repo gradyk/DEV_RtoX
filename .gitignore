@@ -33,6 +33,7 @@
 
 # venv #
 ########
+venv/lib/
 venv/bin/
 venv/include/
 venv/pyvenv.cfg

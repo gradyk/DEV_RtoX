@@ -30,17 +30,14 @@ def ct_processor(main_dict: dict) -> dict:
             text = test[0]
             build_output_file.bof_processor(update_output=test[0],
                                             main_dict=main_dict)
+            main_dict["parse_text"] = main_dict["parse_text"].replace(text, "")
+            main_dict["parse_index"] = 0
+            main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
-            text = ""
             pass
     except TypeError:
-        text = ""
         logging.exception(f"Check_text: "
                           f"{main_dict['processing_dict']['line_to_parse']}:"
                           f"{main_dict['processing_dict']['parse_index']}--"
                           f"{main_dict['processing_dict']['parse_text']}")
-
-    main_dict["parse_text"] = main_dict["parse_text"].replace(text, "")
-    main_dict["parse_index"] = 0
-    main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     return main_dict

@@ -11,8 +11,8 @@ def apt_processor(main_dict: dict) -> dict:
             line = main_dict["working_input_file"][main_dict["line_to_parse"]]
             main_dict["parse_text"] = ''.join((main_dict["parse_text"], line))
             main_dict["parse_index"] = 0
-            return main_dict
         else:
-            return main_dict
+            pass
     else:
-        return main_dict
+        pass
+    return main_dict

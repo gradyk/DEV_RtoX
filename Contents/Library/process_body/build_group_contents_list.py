@@ -5,118 +5,70 @@
 # From standard libraries
 import logging
 import re
+from typing import Any
 
 
 def pre_process(main_dict: dict) -> dict:
     main_dict["contents_string"] = main_dict["group_contents"]
-    # TODO Complete text for logging.exceptions.
     item = None
+    pattern_dict = {
+        "lb": re.compile(r"^{"),
+        "rb": re.compile(r"^[}]"),
+        "dest": re.compile(r"^(\\\*\\[a-zA-Z-0-9]*)"),
+        "cw": re.compile(r"^(\[a-zA-Z-0-9]*)"),
+        "cs": re.compile(r"^(\['-:_|~])"),
+        "text": re.compile(r"^([a-zA-Z0-9\s?.!,;:_%<>=@\-\[\]–/()\'\"“”‘’]*)")
+    }
     while main_dict["contents_string"] != "":
-
-        try:
-            # Left bracket
-            test = re.search(r"^{", main_dict["contents_string"])
-            if test is not item:
-                main_dict["contents_list"].append(test[0])
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"][1:].lstrip()
-            else:
-                pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
-
-        try:
-            # Destination (\*\...)
-            test = re.search(r"^(\\\*\\[a-zA-Z\-0-9]*)",
-                             main_dict["contents_string"])
-            if test is not item:
-                main_dict["contents_list"].append(test[0])
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"].replace(test[0], "", 1).\
-                    lstrip()
-            else:
-                pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
-
-        try:
-            # Control word
-            test = re.search(r"^(\\[a-zA-Z\-0-9]*)",
-                             main_dict["contents_string"])
-            if test is not item:
-                main_dict["contents_list"].append(test[0])
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"].replace(test[0], "", 1).\
-                    lstrip()
-            else:
-                pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
-
-        try:
-            # Control symbol \x where x is ', -, :, _, |, or ~.
-            test = re.search(r"^(\\['-:_|~])", main_dict["contents_string"])
-            if test is not item:
-                main_dict["contents_list"].append(test[0])
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"].replace(test[0], "", 1).\
-                    lstrip()
-            else:
-                pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
-
-        try:
-            # Right bracket
-            test = re.search(r"^}",
-                             main_dict["contents_string"])
-            if test is not item:
-                main_dict["contents_list"].append(test.group())
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"][1:].lstrip()
-            else:
-                pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
-
-        try:
-            # Text
-            test = re.search(r"^[{\\]", main_dict["contents_string"])
-            if test is not item:
-                pass
-            else:
-                test = re.search(r"^([^}]*)", main_dict["contents_string"])
-                if test is not item and test[0] != '':
-                    main_dict["contents_list"].append(test.group())
-                    main_dict["contents_string"] = \
-                        main_dict["contents_string"].lstrip(test.group()).\
-                        lstrip()
-                else:
-                    pass
-        except ValueError as error:
-            logging.exception(error, "_____________")
-        except TypeError as error:
-            logging.exception(error, "_____________")
-        except Exception as error:
-            logging.exception(error, "_____________")
+        for key, value in pattern_dict.items():
+            try:
+                test = re.search(value, main_dict["contents_string"])
+                if test is not item:
+                    main_dict["contents_list"].append(test[0])
+                    switcher(main_dict=main_dict, test=test, key=key)
+            except (KeyError, ValueError, TypeError, Exception) as error:
+                error_report(error=error)
     return main_dict
+
+
+def switcher(main_dict: dict, test: Any, key: Any) -> Any:
+    switch = {
+        "lb":   lb_change,
+        "rb":   rb_change,
+        "dest": other_change,
+        "cw":   other_change,
+        "cs":   other_change,
+        "text": other_change
+    }
+    func_name = switch.get(key, lambda: "Unidentifiable character in "
+                                        "contents string.")
+    main_dict = func_name(main_dict=main_dict, test=test)
+    return main_dict
+
+
+def lb_change(main_dict: dict, test: Any) -> dict:
+    main_dict["contents_string"] = main_dict["contents_string"][1:].lstrip()
+    return main_dict
+
+
+def rb_change(main_dict: dict, test: Any) -> dict:
+    main_dict["contents_string"] = main_dict["contents_string"][:-1].rstrip()
+    return main_dict
+
+
+def other_change(main_dict: dict, test: Any) -> dict:
+    main_dict["contents_string"] = \
+        main_dict["contents_string"].replace(test[0], "", 1).lstrip()
+    return main_dict
+
+
+# TODO Complete text for logging.exceptions.
+def error_report(error):
+    if error is KeyError:
+        logging.exception(error, "__________")
+    if error is ValueError:
+        logging.exception(error, "__________")
+    if error is TypeError:
+        logging.exception(error, "__________")
+    if error is Exception:
+        logging.exception(error, "__________")
