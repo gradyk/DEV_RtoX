@@ -7,7 +7,7 @@ The RtoX package will constitute one part of a larger project (the "Oliver
 
 ## Timeline
 
-RtoX should go into alpha testing in Fall 2020.
+RtoX should go into alpha testing in Winter 2020-2021.
 
 ## Status
 
