@@ -41,35 +41,36 @@ def code_process(main_dict: dict) -> list:
     """ Test for the existence of each pretable controlword and,
     if present, capture the code. """
     pretable_controlword_replacementtext_list = [
-        ("rtf[0-9]+", "rtf"),
-        ("ansi", "ansi"),
-        ("ansicpg1252", "ansicpg1252"),
-        ("upr", "upr"),
-        ("uc[0-9]+", "uc"),
-        ("deflang[0-9]+", "deflang"),
-        ("deflangfe[0-9]+", "deflangfe"),
-        ("deff[0-9]+", "deff"),
-        ("adeff[0-9]+", "adeff"),
-        ("stshfdbch[0-9]+", "stshfdbch"),
-        ("stshfloch[0-9]+", "stshfloch"),
-        ("stshfhich[0-9]+", "stshfhich"),
-        ("stshfbi[0-9]+", "stshfbi"),
-        ("[a-z]+deflang[a-z]+", "deflang"),
-        ("themelang[0-9]+", "themelang"),
-        ("themelangfe[0-9]+", "themelangfe"),
-        ("themelangcs[0-9]+", "themelangcs")
+        "rtf[0-9]+",
+        "ansi",
+        "ansicpg[0-9]+",
+        "upr",
+        "uc[0-9]+",
+        "deflang[0-9]+",
+        "deflangfe[0-9]+",
+        "deff[0-9]+",
+        "adeff[0-9]+",
+        "stshfdbch[0-9]+",
+        "stshfloch[0-9]+",
+        "stshfhich[0-9]+",
+        "stshfbi[0-9]+",
+        "([a-z]+deflang[a-z]+)",
+        "themelang[0-9]+",
+        "themelangfe[0-9]+",
+        "themelangcs[0-9]+",
     ]
     rtf_file_codes_update = []
     working_input_file = main_dict["working_input_file"]
-    line_to_search = working_input_file[1]
+    line_to_search = working_input_file[0]
     for item in pretable_controlword_replacementtext_list:
         try:
-            code_match = re.search(rf'\\{item[0]}', line_to_search)
-            code = code_match[0].replace(f'\\{item[1]}', "")
-            rtf_file_codes_update.append((item[1], code))
+            code_match = re.search(rf'\\{item}', line_to_search)
+            code_text = "".join([i for i in code_match[0] if i.isalpha()])
+            code_value = "".join([i for i in code_match[0] if i.isdigit()])
+            rtf_file_codes_update.append((code_text, code_value))
         except TypeError:
             if logger_basic.isEnabledFor(logging.INFO):
-                logger_basic.info(f"No {item[1]} code.\n")
+                logger_basic.info(f"No {item} code.")
 
     return rtf_file_codes_update
 

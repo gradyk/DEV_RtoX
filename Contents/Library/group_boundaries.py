@@ -13,9 +13,11 @@ __date__ = "2019-12-16"
 __name__ = "Contents.Library.group_boundaries"
 
 # From standard libraries
-import logging
 from collections import deque
 from typing import Any
+
+# From local application
+from read_log_config import logger_debug
 
 
 def define_boundaries(main_dict: dict) -> dict:
@@ -60,7 +62,7 @@ def bracket_test(contents: str, deck: Any, working_index: int):
             deck.popleft()
         return deck
     except IndexError as error:
-        logging.exception(error, f"Working_index exceeds length.")
+        logger_debug(error, f"Working_index exceeds length.")
 
 
 def adjust_working_index(main_dict: dict, end_line: int,

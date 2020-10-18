@@ -24,9 +24,7 @@ import tag_insert_missing_cw
 def gc_processor(main_dict: dict, collections_dict: dict) -> dict:
     # Temp setup for testing
     for ele in main_dict["contents_list"]:
-        if ele == "{":
-            pass
-        elif ele == "}":
+        if ele == "{" or ele == "}":
             pass
         elif re.search(main_dict["cw_regex"], ele):
             cw_text = "".join([i for i in ele if i.isalpha()])

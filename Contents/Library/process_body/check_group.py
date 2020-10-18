@@ -12,7 +12,8 @@ __date__ = "2020-8-12"
 __name__ = "Contents.Library.process_body.check_group"
 
 # From standard libraries
-import logging
+import logging, logging.config
+import os
 import re
 import sys
 
@@ -21,6 +22,18 @@ import adjust_process_text
 import build_group_contents_list
 import group_boundaries
 import group_contents
+
+
+base = os.path.dirname(os.path.realpath("RtoX.py"))
+log_file_path = os.path.join(base, "logging.ini")
+print(log_file_path)
+with open(log_file_path, "r") as lfp:
+    file = lfp.read()
+    print(file)
+logging.config.fileConfig(log_file_path, disable_existing_loggers=False)
+logger_debug = logging.getLogger("root")
+logger_info = logging.getLogger("info")
+logger_warning = logging.getLogger("warning")
 
 
 def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
@@ -46,10 +59,13 @@ def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
             main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
             pass
-    except (TypeError, IndexError, Exception) as error:
-        logging.exception(error, f"Check_group: "
-                          f"{main_dict['line_to_parse']}:"
-                          f"{main_dict['parse_index']}--"
-                          f"{main_dict['parse_text']}")
-        sys.exit()
+    except (TypeError, IndexError, Exception):
+        if logger_debug.isEnabledFor(logging.ERROR):
+            logger_debug.debug(msg=(
+                f"Check_group: "
+                f"{main_dict['line_to_parse']}:"
+                f"{main_dict['parse_index']}--"
+                f"{main_dict['parse_text']}"))
+
+            sys.exit()
     return main_dict
