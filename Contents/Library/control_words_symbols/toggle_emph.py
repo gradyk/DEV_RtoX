@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -30,9 +30,8 @@ def cw_func_processor(tag_info: dict, main_dict: dict) -> dict:
         tag_info["tag_setting"] = "open"
     else:
         tag_info["tag_setting"] = "close"
-    name = tag_info["name"]
     open_str_empty = tag_dict["toggle_emph"][0]
-    open_str = open_str_empty.replace("zzz", name)
+    open_str = open_str_empty.replace("zzz", tag_info["name"])
     tag_info["tag_open_str"] = open_str
     tag_info["tag_close_str"] = tag_dict["toggle_emph"][1]
     return tag_info

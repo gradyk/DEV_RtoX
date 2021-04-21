@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -14,8 +14,7 @@ __name__ = "Contents.Library.split_between_characters"
 # From standard libraries
 import logging
 
-# From application library
-from read_log_config import logger_basic
+log = logging.getLogger(__name__)
 
 
 def split_between(text_to_process: str, split_characters: str):
@@ -24,10 +23,9 @@ def split_between(text_to_process: str, split_characters: str):
     try:
         len(split_characters) == 2
     except TypeError:
-        if logger_basic.isEnabledFor(logging.DEBUG):
-            logger_basic.debug(
-                msg="'split_characters' must be two characters (you provided "
-                    f"{split_characters} as the split_characters.")
+        log.debug(
+            msg="'split_characters' must be two characters (you provided "
+                f"{split_characters} as the split_characters.")
 
     text_to_process = text_to_process.replace("}{", "}|{")
     code_strings_list = text_to_process.split("|")

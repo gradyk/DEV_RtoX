@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -9,92 +9,165 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
-__name__ = "Contents.Library.header_parser_step_two"
+__name__ = "Contents.Library.header_parser_step_three"
 
 # From standard libraries
 import json
 import os
-import re
 
 # From local application
-import dict_updater
-import split_between_characters
+import color_table
+import file_table
+import font_table
+# import generator
+import information_group
+# import para_group_table
+# import rsid_table
+import style_sheet_table
+# import track_changes_table
+# import upi_group_table
+import xml_namespace_table
 
 
-def process_the_tables(main_dict: dict) -> None:
-    header_tables_file = os.path.join(main_dict["debug_dir"],
-                                      "header_tables_dict.json")
+class ProcessTheTables(object):
 
-    with open(header_tables_file) as header_tables_dict_pre:
-        header_tables_dict = json.load(header_tables_dict_pre)
-        for header_table in header_tables_dict:
-            table, table_start_line, table_empty = check_for_empty_table(
-                    header_tables_dict=header_tables_dict,
-                    table=header_table,
-                    working_input_file=main_dict["working_input_file"])
-            table_updater = table_emptyorfull_file_update(
-                    table=table, table_start_line=table_start_line,
-                    table_empty=table_empty,
-                    main_dict=main_dict)
+    def __init__(self, main_dict: dict) -> None:
+        self.main_dict = main_dict
+        self.debug_dir = main_dict["debug_dir"]
+        self.working_input_file = main_dict["working_file_name"]
 
-            if table_updater[table][1] is not True:
-                table_boundaries = header_tables_dict[header_table]
-                text_to_process = get_table_contents_as_text_string(
-                    working_input_file=main_dict["working_input_file"],
-                    table_boundaries=table_boundaries)
-                code_strings_list = split_between_characters.split_between(
-                    text_to_process=text_to_process, split_characters="}{")
-                code_strings_file_update(
-                    main_dict=main_dict, code_strings_list=code_strings_list,
-                    table=table)
+    def analyze_table_code_strings_controller(self):
+        code_strings_file = os.path.join(self.debug_dir,
+                                         "code_strings_file.json")
+        with open(code_strings_file, "r") as code_strings_file_pre:
+            code_strings = json.load(code_strings_file_pre)
+
+        table_info_file = os.path.join(self.debug_dir,
+                                       "table_emptyorfull_dict.json")
+        with open(table_info_file, "r") as table_info_file_pre:
+            table_info = json.load(table_info_file_pre)
+
+        code_function = ""
+        code_strings_to_process = ""
+
+        for table in table_info:
+            if table_info[table][1] is not True:
+                code_strings_to_process = code_strings[table][0]
+
+                table_parser_function_list = {
+                    "fonttbl": ProcessTheTables.process_font_table,
+                    "filetbl": ProcessTheTables.process_file_table,
+                    "colortbl": ProcessTheTables.process_color_table,
+                    "stylesheet": ProcessTheTables.process_style_sheet_table,
+                    "listtable": ProcessTheTables.process_list_table,
+                    "para_group":
+                        ProcessTheTables.process_para_group_properties_table,
+                    "track_changes":
+                        ProcessTheTables.process_track_changes_table,
+                    "rsid": ProcessTheTables.process_rsid_table,
+                    "upi_group": ProcessTheTables.process_upi_group,
+                    "generator": ProcessTheTables.process_generator,
+                    "info": ProcessTheTables.process_info,
+                    "xmlnstbl": ProcessTheTables.process_xmlns
+                    }
+
+                code_function = table_parser_function_list[table]
+
             else:
                 pass
 
+            code_function(self=ProcessTheTables(main_dict=self.main_dict),
+                          code_strings_to_process=code_strings_to_process)
 
-def check_for_empty_table(table: str, header_tables_dict: dict,
-                          working_input_file: list) -> tuple:
-    table_start_line = header_tables_dict[table][0]
-    line_to_search = working_input_file[table_start_line]
-    if re.search(r"{\\" + table + r"}", line_to_search) is True or \
-            re.search(r"{\\" + table + r" }", line_to_search) is True:
-        table_empty = True
-    else:
-        table_empty = False
-    return table, table_start_line, table_empty
+    def process_font_table(self, code_strings_to_process: list):
+        """ Process the code settings for each font number and store the
+        settings in a dictionary. """
+        font_table.FonttblParse.trim_fonttbl(
+            self=font_table.FonttblParse(
+                code_strings_to_process=code_strings_to_process,
+                main_dict=self.main_dict))
+        font_table.FonttblParse.remove_code_strings(
+            self=font_table.FonttblParse(
+                code_strings_to_process=code_strings_to_process,
+                main_dict=self.main_dict))
+        font_table.FonttblParse.parse_code_strings(
+            self=font_table.FonttblParse(
+                main_dict=self.main_dict,
+                code_strings_to_process=code_strings_to_process))
 
+    @staticmethod
+    def process_file_table(code_strings_to_process: list):
+        """ Process the code settings for each file number and store the
+        settings in a dictionary. """
+        file_table.FiletblParse(code_strings_to_process=code_strings_to_process)
 
-def table_emptyorfull_file_update(table: str, table_start_line: str,
-                                  table_empty: bool, main_dict: dict) -> dict:
-    table_updater = {}
-    table_updater.update({table: [table_start_line, table_empty]})
-    dict_updater.json_dict_updater(main_dict=main_dict,
-                                   dict_name="table_emptyorfull_dict.json",
-                                   dict_update=table_updater)
-    return table_updater
+    def process_color_table(self, code_strings_to_process: list):
+        """ Process the code settings for each color number and store the
+        settings in a dictionary. """
+        code_strings_list = color_table.trim_colortbl(
+            code_strings=code_strings_to_process)
+        code_strings_list = color_table.split_code_strings(
+            code_strings_list=code_strings_list)
+        color_table.parse_code_strings(
+            code_strings_list=code_strings_list, main_dict=self.main_dict)
 
+    def process_style_sheet_table(self, code_strings_to_process: list):
+        """ Process the code settings for each style number and store the
+        settings in a dictionary. """
+        code_strings_to_process = \
+            style_sheet_table.StyleSheetParse.trim_stylesheet(
+                self=style_sheet_table.StyleSheetParse(
+                    code_strings_to_process=code_strings_to_process,
+                    main_dict=self.main_dict))
+        code_strings_to_process = \
+            style_sheet_table.StyleSheetParse.update_code_strings(
+                self=style_sheet_table.StyleSheetParse(
+                    code_strings_to_process=code_strings_to_process,
+                    main_dict=self.main_dict))
+        style_sheet_table.StyleSheetParse.parse_code_strings(
+            self=style_sheet_table.StyleSheetParse(
+                code_strings_to_process=code_strings_to_process,
+                main_dict=self.main_dict))
 
-def get_table_contents_as_text_string(table_boundaries: dict,
-                                      working_input_file: list):
-    table_start_line = table_boundaries[0]
-    table_last_line = table_boundaries[2]
-    controlword_line = table_start_line
-    initial_string = working_input_file[controlword_line]
-    string_to_slice = initial_string[table_boundaries[1]:]
-    controlword_line += 1
-    while controlword_line < table_last_line:
-        string_list = [string_to_slice, working_input_file[controlword_line]]
-        string_to_slice = ''.join(string_list)
-        controlword_line += 1
-    last_string = working_input_file[controlword_line]
-    last_string = last_string[:table_boundaries[3]]
-    text_list = [string_to_slice, last_string]
-    text_to_process = ''.join(text_list)
-    return text_to_process
+        # TODO sf_restrictions (style and formatting restrictions) is part of
+        #  style sheet table
 
+    # TODO Build modules for these tables.
+    def process_list_table(self, code_strings_to_process: list):
+        # \listtable
+        pass
 
-def code_strings_file_update(table: str, main_dict: dict,
-                             code_strings_list: list):
-    code_strings_file_updater = {table: [code_strings_list]}
-    dict_updater.json_dict_updater(
-        dict_name="code_strings_file.json", main_dict=main_dict,
-        dict_update=code_strings_file_updater)
+    def process_para_group_properties_table(self,
+                                            code_strings_to_process: list):
+        # \pgptbl
+        pass
+
+    def process_track_changes_table(self, code_strings_to_process: list):
+        # \*\revtbl
+        pass
+
+    def process_rsid_table(self, code_strings_to_process: list):
+        # \*\rsidtbl
+        pass
+
+    def process_upi_group(self, code_strings_to_process: list):
+        # \*\protusertbl (user protection information group)
+        pass
+
+    def process_generator(self, code_strings_to_process: list):
+        # \*\generator (emitter application stamps the doc with its name,
+        # version and build number
+        pass
+
+    def process_info(self, code_strings_to_process: list):
+        information_group.InfoGrpParse.process_code_strings(
+            self=information_group.InfoGrpParse(
+                main_dict=self.main_dict,
+                code_strings_to_process=code_strings_to_process))
+
+    def process_xmlns(self, code_strings_to_process: list):
+        xml_namespace_table.trim_xmlnstbl(
+            code_strings_to_process=code_strings_to_process)
+        xml_namespace_table.parse_namespace(
+            main_dict=self.main_dict,
+            code_strings_to_process=code_strings_to_process)

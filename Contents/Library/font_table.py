@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -12,12 +12,14 @@ __date__ = "2019-10-31"
 __name__ = "Contents.Library.font_table"
 
 # From standard libraries
+import logging
 import re
 from collections import deque
 
 # From local application
 import dict_updater
-from read_log_config import logger_basic
+
+log = logging.getLogger(__name__)
 
 
 class FonttblParse(object):
@@ -77,26 +79,36 @@ class FonttblParse(object):
             get_font_codes = FontParser(code_dict=code_dict)
 
             code_string = FontParser.delete_themes(code_string=code_string)
-            code_string = FontParser.check_fontnum(self=get_font_codes,
-                                                   code_string=code_string)
-            code_string = FontParser.check_fontfamily(self=get_font_codes,
-                                                      code_string=code_string)
-            code_string = FontParser.check_fcharset(self=get_font_codes,
-                                                    code_string=code_string)
-            code_string = FontParser.check_fprq(self=get_font_codes,
-                                                code_string=code_string)
-            code_string = FontParser.check_panose(self=get_font_codes,
-                                                  code_string=code_string)
-            code_string = FontParser.check_fname(self=get_font_codes,
-                                                 code_string=code_string)
-            code_string = FontParser.check_altname(self=get_font_codes,
-                                                   code_string=code_string)
-            code_string = FontParser.check_fontemb(self=get_font_codes,
-                                                   code_string=code_string)
-            code_string = FontParser.check_fontname_tagged(
-                self=get_font_codes, code_string=code_string)
-            FontParser.check_cpg(self=get_font_codes,
-                                 code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fontnum(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fontfamily(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fcharset(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fprq(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_panose(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fname(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_altname(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fontemb(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                code_string = FontParser.check_fontname_tagged(
+                    self=get_font_codes, code_string=code_string)
+            if code_string is not None:
+                FontParser.check_cpg(
+                    self=get_font_codes, code_string=code_string)
 
             dict_updater.json_dict_updater(
                 dict_name="font_table_file.json",
@@ -143,9 +155,9 @@ class FontParser(object):
         except TypeError:
             # TODO Check that the program continues even if it encounters
             #  this problem.
-            logger_basic.debug(msg="There is an error in the font table "
-                                   f'A font number is missing. RtoX will '
-                                   f'ignore this font table.\n')
+            log.debug(msg="There is an error in the font table "
+                          f'A font number is missing. RtoX will '
+                          f'ignore this font table.\n')
 
     def check_fontfamily(self, code_string: str) -> str:
         """ Each font code may define its font family. """

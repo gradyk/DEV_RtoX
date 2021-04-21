@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -17,9 +17,9 @@ import json
 
 
 def create_dict_files(main_dict: dict) -> None:
+
     dict_library = (
         "header_tables_dict.json",
-        "rtf_file_codes.json",
         "code_strings_file.json",
         "table_emptyorfull_dict.json",
         "font_table_file.json",

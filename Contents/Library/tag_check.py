@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -13,7 +13,11 @@ __date__ = "2020-01-22"
 __name__ = "Contents.Library.tag_check"
 
 # From standard libraries
+import logging
+import sys
 from typing import Any
+
+log = logging.getLogger(__name__)
 
 
 def tc_processor(tag_info: dict, main_dict: dict) -> Any:
@@ -50,8 +54,9 @@ def tc_processor(tag_info: dict, main_dict: dict) -> Any:
             update_output = tag_info["tag_open_str"]
         elif tag_info["tag_setting"] == "close":
             update_output = tag_info["tag_close_str"]
-    if tag_info["tag_setting"] == "":
-        pass
-    else:
+    if tag_info["tag_setting"] != "":
         main_dict[tag_info["name"]] = tag_info["tag_setting"]
+    if main_dict is None:
+        log.debug("Tag_check: main_dict is none.")
+        sys.exit(1)
     return main_dict, update_output

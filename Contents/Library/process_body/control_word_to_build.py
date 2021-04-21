@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -18,10 +18,13 @@ __name__ = "Contents.Library.process_body.control_word_to_build"
 import importlib
 import logging
 import os
+import sys
 
 # From local application
 import build_output_file
 import tag_check
+
+log = logging.getLogger(__name__)
 
 
 def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
@@ -30,17 +33,17 @@ def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
     try:
         tagging_mod = importlib.import_module(tag_info["func"], package=cws_dir)
     except ValueError:
-        logging.exception(msg=f"Module name: {tag_info['name']}")
-        pass
+        log.debug(msg=f"Module name: {tag_info['name']}")
     tag_info = tagging_mod.cw_func_processor(
         tag_info=tag_info, main_dict=main_dict)
     # Check whether tag is already open or closed.
     results = tag_check.tc_processor(tag_info=tag_info, main_dict=main_dict)
     main_dict = results[0]
     update_output = results[1]
-    if update_output == "":
-        pass
-    else:
+    if update_output != "":
         build_output_file.bof_processor(update_output=update_output,
                                         main_dict=main_dict)
+    if main_dict is None:
+        log.debug("Main_dict is none.")
+        sys.exit(1)
     return main_dict

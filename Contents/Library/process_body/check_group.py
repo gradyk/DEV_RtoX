@@ -1,8 +1,14 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-"""  """
+"""
+    Determine if the first character in the text being parsed is an opening
+bracket (in RTF, the start of a table or group). If if is, proceed to use
+modules to define the group boundaries and process the group contents. If
+not, advance to the next character in the string (and if it is the last
+character, add to the text being parsed.
+"""
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
@@ -12,9 +18,7 @@ __date__ = "2020-8-12"
 __name__ = "Contents.Library.process_body.check_group"
 
 # From standard libraries
-import logging, logging.config
-import os
-import re
+import logging
 import sys
 
 # From local application
@@ -23,24 +27,18 @@ import build_group_contents_list
 import group_boundaries
 import group_contents
 
-
-base = os.path.dirname(os.path.realpath("RtoX.py"))
-log_file_path = os.path.join(base, "logging.ini")
-print(log_file_path)
-with open(log_file_path, "r") as lfp:
-    file = lfp.read()
-    print(file)
-logging.config.fileConfig(log_file_path, disable_existing_loggers=False)
-logger_debug = logging.getLogger("root")
-logger_info = logging.getLogger("info")
-logger_warning = logging.getLogger("warning")
+log = logging.getLogger(__name__)
 
 
 def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
-    item = None
+    """
+        If the first character test shows the beginning of an RTF group,
+    # capture the location of the group beginning, find the group end,
+    # parse the group into components, and process the components. Finally,
+    re-set relevant variables.
+    """
     try:
-        test = re.search(r"^{", main_dict["parse_text"])
-        if test is not item:
+        if main_dict["parse_text"][0] == "{":
             main_dict["table_start_line"] = main_dict["line_to_parse"]
             main_dict["table_start_index"] = main_dict["parse_index"]
             main_dict = group_boundaries.define_boundaries(main_dict=main_dict)
@@ -57,15 +55,10 @@ def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
             main_dict["table_start_index"] = 0
             main_dict["parse_index"] = 0
             main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
-        else:
-            pass
-    except (TypeError, IndexError, Exception):
-        if logger_debug.isEnabledFor(logging.ERROR):
-            logger_debug.debug(msg=(
-                f"Check_group: "
-                f"{main_dict['line_to_parse']}:"
-                f"{main_dict['parse_index']}--"
-                f"{main_dict['parse_text']}"))
-
-            sys.exit()
+    except (TypeError, IndexError, Exception) as error:
+        log.debug(error, msg=(f"Check_group error: "
+                              f"{main_dict['line_to_parse']}:"
+                              f"{main_dict['parse_index']}--"
+                              f"{main_dict['parse_text']}"))
+        sys.exit("Check_group error.")
     return main_dict

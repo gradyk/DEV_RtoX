@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -20,7 +20,8 @@ from typing import Any
 
 # From local application
 import read_configuration
-from read_log_config import logger_basic
+
+log = logging.getLogger(__name__)
 
 
 def get_config_settings(main_dict: dict) -> None:
@@ -29,15 +30,15 @@ def get_config_settings(main_dict: dict) -> None:
     if main_dict["main_script"] and not os.path.isfile(
             main_dict["main_script"]):
         try:
-            logger_basic.critical(msg="What script are you using? The "
-                                      "program uses RtoX.py as the "
-                                      "main script. The program will now "
-                                      "quit.")
+            log.debug(msg="What script are you using? The "
+                          "program uses RtoX.py as the "
+                          "main script. The program will now "
+                          "quit.")
             sys.exit(1)
         except AttributeError:
-            logging.exception(msg="There is something wrong with the "
-                                  "program installation. The program "
-                                  "will now quit.")
+            log.debug(msg="There is something wrong with the "
+                          "program installation. The program "
+                          "will now quit.")
             sys.exit(1)
 
 
@@ -60,22 +61,19 @@ def extract_file_info(main_dict: dict) -> Any:
             main_dict["working_input_file_bak"] = \
                 main_dict["working_input_file"]
             main_dict["list_size"] = len(main_dict["working_input_file"])
-            logger_basic.isEnabledFor(level=10)
-            logger_basic.info(msg=f"The file you want to convert is "
-                                  f"{main_dict['input_file']}.")
+            log.info(msg=f"The file you want to convert is "
+                         f"{main_dict['input_file']}.")
         except TypeError:
-            logging.exception("There is a logging problem: user input "
-                              "file.")
+            log.debug("There is a logging problem: user input file.")
 
     else:
         try:
-            logger_basic.critical(msg="You did not provide a file to "
-                                      "convert. The program must have a "
-                                      "file to convert and will now quit.")
+            log.info(msg="You did not provide a file to "
+                         "convert. The program must have a "
+                         "file to convert and will now quit.")
             sys.exit(1)
         except TypeError:
-            logging.exception("There is a logging problem: input file "
-                              "absent.")
+            log.debug("There is a logging problem: input file absent.")
 
     # Get the name of the output file from the command line.
     if config_settings_dict.get("output") is not None:
@@ -84,13 +82,11 @@ def extract_file_info(main_dict: dict) -> Any:
                                                        "output", file)
         main_dict["output_file"] = file
         try:
-            logger_basic.isEnabledFor(level=10)
-            logger_basic.info(
+            log.info(
                 msg=f"The RtoX will produce this XML file: "
                 f"{main_dict['output_file_name']}.")
         except TypeError:
-            logging.exception("There is a logging problem: user output "
-                              "file.")
+            log.debug("There is a logging problem: user output file.")
     else:
         try:
             final_output_file = \
@@ -98,13 +94,11 @@ def extract_file_info(main_dict: dict) -> Any:
             main_dict["output_file_name"] = \
                 posixpath.join(main_dict["base_dir"], "output",
                                final_output_file)
-            logger_basic.isEnabledFor(level=10)
-            logger_basic.info(
+            log.info(
                 msg="RtoX will produce this XML file: "
                 f"{main_dict['output_file_name']}.")
         except TypeError:
-            logging.exception("There is a logging problem: default output "
-                              "file.")
+            log.debug("There is a logging problem: default output file.")
 
     # The program supplies settings for the following variables:
     # base_dir, debug_dir, and dicts_dir.
@@ -134,18 +128,16 @@ def extract_file_info(main_dict: dict) -> Any:
     for menu_item in user_input_choices_dict:
         if menu_item:
             try:
-                logger_basic.isEnabledFor(level=10)
-                logger_basic.info(msg=user_input_choices_dict[menu_item])
+                log.info(msg=user_input_choices_dict[menu_item])
             except TypeError:
-                logging.exception(f"There is a logging problem: "
-                                  f"{menu_item}.")
+                log.debug(f"There is a logging problem: {menu_item}.")
         else:
             try:
-                logger_basic.isEnabledFor(level=10)
-                logger_basic.info(msg=f"The program will be set at "
-                                      f"default for: {menu_item}.")
+                log.debug(msg=f"The program will be set at "
+                              f"default for: {menu_item}.")
             except TypeError:
-                logging.exception("")
+                # TODO Complete log.
+                log.debug("_____________")
     return main_dict, config_settings_dict
 
 
@@ -164,15 +156,13 @@ def print_input_error_message():
     """ Log an error message if the configuration (as recorded in the
     config_file_dict) is not valid. """
     try:
-        logger_basic.isEnabledFor(level=10)
-
-        logger_basic.critical(msg="You did not provide information the "
-                                  "RtoX program needs. The program will "
-                                  "now quit.")
+        log.debug(msg="You did not provide information the "
+                      "RtoX program needs. The program will "
+                      "now quit.")
         sys.exit(1)
     except TypeError:
         # TODO Complete logging exception.
-        logging.exception("_______________")
+        log.debug("_______________")
 
 
 # TODO This is not called by anything.
@@ -180,12 +170,10 @@ def print_output_error_message():
     """ Log a message if no file_to_produce is specified. """
     # TODO Check that program can handle no name provided properly.
     try:
-        logger_basic.isEnabledFor(level=10)
-
-        logger_basic.info(msg="You did not provide a file name for the "
-                              "converted file. The program will use the "
-                              "name of the file to convert and change "
-                              "the extension to .xml")
+        log.debug(msg="You did not provide a file name for the "
+                      "converted file. The program will use the "
+                      "name of the file to convert and change "
+                      "the extension to .xml")
     except TypeError:
         # TODO Complete logging exception.
-        logging.exception("______________")
+        log.debug("______________")

@@ -1,14 +1,28 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
+
+"""  """
+
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2020-8-12"
+__name__ = "Contents.Library.process_body.build_group_contents_list"
 
 # From standard libraries
 import logging
 import re
-from read_log_config import logger_debug
+import sys
+
+log = logging.getLogger(__name__)
 
 
 def pre_process(main_dict: dict) -> dict:
+    if main_dict is None:
+        log.debug(msg="Main dict is None.")
+        sys.exit(1)
     main_dict["contents_string"] = main_dict["group_contents"]
     item = None
     pattern_dict = {
@@ -22,27 +36,29 @@ def pre_process(main_dict: dict) -> dict:
     while main_dict["contents_string"] != "":
         for key, value in pattern_dict.items():
             try:
-                test = re.search(value, main_dict["contents_string"])
+                test = value.search(main_dict["contents_string"])
                 if test is not item and test.span() != (0, 0):
                     main_dict["contents_list"].append(test[0])
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"][0:test.start()] +\
-                    main_dict["contents_string"][test.end():]
-                main_dict["contents_string"] = \
-                    main_dict["contents_string"].lstrip()
+                    main_dict["contents_string"] = \
+                        main_dict["contents_string"][0:test.start()] + \
+                        main_dict["contents_string"][test.end():]
+                    main_dict["contents_string"] = \
+                        main_dict["contents_string"].lstrip()
+                elif test is not item and test.span() == (0, 0):
+                    main_dict["contents_string"] = \
+                        main_dict["contents_string"][0:test.start()] + \
+                        main_dict["contents_string"][test.end():]
+                    main_dict["contents_string"] = \
+                        main_dict["contents_string"].lstrip()
+            # TODO Complete error text.
             except (KeyError, ValueError, TypeError, Exception) as error:
-                error_report(error=error)
+                if error is KeyError:
+                    log.debug(msg="AAA")
+                if error is ValueError:
+                    log.debug(msg="BBB")
+                if error is TypeError:
+                    log.debug(msg="CCC")
+                if error is Exception:
+                    log.debug(msg="DDD")
+                sys.exit("build_group_contents_list exit")
     return main_dict
-
-
-# TODO Complete text for errors.
-def error_report(error):
-    if logger_debug.isEnabledFor(logging.ERROR):
-        if error is KeyError:
-            logger_debug(error, "__________")
-        if error is ValueError:
-            logger_debug(error, "__________")
-        if error is TypeError:
-            logger_debug(error, "__________")
-        if error is Exception:
-            logger_debug(error, "__________")

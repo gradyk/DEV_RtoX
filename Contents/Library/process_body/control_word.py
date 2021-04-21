@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -71,8 +71,6 @@ def cw_evaluation(main_dict: dict, test: Any, collections_dict: dict) -> tuple:
             }
             main_dict = control_word_to_build.cwtb_processor(
                 tag_info=tag_info, main_dict=main_dict)
-        else:
-            pass
     except KeyError:
         # Add missing control word to control_words_collections.csv file.
         collections_dict = csv_modifier.csvm_processor(

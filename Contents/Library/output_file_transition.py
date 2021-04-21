@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -23,7 +23,6 @@ __name__ = "Contents.Library.output_file_transition"
 import json
 import logging
 import os
-import sys
 from typing import Any
 
 # From application library
@@ -33,18 +32,15 @@ import build_output_file
 def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
     """ Insert the XML tags to start the document portion of the XML file
     (after the header). """
-    start_tags = os.path.join(main_dict["dicts_dir"],
-                              "start_tags.json")
+    start_tags = os.path.join(main_dict["dicts_dir"], "start_tags.json")
     transition_tags = ""
+    with open(start_tags, "r+") as start_tags_pre:
+        start_tag_dict = json.load(start_tags_pre)
     try:
-        with open(start_tags, "r+") as start_tags_pre:
-            start_tag_dict = json.load(start_tags_pre)
-        if config_settings_dict["tag-set"] == "1":
-            transition_tags = start_tag_dict["1"]
-        elif config_settings_dict["tag-set"] == "2":
-            transition_tags = start_tag_dict["2"]
-        elif config_settings_dict["tag-set"] == "3":
-            transition_tags = start_tag_dict["3"]
+        test_dict = {"1": start_tag_dict["1"],
+                     "2": start_tag_dict["2"],
+                     "3": start_tag_dict["3"]}
+        transition_tags = test_dict[config_settings_dict["tag-set"]]
     except KeyError as error:
         logging.exception(error, "The tag-set number does not match an "
                                  "entry for transition tags.")

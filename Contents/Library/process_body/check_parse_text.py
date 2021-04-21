@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -11,6 +11,7 @@ __name__ = "Contents.Library.process_body.check_parse_text"
 
 # From standard libraries
 import re
+import sys
 
 # From local application
 import check_group
@@ -24,6 +25,8 @@ import check_text
 def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
     main_dict["cw_regex"] = re.compile(r"^(\\[a-zA-Z\-0-9]*)")
     line = main_dict["line_to_parse"]
+    if collections_dict is None:
+        sys.exit("Collections_dict is empty.")
     while line < main_dict["list_size"] + 1:
         # Checks for a group.
         main_dict = check_group.cg_processor(

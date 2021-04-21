@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -18,7 +18,8 @@ import os
 import re
 
 
-def csvm_processor(main_dict: dict, collections_dict: dict, cw_text: str):
+def csvm_processor(main_dict: dict, collections_dict: dict,
+                   cw_text: str) -> dict:
     cw_update = {cw_text: "null"}
     cw_csv_update = f"\n{cw_text},Unknown,Unknown,null"
     util_dir = os.path.join(main_dict["base_dir"], "Utilities")
@@ -38,3 +39,4 @@ def csvm_processor(main_dict: dict, collections_dict: dict, cw_text: str):
         logging.exception(msg="RtoX has encountered a problem adding an "
                               "unknown control word to its dictionary. The "
                               f"control word is: {cw_text}.")
+    return collections_dict
