@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -122,7 +122,7 @@ class StyleParser(object):
                 test = re.search(rf"^\\{style}[0-9]*", code_string)
                 if test is not item:
                     current_key = test[0].replace("\\", "")
-                    self.code_dict.update({current_key: {}})
+                    self.code_dict.update({current_key: {"style_name": ""}})
                     code_string = code_string.replace(test[0], "")
                 else:
                     pass
@@ -135,7 +135,7 @@ class StyleParser(object):
         item = None
         try:
             code_string = code_string.lstrip()
-            test = re.search(r"^(\\[a-zA-Z\-0-9]*)", code_string)
+            test = re.search(r"^(\\[a-zA-Z]*[\-0-9]*)", code_string)
             if test is not item:
                 test_clean = test[0].rstrip()
                 control_word = "".join([i for i in test_clean if i.isalpha()])
@@ -157,7 +157,7 @@ class StyleParser(object):
         return code_string, current_key
 
     def check_style_name(self, code_string: str, current_key: str) -> None:
-        """ Each style has a name, indicating where they style is used. """
+        """ Each style has a name, indicating where the style is used. """
         item = None
         code_string = code_string.lstrip()
         test = re.search(r'^([a-zA-Z\-\s()+0-9]*)', code_string)

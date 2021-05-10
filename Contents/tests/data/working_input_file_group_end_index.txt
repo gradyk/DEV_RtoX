@@ -1,5 +1,0 @@
-{\rtlch\fcs1 \af43 \ltrch\fcs0\f44\insrsid15734229 30}\fldrslt
-\sectd \ltrsect\linex0\endnhere\sectdefaultcl\sftnbj
-{\*\rtlch\fcs1 \af43 \ltrch\fcs0 \f44\insrsid15734229\par } \fldrslt
-{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\pntxta .}}{\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\*\pntxta .}}
-{\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\pntxta .}}{\*\pnseclvl1\pnucrm\pnstart1\pnindent720\pnhang {\*\pntxta .}}

@@ -9,7 +9,7 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-10"
-__name__ = "Contents.Library.header_parser_step_three"
+__name__ = "Contents.Library.header_parser_step_two"
 
 # From standard libraries
 import json
@@ -21,8 +21,8 @@ import file_table
 import font_table
 # import generator
 import information_group
-# import para_group_table
-# import rsid_table
+import pgp_table
+import rsid_table
 import style_sheet_table
 # import track_changes_table
 # import upi_group_table
@@ -39,42 +39,37 @@ class ProcessTheTables(object):
     def analyze_table_code_strings_controller(self):
         code_strings_file = os.path.join(self.debug_dir,
                                          "code_strings_file.json")
+        header_tables_file = os.path.join(self.debug_dir,
+                                          "header_tables_dict.json")
         with open(code_strings_file, "r") as code_strings_file_pre:
             code_strings = json.load(code_strings_file_pre)
 
-        table_info_file = os.path.join(self.debug_dir,
-                                       "table_emptyorfull_dict.json")
-        with open(table_info_file, "r") as table_info_file_pre:
-            table_info = json.load(table_info_file_pre)
+        with open(header_tables_file, "r") as header_tables_dict_pre:
+            header_tables_dict = json.load(header_tables_dict_pre)
 
-        code_function = ""
-        code_strings_to_process = ""
+        for table in header_tables_dict:
+            code_strings_to_process = code_strings[table][0]
+            # Note: All RTF tables using table in the control word abbreviate
+            # it "tbl" with the exception of "listable" which does not
+            # abbreviate table.
+            table_parser_function_list = {
+                "colortbl": ProcessTheTables.process_color_table,
+                "filetbl": ProcessTheTables.process_file_table,
+                "fonttbl": ProcessTheTables.process_font_table,
+                "generator": ProcessTheTables.process_generator,
+                "info": ProcessTheTables.process_info,
+                "listtable": ProcessTheTables.process_list_table,
+                "pgptbl":
+                    ProcessTheTables.process_pgp_table,
+                "rsidtbl": ProcessTheTables.process_rsid_table,
+                "stylesheet": ProcessTheTables.process_style_sheet_table,
+                "track_changes":
+                    ProcessTheTables.process_track_changes_table,
+                "upi_group": ProcessTheTables.process_upi_group,
+                "xmlnstbl": ProcessTheTables.process_xmlns,
+                }
 
-        for table in table_info:
-            if table_info[table][1] is not True:
-                code_strings_to_process = code_strings[table][0]
-
-                table_parser_function_list = {
-                    "fonttbl": ProcessTheTables.process_font_table,
-                    "filetbl": ProcessTheTables.process_file_table,
-                    "colortbl": ProcessTheTables.process_color_table,
-                    "stylesheet": ProcessTheTables.process_style_sheet_table,
-                    "listtable": ProcessTheTables.process_list_table,
-                    "para_group":
-                        ProcessTheTables.process_para_group_properties_table,
-                    "track_changes":
-                        ProcessTheTables.process_track_changes_table,
-                    "rsid": ProcessTheTables.process_rsid_table,
-                    "upi_group": ProcessTheTables.process_upi_group,
-                    "generator": ProcessTheTables.process_generator,
-                    "info": ProcessTheTables.process_info,
-                    "xmlnstbl": ProcessTheTables.process_xmlns
-                    }
-
-                code_function = table_parser_function_list[table]
-
-            else:
-                pass
+            code_function = table_parser_function_list[table]
 
             code_function(self=ProcessTheTables(main_dict=self.main_dict),
                           code_strings_to_process=code_strings_to_process)
@@ -132,23 +127,28 @@ class ProcessTheTables(object):
         # TODO sf_restrictions (style and formatting restrictions) is part of
         #  style sheet table
 
-    # TODO Build modules for these tables.
+    # TODO Build modules for table functions still missing modules.
     def process_list_table(self, code_strings_to_process: list):
         # \listtable
         pass
 
-    def process_para_group_properties_table(self,
-                                            code_strings_to_process: list):
-        # \pgptbl
-        pass
+    def process_pgp_table(self, code_strings_to_process: list):
+        code_strings_to_process = pgp_table.trim_pgptbl(
+            code_strings_to_process=code_strings_to_process)
+        pgp_table.parse_pgp_string(
+            main_dict=self.main_dict,
+            code_strings_to_process=code_strings_to_process)
 
     def process_track_changes_table(self, code_strings_to_process: list):
         # \*\revtbl
         pass
 
     def process_rsid_table(self, code_strings_to_process: list):
-        # \*\rsidtbl
-        pass
+        new_code_string = rsid_table.trim_rsidtbl(
+            code_strings_to_process=code_strings_to_process)
+        rsid_table.parse_rsid_string(
+            main_dict=self.main_dict,
+            code_string=new_code_string)
 
     def process_upi_group(self, code_strings_to_process: list):
         # \*\protusertbl (user protection information group)

@@ -50,8 +50,9 @@ def split_code_strings(code_strings_list: iter) -> iter:
 
     def _remove_bracket(working_list):
         """ Remove the trailing bracket from the color table
-        wrapper. """
-        return working_list.remove("}") or working_list
+        wrapper, if present. """
+        working_list = [x for x in working_list if x != "}"]
+        return working_list
     return map(_remove_bracket, code_strings_list)
 
 

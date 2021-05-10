@@ -19,13 +19,14 @@ import json
 def create_dict_files(main_dict: dict) -> None:
 
     dict_library = (
-        "header_tables_dict.json",
         "code_strings_file.json",
-        "table_emptyorfull_dict.json",
-        "font_table_file.json",
         "color_table_file.json",
-        "style_sheet_table_file.json",
+        "font_table_file.json",
+        "header_tables_dict.json",
         "info_group_file.json",
+        "pgp_table_file.json",
+        "rsid_table_file.json",
+        "style_sheet_table_file.json",
         "xml_namespace_table_file.json"
     )
     for file in dict_library:
