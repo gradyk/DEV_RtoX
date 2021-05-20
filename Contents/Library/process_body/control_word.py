@@ -41,7 +41,7 @@ def cw_processor(main_dict: dict, collections_dict: dict) -> tuple:
                 test=test[0], collections_dict=collections_dict)
             main_dict["parse_text"] = \
                 main_dict["parse_text"].replace(control_word, "", 1).lstrip()
-            main_dict["parse_index"] = 0
+            main_dict["parse_index"] = 1
             main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
             pass

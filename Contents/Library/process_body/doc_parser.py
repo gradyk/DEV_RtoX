@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -44,8 +44,20 @@ def body_parse_manager(main_dict: dict) -> dict:
 def parse_starting_point(header_table_file: str, main_dict: dict) -> Any:
     with open(header_table_file) as htf_pre:
         header_table = json.load(htf_pre)
-        line_to_parse = header_table["info"][2]
-        parse_index = header_table["info"][3]
+        first = list(header_table.keys())[0]
+        starting_line = header_table[first][2]
+        starting_index = header_table[first][3]
+        for table in header_table:
+            if header_table[table][2] > starting_line:
+                starting_line = header_table[table][2]
+                starting_index = header_table[table][3]
+            elif header_table[table][3] > starting_index and \
+                    header_table[table][2] == starting_line:
+                starting_index = header_table[table][3]
+            else:
+                pass
+    line_to_parse = starting_line
+    parse_index = starting_index
     parse_text, line_to_parse, parse_index = set_process_text(
         main_dict=main_dict, parse_index=parse_index,
         line_to_parse=line_to_parse)
@@ -53,16 +65,24 @@ def parse_starting_point(header_table_file: str, main_dict: dict) -> Any:
 
 
 def set_process_text(main_dict: dict, parse_index: int,
-                     line_to_parse: int) -> Any:
-    line = main_dict["working_input_file"][main_dict["line_to_parse"]].rstrip()
-    line = line[parse_index:]
-    length = len(line)
-    if parse_index > length - 2:
-        parse_text = line[parse_index:] + main_dict["working_input_file"][
-            main_dict["line_to_parse"] + 1].rstrip()
-        line_to_parse += 1
-        parse_index = 1
+                     line_to_parse: int) -> tuple:
+    line_text = main_dict["working_input_file"][line_to_parse].rstrip()
+    parse_text = line_text[parse_index:]
+    length = len(parse_text)
+    if length <= 1:
+        parse_text, line_to_parse, parse_index = _adjust_text(
+            parse_text=parse_text, main_dict=main_dict,
+            line_to_parse=line_to_parse)
     else:
-        parse_text = line
         parse_index = 1
+    return parse_text, line_to_parse, parse_index
+
+
+def _adjust_text(parse_text: str, main_dict: dict, line_to_parse: int) -> tuple:
+    # Since parse_text has 1 or fewer characters, increase parse_text by adding
+    # the next string from working_input_file.
+    line_to_parse += 1
+    new_text = main_dict["working_input_file"][line_to_parse]
+    parse_text = parse_text + new_text
+    parse_index = 0
     return parse_text, line_to_parse, parse_index

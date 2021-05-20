@@ -2,7 +2,7 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
-""" Parse the style sheet table and pass the values to a dictionary. """
+""" Parse the stylesheet table and pass the values to a dictionary. """
 
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"

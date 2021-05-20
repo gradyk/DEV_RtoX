@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -30,7 +30,7 @@ def bt_processor(main_dict: dict) -> dict:
                 update_output=text, main_dict=main_dict)
             main_dict["parse_text"] = main_dict["parse_text"].\
                 replace(text, "", 1)
-            main_dict["parse_index"] = 0
+            main_dict["parse_index"] = 1
             main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
             pass

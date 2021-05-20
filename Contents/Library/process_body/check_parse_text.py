@@ -28,20 +28,21 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
     if collections_dict is None:
         sys.exit("Collections_dict is empty.")
     while line < main_dict["list_size"] + 1:
-        # Checks for a group.
+        # Check for a group.
         main_dict = check_group.cg_processor(
             main_dict=main_dict, collections_dict=collections_dict)
-        # Checks for a backslash that should be treated as text.
+        # Check for a backslash that should be treated as text.
         main_dict = backslash_text.bt_processor(main_dict=main_dict)
-        # Checks for a left bracket that should be treated as text.
         # TODO Should there be a right bracket as text test?
+        # main_dict = right_bracket_text.rbt_processor(main_dict=main_dict)
+        # Check for a left bracket that should be treated as text.
         main_dict = left_bracket_text.lbt_processor(main_dict=main_dict)
-        # Checks for a control word or destination.
+        # Check for a control word or destination.
         main_dict, collections_dict = control_word.cw_processor(
             main_dict=main_dict, collections_dict=collections_dict)
-        # Checks for a space between control words.
+        # Check for a space between control words.
         main_dict = errant_space.es_processor(main_dict=main_dict)
-        # Checks for text.
+        # Check for text.
         main_dict = check_text.ct_processor(main_dict=main_dict)
         line = main_dict["line_to_parse"]
     return main_dict

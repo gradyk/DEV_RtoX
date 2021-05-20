@@ -22,6 +22,7 @@ def create_dict_files(main_dict: dict) -> None:
         "code_strings_file.json",
         "color_table_file.json",
         "font_table_file.json",
+        "group_log.json",
         "header_tables_dict.json",
         "info_group_file.json",
         "pgp_table_file.json",

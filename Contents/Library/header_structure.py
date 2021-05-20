@@ -59,16 +59,16 @@ def build_header_tables_dict(main_dict: dict) -> None:
             if table_search is not item:
                 table_start_line = working_input_file.index(line)
                 table_start_index = line.find(table) - factor
-                main_dict["table_start_line"] = table_start_line
-                main_dict["table_start_index"] = table_start_index
-                main_dict["parse_text"] = line[main_dict["table_start_index"]:]
-                main_dict["parse_index"] = main_dict["table_start_index"]
-                main_dict["line_to_parse"] = main_dict["table_start_line"]
+                main_dict["group_start_line"] = table_start_line
+                main_dict["group_start_index"] = table_start_index
+                main_dict["parse_text"] = line[main_dict["group_start_index"]:]
+                main_dict["parse_index"] = main_dict["group_start_index"]
+                main_dict["line_to_parse"] = main_dict["group_start_line"]
                 main_dict = group_boundaries.define_boundaries(
                         main_dict=main_dict)
                 table_boundaries_info = {table: [
-                        main_dict["table_start_line"],
-                        main_dict["table_start_index"],
+                        main_dict["group_start_line"],
+                        main_dict["group_start_index"],
                         main_dict["group_end_line"],
                         main_dict["group_end_index"]]
                 }

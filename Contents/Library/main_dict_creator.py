@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -22,12 +22,14 @@ def mdc_processor(base_dir, debug_dir: str, dicts_dir: str,
         "group_contents":           "",
         "group_end_index":          0,
         "group_end_line":           0,
+        "group_counter":            0,
+        "group_log":                {},
         "line_to_parse":            "",
         "list_size":                "",
         "parse_index":              "",
         "parse_text":               "",
-        "table_start_index":        "",
-        "table_start_line":         "",
+        "group_start_index":        "",
+        "group_start_line":         "",
         "tag_set":                  "",
         "base_dir":                 base_dir,
         "debug_dir":                debug_dir,

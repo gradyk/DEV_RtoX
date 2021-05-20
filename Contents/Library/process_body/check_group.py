@@ -4,10 +4,9 @@
 
 """
     Determine if the first character in the text being parsed is an opening
-bracket (in RTF, the start of a table or group). If if is, proceed to use
-modules to define the group boundaries and process the group contents. If
-not, advance to the next character in the string (and if it is the last
-character, add to the text being parsed.
+bracket. If if is, use modules to define the group boundaries and
+process the group contents. If not, advance to the next character in the
+string (and if it is the last character, add to the text being parsed).
 """
 
 __author__ = "Kenneth A. Grady"
@@ -33,27 +32,27 @@ log = logging.getLogger(__name__)
 def cg_processor(main_dict: dict, collections_dict: dict) -> dict:
     """
         If the first character test shows the beginning of an RTF group,
-    # capture the location of the group beginning, find the group end,
-    # parse the group into components, and process the components. Finally,
+    capture the location of the group beginning, find the group end,
+    parse the group into components, and process the components. Finally,
     re-set relevant variables.
     """
     try:
         if main_dict["parse_text"][0] == "{":
-            main_dict["table_start_line"] = main_dict["line_to_parse"]
-            main_dict["table_start_index"] = main_dict["parse_index"]
+            main_dict["group_start_line"] = main_dict["line_to_parse"]
+            main_dict["group_start_index"] = main_dict["parse_index"] - 1
             main_dict = group_boundaries.define_boundaries(main_dict=main_dict)
             main_dict = \
                 build_group_contents_list.pre_process(main_dict=main_dict)
             main_dict = group_contents.gc_processor(
                 main_dict=main_dict, collections_dict=collections_dict)
             main_dict["parse_text"] = \
-                main_dict["parse_text"].replace(main_dict["group_contents"],
-                                                "", 1)
+                main_dict["parse_text"].replace(
+                    main_dict["group_contents"], "", 1)
             main_dict["group_contents"] = ""
             main_dict["contents_list"] = []
-            main_dict["table_start_line"] = 0
-            main_dict["table_start_index"] = 0
-            main_dict["parse_index"] = 0
+            main_dict["group_start_line"] = 0
+            main_dict["group_start_index"] = 1
+            main_dict["parse_index"] = 1
             main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
     except (TypeError, IndexError, Exception) as error:
         log.debug(error, msg=(f"Check_group error: "
