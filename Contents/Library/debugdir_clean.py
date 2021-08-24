@@ -28,6 +28,7 @@ def cleaner():
         try:
             if filename != "__pycache__":
                 os.remove(os.path.join(folder, filename))
-        except OSError:
-            log.debug("Problem cleaning out debug_dir directory.")
+        except OSError as error:
+            msg = "Problem cleaning out debug_dir directory."
+            log.debug(error, msg)
             sys.exit()

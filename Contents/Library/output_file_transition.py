@@ -42,13 +42,12 @@ def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
                      "3": start_tag_dict["3"]}
         transition_tags = test_dict[config_settings_dict["tag-set"]]
     except KeyError as error:
-        logging.exception(error, "The tag-set number does not match an "
-                                 "entry for transition tags.")
+        msg = "The tag-set number does not match a transition tags entry."
+        logging.exception(error, msg)
         transition_tags = start_tag_dict["1"]
     except FileNotFoundError as error:
-        logging.exception(error, "The config_dict.json file is missing.")
-
+        msg = "The config_dict.json file is missing."
+        logging.exception(error, msg)
     main_dict = build_output_file.bof_processor(
         main_dict=main_dict, update_output=transition_tags)
-
     return main_dict

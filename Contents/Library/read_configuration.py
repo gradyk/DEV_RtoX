@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -15,8 +15,6 @@ __name__ = "Contents.Library.read_configuration"
 # From standard libraries
 import argparse
 import configparser
-import json
-import os
 
 
 def get_system_arguments() -> dict:
@@ -30,8 +28,8 @@ def get_system_arguments() -> dict:
 
 
 def get_configuration(main_dict: dict, config_settings_dict: dict) -> dict:
-    """ 1. Pull user configuration settings from Config.ini. 2. Put key:value
-    pairs in from command line and Config.ini into config_setting_dict
+    """ Pull user configuration settings from Config.ini. Put key:value
+    pairs from command line and Config.ini into config_setting_dict
     dictionary. """
     config = configparser.ConfigParser()
     config.read(main_dict["config_ini"])

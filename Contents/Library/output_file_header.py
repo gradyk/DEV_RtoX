@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -34,6 +34,6 @@ def ofh_processor(main_dict: dict, config_settings_dict: dict) -> dict:
         main_dict = build_output_file.bof_processor(
             main_dict=main_dict, update_output=header_file_text)
     except FileNotFoundError as error:
-        logging.exception(error, "An XML header file cannot be found or "
-                                 "opened.")
+        msg = "An XML header file cannot be found or opened."
+        logging.exception(error, msg)
     return main_dict

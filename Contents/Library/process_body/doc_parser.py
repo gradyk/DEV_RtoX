@@ -22,26 +22,23 @@ import os
 # From local application
 import control_words_collections
 import check_parse_text
-from typing import Any
 
 
 def body_parse_manager(main_dict: dict) -> dict:
     header_table_file = os.path.join(main_dict["debug_dir"],
                                      "header_tables_dict.json")
-    parse_text, line_to_parse, parse_index = parse_starting_point(
+    parse_text, line_to_parse, parse_index = _parse_starting_point(
         header_table_file=header_table_file, main_dict=main_dict)
-
     main_dict["parse_text"] = parse_text
     main_dict["line_to_parse"] = line_to_parse
     main_dict["parse_index"] = parse_index
-
     collections_dict = control_words_collections.cwc_processor()
     main_dict = check_parse_text.cpt_processor(
         main_dict=main_dict, collections_dict=collections_dict)
     return main_dict
 
 
-def parse_starting_point(header_table_file: str, main_dict: dict) -> Any:
+def _parse_starting_point(header_table_file: str, main_dict: dict) -> tuple:
     with open(header_table_file) as htf_pre:
         header_table = json.load(htf_pre)
         first = list(header_table.keys())[0]
@@ -58,14 +55,14 @@ def parse_starting_point(header_table_file: str, main_dict: dict) -> Any:
                 pass
     line_to_parse = starting_line
     parse_index = starting_index
-    parse_text, line_to_parse, parse_index = set_process_text(
+    parse_text, line_to_parse, parse_index = _set_process_text(
         main_dict=main_dict, parse_index=parse_index,
         line_to_parse=line_to_parse)
     return parse_text, line_to_parse, parse_index
 
 
-def set_process_text(main_dict: dict, parse_index: int,
-                     line_to_parse: int) -> tuple:
+def _set_process_text(main_dict: dict, parse_index: int,
+                      line_to_parse: int) -> tuple:
     line_text = main_dict["working_input_file"][line_to_parse].rstrip()
     parse_text = line_text[parse_index:]
     length = len(parse_text)

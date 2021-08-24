@@ -1,0 +1,21 @@
+{
+  "data": [
+    "rtf[0-9]+",
+    "ansi",
+    "ansicpg[0-9]+",
+    "upr",
+    "uc[0-9]+",
+    "deflang[0-9]+",
+    "deflangfe[0-9]+",
+    "deff[0-9]+",
+    "adeff[0-9]+",
+    "stshfdbch[0-9]+",
+    "stshfloch[0-9]+",
+    "stshfhich[0-9]+",
+    "stshfbi[0-9]+",
+    "([a-z]+deflang[a-z]+)",
+    "themelang[0-9]+",
+    "themelangfe[0-9]+",
+    "themelangcs[0-9]+"
+  ]
+}

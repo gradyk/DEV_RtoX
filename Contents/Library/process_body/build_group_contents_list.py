@@ -8,7 +8,7 @@ __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
-__date__ = "2020-8-12"
+__date__ = "2021-05-24"
 __name__ = "Contents.Library.process_body.build_group_contents_list"
 
 # From standard libraries
@@ -21,8 +21,9 @@ log = logging.getLogger(__name__)
 
 def pre_process(main_dict: dict) -> dict:
     if main_dict is None:
-        log.debug(msg="Main dict is None.")
-        sys.exit(1)
+        log.debug(msg="build_group_contents_list File: The program "
+                      "encountered a 'main_dict' is None error.")
+        sys.exit()
     main_dict["contents_string"] = main_dict["group_contents"]
     item = None
     pattern_dict = {
@@ -36,29 +37,29 @@ def pre_process(main_dict: dict) -> dict:
     while main_dict["contents_string"] != "":
         for key, value in pattern_dict.items():
             try:
-                test = value.search(main_dict["contents_string"])
-                if test is not item and test.span() != (0, 0):
-                    main_dict["contents_list"].append(test[0])
-                    main_dict["contents_string"] = \
-                        main_dict["contents_string"][0:test.start()] + \
-                        main_dict["contents_string"][test.end():]
-                    main_dict["contents_string"] = \
-                        main_dict["contents_string"].lstrip()
-                elif test is not item and test.span() == (0, 0):
-                    main_dict["contents_string"] = \
-                        main_dict["contents_string"][0:test.start()] + \
-                        main_dict["contents_string"][test.end():]
-                    main_dict["contents_string"] = \
-                        main_dict["contents_string"].lstrip()
-            # TODO Complete error text.
+                test1 = value.search(main_dict["contents_string"])
+                if test1 is not item:
+                    try:
+                        if test1.span() != (0, 0):
+                            main_dict["contents_list"].append(test1[0])
+                            main_dict["contents_string"] = \
+                                main_dict["contents_string"][0:test1.start()]\
+                                + \
+                                main_dict["contents_string"][test1.end():]
+                            main_dict["contents_string"] = \
+                                main_dict["contents_string"].lstrip()
+                        elif test1.span() == (0, 0):
+                            main_dict["contents_string"] = \
+                                main_dict["contents_string"][0:test1.start()]\
+                                + \
+                                main_dict["contents_string"][test1.end():]
+                            main_dict["contents_string"] = \
+                                main_dict["contents_string"].lstrip()
+                    except KeyError as error:
+                        msg = f"Problem encountered with {main_dict}."
+                        logging.exception(error, msg)
             except (KeyError, ValueError, TypeError, Exception) as error:
-                if error is KeyError:
-                    log.debug(msg="AAA")
-                if error is ValueError:
-                    log.debug(msg="BBB")
-                if error is TypeError:
-                    log.debug(msg="CCC")
-                if error is Exception:
-                    log.debug(msg="DDD")
-                sys.exit("build_group_contents_list exit")
+                msg = f"Problem encountered with {main_dict}."
+                logging.exception(error, msg)
+                sys.exit()
     return main_dict

@@ -29,7 +29,7 @@ def cpt_processor(main_dict: dict, collections_dict: dict) -> dict:
         sys.exit("Collections_dict is empty.")
     while line < main_dict["list_size"] + 1:
         # Check for a group.
-        main_dict = check_group.cg_processor(
+        main_dict, temp_dict = check_group.cg_processor(
             main_dict=main_dict, collections_dict=collections_dict)
         # Check for a backslash that should be treated as text.
         main_dict = backslash_text.bt_processor(main_dict=main_dict)
