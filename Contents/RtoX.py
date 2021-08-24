@@ -31,6 +31,7 @@ import prepare_to_process
 import read_log_config
 import rtf_file_lead_parse
 import tag_closer
+import working_input_file_converter
 
 log = logging.getLogger(__name__)
 
@@ -83,10 +84,10 @@ if __name__ == "Contents.RtoX":
 
         # TODO Add capability to handle numbered paragraphs: spec p.48.
         # TODO Add capability to handle tables: spec p.59.
+        main_dict = working_input_file_converter.processor(main_dict=main_dict)
+        main_dict = doc_parser.body_parse_manager(main_dict=main_dict)
 
         # RESUME EDITING/CONSOLIDATING/CLEANING UP HERE
-
-        main_dict = doc_parser.body_parse_manager(main_dict=main_dict)
         main_dict = tag_closer.tc_processor(main_dict=main_dict)
 
         # TODO Add to final_step: 1) garbage cleanup, 2) any needed/wanted

@@ -22,7 +22,6 @@ log = logging.getLogger(__name__)
 
 
 def initialize(main_dict: dict) -> dict:
-
     temp_dict = {
         "deck":             deque(),
         "text_length":      0,
@@ -81,7 +80,7 @@ def _eval_parse_text(main_dict: dict, temp_dict: dict) -> Tuple[dict, dict]:
         temp_dict = _process_parse_text_character(
             command=temp_dict["parse_text"][0], temp_dict=temp_dict)
         temp_dict = _adjust_variables(temp_dict=temp_dict)
-        # Test for group end and, if not, test whether parse text needs more
+        # Test for group end. If not, test whether parse text needs more
         # text.
         main_dict, temp_dict = _check_deck_status(
             main_dict=main_dict, temp_dict=temp_dict)
@@ -136,7 +135,6 @@ def _adjust_variables(temp_dict: dict) -> dict:
 
 
 def _check_deck_status(main_dict: dict, temp_dict: dict) -> Tuple[dict, dict]:
-    print(temp_dict["deck_length"], ": ", temp_dict["parse_text"])
     if temp_dict["deck_length"] == 0:
         temp_dict["group_contents"] = temp_dict["group_contents"][:-1]
         main_dict, temp_dict = _close_out(

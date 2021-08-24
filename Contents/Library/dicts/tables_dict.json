@@ -21,7 +21,7 @@
         "factor": 4,
         "function": "process_pgp_table.processor"},
     "revtbl":       {
-        "factor": 2
+        "factor": 2,
         "function": "process_rev_table.processor"},
     "rsidtbl":      {
         "factor": 4,

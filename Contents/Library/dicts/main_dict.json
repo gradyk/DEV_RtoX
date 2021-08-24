@@ -23,6 +23,7 @@
         "working_file_name":        "",
         "working_input_file":       "",
         "working_input_file_bak":   "",
+        "wif_string":               "",
         "output_file":              "",
         "output_file_name":         "",
         "output_text":              "",
