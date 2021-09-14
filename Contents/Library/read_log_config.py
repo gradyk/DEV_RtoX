@@ -24,7 +24,7 @@ def logging_setup():
     # NOTSET 0
     path = os.path.realpath("RtoX.py")
     head, tail = ntpath.split(path)
-    log_file = os.path.join(head, "rtox.log")
+    log_file = os.path.join(head, "logs/rtox.log")
     open(log_file, "w").close()
     handler = logging.handlers.WatchedFileHandler(
         os.environ.get("LOGFILE", log_file))

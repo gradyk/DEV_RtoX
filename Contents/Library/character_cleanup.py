@@ -24,7 +24,7 @@ import unicode_cleanup
 log = logging.getLogger(__name__)
 
 
-def cc_processor(main_dict: dict) -> dict:
+def processor(main_dict: dict) -> dict:
     """ Cleanup characters ln the RTF file line-by-line. """
     source_file = main_dict["working_input_file"]
     array_codes = array_select.processor(main_dict=main_dict)

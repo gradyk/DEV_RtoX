@@ -19,21 +19,23 @@ import sys
 log = logging.getLogger(__name__)
 
 
-def pre_process(main_dict: dict) -> dict:
-    if main_dict is None:
-        log.debug(msg="build_group_contents_list File: The program "
-                      "encountered a 'main_dict' is None error.")
+def processor(main_dict: dict) -> dict:
+    try:
+        main_dict["contents_string"] = main_dict["group_contents"]
+        item = None
+        pattern_dict = {
+            "lb": re.compile(r"^{"),
+            "rb": re.compile(r"^[}]"),
+            "dest": re.compile(r"^(\\\*\\[a-zA-Z-0-9]*)"),
+            "cw": re.compile(r"^(\\[a-zA-Z-0-9]*)"),
+            "cs": re.compile(r"^(\\['-:_|~])"),
+            "text": re.compile(r"^([a-zA-Z0-9\s?.!,;:_%<>=@\-\[\]–/()\'\"“”‘’]*)")
+        }
+    except (TypeError, Exception) as error:
+        msg = "main_dict is empty."
+        log.debug(error, msg)
         sys.exit()
-    main_dict["contents_string"] = main_dict["group_contents"]
-    item = None
-    pattern_dict = {
-        "lb": re.compile(r"^{"),
-        "rb": re.compile(r"^[}]"),
-        "dest": re.compile(r"^(\\\*\\[a-zA-Z-0-9]*)"),
-        "cw": re.compile(r"^(\\[a-zA-Z-0-9]*)"),
-        "cs": re.compile(r"^(\\['-:_|~])"),
-        "text": re.compile(r"^([a-zA-Z0-9\s?.!,;:_%<>=@\-\[\]–/()\'\"“”‘’]*)")
-    }
+
     while main_dict["contents_string"] != "":
         for key, value in pattern_dict.items():
             try:
@@ -59,7 +61,8 @@ def pre_process(main_dict: dict) -> dict:
                         msg = f"Problem encountered with {main_dict}."
                         logging.exception(error, msg)
             except (KeyError, ValueError, TypeError, Exception) as error:
-                msg = f"Problem encountered with {main_dict}."
+                msg = f"Problem encountered with " \
+                      f"{main_dict['contents_list']}.append({test1[0]})"
                 logging.exception(error, msg)
                 sys.exit()
     return main_dict

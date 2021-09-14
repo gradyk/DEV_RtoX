@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -21,7 +21,7 @@ import csv_modifier
 import tag_insert_missing_cw
 
 
-def gc_processor(main_dict: dict, collections_dict: dict) -> dict:
+def processor(main_dict: dict, collections_dict: dict) -> dict:
     # Temp setup for testing
     for ele in main_dict["contents_list"]:
         if ele == "{" or ele == "}":
@@ -43,7 +43,7 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> dict:
                         "tag_close": "",
                         "tag_set":   tag_set
                     }
-                    main_dict = control_word_to_build.cwtb_processor(
+                    main_dict = control_word_to_build.processor(
                         tag_info=tag_info, main_dict=main_dict)
                 else:
                     pass
@@ -55,9 +55,10 @@ def gc_processor(main_dict: dict, collections_dict: dict) -> dict:
                     collections_dict=collections_dict)
                 # Add control word that cannot be processed to XML build
                 # file.
-                tag_insert_missing_cw.ti_processor(main_dict=main_dict,
-                                                   cw_text=cw_text)
+                # tag_insert_missing_cw.ti_processor(main_dict=main_dict,
+                #                                   cw_text=cw_text)
         else:
-            build_output_file.bof_processor(update_output=ele,
-                                            main_dict=main_dict)
+            build_output_file.processor(update_output=ele,
+                                        main_dict=main_dict)
+    main_dict["contents_list"] = []
     return main_dict

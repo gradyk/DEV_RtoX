@@ -15,7 +15,6 @@ def retrieve(main_dict: dict) -> dict:
     config_settings_dict = read_configuration.get_system_arguments()
     config_settings_dict = read_configuration.get_configuration(
         main_dict=main_dict, config_settings_dict=config_settings_dict)
-
     # Store the input file from the command line as
     # main_dict["working_input_file"].
     try:
@@ -32,7 +31,6 @@ def retrieve(main_dict: dict) -> dict:
         main_dict["working_input_file"] = pre_file
         main_dict["working_input_file_bak"] = \
             main_dict["working_input_file"]
-        main_dict["list_size"] = len(main_dict["working_input_file"])
         log.info(msg=f"Converting file: {main_dict['input_file']}.")
     except Exception as error:
         msg = "The input file cannot be used."

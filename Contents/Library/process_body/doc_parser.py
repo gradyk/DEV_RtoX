@@ -16,23 +16,19 @@ __date__ = "2019-12-21"
 __name__ = "Contents.Library.process_body.doc_parser"
 
 # From standard libraries
-import os
+from collections import deque
 
 # From local application
 import control_words_collections
-import check_parse_text
-import parse_starting_point
+import check_string
 
 
-def body_parse_manager(main_dict: dict) -> dict:
-    header_table_file = os.path.join(main_dict["debug_dir"],
-                                     "header_tables_dict.json")
-    parse_text, line_to_parse, parse_index = parse_starting_point.processor(
-        header_table_file=header_table_file, main_dict=main_dict)
-    main_dict["parse_text"] = parse_text
-    main_dict["line_to_parse"] = line_to_parse
-    main_dict["parse_index"] = parse_index
+def body_parse_manager(main_dict: dict) -> None:
     collections_dict = control_words_collections.cwc_processor()
-    main_dict = check_parse_text.cpt_processor(
+    main_dict["parse_text"] = ""
+    deck = deque()
+    check_string.pre_processor(
         main_dict=main_dict, collections_dict=collections_dict)
-    return main_dict
+    check_string.processor(main_dict=main_dict,
+                           collections_dict=collections_dict,
+                           deck=deck)

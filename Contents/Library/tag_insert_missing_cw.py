@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -30,4 +30,4 @@ def ti_processor(main_dict: dict, cw_text: str) -> None:
     tag_empty = tag_dict["missing"][0]
     tag = tag_empty.replace("zzz", str(main_dict["line_to_parse"]))
     tag = tag.replace("aaa", cw_text)
-    build_output_file.bof_processor(update_output=tag, main_dict=main_dict)
+    build_output_file.processor(update_output=tag, main_dict=main_dict)

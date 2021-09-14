@@ -48,6 +48,6 @@ def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
     except FileNotFoundError as error:
         msg = "The config_dict.json file is missing."
         logging.exception(error, msg)
-    main_dict = build_output_file.bof_processor(
+    main_dict = build_output_file.processor(
         main_dict=main_dict, update_output=transition_tags)
     return main_dict

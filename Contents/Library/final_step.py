@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -24,7 +24,7 @@ import os
 import xmlformatter
 
 
-def fs_processor(main_dict: dict) -> None:
+def processor(main_dict: dict) -> None:
     xml_tags_file = os.path.join(main_dict["dicts_dir"],
                                  "xml_tags.json")
     with open(xml_tags_file, "r+") as tag_dict_pre:
@@ -41,7 +41,6 @@ def fs_processor(main_dict: dict) -> None:
             main_dict["output_text"] = main_dict["output_text"].\
                 replace(item, "")
         i += 1
-
     # Create a backup of the output_file.xml.
     main_dict["output_text_bak"] = main_dict["output_text"]
     pre_format_file = os.path.join(main_dict["debug_dir"], "output.xml")
@@ -51,7 +50,6 @@ def fs_processor(main_dict: dict) -> None:
         infile=pre_format_file,
         outfile=main_dict["output_file_name"])
     output_dir = os.path.join(main_dict["base_dir"], "output")
-    final_output_list = [output_dir, f'/{main_dict["output_file"]}']
-    final_output = ''.join(final_output_list)
-    with open(final_output, "w+") as final_output_file:
+    output_file = os.path.join(output_dir, main_dict["output_file"])
+    with open(output_file, "w+") as final_output_file:
         final_output_file.write(xml_formatted_text)

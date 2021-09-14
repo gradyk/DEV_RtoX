@@ -16,66 +16,30 @@ import logging
 import re
 
 # From local application
-import adjust_process_text
-import control_word_to_build
-import csv_modifier
-import tag_insert_missing_cw
-from typing import Any
+import controlword_evaluator
+import plain_text
+
+log = logging.getLogger(__name__)
 
 
-def cw_processor(main_dict: dict, collections_dict: dict) -> tuple:
+def processor(main_dict: dict, collections_dict: dict) -> dict:
     # Test for control word (backslash followed by a combination of text,
     # character (optional), and numbers (optional).
-    cw_regex = main_dict["cw_regex"]
-    parse_index = main_dict["parse_index"]
     item = None
     try:
-        test = re.search(cw_regex, main_dict["parse_text"])
+        test = re.search(main_dict["cw_regex"],
+                         main_dict["wif_string"][main_dict["index"]:])
         if test is not item:
             length = test.end() - test.start()
-            control_word = test[0]
-            parse_index = parse_index + length
-            main_dict["parse_index"] = parse_index
-            main_dict, collections_dict = cw_evaluation(
+            main_dict["index"] = main_dict["index"] + length
+            main_dict["index_ptr"] = main_dict["index"]
+            main_dict, collections_dict = controlword_evaluator.processor(
                 main_dict=main_dict,
                 test=test[0], collections_dict=collections_dict)
-            main_dict["parse_text"] = \
-                main_dict["parse_text"].replace(control_word, "", 1).lstrip()
-            main_dict["parse_index"] = 1
-            main_dict = adjust_process_text.apt_processor(main_dict=main_dict)
         else:
-            pass
-    except TypeError:
-        logging.exception(f"{main_dict['line_to_parse']}:"
-                          f"{main_dict['parse_index']}--"
-                          f"{main_dict['parse_text']}")
-    return main_dict, collections_dict
-
-
-def cw_evaluation(main_dict: dict, test: Any, collections_dict: dict) -> tuple:
-    cw_text = "".join([i for i in test if i.isalpha()])
-    cw_value = "".join([i for i in test if i.isdigit()])
-    null_function = "null"
-    try:
-        cw_func = collections_dict[cw_text]
-        if cw_func != null_function:
-            tag_set = main_dict["tag_set"]
-            tag_info = {
-                "func":             cw_func,
-                "name":             cw_text,
-                "value":            cw_value,
-                "tag_open_str":     "",
-                "tag_close_str":    "",
-                "tag_setting":      "",
-                "tag_set":          tag_set
-            }
-            main_dict = control_word_to_build.cwtb_processor(
-                tag_info=tag_info, main_dict=main_dict)
-    except KeyError:
-        # Add missing control word to control_words_collections.csv file.
-        collections_dict = csv_modifier.csvm_processor(
-            main_dict=main_dict, cw_text=cw_text,
-            collections_dict=collections_dict)
-        # Add control word that cannot be processed to XML build file.
-        tag_insert_missing_cw.ti_processor(main_dict=main_dict, cw_text=cw_text)
-    return main_dict, collections_dict
+            main_dict = plain_text.processor(main_dict=main_dict)
+    except (TypeError, IndexError, Exception) as error:
+        msg = f"Check " \
+              f"{main_dict['wif_string'][main_dict['index']:main_dict['index'] + 50]}"
+        log.debug(error, msg)
+    return main_dict

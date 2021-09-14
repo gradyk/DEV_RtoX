@@ -1,0 +1,26 @@
+{
+  "fbidi": {
+    "sub": "Miriam",
+    "temp_index": ""},
+  "fdecor": {
+    "sub": "Old English",
+    "temp_index": ""},
+  "fmodern": {
+    "sub": "Courier",
+    "temp_index":  ""},
+  "fnil": {
+    "sub": "default",
+    "temp_index":  ""},
+  "froman": {
+    "sub": "Times New Roman",
+    "temp_index":  ""},
+  "fscript": {
+    "sub": "Cursive",
+    "temp_index":  ""},
+  "fswiss": {
+    "sub": "Arial",
+    "temp_index":  ""},
+  "ftech": {
+    "sub": "Symbol",
+    "temp_index":  ""}
+}

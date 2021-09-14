@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -40,6 +40,6 @@ def tc_processor(main_dict: dict) -> dict:
         }
         main_dict, update_output = tag_check.tc_processor(
             tag_info=tag_info, main_dict=main_dict)
-        build_output_file.bof_processor(
+        build_output_file.processor(
             update_output=update_output, main_dict=main_dict)
     return main_dict

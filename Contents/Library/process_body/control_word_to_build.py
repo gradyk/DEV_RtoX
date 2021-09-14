@@ -27,13 +27,14 @@ import tag_check
 log = logging.getLogger(__name__)
 
 
-def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
-    base_dir = main_dict["base_dir"]
-    cws_dir = os.path.join(base_dir, "Library/control_words_symbols/")
+def processor(tag_info: dict, main_dict: dict) -> dict:
+    cws_dir = os.path.join(main_dict["base_dir"],
+                           "Library/control_words_symbols/")
     try:
         tagging_mod = importlib.import_module(tag_info["func"], package=cws_dir)
-    except ValueError:
-        log.debug(msg=f"Module name: {tag_info['name']}")
+    except ValueError as error:
+        msg = f"Module name: {tag_info['name']}"
+        log.debug(error, msg)
     tag_info = tagging_mod.cw_func_processor(
         tag_info=tag_info, main_dict=main_dict)
     # Check whether tag is already open or closed.
@@ -41,9 +42,10 @@ def cwtb_processor(tag_info: dict, main_dict: dict) -> dict:
     main_dict = results[0]
     update_output = results[1]
     if update_output != "":
-        build_output_file.bof_processor(update_output=update_output,
-                                        main_dict=main_dict)
+        build_output_file.processor(update_output=update_output,
+                                    main_dict=main_dict)
     if main_dict is None:
-        log.debug("Main_dict is none.")
+        msg = "Main_dict is none."
+        log.debug(msg)
         sys.exit(1)
     return main_dict

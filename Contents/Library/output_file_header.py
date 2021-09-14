@@ -31,7 +31,7 @@ def ofh_processor(main_dict: dict, config_settings_dict: dict) -> dict:
         header_file = os.path.join(header_file_dir, header_file_name)
         with open(header_file, "r+") as header_file_pre:
             header_file_text = header_file_pre.read()
-        main_dict = build_output_file.bof_processor(
+        main_dict = build_output_file.processor(
             main_dict=main_dict, update_output=header_file_text)
     except FileNotFoundError as error:
         msg = "An XML header file cannot be found or opened."
