@@ -7,13 +7,13 @@ __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
 __email__ = "gradyken@msu.edu"
 __date__ = "2020-8-17"
-__name__ = "Contents.Library.process_body.check_parse_text"
+__name__ = "Contents.Library.process_body.check_string"
 
 # From standard libraries
 import logging
 import re
 import sys
-from typing import Any
+from collections import deque
 
 # From local application
 import control_word
@@ -32,8 +32,8 @@ def pre_processor(main_dict: dict, collections_dict: dict) -> None:
     eof_test.processor(main_dict=main_dict, collections_dict=collections_dict)
 
 
-def processor(main_dict: dict, collections_dict: dict,
-              deck: Any) -> None:
+def processor(main_dict: dict, collections_dict: dict) -> None:
+    deck = deque()
     length = len(main_dict["wif_string"])
     while main_dict["index"] < length:
         try:

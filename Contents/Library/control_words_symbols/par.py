@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -16,49 +16,30 @@ __name__ = "Contents.Library.control_words_symbols.par"
 
 # Standard library imports
 import logging
+from typing import Tuple
 
 # From local application
 import build_output_file
-from read_log_config import logger_debug
+
+log = logging.getLogger(__name__)
 
 
-def par_process(debug_dir: str, tag_dict: dict, line: str):
-
-    open_emphasis_tag_cleanup(debug_dir=debug_dir, tag_dict=tag_dict)
-
-    paragraph_tag_cleanup(debug_dir=debug_dir, tag_dict=tag_dict, line=line)
-
-    tag_registry.update(____________)
-
-
-def paragraph_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
+def processor(tag_info: dict, main_dict: dict) -> Tuple[dict, dict]:
     """ If the tag registry shows a closed paragraph, insert an open 
         paragraph tag. If it shows an open paragraph, close it and open a new
         paragraph. """
-
-    if tag_registry["par"] == "closed":
-        content_update = tag_dict["paragraph-beg"]
-        build_output_file.content_append(debug_dir=debug_dir,
-                                          content_update=content_update)
-        try:
-            if logger_debug.isEnabledFor(logging.DEBUG):
-                msg = str(tag_dict["paragraph-beg"] + f"{line}")
-                logger_debug.error(msg)
-        except AttributeError:
-            logging.exception("Check setLevel for logger_debug.")
-
-    else:
-        content_update = tag_dict["paragraph-end"] + tag_dict["paragraph-beg"]
-        output_file_update.content_append(debug_dir=debug_dir,
-                                          content_update=content_update)
-        try:
-            if logger_debug.isEnabledFor(logging.DEBUG):
-                msg = str(tag_dict["paragraph-end"] + tag_dict[
-                         "paragraph-beg"] + f"{line}")
-                logger_debug.error(msg)
-        except AttributeError:
-            logging.exception("Check setLevel for logger_debug.")
-
-
-
-    tag_registry["par"] = "open"
+    if main_dict["tag_queue"]:
+        main_dict["update_output"] = ''.join(main_dict["tag_queue"][::-1])
+        main_dict["tag_queue"] = []
+        main_dict["par"] = "closed"
+    if main_dict["par"] == "closed":
+        main_dict["update_output"] = main_dict["update_output"] + \
+            main_dict["tags"]["par"][0]
+        main_dict["tag_queue"].append(main_dict["tags"]["par"][1])
+    elif main_dict["par"] == "open":
+        main_dict["update_output"] = main_dict["update_output"] + \
+            main_dict["tags"]["par"][1] + main_dict["tags"]["par"][0]
+        main_dict["tag_queue"].append(main_dict["tags"]["par"][1])
+    build_output_file.processor(main_dict=main_dict)
+    main_dict["par"] = "open"
+    return tag_info, main_dict

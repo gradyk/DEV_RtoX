@@ -13,7 +13,6 @@ __name__ = "Contents.RtoX"
 
 # From standard libraries
 import logging
-import os
 from pathlib import Path
 
 # From local application
@@ -51,7 +50,7 @@ if __name__ == "Contents.RtoX":
         # Assign values to main_dict.
         main_dict = main_dict_creator.processor(
             base_dir=base_dir, debug_dir=debug_dir, dicts_dir=dicts_dir,
-            main_script=main_script,config_ini=config_ini)
+            main_script=main_script, config_ini=config_ini)
         # Get and store configuration information.
         prepare_to_process.get_config_settings(main_dict=main_dict)
         # Add settings to rtox_basic.log and update main_dict.
@@ -82,11 +81,8 @@ if __name__ == "Contents.RtoX":
         hdr_structure.processor(main_dict=main_dict)
         # TODO Add capability to handle numbered paragraphs: spec p.48.
         # TODO Add capability to handle tables: spec p.59.
-        doc_parser.body_parse_manager(main_dict=main_dict)
-
-        # RESUME EDITING/CONSOLIDATING/CLEANING UP HERE
-        main_dict = tag_closer.tc_processor(main_dict=main_dict)
-
+        doc_parser.processor(main_dict=main_dict)
+        tag_info, main_dict = tag_closer.processor(main_dict=main_dict)
         # TODO Add to final_step: 1) garbage cleanup, 2) any needed/wanted
         #  post-processing.
         final_step.processor(main_dict=main_dict)

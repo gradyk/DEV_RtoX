@@ -20,6 +20,8 @@ import os
 # From local application
 import build_output_file
 
+log = logging.getLogger(__name__)
+
 
 def ofh_processor(main_dict: dict, config_settings_dict: dict) -> dict:
     header_file_dir = os.path.join(main_dict["base_dir"], "input")
@@ -30,10 +32,9 @@ def ofh_processor(main_dict: dict, config_settings_dict: dict) -> dict:
             header_file_name = "tpresheader.xml"
         header_file = os.path.join(header_file_dir, header_file_name)
         with open(header_file, "r+") as header_file_pre:
-            header_file_text = header_file_pre.read()
-        main_dict = build_output_file.processor(
-            main_dict=main_dict, update_output=header_file_text)
+            main_dict["update_output"] = header_file_pre.read()
+        main_dict = build_output_file.processor(main_dict=main_dict)
     except FileNotFoundError as error:
         msg = "An XML header file cannot be found or opened."
-        logging.exception(error, msg)
+        log.debug(error, msg)
     return main_dict

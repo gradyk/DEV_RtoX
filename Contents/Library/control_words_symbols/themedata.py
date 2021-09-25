@@ -4,10 +4,8 @@
 
 from typing import Tuple
 
-import build_output_file
-
 
 def processor(tag_info: dict, main_dict: dict) -> Tuple[dict, dict]:
-    main_dict["update_output"] = "’"
-    build_output_file.processor(main_dict=main_dict)
+    tag_info["cw_value"] = ""
+    main_dict["contents_list"][2] = ""
     return tag_info, main_dict

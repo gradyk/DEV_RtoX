@@ -30,4 +30,5 @@ def ti_processor(main_dict: dict, cw_text: str) -> None:
     tag_empty = tag_dict["missing"][0]
     tag = tag_empty.replace("zzz", str(main_dict["line_to_parse"]))
     tag = tag.replace("aaa", cw_text)
-    build_output_file.processor(update_output=tag, main_dict=main_dict)
+    main_dict["update_output"] = tag
+    build_output_file.processor(main_dict=main_dict)

@@ -49,10 +49,8 @@ def process_stylesheet(code_strings_to_process: list, main_dict: dict):
     """
     code_strings_to_process = _trim_stylesheet(
         code_strings_to_process=code_strings_to_process)
-    
     code_strings_to_process = _update_code_strings(
         code_strings_to_process=code_strings_to_process)
-    
     _parse_code_strings(
         code_strings_to_process=code_strings_to_process,
         main_dict=main_dict)
@@ -64,8 +62,6 @@ def _trim_stylesheet(code_strings_to_process: list) -> list:
             place = code_strings_to_process.index(code_string)
             new_code_string = code_string.replace("{\\stylesheet{", "{\\s0")
             code_strings_to_process[place] = new_code_string
-        else:
-            pass
     return code_strings_to_process
 
 
@@ -79,8 +75,6 @@ def _update_code_strings(code_strings_to_process: list) -> list:
             code_strings_to_process[
                 code_strings_to_process.index(code_string)] = \
                 new_code_string
-        else:
-            pass
     return code_strings_to_process
 
 
@@ -99,12 +93,10 @@ def _parse_code_strings(code_strings_to_process: list, main_dict: dict) -> None:
             test = re.search(r"\\", code_string)
         _check_style_name(code_string=code_string, current_key=current_key,
                           code_dict=code_dict)
-
         dict_updater.json_dict_updater(
             dict_name="style_sheet_table_file.json",
             dict_update=code_dict,
             main_dict=main_dict)
-
         code_dict = {}
 
 
@@ -132,8 +124,8 @@ def _check_stylecode(code_string: str, code_dict: dict) -> tuple:
             else:
                 pass
         except (ValueError, TypeError) as error:
-            logging.exception(error, "A style does not have a style code.")
-            pass
+            msg = "A style does not have a style code."
+            log.debug(error, msg)
     return code_string, current_key
 
 
@@ -159,8 +151,8 @@ def _check_control_words(code_string: str, current_key: str,
         else:
             pass
     except (ValueError, TypeError) as error:
-        logging.exception(error, "A style code word has created a problem.")
-        pass
+        msg = "A style code word has created a problem."
+        log.debug(error, msg)
     return code_string, current_key
 
 

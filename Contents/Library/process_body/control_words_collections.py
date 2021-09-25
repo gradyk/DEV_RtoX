@@ -1,4 +1,4 @@
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -16,7 +16,7 @@ import os
 from pathlib import Path
 
 
-def cwc_processor():
+def processor():
     # TODO Need a func to check csv for duplicates and remove them. Also,
     #  should check for and remove incomplete entries (e.g., name,,,) which
     #  would cause problems.

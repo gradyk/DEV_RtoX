@@ -81,6 +81,7 @@
                                 "<ts:hiText rend='ul'></ts:hiText>",
                                 "<ts:hiText rend='scaps'></ts:hiText>",
                                 "<ts:hiText rend='pBody'></ts:hiText>",
+                                "<ts:pBody></ts:pBody>",
                                 "  "]
 }
 }

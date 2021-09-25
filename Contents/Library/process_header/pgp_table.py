@@ -18,6 +18,8 @@ import re
 # From local application
 import dict_updater
 
+log = logging.getLogger(__name__)
+
 
 def trim_pgptbl(code_strings_to_process: list) -> list:
     item = None
@@ -73,7 +75,7 @@ def pgp_parse(code_string: str, code_dict: dict) -> tuple:
             pass
     except (ValueError, TypeError) as error:
         msg = "A problem was encountered with a paragraph formatting table."
-        logging.debug(error, msg)
+        log.debug(error, msg)
     return code_string, current_key, code_dict
 
 
@@ -96,7 +98,7 @@ def ipgpn_parse(code_string: str, current_key: str,
         code_string = code_string.replace(test[0], "")
     except (ValueError, TypeError) as error:
         msg = "A paragraph table ipgp identifier has caused a problem."
-        logging.exception(error, msg)
+        log.debug(error, msg)
     return code_dict, current_key, code_string
 
 
@@ -122,5 +124,5 @@ def check_control_words(code_dict: dict, code_string: str,
             pass
     except (ValueError, TypeError) as error:
         msg = "A paragraph table code word has created a problem."
-        logging.debug(error, msg)
+        log.debug(error, msg)
     return code_string, current_key, code_dict

@@ -2,6 +2,13 @@
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
+__author__ = "Kenneth A. Grady"
+__version__ = "0.1.0a0"
+__maintainer__ = "Kenneth A. Grady"
+__email__ = "gradyken@msu.edu"
+__date__ = "2021-9-15"
+__name__ = "Contents.Library.process_body.find_body_group_end"
+
 import logging
 import sys
 from typing import Any

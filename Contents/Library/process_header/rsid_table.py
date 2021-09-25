@@ -14,10 +14,11 @@ __name__ = "Contents.Library.rsid_table"
 # From standard libraries
 import logging
 import re
-import sys
 
 # From local application
 import dict_updater
+
+log = logging.getLogger(__name__)
 
 
 def trim_rsidtbl(code_strings_to_process: list) -> str:
@@ -28,7 +29,7 @@ def trim_rsidtbl(code_strings_to_process: list) -> str:
             code_string.replace("{\\*\\rsidtbl ", "").replace("}", "")
     except (ValueError, TypeError) as error:
         msg = "A problem was encountered processing the rsid table."
-        logging.debug(error, msg)
+        log.debug(error, msg)
     return new_code_string
 
 
@@ -61,12 +62,11 @@ def rsid_parse(code_string: str, code_dict: dict) -> dict:
             space_test = re.search(r"^ \\", code_string)
             if space_test is not item:
                 code_string = code_string.lstrip()
-            else:
-                pass
             counter += 1
             current_key = "rsid" + str(counter)
-        except (ValueError, TypeError):
-            logging.exception(msg="An rsid table entry has caused a problem.")
+        except (ValueError, TypeError) as error:
+            msg = "An rsid table entry has caused a problem."
+            log.debug(error, msg)
     return code_dict
 
 
@@ -86,12 +86,7 @@ def check_control_words(code_dict: dict, code_string: str,
             space_test = re.search(r"^ \\", code_string)
             if space_test is not item:
                 code_string = code_string.lstrip()
-            else:
-                pass
-        else:
-            pass
     except (ValueError, TypeError) as error:
-        logging.exception(error, "An RSID table code word has created a "
-                                 "problem.")
-        pass
+        msg = "An RSID table code word has created a problem."
+        log.exception(error, msg)
     return code_string, current_key, code_dict

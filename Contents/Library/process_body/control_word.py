@@ -33,9 +33,10 @@ def processor(main_dict: dict, collections_dict: dict) -> dict:
             length = test.end() - test.start()
             main_dict["index"] = main_dict["index"] + length
             main_dict["index_ptr"] = main_dict["index"]
-            main_dict, collections_dict = controlword_evaluator.processor(
-                main_dict=main_dict,
-                test=test[0], collections_dict=collections_dict)
+            tag_info, main_dict, collections_dict = \
+                controlword_evaluator.processor(
+                    main_dict=main_dict,
+                    test=test[0], collections_dict=collections_dict)
         else:
             main_dict = plain_text.processor(main_dict=main_dict)
     except (TypeError, IndexError, Exception) as error:

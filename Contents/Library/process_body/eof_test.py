@@ -12,10 +12,9 @@ import final_step
 
 
 def processor(main_dict: dict, collections_dict: dict) -> None:
-    deck = deque()
     if not main_dict["wif_string"]:
         final_step.processor(main_dict=main_dict)
     else:
         main_dict["index"] += 1
         check_string.processor(main_dict=main_dict,
-                               collections_dict=collections_dict, deck=deck)
+                               collections_dict=collections_dict)

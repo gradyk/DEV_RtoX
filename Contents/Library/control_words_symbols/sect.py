@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-#  Copyright (c) 2020. Kenneth A. Grady
+#  Copyright (c) 2021. Kenneth A. Grady
 #  See BSD-2-Clause-Patent license in LICENSE.txt
 #  Additional licenses are in the license folder.
 
@@ -99,5 +99,4 @@ def section_tag_cleanup(debug_dir: str, tag_dict: dict, line: str):
 
 def update_tag_registry(debug_dir: str, tag_open="1"):
     content_update_dict = {"section": tag_open}
-    tag_registry_update.processor(debug_dir=debug_dir,
-                                  tag_update_dict=content_update_dict)
+    tag_registry_update.processor(tag_info, )

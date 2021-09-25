@@ -11,8 +11,17 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2020-8-17"
 __name__ = "Contents.Library.build_output_file"
 
+import logging
 
-def processor(main_dict: dict, update_output: str) -> dict:
-    append_list = [main_dict["output_text"], update_output]
-    main_dict["output_text"] = ''.join(append_list)
+log = logging.getLogger(__name__)
+
+
+def processor(main_dict: dict) -> dict:
+    try:
+        append_list = [main_dict["output_text"], main_dict["update_output"]]
+        main_dict["output_text"] = ''.join(append_list)
+        main_dict["update_output"] = ""
+    except KeyError as error:
+        msg = f"Problem with {'output_text'}"
+        log.debug(error, msg)
     return main_dict

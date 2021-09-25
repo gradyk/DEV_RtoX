@@ -14,8 +14,7 @@ def processor(main_dict: dict) -> dict:
     try:
         text = main_dict["wif_string"][main_dict["index"]]
         main_dict["index"] = main_dict["index"] + 1
-        main_dict = build_output_file.processor(
-            update_output=text, main_dict=main_dict)
+        main_dict = build_output_file.processor(main_dict=main_dict)
     except (TypeError, Exception) as error:
         msg = f"Check_text: " \
               f"{main_dict['wif_string'][main_dict['index']:main_dict['index']+50]}"

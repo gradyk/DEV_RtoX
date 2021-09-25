@@ -59,10 +59,10 @@ def processor(main_dict: dict) -> dict:
                                 main_dict["contents_string"].lstrip()
                     except KeyError as error:
                         msg = f"Problem encountered with {main_dict}."
-                        logging.exception(error, msg)
+                        log.debug(error, msg)
             except (KeyError, ValueError, TypeError, Exception) as error:
                 msg = f"Problem encountered with " \
                       f"{main_dict['contents_list']}.append({test1[0]})"
-                logging.exception(error, msg)
+                log.debug(error, msg)
                 sys.exit()
     return main_dict

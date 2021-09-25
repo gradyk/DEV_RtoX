@@ -618,7 +618,7 @@ langfe,Font (Character) Formatting Properties,Value,null
 langfenp,Font (Character) Formatting Properties,Value,null
 langnp,Font (Character) Formatting Properties,Value,null
 lastrow,Table Definitions,Flag,null
-latentstyles,Style and Formatting Restrictions,Destination,null
+latentstyles,Style and Formatting Restrictions,Destination,latentstyles
 lbr,Special Characters,Symbol,null
 lchars,Document Formatting Properties,Destination,null
 ldblquote,Special Characters,Symbol,null
@@ -671,7 +671,7 @@ lnbrkrule,Document Formatting Properties,Flag,null
 lndscpsxn,Section Formatting Properties,Flag,null
 lnongrid,Document Formatting Properties,Flag,null
 loch,Associated Character Properties,Flag,null
-lquote,Special Characters,Symbol,null
+lquote,Special Characters,Symbol,lquote
 ls,List Table,Value,null
 lsdlockeddef,Style and Formatting Restrictions,Value,null
 lsdlockedexcept,Style and Formatting Restrictions,Destination,null
@@ -790,9 +790,9 @@ pagebb,Paragraph Formatting Properties,Flag,null
 panose,Font Table,Destination,null
 paperh,Document Formatting Properties,Value,null
 paperw,Document Formatting Properties,Value,null
-par,Special Characters,Symbol,null
+par,Special Characters,Symbol,par
 pararsid,Track Changes (Revision Marks),Value,null
-pard,Paragraph Formatting Properties,Flag,null
+pard,Paragraph Formatting Properties,Flag,pard
 pc,Character Set,Flag,null
 pca,Character Set,Flag,null
 pgbrdrb,Document Formatting Properties,Flag,null
@@ -1025,7 +1025,7 @@ revtim,Information Group,Destination,null
 ri,Paragraph Formatting Properties,Value,null
 rin,Paragraph Formatting Properties,Value,null
 row,Special Characters,Symbol,null
-rquote,Special Characters,Symbol,null
+rquote,Special Characters,Symbol,rquote
 rsid,Track Changes (Revision Marks),Value,null
 rsidroot,Track Changes (Revision Marks),Value,null
 rsidtbl,Track Changes (Revision Marks),Destination,null
@@ -1492,10 +1492,12 @@ faccepted,Unknown,Unknown,null
 fstency,Unknown,Unknown,null
 fed,Unknown,Unknown,null
 frics,Unknown,Unknown,null
-themedata,Unknown,Unknown,null
-colorschememapping,Unknown,Unknown,null
+themedata,Unknown,Unknown,themedata
+colorschememapping,Unknown,Unknown,colorschememapping
 lsdsemihiddendef,Unknown,Unknown,null
 lsdunhideuseddef,Unknown,Unknown,null
 lsdqformatdef,Unknown,Unknown,null
 lsdprioritydef,Unknown,Unknown,null
 datastore,Unknown,Unknown,null
+ql,Unknown,Unknown,null
+lin,Unknown,Unknown,null

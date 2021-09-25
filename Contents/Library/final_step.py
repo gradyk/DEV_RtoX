@@ -20,9 +20,6 @@ __name__ = "Contents.Library.final_step"
 import json
 import os
 
-# From local application
-import xmlformatter
-
 
 def processor(main_dict: dict) -> None:
     xml_tags_file = os.path.join(main_dict["dicts_dir"],
@@ -30,7 +27,6 @@ def processor(main_dict: dict) -> None:
     with open(xml_tags_file, "r+") as tag_dict_pre:
         tag_dict_options = json.load(tag_dict_pre)
     tag_dict = tag_dict_options[str(main_dict["tag_set"])]
-
     # Converting to XML creates instances of empty tag pairs.
     # Run through the file twice looking for empty pairs (deleting
     # empty tags on the first run through may create new empty tag pairs).
@@ -46,10 +42,7 @@ def processor(main_dict: dict) -> None:
     pre_format_file = os.path.join(main_dict["debug_dir"], "output.xml")
     with open(pre_format_file, "w+") as output_pre:
         output_pre.write(main_dict["output_text_bak"])
-    xml_formatted_text = xmlformatter.xmlformatter_start(
-        infile=pre_format_file,
-        outfile=main_dict["output_file_name"])
     output_dir = os.path.join(main_dict["base_dir"], "output")
     output_file = os.path.join(output_dir, main_dict["output_file"])
     with open(output_file, "w+") as final_output_file:
-        final_output_file.write(xml_formatted_text)
+        final_output_file.write(main_dict["output_text"])

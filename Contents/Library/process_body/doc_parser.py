@@ -16,19 +16,23 @@ __date__ = "2019-12-21"
 __name__ = "Contents.Library.process_body.doc_parser"
 
 # From standard libraries
-from collections import deque
+import json
+import os
 
 # From local application
 import control_words_collections
 import check_string
 
 
-def body_parse_manager(main_dict: dict) -> None:
-    collections_dict = control_words_collections.cwc_processor()
+def processor(main_dict: dict) -> None:
+    collections_dict = control_words_collections.processor()
     main_dict["parse_text"] = ""
-    deck = deque()
+    tags_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
+    with open(tags_file) as tag_dict_pre:
+        tag_dict_all = json.load(tag_dict_pre)
+    tag_set = str(main_dict["tag_set"])
+    main_dict["tags"] = tag_dict_all[tag_set]
     check_string.pre_processor(
         main_dict=main_dict, collections_dict=collections_dict)
     check_string.processor(main_dict=main_dict,
-                           collections_dict=collections_dict,
-                           deck=deck)
+                           collections_dict=collections_dict)

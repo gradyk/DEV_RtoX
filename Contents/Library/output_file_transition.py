@@ -28,6 +28,8 @@ from typing import Any
 # From application library
 import build_output_file
 
+log = logging.getLogger(__name__)
+
 
 def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
     """ Insert the XML tags to start the document portion of the XML file
@@ -43,11 +45,10 @@ def oft_processor(main_dict: dict, config_settings_dict: dict) -> Any:
         transition_tags = test_dict[config_settings_dict["tag-set"]]
     except KeyError as error:
         msg = "The tag-set number does not match a transition tags entry."
-        logging.exception(error, msg)
+        log.debug(error, msg)
         transition_tags = start_tag_dict["1"]
     except FileNotFoundError as error:
         msg = "The config_dict.json file is missing."
-        logging.exception(error, msg)
-    main_dict = build_output_file.processor(
-        main_dict=main_dict, update_output=transition_tags)
+        log.debug(error, msg)
+    main_dict = build_output_file.processor(main_dict=main_dict)
     return main_dict

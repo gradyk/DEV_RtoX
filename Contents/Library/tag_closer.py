@@ -7,6 +7,10 @@ the list are open, they are closed by inserting closing tags into the
 working_xml_file. The tag_registry is updated. These steps are performed by
 open_tag_check. """
 
+# TODO Problems: 1) tag close needs to be nested correctly (which this
+#  doesn't do), 2) tag list should be dynamic, reflecting tags added to the
+#  output file. Perhaps use a deque to track open tags?
+
 __author__ = "Kenneth A. Grady"
 __version__ = "0.1.0a0"
 __maintainer__ = "Kenneth A. Grady"
@@ -15,31 +19,22 @@ __date__ = "2020-02-07"
 __name__ = "Contents.Library.tag_closer"
 
 # From standard libraries
-import json
-import os
+from typing import Tuple
 
 # From local application
-import build_output_file
 import tag_check
 
 
-def tc_processor(main_dict: dict) -> dict:
-    xml_tags_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
-    with open(xml_tags_file, "r+") as xml_tags_pre:
-        xml_tags_dicts = json.load(xml_tags_pre)
-    xml_tags = xml_tags_dicts[str(main_dict["tag_set"])]
-
+def processor(main_dict: dict) -> Tuple[dict, dict]:
+    tag_info = {}
     status_list = ["par", "section", "body", "bodytext", "wrapper"]
     for tag in status_list:
         tag_info = {
             "name":          tag,
-            "tag_open_str":  xml_tags[tag][0],
-            "tag_close_str": xml_tags[tag][1],
-            "tag_setting":   "close",
-            "tag_set":       main_dict["tag_set"]
+            "tag_open_str":  main_dict["tags"][tag][0],
+            "tag_close_str": main_dict["tags"][tag][1],
+            "tag_status":    main_dict[tag],
         }
-        main_dict, update_output = tag_check.tc_processor(
+        tag_info, main_dict = tag_check.processor(
             tag_info=tag_info, main_dict=main_dict)
-        build_output_file.processor(
-            update_output=update_output, main_dict=main_dict)
-    return main_dict
+    return tag_info, main_dict

@@ -18,11 +18,7 @@ __name__ = "Contents.Library.process_body.control_word_to_build"
 import importlib
 import logging
 import os
-import sys
 
-# From local application
-import build_output_file
-import tag_check
 
 log = logging.getLogger(__name__)
 
@@ -33,19 +29,8 @@ def processor(tag_info: dict, main_dict: dict) -> dict:
     try:
         tagging_mod = importlib.import_module(tag_info["func"], package=cws_dir)
     except ValueError as error:
-        msg = f"Module name: {tag_info['name']}"
+        msg = f"Module name: {tag_info['name']} is missing."
         log.debug(error, msg)
-    tag_info = tagging_mod.cw_func_processor(
+    tag_info, main_dict = tagging_mod.processor(
         tag_info=tag_info, main_dict=main_dict)
-    # Check whether tag is already open or closed.
-    results = tag_check.tc_processor(tag_info=tag_info, main_dict=main_dict)
-    main_dict = results[0]
-    update_output = results[1]
-    if update_output != "":
-        build_output_file.processor(update_output=update_output,
-                                    main_dict=main_dict)
-    if main_dict is None:
-        msg = "Main_dict is none."
-        log.debug(msg)
-        sys.exit(1)
     return main_dict

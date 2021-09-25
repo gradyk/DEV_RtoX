@@ -17,26 +17,26 @@ import logging
 import os
 import re
 
+log = logging.getLogger(__name__)
 
-def csvm_processor(main_dict: dict, collections_dict: dict,
-                   cw_text: str) -> dict:
+
+def processor(main_dict: dict, collections_dict: dict,
+              cw_text: str) -> dict:
     cw_update = {cw_text: "null"}
-    cw_csv_update = f"\n{cw_text},Unknown,Unknown,null"
+    cw_csv_update = f"{cw_text},Unknown,Unknown,null"
     util_dir = os.path.join(main_dict["base_dir"], "Utilities")
     csv_file = os.path.join(util_dir, "control_words_collections.csv")
     collections_dict.update(cw_update)
     with open(csv_file, "r+") as csv_file_pre:
         raw_csv = csv_file_pre.read()
     item = None
-    test = re.search(rf"{cw_text}", raw_csv)
+    test = re.findall(rf"^\\b{cw_text}\\b", raw_csv)
     try:
-        if test is not item:
-            pass
-        else:
+        if test is item:
             with open(csv_file, "a+") as csv_file_pre:
+                csv_file_pre.write("\n")
                 csv_file_pre.write(cw_csv_update)
-    except (ValueError, KeyError, TypeError):
-        logging.exception(msg="RtoX has encountered a problem adding an "
-                              "unknown control word to its dictionary. The "
-                              f"control word is: {cw_text}.")
+    except (ValueError, KeyError, TypeError) as error:
+        msg = f"RtoX cannot add {cw_text} to its dictionary."
+        log.debug(error, msg)
     return collections_dict

@@ -12,26 +12,20 @@ __date__ = "2020-8-17"
 __name__ = "Contents.Library.control_words_symbols.toggle_emph"
 
 # From standard libraries
-import json
-import os
+from typing import Tuple
 
 
-def cw_func_processor(tag_info: dict, main_dict: dict) -> dict:
+def processor(tag_info: dict, main_dict: dict) -> Tuple[dict, dict]:
     # For a toggle control word, \<control_word> turns on the feature and
     # \<control_word>N turns off the feature.
     # See Word2007RTFSpec9 Font (Character) Formatting Properties, p.130.
-    tag_dict_file = os.path.join(main_dict["dicts_dir"], "xml_tags.json")
-    with open(tag_dict_file, "r+") as tag_dict_file_pre:
-        tag_dict_options = json.load(tag_dict_file_pre)
-    tag_set = str(tag_info["tag_set"])
-    tag_dict = tag_dict_options[tag_set]
     item = ""
-    if tag_info["value"] == item:
-        tag_info["tag_setting"] = "open"
+    if tag_info["cw_value"] == item:
+        tag_info["tag_status"] = "open"
     else:
-        tag_info["tag_setting"] = "close"
-    open_str_empty = tag_dict["toggle_emph"][0]
+        tag_info["tag_status"] = "close"
+    open_str_empty = main_dict["tags"]["toggle_emph"][0]
     open_str = open_str_empty.replace("zzz", tag_info["name"])
     tag_info["tag_open_str"] = open_str
-    tag_info["tag_close_str"] = tag_dict["toggle_emph"][1]
-    return tag_info
+    tag_info["tag_close_str"] = main_dict["tags"]["toggle_emph"][1]
+    return tag_info, main_dict

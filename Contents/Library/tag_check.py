@@ -14,13 +14,14 @@ __name__ = "Contents.Library.tag_check"
 
 # From standard libraries
 import logging
-import sys
-from typing import Any
+from typing import Tuple
+
+import build_output_file
 
 log = logging.getLogger(__name__)
 
 
-def tc_processor(tag_info: dict, main_dict: dict) -> Any:
+def processor(tag_info: dict, main_dict: dict) -> Tuple[dict, dict]:
     """ Evaluate whether the tag is open. closed, or not in the registry.
     Options:
     open    and tag_action is open: do nothing
@@ -30,33 +31,15 @@ def tc_processor(tag_info: dict, main_dict: dict) -> Any:
     absent  and tag_action is open: open tag
     absent  and tag_action is close: do nothing
     Finally, update the registry. """
-    update_output = ""
-    name = tag_info["name"]
+    main_dict["update_output"] = ""
     try:  # is tag open or closed
-        if main_dict[name] == "open" and tag_info["tag_setting"] == \
-                "close":
-            update_output = tag_info["tag_close_str"]
-        elif main_dict[name] == "close" and tag_info["tag_setting"] == \
-                "open":
-            update_output = tag_info["tag_open_str"]
-        elif main_dict[name] == "close" and tag_info["tag_setting"] == \
-                "close":
-            update_output = ""
-        elif main_dict[name] == "open" and tag_info["tag_setting"] == \
-                "open":
-            update_output = ""
-    except KeyError:  # control word not in the tag registry
-        # Add the tag to the tag registry and update its status.
+        if tag_info["tag_status"] == "open":
+            main_dict["update_output"] = tag_info["tag_close_str"]
+    except (KeyError, Exception) as error:
+        msg = "Problem closing open tags during process cleanup."
+        log.debug(error, msg)
         # TODO For at least some toggles (aspalpha, aspanum) there isn't
         #  a close tag. Need to identify these situations and mark the
         #  status in the tag registry appropriately.
-        if tag_info["tag_setting"] == "open":
-            update_output = tag_info["tag_open_str"]
-        elif tag_info["tag_setting"] == "close":
-            update_output = tag_info["tag_close_str"]
-    if tag_info["tag_setting"] != "":
-        main_dict[tag_info["name"]] = tag_info["tag_setting"]
-    if main_dict is None:
-        log.debug("Tag_check: main_dict is none.")
-        sys.exit(1)
-    return main_dict, update_output
+    main_dict = build_output_file.processor(main_dict=main_dict)
+    return tag_info, main_dict
