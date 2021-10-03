@@ -38,7 +38,6 @@ def parse_pgp_string(code_strings_to_process: list, main_dict: dict) -> None:
     for code_string in code_strings_to_process:
         code_string, current_key, code_dict = pgp_parse(
             code_string=code_string, code_dict={})
-
         code_dict, current_key, code_string = ipgpn_parse(
             code_string=code_string, counter=counter,
             current_key=current_key, code_dict=code_dict)
@@ -49,7 +48,6 @@ def parse_pgp_string(code_strings_to_process: list, main_dict: dict) -> None:
                 code_string=code_string, current_key=current_key,
                 code_dict=code_dict)
             test = re.search(r"\\", code_string)
-
         dict_updater.json_dict_updater(
             dict_name="pgp_table_file.json",
             dict_update=code_dict,

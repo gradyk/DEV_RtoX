@@ -54,7 +54,7 @@
         "body":                 ["<ts:matterBody>", "</ts:matterBody>"],
         "bodytext":             ["<ts:matterText>", "</ts:matterText>"],
         "section":              ["<ts:matterDiv>", "</ts:matterDiv>"],
-        "par":                  ["<ts:pBody>", "</ts:pBody>"],
+        "par":                  ["\n\n<ts:pBody>", "</ts:pBody>"],
         "title":                ["<ts:generalTitle>", "</ts:generalTitle>"],
         "header":               ["<ts:formeWork><ts:headerText>",
                                  "<ts:formeWork place='top right'><ts:headerText>"],
@@ -82,6 +82,7 @@
                                 "<ts:hiText rend='scaps'></ts:hiText>",
                                 "<ts:hiText rend='pBody'></ts:hiText>",
                                 "<ts:pBody></ts:pBody>",
-                                "  "]
+                                "  ",
+                                "\n\n\n"]
 }
 }

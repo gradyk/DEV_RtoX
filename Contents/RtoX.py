@@ -66,6 +66,8 @@ if __name__ == "Contents.RtoX":
             main_dict=main_dict)
         rtf_file_codes_update = \
             rtf_file_lead_parse.code_process(main_dict=main_dict)
+        # Convert the input file to a string for further processing.
+        input_file_to_string.processor(main_dict=main_dict)
         # Clean up characters in working file version of submitted file.
         main_dict = character_cleanup.processor(main_dict=main_dict)
         # Start the output file and put the header (based on the user's
@@ -77,7 +79,6 @@ if __name__ == "Contents.RtoX":
         main_dict = output_file_transition.oft_processor(
             main_dict=main_dict, config_settings_dict=config_settings_dict)
         # Process the table portion of the header.
-        input_file_to_string.processor(main_dict=main_dict)
         hdr_structure.processor(main_dict=main_dict)
         # TODO Add capability to handle numbered paragraphs: spec p.48.
         # TODO Add capability to handle tables: spec p.59.

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="../DITATopics/RNCSandbox/tpres_all_compact.rnc" type="application/relax-ng-compact-syntax"?>
+<?xml-model href="../DITATopics/RNCSandbox/tpres_all_schematron.sch" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<ts:TPRES xmlns:ts="http://www.kennethgrady.com/ns/1.0.0">
+
+<ts:tpresHeader>
+
+<ts:fileDesc>
+
+<ts:titleStmt>
+<ts:matterTitle consolidated="no" citename="yes" style="short">Artis v. District of Columbia
+</ts:matterTitle>
+<ts:matterTribunal>Supreme Court of the United States</ts:matterTribunal>
+</ts:titleStmt>
+
+<ts:researcherGrp>
+<ts:principalResearcher>
+<ts:persName>Kenneth A. Grady</ts:persName>
+<ts:identNum type="ORCID">0000-0002-9282-4124</ts:identNum>
+</ts:principalResearcher>
+<ts:secondaryResearcher>None</ts:secondaryResearcher>
+<ts:editorName>None</ts:editorName>
+<ts:fundingOrg>None</ts:fundingOrg>
+<ts:sponsorOrg>Michigan State University College of Law</ts:sponsorOrg>
+</ts:researcherGrp>
+
+<ts:editionStmt>
+<ts:pPrebody>slip opinion</ts:pPrebody>
+<ts:dateEvent when-iso="2018-01-22">January 22, 2018</ts:dateEvent>
+<ts:respStmt>
+<ts:entityName>Supreme Court of the United States</ts:entityName>
+<ts:respRole>publisher</ts:respRole>
+</ts:respStmt>
+</ts:editionStmt>
+
+<ts:extentFile>Less than 200KB</ts:extentFile>
+
+<ts:publicationStmt>
+<ts:publisherOrg>Michigan State University College of Law</ts:publisherOrg>
+<ts:releasePermission>Kenneth A. Grady</ts:releasePermission>
+<ts:pubPlace>East Lansing, Michigan</ts:pubPlace>
+<ts:postAddress>
+<ts:streetInfo>648 N. Shaw Lane</ts:streetInfo>
+<ts:placeIdent type="city">East Lansing</ts:placeIdent>
+<ts:placeIdent type="state">Michigan</ts:placeIdent>
+<ts:postCode>48824</ts:postCode>
+</ts:postAddress>
+<ts:availabilityInfo>
+<ts:p>Any material considered covered by a copyright held by the TEI Consortium is licensed by the
+Consortium under The Open Source Initiative 2-Clause BSD License. To the extent any of the
+remaining material is considered copyrightable (which does not include the text of the opinion
+itself), the copyright is held by Kenneth A. Grady and that material also is licensed under The
+Open Source Initiative 2-Clause BSD License.
+</ts:p>
+<ts:licenceInfo target="https://opensource.org/licenses/BSDplusPatent" notBefore="2019-07-01"/>
+</ts:availabilityInfo>
+</ts:publicationStmt>
+
+<ts:seriesStmt>
+<ts:seriesTitle>Supreme Court of the United States, October Term 2018</ts:seriesTitle>
+<ts:respStmt>
+<ts:entityName>Supreme Court of the United States</ts:entityName>
+<ts:respRole/>
+</ts:respStmt>
+</ts:seriesStmt>
+
+<ts:notesStmt>
+<ts:annoNote/>
+</ts:notesStmt>
+
+<ts:sourceDesc>
+<ts:asCited>Artis v. District of Columbia, 583 U. S. ___ (2018)</ts:asCited>
+</ts:sourceDesc>
+
+</ts:fileDesc>
+
+<ts:encodingDesc>
+
+<ts:projectDesc>
+<ts:pPrebody>Text encoded as an example of how to use the TPRES.</ts:pPrebody>
+</ts:projectDesc>
+
+<ts:samplingDecl>
+<ts:pPrebody>This case was chosen because it is a recent example of an opinion by the Supreme Court of
+the United States, the opinion is "open source", the briefs filed by the parties are available in
+digital form, the transcript of the argument before the Court is available in digital form, and it
+provides the opportunity to demonstrate many of the encoding elements and techniques available in
+the TPRES.
+</ts:pPrebody>
+</ts:samplingDecl>
+
+<ts:editorialDecl>
+
+<ts:correctionPol>
+<ts:pPrebody>Original pdf proofread against encoded XML file. Errors in XML corrected to what was in
+the pdf (even if what was in the pdf was an error). Errors in the pdf noted in the markedup text
+using the <ts:xmlelement>sicText</ts:xmlelement> or <ts:xmlelement>corrText</ts:xmlelement> elements.
+</ts:pPrebody>
+</ts:correctionPol>
+
+<ts:normalizationPol>
+<ts:pPrebody>No changes were made to modernize spelling.</ts:pPrebody>
+</ts:normalizationPol>
+
+<ts:punctuationPol>
+<ts:pPrebody>All punctuation marks in the source text (except quotation, section, and paragraph
+marks) have been retained and represented using the appropriate Unicode code point. In cases
+where a punctuation mark and nearby markup convey the same information (for example, a sentence
+ends with a question mark and is also tagged as <ts:xmlelement>senText</ts:xmlelement>) the
+punctuation mark is captured as content within the element.
+</ts:pPrebody>
+</ts:punctuationPol>
+
+<ts:quotationPol marks="none">
+<ts:pPrebody>No quotation marks have been retained. Instead, the
+<ts:xmlatt>rend</ts:xmlatt>
+attribute on the <ts:xmlelement>quoteText</ts:xmlelement> and <ts:xmlelement>innerQuote
+</ts:xmlelement> elements is used to specify what type of quotation mark was used, according
+to the following list:
+<ts:listGenl type="gloss">
+<ts:labelEntry>dq</ts:labelEntry>
+<ts:itemEntry>double quotes, open and close</ts:itemEntry>
+<ts:labelEntry>sq</ts:labelEntry>
+<ts:item>single quotes, open and close</ts:item>
+<ts:labelEntry>blk</ts:labelEntry>
+<ts:itemEntry>block quotation, no quotes</ts:itemEntry>
+<ts:labelEntry>dash</ts:labelEntry>
+<ts:item>long dash open, no close (em dash)</ts:item>
+<ts:labelEntry>dg</ts:labelEntry>
+<ts:itemEntry>double guillemets, open and close</ts:itemEntry>
+</ts:listGenl>
+</ts:pPrebody>
+</ts:quotationPol>
+
+<ts:hyphenationPol>
+<ts:pPrebody>Hyphens appearing between words have been retained. The hyphen is wrapped in <ts:xmlelement>
+pc
+</ts:xmlelement> tags and the <ts:xmlatt>force</ts:xmlatt> attribute is used to show the hyphens
+were placed <ts:q>inter</ts:q>, that is, between words. Hyphens appearing within a word at the
+end of a line, including lines at the end of a page, have been removed. If the hyphenated word
+appeared at the end of a line <ts:i>not</ts:i> at the end of a page, the encoded text contains
+the full, un-hyphenated word and does not contain a tag or other signal indicating there was a
+hyphenated word. Such hyphens are artifacts of typesetting and do not have content significance.
+If the hyphenated word was the last word on a page, the full word is included <ts:i>before
+</ts:i> the <ts:xmlelement>pb</ts:xmlelement> tag without any signal in the encoded text. Again,
+the hyphenation is an artifact of typesetting.
+</ts:pPrebody>
+<ts:pPrebody>If, however, it appears to the encoder that the hyphenated word at the end of a line or
+the end of a page is a word that would be hyphenated regardless of where it falls on the page,
+then the encoder will use the <ts:xmlelement>pc</ts:xmlelement> tags and the <ts:xmlatt>force
+</ts:xmlatt> attribute.
+</ts:pPrebody>
+</ts:hyphenationPol>
+
+<ts:segmentationPol>
+<ts:preBody>Within paragraphs, the key, fundamental grammatical unit is the sentence. It is
+surrounded by<ts:xmlelement>senText</ts:xmlelement> element tags. A <ts:xmlelement>senText
+</ts:xmlelement> element is an entire sentence, which could be made up of one or
+more <ts:xmlelement>segText</ts:xmlelement>, <ts:xmlelement>
+quoteText</ts:xmlelement>, <ts:xmlelement>legalCite</ts:xmlelement>, <ts:xmlelement>
+factCite</ts:xmlelement>, <ts:xmlelement>internalCite</ts:xmlelement>, <ts:xmlelement>
+mentionCite
+</ts:xmlelement> or <ts:xmlelement>recordCite</ts:xmlelement> elements.
+</ts:preBody>
+</ts:segmentationPol>
+
+<ts:stdVals>
+<ts:pPrebody>Dates are encoded using the <ts:xmlatt>when-iso</ts:xmlatt> attribute in the
+form: <ts:q>YYYY-MM-DD</ts:q>.
+</ts:pPrebody>
+</ts:stdVals>
+
+<ts:interpretationPol>
+<ts:pPrebody>The <ts:xmlelement>quoteText</ts:xmlelement> and <ts:xmlelement>innerQuote
+</ts:xmlelement> elements have an optional <ts:xmlatt>qsignif</ts:xmlatt> attribute. That attribute
+accepts one of the following values: 1] law, 2] fact, 3] incidental. The attribute is intended
+as another dimension to help an encoder organize and extract information.
+</ts:pPrebody>
+</ts:interpretationPol>
+</ts:editorialDecl>
+
+<ts:tagsDecl>
+<ts:pPrebody>The Custom CSS file for this document is available at: <!-- <ts:xref href=""</ts:xref> -->
+</ts:pPrebody>
+<ts:pPrebody>The url to W3C CSS Version 4 is: https://www.w3schools.com/w3css/4/w3.css
+</ts:pPrebody>
+<ts:pPrebody>The ConTeXt file for this document is avaialble at: <!-- <ts:xref href=""</ts:xref> -->
+</ts:pPrebody>
+<ts:pPrebody>Universal Citations. The following description is from Universal Citation for North
+Carolina, Technical Committee (June 2019),
+https://www.ncapb.com/wp-content/uploads/2019/06/Universal-Citation-for-North-Carolina.pdf
+(footnotes omitted). TPRES supports Universal Citations in addition to traditional Bluebook
+citations. See [SEC] ___________________.
+
+"Rather than citing to the printed page number in a bound volume published by a third party, the
+citation is directly to the opinion published by the court. The citation includes the case name, the
+year of the decision, the court identifier, a sequential number of the decision, and the paragraph
+number for pinpoint citations. Cases are numbered sequentially, with the first case each year
+identified with the number “1.” Subsequent cases are simply given numbers as they are published by
+the respective court. Traditional page number pinpoint citations are replaced with paragraph
+numbers. If an opinion is not published, a “U” is added after the sequential number of the decision.
+If available, a parallel citation to the appropriate reporter is to be included as well. Although
+there are two primary standards for universal citations, states have created their own unique
+formatting rules for pinpoint and parallel citations. For example, Montana, Ohio, and Oklahoma are
+three states that have implemented this new citation system, and they have minor formatting
+differences."
+</ts:pPrebody>
+</ts:tagsDecl>
+
+<ts:styledefDecl scheme="css" schemeversion="4"/>
+
+<ts:refsDecl>
+<ts:pPrebody>Footnotes: Each U.S. Supreme Court reported decision may have one or more types of opinions
+(e.g., a majority opinion, dissenting opinion, concurring opinion). Each opinion with footnotes has
+the footnotes numbered consecutively beginning with the number "1". Thus, a decision could have
+several footnotes with the same number. Each footnote in the decision receives an identification
+number. The <ts:xmlatt>xml:id</ts:xmlatt> attribute within the <ts:xmlelement>footNote
+</ts:xmlelement> element uses the following referencing scheme for numbering footnotes: 1] lowercase
+"fn", 2] a single underscore, 3] the opinion author's initials in lower case (three initials is
+preferable, two if the author has only two names (see Justice Taxonomy, ____________), 4] a single
+underscore, 5] one letter to indicate the primary type of decision ("m" for majority, "d" for
+dissent, "c" for concurrence, "j" for join), 6] a single underscore, and 7] an integer starting with
+"0001" for the first footnote in the opinion proceeding consecutively to the last footnote in the
+opinion. For example, in a majority opinion authored by Justice Ruth Bader Ginsburg the seventh
+footnote would be numbered "fn_rbg_m_0007".
+</ts:pPrebody>
+</ts:refsDecl>
+<ts:refsDecl>
+<ts:pPrebody>Segments: Each segment in the <ts:xmlelement>matterBody</ts:xmlelement> section of the
+document receives an identification number. The <ts:xmlatt>xml:id</ts:xmlatt> attribute within the <ts:xmlelement>
+segText
+</ts:xmlelement> element uses the following referencing scheme for numbering footnotes: 1] lowercase
+"sg", 2] a single underscore, 3] the opinion author's initials in lower case (three initials is
+preferable, two if the author has only two names (see Justice Taxonomy, ____________), 4] a single
+underscore, 5] one letter to indicate the primary type of decision ("m" for majority, "d" for
+dissent, "c" for concurrence, "j" for join), 6] a single underscore, and 7] an integer starting with
+"0001" for the first segment in the opinion proceeding consecutively to the last segment in the
+opinion. For example, in a concurring opinion authored by Chief Justice John Glover Roberts the
+twelfth segment would be numbered "sg_jgr_c_0012". Given the length of opinions and the number of
+segments, the numbering for segments could run into the hundreds or even thousands.
+</ts:pPrebody>
+</ts:refsDecl>
+<ts:refsDecl>
+<ts:pPrebody>Sentences: Sentences are the key, fundamental grammatical unit for legal texts (transcripts
+of oral argument, depositions, etc., also use the sentence as the key, fundamental grammatical uni).
+Each sentence in the <ts:xmlelement>matterBody</ts:xmlelement> section of the document receives an
+identification number. The <ts:xmlatt>xml:id</ts:xmlatt> attribute within the <ts:xmlelement>
+senText
+</ts:xmlelement> element uses the following referencing scheme for numbering sentences: 1] lowercase
+"st", 2] a single underscore, 3] the opinion author's initials in lower case (three initials is
+preferable, two if the author has only two names (see Justice Taxonomy, ____________), 4] a single
+underscore, 5] one letter to indicate the primary type of decision ("m" for majority, "d" for
+dissent, "c" for concurrence, "j" for join), 6] a single underscore, and 7] an integer starting with
+"0001" for the first sentence in the opinion proceeding consecutively to the last sentence in the
+opinion. For example, in a join opinion authored by Justice Clarence Thomas the twentieth sentence
+would be numbered "st_ct_j_0020". Given the length of opinions and the number of sentences, the
+numbering for sentences could run into the hundreds.
+</ts:pPrebody>
+</ts:refsDecl>
+<ts:refsDecl>
+<ts:pPrebody>Paragraphs: Each paragraph in the <ts:xmlelement>matterBody</ts:xmlelement> section of the
+document receives an identification number. The <ts:xmlatt>xml:id</ts:xmlatt> attribute within the <ts:xmlelement>
+pBody
+</ts:xmlelement> element uses the following referencing scheme for numbering footnotes: 1] the
+lowercase letters "pg", 2] a single underscore, 3] the opinion author's initials in lower case
+(three initials is preferable, two if the author has only two names, omit linking names such as
+"de"), 4] a single underscore, 5] one letter to indicate the primary type of decision ("m" for
+majority, "d" for dissent, "c" for concurrence, "j" for join), 6] a single underscore, and 7] an
+integer starting with "0001" for the first paragraph in the opinion and proceeding consecutively.
+For example, in a dissenting opinion authored by Justice Neil McGill Gorsuch the tenth paragraph
+would be numbered "pg_nmg_d_0010". Given the length of opinions and the number of paragraphs, the
+numbering for paragraphs could run into the hundreds.
+</ts:pPrebody>
+</ts:refsDecl>
+<ts:refsDecl>
+<ts:pPrebody>Citations: There are five categories of citations: factCite, internalCite, legalCite,
+recordCite, and mentionCite. Each citation receives an identification number. The <ts:xmlatt>
+xml:id
+</ts:xmlatt> attribute within the citation element (based on the type of citation) uses the
+following referencing scheme for numbering citations: 1] the lowercase letters "c" plus the letter
+"f" (fact), "i" (internal), "l" (legal), "r" (record), or "m" (mention) depending on the type of
+citation, 2] a single underscore, 3] the opinion author's initials in lower case (three initials is
+preferable, two if the author has only two names, omit linking names such as "de"), 4] a single
+underscore, 5] one letter to indicate the primary type of decision ("m" for majority, "d" for
+dissent, "c" for concurrence, "j" for join), 6] a single underscore, and 7] an integer starting with
+"0001" for the first citation in the opinion and proceeding consecutively to the last citation in
+the opinion. For example, in a majority opinion authored by Justice Samual Anthony Alito Jr. the
+thirteenth legal citation would be numbered "cl_saa_m_13". Given the length of opinions and the
+number of citations, the numbering for citations could run into the hundreds.
+</ts:pPrebody>
+</ts:refsDecl>
+
+<ts:classDecl>
+<ts:taxonomyItem xml:id="LCSH">
+<ts:biblItem>
+<ts:generalTitle>Library of Congress Subject Headings</ts:generalTitle>
+</ts:biblItem>
+</ts:taxonomyItem>
+</ts:classDecl>
+
+<ts:geoDecl>None.</ts:geoDecl>
+
+<ts:unitDecl>None.</ts:unitDecl>
+
+<ts:schemaSpec>None.</ts:schemaSpec>
+
+<ts:schemaRef>[add GitHub location for the tpres_all_compact.rnc]</ts:schemaRef>
+<!-- TODO Add url -->
+
+</ts:encodingDesc>
+
+<ts:profileDesc>
+<ts:textClass>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">Supreme Court
+</ts:classCode>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">United States
+</ts:classCode>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">Judicial review and
+appeals
+</ts:classCode>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">Statute of
+Limitations
+</ts:classCode>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">Limitations (Law)
+</ts:classCode>
+<ts:classCode target="#LCSH" scheme="http://id.loc.gov/authorities/subjects.html">Limitations, Statute
+of
+</ts:classCode>
+</ts:textClass>
+
+<ts:correspDesc>Not relevant.</ts:correspDesc>
+
+<ts:calendarDesc>Not relevant.</ts:calendarDesc>
+
+<ts:textDesc>
+<ts:channelChar mode="w">first version of the opinion</ts:channelChar>
+<ts:constitutionChar type="single">complete version with all written opinions</ts:constitutionChar>
+<ts:derivationChar type="original"/>
+<ts:domainChar type="govt"/>
+<ts:factualityChar type="fact"/>
+<ts:interactionChar type="none" active="plural" passive="world"/>
+<ts:preparednessChar type="deliberative"/> <!-- TODO Revise suggested values -->
+<ts:purposeChar type="adjudicate" degree="high"/> <!-- TODO Revise type suggested values -->
+</ts:textDesc>
+
+<ts:particDesc>
+<ts:tribunalStruc makeup="court">
+<ts:personIdent key="Ginsburg, Ruth Bader" ref="http://viaf.org/viaf/262011391">
+<ts:foreName type="first" sort="1">Ruth</ts:foreName>
+<ts:foreName type="middle" sort="2">Joan</ts:foreName>
+<ts:foreName type="middle" sort="3">Bader</ts:foreName>
+<ts:surName sort="4">Ginsburg</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1933-03-15"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Roberts, Jr., John Glover" ref="http://viaf.org/viaf/46393423">
+<ts:foreName type="first" sort="1">John</ts:foreName>
+<ts:foreName type="middle" sort="2">Glover</ts:foreName>
+<ts:surName sort="3">Roberts</ts:surName>
+<ts:genName sort="4">Jr</ts:genName>
+<ts:roleDesc>Chief Justice</ts:roleDesc>
+<ts:personBirth when-iso="1955-01-27"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Breyer, Stephen Gerald" ref="http://viaf.org/viaf/108725142">
+<ts:foreName type="first" sort="1">Stephen</ts:foreName>
+<ts:foreName type="middle" sort="2">Gerald</ts:foreName>
+<ts:surName sort="3">Breyer</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1938-08-15"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Sotomayor, Sonia" ref="http://viaf.org/viaf/88557188">
+<ts:foreName type="first" sort="1">Sonia</ts:foreName>
+<ts:foreName type="middle" sort="2">Maria</ts:foreName>
+<ts:surName sort="3">Sotomayor</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1954-06-25"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Kagan, Elena" ref="http://viaf.org/viaf/61128699">
+<ts:foreName type="first" sort="1">Elena</ts:foreName>
+<ts:surName sort="2">Kagan</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1960-04-28"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Gorsuch, Neil McGill (1967-)" ref="http://viaf.org/viaf/22093066">
+<ts:foreName type="first" sort="1">Neil</ts:foreName>
+<ts:foreName type="middle" sort="2">McGill</ts:foreName>
+<ts:surName sort="3">Gorsuch</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1967-08-29"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Kennedy, Anthony McLeod" ref="http://viaf.org/viaf/26149596">
+<ts:foreName type="first" sort="1">Anthony</ts:foreName>
+<ts:foreName type="middle" sort="2">McLeod</ts:foreName>
+<ts:surName sort="3">Kennedy</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1936-07-23"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Thomas, Clarence" ref="http://viaf.org/viaf/10647527">
+<ts:foreName type="first" sort="1">Clarence</ts:foreName>
+<ts:surName sort="2">Thomas</ts:surName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1945-06-23"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+<ts:personIdent key="Alito, Jr., Samuel Anthony" ref="http://viaf.org/viaf/44041062">
+<ts:foreName type="first" sort="1">Samuel</ts:foreName>
+<ts:foreName type="middle" sort="2">Anthony</ts:foreName>
+<ts:surName sort="3">Alito</ts:surName>
+<ts:genName sort="4">Jr</ts:genName>
+<ts:roleDesc>Justice</ts:roleDesc>
+<ts:personBirth when-iso="1950-04-01"/>
+<ts:personDeath when-iso="0000-00-00"/>
+</ts:personIdent>
+</ts:tribunalStruc>
+</ts:particDesc>
+
+<ts:settingDesc>Not relevant.</ts:settingDesc>
+
+<ts:handNotes>Not relevant.</ts:handNotes>
+
+<ts:listTranspose>Not relevant.</ts:listTranspose>
+
+</ts:profileDesc>
+
+<ts:xenoData>Not relevant.</ts:xenoData>
+
+<ts:revisionDesc>
+<ts:listChange>
+<ts:changeEvent>Born _______, 2019</ts:changeEvent>
+</ts:listChange>
+</ts:revisionDesc>
+
+</ts:tpresHeader>
+<ts:hiText rend='b'>The Elephant in the Room: MeasuringService Quality (Part 1)</ts:hiText><ts:pBody><ts:hiText rend='i'>This is a two-part post addressing quality in the practice of law. In this post, I’address the need for quality standards. In the next post(on Friday), I’ll address how I think we can begin developing quality standards useful across clients and firms.</ts:hiText></ts:pBody>
+
+<ts:pBody>talk about quality legal services all the time. Yet, we never talk about quality. Within the legal industry, we have no common definition of quality. In fact, we don’t have any definition of quality. We adhere to a “I know it when I see it”standard. In the past, when the legal industry was not as competitive as today, that standard worked. Today, however, we should look for a better standard and find one that can be used across clientsand law firms. Let’s start with the American Society for Quality’s definition of quality:</ts:pBody>
+
+<ts:pBody>subjective term for which each person or sector has its own definition. In technical usage, quality can have two meanings: 1. the characteristics of a product or service that bear on its ability to satisfy stated or implied needs; 2. a product or service free of deficiencies.</ts:pBody>
+
+<ts:pBody>The first sentence acknowledges that quality is subjectiveby person or sector. That should comfort lawyers, since it gives us permission to have a quality definition for practicing law than is different for widgets. Many lawyers misunderstand quality programs, like six sigma, and think that they will be held to an arbitrary quality standard or a standard more suited to than services. We can dispel that myth. Quality varies from industry to industry.</ts:pBody>
+
+<ts:pBody>As the ASQ definition notes, quality also can vary from person to person. My wife and I recently had a large portion of our house painted. We hired a painter who had received rave reviews from many families in our neighborhood. certainly did a good job, but not as good as our prior painter (who was not available). would not give him a rave review. Our definition of quality obviously differs from the definitions our neighbors use.</ts:pBody>
+
+<ts:pBody>a general counsel, I saw quality differences among outside lawyers and in-house lawyers all the time. Every major firm I interviewed described itself as providing high quality legal services. Yet, looking across the firms I hiredto represent my clients, the quality range was enormous. Some firms provided excellent quality, and some firms barely escaped malpractice levels. When I would ask general counsel at other companies for recommendations, I also found that my quality judgment frequently differed from the recommendations I received.One challenge, of course, was that all of our quality definitions were subjective. In fact, we probably weren’t using the same standards. I may have measured quality based on written work product.My peer general counsel may have measured quality based on satisfaction with the outcomes.</ts:pBody>
+
+<ts:pBody>Doctors School Lawyers</ts:pBody>
+
+<ts:pBody>Some lawyers accept this as just the way it is. But, I think we can do much better. Even when we want to evaluate something subjective, we cancome up with effective quality measurement systems. Let’s take an example from healthcare. In 1952, VirginiaApgar, a professor of anesthesiology at Columbia School of Medicine,proposed that obstetricians use a measure she created called the Apgar scoreto measure the health of newborn babies. The score runs from 0 to 10 and is calculated by summing individual scores on five criteria, each measuredon a three-point (0 to 2) scale. A low score indicates a baby is having problems, and a high score indicates a healthy baby. Doctors and nurses score newborn babies minuteand three minuteafter birth, and at other intervals depending on the initial scores.The five criteria in the score are AppearancePulseGrimaceActivityRespiration.</ts:pBody>
+
+<ts:pBody>Measuring a baby’appearance for the Apgar score is not an exact science. The scale is based on skin color, where 0 means blue, pale; 1 means body pink, extremities blue; and 2 means completely pink. Obviously, one doctor’s blue could be another doctor’s pink. Yet, today the Apgar score remains the standard for measuring a newborn baby’health. It works because doctors and nurses become skilled at scoring as they observe newborn babies. Over time, the doctors and nurses develop a high scoring consistency and repeatability. Scores across newborn babies are similar and multiple doctors and nurses give the same score to a newborn baby. The scores are subjective, yet sufficiently reliable that we use them to determine whether a newbornneeds immediate intervention to survive.</ts:pBody>
+
+<ts:pBody>Medical professionals still use Apgar score because having an immediate evaluation of a newborn baby’s health is critical. If the doctor does not determine the health of a newborn immediately after it is born, she missesthe opportunity to provide treatment that will quickly address a potentially critical health situation. In law, having a quality score for a brief or contract is not critical. contract or brief does not have that critical immediacy. Most contracts never end up in disputes, and poorly written briefs still win cases. Clients and lawyers have lived without quality measures because they could.</ts:pBody>
+
+<ts:pBody>Complexity Breeds Errors</ts:pBody>
+
+<ts:pBody>Today, I think we should move to quality measures for legal serviceseven though we can live without them. Legal services are becoming more complex. The more complexity a task or issue involves, the more chances for errors. The errors probably will not be ones that make the difference between winning and losing, but they aerrors nevertheless. Errors in service delivery increase the cost of services. Errors in substance also may increase the cost (through corrections), and could impact the result. Without quality measures, we have no systematic way of identifying the rootcausesfor the errors (since we won’t have identified the errors in the first place), and eliminating those causes. In essence, without quality measures we are simply saying we accept living with inconsistent,and at times poor,quality.</ts:pBody>
+
+<ts:pBody>Legal service delivery models also involve more complex staffing models. We include , project managers, process excellence specialists, statisticians, technologists, para-professionals, administrative and clerical specialists, and third-party service vendors. Each of these disciplines brings its definition of quality to matters. Without common standards, we have trouble communicating a quality definition to the team. As teams flex with new members joining and other members leaving, the absence of quality standards makesit difficult for team members to share a common quality understanding. To that add complexity of working across borders, where quality standards in one country may differ significantly from quality standards in another country. The combinationsof these variables ensure that quality will vary significantly from matter to matter, provider to provider, and team to team.</ts:pBody>
+
+<ts:pBody>Low quality saps morale, resources, and trust. When I was an associate at a large law firm, I was working on a large lawsuit. We had issue many deposition subpoenas and it was my job to get them out timely, track our progress and make sure the process completed on schedule. Unfortunately, I was new to the firm and my definition of quality was substantially different than the stanof those helping me. I spent significant time fixing things that were not done correctly. I kept adding steps to the process, hoping additional checkpoints would improve quality. Those checkpoints certainly added work, but they were not attacking theroot causes of the problems. I was very frustrated (as was the lead partner). I learned a critical lesson about getting everyone on the same “standard”page.For a team to meet a quality standard everyone must share the same standard and performanmetrics must be visible to all team members.</ts:pBody>
+
+<ts:pBody>In my next post, I’ll address how I think we can begin developing quality standards useful across clients and firms.</ts:pBody>
+<ts:pBody>Elephant in the Room: MeasuringService Quality (Part 2)</ts:pBody>
+
+<ts:pBody>This is a two-part post quality in the practice of law. In the first post, I addressed the need for quality standards. In this post, I’ll address how I think we can begin developing quality standards useful across clients and firms.</ts:pBody>
+
+<ts:pBody>In my first posthyperlink to post, I explained the need for quality standards in the practice of law. Today, quality is left to each lawyer and each client to determine on an ad hoc basis. Rather than encouraging uniformly high quality legal servicestailored to meet client needs at various price points, this practice has led, I believe,to a broad range of quality in legal services. more disturbing, quality does not translate to price. In some cases, clients pay very high prices for mediocre quality, in other cases they pay very low for very high quality, and in most cases the correlation (as I perceive it, since we don’t have standards or metrics) between quality and prices is inconsistent.</ts:pBody>
+
+<ts:pBody>Outtraditional explanation for not having consistent quality standards in the legal industry is that it is difficult to measure something that is subjective. As I demonstrated in my first post, even things subjective can be measured with a relatively high level of objectivity. I don’t see any reason why we can’bring quality standards to the practice of law.</ts:pBody>
+
+<ts:pBody>Contracts without Standards</ts:pBody>
+
+<ts:pBody>We can start with a favorite topic of in-house lawyers, contracts. Commercial contracts are the bread-and-butter and bane of in-house lawyers. An in-house lawyer may do a few, dozens or even hundreds of contracts each year. Those contracts may be all of ontype, for example distribution agreements, or may comprise many types, including vendor agreements, non-disclosure agreements, professional services agreements, and so on.</ts:pBody>
+
+<ts:pBody>Each lawyer brings his or her quality standard to each contract. Typically, the lamakes a risk assessment of the contract, compares that to the company’risk tolerance and standards within the department or organization, and then devotes time to the contract process commensurate with that risk assessment. Generally, this process ahappens within the lawyer’s head.When confronted with the next contract, the lawyer repeats the process. Over time, the lawyer hopefully develops some internal consistency in how she performs the evaluation. The lawyer in the next office, however,may also be consistent,but reach entirely different results.</ts:pBody><ts:pBody>working on the contract, the lawyer again uses an internal quality system. She drafts contract provisions that seem clear to her and she hopes will be clear to her client. She drafts according to her personal preferencesand experience. Having read a recently about the importance of a well-written force majeure clause and the risks of a poorly drafted one, our lawyer revises the contract’s force majeure clause to match what she read in the article. She continuesher review, revising the contract by inserting wording, modifying phrases and editing clauses to fit her personal style.</ts:pBody>
+
+<ts:pBody>The completed contract is signed and filed. The client is happy, because the signing of the contract means itcan move forward with the business arrangement. As time passes and no disputes arise, the client’s confidence in the lawyer’s skills grows, because the contract is serving its purpose. The contract is complex, of course, so when an issue does arise the business people consult the lawyer. Her counterpart in the other company’s law department left soon after the contract was signed, and his replacement not familiar with the negotiating history. While he can read the contract provisions, he has no context for interpreting those provisions. Without real disputes, however, our lawyer’s client is satisfied and says that she does quality work.</ts:pBody>
+
+<ts:pBody>Quality Standards for Contracts</ts:pBody>
+
+<ts:pBody>Let’s imagine a different situation. Ourlawyer’s first task is to evaluate the contract according to pre-defined risk standards implemented by the department. The standards have been reviewed and approved by the department lawyers. They based the risk evaluation system on the company’s system, so clients will find it familiar when the lawyers discuss risk with them. lawyer who joins the department receives a policy explaining the standards and how to apply them. The policy contains examples from the contracts typically received by the department. After studying the policy, the new lawyer is given a test during whhe evaluates contracts according to the standards set out in the policy. Other lawyers review the results and explain where their evaluations differed from those of the new lawyer. This process continuesas the lawyer receives and evaluates actual contsubmitted for law department review. After a short period, this step ends because the new lawyer’s evaluations match those of his colleagues.</ts:pBody>
+
+<ts:pBody>The law department prepared its risk standards based on the company’s overall risk process. By doing it thisway, the law department avoids creating a risk management process separate from the company and at the same time establishes a way of discussing risk that allows lawyers and business people to share a common terminology. The risk map might look somethinglike this:</ts:pBody>
+
+<ts:pBody>The lawyers would measure financial, operational, and reputation riskalong with the probability of the risks being realized. Placement on the map indicates the overall risk levelto the company and guides the lawyer to the path to take for reviewing the contract.</ts:pBody>
+
+<ts:pBody>Now that she knows the risk for the contract, our can compare contract provisions to the department’s playbook. The playbook indicates which contractprovisions are importantat specified risk levels and gives the lawyer guidance when negotiating those provisions. When the lawyer reaches the force majeure provision in the contract, she remembers the advice she read recently in an article. She prepares anew force majeure provision for her colleagues to review and sends it to them with a copy of the article and a brief explanation of why she is suggesting updating the playbook. If there is a consensus, she will use the new clause in the contract. If not,she will wait for a consensus before using the clause. improvement process ensures that one lawyer doesn’t get ahead of the department, while at the same time encourages continuous improvement.</ts:pBody>
+
+<ts:pBody>As she moves through the contract, our lawyerpays more attention to the critical clauses and the drafting clarity. In several instances, she understands the provision, but believes the drafting is complicated and will make it difficult for the business people to accurately implement the contract. However, before making changes she copies each clause and pastes it into a calculator. The calculator, which uses the widely Flesch-Kincaid Grade Level scoring system, returns a 12thgrade level reading scorefor the first clause she checks. Although that indicates someone with a reading comprehension at the 12thgradelevel should be able to understand the clause, the department lawyers know that is deceptive. After extensive discussion, the department agreed to use a standard of 8thgrafor general commercial contracts. department found that contracts drafted at that level resulted in very few interpretation questions coming to the law department (a nice work reduction) and even fewer misinterpretations and disputes. (A 12thgrade score for many legal documents would be pretty good. A much higher score is not unusual. blog post has a ____ score. The scores can go down to -3.40, though even children’s books seldom score this low. An exception is Dr. Seuss’Green Eggs and Hamwhich has a -1.3score.) Aftera few tries, she is able to bring the score down to 8.1 by simplifying the language, breaking up some sentences, and deleting redundant provisions. </ts:pBody>
+
+<ts:pBody>Quality Brings Broader Benefits With It</ts:pBody>
+
+<ts:pBody>The law department implementing these simple quality measures should see many benefits. Remember that variation is the most significant reason for waste, including poor quality. Reducing variation will reduce waste and improve quality. Our first step was treduce variation when assessing the risk associated with a contract. By establishing a system through which contracts with similar risk profiles receive similar risk ratings, we have reduced waste. High-risk contracts will receive more attention, reducing the likelihood of disputes (and disputes that don’go to court still waste many resources). Low-risk contracts will not be over lawyered. The playbook approach means that when contracts are revised, we will have greater consistency across contracts. Twolawyers reviewing contracts will go to the same playbook and use the same substitute provisions when making revisions. Finally, applying the Flesch-Kincaid scoring system to contract provisions will help us simplify drafting. Our clauses will be easier toread and understand, reducing the likelihood of misunderstandings, errors and disputes.</ts:pBody>
+
+<ts:pBody>We can check whether we are receiving these benefits by using simple metrics.For example, we could track questions to the law department per contract and Flesch-Kincaid score per contract.The metrics will tell us where we are seeing improvements and where we have further work to do.The metrics also will give us a baseline against which we can measure future improvements. Over time, we will want to bring greater consito what we do, adjust risk levels, and continue to improve our drafting.</ts:pBody>
+
+<ts:pBody>I recognize that contract drafting involves two parties. Sometimes, the other party will not agree to the changes you want to make. They may refuse to accept your force majeureclause. They may disagree with your attempts to simplify and clarify drafting. But, sometimes they will and in those cases you made progress. When you have difficulty getting the other side to agree, you can rely on some of the information you have gatherto support your arguments in favor of your changes. For example, having a systematic risk scoring system can help you demonstrate to the other party why the changes are important to your client. In addition, being able to show your client where the contract falls on your law department risk scale may help you get your client’support for the change. Similarly, using the Flesch-Kincaid scale could help you demonstrate to the other party why your clause will help both parties understand the agreement and,hopefully, avoid disputes.</ts:pBody>
+
+<ts:pBody>Don’t Let Perfect Come Before Progress</ts:pBody>
+
+<ts:pBody>My goal was not to devise the perfect quality system for contract drafting. You may find (and I hope you do) better quality systems to use. I believe, however, that we can apply quality metto legal services. Doing so, will help all of us reduce waste, improve quality, and establish a more objective framework for measuring the impact of innovation on the delivery of legal services.</ts:pBody></ts:matterDiv></ts:matterBody></ts:matterText></ts:TPRES>

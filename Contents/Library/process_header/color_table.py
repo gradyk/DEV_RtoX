@@ -50,8 +50,10 @@ def split_code_strings(main_dict: dict) -> Tuple[dict, list]:
 def parse_code_strings(code_strings_list: iter, main_dict: dict) -> None:
     """ Parse each color table string. """
     code_dict = {}
+    position = 0
     for code_string in code_strings_list:
-        key = code_strings_list.index(code_string)
+        # key = code_strings_list.index(code_string)
+        key = str(position)
         code_dict.update({key: {}})
         code_dict = parse_control_word(
             code_string=code_string, code_dict=code_dict, key=key)
@@ -61,6 +63,7 @@ def parse_code_strings(code_strings_list: iter, main_dict: dict) -> None:
                                        dict_update=code_dict,
                                        main_dict=main_dict)
         code_dict = {}
+        position += 1
 
 
 def parse_control_word(code_string: str, code_dict: dict, key: str) -> dict:

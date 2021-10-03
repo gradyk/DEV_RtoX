@@ -12,14 +12,13 @@ __email__ = "gradyken@msu.edu"
 __date__ = "2019-12-21"
 __name__ = "Contents.Library.main_dict_creator"
 
-from collections import deque
 import json
 import os
 from typing import Any
 
 
 def processor(base_dir: Any, debug_dir: Any, dicts_dir: Any,
-                  main_script: Any, config_ini: Any) -> dict:
+              main_script: Any, config_ini: Any) -> dict:
     main_dict_file = os.path.join(base_dir, dicts_dir, "main_dict.json")
     with open(main_dict_file) as mdf_pre:
         main_dict = json.load(mdf_pre)

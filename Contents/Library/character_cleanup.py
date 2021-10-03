@@ -14,10 +14,10 @@ __name__ = "Contents.Library.character_cleanup"
 
 # From standard libraries
 import logging
-from typing import Any
 
 # From local applications
 import array_select
+import ignored_codes
 import misc_char_cleanup
 import unicode_cleanup
 
@@ -26,19 +26,10 @@ log = logging.getLogger(__name__)
 
 def processor(main_dict: dict) -> dict:
     """ Cleanup characters ln the RTF file line-by-line. """
-    source_file = main_dict["working_input_file"]
     array_codes = array_select.processor(main_dict=main_dict)
-    for line in source_file:
-        place = source_file.index(line)
-        new_line = misc_char_cleanup.processor(
-            array_codes=array_codes, line=line)
-        new_line = unicode_cleanup.processor(array_codes=array_codes,
-                                             new_line=new_line)
-        source_file[place] = new_line
-    main_dict["working_input_file"] = source_file
-    main_dict["working_input_file_bak"] = source_file
+    main_dict = misc_char_cleanup.processor(
+        array_codes=array_codes, main_dict=main_dict)
+    main_dict = unicode_cleanup.processor(array_codes=array_codes,
+                                          main_dict=main_dict)
+    main_dict = ignored_codes.processor(main_dict=main_dict)
     return main_dict
-
-
-def unicode_test(pattern: Any, new_line: str) -> Any:
-    return pattern.search(new_line)

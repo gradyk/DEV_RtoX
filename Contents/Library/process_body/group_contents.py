@@ -23,17 +23,18 @@ log = logging.getLogger(__name__)
 
 
 def processor(main_dict: dict, collections_dict: dict) -> dict:
-    # Temp setup for testing
+    main_dict["status"] = 0
     for ele in main_dict["contents_list"]:
-        if ele == "{" or ele == "}":
-            pass
-        elif re.search(main_dict["cw_regex"], ele):
-            tag_info, main_dict, collections_dict = \
-                controlword_evaluator.processor(
-                    main_dict=main_dict, test=ele,
-                    collections_dict=collections_dict)
-        else:
-            main_dict["update_output"] = ele
-            build_output_file.processor(main_dict=main_dict)
+        if main_dict["status"] == 0:
+            if ele == "{" or ele == "}":
+                pass
+            elif re.search(main_dict["cw_regex"], ele):
+                tag_info, main_dict, collections_dict = \
+                    controlword_evaluator.processor(
+                        main_dict=main_dict, test=ele,
+                        collections_dict=collections_dict)
+            else:
+                main_dict["update_output"] = ele
+                build_output_file.processor(main_dict=main_dict)
     main_dict["contents_list"] = []
     return main_dict

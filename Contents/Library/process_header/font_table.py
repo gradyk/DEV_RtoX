@@ -85,7 +85,8 @@ def parse_code_strings(main_dict: dict, code_strings_list: list):
         code_string = delete_themes(code_string=code_string)
         if code_string is not None:
             code_string, code_dict, current_key, index = check_fontnum(
-                code_string=code_string, code_dict=code_dict)
+                code_string=code_string, code_dict=code_dict,
+                code_strings_list=code_strings_list)
         if code_string is not None:
             code_string, code_dict, index = check_fontfamily(
                 code_string=code_string, code_dict=code_dict,
@@ -145,9 +146,10 @@ def delete_themes(code_string: str) -> str:
     return code_string
 
 
-def check_fontnum(code_dict: dict, code_string: str) \
+def check_fontnum(code_dict: dict, code_string: str, code_strings_list: list) \
         -> Tuple[str, dict, str, int]:
-    """ Each font code has a unique font number (e.g., fontnum = f0). """
+    """ Most font codes have a unique font number (e.g., fontnum = f0). If a
+    font code does not have a number, RtoX supplies one. """
     index = 1
     current_key = ""
     item = None
@@ -157,6 +159,9 @@ def check_fontnum(code_dict: dict, code_string: str) \
             current_key = test[0].replace("\\", "")
             code_dict.update({current_key: {}})
             index = index + len(test[0])
+        else:
+            current_key = code_strings_list.index(code_string) * 100
+            code_dict.update({current_key: {}})
     except TypeError as error:
         # TODO Check that the program continues even if it encounters
         #  this problem.

@@ -20,7 +20,6 @@ def processor(main_dict: dict, test: Any, collections_dict: dict) -> \
     try:
         cw_func = collections_dict[cw_text]
         if cw_func != null_function:
-            tag_set = main_dict["tag_set"]
             tag_info = {
                 "func":             cw_func,
                 "cw_text":          cw_text,
@@ -28,7 +27,7 @@ def processor(main_dict: dict, test: Any, collections_dict: dict) -> \
                 "tag_status":       "",
                 "tag_open_str":     "",
                 "tag_close_str":    "",
-                "tag_set":          tag_set
+                "tag_set":          main_dict["tag_set"]
             }
             main_dict = control_word_to_build.processor(
                 tag_info=tag_info, main_dict=main_dict)

@@ -934,8 +934,8 @@ pnsp,Bullets and Numbering,Value,null
 pnstart,Bullets and Numbering,Value,null
 pnstrike,Bullets and Numbering,Toggle,toggle
 pntext,Bullets and Numbering,Destination,null
-pntxta,Bullets and Numbering,Destination,null
-pntxtb,Bullets and Numbering,Destination,null
+pntxta,Bullets and Numbering,Destination,pntxta
+pntxtb,Bullets and Numbering,Destination,pntxtb
 pnucltr,Bullets and Numbering,Flag,null
 pnucrm,Bullets and Numbering,Flag,null
 pnul,Bullets and Numbering,Toggle,toggle
@@ -1452,7 +1452,7 @@ partightenfactor,Unknown,Unknown,null
 pardeftab,Unknown,Unknown,null
 validatexml,Unknown,Unknown,null
 nouicompat,Unknown,Unknown,null
-wgrffmtfilter,Unknown,Unknown,null
+wgrffmtfilter,Unknown,Unknown,wgrffmtfilter
 nofeaturethrottle,Unknown,Unknown,null
 ilfomacatclnup,Unknown,Unknown,null
 fcs,Unknown,Unknown,null

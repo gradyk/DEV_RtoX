@@ -3,4 +3,4 @@
 #  Additional licenses are in the license folder.
 
 def processor(main_dict: dict, code_strings_to_process: list) -> dict:
-    pass
+    return main_dict
